@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include "mlx/c/device.h"
 #include "mlx/c/private/device.h"
 

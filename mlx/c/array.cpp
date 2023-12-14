@@ -1,3 +1,5 @@
+#include <cstring>
+
 #include "mlx/c/array.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/utils.h"
@@ -58,7 +60,7 @@ mlx_array_from_data(void* data, int* shape, int dim, mlx_array_dtype dtype) {
           mlx::core::array((int64_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::float16:
       return MLX_C_ARRAY(
-          mlx::core::array((float16_t*)data, cpp_shape, cpp_dtype));
+          mlx::core::array((mlx::core::float16_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::float32:
       return MLX_C_ARRAY(mlx::core::array((float*)data, cpp_shape, cpp_dtype));
     case mlx::core::bfloat16:

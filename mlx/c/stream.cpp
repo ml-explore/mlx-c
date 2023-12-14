@@ -1,7 +1,9 @@
-#include "mlx/c/stream.h"
+#include <cstring>
+
 #include "mlx/c/device.h"
 #include "mlx/c/private/device.h"
 #include "mlx/c/private/stream.h"
+#include "mlx/c/stream.h"
 
 char* mlx_stream_::tostring() {
   std::ostringstream os;
@@ -13,9 +15,9 @@ char* mlx_stream_::tostring() {
   return c_str;
 }
 
-extern "C" mlx_stream MLX_CPU_STREAM =
+mlx_stream MLX_CPU_STREAM =
     new mlx_stream_(default_stream(mlx::core::Device::DeviceType::cpu));
-extern "C" mlx_stream MLX_GPU_STREAM =
+mlx_stream MLX_GPU_STREAM =
     new mlx_stream_(default_stream(mlx::core::Device::DeviceType::gpu));
 
 extern "C" mlx_stream mlx_stream_new(int index, mlx_device dev) {
