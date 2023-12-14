@@ -37,6 +37,27 @@ static mlx_array_dtype mlx_c_dtypes[] = {
     MLX_COMPLEX64,
 };
 
+inline mlx_array* mlx_cpp_vector_array_to_c(
+    const std::vector<mlx::core::array>& vec) {
+  mlx_array* c_vec = (mlx_array*)malloc(sizeof(mlx_array) * vec.size());
+  if (c_vec) {
+    for (size_t i = 0; i < vec.size(); i++) {
+      c_vec[i] = new mlx_array_(vec[i]);
+    }
+  }
+  return c_vec;
+}
+
+inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
+    mlx_array* vec,
+    int n) {
+  std::vector<mlx::core::array> cpp_vec;
+  for (size_t i = 0; i < n; i++) {
+    cpp_vec.push_back(vec[i]->ctx);
+  }
+  return cpp_vec;
+}
+
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
 #define MLX_C_ARRAY(arr) (new mlx_array_(arr))
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
@@ -44,5 +65,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
+#define MLX_C_ARRAYS(vec) (mlx_cpp_vector_array_to_c(vec))
+#define MLX_CPP_ARRVEC(vec, size) (mlx_c_vector_array_to_cpp((vec), (size)))
 
 #endif

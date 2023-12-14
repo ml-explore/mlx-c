@@ -68,3 +68,81 @@ mlx_ones(int* shape, int dim, mlx_array_dtype dtype, mlx_stream stream) {
 extern "C" mlx_array mlx_ones_like(mlx_array a, mlx_stream stream) {
   return MLX_C_ARRAY(mlx::core::ones_like(a->ctx, stream->ctx));
 }
+extern "C" mlx_array
+mlx_eye(int n, int m, int k, mlx_array_dtype dtype, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::eye(n, m, k, MLX_CPP_ARRAY_DTYPE(dtype), stream->ctx));
+}
+extern "C" mlx_array
+mlx_identity(int n, mlx_array_dtype dtype, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::identity(n, MLX_CPP_ARRAY_DTYPE(dtype), stream->ctx));
+}
+extern "C" mlx_array
+mlx_reshape(mlx_array a, int* shape, int dim, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::reshape(a->ctx, MLX_CPP_INTVEC(shape, dim), stream->ctx));
+}
+extern "C" mlx_array
+mlx_squeeze(mlx_array a, int* axes, int n, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::squeeze(a->ctx, MLX_CPP_INTVEC(axes, n), stream->ctx));
+}
+extern "C" mlx_array mlx_squeeze_all(mlx_array a, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::squeeze(a->ctx, stream->ctx));
+}
+extern "C" mlx_array
+mlx_expand_dims(mlx_array a, int* axes, int n, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::expand_dims(a->ctx, MLX_CPP_INTVEC(axes, n), stream->ctx));
+}
+extern "C" mlx_array mlx_slice(
+    mlx_array a,
+    int* start,
+    int* stop,
+    int* strides,
+    int n,
+    mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::slice(
+      a->ctx,
+      MLX_CPP_INTVEC(start, n),
+      MLX_CPP_INTVEC(stop, n),
+      MLX_CPP_INTVEC(strides, n),
+      stream->ctx));
+}
+
+extern "C" mlx_array*
+mlx_split_in_n(mlx_array a, int num_splits, int axis, mlx_stream stream) {
+  return MLX_C_ARRAYS(mlx::core::split(a->ctx, num_splits, axis, stream->ctx));
+}
+extern "C" mlx_array*
+mlx_split(mlx_array a, int* indices, int n, int axis, mlx_stream stream) {
+  return MLX_C_ARRAYS(
+      mlx::core::split(a->ctx, MLX_CPP_INTVEC(indices, n), axis, stream->ctx));
+}
+extern "C" mlx_array
+mlx_concatenate(mlx_array* arrays, int n, int axis, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::concatenate(MLX_CPP_ARRVEC(arrays, n), axis, stream->ctx));
+}
+extern "C" mlx_array
+mlx_transpose(mlx_array a, int* axes, int n, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::transpose(a->ctx, MLX_CPP_INTVEC(axes, n), stream->ctx));
+}
+extern "C" mlx_array mlx_pad(
+    mlx_array a,
+    int* axes,
+    int* low_pad_size,
+    int* high_pad_size,
+    int n,
+    mlx_array pad_value,
+    mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::pad(
+      a->ctx,
+      MLX_CPP_INTVEC(axes, n),
+      MLX_CPP_INTVEC(low_pad_size, n),
+      MLX_CPP_INTVEC(high_pad_size, n),
+      pad_value->ctx,
+      stream->ctx));
+}

@@ -36,6 +36,36 @@ mlx_array mlx_zeros_like(mlx_array a, mlx_stream stream);
 mlx_array
 mlx_ones(int* shape, int dim, mlx_array_dtype dtype, mlx_stream stream);
 mlx_array mlx_ones_like(mlx_array a, mlx_stream stream);
+mlx_array
+mlx_eye(int n, int m, int k, mlx_array_dtype dtype, mlx_stream stream);
+mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream stream);
+mlx_array mlx_reshape(mlx_array a, int* shape, int dim, mlx_stream stream);
+mlx_array mlx_squeeze(mlx_array a, int* axes, int n, mlx_stream stream);
+mlx_array mlx_squeeze_all(mlx_array a, mlx_stream stream);
+mlx_array mlx_expand_dims(mlx_array a, int* axes, int n, mlx_stream stream);
+mlx_array mlx_slice(
+    mlx_array a,
+    int* start,
+    int* stop,
+    int* strides,
+    int n,
+    mlx_stream stream);
+
+mlx_array*
+mlx_split_in_n(mlx_array a, int num_splits, int axis, mlx_stream stream);
+mlx_array*
+mlx_split(mlx_array a, int* indices, int n, int axis, mlx_stream stream);
+mlx_array
+mlx_concatenate(mlx_array* arrays, int n, int axis, mlx_stream stream);
+mlx_array mlx_transpose(mlx_array a, int* axes, int n, mlx_stream stream);
+mlx_array mlx_pad(
+    mlx_array a,
+    int* axes,
+    int* low_pad_size,
+    int* high_pad_size,
+    int n,
+    mlx_array pad_value,
+    mlx_stream stream);
 
 #ifdef __cplusplus
 }
