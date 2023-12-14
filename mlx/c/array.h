@@ -10,7 +10,7 @@ extern "C" {
 
 typedef struct mlx_array_* mlx_array;
 
-enum mlx_array_dtype {
+typedef enum mlx_array_dtype_ {
   MLX_BOOL,
   MLX_UINT8,
   MLX_UINT16,
@@ -24,7 +24,7 @@ enum mlx_array_dtype {
   MLX_FLOAT32,
   MLX_BFLOAT16,
   MLX_COMPLEX64,
-};
+} mlx_array_dtype;
 
 mlx_array mlx_array_from_bool(bool val);
 mlx_array mlx_array_from_int(int val);

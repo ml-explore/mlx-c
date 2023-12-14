@@ -7,7 +7,7 @@ extern "C" {
 
 typedef struct mlx_device_* mlx_device;
 
-enum mlx_device_type { MLX_CPU, MLX_GPU };
+typedef enum mlx_device_type_ { MLX_CPU, MLX_GPU } mlx_device_type;
 
 mlx_device mlx_device_new(mlx_device_type type, int index);
 mlx_device_type mlx_device_get_type(mlx_device dev);
