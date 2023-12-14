@@ -79,6 +79,45 @@ mlx_array
 mlx_array_equal(mlx_array a, mlx_array b, bool equal_nan, mlx_stream stream);
 mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream stream);
+mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array mlx_allclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    mlx_stream stream);
+mlx_array
+mlx_all(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array ml_any_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_any(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_sum_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_sum(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_mean_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_mean(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream stream);
+mlx_array mlx_var(
+    mlx_array a,
+    int* axes,
+    int n,
+    bool keepdims,
+    int ddof,
+    mlx_stream stream);
+mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_prod(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_max_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_max(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_min_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array
+mlx_min(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream);
+mlx_array mlx_argmin_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array mlx_argmin(mlx_array a, int axis, bool keepdims, mlx_stream stream);
+mlx_array mlx_argmax_all(mlx_array a, bool keepdims, mlx_stream stream);
+mlx_array mlx_argmax(mlx_array a, int axis, bool keepdims, mlx_stream stream);
 
 #ifdef __cplusplus
 }

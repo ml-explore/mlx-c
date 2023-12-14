@@ -190,3 +190,105 @@ mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream stream) {
   return MLX_C_ARRAY(
       mlx::core::where(condition->ctx, x->ctx, y->ctx, stream->ctx));
 }
+extern "C" mlx_array
+mlx_all_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::all(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array mlx_allclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::allclose(a->ctx, b->ctx, rtol, atol, stream->ctx));
+}
+extern "C" mlx_array
+mlx_all(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::all(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_any_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::any(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_any(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::any(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_sum_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::sum(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_sum(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::sum(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_mean_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::mean(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_mean(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::mean(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::var(a->ctx, keepdims, ddof, stream->ctx));
+}
+extern "C" mlx_array mlx_var(
+    mlx_array a,
+    int* axes,
+    int n,
+    bool keepdims,
+    int ddof,
+    mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::var(
+      a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, ddof, stream->ctx));
+}
+extern "C" mlx_array
+mlx_prod_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::prod(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_prod(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::prod(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_max_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::max(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_max(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::max(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_min_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::min(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_min(mlx_array a, int* axes, int n, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::min(a->ctx, MLX_CPP_INTVEC(axes, n), keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_argmin_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::argmin(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_argmin(mlx_array a, int axis, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::argmin(a->ctx, axis, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_argmax_all(mlx_array a, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::argmax(a->ctx, keepdims, stream->ctx));
+}
+extern "C" mlx_array
+mlx_argmax(mlx_array a, int axis, bool keepdims, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::argmax(a->ctx, axis, keepdims, stream->ctx));
+}
