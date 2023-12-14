@@ -56,8 +56,9 @@ mlx_split_in_n(mlx_array a, int num_splits, int axis, mlx_stream stream);
 mlx_array*
 mlx_split(mlx_array a, int* indices, int n, int axis, mlx_stream stream);
 mlx_array
-mlx_concatenate(mlx_array* arrays, int n, int axis, mlx_stream stream);
+mlx_concatenate(mlx_array* arrays, size_t n, int axis, mlx_stream stream);
 mlx_array mlx_transpose(mlx_array a, int* axes, int n, mlx_stream stream);
+mlx_array mlx_transpose_all(mlx_array a, mlx_stream stream);
 mlx_array mlx_pad(
     mlx_array a,
     int* axes,
@@ -66,6 +67,18 @@ mlx_array mlx_pad(
     int n,
     mlx_array pad_value,
     mlx_stream stream);
+mlx_array mlx_broadcast_to(mlx_array a, int* shape, int dim, mlx_stream stream);
+mlx_array* mlx_broadcast_arrays(mlx_array* inputs, size_t n, mlx_stream stream);
+mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array mlx_not_equal(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array mlx_less_equal(mlx_array a, mlx_array b, mlx_stream stream);
+mlx_array
+mlx_array_equal(mlx_array a, mlx_array b, bool equal_nan, mlx_stream stream);
+mlx_array
+mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream stream);
 
 #ifdef __cplusplus
 }

@@ -50,7 +50,7 @@ inline mlx_array* mlx_cpp_vector_array_to_c(
 
 inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
     mlx_array* vec,
-    int n) {
+    size_t n) {
   std::vector<mlx::core::array> cpp_vec;
   for (size_t i = 0; i < n; i++) {
     cpp_vec.push_back(vec[i]->ctx);

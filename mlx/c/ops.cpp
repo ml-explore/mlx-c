@@ -121,7 +121,7 @@ mlx_split(mlx_array a, int* indices, int n, int axis, mlx_stream stream) {
       mlx::core::split(a->ctx, MLX_CPP_INTVEC(indices, n), axis, stream->ctx));
 }
 extern "C" mlx_array
-mlx_concatenate(mlx_array* arrays, int n, int axis, mlx_stream stream) {
+mlx_concatenate(mlx_array* arrays, size_t n, int axis, mlx_stream stream) {
   return MLX_C_ARRAY(
       mlx::core::concatenate(MLX_CPP_ARRVEC(arrays, n), axis, stream->ctx));
 }
@@ -129,6 +129,9 @@ extern "C" mlx_array
 mlx_transpose(mlx_array a, int* axes, int n, mlx_stream stream) {
   return MLX_C_ARRAY(
       mlx::core::transpose(a->ctx, MLX_CPP_INTVEC(axes, n), stream->ctx));
+}
+extern "C" mlx_array mlx_transpose_all(mlx_array a, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::transpose(a->ctx, stream->ctx));
 }
 extern "C" mlx_array mlx_pad(
     mlx_array a,
@@ -145,4 +148,45 @@ extern "C" mlx_array mlx_pad(
       MLX_CPP_INTVEC(high_pad_size, n),
       pad_value->ctx,
       stream->ctx));
+}
+extern "C" mlx_array
+mlx_broadcast_to(mlx_array a, int* shape, int dim, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::broadcast_to(a->ctx, MLX_CPP_INTVEC(shape, dim), stream->ctx));
+}
+extern "C" mlx_array*
+mlx_broadcast_arrays(mlx_array* inputs, size_t n, mlx_stream stream) {
+  return MLX_C_ARRAYS(
+      mlx::core::broadcast_arrays(MLX_CPP_ARRVEC(inputs, n), stream->ctx));
+}
+extern "C" mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::equal(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array
+mlx_not_equal(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::not_equal(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::greater(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array
+mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::greater_equal(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::less(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array
+mlx_less_equal(mlx_array a, mlx_array b, mlx_stream stream) {
+  return MLX_C_ARRAY(mlx::core::less_equal(a->ctx, b->ctx, stream->ctx));
+}
+extern "C" mlx_array
+mlx_array_equal(mlx_array a, mlx_array b, bool equal_nan, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::array_equal(a->ctx, b->ctx, equal_nan, stream->ctx));
+}
+extern "C" mlx_array
+mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream stream) {
+  return MLX_C_ARRAY(
+      mlx::core::where(condition->ctx, x->ctx, y->ctx, stream->ctx));
 }
