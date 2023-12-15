@@ -1,11 +1,19 @@
 import cxxheaderparser
 from cxxheaderparser.simple import parse_string
 import argparse
+import os
 
 parser = argparse.ArgumentParser("MLX C bindings generator", add_help=False)
 parser.add_argument("--header", type=str)
+parser.add_argument("--namespace", default="mlx::core", type=str)
 parser.add_argument("--implementation", default=False, action="store_true")
 args = parser.parse_args()
+
+headername = os.path.basename(args.header)
+if headername.endswith(".h"):
+    headername = headername[:-2]
+else:
+    raise RuntimeError("are you sure you are providing a header?")
 
 Z = cxxheaderparser.simple.parse_file(args.header)
 
@@ -39,7 +47,10 @@ def getname(t):
 
 
 funcs = {}
-l = Z.namespace.namespaces["mlx"].namespaces["core"]
+l = Z.namespace
+for namespace in args.namespace.split("::"):
+    l = l.namespaces[namespace]
+
 for f in l.functions:
     name = getname(f.name)
     if name.startswith("operator"):
@@ -112,9 +123,9 @@ for name in funcs:
 sorted_funcs.sort(key=lambda x: x["name"])
 
 if args.implementation:
+    print('#include "mlx/c/' + headername + '.h"')
     print(
         """
-#include "mlx/c/ops.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/utils.h"
@@ -122,11 +133,10 @@ if args.implementation:
 """
     )
 else:
+    print("#ifndef MLX_" + headername.upper() + "_H")
+    print("#define MLX_" + headername.upper() + "_H")
     print(
         """
-#ifndef MLX_OPS_H
-#define MLX_OPS_H
-
 #include <stdio.h>
 
 #include "mlx/c/array.h"
@@ -219,7 +229,7 @@ for f in sorted_funcs:
         raise RuntimeError("unsupported return type: " + return_t)
 
     cpp_code.append("(")
-    cpp_code.append("mlx::core::" + f["name"])
+    cpp_code.append(args.namespace + "::" + f["name"])
     cpp_code.append("(")
     cpp_code.append(cpp_call)
     cpp_code.append(")")
