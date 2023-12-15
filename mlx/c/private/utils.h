@@ -5,6 +5,86 @@
 #include "mlx/c/array.h"
 #include "mlx/mlx.h"
 
+class CFILEReader : public mlx::core::io::Reader {
+ private:
+  FILE* f;
+
+ public:
+  CFILEReader(FILE* f) : f(f){};
+  virtual bool is_open() const override {
+    return f != nullptr;
+  };
+  virtual bool good() const override {
+    return ferror(f) == 0;
+  };
+  virtual size_t tell() const override {
+    return ftell(f);
+  }
+  virtual void seek(
+      int64_t off,
+      std::ios_base::seekdir way = std::ios_base::beg) override {
+    switch (way) {
+      case std::ios_base::beg:
+        fseek(f, off, SEEK_SET);
+        break;
+      case std::ios_base::cur:
+        fseek(f, off, SEEK_CUR);
+        break;
+      case std::ios_base::end:
+        fseek(f, off, SEEK_END);
+        break;
+      default:
+        throw std::runtime_error("FILE: invalid seek way");
+    }
+  }
+  virtual void read(char* data, size_t n) override {
+    fread(data, 1, n, f);
+  };
+  virtual std::string label() const override {
+    return "FILE (read mode)";
+  };
+};
+
+class CFILEWriter : public mlx::core::io::Writer {
+ private:
+  FILE* f;
+
+ public:
+  CFILEWriter(FILE* f) : f(f){};
+  virtual bool is_open() const override {
+    return f != nullptr;
+  };
+  virtual bool good() const override {
+    return ferror(f) == 0;
+  };
+  virtual size_t tell() const override {
+    return ftell(f);
+  }
+  virtual void seek(
+      int64_t off,
+      std::ios_base::seekdir way = std::ios_base::beg) override {
+    switch (way) {
+      case std::ios_base::beg:
+        fseek(f, off, SEEK_SET);
+        break;
+      case std::ios_base::cur:
+        fseek(f, off, SEEK_CUR);
+        break;
+      case std::ios_base::end:
+        fseek(f, off, SEEK_END);
+        break;
+      default:
+        throw std::runtime_error("FILE: invalid seek way");
+    }
+  }
+  virtual void write(const char* data, size_t n) override {
+    fwrite(data, 1, n, f);
+  };
+  virtual std::string label() const override {
+    return "FILE (write mode)";
+  };
+};
+
 static mlx::core::Dtype mlx_cpp_dtypes[] = {
     mlx::core::bool_,
     mlx::core::uint8,
@@ -67,5 +147,9 @@ inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
   (std::vector<size_t>((vals), (vals) + (size)))
 #define MLX_C_ARRAYS(vec) (mlx_cpp_vector_array_to_c(vec))
 #define MLX_CPP_ARRVEC(vec, size) (mlx_c_vector_array_to_cpp((vec), (size)))
+#define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
+#define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
+#define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
+#define MLX_C_VOID(f) (f)
 
 #endif
