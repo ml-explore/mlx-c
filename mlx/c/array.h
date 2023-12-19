@@ -30,8 +30,11 @@ mlx_array mlx_array_from_bool(bool val);
 mlx_array mlx_array_from_int(int val);
 mlx_array mlx_array_from_float(float val);
 mlx_array mlx_array_from_complex(float real_val, float imag_val);
-mlx_array
-mlx_array_from_data(void* data, int* shape, int dim, mlx_array_dtype dtype);
+mlx_array mlx_array_from_data(
+    const void* data,
+    const int* shape,
+    int dim,
+    mlx_array_dtype dtype);
 
 size_t mlx_array_itemsize(mlx_array arr);
 size_t mlx_array_size(mlx_array arr);

@@ -27,8 +27,11 @@ extern "C" mlx_array mlx_array_from_complex(float real_val, float imag_val) {
   std::complex<float> cpp_val(real_val, imag_val);
   return MLX_C_ARRAY(mlx::core::array(cpp_val));
 }
-extern "C" mlx_array
-mlx_array_from_data(void* data, int* shape, int dim, mlx_array_dtype dtype) {
+extern "C" mlx_array mlx_array_from_data(
+    const void* data,
+    const int* shape,
+    int dim,
+    mlx_array_dtype dtype) {
   std::vector<int> cpp_shape;
   cpp_shape.assign(shape, shape + dim);
   mlx::core::Dtype cpp_dtype = MLX_CPP_ARRAY_DTYPE(dtype);
