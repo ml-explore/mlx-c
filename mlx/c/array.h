@@ -10,6 +10,11 @@ extern "C" {
 
 typedef struct mlx_array_* mlx_array;
 
+typedef struct mlx_vector_array_ {
+  mlx_array* arrays;
+  size_t size;
+} mlx_vector_array;
+
 typedef enum mlx_array_dtype_ {
   MLX_BOOL,
   MLX_UINT8,

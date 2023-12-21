@@ -1,0 +1,129 @@
+#include "mlx/c/random.h"
+
+#include "mlx/c/private/array.h"
+#include "mlx/c/private/stream.h"
+#include "mlx/c/private/utils.h"
+
+extern "C" mlx_array mlx_random_bernoulli(
+    mlx_array p,
+    int* shape,
+    size_t num_shape,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::bernoulli(
+      p->ctx,
+      MLX_CPP_INTVEC(shape, num_shape),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_bits(
+    int* shape,
+    size_t num_shape,
+    int width,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::bits(
+      MLX_CPP_INTVEC(shape, num_shape),
+      width,
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_categorical(
+    mlx_array logits,
+    int axis,
+    int* shape,
+    size_t num_shape,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::categorical(
+      logits->ctx,
+      axis,
+      MLX_CPP_INTVEC(shape, num_shape),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_gumbel(
+    int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::gumbel(
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_key(uint64_t seed) {
+  return MLX_C_ARRAY(mlx::core::random::key(seed));
+}
+extern "C" mlx_array mlx_random_normal(
+    int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::normal(
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_randint(
+    mlx_array low,
+    mlx_array high,
+    int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::randint(
+      low->ctx,
+      high->ctx,
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" void mlx_random_seed(uint64_t seed) {
+  return MLX_C_VOID(mlx::core::random::seed(seed));
+}
+extern "C" mlx_array
+mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::split(key->ctx, num, s->ctx));
+}
+extern "C" mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s) {
+  return MLX_C_ARRAYPAIR(mlx::core::random::split(key->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_random_truncated_normal(
+    mlx_array lower,
+    mlx_array upper,
+    int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::truncated_normal(
+      lower->ctx,
+      upper->ctx,
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_uniform(
+    mlx_array low,
+    mlx_array high,
+    int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::uniform(
+      low->ctx,
+      high->ctx,
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}

@@ -1,7 +1,9 @@
 #ifndef MLX_UTILS_H
 #define MLX_UTILS_H
 
+#include <optional>
 #include <vector>
+
 #include "mlx/c/array.h"
 #include "mlx/mlx.h"
 
@@ -117,12 +119,42 @@ static mlx_array_dtype mlx_c_dtypes[] = {
     MLX_COMPLEX64,
 };
 
-inline mlx_array* mlx_cpp_vector_array_to_c(
+inline mlx_vector_array mlx_cpp_vector_array_to_c(
     const std::vector<mlx::core::array>& vec) {
-  mlx_array* c_vec = (mlx_array*)malloc(sizeof(mlx_array) * vec.size());
-  if (c_vec) {
+  mlx_vector_array c_vec;
+  c_vec.size = vec.size();
+  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * vec.size());
+  if (c_vec.arrays) {
     for (size_t i = 0; i < vec.size(); i++) {
-      c_vec[i] = new mlx_array_(vec[i]);
+      c_vec.arrays[i] = new mlx_array_(vec[i]);
+    }
+  }
+  return c_vec;
+}
+
+inline mlx_vector_array mlx_cpp_pair_array_to_c(
+    const std::pair<mlx::core::array, mlx::core::array>& vec) {
+  mlx_vector_array c_vec;
+  c_vec.size = 2;
+  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * 2);
+  if (c_vec.arrays) {
+    c_vec.arrays[0] = new mlx_array_(vec.first);
+    c_vec.arrays[0] = new mlx_array_(vec.second);
+  }
+  return c_vec;
+}
+
+inline mlx_vector_array mlx_cpp_tuple3_array_to_c(
+    const std::tuple<mlx::core::array, mlx::core::array, mlx::core::array>&
+        vec) {
+  mlx_vector_array c_vec;
+  c_vec.size = 3;
+  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * 3);
+  if (c_vec.arrays) {
+    for (int i = 0; i < 3; i++) {
+      c_vec.arrays[0] = new mlx_array_(std::get<0>(vec));
+      c_vec.arrays[1] = new mlx_array_(std::get<1>(vec));
+      c_vec.arrays[2] = new mlx_array_(std::get<2>(vec));
     }
   }
   return c_vec;
@@ -146,6 +178,8 @@ inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
 #define MLX_C_ARRAYS(vec) (mlx_cpp_vector_array_to_c(vec))
+#define MLX_C_ARRAYPAIR(apair) (mlx_cpp_pair_array_to_c(apair))
+#define MLX_C_ARRAYTUPLE3(atuple) (mlx_cpp_tuple3_array_to_c(atuple))
 #define MLX_CPP_ARRVEC(vec, size) (mlx_c_vector_array_to_cpp((vec), (size)))
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
