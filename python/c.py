@@ -136,15 +136,15 @@ def generate(funcs, headername, namespace, implementation):
                 c_call.append(pti + " " + pni)
                 cpp_call.append(pni)
             elif pti == "std::vector<int>":
-                c_call.append("int* " + pni)
+                c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::vector<size_t>":
-                c_call.append("size_t* " + pni)
+                c_call.append("const size_t* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_SIZEVEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::vector<array>":
-                c_call.append("mlx_array* " + pni)
+                c_call.append("const mlx_array* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_ARRVEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::pair<int, int>":
