@@ -1,3 +1,6 @@
+import sys
+
+
 def generate(funcs, headername, namespace, implementation):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
@@ -94,7 +97,9 @@ def generate(funcs, headername, namespace, implementation):
         ):
             signature.append("mlx_vector_array")
         else:
-            raise RuntimeError("unsupported return type: " + return_t)
+            print("unsupported return type: " + return_t, file=sys.stderr)
+            print("skipping", f, file=sys.stderr)
+            continue
         if "variant" in f:
             signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"])
         else:
@@ -105,6 +110,7 @@ def generate(funcs, headername, namespace, implementation):
         cpp_call = []
         pt = f["params_t"]
         pn = f["params_name"]
+        encountered_unsupported_type = False
         for i in range(len(pt)):
             pti = pt[i]
             pni = pn[i]
@@ -158,7 +164,14 @@ def generate(funcs, headername, namespace, implementation):
                 c_call.append("FILE* " + pni)
                 cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
             else:
-                raise RuntimeError("unsupported type: " + pti)
+                print("unsupported type: " + pti, file=sys.stderr)
+                encountered_unsupported_type = True
+                break
+
+        if encountered_unsupported_type:
+            print("skipping", f, file=sys.stderr)
+            continue
+
         # print(f)
         c_call = ", ".join(c_call)
         cpp_call = ", ".join(cpp_call)
@@ -180,7 +193,9 @@ def generate(funcs, headername, namespace, implementation):
         elif return_t == "std::tuple<array, array, array>":
             cpp_code.append("MLX_C_ARRAYTUPLE3")
         else:
-            raise RuntimeError("unsupported return type: " + return_t)
+            print("unsupported return type: " + return_t, file=sys.stderr)
+            print("skipping", f, file=sys.stderr)
+            continue
 
         cpp_code.append("(")
         cpp_code.append(namespace + "::" + f["name"])
