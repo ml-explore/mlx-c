@@ -161,7 +161,7 @@ inline mlx_vector_array mlx_cpp_tuple3_array_to_c(
 }
 
 inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
-    mlx_array* vec,
+    const mlx_array* vec,
     size_t n) {
   std::vector<mlx::core::array> cpp_vec;
   for (size_t i = 0; i < n; i++) {

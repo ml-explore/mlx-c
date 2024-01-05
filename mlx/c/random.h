@@ -12,12 +12,12 @@ extern "C" {
 
 mlx_array mlx_random_bernoulli(
     mlx_array p,
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_bits(
-    int* shape,
+    const int* shape,
     size_t num_shape,
     int width,
     mlx_array key,
@@ -25,19 +25,19 @@ mlx_array mlx_random_bits(
 mlx_array mlx_random_categorical(
     mlx_array logits,
     int axis,
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_gumbel(
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_key(uint64_t seed);
 mlx_array mlx_random_normal(
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     mlx_array key,
@@ -45,7 +45,7 @@ mlx_array mlx_random_normal(
 mlx_array mlx_random_randint(
     mlx_array low,
     mlx_array high,
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     mlx_array key,
@@ -56,7 +56,7 @@ mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s);
 mlx_array mlx_random_truncated_normal(
     mlx_array lower,
     mlx_array upper,
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     mlx_array key,
@@ -64,7 +64,7 @@ mlx_array mlx_random_truncated_normal(
 mlx_array mlx_random_uniform(
     mlx_array low,
     mlx_array high,
-    int* shape,
+    const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     mlx_array key,
