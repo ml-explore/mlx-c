@@ -102,52 +102,48 @@ extern "C" mlx_array_dtype mlx_array_get_dtype(mlx_array arr) {
   return MLX_C_ARRAY_DTYPE(MLX_CPP_ARRAY(arr).dtype());
 }
 
-extern "C" bool mlx_array_is_tracer(mlx_array arr) {
-    return MLX_CPP_ARRAY(arr).is_tracer();
+extern "C" bool mlx_array_item_bool(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<bool>();
 }
-
-extern "C" bool mlx_array_item_bool(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<bool>(retain_graph);
+extern "C" uint8_t mlx_array_item_uint8(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<uint8_t>();
 }
-extern "C" uint8_t mlx_array_item_uint8(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<uint8_t>(retain_graph);
+extern "C" uint16_t mlx_array_item_uint16(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<uint16_t>();
 }
-extern "C" uint16_t mlx_array_item_uint16(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<uint16_t>(retain_graph);
+extern "C" uint32_t mlx_array_item_uint32(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<uint32_t>();
 }
-extern "C" uint32_t mlx_array_item_uint32(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<uint32_t>(retain_graph);
+extern "C" uint64_t mlx_array_item_uint64(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<uint64_t>();
 }
-extern "C" uint64_t mlx_array_item_uint64(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<uint64_t>(retain_graph);
+extern "C" int8_t mlx_array_item_int8(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<int8_t>();
 }
-extern "C" int8_t mlx_array_item_int8(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<int8_t>(retain_graph);
+extern "C" int16_t mlx_array_item_int16(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<int16_t>();
 }
-extern "C" int16_t mlx_array_item_int16(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<int16_t>(retain_graph);
+extern "C" int32_t mlx_array_item_int32(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<int32_t>();
 }
-extern "C" int32_t mlx_array_item_int32(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<int32_t>(retain_graph);
+extern "C" int64_t mlx_array_item_int64(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<int64_t>();
 }
-extern "C" int64_t mlx_array_item_int64(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<int64_t>(retain_graph);
+extern "C" float mlx_array_item_float32(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<float>();
 }
-extern "C" float mlx_array_item_float32(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<float>(retain_graph);
-}
-extern "C" float _Complex mlx_array_item_complex64(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<float _Complex>(retain_graph);
+extern "C" float _Complex mlx_array_item_complex64(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<float _Complex>();
 }
 
 #ifdef HAS_FLOAT16
-extern "C" float16_t mlx_array_item_float16(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<float16_t>(retain_graph);
+extern "C" float16_t mlx_array_item_float16(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<float16_t>();
 }
 #endif
 
 #ifdef HAS_BFLOAT16
-extern "C" bfloat16_t mlx_array_item_bfloat16(mlx_array arr, bool retain_graph) {
-  return MLX_CPP_ARRAY(arr).item<bfloat16_t>(retain_graph);
+extern "C" bfloat16_t mlx_array_item_bfloat16(mlx_array arr) {
+  return MLX_CPP_ARRAY(arr).item<bfloat16_t>();
 }
 #endif

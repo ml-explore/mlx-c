@@ -233,7 +233,7 @@ mlx_array
 mlx_reshape(mlx_array a, const int* shape, size_t num_shape, mlx_stream s);
 mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s);
 mlx_array mlx_rsqrt(mlx_array a, mlx_stream s);
-void mlx_save(FILE* out_stream, mlx_array a, bool retain_graph);
+void mlx_save(FILE* out_stream, mlx_array a);
 mlx_array mlx_scatter(
     mlx_array a,
     const mlx_array* indices,

@@ -502,9 +502,9 @@ extern "C" mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s) {
 extern "C" mlx_array mlx_rsqrt(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::rsqrt(a->ctx, s->ctx));
 }
-extern "C" void mlx_save(FILE* out_stream, mlx_array a, bool retain_graph) {
+extern "C" void mlx_save(FILE* out_stream, mlx_array a) {
   return MLX_C_VOID(
-      mlx::core::save(MLX_CPP_WRITER(out_stream), a->ctx, retain_graph));
+      mlx::core::save(MLX_CPP_WRITER(out_stream), a->ctx));
 }
 extern "C" mlx_array mlx_scatter(
     mlx_array a,

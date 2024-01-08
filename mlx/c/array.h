@@ -56,26 +56,24 @@ size_t* mlx_array_strides(mlx_array arr);
 int mlx_array_dim(mlx_array arr, int dim);
 mlx_array_dtype mlx_array_get_dtype(mlx_array arr);
 
-bool mlx_array_is_tracer(mlx_array arr);
-
-bool mlx_array_item_bool(mlx_array arr, bool retain_graph);
-uint8_t mlx_array_item_uint8(mlx_array arr, bool retain_graph);
-uint16_t mlx_array_item_uint16(mlx_array arr, bool retain_graph);
-uint32_t mlx_array_item_uint32(mlx_array arr, bool retain_graph);
-uint64_t mlx_array_item_uint64(mlx_array arr, bool retain_graph);
-int8_t mlx_array_item_int8(mlx_array arr, bool retain_graph);
-int16_t mlx_array_item_int16(mlx_array arr, bool retain_graph);
-int32_t mlx_array_item_int32(mlx_array arr, bool retain_graph);
-int64_t mlx_array_item_int64(mlx_array arr, bool retain_graph);
-float mlx_array_item_float32(mlx_array arr, bool retain_graph);
-float _Complex mlx_array_item_complex64(mlx_array arr, bool retain_graph);
+bool mlx_array_item_bool(mlx_array arr);
+uint8_t mlx_array_item_uint8(mlx_array arr);
+uint16_t mlx_array_item_uint16(mlx_array arr);
+uint32_t mlx_array_item_uint32(mlx_array arr);
+uint64_t mlx_array_item_uint64(mlx_array arr);
+int8_t mlx_array_item_int8(mlx_array arr);
+int16_t mlx_array_item_int16(mlx_array arr);
+int32_t mlx_array_item_int32(mlx_array arr);
+int64_t mlx_array_item_int64(mlx_array arr);
+float mlx_array_item_float32(mlx_array arr);
+float _Complex mlx_array_item_complex64(mlx_array arr);
 
 #ifdef HAS_FLOAT16
-float16_t mlx_array_item_float16(mlx_array arr, bool retain_graph);
+float16_t mlx_array_item_float16(mlx_array arr);
 #endif
 
 #ifdef HAS_BFLOAT16
-bfloat16_t mlx_array_item_bfloat16(mlx_array arr, bool retain_graph);
+bfloat16_t mlx_array_item_bfloat16(mlx_array arr);
 #endif
 
 #ifdef __cplusplus
