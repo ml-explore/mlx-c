@@ -1,6 +1,8 @@
 #include "mlx/c/array.h"
 #include "mlx/c/device.h"
+#include "mlx/c/fft.h"
 #include "mlx/c/ops.h"
+#include "mlx/c/random.h"
 #include "mlx/c/stream.h"
 
 #ifdef __cplusplus
