@@ -35,6 +35,11 @@ mlx_array mlx_random_categorical_num_samples(
     int num_samples,
     mlx_array key,
     mlx_stream s);
+mlx_array mlx_random_categorical(
+    mlx_array logits,
+    int axis,
+    mlx_array key,
+    mlx_stream s);
 mlx_array mlx_random_gumbel(
     const int* shape,
     size_t num_shape,

@@ -55,6 +55,17 @@ extern "C" mlx_array mlx_random_categorical_num_samples(
       (key ? std::make_optional(key->ctx) : std::nullopt),
       s->ctx));
 }
+extern "C" mlx_array mlx_random_categorical(
+    mlx_array logits,
+    int axis,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::categorical(
+      logits->ctx,
+      axis,
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
 extern "C" mlx_array mlx_random_gumbel(
     const int* shape,
     size_t num_shape,
