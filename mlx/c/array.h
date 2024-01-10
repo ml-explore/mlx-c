@@ -55,6 +55,7 @@ int* mlx_array_shape(mlx_array arr);
 size_t* mlx_array_strides(mlx_array arr);
 int mlx_array_dim(mlx_array arr, int dim);
 mlx_array_dtype mlx_array_get_dtype(mlx_array arr);
+void mlx_array_eval(mlx_array arr);
 
 bool mlx_array_item_bool(mlx_array arr);
 uint8_t mlx_array_item_uint8(mlx_array arr);
@@ -74,6 +75,26 @@ float16_t mlx_array_item_float16(mlx_array arr);
 
 #ifdef HAS_BFLOAT16
 bfloat16_t mlx_array_item_bfloat16(mlx_array arr);
+#endif
+
+const bool *mlx_array_data_bool(mlx_array arr);
+const uint8_t *mlx_array_data_uint8(mlx_array arr);
+const uint16_t *mlx_array_data_uint16(mlx_array arr);
+const uint32_t *mlx_array_data_uint32(mlx_array arr);
+const uint64_t *mlx_array_data_uint64(mlx_array arr);
+const int8_t *mlx_array_data_int8(mlx_array arr);
+const int16_t *mlx_array_data_int16(mlx_array arr);
+const int32_t *mlx_array_data_int32(mlx_array arr);
+const int64_t *mlx_array_data_int64(mlx_array arr);
+const float *mlx_array_data_float32(mlx_array arr);
+const float _Complex *mlx_array_data_complex64(mlx_array arr);
+
+#ifdef HAS_FLOAT16
+const float16_t *mlx_array_data_float16(mlx_array arr);
+#endif
+
+#ifdef HAS_BFLOAT16
+const bfloat16_t *mlx_array_data_bfloat16(mlx_array arr);
 #endif
 
 #ifdef __cplusplus
