@@ -28,7 +28,7 @@ extern "C" mlx_array mlx_random_bits(
       (key ? std::make_optional(key->ctx) : std::nullopt),
       s->ctx));
 }
-extern "C" mlx_array mlx_random_categorical(
+extern "C" mlx_array mlx_random_categorical_shape(
     mlx_array logits,
     int axis,
     const int* shape,
@@ -39,6 +39,19 @@ extern "C" mlx_array mlx_random_categorical(
       logits->ctx,
       axis,
       MLX_CPP_INTVEC(shape, num_shape),
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_random_categorical_num_samples(
+    mlx_array logits,
+    int axis,
+    int num_samples,
+    mlx_array key,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::random::categorical(
+      logits->ctx,
+      axis,
+      num_samples,
       (key ? std::make_optional(key->ctx) : std::nullopt),
       s->ctx));
 }

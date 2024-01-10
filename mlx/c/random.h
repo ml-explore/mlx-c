@@ -22,11 +22,17 @@ mlx_array mlx_random_bits(
     int width,
     mlx_array key,
     mlx_stream s);
-mlx_array mlx_random_categorical(
+mlx_array mlx_random_categorical_shape(
     mlx_array logits,
     int axis,
     const int* shape,
     size_t num_shape,
+    mlx_array key,
+    mlx_stream s);
+mlx_array mlx_random_categorical_num_samples(
+    mlx_array logits,
+    int axis,
+    int num_samples,
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_gumbel(
