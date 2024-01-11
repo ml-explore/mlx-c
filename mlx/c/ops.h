@@ -12,10 +12,15 @@ extern "C" {
 
 mlx_array mlx_abs(mlx_array a, mlx_stream s);
 mlx_array mlx_add(mlx_array a, mlx_array b, mlx_stream s);
-mlx_array mlx_all(
+mlx_array mlx_all_axes(
     mlx_array a,
     const int* axes,
     size_t num_axes,
+    bool keepdims,
+    mlx_stream s);
+mlx_array mlx_all_axis(
+    mlx_array a,
+    int axis,
     bool keepdims,
     mlx_stream s);
 mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream s);
@@ -153,6 +158,8 @@ mlx_array mlx_log1p(mlx_array a, mlx_stream s);
 mlx_array mlx_log2(mlx_array a, mlx_stream s);
 mlx_array mlx_logaddexp(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_logical_not(mlx_array a, mlx_stream s);
+mlx_array mlx_logical_and(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_logical_or(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_logsumexp(
     mlx_array a,
     const int* axes,

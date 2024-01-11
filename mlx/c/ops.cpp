@@ -10,7 +10,7 @@ extern "C" mlx_array mlx_abs(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_add(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::add(a->ctx, b->ctx, s->ctx));
 }
-extern "C" mlx_array mlx_all(
+extern "C" mlx_array mlx_all_axes(
     mlx_array a,
     const int* axes,
     size_t num_axes,
@@ -18,6 +18,14 @@ extern "C" mlx_array mlx_all(
     mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::all(a->ctx, MLX_CPP_INTVEC(axes, num_axes), keepdims, s->ctx));
+}
+extern "C" mlx_array mlx_all_axis(
+    mlx_array a,
+    int axis,
+    bool keepdims,
+    mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::all(a->ctx, axis, keepdims, s->ctx));
 }
 extern "C" mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::all(a->ctx, keepdims, s->ctx));
@@ -331,6 +339,12 @@ extern "C" mlx_array mlx_logaddexp(mlx_array a, mlx_array b, mlx_stream s) {
 }
 extern "C" mlx_array mlx_logical_not(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::logical_not(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_logical_and(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::logical_and(a->ctx, b->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_logical_or(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::logical_or(a->ctx, b->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_logsumexp(
     mlx_array a,
