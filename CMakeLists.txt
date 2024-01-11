@@ -40,7 +40,8 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/mlx.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp)
 
 add_library(mlxc STATIC ${mlxc-src})
 

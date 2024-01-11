@@ -43,8 +43,15 @@ def getname(t):
         for s in t.args:
             res.append(getname(s))
         return "<" + ", ".join(res) + ">"
+    elif type(t) == cxxheaderparser.types.FunctionType:
+        return_t = getname(t.return_type)
+        params_t = []
+        for p in t.parameters:
+            params_t.append(getname(p.type))
+        res = return_t + "(" + ",".join(params_t) + ")"
+        return res
 
-    raise "unsupported type: " + t
+    raise RuntimeError("unsupported type: " + str(t))
 
 
 funcs = {}
