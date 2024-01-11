@@ -5,7 +5,6 @@
 extern "C" {
 #endif
 
-
 #ifdef __ARM_FEATURE_FP16_SCALAR_ARITHMETIC
 #define HAS_FLOAT16
 #include <arm_fp16.h>
@@ -17,7 +16,6 @@ typedef __fp16 float16_t;
 #include <arm_bf16.h>
 typedef __bf16 bfloat16_t;
 #endif
-
 
 #ifdef __cplusplus
 }

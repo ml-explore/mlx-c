@@ -151,48 +151,48 @@ extern "C" bfloat16_t mlx_array_item_bfloat16(mlx_array arr) {
 }
 #endif
 
-extern "C" const bool *mlx_array_data_bool(mlx_array arr) {
+extern "C" const bool* mlx_array_data_bool(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<bool>();
 }
-extern "C" const uint8_t *mlx_array_data_uint8(mlx_array arr) {
+extern "C" const uint8_t* mlx_array_data_uint8(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<uint8_t>();
 }
-extern "C" const uint16_t *mlx_array_data_uint16(mlx_array arr) {
+extern "C" const uint16_t* mlx_array_data_uint16(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<uint16_t>();
 }
-extern "C" const uint32_t *mlx_array_data_uint32(mlx_array arr) {
+extern "C" const uint32_t* mlx_array_data_uint32(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<uint32_t>();
 }
-extern "C" const uint64_t *mlx_array_data_uint64(mlx_array arr) {
+extern "C" const uint64_t* mlx_array_data_uint64(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<uint64_t>();
 }
-extern "C" const int8_t *mlx_array_data_int8(mlx_array arr) {
+extern "C" const int8_t* mlx_array_data_int8(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<int8_t>();
 }
-extern "C" const int16_t *mlx_array_data_int16(mlx_array arr) {
+extern "C" const int16_t* mlx_array_data_int16(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<int16_t>();
 }
-extern "C" const int32_t *mlx_array_data_int32(mlx_array arr) {
+extern "C" const int32_t* mlx_array_data_int32(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<int32_t>();
 }
-extern "C" const int64_t *mlx_array_data_int64(mlx_array arr) {
+extern "C" const int64_t* mlx_array_data_int64(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<int64_t>();
 }
-extern "C" const float *mlx_array_data_float32(mlx_array arr) {
+extern "C" const float* mlx_array_data_float32(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<float>();
 }
-extern "C" const float _Complex *mlx_array_data_complex64(mlx_array arr) {
+extern "C" const float _Complex* mlx_array_data_complex64(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<float _Complex>();
 }
 
 #ifdef HAS_FLOAT16
-extern "C" const float16_t *mlx_array_data_float16(mlx_array arr) {
+extern "C" const float16_t* mlx_array_data_float16(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<float16_t>();
 }
 #endif
 
 #ifdef HAS_BFLOAT16
-extern "C" const bfloat16_t *mlx_array_data_bfloat16(mlx_array arr) {
+extern "C" const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<bfloat16_t>();
 }
 #endif
