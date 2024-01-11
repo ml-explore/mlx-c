@@ -35,6 +35,7 @@ FetchContent_MakeAvailable(mlx)
 
 set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/array.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/mlx.cpp
