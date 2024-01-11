@@ -28,7 +28,7 @@ set(MLX_BUILD_METAL ON)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG "main")
+  GIT_TAG c92a134b0d8f0e9fbc90b49dae7edbad8da18d58)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------
