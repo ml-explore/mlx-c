@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "mlx/c/array.h"
+#include "mlx/c/private/array.h"
 #include "mlx/mlx.h"
 
 class CFILEReader : public mlx::core::io::Reader {
