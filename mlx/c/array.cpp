@@ -1,6 +1,7 @@
 #include <cstring>
 
 #include "mlx/c/array.h"
+#include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/utils.h"
 
@@ -12,6 +13,12 @@ char* mlx_array_::tostring() {
   memcpy(c_str, str.data(), str.size());
   c_str[str.size()] = '\0';
   return c_str;
+}
+
+extern "C" void mlx_vector_array_free(mlx_vector_array vec) {
+  for (size_t i = 0; i < vec.size; i++) {
+    mlx_free(vec.arrays[i]);
+  }
 }
 
 extern "C" mlx_array mlx_array_from_bool(bool val) {
