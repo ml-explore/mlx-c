@@ -18,11 +18,7 @@ mlx_array mlx_all_axes(
     size_t num_axes,
     bool keepdims,
     mlx_stream s);
-mlx_array mlx_all_axis(
-    mlx_array a,
-    int axis,
-    bool keepdims,
-    mlx_stream s);
+mlx_array mlx_all_axis(mlx_array a, int axis, bool keepdims, mlx_stream s);
 mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream s);
 mlx_array
 mlx_allclose(mlx_array a, mlx_array b, double rtol, double atol, mlx_stream s);
@@ -115,6 +111,7 @@ mlx_array mlx_dequantize(
     int bits,
     mlx_stream s);
 mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s);
+mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_erf(mlx_array a, mlx_stream s);
 mlx_array mlx_erfinv(mlx_array a, mlx_stream s);
@@ -143,6 +140,7 @@ mlx_array mlx_gather(
 mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s);
+mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_less_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_linspace(
@@ -157,8 +155,8 @@ mlx_array mlx_log10(mlx_array a, mlx_stream s);
 mlx_array mlx_log1p(mlx_array a, mlx_stream s);
 mlx_array mlx_log2(mlx_array a, mlx_stream s);
 mlx_array mlx_logaddexp(mlx_array a, mlx_array b, mlx_stream s);
-mlx_array mlx_logical_not(mlx_array a, mlx_stream s);
 mlx_array mlx_logical_and(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_logical_not(mlx_array a, mlx_stream s);
 mlx_array mlx_logical_or(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_logsumexp(
     mlx_array a,
@@ -201,6 +199,7 @@ mlx_array mlx_ones(
     mlx_array_dtype dtype,
     mlx_stream s);
 mlx_array mlx_ones_like(mlx_array a, mlx_stream s);
+mlx_array mlx_outer(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_pad(
     mlx_array a,
     const int* axes,

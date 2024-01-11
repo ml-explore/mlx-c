@@ -15,19 +15,20 @@ def generate(funcs, headername, namespace, implementation):
         else:
             variants.sort(key=lambda x: len(x["params_name"]), reverse=True)
 
-            idx = 0
-            while idx < len(variants) - 1:
-                pidx = variants[idx]["params_name"]
-                pidxp1 = variants[idx + 1]["params_name"]
-                mpidx = [p if p != "axis" else "axes" for p in pidx]
-                mpidxp1 = [p if p != "axis" else "axes" for p in pidxp1]
-                if mpidx == mpidxp1:
-                    if pidx == mpidx:
-                        variants.pop(idx + 1)
+            if name != "all":
+                idx = 0
+                while idx < len(variants) - 1:
+                    pidx = variants[idx]["params_name"]
+                    pidxp1 = variants[idx + 1]["params_name"]
+                    mpidx = [p if p != "axis" else "axes" for p in pidx]
+                    mpidxp1 = [p if p != "axis" else "axes" for p in pidxp1]
+                    if mpidx == mpidxp1:
+                        if pidx == mpidx:
+                            variants.pop(idx + 1)
+                        else:
+                            variants.pop(idx)
                     else:
-                        variants.pop(idx)
-                else:
-                    idx = idx + 1
+                        idx = idx + 1
 
             if len(variants) == 1:
                 sorted_funcs.append(variants[0])
@@ -39,6 +40,19 @@ def generate(funcs, headername, namespace, implementation):
                 sorted_funcs.append(var1)
             elif name == "pad":
                 sorted_funcs.append(variants[0])
+            elif name == "all":
+                variants[0]["variant"] = "axes"
+                variants[1]["variant"] = "axis"
+                variants[2]["variant"] = "all"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[1])
+                sorted_funcs.append(variants[2])
+            elif name == "categorical":
+                variants[0]["variant"] = "shape"
+                variants[1]["variant"] = "num_samples"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[1])
+                sorted_funcs.append(variants[2])
             elif (
                 "axes" in variants[0]["params_name"]
                 or "axis" in variants[0]["params_name"]

@@ -43,13 +43,13 @@ extern "C" mlx_array mlx_random_categorical_shape(
       s->ctx));
 }
 extern "C" mlx_array mlx_random_categorical_num_samples(
-    mlx_array logits,
+    mlx_array logits_,
     int axis,
     int num_samples,
     mlx_array key,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::random::categorical(
-      logits->ctx,
+      logits_->ctx,
       axis,
       num_samples,
       (key ? std::make_optional(key->ctx) : std::nullopt),
