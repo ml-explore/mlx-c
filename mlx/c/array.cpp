@@ -19,6 +19,14 @@ extern "C" void mlx_vector_array_free(mlx_vector_array vec) {
   for (size_t i = 0; i < vec.size; i++) {
     mlx_free(vec.arrays[i]);
   }
+  free(vec.arrays);
+}
+
+extern "C" void mlx_vector_vector_array_free(mlx_vector_vector_array vec) {
+  for (size_t i = 0; i < vec.size; i++) {
+    mlx_vector_array_free(vec.vectors[i]);
+  }
+  free(vec.vectors);
 }
 
 extern "C" mlx_array mlx_array_from_bool(bool val) {

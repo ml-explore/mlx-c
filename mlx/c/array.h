@@ -19,8 +19,16 @@ typedef struct mlx_vector_array_ {
   mlx_array* arrays;
   size_t size;
 } mlx_vector_array;
-// free all arrays in vector
+
+// free arrays in vector, and arrays itself
 void mlx_vector_array_free(mlx_vector_array vec);
+
+typedef struct mlx_vector_vector_array_ {
+  mlx_vector_array* vectors;
+  size_t size;
+} mlx_vector_vector_array;
+
+void mlx_vector_vector_array_free(mlx_vector_vector_array vec);
 
 typedef enum mlx_array_dtype_ {
   MLX_BOOL,
