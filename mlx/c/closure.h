@@ -10,6 +10,7 @@ extern "C" {
 typedef struct mlx_closure_* mlx_closure;
 
 mlx_closure mlx_closure_new(mlx_vector_array (*fun)(const mlx_array*, size_t));
+mlx_closure mlx_closure_new_unary(mlx_array (*fun)(const mlx_array));
 mlx_closure mlx_closure_new_with_payload(
     mlx_vector_array (*fun)(const mlx_array*, size_t, void*),
     void* payload,

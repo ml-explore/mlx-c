@@ -1,5 +1,6 @@
 #include <cstring>
 
+#include "mlx.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/utils.h"
@@ -20,6 +21,22 @@ extern "C" mlx_closure mlx_closure_new(
     mlx_vector_array_free(c_input);
     auto res = mlx_c_vector_array_to_cpp(c_res.arrays, c_res.size);
     mlx_vector_array_free(c_res);
+    return res;
+  };
+  return new mlx_closure_(cpp_closure);
+}
+
+extern "C" mlx_closure mlx_closure_new_unary(
+    mlx_array (*fun)(const mlx_array)) {
+  auto cpp_closure = [fun](const std::vector<mlx::core::array>& input) {
+    if (input.size() != 1) {
+      throw std::runtime_error("closure: expected unary input");
+    }
+    auto c_input = MLX_C_ARRAY(input[0]);
+    auto c_res = fun(c_input);
+    mlx_free(c_input);
+    std::vector<mlx::core::array> res = {c_res->ctx};
+    mlx_free(c_res);
     return res;
   };
   return new mlx_closure_(cpp_closure);
