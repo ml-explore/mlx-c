@@ -171,6 +171,20 @@ inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
   return cpp_vec;
 }
 
+inline mlx_vector_vector_array mlx_cpp_pair_vector_array_to_c(
+    const std::pair<
+        std::vector<mlx::core::array>,
+        std::vector<mlx::core::array>>& pair) {
+  mlx_vector_vector_array c_vec;
+  c_vec.size = 2;
+  c_vec.vectors = (mlx_vector_array*)malloc(sizeof(mlx_vector_array) * 2);
+  if (c_vec.vectors) {
+    c_vec.vectors[0] = mlx_cpp_vector_array_to_c(std::get<0>(pair));
+    c_vec.vectors[1] = mlx_cpp_vector_array_to_c(std::get<1>(pair));
+  }
+  return c_vec;
+}
+
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
 #define MLX_C_ARRAY(arr) (new mlx_array_(arr))
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
@@ -185,6 +199,9 @@ inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
+#define MLX_C_CLOSURE(f) (new mlx_closure_(f))
+#define MLX_CPP_CLOSURE(f) ((f)->ctx)
+#define MLX_C_VECTORARRAYPAIR(apair) (mlx_cpp_pair_vector_array_to_c(apair))
 #define MLX_C_VOID(f) (f)
 
 #endif

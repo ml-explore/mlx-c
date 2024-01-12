@@ -75,6 +75,7 @@ def generate(funcs, headername, namespace, implementation):
         print(
             """
     #include "mlx/c/private/array.h"
+    #include "mlx/c/private/closure.h"
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/utils.h"
 
@@ -88,6 +89,7 @@ def generate(funcs, headername, namespace, implementation):
     #include <stdio.h>
 
     #include "mlx/c/array.h"
+    #include "mlx/c/closure.h"
     #include "mlx/c/stream.h"
 
     #ifdef __cplusplus
@@ -110,6 +112,10 @@ def generate(funcs, headername, namespace, implementation):
             or return_t == "std::tuple<array, array, array>"
         ):
             signature.append("mlx_vector_array")
+        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
+            signature.append("mlx_vector_vector_array")
+        elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
+            signature.append("mlx_closure")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
@@ -177,6 +183,9 @@ def generate(funcs, headername, namespace, implementation):
             elif pti == "std::shared_ptr<io::Writer>":
                 c_call.append("FILE* " + pni)
                 cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
+            elif pti == "std::function<std::vector<array>(std::vector<array>)>":
+                c_call.append("mlx_closure " + pni)
+                cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
             else:
                 print("unsupported type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
@@ -206,6 +215,10 @@ def generate(funcs, headername, namespace, implementation):
             cpp_code.append("MLX_C_ARRAYPAIR")
         elif return_t == "std::tuple<array, array, array>":
             cpp_code.append("MLX_C_ARRAYTUPLE3")
+        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
+            cpp_code.append("MLX_C_VECTORARRAYPAIR")
+        elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
+            cpp_code.append("MLX_C_CLOSURE")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
