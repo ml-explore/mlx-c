@@ -38,6 +38,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/mlx.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
