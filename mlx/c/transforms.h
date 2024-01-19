@@ -19,6 +19,8 @@ mlx_vector_vector_array mlx_jvp(
     const mlx_array* tangents,
     size_t num_tangents);
 void mlx_simplify(const mlx_array* outputs, size_t num_outputs);
+mlx_closure_value_and_grad
+mlx_value_and_grad(mlx_closure fun, const int* argnums, size_t num_argnums);
 mlx_vector_vector_array mlx_vjp(
     mlx_closure fun,
     const mlx_array* primals,

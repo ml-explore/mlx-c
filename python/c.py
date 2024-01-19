@@ -116,6 +116,8 @@ def generate(funcs, headername, namespace, implementation):
             signature.append("mlx_vector_vector_array")
         elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
             signature.append("mlx_closure")
+        elif return_t == "ValueAndGradFn":
+            signature.append("mlx_closure_value_and_grad")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
@@ -219,6 +221,8 @@ def generate(funcs, headername, namespace, implementation):
             cpp_code.append("MLX_C_VECTORARRAYPAIR")
         elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
             cpp_code.append("MLX_C_CLOSURE")
+        elif return_t == "ValueAndGradFn":
+            cpp_code.append("MLX_C_CLOSURE_VALUE_AND_GRAD")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)

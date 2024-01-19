@@ -22,6 +22,11 @@ extern "C" mlx_vector_vector_array mlx_jvp(
 extern "C" void mlx_simplify(const mlx_array* outputs, size_t num_outputs) {
   return MLX_C_VOID(mlx::core::simplify(MLX_CPP_ARRVEC(outputs, num_outputs)));
 }
+extern "C" mlx_closure_value_and_grad
+mlx_value_and_grad(mlx_closure fun, const int* argnums, size_t num_argnums) {
+  return MLX_C_CLOSURE_VALUE_AND_GRAD(mlx::core::value_and_grad(
+      MLX_CPP_CLOSURE(fun), MLX_CPP_INTVEC(argnums, num_argnums)));
+}
 extern "C" mlx_vector_vector_array mlx_vjp(
     mlx_closure fun,
     const mlx_array* primals,

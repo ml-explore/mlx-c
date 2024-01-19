@@ -65,3 +65,21 @@ mlx_closure_apply(mlx_closure cls, const mlx_array* inputs, size_t num_inputs) {
   auto c_res = mlx_cpp_vector_array_to_c(cpp_res);
   return c_res;
 }
+
+extern "C" mlx_vector_vector_array mlx_closure_value_and_grad_apply(
+    mlx_closure_value_and_grad cls,
+    const mlx_array* inputs,
+    size_t num_inputs) {
+  auto cpp_input = mlx_c_vector_array_to_cpp(inputs, num_inputs);
+  auto cpp_res = cls->ctx(cpp_input);
+  auto c_res = mlx_cpp_pair_vector_array_to_c(cpp_res);
+  return c_res;
+}
+
+char* mlx_closure_value_and_grad_::tostring() {
+  std::string str = "mlx_vector_vector_array closure(mlx_vector_array, void*)";
+  char* c_str = (char*)malloc(str.size() + 1);
+  memcpy(c_str, str.data(), str.size());
+  c_str[str.size()] = '\0';
+  return c_str;
+}

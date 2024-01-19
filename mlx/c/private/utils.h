@@ -203,5 +203,6 @@ inline mlx_vector_vector_array mlx_cpp_pair_vector_array_to_c(
 #define MLX_CPP_CLOSURE(f) ((f)->ctx)
 #define MLX_C_VECTORARRAYPAIR(apair) (mlx_cpp_pair_vector_array_to_c(apair))
 #define MLX_C_VOID(f) (f)
+#define MLX_C_CLOSURE_VALUE_AND_GRAD(f) (new mlx_closure_value_and_grad_(f))
 
 #endif

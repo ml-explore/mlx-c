@@ -7,6 +7,7 @@
 extern "C" {
 #endif
 
+// mlx_closure takes a vector of arrays, and returns a vector of arrays.
 typedef struct mlx_closure_* mlx_closure;
 
 mlx_closure mlx_closure_new(mlx_vector_array (*fun)(const mlx_array*, size_t));
@@ -17,6 +18,14 @@ mlx_closure mlx_closure_new_with_payload(
     void (*dtor)(void*));
 mlx_vector_array
 mlx_closure_apply(mlx_closure cls, const mlx_array* inputs, size_t num_inputs);
+
+// mlx_closure_value_and_grad takes a vector of arrays, and returns a vector of
+// vector of arrays (of size 2)
+typedef struct mlx_closure_value_and_grad_* mlx_closure_value_and_grad;
+mlx_vector_vector_array mlx_closure_value_and_grad_apply(
+    mlx_closure_value_and_grad cls,
+    const mlx_array* inputs,
+    size_t num_inputs);
 
 #ifdef __cplusplus
 }
