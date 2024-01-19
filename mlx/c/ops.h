@@ -5,6 +5,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 
 #ifdef __cplusplus
@@ -150,7 +151,10 @@ mlx_array mlx_linspace(
     int num,
     mlx_array_dtype dtype,
     mlx_stream s);
-mlx_array mlx_load(FILE* in_stream, mlx_stream s);
+mlx_array mlx_load_file(FILE* in_stream, mlx_stream s);
+mlx_map_string_to_array mlx_load_safetensors_file(
+    FILE* in_stream,
+    mlx_stream s);
 mlx_array mlx_log(mlx_array a, mlx_stream s);
 mlx_array mlx_log10(mlx_array a, mlx_stream s);
 mlx_array mlx_log1p(mlx_array a, mlx_stream s);
@@ -240,7 +244,8 @@ mlx_array
 mlx_reshape(mlx_array a, const int* shape, size_t num_shape, mlx_stream s);
 mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s);
 mlx_array mlx_rsqrt(mlx_array a, mlx_stream s);
-void mlx_save(FILE* out_stream, mlx_array a);
+void mlx_save_file(FILE* out_stream, mlx_array a);
+void mlx_save_safetensors_file(FILE* in_stream, mlx_map_string_to_array param);
 mlx_array mlx_scatter(
     mlx_array a,
     const mlx_array* indices,

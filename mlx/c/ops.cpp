@@ -1,6 +1,9 @@
 #include "mlx/c/ops.h"
 
+#include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
+#include "mlx/c/private/closure.h"
+#include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/utils.h"
 
@@ -321,8 +324,14 @@ extern "C" mlx_array mlx_linspace(
   return MLX_C_ARRAY(mlx::core::linspace(
       start, stop, num, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
-extern "C" mlx_array mlx_load(FILE* in_stream, mlx_stream s) {
+extern "C" mlx_array mlx_load_file(FILE* in_stream, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::load(MLX_CPP_READER(in_stream), s->ctx));
+}
+extern "C" mlx_map_string_to_array mlx_load_safetensors_file(
+    FILE* in_stream,
+    mlx_stream s) {
+  return MLX_C_MAP_STRING_TO_ARRAY(
+      mlx::core::load_safetensors(MLX_CPP_READER(in_stream), s->ctx));
 }
 extern "C" mlx_array mlx_log(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::log(a->ctx, s->ctx));
@@ -521,8 +530,14 @@ extern "C" mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s) {
 extern "C" mlx_array mlx_rsqrt(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::rsqrt(a->ctx, s->ctx));
 }
-extern "C" void mlx_save(FILE* out_stream, mlx_array a) {
+extern "C" void mlx_save_file(FILE* out_stream, mlx_array a) {
   return MLX_C_VOID(mlx::core::save(MLX_CPP_WRITER(out_stream), a->ctx));
+}
+extern "C" void mlx_save_safetensors_file(
+    FILE* in_stream,
+    mlx_map_string_to_array param) {
+  return MLX_C_VOID(mlx::core::save_safetensors(
+      MLX_CPP_WRITER(in_stream), MLX_CPP_MAP_STRING_TO_ARRAY(param)));
 }
 extern "C" mlx_array mlx_scatter(
     mlx_array a,

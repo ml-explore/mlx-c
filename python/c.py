@@ -65,6 +65,21 @@ def generate(funcs, headername, namespace, implementation):
                 var1["variant"] = "all"
                 sorted_funcs.append(var0)
                 sorted_funcs.append(var1)
+            elif (
+                "std::shared_ptr<io::Reader>" in variants[0]["params_t"]
+                or "std::shared_ptr<io::Reader>" in variants[1]["params_t"]
+                or "std::shared_ptr<io::Writer>" in variants[0]["params_t"]
+                or "std::shared_ptr<io::Writer>" in variants[1]["params_t"]
+            ):
+                if (
+                    "std::shared_ptr<io::Reader>" in variants[0]["params_t"]
+                    or "std::shared_ptr<io::Writer>" in variants[0]["params_t"]
+                ):
+                    variants[0]["variant"] = "file"
+                else:
+                    variants[1]["variant"] = "file"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[1])
             else:
                 sorted_funcs.append(variants[0])  # abandon
 
