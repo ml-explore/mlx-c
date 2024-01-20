@@ -206,5 +206,7 @@ inline mlx_vector_vector_array mlx_cpp_pair_vector_array_to_c(
 #define MLX_C_CLOSURE_VALUE_AND_GRAD(f) (new mlx_closure_value_and_grad_(f))
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
 #define MLX_C_MAP_STRING_TO_ARRAY(map) (new mlx_map_string_to_array_(map))
+#define MLX_CPP_STRING(str) ((str)->ctx)
+#define MLX_C_STRING(str) (new mlx_string_(str))
 
 #endif

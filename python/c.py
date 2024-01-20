@@ -94,6 +94,7 @@ def generate(funcs, headername, namespace, implementation):
     #include "mlx/c/private/closure.h"
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
+    #include "mlx/c/private/string.h"
     #include "mlx/c/private/utils.h"
 
     """
@@ -109,6 +110,7 @@ def generate(funcs, headername, namespace, implementation):
     #include "mlx/c/closure.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
+    #include "mlx/c/string.h"
 
     #ifdef __cplusplus
     extern "C" {
@@ -138,6 +140,8 @@ def generate(funcs, headername, namespace, implementation):
             signature.append("mlx_closure_value_and_grad")
         elif return_t == "std::unordered_map<std::string, array>":
             signature.append("mlx_map_string_to_array")
+        elif return_t == "std::string":
+            signature.append("mlx_string")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
@@ -213,6 +217,9 @@ def generate(funcs, headername, namespace, implementation):
             elif pti == "std::unordered_map<std::string, array>":
                 c_call.append("mlx_map_string_to_array " + pni)
                 cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
+            elif pti == "std::string":
+                c_call.append("mlx_string " + pni)
+                cpp_call.append("MLX_CPP_STRING(" + pni + ")")
             else:
                 print("unsupported type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
@@ -250,6 +257,8 @@ def generate(funcs, headername, namespace, implementation):
             cpp_code.append("MLX_C_CLOSURE_VALUE_AND_GRAD")
         elif return_t == "std::unordered_map<std::string, array>":
             cpp_code.append("MLX_C_MAP_STRING_TO_ARRAY")
+        elif return_t == "std::string":
+            cpp_code.append("MLX_C_STRING")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)

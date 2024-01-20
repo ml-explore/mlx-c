@@ -4,7 +4,10 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
+#include "mlx/c/closure.h"
+#include "mlx/c/map.h"
 #include "mlx/c/stream.h"
+#include "mlx/c/string.h"
 
 #ifdef __cplusplus
 extern "C" {

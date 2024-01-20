@@ -1,7 +1,11 @@
 #include "mlx/c/random.h"
 
+#include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
+#include "mlx/c/private/closure.h"
+#include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
 extern "C" mlx_array mlx_random_bernoulli(

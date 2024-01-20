@@ -1,8 +1,11 @@
 #include "mlx/c/transforms.h"
 
+#include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
 extern "C" void mlx_eval(const mlx_array* outputs, size_t num_outputs) {
