@@ -14,18 +14,76 @@ mlx_string mlx_array_::tostring() {
   return new mlx_string_(str);
 }
 
-extern "C" void mlx_vector_array_free(mlx_vector_array vec) {
-  for (size_t i = 0; i < vec.size; i++) {
-    mlx_free(vec.arrays[i]);
-  }
-  free(vec.arrays);
+mlx_string mlx_vector_array_::tostring() {
+  std::ostringstream os;
+  os << "vector of arrays (size=" << ctx.size() << ")";
+  std::string str = os.str();
+  return new mlx_string_(str);
 }
 
-extern "C" void mlx_vector_vector_array_free(mlx_vector_vector_array vec) {
-  for (size_t i = 0; i < vec.size; i++) {
-    mlx_vector_array_free(vec.vectors[i]);
+mlx_string mlx_vector_vector_array_::tostring() {
+  std::ostringstream os;
+  os << "vector of vector of arrays (size=" << ctx.size() << ")";
+  std::string str = os.str();
+  return new mlx_string_(str);
+}
+
+extern "C" mlx_vector_array mlx_vector_array_new() {
+  return new mlx_vector_array_();
+}
+
+extern "C" mlx_vector_array mlx_vector_array_new_unary(const mlx_array arr) {
+  return new mlx_vector_array_({arr->ctx});
+}
+
+extern "C" void mlx_vector_array_add(
+    mlx_vector_array vec,
+    const mlx_array arr) {
+  vec->ctx.push_back(arr->ctx);
+}
+
+extern "C" void mlx_vector_array_add_arrays(
+    mlx_vector_array vec,
+    const mlx_array* arrs,
+    size_t num_arrs) {
+  for (size_t i = 0; i < num_arrs; i++) {
+    vec->ctx.push_back(arrs[i]->ctx);
   }
-  free(vec.vectors);
+}
+
+extern "C" mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index) {
+  return new mlx_array_(vec->ctx.at(index));
+}
+
+extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
+  return vec->ctx.size();
+}
+
+extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
+  return new mlx_vector_vector_array_();
+}
+
+extern "C" void mlx_vector_vector_array_add(
+    mlx_vector_vector_array vec2,
+    const mlx_vector_array vec) {
+  vec2->ctx.push_back(vec->ctx);
+}
+
+extern "C" mlx_vector_array mlx_vector_vector_array_get(
+    mlx_vector_vector_array vec2,
+    size_t index) {
+  return new mlx_vector_array_(vec2->ctx.at(index));
+}
+
+extern "C" mlx_array mlx_vector_vector_array_get2d(
+    mlx_vector_vector_array vec2,
+    size_t index,
+    size_t arr_index) {
+  return new mlx_array_(vec2->ctx.at(index).at(arr_index));
+}
+
+extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec2) {
+  return vec2->ctx.size();
 }
 
 extern "C" mlx_array mlx_array_from_bool(bool val) {

@@ -120,71 +120,6 @@ static mlx_array_dtype mlx_c_dtypes[] = {
     MLX_COMPLEX64,
 };
 
-inline mlx_vector_array mlx_cpp_vector_array_to_c(
-    const std::vector<mlx::core::array>& vec) {
-  mlx_vector_array c_vec;
-  c_vec.size = vec.size();
-  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * vec.size());
-  if (c_vec.arrays) {
-    for (size_t i = 0; i < vec.size(); i++) {
-      c_vec.arrays[i] = new mlx_array_(vec[i]);
-    }
-  }
-  return c_vec;
-}
-
-inline mlx_vector_array mlx_cpp_pair_array_to_c(
-    const std::pair<mlx::core::array, mlx::core::array>& vec) {
-  mlx_vector_array c_vec;
-  c_vec.size = 2;
-  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * 2);
-  if (c_vec.arrays) {
-    c_vec.arrays[0] = new mlx_array_(vec.first);
-    c_vec.arrays[0] = new mlx_array_(vec.second);
-  }
-  return c_vec;
-}
-
-inline mlx_vector_array mlx_cpp_tuple3_array_to_c(
-    const std::tuple<mlx::core::array, mlx::core::array, mlx::core::array>&
-        vec) {
-  mlx_vector_array c_vec;
-  c_vec.size = 3;
-  c_vec.arrays = (mlx_array*)malloc(sizeof(mlx_array) * 3);
-  if (c_vec.arrays) {
-    for (int i = 0; i < 3; i++) {
-      c_vec.arrays[0] = new mlx_array_(std::get<0>(vec));
-      c_vec.arrays[1] = new mlx_array_(std::get<1>(vec));
-      c_vec.arrays[2] = new mlx_array_(std::get<2>(vec));
-    }
-  }
-  return c_vec;
-}
-
-inline std::vector<mlx::core::array> mlx_c_vector_array_to_cpp(
-    const mlx_array* vec,
-    size_t n) {
-  std::vector<mlx::core::array> cpp_vec;
-  for (size_t i = 0; i < n; i++) {
-    cpp_vec.push_back(vec[i]->ctx);
-  }
-  return cpp_vec;
-}
-
-inline mlx_vector_vector_array mlx_cpp_pair_vector_array_to_c(
-    const std::pair<
-        std::vector<mlx::core::array>,
-        std::vector<mlx::core::array>>& pair) {
-  mlx_vector_vector_array c_vec;
-  c_vec.size = 2;
-  c_vec.vectors = (mlx_vector_array*)malloc(sizeof(mlx_vector_array) * 2);
-  if (c_vec.vectors) {
-    c_vec.vectors[0] = mlx_cpp_vector_array_to_c(std::get<0>(pair));
-    c_vec.vectors[1] = mlx_cpp_vector_array_to_c(std::get<1>(pair));
-  }
-  return c_vec;
-}
-
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
 #define MLX_C_ARRAY(arr) (new mlx_array_(arr))
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
@@ -192,16 +127,16 @@ inline mlx_vector_vector_array mlx_cpp_pair_vector_array_to_c(
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
-#define MLX_C_ARRAYS(vec) (mlx_cpp_vector_array_to_c(vec))
-#define MLX_C_ARRAYPAIR(apair) (mlx_cpp_pair_array_to_c(apair))
-#define MLX_C_ARRAYTUPLE3(atuple) (mlx_cpp_tuple3_array_to_c(atuple))
-#define MLX_CPP_ARRVEC(vec, size) (mlx_c_vector_array_to_cpp((vec), (size)))
+#define MLX_C_ARRAYS(vec) (new mlx_vector_array_(vec))
+#define MLX_C_ARRAYPAIR(apair) (new mlx_vector_array_(apair))
+#define MLX_C_ARRAYTUPLE3(atuple) (new mlx_vector_array_(atuple))
+#define MLX_CPP_ARRVEC(vec) ((vec)->ctx)
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
 #define MLX_C_CLOSURE(f) (new mlx_closure_(f))
 #define MLX_CPP_CLOSURE(f) ((f)->ctx)
-#define MLX_C_VECTORARRAYPAIR(apair) (mlx_cpp_pair_vector_array_to_c(apair))
+#define MLX_C_VECTORARRAYPAIR(apair) (new mlx_vector_vector_array_(apair))
 #define MLX_C_VOID(f) (f)
 #define MLX_C_CLOSURE_VALUE_AND_GRAD(f) (new mlx_closure_value_and_grad_(f))
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)

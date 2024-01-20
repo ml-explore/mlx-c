@@ -63,19 +63,16 @@ mlx_array mlx_as_strided(
     size_t offset,
     mlx_stream s);
 mlx_array mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
-mlx_vector_array
-mlx_broadcast_arrays(const mlx_array* inputs, size_t num_inputs, mlx_stream s);
+mlx_vector_array mlx_broadcast_arrays(
+    const mlx_vector_array inputs,
+    mlx_stream s);
 mlx_array
 mlx_broadcast_to(mlx_array a, const int* shape, size_t num_shape, mlx_stream s);
 mlx_array mlx_ceil(mlx_array a, mlx_stream s);
 mlx_array mlx_clip(mlx_array a, mlx_array a_min, mlx_array a_max, mlx_stream s);
-mlx_array mlx_concatenate(
-    const mlx_array* arrays,
-    size_t num_arrays,
-    int axis,
-    mlx_stream s);
 mlx_array
-mlx_concatenate_all(const mlx_array* arrays, size_t num_arrays, mlx_stream s);
+mlx_concatenate(const mlx_vector_array arrays, int axis, mlx_stream s);
+mlx_array mlx_concatenate_all(const mlx_vector_array arrays, mlx_stream s);
 mlx_array mlx_conv1d(
     mlx_array input,
     mlx_array weight,
@@ -133,8 +130,7 @@ mlx_array mlx_full(
     mlx_stream s);
 mlx_array mlx_gather(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     const int* axes,
     size_t num_axes,
     const int* slice_sizes,
@@ -255,40 +251,35 @@ void mlx_save_safetensors_file(FILE* in_stream, mlx_map_string_to_array param);
 void mlx_save_safetensors(mlx_string file, mlx_map_string_to_array param);
 mlx_array mlx_scatter(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s);
 mlx_array mlx_scatter_add(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s);
 mlx_array mlx_scatter_max(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s);
 mlx_array mlx_scatter_min(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s);
 mlx_array mlx_scatter_prod(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
@@ -324,10 +315,8 @@ mlx_array mlx_square(mlx_array a, mlx_stream s);
 mlx_array
 mlx_squeeze(mlx_array a, const int* axes, size_t num_axes, mlx_stream s);
 mlx_array mlx_squeeze_all(mlx_array a, mlx_stream s);
-mlx_array
-mlx_stack(const mlx_array* arrays, size_t num_arrays, int axis, mlx_stream s);
-mlx_array
-mlx_stack_all(const mlx_array* arrays, size_t num_arrays, mlx_stream s);
+mlx_array mlx_stack(const mlx_vector_array arrays, int axis, mlx_stream s);
+mlx_array mlx_stack_all(const mlx_vector_array arrays, mlx_stream s);
 mlx_array mlx_stop_gradient(mlx_array a, mlx_stream s);
 mlx_array mlx_subtract(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_sum(

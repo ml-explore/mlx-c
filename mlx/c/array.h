@@ -14,21 +14,8 @@ extern "C" {
 #include <float.h>
 
 typedef struct mlx_array_* mlx_array;
-
-typedef struct mlx_vector_array_ {
-  mlx_array* arrays;
-  size_t size;
-} mlx_vector_array;
-
-// free arrays in vector, and arrays itself
-void mlx_vector_array_free(mlx_vector_array vec);
-
-typedef struct mlx_vector_vector_array_ {
-  mlx_vector_array* vectors;
-  size_t size;
-} mlx_vector_vector_array;
-
-void mlx_vector_vector_array_free(mlx_vector_vector_array vec);
+typedef struct mlx_vector_array_* mlx_vector_array;
+typedef struct mlx_vector_vector_array_* mlx_vector_vector_array;
 
 typedef enum mlx_array_dtype_ {
   MLX_BOOL,
@@ -106,6 +93,29 @@ const float16_t* mlx_array_data_float16(mlx_array arr);
 #ifdef HAS_BFLOAT16
 const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr);
 #endif
+
+mlx_vector_array mlx_vector_array_new();
+mlx_vector_array mlx_vector_array_new_unary(const mlx_array arr);
+void mlx_vector_array_add(mlx_vector_array vec, const mlx_array arr);
+void mlx_vector_array_add_arrays(
+    mlx_vector_array vec,
+    const mlx_array* arrs,
+    size_t num_arrs);
+mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index);
+size_t mlx_vector_array_size(mlx_vector_array vec);
+
+mlx_vector_vector_array mlx_vector_vector_array_new();
+void mlx_vector_vector_array_add(
+    mlx_vector_vector_array vec2,
+    const mlx_vector_array vec);
+mlx_vector_array mlx_vector_vector_array_get(
+    mlx_vector_vector_array vec2,
+    size_t index);
+mlx_array mlx_vector_vector_array_get2d(
+    mlx_vector_vector_array vec2,
+    size_t index,
+    size_t arr_index);
+size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec2);
 
 #ifdef __cplusplus
 }

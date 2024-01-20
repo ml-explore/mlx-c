@@ -11,13 +11,13 @@ mlx_string_* mlx_closure_::tostring() {
 }
 
 extern "C" mlx_closure mlx_closure_new(
-    mlx_vector_array (*fun)(const mlx_array*, size_t)) {
+    mlx_vector_array (*fun)(const mlx_vector_array)) {
   auto cpp_closure = [fun](const std::vector<mlx::core::array>& input) {
-    auto c_input = mlx_cpp_vector_array_to_c(input);
-    auto c_res = fun(c_input.arrays, c_input.size);
-    mlx_vector_array_free(c_input);
-    auto res = mlx_c_vector_array_to_cpp(c_res.arrays, c_res.size);
-    mlx_vector_array_free(c_res);
+    auto c_input = new mlx_vector_array_(input);
+    auto c_res = fun(c_input);
+    mlx_free(c_input);
+    auto res = c_res->ctx;
+    mlx_free(c_res);
     return res;
   };
   return new mlx_closure_(cpp_closure);
@@ -29,7 +29,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
     if (input.size() != 1) {
       throw std::runtime_error("closure: expected unary input");
     }
-    auto c_input = MLX_C_ARRAY(input[0]);
+    auto c_input = new mlx_array_(input[0]);
     auto c_res = fun(c_input);
     mlx_free(c_input);
     std::vector<mlx::core::array> res = {c_res->ctx};
@@ -40,37 +40,33 @@ extern "C" mlx_closure mlx_closure_new_unary(
 }
 
 extern "C" mlx_closure mlx_closure_new_with_payload(
-    mlx_vector_array (*fun)(const mlx_array*, size_t, void*),
+    mlx_vector_array (*fun)(const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*)) {
   auto cpp_closure =
       [fun, payload, dtor](const std::vector<mlx::core::array>& input) {
-        auto c_input = mlx_cpp_vector_array_to_c(input);
-        auto c_res = fun(c_input.arrays, c_input.size, payload);
-        mlx_vector_array_free(c_input);
-        auto res = mlx_c_vector_array_to_cpp(c_res.arrays, c_res.size);
-        mlx_vector_array_free(c_res);
+        auto c_input = new mlx_vector_array_(input);
+        auto c_res = fun(c_input, payload);
+        mlx_free(c_input);
+        auto res = c_res->ctx;
+        mlx_free(c_res);
         return res;
       };
   return new mlx_closure_(cpp_closure, payload, dtor);
 }
 
-extern "C" mlx_vector_array
-mlx_closure_apply(mlx_closure cls, const mlx_array* inputs, size_t num_inputs) {
-  auto cpp_input = mlx_c_vector_array_to_cpp(inputs, num_inputs);
-  auto cpp_res = cls->ctx(cpp_input);
-  auto c_res = mlx_cpp_vector_array_to_c(cpp_res);
-  return c_res;
+extern "C" mlx_vector_array mlx_closure_apply(
+    mlx_closure cls,
+    const mlx_vector_array inputs) {
+  auto cpp_res = cls->ctx(inputs->ctx);
+  return new mlx_vector_array_(cpp_res);
 }
 
 extern "C" mlx_vector_vector_array mlx_closure_value_and_grad_apply(
     mlx_closure_value_and_grad cls,
-    const mlx_array* inputs,
-    size_t num_inputs) {
-  auto cpp_input = mlx_c_vector_array_to_cpp(inputs, num_inputs);
-  auto cpp_res = cls->ctx(cpp_input);
-  auto c_res = mlx_cpp_pair_vector_array_to_c(cpp_res);
-  return c_res;
+    const mlx_vector_array inputs) {
+  auto cpp_res = cls->ctx(inputs->ctx);
+  return new mlx_vector_vector_array_(cpp_res);
 }
 
 mlx_string_* mlx_closure_value_and_grad_::tostring() {

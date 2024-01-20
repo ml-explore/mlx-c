@@ -124,10 +124,11 @@ mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::astype(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
-extern "C" mlx_vector_array
-mlx_broadcast_arrays(const mlx_array* inputs, size_t num_inputs, mlx_stream s) {
+extern "C" mlx_vector_array mlx_broadcast_arrays(
+    const mlx_vector_array inputs,
+    mlx_stream s) {
   return MLX_C_ARRAYS(
-      mlx::core::broadcast_arrays(MLX_CPP_ARRVEC(inputs, num_inputs), s->ctx));
+      mlx::core::broadcast_arrays(MLX_CPP_ARRVEC(inputs), s->ctx));
 }
 extern "C" mlx_array mlx_broadcast_to(
     mlx_array a,
@@ -148,18 +149,15 @@ mlx_clip(mlx_array a, mlx_array a_min, mlx_array a_max, mlx_stream s) {
       (a_max ? std::make_optional(a_max->ctx) : std::nullopt),
       s->ctx));
 }
-extern "C" mlx_array mlx_concatenate(
-    const mlx_array* arrays,
-    size_t num_arrays,
-    int axis,
-    mlx_stream s) {
-  return MLX_C_ARRAY(
-      mlx::core::concatenate(MLX_CPP_ARRVEC(arrays, num_arrays), axis, s->ctx));
-}
 extern "C" mlx_array
-mlx_concatenate_all(const mlx_array* arrays, size_t num_arrays, mlx_stream s) {
+mlx_concatenate(const mlx_vector_array arrays, int axis, mlx_stream s) {
   return MLX_C_ARRAY(
-      mlx::core::concatenate(MLX_CPP_ARRVEC(arrays, num_arrays), s->ctx));
+      mlx::core::concatenate(MLX_CPP_ARRVEC(arrays), axis, s->ctx));
+}
+extern "C" mlx_array mlx_concatenate_all(
+    const mlx_vector_array arrays,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::concatenate(MLX_CPP_ARRVEC(arrays), s->ctx));
 }
 extern "C" mlx_array mlx_conv1d(
     mlx_array input,
@@ -283,8 +281,7 @@ extern "C" mlx_array mlx_full(
 }
 extern "C" mlx_array mlx_gather(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     const int* axes,
     size_t num_axes,
     const int* slice_sizes,
@@ -292,7 +289,7 @@ extern "C" mlx_array mlx_gather(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::gather(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       MLX_CPP_INTVEC(axes, num_axes),
       MLX_CPP_INTVEC(slice_sizes, num_slice_sizes),
       s->ctx));
@@ -570,75 +567,70 @@ extern "C" void mlx_save_safetensors(
 }
 extern "C" mlx_array mlx_scatter(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::scatter(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       updates->ctx,
       MLX_CPP_INTVEC(axes, num_axes),
       s->ctx));
 }
 extern "C" mlx_array mlx_scatter_add(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::scatter_add(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       updates->ctx,
       MLX_CPP_INTVEC(axes, num_axes),
       s->ctx));
 }
 extern "C" mlx_array mlx_scatter_max(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::scatter_max(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       updates->ctx,
       MLX_CPP_INTVEC(axes, num_axes),
       s->ctx));
 }
 extern "C" mlx_array mlx_scatter_min(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::scatter_min(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       updates->ctx,
       MLX_CPP_INTVEC(axes, num_axes),
       s->ctx));
 }
 extern "C" mlx_array mlx_scatter_prod(
     mlx_array a,
-    const mlx_array* indices,
-    size_t num_indices,
+    const mlx_vector_array indices,
     mlx_array updates,
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::scatter_prod(
       a->ctx,
-      MLX_CPP_ARRVEC(indices, num_indices),
+      MLX_CPP_ARRVEC(indices),
       updates->ctx,
       MLX_CPP_INTVEC(axes, num_axes),
       s->ctx));
@@ -713,14 +705,13 @@ extern "C" mlx_array mlx_squeeze_all(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::squeeze(a->ctx, s->ctx));
 }
 extern "C" mlx_array
-mlx_stack(const mlx_array* arrays, size_t num_arrays, int axis, mlx_stream s) {
-  return MLX_C_ARRAY(
-      mlx::core::stack(MLX_CPP_ARRVEC(arrays, num_arrays), axis, s->ctx));
+mlx_stack(const mlx_vector_array arrays, int axis, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::stack(MLX_CPP_ARRVEC(arrays), axis, s->ctx));
 }
-extern "C" mlx_array
-mlx_stack_all(const mlx_array* arrays, size_t num_arrays, mlx_stream s) {
-  return MLX_C_ARRAY(
-      mlx::core::stack(MLX_CPP_ARRVEC(arrays, num_arrays), s->ctx));
+extern "C" mlx_array mlx_stack_all(
+    const mlx_vector_array arrays,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::stack(MLX_CPP_ARRVEC(arrays), s->ctx));
 }
 extern "C" mlx_array mlx_stop_gradient(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::stop_gradient(a->ctx, s->ctx));

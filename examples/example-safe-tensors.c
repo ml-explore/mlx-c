@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "mlx/c/mlx.h"
 
+void print_array(const char* msg, mlx_array arr) {
+  mlx_string str;
+  str = mlx_tostring(arr);
+  printf("%s\n%s\n", msg, mlx_string_data(str));
+  mlx_free(str);
+}
+
 int main() {
   FILE* f = fopen("arrays.safetensors", "rb");
   if (!f) {
@@ -15,10 +22,7 @@ int main() {
     mlx_string key = mlx_map_string_to_array_iterator_key(it);
     mlx_array value = mlx_map_string_to_array_iterator_value(it);
 
-    mlx_string str = mlx_tostring(value);
-    printf("key:\n%s\n", mlx_string_data(key));
-    printf("value:\n%s\n", mlx_string_data(str));
-    mlx_free(str);
+    print_array(mlx_string_data(key), value);
 
     mlx_free(key);
     mlx_free(value);
