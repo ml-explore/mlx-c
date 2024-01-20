@@ -7,7 +7,7 @@
 
 struct mlx_array_ : mlx_object_ {
   mlx_array_(mlx::core::array ctx) : mlx_object_(), ctx(ctx){};
-  virtual char* tostring() override;
+  virtual mlx_string_* tostring() override;
   mlx::core::array ctx;
 };
 

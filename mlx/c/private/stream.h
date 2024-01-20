@@ -6,7 +6,7 @@
 
 struct mlx_stream_ : mlx_object_ {
   mlx_stream_(mlx::core::Stream ctx) : mlx_object_(), ctx(ctx){};
-  virtual char* tostring() override;
+  virtual mlx_string_* tostring() override;
   mlx::core::Stream ctx;
 };
 

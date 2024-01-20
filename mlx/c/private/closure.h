@@ -14,7 +14,7 @@ struct mlx_closure_ : mlx_object_ {
       void* payload = nullptr,
       void (*dtor)(void*) = nullptr)
       : mlx_object_(), ctx(ctx), payload(payload), dtor(dtor){};
-  virtual char* tostring() override;
+  virtual mlx_string_* tostring() override;
   std::function<std::vector<mlx::core::array>(
       const std::vector<mlx::core::array>&)>
       ctx;
@@ -34,7 +34,7 @@ struct mlx_closure_value_and_grad_ : mlx_object_ {
           std::vector<mlx::core::array>>(const std::vector<mlx::core::array>&)>
           ctx)
       : mlx_object_(), ctx(ctx){};
-  virtual char* tostring() override;
+  virtual mlx_string_* tostring() override;
   std::function<
       std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>(
           const std::vector<mlx::core::array>&)>

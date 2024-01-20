@@ -1,18 +1,17 @@
 #include <cstring>
 
 #include "mlx/c/array.h"
-#include "mlx/c/mlx.h"
+#include "mlx/c/object.h"
 #include "mlx/c/private/array.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/string.h"
 
-char* mlx_array_::tostring() {
+mlx_string mlx_array_::tostring() {
   std::ostringstream os;
   os << ctx;
   std::string str = os.str();
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+  return new mlx_string_(str);
 }
 
 extern "C" void mlx_vector_array_free(mlx_vector_array vec) {

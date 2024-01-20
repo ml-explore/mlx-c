@@ -1,22 +1,15 @@
 #include "mlx/c/map.h"
-#include "mlx.h"
+#include "mlx/c/object.h"
 #include "mlx/c/private/map.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-char* mlx_map_string_to_array_::tostring() {
-  std::string str = "mlx_map_string_to_array";
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+mlx_string_* mlx_map_string_to_array_::tostring() {
+  return new mlx_string_("mlx_map_string_to_array");
 }
 
-char* mlx_map_string_to_array_iterator_::tostring() {
-  std::string str = "mlx_map_string_to_array_iterator";
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+mlx_string_* mlx_map_string_to_array_iterator_::tostring() {
+  return new mlx_string_("mlx_map_string_to_array_iterator");
 }
 
 extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
@@ -25,19 +18,16 @@ extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
 
 extern "C" bool mlx_map_string_to_array_insert(
     mlx_map_string_to_array map,
-    const char* key,
+    const mlx_string key,
     const mlx_array value) {
-  std::string key_cpp(key);
-  mlx::core::array arr_cpp = value->ctx;
-  auto res = map->ctx.insert(std::make_pair(key_cpp, arr_cpp));
+  auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
   return res.second;
 }
 
 extern "C" mlx_array mlx_map_string_to_array_get(
     mlx_map_string_to_array map,
-    const char* key) {
-  std::string key_cpp(key);
-  auto search = map->ctx.find(key_cpp);
+    const mlx_string key) {
+  auto search = map->ctx.find(key->ctx);
   if (search == map->ctx.end()) {
     return nullptr;
   } else {
@@ -69,12 +59,12 @@ extern "C" bool mlx_map_string_to_array_iterator_end(
   }
 }
 
-extern "C" const char* mlx_map_string_to_array_iterator_key(
+extern "C" mlx_string mlx_map_string_to_array_iterator_key(
     mlx_map_string_to_array_iterator it) {
   if (it->ctx == it->map->ctx.end()) {
     return nullptr;
   } else {
-    return it->ctx->first.c_str();
+    return new mlx_string_(it->ctx->first);
   }
 }
 

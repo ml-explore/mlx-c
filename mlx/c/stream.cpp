@@ -3,16 +3,14 @@
 #include "mlx/c/device.h"
 #include "mlx/c/private/device.h"
 #include "mlx/c/private/stream.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/stream.h"
 
-char* mlx_stream_::tostring() {
+mlx_string_* mlx_stream_::tostring() {
   std::ostringstream os;
   os << ctx;
   std::string str = os.str();
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+  return new mlx_string_(str);
 }
 
 mlx_stream MLX_CPU_STREAM =

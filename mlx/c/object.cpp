@@ -1,7 +1,7 @@
-#include "mlx/c/mlx.h"
 #include "mlx/c/private/object.h"
+#include "mlx/c/object.h"
 
-extern "C" char* mlx_tostring(void* ptr) {
+extern "C" mlx_string_* mlx_tostring(void* ptr) {
   struct mlx_object_* obj = (struct mlx_object_*)ptr;
   return obj->tostring();
 }

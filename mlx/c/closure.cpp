@@ -1,16 +1,13 @@
 #include <cstring>
 
-#include "mlx.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/object.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-char* mlx_closure_::tostring() {
-  std::string str = "mlx_vector_array closure(mlx_vector_array, void*)";
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+mlx_string_* mlx_closure_::tostring() {
+  return new mlx_string_("mlx_vector_array closure(mlx_vector_array, void*)");
 }
 
 extern "C" mlx_closure mlx_closure_new(
@@ -76,10 +73,7 @@ extern "C" mlx_vector_vector_array mlx_closure_value_and_grad_apply(
   return c_res;
 }
 
-char* mlx_closure_value_and_grad_::tostring() {
-  std::string str = "mlx_vector_vector_array closure(mlx_vector_array, void*)";
-  char* c_str = (char*)malloc(str.size() + 1);
-  memcpy(c_str, str.data(), str.size());
-  c_str[str.size()] = '\0';
-  return c_str;
+mlx_string_* mlx_closure_value_and_grad_::tostring() {
+  return new mlx_string_(
+      "mlx_vector_vector_array closure(mlx_vector_array, void*)");
 }

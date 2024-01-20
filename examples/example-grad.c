@@ -18,14 +18,14 @@ int main() {
     mlx_array one = mlx_array_from_float(1.0);
     mlx_vector_vector_array res = mlx_jvp(cls, &x, 1, &one, 1);
 
-    char* str;
+    mlx_string str;
     str = mlx_tostring(res.vectors[0].arrays[0]);
-    printf("out\n%s\n", str);
-    free(str);
+    printf("out\n%s\n", mlx_string_data(str));
+    mlx_free(str);
 
     str = mlx_tostring(res.vectors[1].arrays[0]);
-    printf("dout\n%s\n", str);
-    free(str);
+    printf("dout\n%s\n", mlx_string_data(str));
+    mlx_free(str);
 
     mlx_vector_vector_array_free(res);
     mlx_free(one);
@@ -38,14 +38,14 @@ int main() {
     mlx_closure_value_and_grad vag = mlx_value_and_grad(cls, &garg, 1);
     mlx_vector_vector_array res = mlx_closure_value_and_grad_apply(vag, &x, 1);
 
-    char* str;
+    mlx_string str;
     str = mlx_tostring(res.vectors[0].arrays[0]);
-    printf("out\n%s\n", str);
-    free(str);
+    printf("out\n%s\n", mlx_string_data(str));
+    mlx_free(str);
 
     str = mlx_tostring(res.vectors[1].arrays[0]);
-    printf("dout\n%s\n", str);
-    free(str);
+    printf("dout\n%s\n", mlx_string_data(str));
+    mlx_free(str);
 
     mlx_vector_vector_array_free(res);
     mlx_free(vag);

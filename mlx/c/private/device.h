@@ -7,7 +7,7 @@
 
 struct mlx_device_ : mlx_object_ {
   mlx_device_(mlx::core::Device ctx) : mlx_object_(), ctx(ctx){};
-  virtual char* tostring() override;
+  virtual mlx_string_* tostring() override;
   mlx::core::Device ctx;
 };
 
