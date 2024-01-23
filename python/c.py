@@ -182,6 +182,7 @@ def generate(funcs, headername, namespace, implementation):
                 cpp_call.append("MLX_CPP_ARRAY_DTYPE(" + pni + ")")
             elif (
                 pti == "bool"
+                or pti == "float"
                 or pti == "double"
                 or pti == "int"
                 or pti == "size_t"

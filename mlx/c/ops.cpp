@@ -14,6 +14,16 @@ extern "C" mlx_array mlx_abs(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_add(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::add(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_addmm(
+    mlx_array c,
+    mlx_array a,
+    mlx_array b,
+    float alpha,
+    float beta,
+    mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::addmm(c->ctx, a->ctx, b->ctx, alpha, beta, s->ctx));
+}
 extern "C" mlx_array mlx_all_axes(
     mlx_array a,
     const int* axes,
@@ -306,6 +316,18 @@ extern "C" mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s) {
 }
 extern "C" mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::inner(a->ctx, b->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_isnan(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::isnan(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_isneginf(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::isneginf(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_isposinf(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::isposinf(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::less(a->ctx, b->ctx, s->ctx));
@@ -757,6 +779,11 @@ extern "C" mlx_array mlx_tanh(mlx_array a, mlx_stream s) {
 extern "C" mlx_array
 mlx_tensordot(mlx_array a, mlx_array b, int dims, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::tensordot(a->ctx, b->ctx, dims, s->ctx));
+}
+extern "C" mlx_array
+mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::tile(arr->ctx, MLX_CPP_INTVEC(reps, num_reps), s->ctx));
 }
 extern "C" mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::topk(a->ctx, k, axis, s->ctx));
