@@ -26,7 +26,6 @@ mlx_vector_array inc_fun_value(mlx_vector_array in, void* payload) {
   mlx_array res = mlx_add(mlx_vector_array_get(in, 0), value, MLX_GPU_STREAM);
   mlx_vector_array vres = mlx_vector_array_from_array(res);
   mlx_free(res);
-
   return vres;
 }
 
@@ -99,6 +98,7 @@ int main() {
     mlx_free(vag);
   }
 
+  mlx_free(cls_with_value);
   mlx_free(cls);
   mlx_free(x);
 
