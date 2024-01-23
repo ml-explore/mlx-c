@@ -95,7 +95,8 @@ const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr);
 #endif
 
 mlx_vector_array mlx_vector_array_new();
-mlx_vector_array mlx_vector_array_new_unary(const mlx_array arr);
+mlx_vector_array mlx_vector_array_from_arrays(mlx_array* arrs, size_t num_arrs);
+mlx_vector_array mlx_vector_array_from_array(const mlx_array arr);
 void mlx_vector_array_add(mlx_vector_array vec, const mlx_array arr);
 void mlx_vector_array_add_arrays(
     mlx_vector_array vec,

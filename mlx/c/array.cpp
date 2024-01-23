@@ -32,7 +32,17 @@ extern "C" mlx_vector_array mlx_vector_array_new() {
   return new mlx_vector_array_();
 }
 
-extern "C" mlx_vector_array mlx_vector_array_new_unary(const mlx_array arr) {
+mlx_vector_array mlx_vector_array_from_arrays(
+    mlx_array* arrs,
+    size_t num_arrs) {
+  std::vector<mlx::core::array> cpp_arrs;
+  for (size_t i = 0; i < num_arrs; i++) {
+    cpp_arrs.push_back(arrs[i]->ctx);
+  }
+  return new mlx_vector_array_(cpp_arrs);
+}
+
+extern "C" mlx_vector_array mlx_vector_array_from_array(const mlx_array arr) {
   return new mlx_vector_array_({arr->ctx});
 }
 
