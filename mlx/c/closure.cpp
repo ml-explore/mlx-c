@@ -43,16 +43,17 @@ extern "C" mlx_closure mlx_closure_new_with_payload(
     mlx_vector_array (*fun)(const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*)) {
+  auto cpp_payload = std::shared_ptr<void>(payload, dtor);
   auto cpp_closure =
-      [fun, payload, dtor](const std::vector<mlx::core::array>& input) {
+      [fun, cpp_payload, dtor](const std::vector<mlx::core::array>& input) {
         auto c_input = new mlx_vector_array_(input);
-        auto c_res = fun(c_input, payload);
+        auto c_res = fun(c_input, cpp_payload.get());
         mlx_free(c_input);
         auto res = c_res->ctx;
         mlx_free(c_res);
         return res;
       };
-  return new mlx_closure_(cpp_closure, payload, dtor);
+  return new mlx_closure_(cpp_closure);
 }
 
 extern "C" mlx_vector_array mlx_closure_apply(
