@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #include <stdio.h>
 #include <stdlib.h>
 

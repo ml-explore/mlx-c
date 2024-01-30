@@ -1,3 +1,5 @@
+# Copyright © 2023-2024 Apple Inc.
+
 import sys
 
 
@@ -85,6 +87,13 @@ def generate(funcs, headername, namespace, implementation):
 
     sorted_funcs.sort(key=lambda x: x["name"])
 
+    print(
+        """/* Copyright © 2023-2024 Apple Inc.                   */
+/*                                                    */
+/* This file is auto-generated. Do not edit manually. */
+/*                                                    */
+"""
+    )
     if implementation:
         print('#include "mlx/c/' + headername + '.h"')
         print(

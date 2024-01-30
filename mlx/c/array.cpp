@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #include <cstring>
 
 #include "mlx/c/array.h"

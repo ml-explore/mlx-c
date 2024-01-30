@@ -1,3 +1,8 @@
+/* Copyright © 2023-2024 Apple Inc.                   */
+/*                                                    */
+/* This file is auto-generated. Do not edit manually. */
+/*                                                    */
+
 #ifndef MLX_FFT_H
 #define MLX_FFT_H
 

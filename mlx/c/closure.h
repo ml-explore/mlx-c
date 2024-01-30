@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #ifndef MLX_CLOSURE_H
 #define MLX_CLOSURE_H
 

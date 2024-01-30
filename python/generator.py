@@ -1,3 +1,5 @@
+# Copyright © 2023-2024 Apple Inc.
+
 import cxxheaderparser
 from cxxheaderparser.simple import parse_string
 import argparse

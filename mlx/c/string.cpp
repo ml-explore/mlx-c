@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #include "mlx/c/string.h"
 #include "mlx/c/object.h"
 #include "mlx/c/private/string.h"

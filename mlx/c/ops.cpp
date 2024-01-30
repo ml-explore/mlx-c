@@ -1,3 +1,8 @@
+/* Copyright © 2023-2024 Apple Inc.                   */
+/*                                                    */
+/* This file is auto-generated. Do not edit manually. */
+/*                                                    */
+
 #include "mlx/c/ops.h"
 
 #include "mlx/c/mlx.h"

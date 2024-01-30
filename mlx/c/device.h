@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #ifndef MLX_DEVICE_H
 #define MLX_DEVICE_H
 

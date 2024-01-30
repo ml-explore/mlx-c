@@ -1,3 +1,5 @@
+# Copyright © 2023-2024 Apple Inc.
+
 cmake_minimum_required(VERSION 3.16)
 
 # ----------------------------- Setup -----------------------------
