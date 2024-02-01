@@ -3,7 +3,7 @@
 import sys
 
 
-def generate(funcs, headername, namespace, implementation):
+def generate(funcs, headername, namespace, implementation, docstring):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -126,6 +126,12 @@ def generate(funcs, headername, namespace, implementation):
     #endif
     """
         )
+        if docstring:
+            docstring = docstring.replace("\n", "\n* ")
+            print("/**")
+            print("* \defgroup " + headername + " " + docstring)
+            print("*/")
+            print("/**@{*/")
 
     for f in sorted_funcs:
         # print(f["return_t"])
@@ -289,6 +295,8 @@ def generate(funcs, headername, namespace, implementation):
     if implementation:
         pass
     else:
+        if docstring:
+            print("/**@}*/")
         print(
             """
     #ifdef __cplusplus
