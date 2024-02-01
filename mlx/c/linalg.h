@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /**
- * \defgroup linalg List of linalg operations
+ * \defgroup linalg Linear algebra operations
  */
 /**@{*/
 mlx_array mlx_linalg_norm(

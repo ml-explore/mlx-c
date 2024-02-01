@@ -18,6 +18,10 @@
 extern "C" {
 #endif
 
+/**
+ * \defgroup fft FFT operations
+ */
+/**@{*/
 mlx_array mlx_fft_fft(mlx_array a, int n, int axis, mlx_stream s);
 mlx_array mlx_fft_fft2(
     mlx_array a,
@@ -78,6 +82,7 @@ mlx_array mlx_fft_rfftn(
     const int* axes,
     size_t num_axes,
     mlx_stream s);
+/**@}*/
 
 #ifdef __cplusplus
 }

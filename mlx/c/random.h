@@ -18,6 +18,10 @@
 extern "C" {
 #endif
 
+/**
+ * \defgroup random Random numbers operations
+ */
+/**@{*/
 mlx_array mlx_random_bernoulli(
     mlx_array p,
     const int* shape,
@@ -85,6 +89,7 @@ mlx_array mlx_random_uniform(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s);
+/**@}*/
 
 #ifdef __cplusplus
 }

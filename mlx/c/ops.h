@@ -18,6 +18,10 @@
 extern "C" {
 #endif
 
+/**
+ * \defgroup ops Core array operations
+ */
+/**@{*/
 mlx_array mlx_abs(mlx_array a, mlx_stream s);
 mlx_array mlx_add(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_addmm(
@@ -376,6 +380,7 @@ mlx_array mlx_zeros(
     mlx_array_dtype dtype,
     mlx_stream s);
 mlx_array mlx_zeros_like(mlx_array a, mlx_stream s);
+/**@}*/
 
 #ifdef __cplusplus
 }

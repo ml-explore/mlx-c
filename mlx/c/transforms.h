@@ -18,6 +18,10 @@
 extern "C" {
 #endif
 
+/**
+ * \defgroup transforms Transforms operations
+ */
+/**@{*/
 void mlx_eval(const mlx_vector_array outputs);
 mlx_vector_vector_array mlx_jvp(
     mlx_closure fun,
@@ -30,6 +34,7 @@ mlx_vector_vector_array mlx_vjp(
     mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array cotangents);
+/**@}*/
 
 #ifdef __cplusplus
 }
