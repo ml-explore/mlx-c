@@ -1,5 +1,5 @@
 Stream
 ======
 
-.. doxygengroup:: mlx_stream 
+.. doxygengroup:: mlx_stream
    :content-only:

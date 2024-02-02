@@ -1,5 +1,5 @@
 Array
 =====
 
-.. doxygengroup:: mlx_array 
+.. doxygengroup:: mlx_array
    :content-only:

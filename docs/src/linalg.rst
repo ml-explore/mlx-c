@@ -1,5 +1,5 @@
 Linear Algebra
 ==============
 
-.. doxygengroup:: linalg 
+.. doxygengroup:: linalg
    :content-only:

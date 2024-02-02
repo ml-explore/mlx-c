@@ -1,5 +1,5 @@
 Device
 ======
 
-.. doxygengroup:: mlx_device 
+.. doxygengroup:: mlx_device
    :content-only:
