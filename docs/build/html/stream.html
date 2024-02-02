@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>MLX C &#8212; MLX C 0.0.0 documentation</title>
+    <title>Stream &#8212; MLX C 0.0.0 documentation</title>
   
   
   
@@ -43,10 +43,11 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'stream';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Building and Installing" href="install.html" />
+    <link rel="next" title="Transforms" href="transforms.html" />
+    <link rel="prev" title="Random" href="random.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,7 +123,7 @@
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -145,14 +146,14 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 </ul>
 
@@ -223,7 +224,7 @@
       
       
       
-      <li><a href="_sources/index.rst" target="_blank"
+      <li><a href="_sources/stream.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +306,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MLX C</h1>
+    <h1>Stream</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -319,31 +320,56 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="mlx-c">
-<h1>MLX C<a class="headerlink" href="#mlx-c" title="Permalink to this heading">#</a></h1>
-<p>MLX C is a C API for <a class="reference external" href="https://github.com/ml-explore/mlx">MLX</a>. MLX C can be
-used standalone or as a bridge to bind other languages to MLX. For example, the
-<a class="reference external" href="https://github.com/ml-explore/mlx-swift/">MLX Swift</a> package uses MLX C for
-Swift bindings to MLX.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
-</ul>
-</div>
+  <section id="stream">
+<h1>Stream<a class="headerlink" href="#stream" title="Permalink to this heading">#</a></h1>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410mlx_stream">
+<span id="_CPPv310mlx_stream"></span><span id="_CPPv210mlx_stream"></span><span id="mlx_stream"></span><span class="target" id="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_stream_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream</span></span></span><a class="headerlink" href="#_CPPv410mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A MLX stream object. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv414MLX_CPU_STREAM">
+<span id="_CPPv314MLX_CPU_STREAM"></span><span id="_CPPv214MLX_CPU_STREAM"></span><span id="MLX_CPU_STREAM__mlx_stream"></span><span class="target" id="group__mlx__stream_1ga71e17e49521c44cad862694eff7974bd"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_CPU_STREAM</span></span></span><a class="headerlink" href="#_CPPv414MLX_CPU_STREAM" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Current default CPU stream. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv414MLX_GPU_STREAM">
+<span id="_CPPv314MLX_GPU_STREAM"></span><span id="_CPPv214MLX_GPU_STREAM"></span><span id="MLX_GPU_STREAM__mlx_stream"></span><span class="target" id="group__mlx__stream_1ga4082b278b0f736d4330d12a2fee9109a"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_GPU_STREAM</span></span></span><a class="headerlink" href="#_CPPv414MLX_GPU_STREAM" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Current default GPU stream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_stream_newi10mlx_device">
+<span id="_CPPv314mlx_stream_newi10mlx_device"></span><span id="_CPPv214mlx_stream_newi10mlx_device"></span><span id="mlx_stream_new__i.mlx_device"></span><span class="target" id="group__mlx__stream_1ga53ac9e91760cee5ce97265e054062c91"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream_new</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span>, <a class="reference internal" href="device.html#_CPPv410mlx_device" title="mlx_device"><span class="n"><span class="pre">mlx_device</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_stream_newi10mlx_device" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a new stream, with specified <code class="docutils literal notranslate"><span class="pre">index</span></code>, on a device. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424mlx_stream_new_on_device10mlx_device">
+<span id="_CPPv324mlx_stream_new_on_device10mlx_device"></span><span id="_CPPv224mlx_stream_new_on_device10mlx_device"></span><span id="mlx_stream_new_on_device__mlx_device"></span><span class="target" id="group__mlx__stream_1ga881dc466c5ba0fb1a05b376fb840c112"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream_new_on_device</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="device.html#_CPPv410mlx_device" title="mlx_device"><span class="n"><span class="pre">mlx_device</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424mlx_stream_new_on_device10mlx_device" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a new stream on a device. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416mlx_stream_equal10mlx_stream10mlx_stream">
+<span id="_CPPv316mlx_stream_equal10mlx_stream10mlx_stream"></span><span id="_CPPv216mlx_stream_equal10mlx_stream10mlx_stream"></span><span id="mlx_stream_equal__mlx_stream.mlx_stream"></span><span class="target" id="group__mlx__stream_1gaa8fa64c28a7e58004fc6c86302c4fd91"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream_equal</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">lhs</span></span>, <a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">rhs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mlx_stream_equal10mlx_stream10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Check if streams are the same. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418mlx_default_stream10mlx_device">
+<span id="_CPPv318mlx_default_stream10mlx_device"></span><span id="_CPPv218mlx_default_stream10mlx_device"></span><span id="mlx_default_stream__mlx_device"></span><span class="target" id="group__mlx__stream_1gaf2839578faded9dfabe73d524910e821"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_default_stream</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="device.html#_CPPv410mlx_device" title="mlx_device"><span class="n"><span class="pre">mlx_device</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_default_stream10mlx_device" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the default stream on the given device. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_set_default_stream10mlx_stream">
+<span id="_CPPv322mlx_set_default_stream10mlx_stream"></span><span id="_CPPv222mlx_set_default_stream10mlx_stream"></span><span id="mlx_set_default_stream__mlx_stream"></span><span class="target" id="group__mlx__stream_1gab1619f0ecd6945c912594ad20dbecbe7"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_set_default_stream</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422mlx_set_default_stream10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Set default stream. </p>
+</dd></dl>
+
 </section>
 
 
@@ -357,12 +383,21 @@ Swift bindings to MLX.</p>
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="random.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Random</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="install.html"
+       href="transforms.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Building and Installing</p>
+        <p class="prev-next-title">Transforms</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>MLX C &#8212; MLX C 0.0.0 documentation</title>
+    <title>Linear Algebra &#8212; MLX C 0.0.0 documentation</title>
   
   
   
@@ -43,10 +43,11 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'linalg';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Building and Installing" href="install.html" />
+    <link rel="next" title="Operations" href="ops.html" />
+    <link rel="prev" title="FFT" href="fft.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,7 +123,7 @@
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -145,11 +146,11 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
@@ -223,7 +224,7 @@
       
       
       
-      <li><a href="_sources/index.rst" target="_blank"
+      <li><a href="_sources/linalg.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +306,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MLX C</h1>
+    <h1>Linear Algebra</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -319,31 +320,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="mlx-c">
-<h1>MLX C<a class="headerlink" href="#mlx-c" title="Permalink to this heading">#</a></h1>
-<p>MLX C is a C API for <a class="reference external" href="https://github.com/ml-explore/mlx">MLX</a>. MLX C can be
-used standalone or as a bridge to bind other languages to MLX. For example, the
-<a class="reference external" href="https://github.com/ml-explore/mlx-swift/">MLX Swift</a> package uses MLX C for
-Swift bindings to MLX.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
-<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
-</ul>
-</div>
+  <section id="linear-algebra">
+<h1>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this heading">#</a></h1>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415mlx_linalg_norm9mlx_array10mlx_stringib10mlx_stream">
+<span id="_CPPv315mlx_linalg_norm9mlx_array10mlx_stringib10mlx_stream"></span><span id="_CPPv215mlx_linalg_norm9mlx_array10mlx_stringib10mlx_stream"></span><span id="mlx_linalg_norm__mlx_array.mlx_string.i.b.mlx_stream"></span><span class="target" id="group__linalg_1gacaca9847352e923164728c0db46b7436"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_norm</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="n"><span class="pre">mlx_string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ord</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">axis</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">keepdims</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415mlx_linalg_norm9mlx_array10mlx_stringib10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 </section>
 
 
@@ -357,12 +340,21 @@ Swift bindings to MLX.</p>
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="fft.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">FFT</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="install.html"
+       href="ops.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Building and Installing</p>
+        <p class="prev-next-title">Operations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

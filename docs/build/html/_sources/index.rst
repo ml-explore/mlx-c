@@ -1,7 +1,10 @@
 MLX C
 =====
 
-A C wrapper for MLX
+MLX C is a C API for `MLX <https://github.com/ml-explore/mlx>`_. MLX C can be
+used standalone or as a bridge to bind other languages to MLX. For example, the
+`MLX Swift <https://github.com/ml-explore/mlx-swift/>`_ package uses MLX C for
+Swift bindings to MLX.
 
 .. toctree::
    :caption: Installation
@@ -14,3 +17,10 @@ A C wrapper for MLX
    :maxdepth: 1
 
    array
+   device
+   fft
+   linalg
+   ops
+   random
+   stream
+   transforms
