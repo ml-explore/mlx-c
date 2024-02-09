@@ -45,9 +45,15 @@ mlx_all_axis(mlx_array a, int axis, bool keepdims, mlx_stream s) {
 extern "C" mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::all(a->ctx, keepdims, s->ctx));
 }
-extern "C" mlx_array
-mlx_allclose(mlx_array a, mlx_array b, double rtol, double atol, mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::allclose(a->ctx, b->ctx, rtol, atol, s->ctx));
+extern "C" mlx_array mlx_allclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    bool equal_nan,
+    mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::allclose(a->ctx, b->ctx, rtol, atol, equal_nan, s->ctx));
 }
 extern "C" mlx_array mlx_any(
     mlx_array a,
@@ -234,6 +240,12 @@ mlx_cumsum(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::cumsum(a->ctx, axis, reverse, inclusive, s->ctx));
 }
+extern "C" mlx_vector_array mlx_depends(
+    const mlx_vector_array inputs,
+    const mlx_vector_array dependencies) {
+  return MLX_C_ARRAYS(
+      mlx::core::depends(MLX_CPP_ARRVEC(inputs), MLX_CPP_ARRVEC(dependencies)));
+}
 extern "C" mlx_array mlx_dequantize(
     mlx_array w,
     mlx_array scales,
@@ -243,6 +255,13 @@ extern "C" mlx_array mlx_dequantize(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::dequantize(
       w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx));
+}
+extern "C" mlx_array mlx_diag(mlx_array a, int k, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::diag(a->ctx, k, s->ctx));
+}
+extern "C" mlx_array
+mlx_diagonal(mlx_array a, int offset, int axis1, int axis2, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::diagonal(a->ctx, offset, axis1, axis2, s->ctx));
 }
 extern "C" mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::divide(a->ctx, b->ctx, s->ctx));
@@ -322,6 +341,16 @@ extern "C" mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s) {
 extern "C" mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::inner(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_isclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    bool equal_nan,
+    mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::isclose(a->ctx, b->ctx, rtol, atol, equal_nan, s->ctx));
+}
 extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
 }
@@ -348,30 +377,6 @@ extern "C" mlx_array mlx_linspace(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::linspace(
       start, stop, num, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
-}
-extern "C" mlx_array mlx_load_file(FILE* in_stream, mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::load(MLX_CPP_READER(in_stream), s->ctx));
-}
-extern "C" mlx_array mlx_load(mlx_string file, mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::load(MLX_CPP_STRING(file), s->ctx));
-}
-extern "C" mlx_map_string_to_array mlx_load_gguf(
-    mlx_string file,
-    mlx_stream s) {
-  return MLX_C_MAP_STRING_TO_ARRAY(
-      mlx::core::load_gguf(MLX_CPP_STRING(file), s->ctx));
-}
-extern "C" mlx_map_string_to_array mlx_load_safetensors_file(
-    FILE* in_stream,
-    mlx_stream s) {
-  return MLX_C_MAP_STRING_TO_ARRAY(
-      mlx::core::load_safetensors(MLX_CPP_READER(in_stream), s->ctx));
-}
-extern "C" mlx_map_string_to_array mlx_load_safetensors(
-    mlx_string file,
-    mlx_stream s) {
-  return MLX_C_MAP_STRING_TO_ARRAY(
-      mlx::core::load_safetensors(MLX_CPP_STRING(file), s->ctx));
 }
 extern "C" mlx_array mlx_log(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::log(a->ctx, s->ctx));
@@ -569,28 +574,6 @@ extern "C" mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s) {
 }
 extern "C" mlx_array mlx_rsqrt(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::rsqrt(a->ctx, s->ctx));
-}
-extern "C" void mlx_save_file(FILE* out_stream, mlx_array a) {
-  return MLX_C_VOID(mlx::core::save(MLX_CPP_WRITER(out_stream), a->ctx));
-}
-extern "C" void mlx_save(mlx_string file, mlx_array a) {
-  return MLX_C_VOID(mlx::core::save(MLX_CPP_STRING(file), a->ctx));
-}
-extern "C" void mlx_save_gguf(mlx_string file, mlx_map_string_to_array a) {
-  return MLX_C_VOID(mlx::core::save_gguf(
-      MLX_CPP_STRING(file), MLX_CPP_MAP_STRING_TO_ARRAY(a)));
-}
-extern "C" void mlx_save_safetensors_file(
-    FILE* in_stream,
-    mlx_map_string_to_array param) {
-  return MLX_C_VOID(mlx::core::save_safetensors(
-      MLX_CPP_WRITER(in_stream), MLX_CPP_MAP_STRING_TO_ARRAY(param)));
-}
-extern "C" void mlx_save_safetensors(
-    mlx_string file,
-    mlx_map_string_to_array param) {
-  return MLX_C_VOID(mlx::core::save_safetensors(
-      MLX_CPP_STRING(file), MLX_CPP_MAP_STRING_TO_ARRAY(param)));
 }
 extern "C" mlx_array mlx_scatter(
     mlx_array a,

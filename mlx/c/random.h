@@ -19,7 +19,7 @@ extern "C" {
 #endif
 
 /**
- * \defgroup random Random numbers operations
+ * \defgroup random Random number operations
  */
 /**@{*/
 mlx_array mlx_random_bernoulli(
@@ -60,6 +60,8 @@ mlx_array mlx_random_normal(
     const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
+    float loc,
+    float scale,
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_randint(

@@ -94,11 +94,15 @@ extern "C" mlx_array mlx_random_normal(
     const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
+    float loc,
+    float scale,
     mlx_array key,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::random::normal(
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
+      loc,
+      scale,
       (key ? std::make_optional(key->ctx) : std::nullopt),
       s->ctx));
 }

@@ -22,12 +22,27 @@ extern "C" {
  * \defgroup linalg Linear algebra operations
  */
 /**@{*/
-mlx_array mlx_linalg_norm(
+mlx_array mlx_linalg_norm_p(
     mlx_array a,
-    mlx_string ord,
-    int axis,
+    double ord,
+    const int* axis,
+    size_t num_axis,
     bool keepdims,
     mlx_stream s);
+mlx_array mlx_linalg_norm_ord(
+    mlx_array a,
+    mlx_string ord,
+    const int* axis,
+    size_t num_axis,
+    bool keepdims,
+    mlx_stream s);
+mlx_array mlx_linalg_norm(
+    mlx_array a,
+    const int* axis,
+    size_t num_axis,
+    bool keepdims,
+    mlx_stream s);
+mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus

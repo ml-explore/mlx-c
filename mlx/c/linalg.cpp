@@ -13,12 +13,39 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-extern "C" mlx_array mlx_linalg_norm(
+extern "C" mlx_array mlx_linalg_norm_p(
     mlx_array a,
-    mlx_string ord,
-    int axis,
+    double ord,
+    const int* axis,
+    size_t num_axis,
     bool keepdims,
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::linalg::norm(
-      a->ctx, MLX_CPP_STRING(ord), axis, keepdims, s->ctx));
+      a->ctx, ord, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx));
+}
+extern "C" mlx_array mlx_linalg_norm_ord(
+    mlx_array a,
+    mlx_string ord,
+    const int* axis,
+    size_t num_axis,
+    bool keepdims,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::linalg::norm(
+      a->ctx,
+      MLX_CPP_STRING(ord),
+      MLX_CPP_OPT_INTVEC(axis, num_axis),
+      keepdims,
+      s->ctx));
+}
+extern "C" mlx_array mlx_linalg_norm(
+    mlx_array a,
+    const int* axis,
+    size_t num_axis,
+    bool keepdims,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::linalg::norm(
+      a->ctx, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx));
+}
+extern "C" mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAYPAIR(mlx::core::linalg::qr(a->ctx, s->ctx));
 }

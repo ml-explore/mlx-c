@@ -40,4 +40,6 @@ Swift bindings to MLX.
    fft
    linalg
    random
+   io
    transforms
+   compile

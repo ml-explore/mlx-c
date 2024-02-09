@@ -39,8 +39,13 @@ mlx_array mlx_all_axes(
     mlx_stream s);
 mlx_array mlx_all_axis(mlx_array a, int axis, bool keepdims, mlx_stream s);
 mlx_array mlx_all_all(mlx_array a, bool keepdims, mlx_stream s);
-mlx_array
-mlx_allclose(mlx_array a, mlx_array b, double rtol, double atol, mlx_stream s);
+mlx_array mlx_allclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    bool equal_nan,
+    mlx_stream s);
 mlx_array mlx_any(
     mlx_array a,
     const int* axes,
@@ -119,6 +124,9 @@ mlx_array
 mlx_cumprod(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s);
 mlx_array
 mlx_cumsum(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s);
+mlx_vector_array mlx_depends(
+    const mlx_vector_array inputs,
+    const mlx_vector_array dependencies);
 mlx_array mlx_dequantize(
     mlx_array w,
     mlx_array scales,
@@ -126,6 +134,9 @@ mlx_array mlx_dequantize(
     int group_size,
     int bits,
     mlx_stream s);
+mlx_array mlx_diag(mlx_array a, int k, mlx_stream s);
+mlx_array
+mlx_diagonal(mlx_array a, int offset, int axis1, int axis2, mlx_stream s);
 mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s);
 mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s);
@@ -156,6 +167,13 @@ mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_isclose(
+    mlx_array a,
+    mlx_array b,
+    double rtol,
+    double atol,
+    bool equal_nan,
+    mlx_stream s);
 mlx_array mlx_isinf(mlx_array a, mlx_stream s);
 mlx_array mlx_isnan(mlx_array a, mlx_stream s);
 mlx_array mlx_isneginf(mlx_array a, mlx_stream s);
@@ -168,13 +186,6 @@ mlx_array mlx_linspace(
     int num,
     mlx_array_dtype dtype,
     mlx_stream s);
-mlx_array mlx_load_file(FILE* in_stream, mlx_stream s);
-mlx_array mlx_load(mlx_string file, mlx_stream s);
-mlx_map_string_to_array mlx_load_gguf(mlx_string file, mlx_stream s);
-mlx_map_string_to_array mlx_load_safetensors_file(
-    FILE* in_stream,
-    mlx_stream s);
-mlx_map_string_to_array mlx_load_safetensors(mlx_string file, mlx_stream s);
 mlx_array mlx_log(mlx_array a, mlx_stream s);
 mlx_array mlx_log10(mlx_array a, mlx_stream s);
 mlx_array mlx_log1p(mlx_array a, mlx_stream s);
@@ -264,11 +275,6 @@ mlx_array
 mlx_reshape(mlx_array a, const int* shape, size_t num_shape, mlx_stream s);
 mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s);
 mlx_array mlx_rsqrt(mlx_array a, mlx_stream s);
-void mlx_save_file(FILE* out_stream, mlx_array a);
-void mlx_save(mlx_string file, mlx_array a);
-void mlx_save_gguf(mlx_string file, mlx_map_string_to_array a);
-void mlx_save_safetensors_file(FILE* in_stream, mlx_map_string_to_array param);
-void mlx_save_safetensors(mlx_string file, mlx_map_string_to_array param);
 mlx_array mlx_scatter(
     mlx_array a,
     const mlx_vector_array indices,

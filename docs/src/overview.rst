@@ -83,6 +83,11 @@ Many array :doc:`operations <ops>` are available, with additional support
 for :doc:`random number generation <random>`, :doc:`FFT <fft>`. Advanced
 :doc:`linear algebra operations <linalg>` are in their early stages.
 
+IO Operations
+-------------
+
+MLX C comes with a number of :doc:`array IO operations <io>`, which help to
+serialize and deserialize arrays in several popular formats.
 
 Function Transformations
 ------------------------
@@ -101,3 +106,13 @@ return closures.
 
 For a quickstart, see our `example using closures
 <https://github.com/ml-explore/mlx-c/blob/main/examples/example-grad.c>`_.
+
+Compilation
+-----------
+
+If one re-uses over and over a given function, then it may be beneficial to
+compile this function, to limit the overhead induced by the construction of
+the graph representing the function. MLX compilation also supports some
+kernel fusion. :doc:`Compilation operations <compile>` are a form of
+function transformations, taking a closure, and return a new closure (which
+is the compiled version of the given closure).

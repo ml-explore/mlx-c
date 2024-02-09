@@ -13,6 +13,9 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" mlx_closure mlx_checkpoint(mlx_closure fun) {
+  return MLX_C_CLOSURE(mlx::core::checkpoint(MLX_CPP_CLOSURE(fun)));
+}
 extern "C" void mlx_eval(const mlx_vector_array outputs) {
   return MLX_C_VOID(mlx::core::eval(MLX_CPP_ARRVEC(outputs)));
 }
@@ -22,9 +25,6 @@ extern "C" mlx_vector_vector_array mlx_jvp(
     const mlx_vector_array tangents) {
   return MLX_C_VECTORARRAYPAIR(mlx::core::jvp(
       MLX_CPP_CLOSURE(fun), MLX_CPP_ARRVEC(primals), MLX_CPP_ARRVEC(tangents)));
-}
-extern "C" void mlx_simplify(const mlx_vector_array outputs) {
-  return MLX_C_VOID(mlx::core::simplify(MLX_CPP_ARRVEC(outputs)));
 }
 extern "C" mlx_closure_value_and_grad
 mlx_value_and_grad(mlx_closure fun, const int* argnums, size_t num_argnums) {

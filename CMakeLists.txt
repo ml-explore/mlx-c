@@ -30,7 +30,7 @@ set(MLX_BUILD_METAL ON)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.0.10)
+  GIT_TAG v0.2.0)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------
@@ -38,8 +38,10 @@ FetchContent_MakeAvailable(mlx)
 set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/array.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
@@ -47,7 +49,8 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp)
 
 add_library(mlxc STATIC ${mlxc-src})
 

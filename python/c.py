@@ -17,7 +17,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
         else:
             variants.sort(key=lambda x: len(x["params_name"]), reverse=True)
 
-            if name != "all":
+            if name != "all" and name != "norm":
                 idx = 0
                 while idx < len(variants) - 1:
                     pidx = variants[idx]["params_name"]
@@ -55,6 +55,12 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[1])
                 sorted_funcs.append(variants[2])
+            elif name == "norm":
+                variants[0]["variant"] = "p"
+                variants[2]["variant"] = "ord"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[2])
+                sorted_funcs.append(variants[4])
             elif (
                 "axes" in variants[0]["params_name"]
                 or "axis" in variants[0]["params_name"]
@@ -209,6 +215,10 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
+            elif pti == "std::optional<std::vector<int>>":
+                c_call.append("const int* " + pni)
+                c_call.append("size_t num_" + pni)
+                cpp_call.append("MLX_CPP_OPT_INTVEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::vector<size_t>":
                 c_call.append("const size_t* " + pni)
                 c_call.append("size_t num_" + pni)

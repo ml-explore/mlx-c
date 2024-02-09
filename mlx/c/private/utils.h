@@ -9,6 +9,7 @@
 #include "mlx/c/array.h"
 #include "mlx/c/private/array.h"
 #include "mlx/mlx.h"
+#include "mlx/transforms_impl.h"
 
 class CFILEReader : public mlx::core::io::Reader {
  private:
@@ -127,6 +128,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
 #define MLX_C_ARRAY_DTYPE(dtype) (mlx_c_dtypes[(int)((dtype).val)])
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
+#define MLX_CPP_OPT_INTVEC(vals, size) ((vals) ? std::make_optional(std::vector<int>((vals), (vals) + (size))) : std::nullopt)
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
 #define MLX_C_ARRAYS(vec) (new mlx_vector_array_(vec))
