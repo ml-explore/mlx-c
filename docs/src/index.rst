@@ -1,10 +1,17 @@
 MLX C
 =====
 
-MLX C is a C API for `MLX <https://github.com/ml-explore/mlx>`_. MLX C can be
-used standalone or as a bridge to bind other languages to MLX. For example, the
-`MLX Swift <https://github.com/ml-explore/mlx-swift/>`_ package uses MLX C for
-Swift bindings to MLX.
+MLX C is a C API for `MLX <https://github.com/ml-explore/mlx>`_.
+
+MLX is an array framework for machine learning research on Apple
+silicon. MLX C expands MLX to the C language, making research and
+experimentation easier on Apple silicon. MLX is intended for research and
+not for production deployment of models in apps.
+
+MLX C can be used standalone or as a bridge to bind other languages
+to MLX. For example, the `MLX Swift
+<https://github.com/ml-explore/mlx-swift/>`_ package uses MLX C for Swift
+bindings to MLX.
 
 .. toctree::
    :caption: Installation
