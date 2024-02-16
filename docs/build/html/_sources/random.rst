@@ -1,5 +1,5 @@
 Random
 ======
 
-.. doxygengroup:: random 
+.. doxygengroup:: random
    :content-only:

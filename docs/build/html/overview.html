@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Overview &#8212; MLX C 0.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overview';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Object" href="object.html" />
+    <link rel="prev" title="Building and Installing" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.0 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ml-explore/mlx-c" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/overview.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Overview</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-object">C Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-of-arrays-and-vector-of-vector-of-arrays">Vector of Arrays, and Vector of Vector of Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-and-stream">Device and Stream</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-and-maps">String and Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io-operations">IO Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-transformations">Function Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">Compilation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<p>MLX C wraps and follows as closely as possible the C++ API of <a class="reference external" href="https://github.com/ml-explore/mlx">MLX</a>.</p>
+<section id="c-object">
+<h2>C Object<a class="headerlink" href="#c-object" title="Permalink to this heading">#</a></h2>
+<p>MLX C relies on several C <code class="docutils literal notranslate"><span class="pre">struct</span></code> which are all compatible with a private
+<a class="reference internal" href="object.html"><span class="doc">object struct</span></a> (that we will refer as a MLX C object),
+which implements basic memory management. When using MLX C, it is important
+to note that:</p>
+<ul class="simple">
+<li><p>All returned C objects come with a reference count of 1, which needs to
+be decreased with a matching <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code> call.</p></li>
+<li><p>When the reference count of an object gets to 0, the object is freed.</p></li>
+<li><p>Reference count may be increased via <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_retain()</span></code>, in which case it
+should be matched at some point with a <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code> to avoid any memory
+leak. Increasing the reference count may be necessary when storing a
+MLX C object into a custom C structure.</p></li>
+</ul>
+<p>In addition, MLX C objects come with a convenience <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_tostring()</span></code>
+function which returns a string describing the contents of the object
+(which is particularly interesting for array objects).</p>
+</section>
+<section id="array">
+<h2>Array<a class="headerlink" href="#array" title="Permalink to this heading">#</a></h2>
+<p>The most important object in MLX C is certainly the <a class="reference internal" href="array.html"><span class="doc">array</span></a>
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_array</span></code>), which holds the data on which computations are
+performed. As MLX is <a class="reference external" href="https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html">lazy</a>,
+the contents of the array obtained via the <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_array_data_*()</span></code> functions are
+valid only if <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_eval()</span></code> as been called (see
+<a class="reference internal" href="transforms.html"><span class="doc">transforms</span></a>).</p>
+</section>
+<section id="vector-of-arrays-and-vector-of-vector-of-arrays">
+<h2>Vector of Arrays, and Vector of Vector of Arrays<a class="headerlink" href="#vector-of-arrays-and-vector-of-vector-of-arrays" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="vecarray.html"><span class="doc">Vector of arrays</span></a> (<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_array</span></code>) can hold
+multiple arrays, and <a class="reference internal" href="vecvecarray.html"><span class="doc">vector of vector arrays</span></a>
+(<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code>) can hold multiple vector of arrays.</p>
+<p>An array added to a <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_array</span></code> will stay alive until the
+vector of arrays is destroyed (via <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code>). Arrays returned by
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_vector_array_get()</span></code> will need to be matched with a corresponding
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code>.</p>
+<p>Same idea applies to <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code>.</p>
+</section>
+<section id="device-and-stream">
+<h2>Device and Stream<a class="headerlink" href="#device-and-stream" title="Permalink to this heading">#</a></h2>
+<p>In MLX, arrays are not tied to a device. Instead, operations on arrays are
+scheduled on a <a class="reference internal" href="stream.html"><span class="doc">stream</span></a>, which is associated to a particular
+<a class="reference internal" href="device.html"><span class="doc">device</span></a>.</p>
+<p>MLX C provides <code class="xref py py-class docutils literal notranslate"><span class="pre">MLX_CPU_STREAM</span></code> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">MLX_GPU_STREAM</span></code>, which point to the default CPU and GPU
+streams. See the basic <a class="reference external" href="https://github.com/ml-explore/mlx-c/blob/main/examples/example.c">MLX C example</a>.</p>
+</section>
+<section id="string-and-maps">
+<h2>String and Maps<a class="headerlink" href="#string-and-maps" title="Permalink to this heading">#</a></h2>
+<p>MLX C has a <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_string</span></code> which <a class="reference internal" href="string.html"><span class="doc">encapsulates a C char
+pointer</span></a>. Just like other MLX C objects, it must be freed with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code>.</p>
+<p>MLX C also has a <a class="reference internal" href="map.html"><span class="doc">string-to-array map</span></a> named
+<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_map_string_to_array</span></code>.</p>
+</section>
+<section id="array-operations">
+<h2>Array Operations<a class="headerlink" href="#array-operations" title="Permalink to this heading">#</a></h2>
+<p>Many array <a class="reference internal" href="ops.html"><span class="doc">operations</span></a> are available, with additional support
+for <a class="reference internal" href="random.html"><span class="doc">random number generation</span></a>, and <a class="reference internal" href="fft.html"><span class="doc">FFTs</span></a>. Advanced
+<a class="reference internal" href="linalg.html"><span class="doc">linear algebra operations</span></a> are in their early stages.</p>
+</section>
+<section id="io-operations">
+<h2>IO Operations<a class="headerlink" href="#io-operations" title="Permalink to this heading">#</a></h2>
+<p>MLX C wraps a number of <a class="reference internal" href="io.html"><span class="doc">array IO operations</span></a>, which saves and loads
+arrays in several common formats.</p>
+</section>
+<section id="function-transformations">
+<h2>Function Transformations<a class="headerlink" href="#function-transformations" title="Permalink to this heading">#</a></h2>
+<p>MLX supports the concept of <a class="reference external" href="https://ml-explore.github.io/mlx/build/html/python/transforms.html">function transforms</a>.</p>
+<p>These are also available in MLX C through the use of
+<a class="reference internal" href="closure.html"><span class="doc">closures</span></a> that contain a C function pointer and
+optional payloads. Closures obey the same memory management rules as
+other MLX C objects and must be release with a matching <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code>
+call.</p>
+<p>MLX C <a class="reference internal" href="transforms.html"><span class="doc">transforms</span></a> will are applied on closures and may
+return closures.</p>
+<p>For more details, see the <a class="reference external" href="https://github.com/ml-explore/mlx-c/blob/main/examples/example-grad.c">example using closures</a>.</p>
+</section>
+<section id="compilation">
+<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading">#</a></h2>
+<p>When using the same function multiple times, compilation may be beneficial.
+Compiling functions makes them more efficient by reducing redundant work,
+fusing kernels, and reducing overhead. <a class="reference internal" href="compile.html"><span class="doc">Compilation operations</span></a>
+are function transformations which take a closure and return a new closure
+(which is the compiled version of the given closure).</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="install.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Building and Installing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="object.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Object</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-object">C Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-of-arrays-and-vector-of-vector-of-arrays">Vector of Arrays, and Vector of Vector of Arrays</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#device-and-stream">Device and Stream</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-and-maps">String and Maps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-operations">Array Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io-operations">IO Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-transformations">Function Transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">Compilation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MLX Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, MLX Contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 FFT
 ===
 
-.. doxygengroup:: fft 
+.. doxygengroup:: fft
    :content-only:

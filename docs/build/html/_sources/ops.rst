@@ -1,5 +1,5 @@
 Operations
 ==========
 
-.. doxygengroup:: ops 
+.. doxygengroup:: ops
    :content-only:

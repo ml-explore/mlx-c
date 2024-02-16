@@ -1,5 +1,5 @@
 Transforms
 ==========
 
-.. doxygengroup:: transforms 
+.. doxygengroup:: transforms
    :content-only:

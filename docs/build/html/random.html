@@ -46,8 +46,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'random';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stream" href="stream.html" />
-    <link rel="prev" title="Operations" href="ops.html" />
+    <link rel="next" title="IO Operations" href="io.html" />
+    <link rel="prev" title="Linear Algebra" href="linalg.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -145,16 +145,31 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 </ul>
 
     </div>
@@ -358,8 +373,8 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream">
-<span id="_CPPv317mlx_random_normalPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream"></span><span id="_CPPv217mlx_random_normalPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream"></span><span id="mlx_random_normal__iCP.s.mlx_array_dtype.mlx_array.mlx_stream"></span><span class="target" id="group__random_1ga3c91d29fa15dc966d2af645293783040"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_random_normal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">shape</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_shape</span></span>, <a class="reference internal" href="array.html#_CPPv415mlx_array_dtype" title="mlx_array_dtype"><span class="n"><span class="pre">mlx_array_dtype</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dtype</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtypeff9mlx_array10mlx_stream">
+<span id="_CPPv317mlx_random_normalPKi6size_t15mlx_array_dtypeff9mlx_array10mlx_stream"></span><span id="_CPPv217mlx_random_normalPKi6size_t15mlx_array_dtypeff9mlx_array10mlx_stream"></span><span id="mlx_random_normal__iCP.s.mlx_array_dtype.float.float.mlx_array.mlx_stream"></span><span class="target" id="group__random_1gad087da542f656649ece8bf0bda8e5ca2"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_random_normal</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">shape</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_shape</span></span>, <a class="reference internal" href="array.html#_CPPv415mlx_array_dtype" title="mlx_array_dtype"><span class="n"><span class="pre">mlx_array_dtype</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dtype</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">loc</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtypeff9mlx_array10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -379,7 +394,7 @@ document.write(`
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv416mlx_random_split9mlx_array10mlx_stream">
-<span id="_CPPv316mlx_random_split9mlx_array10mlx_stream"></span><span id="_CPPv216mlx_random_split9mlx_array10mlx_stream"></span><span id="mlx_random_split__mlx_array.mlx_stream"></span><span class="target" id="group__random_1ga303bc6bf169c324477f42db52dbe6168"></span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_random_split</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mlx_random_split9mlx_array10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv316mlx_random_split9mlx_array10mlx_stream"></span><span id="_CPPv216mlx_random_split9mlx_array10mlx_stream"></span><span id="mlx_random_split__mlx_array.mlx_stream"></span><span class="target" id="group__random_1ga303bc6bf169c324477f42db52dbe6168"></span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_random_split</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mlx_random_split9mlx_array10mlx_stream" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -406,20 +421,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ops.html"
+       href="linalg.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Operations</p>
+        <p class="prev-next-title">Linear Algebra</p>
       </div>
     </a>
     <a class="right-next"
-       href="stream.html"
+       href="io.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stream</p>
+        <p class="prev-next-title">IO Operations</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -142,16 +142,31 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 </ul>
 
     </div>
@@ -291,7 +306,7 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv412mlx_all_axis9mlx_arrayib10mlx_stream">mlx_all_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_allclose9mlx_array9mlx_arraydd10mlx_stream">mlx_allclose (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_allclose9mlx_array9mlx_arrayddb10mlx_stream">mlx_allclose (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_any9mlx_arrayPKi6size_tb10mlx_stream">mlx_any (C++ function)</a>
 </li>
@@ -443,7 +458,25 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv48mlx_ceil9mlx_array10mlx_stream">mlx_ceil (C++ function)</a>
 </li>
+      <li><a href="transforms.html#_CPPv414mlx_checkpoint11mlx_closure">mlx_checkpoint (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv48mlx_clip9mlx_array9mlx_array9mlx_array10mlx_stream">mlx_clip (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv411mlx_closure">mlx_closure (C++ type)</a>
+</li>
+      <li><a href="closure.html#_CPPv417mlx_closure_apply11mlx_closureK16mlx_vector_array">mlx_closure_apply (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv415mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE">mlx_closure_new (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv421mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE">mlx_closure_new_unary (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv428mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE">mlx_closure_new_with_payload (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv426mlx_closure_value_and_grad">mlx_closure_value_and_grad (C++ type)</a>
+</li>
+      <li><a href="closure.html#_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array">mlx_closure_value_and_grad_apply (C++ function)</a>
+</li>
+      <li><a href="compile.html#_CPPv411mlx_compile11mlx_closure">mlx_compile (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv415mlx_concatenateK16mlx_vector_arrayi10mlx_stream">mlx_concatenate (C++ function)</a>
 </li>
@@ -473,6 +506,8 @@ document.write(`
 </li>
       <li><a href="stream.html#_CPPv418mlx_default_stream10mlx_device">mlx_default_stream (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv411mlx_dependsK16mlx_vector_arrayK16mlx_vector_array">mlx_depends (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv414mlx_dequantize9mlx_array9mlx_array9mlx_arrayii10mlx_stream">mlx_dequantize (C++ function)</a>
 </li>
       <li><a href="device.html#_CPPv410mlx_device">mlx_device (C++ type)</a>
@@ -489,9 +524,17 @@ document.write(`
 </li>
       <li><a href="device.html#_CPPv4N16mlx_device_type_7MLX_GPUE">mlx_device_type_::MLX_GPU (C++ enumerator)</a>
 </li>
+      <li><a href="ops.html#_CPPv48mlx_diag9mlx_arrayi10mlx_stream">mlx_diag (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_diagonal9mlx_arrayiii10mlx_stream">mlx_diagonal (C++ function)</a>
+</li>
+      <li><a href="compile.html#_CPPv419mlx_disable_compilev">mlx_disable_compile (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv410mlx_divide9mlx_array9mlx_array10mlx_stream">mlx_divide (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_divmod9mlx_array9mlx_array10mlx_stream">mlx_divmod (C++ function)</a>
+</li>
+      <li><a href="compile.html#_CPPv418mlx_enable_compilev">mlx_enable_compile (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_equal9mlx_array9mlx_array10mlx_stream">mlx_equal (C++ function)</a>
 </li>
@@ -537,14 +580,14 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv416mlx_floor_divide9mlx_array9mlx_array10mlx_stream">mlx_floor_divide (C++ function)</a>
 </li>
+      <li><a href="object.html#_CPPv48mlx_freePv">mlx_free (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv48mlx_fullPKi6size_t9mlx_array15mlx_array_dtype10mlx_stream">mlx_full (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_gather9mlx_arrayK16mlx_vector_arrayPKi6size_tPKi6size_t10mlx_stream">mlx_gather (C++ function)</a>
 </li>
       <li><a href="stream.html#_CPPv414MLX_GPU_STREAM">MLX_GPU_STREAM (C++ member)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ops.html#_CPPv411mlx_greater9mlx_array9mlx_array10mlx_stream">mlx_greater (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv417mlx_greater_equal9mlx_array9mlx_array10mlx_stream">mlx_greater_equal (C++ function)</a>
@@ -553,12 +596,16 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv49mlx_inner9mlx_array9mlx_array10mlx_stream">mlx_inner (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv411mlx_isclose9mlx_array9mlx_arrayddb10mlx_stream">mlx_isclose (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv49mlx_isinf9mlx_array10mlx_stream">mlx_isinf (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_isnan9mlx_array10mlx_stream">mlx_isnan (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_isneginf9mlx_array10mlx_stream">mlx_isneginf (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ops.html#_CPPv412mlx_isposinf9mlx_array10mlx_stream">mlx_isposinf (C++ function)</a>
 </li>
       <li><a href="transforms.html#_CPPv47mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array">mlx_jvp (C++ function)</a>
@@ -567,19 +614,23 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv414mlx_less_equal9mlx_array9mlx_array10mlx_stream">mlx_less_equal (C++ function)</a>
 </li>
-      <li><a href="linalg.html#_CPPv415mlx_linalg_norm9mlx_array10mlx_stringib10mlx_stream">mlx_linalg_norm (C++ function)</a>
+      <li><a href="linalg.html#_CPPv415mlx_linalg_norm9mlx_arrayPKi6size_tb10mlx_stream">mlx_linalg_norm (C++ function)</a>
+</li>
+      <li><a href="linalg.html#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream">mlx_linalg_norm_ord (C++ function)</a>
+</li>
+      <li><a href="linalg.html#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream">mlx_linalg_norm_p (C++ function)</a>
+</li>
+      <li><a href="linalg.html#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream">mlx_linalg_qr (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_linspaceddi15mlx_array_dtype10mlx_stream">mlx_linspace (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_load10mlx_string10mlx_stream">mlx_load (C++ function)</a>
+      <li><a href="io.html#_CPPv48mlx_load10mlx_string10mlx_stream">mlx_load (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_load_fileP4FILE10mlx_stream">mlx_load_file (C++ function)</a>
+      <li><a href="io.html#_CPPv413mlx_load_fileP4FILE10mlx_stream">mlx_load_file (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_load_gguf10mlx_string10mlx_stream">mlx_load_gguf (C++ function)</a>
+      <li><a href="io.html#_CPPv420mlx_load_safetensors10mlx_string10mlx_stream">mlx_load_safetensors (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_load_safetensors10mlx_string10mlx_stream">mlx_load_safetensors (C++ function)</a>
-</li>
-      <li><a href="ops.html#_CPPv425mlx_load_safetensors_fileP4FILE10mlx_stream">mlx_load_safetensors_file (C++ function)</a>
+      <li><a href="io.html#_CPPv425mlx_load_safetensors_fileP4FILE10mlx_stream">mlx_load_safetensors_file (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_log9mlx_array10mlx_stream">mlx_log (C++ function)</a>
 </li>
@@ -600,6 +651,26 @@ document.write(`
       <li><a href="ops.html#_CPPv413mlx_logsumexp9mlx_arrayPKi6size_tb10mlx_stream">mlx_logsumexp (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv417mlx_logsumexp_all9mlx_arrayb10mlx_stream">mlx_logsumexp_all (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv423mlx_map_string_to_array">mlx_map_string_to_array (C++ type)</a>
+</li>
+      <li><a href="map.html#_CPPv427mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string">mlx_map_string_to_array_get (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array">mlx_map_string_to_array_insert (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv431mlx_map_string_to_array_iterate23mlx_map_string_to_array">mlx_map_string_to_array_iterate (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv432mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator (C++ type)</a>
+</li>
+      <li><a href="map.html#_CPPv436mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator_end (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv436mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator_key (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv437mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator_next (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator_value (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv427mlx_map_string_to_array_newv">mlx_map_string_to_array_new (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_matmul9mlx_array9mlx_array10mlx_stream">mlx_matmul (C++ function)</a>
 </li>
@@ -663,7 +734,7 @@ document.write(`
 </li>
       <li><a href="random.html#_CPPv414mlx_random_key8uint64_t">mlx_random_key (C++ function)</a>
 </li>
-      <li><a href="random.html#_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream">mlx_random_normal (C++ function)</a>
+      <li><a href="random.html#_CPPv417mlx_random_normalPKi6size_t15mlx_array_dtypeff9mlx_array10mlx_stream">mlx_random_normal (C++ function)</a>
 </li>
       <li><a href="random.html#_CPPv418mlx_random_randint9mlx_array9mlx_arrayPKi6size_t15mlx_array_dtype9mlx_array10mlx_stream">mlx_random_randint (C++ function)</a>
 </li>
@@ -687,19 +758,19 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv411mlx_reshape9mlx_arrayPKi6size_t10mlx_stream">mlx_reshape (C++ function)</a>
 </li>
+      <li><a href="object.html#_CPPv410mlx_retainPv">mlx_retain (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv49mlx_round9mlx_arrayi10mlx_stream">mlx_round (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_rsqrt9mlx_array10mlx_stream">mlx_rsqrt (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_save10mlx_string9mlx_array">mlx_save (C++ function)</a>
+      <li><a href="io.html#_CPPv48mlx_save10mlx_string9mlx_array">mlx_save (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_save_fileP4FILE9mlx_array">mlx_save_file (C++ function)</a>
+      <li><a href="io.html#_CPPv413mlx_save_fileP4FILE9mlx_array">mlx_save_file (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_save_gguf10mlx_string23mlx_map_string_to_array">mlx_save_gguf (C++ function)</a>
+      <li><a href="io.html#_CPPv420mlx_save_safetensors10mlx_string23mlx_map_string_to_array">mlx_save_safetensors (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_save_safetensors10mlx_string23mlx_map_string_to_array">mlx_save_safetensors (C++ function)</a>
-</li>
-      <li><a href="ops.html#_CPPv425mlx_save_safetensors_fileP4FILE23mlx_map_string_to_array">mlx_save_safetensors_file (C++ function)</a>
+      <li><a href="io.html#_CPPv425mlx_save_safetensors_fileP4FILE23mlx_map_string_to_array">mlx_save_safetensors_file (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_scatter9mlx_arrayK16mlx_vector_array9mlx_arrayPKi6size_t10mlx_stream">mlx_scatter (C++ function)</a>
 </li>
@@ -718,8 +789,6 @@ document.write(`
       <li><a href="ops.html#_CPPv411mlx_sigmoid9mlx_array10mlx_stream">mlx_sigmoid (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_sign9mlx_array10mlx_stream">mlx_sign (C++ function)</a>
-</li>
-      <li><a href="transforms.html#_CPPv412mlx_simplifyK16mlx_vector_array">mlx_simplify (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_sin9mlx_array10mlx_stream">mlx_sin (C++ function)</a>
 </li>
@@ -761,6 +830,12 @@ document.write(`
 </li>
       <li><a href="stream.html#_CPPv424mlx_stream_new_on_device10mlx_device">mlx_stream_new_on_device (C++ function)</a>
 </li>
+      <li><a href="string.html#_CPPv410mlx_string">mlx_string (C++ type)</a>
+</li>
+      <li><a href="string.html#_CPPv415mlx_string_data10mlx_string">mlx_string_data (C++ function)</a>
+</li>
+      <li><a href="string.html#_CPPv414mlx_string_newPKc">mlx_string_new (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv412mlx_subtract9mlx_array9mlx_array10mlx_stream">mlx_subtract (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_sum9mlx_arrayPKi6size_tb10mlx_stream">mlx_sum (C++ function)</a>
@@ -787,6 +862,8 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv412mlx_topk_all9mlx_arrayi10mlx_stream">mlx_topk_all (C++ function)</a>
 </li>
+      <li><a href="object.html#_CPPv412mlx_tostringPv">mlx_tostring (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv413mlx_transpose9mlx_arrayPKi6size_t10mlx_stream">mlx_transpose (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv417mlx_transpose_all9mlx_array10mlx_stream">mlx_transpose_all (C++ function)</a>
@@ -802,6 +879,34 @@ document.write(`
       <li><a href="ops.html#_CPPv47mlx_var9mlx_arrayPKi6size_tbi10mlx_stream">mlx_var (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_var_all9mlx_arraybi10mlx_stream">mlx_var_all (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv416mlx_vector_array">mlx_vector_array (C++ type)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv420mlx_vector_array_add16mlx_vector_arrayK9mlx_array">mlx_vector_array_add (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv427mlx_vector_array_add_arrays16mlx_vector_arrayPK9mlx_array6size_t">mlx_vector_array_add_arrays (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv427mlx_vector_array_from_arrayK9mlx_array">mlx_vector_array_from_array (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv428mlx_vector_array_from_arraysP9mlx_array6size_t">mlx_vector_array_from_arrays (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv420mlx_vector_array_get16mlx_vector_array6size_t">mlx_vector_array_get (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv420mlx_vector_array_newv">mlx_vector_array_new (C++ function)</a>
+</li>
+      <li><a href="vecarray.html#_CPPv421mlx_vector_array_size16mlx_vector_array">mlx_vector_array_size (C++ function)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv423mlx_vector_vector_array">mlx_vector_vector_array (C++ type)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv427mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array">mlx_vector_vector_array_add (C++ function)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv427mlx_vector_vector_array_get23mlx_vector_vector_array6size_t">mlx_vector_vector_array_get (C++ function)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv429mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t">mlx_vector_vector_array_get2d (C++ function)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv427mlx_vector_vector_array_newv">mlx_vector_vector_array_new (C++ function)</a>
+</li>
+      <li><a href="vecvecarray.html#_CPPv428mlx_vector_vector_array_size23mlx_vector_vector_array">mlx_vector_vector_array_size (C++ function)</a>
 </li>
       <li><a href="transforms.html#_CPPv47mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array">mlx_vjp (C++ function)</a>
 </li>

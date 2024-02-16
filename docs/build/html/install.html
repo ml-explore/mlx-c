@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'install';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Array" href="array.html" />
+    <link rel="next" title="Overview" href="overview.html" />
     <link rel="prev" title="MLX C" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -145,9 +145,31 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Building and Installing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 </ul>
 
     </div>
@@ -315,11 +337,18 @@ document.write(`
                   
   <section id="building-and-installing">
 <h1>Building and Installing<a class="headerlink" href="#building-and-installing" title="Permalink to this heading">#</a></h1>
+<p>CMake is required to build MLX C. You can install it with <a class="reference external" href="https://brew.sh/">Homebrew</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>brew install cmake
+</pre></div>
+</div>
+<p>To build MLX C, run the following commands:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build/
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE<span class="o">=</span>Release
 make -j
 </pre></div>
 </div>
+<p>MLX C will fetch <a class="reference external" href="https://github.com/ml-explore/mlx">MLX</a> under the hood,
+compile it, and then compile the C API.</p>
 </section>
 
 
@@ -343,11 +372,11 @@ make -j
       </div>
     </a>
     <a class="right-next"
-       href="array.html"
+       href="overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Array</p>
+        <p class="prev-next-title">Overview</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

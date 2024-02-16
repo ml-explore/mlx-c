@@ -13,14 +13,33 @@ Swift bindings to MLX.
    install
 
 .. toctree::
+   :caption: Overview
+   :maxdepth: 1
+
+   overview
+
+.. toctree::
+   :caption: Object Reference
+   :maxdepth: 1
+
+   object
+   array
+   vecarray
+   vecvecarray
+   stream
+   device
+   string
+   map
+   closure
+
+.. toctree::
    :caption: API Reference
    :maxdepth: 1
 
-   array
-   device
+   ops
    fft
    linalg
-   ops
    random
-   stream
+   io
    transforms
+   compile

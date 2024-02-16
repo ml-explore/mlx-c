@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['numbers_20operations_0',['Random numbers operations',['../group__random.html',1,'']]]
+  ['map_0',['String-to-array map',['../group__mlx__map__string__to__array.html',1,'']]]
 ];

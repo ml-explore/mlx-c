@@ -46,7 +46,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'transforms';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Stream" href="stream.html" />
+    <link rel="next" title="Compilation" href="compile.html" />
+    <link rel="prev" title="IO Operations" href="io.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -144,16 +145,31 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 </ul>
 
     </div>
@@ -322,28 +338,28 @@ document.write(`
   <section id="transforms">
 <h1>Transforms<a class="headerlink" href="#transforms" title="Permalink to this heading">#</a></h1>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_checkpoint11mlx_closure">
+<span id="_CPPv314mlx_checkpoint11mlx_closure"></span><span id="_CPPv214mlx_checkpoint11mlx_closure"></span><span id="mlx_checkpoint__mlx_closure"></span><span class="target" id="group__transforms_1ga6d9653deb56e506856a656ba26b4efa3"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_checkpoint</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_checkpoint11mlx_closure" title="Permalink to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv48mlx_evalK16mlx_vector_array">
-<span id="_CPPv38mlx_evalK16mlx_vector_array"></span><span id="_CPPv28mlx_evalK16mlx_vector_array"></span><span id="mlx_eval__mlx_vector_arrayC"></span><span class="target" id="group__transforms_1ga6ff5e8e8caf119872cb4d569fd21940f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_eval</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outputs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48mlx_evalK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv38mlx_evalK16mlx_vector_array"></span><span id="_CPPv28mlx_evalK16mlx_vector_array"></span><span id="mlx_eval__mlx_vector_arrayC"></span><span class="target" id="group__transforms_1ga6ff5e8e8caf119872cb4d569fd21940f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_eval</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">outputs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48mlx_evalK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv47mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array">
-<span id="_CPPv37mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="_CPPv27mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="mlx_jvp__mlx_closure.mlx_vector_arrayC.mlx_vector_arrayC"></span><span class="target" id="group__transforms_1ga6d63a6cf3bde6763e206d911e019e9c6"></span><span class="n"><span class="pre">mlx_vector_vector_array</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_jvp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mlx_closure</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">primals</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">tangents</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv412mlx_simplifyK16mlx_vector_array">
-<span id="_CPPv312mlx_simplifyK16mlx_vector_array"></span><span id="_CPPv212mlx_simplifyK16mlx_vector_array"></span><span id="mlx_simplify__mlx_vector_arrayC"></span><span class="target" id="group__transforms_1ga8cfe7dd638f766633a942c87eeaf382e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_simplify</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outputs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412mlx_simplifyK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv37mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="_CPPv27mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="mlx_jvp__mlx_closure.mlx_vector_arrayC.mlx_vector_arrayC"></span><span class="target" id="group__transforms_1ga6d63a6cf3bde6763e206d911e019e9c6"></span><a class="reference internal" href="vecvecarray.html#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_jvp</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">primals</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tangents</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418mlx_value_and_grad11mlx_closurePKi6size_t">
-<span id="_CPPv318mlx_value_and_grad11mlx_closurePKi6size_t"></span><span id="_CPPv218mlx_value_and_grad11mlx_closurePKi6size_t"></span><span id="mlx_value_and_grad__mlx_closure.iCP.s"></span><span class="target" id="group__transforms_1ga3a8dde0302a24cb52f24b627ea66b9c4"></span><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_value_and_grad</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mlx_closure</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argnums</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_argnums</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_value_and_grad11mlx_closurePKi6size_t" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv318mlx_value_and_grad11mlx_closurePKi6size_t"></span><span id="_CPPv218mlx_value_and_grad11mlx_closurePKi6size_t"></span><span id="mlx_value_and_grad__mlx_closure.iCP.s"></span><span class="target" id="group__transforms_1ga3a8dde0302a24cb52f24b627ea66b9c4"></span><a class="reference internal" href="closure.html#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_value_and_grad</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argnums</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_argnums</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_value_and_grad11mlx_closurePKi6size_t" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv47mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array">
-<span id="_CPPv37mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="_CPPv27mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="mlx_vjp__mlx_closure.mlx_vector_arrayC.mlx_vector_arrayC"></span><span class="target" id="group__transforms_1gac0fe4c29c33ea438ee61522ce9dbee8a"></span><span class="n"><span class="pre">mlx_vector_vector_array</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vjp</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">mlx_closure</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">primals</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_array</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cotangents</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv37mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="_CPPv27mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array"></span><span id="mlx_vjp__mlx_closure.mlx_vector_arrayC.mlx_vector_arrayC"></span><span class="target" id="group__transforms_1gac0fe4c29c33ea438ee61522ce9dbee8a"></span><a class="reference internal" href="vecvecarray.html#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vjp</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">primals</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cotangents</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47mlx_vjp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array" title="Permalink to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -360,13 +376,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="stream.html"
+       href="io.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Stream</p>
+        <p class="prev-next-title">IO Operations</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="compile.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compilation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
