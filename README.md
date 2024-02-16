@@ -5,7 +5,7 @@ used standalone or as a bridge to bind other languages to MLX. For example,
 the [MLX Swift](https://github.com/ml-explore/mlx-swift/) package uses MLX C
 for Swift bindings to MLX.
 
-For more information see the [docs](https://ml-explore.github.io/mlx-c)
+For more information see the [docs](https://ml-explore.github.io/mlx-c).
 
 ## Install
 
@@ -24,7 +24,7 @@ make -j
 ```
 
 From the `build/` directory, you can run an [examples/example.c](example)
-that uses MLX C  with `./example`.
+that uses MLX C with `./example`.
 
 ## Contributing 
 

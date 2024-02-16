@@ -7,7 +7,7 @@ MLX C wraps and follows as closely as possible the C++ API of `MLX
 C Object
 --------
 
-MLX C relies on several C `struct` which are all compatible with a private
+MLX C relies on several C ``struct`` which are all compatible with a private
 :doc:`object struct <object>` (that we will refer as a MLX C object),
 which implements basic memory management. When using MLX C, it is important
 to note that:
@@ -19,7 +19,7 @@ to note that:
 
 * Reference count may be increased via :func:`mlx_retain()`, in which case it
   should be matched at some point with a :func:`mlx_free()` to avoid any memory
-  leak. Increa ing the reference count may be necessary when one stores a
+  leak. Increasing the reference count may be necessary when storing a
   MLX C object into a custom C structure.
 
 In addition, MLX C objects come with a convenience :func:`mlx_tostring()`
@@ -30,11 +30,11 @@ Array
 -----
 
 The most important object in MLX C is certainly the :doc:`array <array>`
-(:class:`mlx_array`), which holds data on which computation are
+(:class:`mlx_array`), which holds the data on which computations are
 performed. As MLX is `lazy
 <https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html>`_,
-contents of the array obtained via :func:`mlx_array_data_*()` functions are
-valid only if :func:`mlx_eval()` as been called before (see
+the contents of the array obtained via the :func:`mlx_array_data_*()` functions are
+valid only if :func:`mlx_eval()` as been called (see
 :doc:`transforms <transforms>`).
 
 
@@ -57,10 +57,10 @@ Device and Stream
 -----------------
 
 In MLX, arrays are not tied to a device. Instead, operations on arrays are
-scheduled on a :doc:`stream <stream>`, itself attached to a particular
+scheduled on a :doc:`stream <stream>`, which is associated to a particular
 :doc:`device <device>`.
 
-MLX C provides convenient :class:`MLX_CPU_STREAM` and
+MLX C provides :class:`MLX_CPU_STREAM` and
 :class:`MLX_GPU_STREAM`, which point to the default CPU and GPU
 streams. See the basic `MLX C example
 <https://github.com/ml-explore/mlx-c/blob/main/examples/example.c>`_.
@@ -68,26 +68,25 @@ streams. See the basic `MLX C example
 String and Maps
 ---------------
 
-MLX C comes with a :class:`mlx_string` which :doc:`encapsulates a C char
-pointer <string>`. As for other MLX C objects, it must be freed via
+MLX C has a :class:`mlx_string` which :doc:`encapsulates a C char
+pointer <string>`. Just like other MLX C objects, it must be freed with 
 :func:`mlx_free()`.
 
-We also have a :doc:`string-to-array map <map>`, called
+MLX C also has a :doc:`string-to-array map <map>` named
 :class:`mlx_map_string_to_array`.
-
 
 Array Operations
 ----------------
 
 Many array :doc:`operations <ops>` are available, with additional support
-for :doc:`random number generation <random>`, :doc:`FFT <fft>`. Advanced
+for :doc:`random number generation <random>`, and :doc:`FFTs <fft>`. Advanced
 :doc:`linear algebra operations <linalg>` are in their early stages.
 
 IO Operations
 -------------
 
-MLX C comes with a number of :doc:`array IO operations <io>`, which help to
-serialize and deserialize arrays in several popular formats.
+MLX C wraps a number of :doc:`array IO operations <io>`, which saves and loads
+arrays in several common formats.
 
 Function Transformations
 ------------------------
@@ -95,24 +94,23 @@ Function Transformations
 MLX supports the concept of `function transforms
 <https://ml-explore.github.io/mlx/build/html/python/transforms.html>`_.
 
-The same idea is transposed in MLX C, with support for several type of
-:doc:`closures <closure>` which can encapsulate a C function pointer, with
-optional payloads. Closures obey the same memory management rules than
-other MLX C objects, and must be release with a matching :func:`mlx_free()`
+These are also available in MLX C through the use of
+:doc:`closures <closure>` that contain a C function pointer and
+optional payloads. Closures obey the same memory management rules as
+other MLX C objects and must be release with a matching :func:`mlx_free()`
 call.
 
-MLX C :doc:`transforms <transforms>` will be applied on closures, and may
+MLX C :doc:`transforms <transforms>` will are applied on closures and may
 return closures.
 
-For a quickstart, see our `example using closures
+For more details, see the `example using closures
 <https://github.com/ml-explore/mlx-c/blob/main/examples/example-grad.c>`_.
 
 Compilation
 -----------
 
-If one re-uses over and over a given function, then it may be beneficial to
-compile this function, to limit the overhead induced by the construction of
-the graph representing the function. MLX compilation also supports some
-kernel fusion. :doc:`Compilation operations <compile>` are a form of
-function transformations, taking a closure, and return a new closure (which
-is the compiled version of the given closure).
+When using the same function multiple times, compilation may be beneficial.
+Compiling functions makes them more efficient by reducing redundant work,
+fusing kernels, and reducing overhead. :doc:`Compilation operations <compile>`
+are function transformations which take a closure and return a new closure
+(which is the compiled version of the given closure).
