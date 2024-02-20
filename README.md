@@ -29,7 +29,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
 ```
 
-From the `build/` directory, you can run an [examples/example.c](example)
+From the `build/` directory, you can run an [example](examples/example.c)
 that uses MLX C with `./example`.
 
 ## Contributing 
