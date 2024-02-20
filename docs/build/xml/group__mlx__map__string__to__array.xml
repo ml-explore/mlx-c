@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__map__string__to__array" kind="group">
+    <compoundname>mlx_map_string_to_array</compoundname>
+    <title>String-to-array map</title>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" prot="public" static="no">
+        <type>struct mlx_map_string_to_array_ *</type>
+        <definition>typedef struct mlx_map_string_to_array_* mlx_map_string_to_array</definition>
+        <argsstring></argsstring>
+        <name>mlx_map_string_to_array</name>
+        <briefdescription>
+<para>A string-to-array map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="22" column="40" bodyfile="mlx/c/map.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" prot="public" static="no">
+        <type>struct mlx_map_string_to_array_iterator_ *</type>
+        <definition>typedef struct mlx_map_string_to_array_iterator_* mlx_map_string_to_array_iterator</definition>
+        <argsstring></argsstring>
+        <name>mlx_map_string_to_array_iterator</name>
+        <briefdescription>
+<para>An iterator over a string-to-array map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="48" column="5" bodyfile="mlx/c/map.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" prot="public" static="no">
+        <type>struct mlx_map_string_to_string_ *</type>
+        <definition>typedef struct mlx_map_string_to_string_* mlx_map_string_to_string</definition>
+        <argsstring></argsstring>
+        <name>mlx_map_string_to_string</name>
+        <briefdescription>
+<para>A string-to-string map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="77" column="41" bodyfile="mlx/c/map.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" prot="public" static="no">
+        <type>struct mlx_map_string_to_string_iterator_ *</type>
+        <definition>typedef struct mlx_map_string_to_string_iterator_* mlx_map_string_to_string_iterator</definition>
+        <argsstring></argsstring>
+        <name>mlx_map_string_to_string_iterator</name>
+        <briefdescription>
+<para>An iterator over a string-to-string map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="103" column="5" bodyfile="mlx/c/map.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga7f6dfc4bd0f1a9451f0151bfd1c1970b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref></type>
+        <definition>mlx_map_string_to_array mlx_map_string_to_array_new</definition>
+        <argsstring>(void)</argsstring>
+        <name>mlx_map_string_to_array_new</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns a new empty string-to-array map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="27" column="25" declfile="mlx/c/map.h" declline="27" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga50364fbc1b2e4815a94de992e8a76b36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_array_insert</definition>
+        <argsstring>(mlx_map_string_to_array map, const mlx_string key, const mlx_array value)</argsstring>
+        <name>mlx_map_string_to_array_insert</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref></type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Insert a new <computeroutput>value</computeroutput> at the specified <computeroutput>key</computeroutput> in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>true</computeroutput> if the value was actually inserted. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="32" column="6" declfile="mlx/c/map.h" declline="32" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga90d3afaa3b6c91587b894e560274be37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_map_string_to_array_get</definition>
+        <argsstring>(mlx_map_string_to_array map, const mlx_string key)</argsstring>
+        <name>mlx_map_string_to_array_get</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref></type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value indexed at the specified <computeroutput>key</computeroutput> in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>NULL</computeroutput> if no value was found for <computeroutput>key</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="40" column="11" declfile="mlx/c/map.h" declline="40" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga2f1498a39c03e6d0ba33ff70a1053d31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" kindref="member">mlx_map_string_to_array_iterator</ref></type>
+        <definition>mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate</definition>
+        <argsstring>(mlx_map_string_to_array map)</argsstring>
+        <name>mlx_map_string_to_array_iterate</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref></type>
+          <declname>map</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new iterator over the given map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="52" column="34" declfile="mlx/c/map.h" declline="52" declcolumn="34"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga75a4a571a5528f1143a5989b600a71ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_array_iterator_next</definition>
+        <argsstring>(mlx_map_string_to_array_iterator it)</argsstring>
+        <name>mlx_map_string_to_array_iterator_next</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" kindref="member">mlx_map_string_to_array_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Increment iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>true</computeroutput> if iterator could actually be incremented. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="58" column="6" declfile="mlx/c/map.h" declline="58" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga30ba4ebba3d383e8479ea9d2d7f0356a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_array_iterator_end</definition>
+        <argsstring>(mlx_map_string_to_array_iterator it)</argsstring>
+        <name>mlx_map_string_to_array_iterator_end</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" kindref="member">mlx_map_string_to_array_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns <computeroutput>true</computeroutput> iif iterator is at the end of the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="62" column="6" declfile="mlx/c/map.h" declline="62" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga03d6d2bb281ab14b61b5200d97cc65e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_map_string_to_array_iterator_key</definition>
+        <argsstring>(mlx_map_string_to_array_iterator it)</argsstring>
+        <name>mlx_map_string_to_array_iterator_key</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" kindref="member">mlx_map_string_to_array_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns the key associated to the current iterator position in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="66" column="12" declfile="mlx/c/map.h" declline="66" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga9e76cb4efd7e7cdf79653e8d705e0408" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_map_string_to_array_iterator_value</definition>
+        <argsstring>(mlx_map_string_to_array_iterator it)</argsstring>
+        <name>mlx_map_string_to_array_iterator_value</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150" kindref="member">mlx_map_string_to_array_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value associated to the current iterator position in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="71" column="11" declfile="mlx/c/map.h" declline="71" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga80bf5a4eeb990fd76533a0ab72e11b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref></type>
+        <definition>mlx_map_string_to_string mlx_map_string_to_string_new</definition>
+        <argsstring>(void)</argsstring>
+        <name>mlx_map_string_to_string_new</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns a new empty string-to-string map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="82" column="26" declfile="mlx/c/map.h" declline="82" declcolumn="26"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga3c0c1623f2ee4ad88f172b4a50dc3aea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_string_insert</definition>
+        <argsstring>(mlx_map_string_to_string map, const mlx_string key, const mlx_string value)</argsstring>
+        <name>mlx_map_string_to_string_insert</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref></type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Insert a new <computeroutput>value</computeroutput> at the specified <computeroutput>key</computeroutput> in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>true</computeroutput> if the value was actually inserted. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="87" column="6" declfile="mlx/c/map.h" declline="87" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1gab47d1649c7bdbc3d5a5844a01ee25e59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_map_string_to_string_get</definition>
+        <argsstring>(mlx_map_string_to_string map, const mlx_string key)</argsstring>
+        <name>mlx_map_string_to_string_get</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref></type>
+          <declname>map</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value indexed at the specified <computeroutput>key</computeroutput> in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>NULL</computeroutput> if no value was found for <computeroutput>key</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="95" column="12" declfile="mlx/c/map.h" declline="95" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga0ae16c0c44916bb5788d0ccf37a56454" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" kindref="member">mlx_map_string_to_string_iterator</ref></type>
+        <definition>mlx_map_string_to_string_iterator mlx_map_string_to_string_iterate</definition>
+        <argsstring>(mlx_map_string_to_string map)</argsstring>
+        <name>mlx_map_string_to_string_iterate</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref></type>
+          <declname>map</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new iterator over the given map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="107" column="35" declfile="mlx/c/map.h" declline="107" declcolumn="35"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga6ef2a8324a75838c85f75395b734dda8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_string_iterator_next</definition>
+        <argsstring>(mlx_map_string_to_string_iterator it)</argsstring>
+        <name>mlx_map_string_to_string_iterator_next</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" kindref="member">mlx_map_string_to_string_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Increment iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns <computeroutput>true</computeroutput> if iterator could actually be incremented. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="113" column="6" declfile="mlx/c/map.h" declline="113" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga957548f137e28c983687760d5ffa7098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_map_string_to_string_iterator_end</definition>
+        <argsstring>(mlx_map_string_to_string_iterator it)</argsstring>
+        <name>mlx_map_string_to_string_iterator_end</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" kindref="member">mlx_map_string_to_string_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns <computeroutput>true</computeroutput> iif iterator is at the end of the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="118" column="6" declfile="mlx/c/map.h" declline="118" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1ga85c27c5e7ced082e2d978c82889c11c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_map_string_to_string_iterator_key</definition>
+        <argsstring>(mlx_map_string_to_string_iterator it)</argsstring>
+        <name>mlx_map_string_to_string_iterator_key</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" kindref="member">mlx_map_string_to_string_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns the key associated to the current iterator position in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="123" column="12" declfile="mlx/c/map.h" declline="123" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__map__string__to__array_1gaac61bc240ac3ba06a85ca2e1ad79624d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_map_string_to_string_iterator_value</definition>
+        <argsstring>(mlx_map_string_to_string_iterator it)</argsstring>
+        <name>mlx_map_string_to_string_iterator_value</name>
+        <param>
+          <type><ref refid="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43" kindref="member">mlx_map_string_to_string_iterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value associated to the current iterator position in the map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/map.h" line="128" column="12" declfile="mlx/c/map.h" declline="128" declcolumn="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX string-to-array map object. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

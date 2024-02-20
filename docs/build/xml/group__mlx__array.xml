@@ -1,0 +1,864 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__array" kind="group">
+    <compoundname>mlx_array</compoundname>
+    <title>Array</title>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__mlx__array_1ga01931f076ae8ca8b48f458d2d933f193" prot="public" static="no" strong="no">
+        <type></type>
+        <name>mlx_array_dtype_</name>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193ac774e9dc6620dfd5a4efa682cc9d5512" prot="public">
+          <name>MLX_BOOL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193af5b293dcd4a5d925f67f9c71633db90d" prot="public">
+          <name>MLX_UINT8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a921e9b4411e65d3fbc5e73ea12ed81f9" prot="public">
+          <name>MLX_UINT16</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193aed9648346fa72316e9a4cc02c0b851c1" prot="public">
+          <name>MLX_UINT32</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a5f403b09d7113605618de4788659f0a3" prot="public">
+          <name>MLX_UINT64</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a01c9e794678c9948a6fede844518926e" prot="public">
+          <name>MLX_INT8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a926a8985bacd9929226fcbdea4ce2fd8" prot="public">
+          <name>MLX_INT16</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0353d4f27caaaa4abe92b350bff9e20c" prot="public">
+          <name>MLX_INT32</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a6c2b0590f5a8ab80246e9d463f86dda8" prot="public">
+          <name>MLX_INT64</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0374c08003d584dec8cc548805a0c0dc" prot="public">
+          <name>MLX_FLOAT16</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a4e2044405b116bc7dd98a1947438c727" prot="public">
+          <name>MLX_FLOAT32</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a3594706af8d420cd2621641f0d24b278" prot="public">
+          <name>MLX_BFLOAT16</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a8c16e9e9c299a96b8369bbca0d814d91" prot="public">
+          <name>MLX_COMPLEX64</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Array element type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="32" column="1" bodyfile="mlx/c/array.h" bodystart="32" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" prot="public" static="no">
+        <type>struct mlx_array_ *</type>
+        <definition>typedef struct mlx_array_* mlx_array</definition>
+        <argsstring></argsstring>
+        <name>mlx_array</name>
+        <briefdescription>
+<para>An N-dimensional array object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="27" column="26" bodyfile="mlx/c/array.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" prot="public" static="no">
+        <type>enum <ref refid="group__mlx__array_1ga01931f076ae8ca8b48f458d2d933f193" kindref="member">mlx_array_dtype_</ref></type>
+        <definition>typedef enum mlx_array_dtype_ mlx_array_dtype</definition>
+        <argsstring></argsstring>
+        <name>mlx_array_dtype</name>
+        <briefdescription>
+<para>Array element type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="46" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__array_1gad6c38db0758a7f6c937b417da9a46dec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_array_from_bool</definition>
+        <argsstring>(bool val)</argsstring>
+        <name>mlx_array_from_bool</name>
+        <param>
+          <type>bool</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>New array from a bool scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="51" column="11" declfile="mlx/c/array.h" declline="51" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga393a276ecd3d9c76c26e3eb577860f7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_array_from_int</definition>
+        <argsstring>(int val)</argsstring>
+        <name>mlx_array_from_int</name>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>New array from a int scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="55" column="11" declfile="mlx/c/array.h" declline="55" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga9453635c9d931b70b58a667302bbcc8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_array_from_float</definition>
+        <argsstring>(float val)</argsstring>
+        <name>mlx_array_from_float</name>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>New array from a float scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="59" column="11" declfile="mlx/c/array.h" declline="59" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaddaea3b6e8308397044f601bb1ce2f00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_array_from_complex</definition>
+        <argsstring>(float real_val, float imag_val)</argsstring>
+        <name>mlx_array_from_complex</name>
+        <param>
+          <type>float</type>
+          <declname>real_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>imag_val</declname>
+        </param>
+        <briefdescription>
+<para>New array from a complex scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="63" column="11" declfile="mlx/c/array.h" declline="63" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga2fe9d623c41423b85a792329bfd60dd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_array_from_data</definition>
+        <argsstring>(const void *data, const int *shape, int dim, mlx_array_dtype dtype)</argsstring>
+        <name>mlx_array_from_data</name>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <briefdescription>
+<para>New array from existing buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A buffer which will be copied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>shape</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shape of the array. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of dimensions (size of <computeroutput>shape</computeroutput>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dtype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of array elements. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="71" column="11" declfile="mlx/c/array.h" declline="71" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaa397066e4033669b84edec5fa3feed9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t mlx_array_itemsize</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_itemsize</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The size of the array&apos;s datatype in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="80" column="8" declfile="mlx/c/array.h" declline="80" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga3bc5a95db74347453f2649a366ddb993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t mlx_array_size</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_size</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Number of elements in the array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="84" column="8" declfile="mlx/c/array.h" declline="84" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaaf3c54f70a4dc4c71446f4e1182d68a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t *</type>
+        <definition>size_t * mlx_array_strides</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_strides</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The strides of the array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns: a pointer to the sizes of each dimension. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="88" column="8" declfile="mlx/c/array.h" declline="88" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gab5024ad2ca2186bf28c41b93ce370908" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t mlx_array_nbytes</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_nbytes</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The number of bytes in the array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="92" column="8" declfile="mlx/c/array.h" declline="92" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga1047f247b0b4f16fd4366b69e7006df4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t mlx_array_ndim</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_ndim</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The array&apos;s dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="96" column="8" declfile="mlx/c/array.h" declline="96" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga07cb68fe9c5a6e251d266d967d51c1f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>int * mlx_array_shape</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_shape</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The shape of the array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns: a pointer to the sizes of each dimension. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="101" column="5" declfile="mlx/c/array.h" declline="101" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga347c42b4e9bdfb211ad3a3bd4a784282" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int mlx_array_dim</definition>
+        <argsstring>(mlx_array arr, int dim)</argsstring>
+        <name>mlx_array_dim</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+<para>The shape of the array in a particular dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="110" column="5" declfile="mlx/c/array.h" declline="110" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga7752a97ea07ecc040b4979a5a0509882" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+        <definition>mlx_array_dtype mlx_array_get_dtype</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_get_dtype</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>The array element type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="114" column="17" declfile="mlx/c/array.h" declline="114" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga00df42b6e57fea786af1eff88fd171a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_array_eval</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_eval</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="118" column="6" declfile="mlx/c/array.h" declline="118" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gabf98109368145c9b05a1ac35d5d8e507" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool mlx_array_item_bool</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_bool</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="123" column="6" declfile="mlx/c/array.h" declline="123" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga6aca6ab5bae26e9d775efcadb12a7c6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t mlx_array_item_uint8</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_uint8</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="127" column="9" declfile="mlx/c/array.h" declline="127" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gab7f22210bcafdd001ea857d9928e11d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t mlx_array_item_uint16</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_uint16</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="131" column="10" declfile="mlx/c/array.h" declline="131" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga651f2a7a18984beacbf3bc774161ba17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t mlx_array_item_uint32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_uint32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="135" column="10" declfile="mlx/c/array.h" declline="135" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga7375a82d932d3ad998a9ee2ef9f76241" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t mlx_array_item_uint64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_uint64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="139" column="10" declfile="mlx/c/array.h" declline="139" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gac982a12111b322687d1120ad3139d926" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int8_t</type>
+        <definition>int8_t mlx_array_item_int8</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_int8</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="143" column="8" declfile="mlx/c/array.h" declline="143" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gad2428832b775a450962e1c72d51de9f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int16_t</type>
+        <definition>int16_t mlx_array_item_int16</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_int16</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="147" column="9" declfile="mlx/c/array.h" declline="147" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gad9cda547d77482002e5e0336baf3bafc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>int32_t mlx_array_item_int32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_int32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="151" column="9" declfile="mlx/c/array.h" declline="151" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga7684decaeeb25f63342997cd809a83fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t mlx_array_item_int64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_int64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="155" column="9" declfile="mlx/c/array.h" declline="155" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga9311c96ef22dc0d681b682457cd21d8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float mlx_array_item_float32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_float32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="159" column="7" declfile="mlx/c/array.h" declline="159" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga0dfe01b5b1399990c2be7a7c92eb2b0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float _Complex</type>
+        <definition>float _Complex mlx_array_item_complex64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_item_complex64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Access the value of a scalar array. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="163" column="16" declfile="mlx/c/array.h" declline="163" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaddfdc134df5e102b4a9e4d652a97cb1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const bool *</type>
+        <definition>const bool * mlx_array_data_bool</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_bool</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>bool*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="183" column="12" declfile="mlx/c/array.h" declline="183" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaa47b98ca11b3bde8fda0c36e3618ed5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const uint8_t *</type>
+        <definition>const uint8_t * mlx_array_data_uint8</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_uint8</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>uint8_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="188" column="15" declfile="mlx/c/array.h" declline="188" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga79b0e35274986fc628f1df387523820e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const uint16_t *</type>
+        <definition>const uint16_t * mlx_array_data_uint16</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_uint16</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>uint16_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="193" column="16" declfile="mlx/c/array.h" declline="193" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga974c2992bb0c8b6667b3071288ff5e58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t * mlx_array_data_uint32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_uint32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>uint32_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="198" column="16" declfile="mlx/c/array.h" declline="198" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga2e488bfe5b34cf651cfb5742a96bd1ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const uint64_t *</type>
+        <definition>const uint64_t * mlx_array_data_uint64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_uint64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>uint64_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="203" column="16" declfile="mlx/c/array.h" declline="203" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga6d1f4d899caa75ba93881774e68673ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const int8_t *</type>
+        <definition>const int8_t * mlx_array_data_int8</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_int8</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>int8_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="208" column="14" declfile="mlx/c/array.h" declline="208" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gabf20cefbf75cde9aadfab961d772b208" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const int16_t *</type>
+        <definition>const int16_t * mlx_array_data_int16</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_int16</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>int16_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="213" column="15" declfile="mlx/c/array.h" declline="213" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga3c3915a6b7bc68292a90a478382ba6df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const int32_t *</type>
+        <definition>const int32_t * mlx_array_data_int32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_int32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>int32_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="218" column="15" declfile="mlx/c/array.h" declline="218" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gaa0f62f184fc9a6b2eef924fc8601804f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const int64_t *</type>
+        <definition>const int64_t * mlx_array_data_int64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_int64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>int64_t*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="223" column="15" declfile="mlx/c/array.h" declline="223" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1ga685ceb0ac19984714596f18bb2c67ce8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * mlx_array_data_float32</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_float32</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>float32*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="228" column="13" declfile="mlx/c/array.h" declline="228" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__array_1gac56b61a84e5f9cb8b87267f01803fb5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float _Complex *</type>
+        <definition>const float _Complex * mlx_array_data_complex64</definition>
+        <argsstring>(mlx_array arr)</argsstring>
+        <name>mlx_array_data_complex64</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the array data, cast to <computeroutput>_Complex*</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array must be evaluated, otherwise returns NULL. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="233" column="22" declfile="mlx/c/array.h" declline="233" declcolumn="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX N-dimensional array object. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

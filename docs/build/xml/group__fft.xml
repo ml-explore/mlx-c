@@ -1,0 +1,425 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__fft" kind="group">
+    <compoundname>fft</compoundname>
+    <title>FFT operations</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__fft_1ga135ee1d75b4d9d92a7780413c09cb08b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_fft</definition>
+        <argsstring>(mlx_array a, int n, int axis, mlx_stream s)</argsstring>
+        <name>mlx_fft_fft</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="26" column="11" declfile="mlx/c/fft.h" declline="26" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaa0a783cfaa8e7678626857f623f2d623" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_fft2</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_fft2</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="27" column="11" declfile="mlx/c/fft.h" declline="27" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaeba90a105da0c2c9122be533375f98ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_fftn</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_fftn</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="34" column="11" declfile="mlx/c/fft.h" declline="34" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga81bbb0decf0b47ac2fa583e5e9dc4c4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_ifft</definition>
+        <argsstring>(mlx_array a, int n, int axis, mlx_stream s)</argsstring>
+        <name>mlx_fft_ifft</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="41" column="11" declfile="mlx/c/fft.h" declline="41" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga3fe80627d79e9e2c1937687feac65c52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_ifft2</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_ifft2</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="42" column="11" declfile="mlx/c/fft.h" declline="42" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga421a574a2ab566ab2c025716a399f77b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_ifftn</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_ifftn</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="49" column="11" declfile="mlx/c/fft.h" declline="49" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaf9aa5ee1b27d942807b72fb0d687af2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_irfft</definition>
+        <argsstring>(mlx_array a, int n, int axis, mlx_stream s)</argsstring>
+        <name>mlx_fft_irfft</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="56" column="11" declfile="mlx/c/fft.h" declline="56" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga05f4bbb1773daa9762d1085ca8cab498" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_irfft2</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_irfft2</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="57" column="11" declfile="mlx/c/fft.h" declline="57" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga19816cd6587928cb6a5ebb83ca8849fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_irfftn</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_irfftn</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="64" column="11" declfile="mlx/c/fft.h" declline="64" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1ga92e9f63e88ce3304f6938ffc1c43c9b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_rfft</definition>
+        <argsstring>(mlx_array a, int n, int axis, mlx_stream s)</argsstring>
+        <name>mlx_fft_rfft</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="71" column="11" declfile="mlx/c/fft.h" declline="71" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gaa44923cc760ba2a569e128be95f75ef5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_rfft2</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_rfft2</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="72" column="11" declfile="mlx/c/fft.h" declline="72" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__fft_1gabca31669016dfc1802b65c38493e764f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_fft_rfftn</definition>
+        <argsstring>(mlx_array a, const int *n, size_t num_n, const int *axes, size_t num_axes, mlx_stream s)</argsstring>
+        <name>mlx_fft_rfftn</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_n</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_axes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/fft.h" line="79" column="11" declfile="mlx/c/fft.h" declline="79" declcolumn="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

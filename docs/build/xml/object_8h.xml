@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="object_8h" kind="file" language="C++">
+    <compoundname>object.h</compoundname>
+    <includes refid="string_8h" local="yes">mlx/c/string.h</includes>
+    <includedby refid="mlx_8h" local="yes">mlx/c/mlx.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>mlx/c/object.h</label>
+        <link refid="object_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mlx/c/string.h</label>
+        <link refid="string_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+      <node id="1">
+        <label>mlx/c/object.h</label>
+        <link refid="object_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <member refid="group__mlx__object_1ga594efe21145484905cd981f5b26944d1" kind="function"><name>mlx_tostring</name></member>
+      <member refid="group__mlx__object_1gad4bb1fc62230a1d131f706d0946d00c0" kind="function"><name>mlx_retain</name></member>
+      <member refid="group__mlx__object_1ga801484c3c9b0715d6875612830840172" kind="function"><name>mlx_free</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_OBJECT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_OBJECT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string_8h" kindref="compound">mlx/c/string.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="group__mlx__object_1ga594efe21145484905cd981f5b26944d1" refkind="member"><highlight class="normal"><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref><sp/><ref refid="group__mlx__object_1ga594efe21145484905cd981f5b26944d1" kindref="member">mlx_tostring</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj);</highlight></codeline>
+<codeline lineno="25" refid="group__mlx__object_1gad4bb1fc62230a1d131f706d0946d00c0" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__object_1gad4bb1fc62230a1d131f706d0946d00c0" kindref="member">mlx_retain</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj);</highlight></codeline>
+<codeline lineno="29" refid="group__mlx__object_1ga801484c3c9b0715d6875612830840172" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__object_1ga801484c3c9b0715d6875612830840172" kindref="member">mlx_free</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>obj);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/object.h"/>
+  </compounddef>
+</doxygen>

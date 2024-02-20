@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="dir_938ab0ecf10b8b860ff766c820f665fd" kind="dir">
+    <compoundname>mlx</compoundname>
+    <innerdir refid="dir_a6fe5f0728c6a2b86774c3cbd2dfd119">mlx/c</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="mlx/"/>
+  </compounddef>
+</doxygen>

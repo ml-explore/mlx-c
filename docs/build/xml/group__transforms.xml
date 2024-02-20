@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__transforms" kind="group">
+    <compoundname>transforms</compoundname>
+    <title>Transform operations</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__transforms_1ga6d9653deb56e506856a656ba26b4efa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+        <definition>mlx_closure mlx_checkpoint</definition>
+        <argsstring>(mlx_closure fun)</argsstring>
+        <name>mlx_checkpoint</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms.h" line="26" column="13" declfile="mlx/c/transforms.h" declline="26" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms_1ga6ff5e8e8caf119872cb4d569fd21940f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_eval</definition>
+        <argsstring>(const mlx_vector_array outputs)</argsstring>
+        <name>mlx_eval</name>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>outputs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms.h" line="27" column="6" declfile="mlx/c/transforms.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms_1ga6d63a6cf3bde6763e206d911e019e9c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+        <definition>mlx_vector_vector_array mlx_jvp</definition>
+        <argsstring>(mlx_closure fun, const mlx_vector_array primals, const mlx_vector_array tangents)</argsstring>
+        <name>mlx_jvp</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>primals</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>tangents</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms.h" line="28" column="25" declfile="mlx/c/transforms.h" declline="28" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms_1ga3a8dde0302a24cb52f24b627ea66b9c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__closure_1ga0f47fc38cb9ec4b0da7902ae18261bf0" kindref="member">mlx_closure_value_and_grad</ref></type>
+        <definition>mlx_closure_value_and_grad mlx_value_and_grad</definition>
+        <argsstring>(mlx_closure fun, const int *argnums, size_t num_argnums)</argsstring>
+        <name>mlx_value_and_grad</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>argnums</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_argnums</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms.h" line="33" column="1" declfile="mlx/c/transforms.h" declline="33" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms_1gac0fe4c29c33ea438ee61522ce9dbee8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+        <definition>mlx_vector_vector_array mlx_vjp</definition>
+        <argsstring>(mlx_closure fun, const mlx_vector_array primals, const mlx_vector_array cotangents)</argsstring>
+        <name>mlx_vjp</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>primals</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>cotangents</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms.h" line="34" column="25" declfile="mlx/c/transforms.h" declline="34" declcolumn="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

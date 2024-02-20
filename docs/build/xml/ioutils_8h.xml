@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="ioutils_8h" kind="file" language="C++">
+    <compoundname>ioutils.h</compoundname>
+    <includes refid="map_8h" local="yes">mlx/c/map.h</includes>
+    <includedby refid="compile_8h" local="yes">mlx/c/compile.h</includedby>
+    <includedby refid="fft_8h" local="yes">mlx/c/fft.h</includedby>
+    <includedby refid="io_8h" local="yes">mlx/c/io.h</includedby>
+    <includedby refid="linalg_8h" local="yes">mlx/c/linalg.h</includedby>
+    <includedby refid="ops_8h" local="yes">mlx/c/ops.h</includedby>
+    <includedby refid="random_8h" local="yes">mlx/c/random.h</includedby>
+    <includedby refid="transforms_8h" local="yes">mlx/c/transforms.h</includedby>
+    <includedby refid="transforms__impl_8h" local="yes">mlx/c/transforms_impl.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>mlx/c/array.h</label>
+        <link refid="array_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>half.h</label>
+        <link refid="half_8h"/>
+      </node>
+      <node id="1">
+        <label>mlx/c/ioutils.h</label>
+        <link refid="ioutils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mlx/c/map.h</label>
+        <link refid="map_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>mlx/c/string.h</label>
+        <link refid="string_8h"/>
+      </node>
+      <node id="7">
+        <label>float.h</label>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>mlx/c/compile.h</label>
+        <link refid="compile_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>mlx/c/io.h</label>
+        <link refid="io_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mlx/c/ioutils.h</label>
+        <link refid="ioutils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>mlx/c/linalg.h</label>
+        <link refid="linalg_8h"/>
+      </node>
+      <node id="3">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+      <node id="7">
+        <label>mlx/c/ops.h</label>
+        <link refid="ops_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>mlx/c/random.h</label>
+        <link refid="random_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>mlx/c/transforms.h</label>
+        <link refid="transforms_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>mlx/c/transforms_impl.h</label>
+        <link refid="transforms__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="typedef">
+      <member refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kind="typedef"><name>mlx_safetensors</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__mlx__ioutils_1ga66d42d8d0cc6bc0f30c593296b927ef3" kind="function"><name>mlx_safetensors_new</name></member>
+      <member refid="group__mlx__ioutils_1ga23d3c8c576ed29b202f9cee49e7e631d" kind="function"><name>mlx_safetensors_data</name></member>
+      <member refid="group__mlx__ioutils_1ga66e7596f3849374891d9a995ea75794d" kind="function"><name>mlx_safetensors_metadata</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_IOHELPERS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_IOHELPERS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="map_8h" kindref="compound">mlx/c/map.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_safetensors_*<sp/><ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref>;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="group__mlx__ioutils_1ga66d42d8d0cc6bc0f30c593296b927ef3" refkind="member"><highlight class="normal"><ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref><sp/><ref refid="group__mlx__ioutils_1ga66d42d8d0cc6bc0f30c593296b927ef3" kindref="member">mlx_safetensors_new</ref>();</highlight></codeline>
+<codeline lineno="30" refid="group__mlx__ioutils_1ga23d3c8c576ed29b202f9cee49e7e631d" refkind="member"><highlight class="normal"><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref><sp/><ref refid="group__mlx__ioutils_1ga23d3c8c576ed29b202f9cee49e7e631d" kindref="member">mlx_safetensors_data</ref>(<ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref><sp/>st);</highlight></codeline>
+<codeline lineno="34" refid="group__mlx__ioutils_1ga66e7596f3849374891d9a995ea75794d" refkind="member"><highlight class="normal"><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref><sp/><ref refid="group__mlx__ioutils_1ga66e7596f3849374891d9a995ea75794d" kindref="member">mlx_safetensors_metadata</ref>(<ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref><sp/>st);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/ioutils.h"/>
+  </compounddef>
+</doxygen>

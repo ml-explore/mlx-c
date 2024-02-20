@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__device" kind="group">
+    <compoundname>mlx_device</compoundname>
+    <title>Device</title>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__mlx__device_1ga2134077308b56f515a4b223dafb695b1" prot="public" static="no" strong="no">
+        <type></type>
+        <name>mlx_device_type_</name>
+        <enumvalue id="group__mlx__device_1gga2134077308b56f515a4b223dafb695b1a98c4da5406853c97e13d7f2715b0d3ee" prot="public">
+          <name>MLX_CPU</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__mlx__device_1gga2134077308b56f515a4b223dafb695b1a31513a64b477a9ab399564b026897efc" prot="public">
+          <name>MLX_GPU</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Device type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="24" column="1" bodyfile="mlx/c/device.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" prot="public" static="no">
+        <type>struct mlx_device_ *</type>
+        <definition>typedef struct mlx_device_* mlx_device</definition>
+        <argsstring></argsstring>
+        <name>mlx_device</name>
+        <briefdescription>
+<para>A MLX device object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="19" column="27" bodyfile="mlx/c/device.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" prot="public" static="no">
+        <type>enum <ref refid="group__mlx__device_1ga2134077308b56f515a4b223dafb695b1" kindref="member">mlx_device_type_</ref></type>
+        <definition>typedef enum mlx_device_type_ mlx_device_type</definition>
+        <argsstring></argsstring>
+        <name>mlx_device_type</name>
+        <briefdescription>
+<para>Device type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="24" column="46"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__device_1gab529bef4717070efeae7b19e2b3ff9a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref></type>
+        <definition>mlx_device mlx_device_new</definition>
+        <argsstring>(mlx_device_type type, int index)</argsstring>
+        <name>mlx_device_new</name>
+        <param>
+          <type><ref refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kindref="member">mlx_device_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new device of specified <computeroutput>type</computeroutput>, with specified <computeroutput>index</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="29" column="12" declfile="mlx/c/device.h" declline="29" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__device_1ga52e3164a7ff83d4c94833061974e6699" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kindref="member">mlx_device_type</ref></type>
+        <definition>mlx_device_type mlx_device_get_type</definition>
+        <argsstring>(mlx_device dev)</argsstring>
+        <name>mlx_device_get_type</name>
+        <param>
+          <type><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+<para>Returns the type of the device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="33" column="17" declfile="mlx/c/device.h" declline="33" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__device_1ga0ef475015b686a8b9f7a8ff70a84586a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref></type>
+        <definition>mlx_device mlx_default_device</definition>
+        <argsstring>(void)</argsstring>
+        <name>mlx_default_device</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the default MLX device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="37" column="12" declfile="mlx/c/device.h" declline="37" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__device_1ga94c09fa62e5ab440c30a68d8ab86c4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref></type>
+        <definition>mlx_device mlx_set_default_device</definition>
+        <argsstring>(mlx_device dev)</argsstring>
+        <name>mlx_set_default_device</name>
+        <param>
+          <type><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+<para>Set the default MLX device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/device.h" line="41" column="12" declfile="mlx/c/device.h" declline="41" declcolumn="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX device object. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

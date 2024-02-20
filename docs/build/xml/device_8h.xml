@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="device_8h" kind="file" language="C++">
+    <compoundname>device.h</compoundname>
+    <includedby refid="mlx_8h" local="yes">mlx/c/mlx.h</includedby>
+    <includedby refid="stream_8h" local="yes">mlx/c/stream.h</includedby>
+    <invincdepgraph>
+      <node id="4">
+        <label>mlx/c/compile.h</label>
+        <link refid="compile_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mlx/c/device.h</label>
+        <link refid="device_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>mlx/c/fast.h</label>
+        <link refid="fast_8h"/>
+      </node>
+      <node id="6">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>mlx/c/io.h</label>
+        <link refid="io_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>mlx/c/linalg.h</label>
+        <link refid="linalg_8h"/>
+      </node>
+      <node id="2">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+      <node id="9">
+        <label>mlx/c/ops.h</label>
+        <link refid="ops_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>mlx/c/random.h</label>
+        <link refid="random_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>mlx/c/stream.h</label>
+        <link refid="stream_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>mlx/c/transforms.h</label>
+        <link refid="transforms_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>mlx/c/transforms_impl.h</label>
+        <link refid="transforms__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="enum">
+      <member refid="group__mlx__device_1ga2134077308b56f515a4b223dafb695b1" kind="enum"><name>mlx_device_type_</name></member>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <member refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kind="typedef"><name>mlx_device</name></member>
+      <member refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kind="typedef"><name>mlx_device_type</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__mlx__device_1gab529bef4717070efeae7b19e2b3ff9a2" kind="function"><name>mlx_device_new</name></member>
+      <member refid="group__mlx__device_1ga52e3164a7ff83d4c94833061974e6699" kind="function"><name>mlx_device_get_type</name></member>
+      <member refid="group__mlx__device_1ga0ef475015b686a8b9f7a8ff70a84586a" kind="function"><name>mlx_default_device</name></member>
+      <member refid="group__mlx__device_1ga94c09fa62e5ab440c30a68d8ab86c4de" kind="function"><name>mlx_set_default_device</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_DEVICE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_DEVICE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_device_*<sp/><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="group__mlx__device_1gga2134077308b56f515a4b223dafb695b1a98c4da5406853c97e13d7f2715b0d3ee" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__mlx__device_1ga2134077308b56f515a4b223dafb695b1" kindref="member">mlx_device_type_</ref><sp/>{<sp/><ref refid="group__mlx__device_1gga2134077308b56f515a4b223dafb695b1a98c4da5406853c97e13d7f2715b0d3ee" kindref="member">MLX_CPU</ref>,<sp/><ref refid="group__mlx__device_1gga2134077308b56f515a4b223dafb695b1a31513a64b477a9ab399564b026897efc" kindref="member">MLX_GPU</ref><sp/>}<sp/><ref refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kindref="member">mlx_device_type</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="group__mlx__device_1gab529bef4717070efeae7b19e2b3ff9a2" refkind="member"><highlight class="normal"><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/><ref refid="group__mlx__device_1gab529bef4717070efeae7b19e2b3ff9a2" kindref="member">mlx_device_new</ref>(<ref refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kindref="member">mlx_device_type</ref><sp/>type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="33" refid="group__mlx__device_1ga52e3164a7ff83d4c94833061974e6699" refkind="member"><highlight class="normal"><ref refid="group__mlx__device_1gaa2a546fc1d52a592231d94db3a59946c" kindref="member">mlx_device_type</ref><sp/><ref refid="group__mlx__device_1ga52e3164a7ff83d4c94833061974e6699" kindref="member">mlx_device_get_type</ref>(<ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/>dev);</highlight></codeline>
+<codeline lineno="37" refid="group__mlx__device_1ga0ef475015b686a8b9f7a8ff70a84586a" refkind="member"><highlight class="normal"><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/><ref refid="group__mlx__device_1ga0ef475015b686a8b9f7a8ff70a84586a" kindref="member">mlx_default_device</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41" refid="group__mlx__device_1ga94c09fa62e5ab440c30a68d8ab86c4de" refkind="member"><highlight class="normal"><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/><ref refid="group__mlx__device_1ga94c09fa62e5ab440c30a68d8ab86c4de" kindref="member">mlx_set_default_device</ref>(<ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/>dev);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/device.h"/>
+  </compounddef>
+</doxygen>

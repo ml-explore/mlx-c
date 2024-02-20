@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="fft_8h" kind="file" language="C++">
+    <compoundname>fft.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="array_8h" local="yes">mlx/c/array.h</includes>
+    <includes refid="closure_8h" local="yes">mlx/c/closure.h</includes>
+    <includes refid="ioutils_8h" local="yes">mlx/c/ioutils.h</includes>
+    <includes refid="map_8h" local="yes">mlx/c/map.h</includes>
+    <includes refid="stream_8h" local="yes">mlx/c/stream.h</includes>
+    <includes refid="string_8h" local="yes">mlx/c/string.h</includes>
+    <includedby refid="mlx_8h" local="yes">mlx/c/mlx.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>mlx/c/array.h</label>
+        <link refid="array_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>mlx/c/closure.h</label>
+        <link refid="closure_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>mlx/c/device.h</label>
+        <link refid="device_8h"/>
+      </node>
+      <node id="1">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>half.h</label>
+        <link refid="half_8h"/>
+      </node>
+      <node id="9">
+        <label>mlx/c/ioutils.h</label>
+        <link refid="ioutils_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>mlx/c/map.h</label>
+        <link refid="map_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>mlx/c/stream.h</label>
+        <link refid="stream_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>mlx/c/string.h</label>
+        <link refid="string_8h"/>
+      </node>
+      <node id="7">
+        <label>float.h</label>
+      </node>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="2">
+        <label>stdio.h</label>
+      </node>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <member refid="group__fft_1ga135ee1d75b4d9d92a7780413c09cb08b" kind="function"><name>mlx_fft_fft</name></member>
+      <member refid="group__fft_1gaa0a783cfaa8e7678626857f623f2d623" kind="function"><name>mlx_fft_fft2</name></member>
+      <member refid="group__fft_1gaeba90a105da0c2c9122be533375f98ee" kind="function"><name>mlx_fft_fftn</name></member>
+      <member refid="group__fft_1ga81bbb0decf0b47ac2fa583e5e9dc4c4e" kind="function"><name>mlx_fft_ifft</name></member>
+      <member refid="group__fft_1ga3fe80627d79e9e2c1937687feac65c52" kind="function"><name>mlx_fft_ifft2</name></member>
+      <member refid="group__fft_1ga421a574a2ab566ab2c025716a399f77b" kind="function"><name>mlx_fft_ifftn</name></member>
+      <member refid="group__fft_1gaf9aa5ee1b27d942807b72fb0d687af2d" kind="function"><name>mlx_fft_irfft</name></member>
+      <member refid="group__fft_1ga05f4bbb1773daa9762d1085ca8cab498" kind="function"><name>mlx_fft_irfft2</name></member>
+      <member refid="group__fft_1ga19816cd6587928cb6a5ebb83ca8849fe" kind="function"><name>mlx_fft_irfftn</name></member>
+      <member refid="group__fft_1ga92e9f63e88ce3304f6938ffc1c43c9b1" kind="function"><name>mlx_fft_rfft</name></member>
+      <member refid="group__fft_1gaa44923cc760ba2a569e128be95f75ef5" kind="function"><name>mlx_fft_rfft2</name></member>
+      <member refid="group__fft_1gabca31669016dfc1802b65c38493e764f" kind="function"><name>mlx_fft_rfftn</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>This<sp/>file<sp/>is<sp/>auto-generated.<sp/>Do<sp/>not<sp/>edit<sp/>manually.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">/*<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_FFT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_FFT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="array_8h" kindref="compound">mlx/c/array.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="closure_8h" kindref="compound">mlx/c/closure.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ioutils_8h" kindref="compound">mlx/c/ioutils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="map_8h" kindref="compound">mlx/c/map.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="stream_8h" kindref="compound">mlx/c/stream.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string_8h" kindref="compound">mlx/c/string.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="group__fft_1ga135ee1d75b4d9d92a7780413c09cb08b" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga135ee1d75b4d9d92a7780413c09cb08b" kindref="member">mlx_fft_fft</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>axis,<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="27" refid="group__fft_1gaa0a783cfaa8e7678626857f623f2d623" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1gaa0a783cfaa8e7678626857f623f2d623" kindref="member">mlx_fft_fft2</ref>(</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="34" refid="group__fft_1gaeba90a105da0c2c9122be533375f98ee" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1gaeba90a105da0c2c9122be533375f98ee" kindref="member">mlx_fft_fftn</ref>(</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="41" refid="group__fft_1ga81bbb0decf0b47ac2fa583e5e9dc4c4e" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga81bbb0decf0b47ac2fa583e5e9dc4c4e" kindref="member">mlx_fft_ifft</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>axis,<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="42" refid="group__fft_1ga3fe80627d79e9e2c1937687feac65c52" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga3fe80627d79e9e2c1937687feac65c52" kindref="member">mlx_fft_ifft2</ref>(</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="49" refid="group__fft_1ga421a574a2ab566ab2c025716a399f77b" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga421a574a2ab566ab2c025716a399f77b" kindref="member">mlx_fft_ifftn</ref>(</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="56" refid="group__fft_1gaf9aa5ee1b27d942807b72fb0d687af2d" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1gaf9aa5ee1b27d942807b72fb0d687af2d" kindref="member">mlx_fft_irfft</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>axis,<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="57" refid="group__fft_1ga05f4bbb1773daa9762d1085ca8cab498" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga05f4bbb1773daa9762d1085ca8cab498" kindref="member">mlx_fft_irfft2</ref>(</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="64" refid="group__fft_1ga19816cd6587928cb6a5ebb83ca8849fe" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga19816cd6587928cb6a5ebb83ca8849fe" kindref="member">mlx_fft_irfftn</ref>(</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="71" refid="group__fft_1ga92e9f63e88ce3304f6938ffc1c43c9b1" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1ga92e9f63e88ce3304f6938ffc1c43c9b1" kindref="member">mlx_fft_rfft</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>axis,<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="72" refid="group__fft_1gaa44923cc760ba2a569e128be95f75ef5" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1gaa44923cc760ba2a569e128be95f75ef5" kindref="member">mlx_fft_rfft2</ref>(</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="79" refid="group__fft_1gabca31669016dfc1802b65c38493e764f" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__fft_1gabca31669016dfc1802b65c38493e764f" kindref="member">mlx_fft_rfftn</ref>(</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>a,</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>n,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_n,</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>axes,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_axes,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>s);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/fft.h"/>
+  </compounddef>
+</doxygen>

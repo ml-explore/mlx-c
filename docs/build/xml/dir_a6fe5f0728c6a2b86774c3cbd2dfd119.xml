@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="dir_a6fe5f0728c6a2b86774c3cbd2dfd119" kind="dir">
+    <compoundname>mlx/c</compoundname>
+    <innerfile refid="array_8h">array.h</innerfile>
+    <innerfile refid="closure_8h">closure.h</innerfile>
+    <innerfile refid="compile_8h">compile.h</innerfile>
+    <innerfile refid="device_8h">device.h</innerfile>
+    <innerfile refid="fast_8h">fast.h</innerfile>
+    <innerfile refid="fft_8h">fft.h</innerfile>
+    <innerfile refid="half_8h">half.h</innerfile>
+    <innerfile refid="io_8h">io.h</innerfile>
+    <innerfile refid="ioutils_8h">ioutils.h</innerfile>
+    <innerfile refid="linalg_8h">linalg.h</innerfile>
+    <innerfile refid="map_8h">map.h</innerfile>
+    <innerfile refid="mlx_8h">mlx.h</innerfile>
+    <innerfile refid="object_8h">object.h</innerfile>
+    <innerfile refid="ops_8h">ops.h</innerfile>
+    <innerfile refid="random_8h">random.h</innerfile>
+    <innerfile refid="stream_8h">stream.h</innerfile>
+    <innerfile refid="string_8h">string.h</innerfile>
+    <innerfile refid="transforms_8h">transforms.h</innerfile>
+    <innerfile refid="transforms__impl_8h">transforms_impl.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="mlx/c/"/>
+  </compounddef>
+</doxygen>

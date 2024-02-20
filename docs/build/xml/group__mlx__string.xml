@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__string" kind="group">
+    <compoundname>mlx_string</compoundname>
+    <title>String</title>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" prot="public" static="no">
+        <type>struct mlx_string_ *</type>
+        <definition>typedef struct mlx_string_* mlx_string</definition>
+        <argsstring></argsstring>
+        <name>mlx_string</name>
+        <briefdescription>
+<para>A MLX string object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/string.h" line="19" column="27" bodyfile="mlx/c/string.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__string_1ga5fc577bde512f519497cf1f892e98a5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_string_new</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>mlx_string_new</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new string, copying contents from <computeroutput>str</computeroutput>, which must end with <computeroutput>\0</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/string.h" line="24" column="12" declfile="mlx/c/string.h" declline="24" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__string_1ga3fcae79ba30db09cd7e3c0399ead1a2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * mlx_string_data</definition>
+        <argsstring>(mlx_string str)</argsstring>
+        <name>mlx_string_data</name>
+        <param>
+          <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Returns a pointer to the string contents. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The pointer is valid for the life duration of the string. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/string.h" line="30" column="12" declfile="mlx/c/string.h" declline="30" declcolumn="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX string object. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

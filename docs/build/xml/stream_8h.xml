@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="stream_8h" kind="file" language="C++">
+    <compoundname>stream.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="device_8h" local="yes">mlx/c/device.h</includes>
+    <includedby refid="compile_8h" local="yes">mlx/c/compile.h</includedby>
+    <includedby refid="fast_8h" local="yes">mlx/c/fast.h</includedby>
+    <includedby refid="fft_8h" local="yes">mlx/c/fft.h</includedby>
+    <includedby refid="io_8h" local="yes">mlx/c/io.h</includedby>
+    <includedby refid="linalg_8h" local="yes">mlx/c/linalg.h</includedby>
+    <includedby refid="mlx_8h" local="yes">mlx/c/mlx.h</includedby>
+    <includedby refid="ops_8h" local="yes">mlx/c/ops.h</includedby>
+    <includedby refid="random_8h" local="yes">mlx/c/random.h</includedby>
+    <includedby refid="transforms_8h" local="yes">mlx/c/transforms.h</includedby>
+    <includedby refid="transforms__impl_8h" local="yes">mlx/c/transforms_impl.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>mlx/c/device.h</label>
+        <link refid="device_8h"/>
+      </node>
+      <node id="1">
+        <label>mlx/c/stream.h</label>
+        <link refid="stream_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>mlx/c/compile.h</label>
+        <link refid="compile_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>mlx/c/fast.h</label>
+        <link refid="fast_8h"/>
+      </node>
+      <node id="5">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>mlx/c/io.h</label>
+        <link refid="io_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>mlx/c/linalg.h</label>
+        <link refid="linalg_8h"/>
+      </node>
+      <node id="3">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+      <node id="8">
+        <label>mlx/c/ops.h</label>
+        <link refid="ops_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>mlx/c/random.h</label>
+        <link refid="random_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mlx/c/stream.h</label>
+        <link refid="stream_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>mlx/c/transforms.h</label>
+        <link refid="transforms_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>mlx/c/transforms_impl.h</label>
+        <link refid="transforms__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="typedef">
+      <member refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kind="typedef"><name>mlx_stream</name></member>
+    </sectiondef>
+    <sectiondef kind="var">
+      <member refid="group__mlx__stream_1ga71e17e49521c44cad862694eff7974bd" kind="variable"><name>MLX_CPU_STREAM</name></member>
+      <member refid="group__mlx__stream_1ga4082b278b0f736d4330d12a2fee9109a" kind="variable"><name>MLX_GPU_STREAM</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__mlx__stream_1ga53ac9e91760cee5ce97265e054062c91" kind="function"><name>mlx_stream_new</name></member>
+      <member refid="group__mlx__stream_1ga881dc466c5ba0fb1a05b376fb840c112" kind="function"><name>mlx_stream_new_on_device</name></member>
+      <member refid="group__mlx__stream_1gaa8fa64c28a7e58004fc6c86302c4fd91" kind="function"><name>mlx_stream_equal</name></member>
+      <member refid="group__mlx__stream_1gaf2839578faded9dfabe73d524910e821" kind="function"><name>mlx_default_stream</name></member>
+      <member refid="group__mlx__stream_1gab1619f0ecd6945c912594ad20dbecbe7" kind="function"><name>mlx_set_default_stream</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_STREAM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_STREAM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="device_8h" kindref="compound">mlx/c/device.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_stream_*<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref>;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="group__mlx__stream_1ga53ac9e91760cee5ce97265e054062c91" refkind="member"><highlight class="normal"><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1ga53ac9e91760cee5ce97265e054062c91" kindref="member">mlx_stream_new</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index,<sp/><ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/>dev);</highlight></codeline>
+<codeline lineno="32" refid="group__mlx__stream_1ga881dc466c5ba0fb1a05b376fb840c112" refkind="member"><highlight class="normal"><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1ga881dc466c5ba0fb1a05b376fb840c112" kindref="member">mlx_stream_new_on_device</ref>(<ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/>dev);</highlight></codeline>
+<codeline lineno="36" refid="group__mlx__stream_1gaa8fa64c28a7e58004fc6c86302c4fd91" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__mlx__stream_1gaa8fa64c28a7e58004fc6c86302c4fd91" kindref="member">mlx_stream_equal</ref>(<ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>lhs,<sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>rhs);</highlight></codeline>
+<codeline lineno="40" refid="group__mlx__stream_1gaf2839578faded9dfabe73d524910e821" refkind="member"><highlight class="normal"><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1gaf2839578faded9dfabe73d524910e821" kindref="member">mlx_default_stream</ref>(<ref refid="group__mlx__device_1ga32e884af69d6f119ba7341f8ef4855c3" kindref="member">mlx_device</ref><sp/>dev);</highlight></codeline>
+<codeline lineno="44" refid="group__mlx__stream_1gab1619f0ecd6945c912594ad20dbecbe7" refkind="member"><highlight class="normal"><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1gab1619f0ecd6945c912594ad20dbecbe7" kindref="member">mlx_set_default_stream</ref>(<ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/>stream);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1ga71e17e49521c44cad862694eff7974bd" kindref="member">MLX_CPU_STREAM</ref>;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref><sp/><ref refid="group__mlx__stream_1ga4082b278b0f736d4330d12a2fee9109a" kindref="member">MLX_GPU_STREAM</ref>;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/stream.h"/>
+  </compounddef>
+</doxygen>

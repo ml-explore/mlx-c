@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__random" kind="group">
+    <compoundname>random</compoundname>
+    <title>Random number operations</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__random_1gab4308ff43930847f966a72c61d8e2dbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_bernoulli</definition>
+        <argsstring>(mlx_array p, const int *shape, size_t num_shape, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_bernoulli</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="26" column="11" declfile="mlx/c/random.h" declline="26" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga96a995e7d51419c440206919837ead91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_bits</definition>
+        <argsstring>(const int *shape, size_t num_shape, int width, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_bits</name>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="32" column="11" declfile="mlx/c/random.h" declline="32" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1gaade74ae34db784522f0b3931d377d610" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_categorical_shape</definition>
+        <argsstring>(mlx_array logits, int axis, const int *shape, size_t num_shape, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_categorical_shape</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>logits</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="38" column="11" declfile="mlx/c/random.h" declline="38" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga4600e45ee5d9c05f741e62cc0998710e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_categorical_num_samples</definition>
+        <argsstring>(mlx_array logits_, int axis, int num_samples, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_categorical_num_samples</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>logits_</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_samples</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="45" column="11" declfile="mlx/c/random.h" declline="45" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1gaba46781f7226e3e9e2d474ee915328d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_categorical</definition>
+        <argsstring>(mlx_array logits, int axis, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_categorical</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>logits</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="52" column="1" declfile="mlx/c/random.h" declline="52" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga295256c50faaf60463d2dbed444d9d95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_gumbel</definition>
+        <argsstring>(const int *shape, size_t num_shape, mlx_array_dtype dtype, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_gumbel</name>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="53" column="11" declfile="mlx/c/random.h" declline="53" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga7159fba1c10a2cf1d690c7b437341d93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_key</definition>
+        <argsstring>(uint64_t seed)</argsstring>
+        <name>mlx_random_key</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="59" column="11" declfile="mlx/c/random.h" declline="59" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1gad087da542f656649ece8bf0bda8e5ca2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_normal</definition>
+        <argsstring>(const int *shape, size_t num_shape, mlx_array_dtype dtype, float loc, float scale, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_normal</name>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>loc</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="60" column="11" declfile="mlx/c/random.h" declline="60" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga2ae33f98382a8d9a403fdcbe7c0f500e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_randint</definition>
+        <argsstring>(mlx_array low, mlx_array high, const int *shape, size_t num_shape, mlx_array_dtype dtype, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_randint</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>low</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>high</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="68" column="11" declfile="mlx/c/random.h" declline="68" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga7feca4b91368b40a1d2d5bafcf08c90d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_random_seed</definition>
+        <argsstring>(uint64_t seed)</argsstring>
+        <name>mlx_random_seed</name>
+        <param>
+          <type>uint64_t</type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="76" column="6" declfile="mlx/c/random.h" declline="76" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1gacc6c755f039ca1d2244d50bc6389ee65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_split_equal_parts</definition>
+        <argsstring>(mlx_array key, int num, mlx_stream s)</argsstring>
+        <name>mlx_random_split_equal_parts</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="77" column="11" declfile="mlx/c/random.h" declline="77" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga303bc6bf169c324477f42db52dbe6168" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+        <definition>mlx_vector_array mlx_random_split</definition>
+        <argsstring>(mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_split</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="78" column="18" declfile="mlx/c/random.h" declline="78" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga5b0c509850ccc2257467cdb717cabd14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_truncated_normal</definition>
+        <argsstring>(mlx_array lower, mlx_array upper, const int *shape, size_t num_shape, mlx_array_dtype dtype, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_truncated_normal</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>lower</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>upper</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="79" column="11" declfile="mlx/c/random.h" declline="79" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__random_1ga95dfe70115737f33bf7a7ff0f56451e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_random_uniform</definition>
+        <argsstring>(mlx_array low, mlx_array high, const int *shape, size_t num_shape, mlx_array_dtype dtype, mlx_array key, mlx_stream s)</argsstring>
+        <name>mlx_random_uniform</name>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>low</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>high</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_shape</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref></type>
+          <declname>dtype</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2" kindref="member">mlx_stream</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/random.h" line="87" column="11" declfile="mlx/c/random.h" declline="87" declcolumn="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

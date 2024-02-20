@@ -1,0 +1,404 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="array_8h" kind="file" language="C++">
+    <compoundname>array.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="half_8h" local="yes">half.h</includes>
+    <includes local="no">float.h</includes>
+    <includedby refid="closure_8h" local="yes">mlx/c/closure.h</includedby>
+    <includedby refid="compile_8h" local="yes">mlx/c/compile.h</includedby>
+    <includedby refid="fast_8h" local="yes">mlx/c/fast.h</includedby>
+    <includedby refid="fft_8h" local="yes">mlx/c/fft.h</includedby>
+    <includedby refid="io_8h" local="yes">mlx/c/io.h</includedby>
+    <includedby refid="linalg_8h" local="yes">mlx/c/linalg.h</includedby>
+    <includedby refid="map_8h" local="yes">mlx/c/map.h</includedby>
+    <includedby refid="mlx_8h" local="yes">mlx/c/mlx.h</includedby>
+    <includedby refid="ops_8h" local="yes">mlx/c/ops.h</includedby>
+    <includedby refid="random_8h" local="yes">mlx/c/random.h</includedby>
+    <includedby refid="transforms_8h" local="yes">mlx/c/transforms.h</includedby>
+    <includedby refid="transforms__impl_8h" local="yes">mlx/c/transforms_impl.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>mlx/c/array.h</label>
+        <link refid="array_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>half.h</label>
+        <link refid="half_8h"/>
+      </node>
+      <node id="5">
+        <label>float.h</label>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>mlx/c/array.h</label>
+        <link refid="array_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mlx/c/closure.h</label>
+        <link refid="closure_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>mlx/c/compile.h</label>
+        <link refid="compile_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>mlx/c/fast.h</label>
+        <link refid="fast_8h"/>
+      </node>
+      <node id="6">
+        <label>mlx/c/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>mlx/c/io.h</label>
+        <link refid="io_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>mlx/c/ioutils.h</label>
+        <link refid="ioutils_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>mlx/c/linalg.h</label>
+        <link refid="linalg_8h"/>
+      </node>
+      <node id="13">
+        <label>mlx/c/map.h</label>
+        <link refid="map_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>mlx/c/mlx.h</label>
+        <link refid="mlx_8h"/>
+      </node>
+      <node id="9">
+        <label>mlx/c/ops.h</label>
+        <link refid="ops_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>mlx/c/random.h</label>
+        <link refid="random_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>mlx/c/transforms.h</label>
+        <link refid="transforms_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>mlx/c/transforms_impl.h</label>
+        <link refid="transforms__impl_8h"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="array_8h_1a698251e9736d8a60166c6cacbdb1647e" prot="public" static="no">
+        <name>__STDC_WANT_IEC_60559_TYPES_EXT__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="15" column="9" bodyfile="mlx/c/array.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <member refid="group__mlx__array_1ga01931f076ae8ca8b48f458d2d933f193" kind="enum"><name>mlx_array_dtype_</name></member>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <member refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kind="typedef"><name>mlx_array</name></member>
+      <member refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kind="typedef"><name>mlx_array_dtype</name></member>
+      <member refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kind="typedef"><name>mlx_vector_array</name></member>
+      <member refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kind="typedef"><name>mlx_vector_vector_array</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__mlx__array_1gad6c38db0758a7f6c937b417da9a46dec" kind="function"><name>mlx_array_from_bool</name></member>
+      <member refid="group__mlx__array_1ga393a276ecd3d9c76c26e3eb577860f7e" kind="function"><name>mlx_array_from_int</name></member>
+      <member refid="group__mlx__array_1ga9453635c9d931b70b58a667302bbcc8d" kind="function"><name>mlx_array_from_float</name></member>
+      <member refid="group__mlx__array_1gaddaea3b6e8308397044f601bb1ce2f00" kind="function"><name>mlx_array_from_complex</name></member>
+      <member refid="group__mlx__array_1ga2fe9d623c41423b85a792329bfd60dd8" kind="function"><name>mlx_array_from_data</name></member>
+      <member refid="group__mlx__array_1gaa397066e4033669b84edec5fa3feed9a" kind="function"><name>mlx_array_itemsize</name></member>
+      <member refid="group__mlx__array_1ga3bc5a95db74347453f2649a366ddb993" kind="function"><name>mlx_array_size</name></member>
+      <member refid="group__mlx__array_1gaaf3c54f70a4dc4c71446f4e1182d68a6" kind="function"><name>mlx_array_strides</name></member>
+      <member refid="group__mlx__array_1gab5024ad2ca2186bf28c41b93ce370908" kind="function"><name>mlx_array_nbytes</name></member>
+      <member refid="group__mlx__array_1ga1047f247b0b4f16fd4366b69e7006df4" kind="function"><name>mlx_array_ndim</name></member>
+      <member refid="group__mlx__array_1ga07cb68fe9c5a6e251d266d967d51c1f7" kind="function"><name>mlx_array_shape</name></member>
+      <member refid="group__mlx__array_1ga347c42b4e9bdfb211ad3a3bd4a784282" kind="function"><name>mlx_array_dim</name></member>
+      <member refid="group__mlx__array_1ga7752a97ea07ecc040b4979a5a0509882" kind="function"><name>mlx_array_get_dtype</name></member>
+      <member refid="group__mlx__array_1ga00df42b6e57fea786af1eff88fd171a1" kind="function"><name>mlx_array_eval</name></member>
+      <member refid="group__mlx__array_1gabf98109368145c9b05a1ac35d5d8e507" kind="function"><name>mlx_array_item_bool</name></member>
+      <member refid="group__mlx__array_1ga6aca6ab5bae26e9d775efcadb12a7c6a" kind="function"><name>mlx_array_item_uint8</name></member>
+      <member refid="group__mlx__array_1gab7f22210bcafdd001ea857d9928e11d2" kind="function"><name>mlx_array_item_uint16</name></member>
+      <member refid="group__mlx__array_1ga651f2a7a18984beacbf3bc774161ba17" kind="function"><name>mlx_array_item_uint32</name></member>
+      <member refid="group__mlx__array_1ga7375a82d932d3ad998a9ee2ef9f76241" kind="function"><name>mlx_array_item_uint64</name></member>
+      <member refid="group__mlx__array_1gac982a12111b322687d1120ad3139d926" kind="function"><name>mlx_array_item_int8</name></member>
+      <member refid="group__mlx__array_1gad2428832b775a450962e1c72d51de9f0" kind="function"><name>mlx_array_item_int16</name></member>
+      <member refid="group__mlx__array_1gad9cda547d77482002e5e0336baf3bafc" kind="function"><name>mlx_array_item_int32</name></member>
+      <member refid="group__mlx__array_1ga7684decaeeb25f63342997cd809a83fc" kind="function"><name>mlx_array_item_int64</name></member>
+      <member refid="group__mlx__array_1ga9311c96ef22dc0d681b682457cd21d8f" kind="function"><name>mlx_array_item_float32</name></member>
+      <member refid="group__mlx__array_1ga0dfe01b5b1399990c2be7a7c92eb2b0a" kind="function"><name>mlx_array_item_complex64</name></member>
+      <member refid="group__mlx__array_1gaddfdc134df5e102b4a9e4d652a97cb1b" kind="function"><name>mlx_array_data_bool</name></member>
+      <member refid="group__mlx__array_1gaa47b98ca11b3bde8fda0c36e3618ed5b" kind="function"><name>mlx_array_data_uint8</name></member>
+      <member refid="group__mlx__array_1ga79b0e35274986fc628f1df387523820e" kind="function"><name>mlx_array_data_uint16</name></member>
+      <member refid="group__mlx__array_1ga974c2992bb0c8b6667b3071288ff5e58" kind="function"><name>mlx_array_data_uint32</name></member>
+      <member refid="group__mlx__array_1ga2e488bfe5b34cf651cfb5742a96bd1ad" kind="function"><name>mlx_array_data_uint64</name></member>
+      <member refid="group__mlx__array_1ga6d1f4d899caa75ba93881774e68673ba" kind="function"><name>mlx_array_data_int8</name></member>
+      <member refid="group__mlx__array_1gabf20cefbf75cde9aadfab961d772b208" kind="function"><name>mlx_array_data_int16</name></member>
+      <member refid="group__mlx__array_1ga3c3915a6b7bc68292a90a478382ba6df" kind="function"><name>mlx_array_data_int32</name></member>
+      <member refid="group__mlx__array_1gaa0f62f184fc9a6b2eef924fc8601804f" kind="function"><name>mlx_array_data_int64</name></member>
+      <member refid="group__mlx__array_1ga685ceb0ac19984714596f18bb2c67ce8" kind="function"><name>mlx_array_data_float32</name></member>
+      <member refid="group__mlx__array_1gac56b61a84e5f9cb8b87267f01803fb5f" kind="function"><name>mlx_array_data_complex64</name></member>
+      <member refid="group__mlx__vector__array_1ga9b551d94cf2d4d8ba2ba88940da7fd93" kind="function"><name>mlx_vector_array_new</name></member>
+      <member refid="group__mlx__vector__array_1gabec67b708f5e370aefa65bdd5d4e0d2b" kind="function"><name>mlx_vector_array_from_arrays</name></member>
+      <member refid="group__mlx__vector__array_1ga68f8293bd08fcd36f041198a5a011e05" kind="function"><name>mlx_vector_array_from_array</name></member>
+      <member refid="group__mlx__vector__array_1gaa997ab32328e95f7e24e8e7aea716a44" kind="function"><name>mlx_vector_array_add</name></member>
+      <member refid="group__mlx__vector__array_1ga2ccb0d27c6b14634ae8054fd30942215" kind="function"><name>mlx_vector_array_add_arrays</name></member>
+      <member refid="group__mlx__vector__array_1ga772c4e885bcd85487718164c7ca014a1" kind="function"><name>mlx_vector_array_get</name></member>
+      <member refid="group__mlx__vector__array_1gac02cdc0d5a9455062f8d55c363add35f" kind="function"><name>mlx_vector_array_size</name></member>
+      <member refid="group__mlx__vector__vector__array_1gab42189195de2e327b572b91c986769e8" kind="function"><name>mlx_vector_vector_array_new</name></member>
+      <member refid="group__mlx__vector__vector__array_1gac8e9b0a57ba770609fc83206df3c93fb" kind="function"><name>mlx_vector_vector_array_add</name></member>
+      <member refid="group__mlx__vector__vector__array_1ga48c1a685f41eb929f6744f7cd35534bd" kind="function"><name>mlx_vector_vector_array_get</name></member>
+      <member refid="group__mlx__vector__vector__array_1ga37dd3e6fb775f224e4ade1e4163f98e7" kind="function"><name>mlx_vector_vector_array_get2d</name></member>
+      <member refid="group__mlx__vector__vector__array_1ga0887230b5e9d71d55994bb1605cd3b84" kind="function"><name>mlx_vector_vector_array_size</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>Copyright<sp/>©<sp/>2023-2024<sp/>Apple<sp/>Inc.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MLX_ARRAY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MLX_ARRAY_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="half_8h" kindref="compound">half.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="array_8h_1a698251e9736d8a60166c6cacbdb1647e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>__STDC_WANT_IEC_60559_TYPES_EXT__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;float.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_array_*<sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="group__mlx__array_1ga01931f076ae8ca8b48f458d2d933f193" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga01931f076ae8ca8b48f458d2d933f193" kindref="member">mlx_array_dtype_</ref><sp/>{</highlight></codeline>
+<codeline lineno="33" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193ac774e9dc6620dfd5a4efa682cc9d5512" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193ac774e9dc6620dfd5a4efa682cc9d5512" kindref="member">MLX_BOOL</ref>,</highlight></codeline>
+<codeline lineno="34" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193af5b293dcd4a5d925f67f9c71633db90d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193af5b293dcd4a5d925f67f9c71633db90d" kindref="member">MLX_UINT8</ref>,</highlight></codeline>
+<codeline lineno="35" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a921e9b4411e65d3fbc5e73ea12ed81f9" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a921e9b4411e65d3fbc5e73ea12ed81f9" kindref="member">MLX_UINT16</ref>,</highlight></codeline>
+<codeline lineno="36" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193aed9648346fa72316e9a4cc02c0b851c1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193aed9648346fa72316e9a4cc02c0b851c1" kindref="member">MLX_UINT32</ref>,</highlight></codeline>
+<codeline lineno="37" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a5f403b09d7113605618de4788659f0a3" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a5f403b09d7113605618de4788659f0a3" kindref="member">MLX_UINT64</ref>,</highlight></codeline>
+<codeline lineno="38" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a01c9e794678c9948a6fede844518926e" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a01c9e794678c9948a6fede844518926e" kindref="member">MLX_INT8</ref>,</highlight></codeline>
+<codeline lineno="39" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a926a8985bacd9929226fcbdea4ce2fd8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a926a8985bacd9929226fcbdea4ce2fd8" kindref="member">MLX_INT16</ref>,</highlight></codeline>
+<codeline lineno="40" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0353d4f27caaaa4abe92b350bff9e20c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0353d4f27caaaa4abe92b350bff9e20c" kindref="member">MLX_INT32</ref>,</highlight></codeline>
+<codeline lineno="41" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a6c2b0590f5a8ab80246e9d463f86dda8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a6c2b0590f5a8ab80246e9d463f86dda8" kindref="member">MLX_INT64</ref>,</highlight></codeline>
+<codeline lineno="42" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0374c08003d584dec8cc548805a0c0dc" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a0374c08003d584dec8cc548805a0c0dc" kindref="member">MLX_FLOAT16</ref>,</highlight></codeline>
+<codeline lineno="43" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a4e2044405b116bc7dd98a1947438c727" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a4e2044405b116bc7dd98a1947438c727" kindref="member">MLX_FLOAT32</ref>,</highlight></codeline>
+<codeline lineno="44" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a3594706af8d420cd2621641f0d24b278" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a3594706af8d420cd2621641f0d24b278" kindref="member">MLX_BFLOAT16</ref>,</highlight></codeline>
+<codeline lineno="45" refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a8c16e9e9c299a96b8369bbca0d814d91" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="group__mlx__array_1gga01931f076ae8ca8b48f458d2d933f193a8c16e9e9c299a96b8369bbca0d814d91" kindref="member">MLX_COMPLEX64</ref>,</highlight></codeline>
+<codeline lineno="46" refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" refkind="member"><highlight class="normal">}<sp/><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref>;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="group__mlx__array_1gad6c38db0758a7f6c937b417da9a46dec" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__array_1gad6c38db0758a7f6c937b417da9a46dec" kindref="member">mlx_array_from_bool</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>val);</highlight></codeline>
+<codeline lineno="55" refid="group__mlx__array_1ga393a276ecd3d9c76c26e3eb577860f7e" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__array_1ga393a276ecd3d9c76c26e3eb577860f7e" kindref="member">mlx_array_from_int</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>val);</highlight></codeline>
+<codeline lineno="59" refid="group__mlx__array_1ga9453635c9d931b70b58a667302bbcc8d" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__array_1ga9453635c9d931b70b58a667302bbcc8d" kindref="member">mlx_array_from_float</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val);</highlight></codeline>
+<codeline lineno="63" refid="group__mlx__array_1gaddaea3b6e8308397044f601bb1ce2f00" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__array_1gaddaea3b6e8308397044f601bb1ce2f00" kindref="member">mlx_array_from_complex</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>real_val,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>imag_val);</highlight></codeline>
+<codeline lineno="71" refid="group__mlx__array_1ga2fe9d623c41423b85a792329bfd60dd8" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__array_1ga2fe9d623c41423b85a792329bfd60dd8" kindref="member">mlx_array_from_data</ref>(</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>data,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/>shape,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dim,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref><sp/>dtype);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="group__mlx__array_1gaa397066e4033669b84edec5fa3feed9a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1gaa397066e4033669b84edec5fa3feed9a" kindref="member">mlx_array_itemsize</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="84" refid="group__mlx__array_1ga3bc5a95db74347453f2649a366ddb993" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga3bc5a95db74347453f2649a366ddb993" kindref="member">mlx_array_size</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="88" refid="group__mlx__array_1gaaf3c54f70a4dc4c71446f4e1182d68a6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">*<sp/><ref refid="group__mlx__array_1gaaf3c54f70a4dc4c71446f4e1182d68a6" kindref="member">mlx_array_strides</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="92" refid="group__mlx__array_1gab5024ad2ca2186bf28c41b93ce370908" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1gab5024ad2ca2186bf28c41b93ce370908" kindref="member">mlx_array_nbytes</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="96" refid="group__mlx__array_1ga1047f247b0b4f16fd4366b69e7006df4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga1047f247b0b4f16fd4366b69e7006df4" kindref="member">mlx_array_ndim</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="101" refid="group__mlx__array_1ga07cb68fe9c5a6e251d266d967d51c1f7" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="group__mlx__array_1ga07cb68fe9c5a6e251d266d967d51c1f7" kindref="member">mlx_array_shape</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">*<sp/><ref refid="group__mlx__array_1gaaf3c54f70a4dc4c71446f4e1182d68a6" kindref="member">mlx_array_strides</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="110" refid="group__mlx__array_1ga347c42b4e9bdfb211ad3a3bd4a784282" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga347c42b4e9bdfb211ad3a3bd4a784282" kindref="member">mlx_array_dim</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>dim);</highlight></codeline>
+<codeline lineno="114" refid="group__mlx__array_1ga7752a97ea07ecc040b4979a5a0509882" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga58b14c486e3d2f4c716ea2173ea2821c" kindref="member">mlx_array_dtype</ref><sp/><ref refid="group__mlx__array_1ga7752a97ea07ecc040b4979a5a0509882" kindref="member">mlx_array_get_dtype</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="118" refid="group__mlx__array_1ga00df42b6e57fea786af1eff88fd171a1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga00df42b6e57fea786af1eff88fd171a1" kindref="member">mlx_array_eval</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="group__mlx__array_1gabf98109368145c9b05a1ac35d5d8e507" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1gabf98109368145c9b05a1ac35d5d8e507" kindref="member">mlx_array_item_bool</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="127" refid="group__mlx__array_1ga6aca6ab5bae26e9d775efcadb12a7c6a" refkind="member"><highlight class="normal">uint8_t<sp/><ref refid="group__mlx__array_1ga6aca6ab5bae26e9d775efcadb12a7c6a" kindref="member">mlx_array_item_uint8</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="131" refid="group__mlx__array_1gab7f22210bcafdd001ea857d9928e11d2" refkind="member"><highlight class="normal">uint16_t<sp/><ref refid="group__mlx__array_1gab7f22210bcafdd001ea857d9928e11d2" kindref="member">mlx_array_item_uint16</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="135" refid="group__mlx__array_1ga651f2a7a18984beacbf3bc774161ba17" refkind="member"><highlight class="normal">uint32_t<sp/><ref refid="group__mlx__array_1ga651f2a7a18984beacbf3bc774161ba17" kindref="member">mlx_array_item_uint32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="139" refid="group__mlx__array_1ga7375a82d932d3ad998a9ee2ef9f76241" refkind="member"><highlight class="normal">uint64_t<sp/><ref refid="group__mlx__array_1ga7375a82d932d3ad998a9ee2ef9f76241" kindref="member">mlx_array_item_uint64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="143" refid="group__mlx__array_1gac982a12111b322687d1120ad3139d926" refkind="member"><highlight class="normal">int8_t<sp/><ref refid="group__mlx__array_1gac982a12111b322687d1120ad3139d926" kindref="member">mlx_array_item_int8</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="147" refid="group__mlx__array_1gad2428832b775a450962e1c72d51de9f0" refkind="member"><highlight class="normal">int16_t<sp/><ref refid="group__mlx__array_1gad2428832b775a450962e1c72d51de9f0" kindref="member">mlx_array_item_int16</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="151" refid="group__mlx__array_1gad9cda547d77482002e5e0336baf3bafc" refkind="member"><highlight class="normal">int32_t<sp/><ref refid="group__mlx__array_1gad9cda547d77482002e5e0336baf3bafc" kindref="member">mlx_array_item_int32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="155" refid="group__mlx__array_1ga7684decaeeb25f63342997cd809a83fc" refkind="member"><highlight class="normal">int64_t<sp/><ref refid="group__mlx__array_1ga7684decaeeb25f63342997cd809a83fc" kindref="member">mlx_array_item_int64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="159" refid="group__mlx__array_1ga9311c96ef22dc0d681b682457cd21d8f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga9311c96ef22dc0d681b682457cd21d8f" kindref="member">mlx_array_item_float32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="163" refid="group__mlx__array_1ga0dfe01b5b1399990c2be7a7c92eb2b0a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>_Complex<sp/><ref refid="group__mlx__array_1ga0dfe01b5b1399990c2be7a7c92eb2b0a" kindref="member">mlx_array_item_complex64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>HAS_FLOAT16</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">float16_t<sp/>mlx_array_item_float16(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>HAS_BFLOAT16</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">bfloat16_t<sp/>mlx_array_item_bfloat16(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="group__mlx__array_1gaddfdc134df5e102b4a9e4d652a97cb1b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">*<sp/><ref refid="group__mlx__array_1gaddfdc134df5e102b4a9e4d652a97cb1b" kindref="member">mlx_array_data_bool</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="188" refid="group__mlx__array_1gaa47b98ca11b3bde8fda0c36e3618ed5b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t*<sp/><ref refid="group__mlx__array_1gaa47b98ca11b3bde8fda0c36e3618ed5b" kindref="member">mlx_array_data_uint8</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="193" refid="group__mlx__array_1ga79b0e35274986fc628f1df387523820e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t*<sp/><ref refid="group__mlx__array_1ga79b0e35274986fc628f1df387523820e" kindref="member">mlx_array_data_uint16</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="198" refid="group__mlx__array_1ga974c2992bb0c8b6667b3071288ff5e58" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t*<sp/><ref refid="group__mlx__array_1ga974c2992bb0c8b6667b3071288ff5e58" kindref="member">mlx_array_data_uint32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="203" refid="group__mlx__array_1ga2e488bfe5b34cf651cfb5742a96bd1ad" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint64_t*<sp/><ref refid="group__mlx__array_1ga2e488bfe5b34cf651cfb5742a96bd1ad" kindref="member">mlx_array_data_uint64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="208" refid="group__mlx__array_1ga6d1f4d899caa75ba93881774e68673ba" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int8_t*<sp/><ref refid="group__mlx__array_1ga6d1f4d899caa75ba93881774e68673ba" kindref="member">mlx_array_data_int8</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="213" refid="group__mlx__array_1gabf20cefbf75cde9aadfab961d772b208" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int16_t*<sp/><ref refid="group__mlx__array_1gabf20cefbf75cde9aadfab961d772b208" kindref="member">mlx_array_data_int16</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="218" refid="group__mlx__array_1ga3c3915a6b7bc68292a90a478382ba6df" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int32_t*<sp/><ref refid="group__mlx__array_1ga3c3915a6b7bc68292a90a478382ba6df" kindref="member">mlx_array_data_int32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="223" refid="group__mlx__array_1gaa0f62f184fc9a6b2eef924fc8601804f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int64_t*<sp/><ref refid="group__mlx__array_1gaa0f62f184fc9a6b2eef924fc8601804f" kindref="member">mlx_array_data_int64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="228" refid="group__mlx__array_1ga685ceb0ac19984714596f18bb2c67ce8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/><ref refid="group__mlx__array_1ga685ceb0ac19984714596f18bb2c67ce8" kindref="member">mlx_array_data_float32</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="233" refid="group__mlx__array_1gac56b61a84e5f9cb8b87267f01803fb5f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>_Complex*<sp/><ref refid="group__mlx__array_1gac56b61a84e5f9cb8b87267f01803fb5f" kindref="member">mlx_array_data_complex64</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>HAS_FLOAT16</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>float16_t*<sp/>mlx_array_data_float16(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>HAS_BFLOAT16</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>bfloat16_t*<sp/>mlx_array_data_bfloat16(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="261" refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_vector_array_*<sp/><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref>;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266" refid="group__mlx__vector__array_1ga9b551d94cf2d4d8ba2ba88940da7fd93" refkind="member"><highlight class="normal"><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/><ref refid="group__mlx__vector__array_1ga9b551d94cf2d4d8ba2ba88940da7fd93" kindref="member">mlx_vector_array_new</ref>();</highlight></codeline>
+<codeline lineno="271" refid="group__mlx__vector__array_1gabec67b708f5e370aefa65bdd5d4e0d2b" refkind="member"><highlight class="normal"><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/><ref refid="group__mlx__vector__array_1gabec67b708f5e370aefa65bdd5d4e0d2b" kindref="member">mlx_vector_array_from_arrays</ref>(<ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref>*<sp/>arrs,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_arrs);</highlight></codeline>
+<codeline lineno="276" refid="group__mlx__vector__array_1ga68f8293bd08fcd36f041198a5a011e05" refkind="member"><highlight class="normal"><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/><ref refid="group__mlx__vector__array_1ga68f8293bd08fcd36f041198a5a011e05" kindref="member">mlx_vector_array_from_array</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="281" refid="group__mlx__vector__array_1gaa997ab32328e95f7e24e8e7aea716a44" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__array_1gaa997ab32328e95f7e24e8e7aea716a44" kindref="member">mlx_vector_array_add</ref>(<ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/>vec,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/>arr);</highlight></codeline>
+<codeline lineno="286" refid="group__mlx__vector__array_1ga2ccb0d27c6b14634ae8054fd30942215" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__array_1ga2ccb0d27c6b14634ae8054fd30942215" kindref="member">mlx_vector_array_add_arrays</ref>(</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/>vec,</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref>*<sp/>arrs,</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>num_arrs);</highlight></codeline>
+<codeline lineno="293" refid="group__mlx__vector__array_1ga772c4e885bcd85487718164c7ca014a1" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__vector__array_1ga772c4e885bcd85487718164c7ca014a1" kindref="member">mlx_vector_array_get</ref>(<ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/>vec,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="297" refid="group__mlx__vector__array_1gac02cdc0d5a9455062f8d55c363add35f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__array_1gac02cdc0d5a9455062f8d55c363add35f" kindref="member">mlx_vector_array_size</ref>(<ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/>vec);</highlight></codeline>
+<codeline lineno="309" refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">mlx_vector_vector_array_*<sp/><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref>;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314" refid="group__mlx__vector__vector__array_1gab42189195de2e327b572b91c986769e8" refkind="member"><highlight class="normal"><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref><sp/><ref refid="group__mlx__vector__vector__array_1gab42189195de2e327b572b91c986769e8" kindref="member">mlx_vector_vector_array_new</ref>();</highlight></codeline>
+<codeline lineno="319" refid="group__mlx__vector__vector__array_1gac8e9b0a57ba770609fc83206df3c93fb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__vector__array_1gac8e9b0a57ba770609fc83206df3c93fb" kindref="member">mlx_vector_vector_array_add</ref>(</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref><sp/>vec2,</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/>vec);</highlight></codeline>
+<codeline lineno="325" refid="group__mlx__vector__vector__array_1ga48c1a685f41eb929f6744f7cd35534bd" refkind="member"><highlight class="normal"><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref><sp/><ref refid="group__mlx__vector__vector__array_1ga48c1a685f41eb929f6744f7cd35534bd" kindref="member">mlx_vector_vector_array_get</ref>(</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref><sp/>vec2,</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="332" refid="group__mlx__vector__vector__array_1ga37dd3e6fb775f224e4ade1e4163f98e7" refkind="member"><highlight class="normal"><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref><sp/><ref refid="group__mlx__vector__vector__array_1ga37dd3e6fb775f224e4ade1e4163f98e7" kindref="member">mlx_vector_vector_array_get2d</ref>(</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref><sp/>vec2,</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>index,</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>arr_index);</highlight></codeline>
+<codeline lineno="336" refid="group__mlx__vector__vector__array_1ga0887230b5e9d71d55994bb1605cd3b84" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group__mlx__vector__vector__array_1ga0887230b5e9d71d55994bb1605cd3b84" kindref="member">mlx_vector_vector_array_size</ref>(<ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref><sp/>vec2);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="mlx/c/array.h"/>
+  </compounddef>
+</doxygen>

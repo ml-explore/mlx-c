@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__vector__vector__array" kind="group">
+    <compoundname>mlx_vector_vector_array</compoundname>
+    <title>Vector of array vectors</title>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" prot="public" static="no">
+        <type>struct mlx_vector_vector_array_ *</type>
+        <definition>typedef struct mlx_vector_vector_array_* mlx_vector_vector_array</definition>
+        <argsstring></argsstring>
+        <name>mlx_vector_vector_array</name>
+        <briefdescription>
+<para>A vector of array vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="309" column="40" bodyfile="mlx/c/array.h" bodystart="309" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__vector__vector__array_1gab42189195de2e327b572b91c986769e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+        <definition>mlx_vector_vector_array mlx_vector_vector_array_new</definition>
+        <argsstring>()</argsstring>
+        <name>mlx_vector_vector_array_new</name>
+        <briefdescription>
+<para>New empty vector of array vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="314" column="25" declfile="mlx/c/array.h" declline="314" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__vector__vector__array_1gac8e9b0a57ba770609fc83206df3c93fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_vector_vector_array_add</definition>
+        <argsstring>(mlx_vector_vector_array vec2, const mlx_vector_array vec)</argsstring>
+        <name>mlx_vector_vector_array_add</name>
+        <param>
+          <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+          <declname>vec2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>Add an array vector to the vector of array vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Reference count of the array vector will be increased. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="319" column="6" declfile="mlx/c/array.h" declline="319" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__vector__vector__array_1ga48c1a685f41eb929f6744f7cd35534bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+        <definition>mlx_vector_array mlx_vector_vector_array_get</definition>
+        <argsstring>(mlx_vector_vector_array vec2, size_t index)</argsstring>
+        <name>mlx_vector_vector_array_get</name>
+        <param>
+          <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+          <declname>vec2</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get the array vector at specified <computeroutput>index</computeroutput> in the vector of array vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="325" column="18" declfile="mlx/c/array.h" declline="325" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__vector__vector__array_1ga37dd3e6fb775f224e4ade1e4163f98e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__array_1ga74a41c6be8b4520da3788a5626d5c783" kindref="member">mlx_array</ref></type>
+        <definition>mlx_array mlx_vector_vector_array_get2d</definition>
+        <argsstring>(mlx_vector_vector_array vec2, size_t index, size_t arr_index)</argsstring>
+        <name>mlx_vector_vector_array_get2d</name>
+        <param>
+          <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+          <declname>vec2</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>arr_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the array at specified (<computeroutput>index</computeroutput>, <computeroutput>arr_index</computeroutput>) in the vector of array vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="332" column="11" declfile="mlx/c/array.h" declline="332" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__vector__vector__array_1ga0887230b5e9d71d55994bb1605cd3b84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t mlx_vector_vector_array_size</definition>
+        <argsstring>(mlx_vector_vector_array vec2)</argsstring>
+        <name>mlx_vector_vector_array_size</name>
+        <param>
+          <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+          <declname>vec2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/array.h" line="336" column="8" declfile="mlx/c/array.h" declline="336" declcolumn="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX vector of vector array object. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

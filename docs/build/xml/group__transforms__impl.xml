@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__transforms__impl" kind="group">
+    <compoundname>transforms_impl</compoundname>
+    <title>Implementation detail operations</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__transforms__impl_1ga1da87125d06225bfecaea406e25fc54e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+        <definition>mlx_closure mlx_detail_compile</definition>
+        <argsstring>(mlx_closure fun, size_t fun_id)</argsstring>
+        <name>mlx_detail_compile</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>fun_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms_impl.h" line="26" column="13" declfile="mlx/c/transforms_impl.h" declline="26" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms__impl_1gac290646a0f504866960490179515ba37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_detail_compile_erase</definition>
+        <argsstring>(size_t fun_id)</argsstring>
+        <name>mlx_detail_compile_erase</name>
+        <param>
+          <type>size_t</type>
+          <declname>fun_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms_impl.h" line="27" column="6" declfile="mlx/c/transforms_impl.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms__impl_1gabe2b710b91f0e0c09e7eb2ad60cc8eb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+        <definition>mlx_vector_array mlx_detail_vmap_replace</definition>
+        <argsstring>(const mlx_vector_array inputs, const mlx_vector_array s_inputs, const mlx_vector_array s_outputs, const int *in_axes, size_t num_in_axes, const int *out_axes, size_t num_out_axes)</argsstring>
+        <name>mlx_detail_vmap_replace</name>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>s_inputs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>s_outputs</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>in_axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_in_axes</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>out_axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_out_axes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms_impl.h" line="28" column="18" declfile="mlx/c/transforms_impl.h" declline="28" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group__transforms__impl_1ga590a0268fb827c2449b756c3e8ba4f1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce" kindref="member">mlx_vector_vector_array</ref></type>
+        <definition>mlx_vector_vector_array mlx_detail_vmap_trace</definition>
+        <argsstring>(mlx_closure fun, const mlx_vector_array inputs, const int *in_axes, size_t num_in_axes)</argsstring>
+        <name>mlx_detail_vmap_trace</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group__mlx__vector__array_1gaaa676b4f577904702c78a2067cf3c8a8" kindref="member">mlx_vector_array</ref></type>
+          <declname>inputs</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>in_axes</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>num_in_axes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/transforms_impl.h" line="36" column="25" declfile="mlx/c/transforms_impl.h" declline="36" declcolumn="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

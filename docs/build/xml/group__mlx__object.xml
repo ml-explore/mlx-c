@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__object" kind="group">
+    <compoundname>mlx_object</compoundname>
+    <title>Object</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__object_1ga594efe21145484905cd981f5b26944d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__string_1gace79c22ecc692b1c157818c43714e2d6" kindref="member">mlx_string</ref></type>
+        <definition>mlx_string mlx_tostring</definition>
+        <argsstring>(void *obj)</argsstring>
+        <name>mlx_tostring</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Returns a new string representing the object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/object.h" line="21" column="12" declfile="mlx/c/object.h" declline="21" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__object_1gad4bb1fc62230a1d131f706d0946d00c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_retain</definition>
+        <argsstring>(void *obj)</argsstring>
+        <name>mlx_retain</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Increases the reference count of the object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/object.h" line="25" column="6" declfile="mlx/c/object.h" declline="25" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__object_1ga801484c3c9b0715d6875612830840172" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_free</definition>
+        <argsstring>(void *obj)</argsstring>
+        <name>mlx_free</name>
+        <param>
+          <type>void *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>Decreases the reference count of the object, and free if it gets to zero. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/object.h" line="29" column="6" declfile="mlx/c/object.h" declline="29" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX object general methods. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

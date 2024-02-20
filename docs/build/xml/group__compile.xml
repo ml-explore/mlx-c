@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__compile" kind="group">
+    <compoundname>compile</compoundname>
+    <title>Compilation operations</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__compile_1gafb5bf26392a47ace404f162204423c86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+        <definition>mlx_closure mlx_compile</definition>
+        <argsstring>(mlx_closure fun)</argsstring>
+        <name>mlx_compile</name>
+        <param>
+          <type><ref refid="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f" kindref="member">mlx_closure</ref></type>
+          <declname>fun</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/compile.h" line="26" column="13" declfile="mlx/c/compile.h" declline="26" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="group__compile_1gad3c419b900c9c0bc59c917ad5a621363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_disable_compile</definition>
+        <argsstring>()</argsstring>
+        <name>mlx_disable_compile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/compile.h" line="27" column="6" declfile="mlx/c/compile.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__compile_1ga6ef0e5e1902671c2a3f5cf4bc0b2e910" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mlx_enable_compile</definition>
+        <argsstring>()</argsstring>
+        <name>mlx_enable_compile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/compile.h" line="28" column="6" declfile="mlx/c/compile.h" declline="28" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group__mlx__ioutils" kind="group">
+    <compoundname>mlx_ioutils</compoundname>
+    <title>IO objects</title>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" prot="public" static="no">
+        <type>struct mlx_safetensors_ *</type>
+        <definition>typedef struct mlx_safetensors_* mlx_safetensors</definition>
+        <argsstring></argsstring>
+        <name>mlx_safetensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/ioutils.h" line="21" column="32" bodyfile="mlx/c/ioutils.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__mlx__ioutils_1ga66d42d8d0cc6bc0f30c593296b927ef3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref></type>
+        <definition>mlx_safetensors mlx_safetensors_new</definition>
+        <argsstring>()</argsstring>
+        <name>mlx_safetensors_new</name>
+        <briefdescription>
+<para>Returns a empty safetensors storage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/ioutils.h" line="26" column="17" declfile="mlx/c/ioutils.h" declline="26" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__ioutils_1ga23d3c8c576ed29b202f9cee49e7e631d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d" kindref="member">mlx_map_string_to_array</ref></type>
+        <definition>mlx_map_string_to_array mlx_safetensors_data</definition>
+        <argsstring>(mlx_safetensors st)</argsstring>
+        <name>mlx_safetensors_data</name>
+        <param>
+          <type><ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref></type>
+          <declname>st</declname>
+        </param>
+        <briefdescription>
+<para>Returns the data map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/ioutils.h" line="30" column="25" declfile="mlx/c/ioutils.h" declline="30" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="group__mlx__ioutils_1ga66e7596f3849374891d9a995ea75794d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2" kindref="member">mlx_map_string_to_string</ref></type>
+        <definition>mlx_map_string_to_string mlx_safetensors_metadata</definition>
+        <argsstring>(mlx_safetensors st)</argsstring>
+        <name>mlx_safetensors_metadata</name>
+        <param>
+          <type><ref refid="group__mlx__ioutils_1ga5b1a80cda0c6647374271e6dbafdc6d1" kindref="member">mlx_safetensors</ref></type>
+          <declname>st</declname>
+        </param>
+        <briefdescription>
+<para>Returns the metadata map. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mlx/c/ioutils.h" line="34" column="26" declfile="mlx/c/ioutils.h" declline="34" declcolumn="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MLX IO objects. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

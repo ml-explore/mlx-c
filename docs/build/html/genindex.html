@@ -1,8 +1,9 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -27,18 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=5db94ae7"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
@@ -133,7 +136,7 @@
     
     
     <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.0 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -616,8 +619,6 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv412mlx_isneginf9mlx_array10mlx_stream">mlx_isneginf (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ops.html#_CPPv412mlx_isposinf9mlx_array10mlx_stream">mlx_isposinf (C++ function)</a>
 </li>
       <li><a href="transforms.html#_CPPv47mlx_jvp11mlx_closureK16mlx_vector_arrayK16mlx_vector_array">mlx_jvp (C++ function)</a>
@@ -628,6 +629,8 @@ document.write(`
 </li>
       <li><a href="linalg.html#_CPPv415mlx_linalg_norm9mlx_arrayPKi6size_tb10mlx_stream">mlx_linalg_norm (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="linalg.html#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream">mlx_linalg_norm_ord (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream">mlx_linalg_norm_p (C++ function)</a>
@@ -683,6 +686,26 @@ document.write(`
       <li><a href="map.html#_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator">mlx_map_string_to_array_iterator_value (C++ function)</a>
 </li>
       <li><a href="map.html#_CPPv427mlx_map_string_to_array_newv">mlx_map_string_to_array_new (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv424mlx_map_string_to_string">mlx_map_string_to_string (C++ type)</a>
+</li>
+      <li><a href="map.html#_CPPv428mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string">mlx_map_string_to_string_get (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string">mlx_map_string_to_string_insert (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv432mlx_map_string_to_string_iterate24mlx_map_string_to_string">mlx_map_string_to_string_iterate (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv433mlx_map_string_to_string_iterator">mlx_map_string_to_string_iterator (C++ type)</a>
+</li>
+      <li><a href="map.html#_CPPv437mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator">mlx_map_string_to_string_iterator_end (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv437mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator">mlx_map_string_to_string_iterator_key (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv438mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator">mlx_map_string_to_string_iterator_next (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv439mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator">mlx_map_string_to_string_iterator_value (C++ function)</a>
+</li>
+      <li><a href="map.html#_CPPv428mlx_map_string_to_string_newv">mlx_map_string_to_string_new (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_matmul9mlx_array9mlx_array10mlx_stream">mlx_matmul (C++ function)</a>
 </li>
@@ -780,9 +803,9 @@ document.write(`
 </li>
       <li><a href="io.html#_CPPv413mlx_save_fileP4FILE9mlx_array">mlx_save_file (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv420mlx_save_safetensors10mlx_string23mlx_map_string_to_array">mlx_save_safetensors (C++ function)</a>
+      <li><a href="io.html#_CPPv420mlx_save_safetensors10mlx_string23mlx_map_string_to_array24mlx_map_string_to_string">mlx_save_safetensors (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv425mlx_save_safetensors_fileP4FILE23mlx_map_string_to_array">mlx_save_safetensors_file (C++ function)</a>
+      <li><a href="io.html#_CPPv425mlx_save_safetensors_fileP4FILE23mlx_map_string_to_array24mlx_map_string_to_string">mlx_save_safetensors_file (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_scatter9mlx_arrayK16mlx_vector_array9mlx_arrayPKi6size_t10mlx_stream">mlx_scatter (C++ function)</a>
 </li>
