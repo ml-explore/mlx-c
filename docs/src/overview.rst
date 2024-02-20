@@ -85,8 +85,8 @@ for :doc:`random number generation <random>`, and :doc:`FFTs <fft>`. Advanced
 IO Operations
 -------------
 
-MLX C wraps a number of :doc:`array IO operations <io>`, which saves and
-loads arrays in several common formats. See :doc:`IO utils <ioutils>` for
+MLX C wraps a number of :doc:`array IO operations <io>`, which save and
+load arrays in several common formats. See :doc:`IO utils <ioutils>` for
 specific MLX objects defined for IO purposes.
 
 
