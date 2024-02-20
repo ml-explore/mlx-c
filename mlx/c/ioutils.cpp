@@ -1,3 +1,5 @@
+/* Copyright © 2023-2024 Apple Inc. */
+
 #include "mlx/c/ioutils.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
