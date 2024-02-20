@@ -16,7 +16,8 @@ extern "C" {
 /**@{*/
 
 /**
- * .
+ * A MLX SafeTensors storage.
+ * Holds a string-to-array map (data) and string-to-string map (metadata).
  */
 typedef struct mlx_safetensors_* mlx_safetensors;
 

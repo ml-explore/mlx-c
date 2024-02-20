@@ -85,8 +85,10 @@ for :doc:`random number generation <random>`, and :doc:`FFTs <fft>`. Advanced
 IO Operations
 -------------
 
-MLX C wraps a number of :doc:`array IO operations <io>`, which saves and loads
-arrays in several common formats.
+MLX C wraps a number of :doc:`array IO operations <io>`, which saves and
+loads arrays in several common formats. See :doc:`IO utils <ioutils>` for
+specific MLX objects defined for IO purposes.
+
 
 Function Transformations
 ------------------------
@@ -114,3 +116,11 @@ Compiling functions makes them more efficient by reducing redundant work,
 fusing kernels, and reducing overhead. :doc:`Compilation operations <compile>`
 are function transformations which take a closure and return a new closure
 (which is the compiled version of the given closure).
+
+Fast Custom Ops
+===============
+
+To maximize performance, one can leverage :doc:`compilation
+<compile>`. However, sometimes compilation falls short, and in that case
+MLX comes with :doc:`fast <fast>` custom implementations for some
+mainstream operations.
