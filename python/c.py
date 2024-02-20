@@ -107,6 +107,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
     #include "mlx/c/mlx.h"
     #include "mlx/c/private/array.h"
     #include "mlx/c/private/closure.h"
+    #include "mlx/c/private/io.h"
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/string.h"
@@ -123,6 +124,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
+    #include "mlx/c/ioutils.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
     #include "mlx/c/string.h"
@@ -161,6 +163,10 @@ def generate(funcs, headername, namespace, implementation, docstring):
             signature.append("mlx_closure_value_and_grad")
         elif return_t == "std::unordered_map<std::string, array>":
             signature.append("mlx_map_string_to_array")
+        elif return_t == "std::unordered_map<std::string, std::string>":
+            signature.append("mlx_map_string_to_string")
+        elif return_t == "SafetensorsLoad":
+            signature.append("mlx_safetensors")
         elif return_t == "std::string":
             signature.append("mlx_string")
         else:
@@ -242,6 +248,9 @@ def generate(funcs, headername, namespace, implementation, docstring):
             elif pti == "std::unordered_map<std::string, array>":
                 c_call.append("mlx_map_string_to_array " + pni)
                 cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
+            elif pti == "std::unordered_map<std::string, std::string>":
+                c_call.append("mlx_map_string_to_string " + pni)
+                cpp_call.append("MLX_CPP_MAP_STRING_TO_STRING(" + pni + ")")
             elif pti == "std::string":
                 c_call.append("mlx_string " + pni)
                 cpp_call.append("MLX_CPP_STRING(" + pni + ")")
@@ -282,6 +291,10 @@ def generate(funcs, headername, namespace, implementation, docstring):
             cpp_code.append("MLX_C_CLOSURE_VALUE_AND_GRAD")
         elif return_t == "std::unordered_map<std::string, array>":
             cpp_code.append("MLX_C_MAP_STRING_TO_ARRAY")
+        elif return_t == "std::unordered_map<std::string, std::string>":
+            cpp_code.append("MLX_C_MAP_STRING_TO_STRING")
+        elif return_t == "SafetensorsLoad":
+            cpp_code.append("MLX_C_SAFETENSORS")
         elif return_t == "std::string":
             cpp_code.append("MLX_C_STRING")
         else:

@@ -128,7 +128,9 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
 #define MLX_C_ARRAY_DTYPE(dtype) (mlx_c_dtypes[(int)((dtype).val)])
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
-#define MLX_CPP_OPT_INTVEC(vals, size) ((vals) ? std::make_optional(std::vector<int>((vals), (vals) + (size))) : std::nullopt)
+#define MLX_CPP_OPT_INTVEC(vals, size)                                    \
+  ((vals) ? std::make_optional(std::vector<int>((vals), (vals) + (size))) \
+          : std::nullopt)
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
 #define MLX_C_ARRAYS(vec) (new mlx_vector_array_(vec))
@@ -145,7 +147,10 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_C_CLOSURE_VALUE_AND_GRAD(f) (new mlx_closure_value_and_grad_(f))
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
 #define MLX_C_MAP_STRING_TO_ARRAY(map) (new mlx_map_string_to_array_(map))
+#define MLX_CPP_MAP_STRING_TO_STRING(map) ((map)->ctx)
+#define MLX_C_MAP_STRING_TO_STRING(map) (new mlx_map_string_to_string_(map))
 #define MLX_CPP_STRING(str) ((str)->ctx)
 #define MLX_C_STRING(str) (new mlx_string_(str))
+#define MLX_C_SAFETENSORS(st) (new mlx_safetensors_(st))
 
 #endif

@@ -3,14 +3,13 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_COMPILE_H
-#define MLX_COMPILE_H
+#ifndef MLX_FAST_H
+#define MLX_FAST_H
 
 #include <stdio.h>
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
-#include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
@@ -20,12 +19,17 @@ extern "C" {
 #endif
 
 /**
- * \defgroup compile Compilation operations
+ * \defgroup fast Fast custom operations
  */
 /**@{*/
-mlx_closure mlx_compile(mlx_closure fun);
-void mlx_disable_compile();
-void mlx_enable_compile();
+mlx_array mlx_fast_rope(
+    mlx_array x,
+    int dims,
+    bool traditional,
+    float base,
+    float scale,
+    int offset,
+    mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus

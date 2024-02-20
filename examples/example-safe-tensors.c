@@ -17,7 +17,8 @@ int main() {
     return -1;
   }
 
-  mlx_map_string_to_array map = mlx_load_safetensors_file(f, MLX_CPU_STREAM);
+  mlx_safetensors st = mlx_load_safetensors_file(f, MLX_CPU_STREAM);
+  mlx_map_string_to_array map = mlx_safetensors_data(st);
 
   mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(map);
   while (!mlx_map_string_to_array_iterator_end(it)) {
@@ -33,6 +34,7 @@ int main() {
   }
 
   mlx_free(map);
+  mlx_free(st);
   fclose(f);
 
   return 0;
