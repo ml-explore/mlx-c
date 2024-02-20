@@ -120,7 +120,5 @@ are function transformations which take a closure and return a new closure
 Fast Custom Ops
 ===============
 
-To maximize performance, one can leverage :doc:`compilation
-<compile>`. However, sometimes compilation falls short, and in that case
-MLX comes with :doc:`fast <fast>` custom implementations for some
-mainstream operations.
+To maximize performance MLX has :doc:`fast <fast>` custom implementations
+for some common operations.
