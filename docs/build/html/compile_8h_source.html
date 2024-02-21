@@ -93,28 +93,30 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="array_8h.html">mlx/c/array.h</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="closure_8h.html">mlx/c/closure.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="map_8h.html">mlx/c/map.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8h.html">mlx/c/stream.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="string_8h.html">mlx/c/string.h</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="group__compile.html#gafb5bf26392a47ace404f162204423c86">   25</a></span><a class="code hl_typedef" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> <a class="code hl_function" href="group__compile.html#gafb5bf26392a47ace404f162204423c86">mlx_compile</a>(<a class="code hl_typedef" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> fun);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group__compile.html#gad3c419b900c9c0bc59c917ad5a621363">   26</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__compile.html#gad3c419b900c9c0bc59c917ad5a621363">mlx_disable_compile</a>();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group__compile.html#ga6ef0e5e1902671c2a3f5cf4bc0b2e910">   27</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__compile.html#ga6ef0e5e1902671c2a3f5cf4bc0b2e910">mlx_enable_compile</a>();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ioutils_8h.html">mlx/c/ioutils.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="map_8h.html">mlx/c/map.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="stream_8h.html">mlx/c/stream.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="string_8h.html">mlx/c/string.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="group__compile.html#gafb5bf26392a47ace404f162204423c86">   26</a></span><a class="code hl_typedef" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> <a class="code hl_function" href="group__compile.html#gafb5bf26392a47ace404f162204423c86">mlx_compile</a>(<a class="code hl_typedef" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> fun);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="group__compile.html#gad3c419b900c9c0bc59c917ad5a621363">   27</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__compile.html#gad3c419b900c9c0bc59c917ad5a621363">mlx_disable_compile</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group__compile.html#ga6ef0e5e1902671c2a3f5cf4bc0b2e910">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__compile.html#ga6ef0e5e1902671c2a3f5cf4bc0b2e910">mlx_enable_compile</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aarray_8h_html"><div class="ttname"><a href="array_8h.html">array.h</a></div></div>
 <div class="ttc" id="aclosure_8h_html"><div class="ttname"><a href="closure_8h.html">closure.h</a></div></div>
 <div class="ttc" id="agroup__compile_html_ga6ef0e5e1902671c2a3f5cf4bc0b2e910"><div class="ttname"><a href="group__compile.html#ga6ef0e5e1902671c2a3f5cf4bc0b2e910">mlx_enable_compile</a></div><div class="ttdeci">void mlx_enable_compile()</div></div>
 <div class="ttc" id="agroup__compile_html_gad3c419b900c9c0bc59c917ad5a621363"><div class="ttname"><a href="group__compile.html#gad3c419b900c9c0bc59c917ad5a621363">mlx_disable_compile</a></div><div class="ttdeci">void mlx_disable_compile()</div></div>
 <div class="ttc" id="agroup__compile_html_gafb5bf26392a47ace404f162204423c86"><div class="ttname"><a href="group__compile.html#gafb5bf26392a47ace404f162204423c86">mlx_compile</a></div><div class="ttdeci">mlx_closure mlx_compile(mlx_closure fun)</div></div>
 <div class="ttc" id="agroup__mlx__closure_html_gab304bffccbf5d2ef4a09bdca4778cb5f"><div class="ttname"><a href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a></div><div class="ttdeci">struct mlx_closure_ * mlx_closure</div><div class="ttdoc">A closure encapsulating a function taking a vector of arrays, and returning a vector of arrays.</div><div class="ttdef"><b>Definition</b> closure.h:22</div></div>
+<div class="ttc" id="aioutils_8h_html"><div class="ttname"><a href="ioutils_8h.html">ioutils.h</a></div></div>
 <div class="ttc" id="amap_8h_html"><div class="ttname"><a href="map_8h.html">map.h</a></div></div>
 <div class="ttc" id="astream_8h_html"><div class="ttname"><a href="stream_8h.html">stream.h</a></div></div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div></div>

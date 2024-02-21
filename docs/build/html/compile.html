@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Compilation &#8212; MLX C 0.0.0 documentation</title>
   
@@ -29,23 +28,22 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'compile';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Fast Custom Ops" href="fast.html" />
     <link rel="prev" title="Transforms" href="transforms.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -160,6 +158,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -172,6 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -182,6 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 </ul>
 
     </div>
@@ -322,7 +323,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -338,6 +341,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -348,20 +361,20 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="compilation">
-<h1>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading">#</a></h1>
+<h1>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h1>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv411mlx_compile11mlx_closure">
-<span id="_CPPv311mlx_compile11mlx_closure"></span><span id="_CPPv211mlx_compile11mlx_closure"></span><span id="mlx_compile__mlx_closure"></span><span class="target" id="group__compile_1gafb5bf26392a47ace404f162204423c86"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compile11mlx_closure" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv311mlx_compile11mlx_closure"></span><span id="_CPPv211mlx_compile11mlx_closure"></span><span id="mlx_compile__mlx_closure"></span><span class="target" id="group__compile_1gafb5bf26392a47ace404f162204423c86"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compile11mlx_closure" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv419mlx_disable_compilev">
-<span id="_CPPv319mlx_disable_compilev"></span><span id="_CPPv219mlx_disable_compilev"></span><span id="mlx_disable_compile"></span><span class="target" id="group__compile_1gad3c419b900c9c0bc59c917ad5a621363"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_disable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_disable_compilev" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv319mlx_disable_compilev"></span><span id="_CPPv219mlx_disable_compilev"></span><span id="mlx_disable_compile"></span><span class="target" id="group__compile_1gad3c419b900c9c0bc59c917ad5a621363"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_disable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_disable_compilev" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418mlx_enable_compilev">
-<span id="_CPPv318mlx_enable_compilev"></span><span id="_CPPv218mlx_enable_compilev"></span><span id="mlx_enable_compile"></span><span class="target" id="group__compile_1ga6ef0e5e1902671c2a3f5cf4bc0b2e910"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_enable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_enable_compilev" title="Permalink to this definition">#</a><br /></dt>
+<span id="_CPPv318mlx_enable_compilev"></span><span id="_CPPv218mlx_enable_compilev"></span><span id="mlx_enable_compile"></span><span class="target" id="group__compile_1ga6ef0e5e1902671c2a3f5cf4bc0b2e910"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_enable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_enable_compilev" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -386,6 +399,15 @@ document.write(`
         <p class="prev-next-title">Transforms</p>
       </div>
     </a>
+    <a class="right-next"
+       href="fast.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fast Custom Ops</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -393,7 +415,22 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

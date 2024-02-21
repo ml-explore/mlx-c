@@ -1,9 +1,8 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
@@ -28,20 +27,18 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
@@ -160,6 +157,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -172,6 +170,7 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -182,6 +181,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 </ul>
 
     </div>
@@ -565,6 +565,8 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv47mlx_eyeiii15mlx_array_dtype10mlx_stream">mlx_eye (C++ function)</a>
 </li>
+      <li><a href="fast.html#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream">mlx_fast_rope (C++ function)</a>
+</li>
       <li><a href="fft.html#_CPPv411mlx_fft_fft9mlx_arrayii10mlx_stream">mlx_fft_fft (C++ function)</a>
 </li>
       <li><a href="fft.html#_CPPv412mlx_fft_fft29mlx_arrayPKi6size_tPKi6size_t10mlx_stream">mlx_fft_fft2 (C++ function)</a>
@@ -629,10 +631,10 @@ document.write(`
 </li>
       <li><a href="linalg.html#_CPPv415mlx_linalg_norm9mlx_arrayPKi6size_tb10mlx_stream">mlx_linalg_norm (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="linalg.html#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream">mlx_linalg_norm_ord (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="linalg.html#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream">mlx_linalg_norm_p (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream">mlx_linalg_qr (C++ function)</a>
@@ -798,6 +800,14 @@ document.write(`
       <li><a href="ops.html#_CPPv49mlx_round9mlx_arrayi10mlx_stream">mlx_round (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_rsqrt9mlx_array10mlx_stream">mlx_rsqrt (C++ function)</a>
+</li>
+      <li><a href="ioutils.html#_CPPv415mlx_safetensors">mlx_safetensors (C++ type)</a>
+</li>
+      <li><a href="ioutils.html#_CPPv420mlx_safetensors_data15mlx_safetensors">mlx_safetensors_data (C++ function)</a>
+</li>
+      <li><a href="ioutils.html#_CPPv424mlx_safetensors_metadata15mlx_safetensors">mlx_safetensors_metadata (C++ function)</a>
+</li>
+      <li><a href="ioutils.html#_CPPv419mlx_safetensors_newv">mlx_safetensors_new (C++ function)</a>
 </li>
       <li><a href="io.html#_CPPv48mlx_save10mlx_string9mlx_array">mlx_save (C++ function)</a>
 </li>

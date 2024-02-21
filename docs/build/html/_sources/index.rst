@@ -38,6 +38,7 @@ bindings to MLX.
    string
    map
    closure
+   ioutils
 
 .. toctree::
    :caption: API Reference
@@ -50,3 +51,4 @@ bindings to MLX.
    io
    transforms
    compile
+   fast

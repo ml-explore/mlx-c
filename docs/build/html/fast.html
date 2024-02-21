@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Vector of Vector of Arrays &#8212; MLX C 0.0.0 documentation</title>
+    <title>Fast Custom Ops &#8212; MLX C 0.0.0 documentation</title>
   
   
   
@@ -40,11 +40,10 @@
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'vecvecarray';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fast';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stream" href="stream.html" />
-    <link rel="prev" title="Vector of Arrays" href="vecarray.html" />
+    <link rel="prev" title="Compilation" href="compile.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -161,11 +160,11 @@
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Vector of Vector of Arrays</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
@@ -174,7 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
@@ -182,7 +181,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fast Custom Ops</a></li>
 </ul>
 
     </div>
@@ -252,7 +251,7 @@
       
       
       
-      <li><a href="_sources/vecvecarray.rst" target="_blank"
+      <li><a href="_sources/fast.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -336,7 +335,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Vector of Vector of Arrays</h1>
+    <h1>Fast Custom Ops</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -346,12 +345,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_vector_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_newv"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_add()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_get23mlx_vector_vector_array6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_get2d()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_vector_vector_array_size23mlx_vector_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_size()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rope()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -363,42 +357,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="vector-of-vector-of-arrays">
-<h1>Vector of Vector of Arrays<a class="headerlink" href="#vector-of-vector-of-arrays" title="Link to this heading">#</a></h1>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv423mlx_vector_vector_array">
-<span id="_CPPv323mlx_vector_vector_array"></span><span id="_CPPv223mlx_vector_vector_array"></span><span id="mlx_vector_vector_array"></span><span class="target" id="group__mlx__vector__vector__array_1ga609d1dd106d325c8c7222368c127e6ce"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_vector_vector_array_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></span><a class="headerlink" href="#_CPPv423mlx_vector_vector_array" title="Link to this definition">#</a><br /></dt>
-<dd><p>A vector of array vectors. </p>
-</dd></dl>
-
+  <section id="fast-custom-ops">
+<h1>Fast Custom Ops<a class="headerlink" href="#fast-custom-ops" title="Link to this heading">#</a></h1>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv427mlx_vector_vector_array_newv">
-<span id="_CPPv327mlx_vector_vector_array_newv"></span><span id="_CPPv227mlx_vector_vector_array_newv"></span><span id="mlx_vector_vector_array_new"></span><span class="target" id="group__mlx__vector__vector__array_1gab42189195de2e327b572b91c986769e8"></span><a class="reference internal" href="#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_vector_vector_array_newv" title="Link to this definition">#</a><br /></dt>
-<dd><p>New empty vector of array vectors. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv427mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array">
-<span id="_CPPv327mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array"></span><span id="_CPPv227mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array"></span><span id="mlx_vector_vector_array_add__mlx_vector_vector_array.mlx_vector_arrayC"></span><span class="target" id="group__mlx__vector__vector__array_1gac8e9b0a57ba770609fc83206df3c93fb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array_add</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vec2</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vec</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
-<dd><p>Add an array vector to the vector of array vectors. </p>
-<p>Reference count of the array vector will be increased. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv427mlx_vector_vector_array_get23mlx_vector_vector_array6size_t">
-<span id="_CPPv327mlx_vector_vector_array_get23mlx_vector_vector_array6size_t"></span><span id="_CPPv227mlx_vector_vector_array_get23mlx_vector_vector_array6size_t"></span><span id="mlx_vector_vector_array_get__mlx_vector_vector_array.s"></span><span class="target" id="group__mlx__vector__vector__array_1ga48c1a685f41eb929f6744f7cd35534bd"></span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array_get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vec2</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_vector_vector_array_get23mlx_vector_vector_array6size_t" title="Link to this definition">#</a><br /></dt>
-<dd><p>Get the array vector at specified <code class="docutils literal notranslate"><span class="pre">index</span></code> in the vector of array vectors. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv429mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t">
-<span id="_CPPv329mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t"></span><span id="_CPPv229mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t"></span><span id="mlx_vector_vector_array_get2d__mlx_vector_vector_array.s.s"></span><span class="target" id="group__mlx__vector__vector__array_1ga37dd3e6fb775f224e4ade1e4163f98e7"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array_get2d</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vec2</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">index</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">arr_index</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t" title="Link to this definition">#</a><br /></dt>
-<dd><p>Get the array at specified (<code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">arr_index</span></code>) in the vector of array vectors. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv428mlx_vector_vector_array_size23mlx_vector_vector_array">
-<span id="_CPPv328mlx_vector_vector_array_size23mlx_vector_vector_array"></span><span id="_CPPv228mlx_vector_vector_array_size23mlx_vector_vector_array"></span><span id="mlx_vector_vector_array_size__mlx_vector_vector_array"></span><span class="target" id="group__mlx__vector__vector__array_1ga0887230b5e9d71d55994bb1605cd3b84"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_vector_vector_array_size</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vec2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_vector_vector_array_size23mlx_vector_vector_array" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream">
+<span id="_CPPv313mlx_fast_rope9mlx_arrayibffi10mlx_stream"></span><span id="_CPPv213mlx_fast_rope9mlx_arrayibffi10mlx_stream"></span><span id="mlx_fast_rope__mlx_array.i.b.float.float.i.mlx_stream"></span><span class="target" id="group__fast_1ga272d727bbff0900ac42c58c09b9a2127"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fast_rope</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dims</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">traditional</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">base</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">offset</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -415,22 +378,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="vecarray.html"
+       href="compile.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Vector of Arrays</p>
+        <p class="prev-next-title">Compilation</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="stream.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stream</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -448,12 +402,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_vector_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_newv"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_add23mlx_vector_vector_arrayK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_add()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_vector_vector_array_get23mlx_vector_vector_array6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_vector_vector_array_get2d23mlx_vector_vector_array6size_t6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_get2d()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_vector_vector_array_size23mlx_vector_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_vector_vector_array_size()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rope()</span></code></a></li>
 </ul>
   </nav></div>
 

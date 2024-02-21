@@ -8,68 +8,68 @@ msgstr ""
 "Language: ro\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Theme by the"
-msgstr "Tema de"
-
-msgid "Open an issue"
-msgstr "Deschideți o problemă"
-
-msgid "Contents"
-msgstr "Cuprins"
-
-msgid "Download notebook file"
-msgstr "Descărcați fișierul notebook"
-
-msgid "Sphinx Book Theme"
-msgstr "Tema Sphinx Book"
-
-msgid "Fullscreen mode"
-msgstr "Modul ecran întreg"
-
-msgid "Edit this page"
-msgstr "Editați această pagină"
-
-msgid "By"
-msgstr "De"
-
-msgid "Copyright"
-msgstr "Drepturi de autor"
-
-msgid "Source repository"
-msgstr "Depozit sursă"
-
-msgid "previous page"
-msgstr "pagina anterioară"
-
-msgid "next page"
-msgstr "pagina următoare"
-
-msgid "Toggle navigation"
-msgstr "Comutare navigare"
-
-msgid "repository"
-msgstr "repertoriu"
+msgid "Download source file"
+msgstr "Descărcați fișierul sursă"
 
 msgid "suggest edit"
 msgstr "sugerează editare"
 
+msgid "Toggle navigation"
+msgstr "Comutare navigare"
+
 msgid "open issue"
 msgstr "problema deschisă"
 
-msgid "Launch"
-msgstr "Lansa"
+msgid "Download notebook file"
+msgstr "Descărcați fișierul notebook"
+
+msgid "repository"
+msgstr "repertoriu"
+
+msgid "Theme by the"
+msgstr "Tema de"
 
 msgid "Print to PDF"
 msgstr "Imprimați în PDF"
 
-msgid "By the"
-msgstr "Langa"
+msgid "Download this page"
+msgstr "Descarcă această pagină"
+
+msgid "Copyright"
+msgstr "Drepturi de autor"
 
 msgid "Last updated on"
 msgstr "Ultima actualizare la"
 
-msgid "Download source file"
-msgstr "Descărcați fișierul sursă"
+msgid "Launch"
+msgstr "Lansa"
 
-msgid "Download this page"
-msgstr "Descarcă această pagină"
+msgid "Open an issue"
+msgstr "Deschideți o problemă"
+
+msgid "Fullscreen mode"
+msgstr "Modul ecran întreg"
+
+msgid "Sphinx Book Theme"
+msgstr "Tema Sphinx Book"
+
+msgid "Contents"
+msgstr "Cuprins"
+
+msgid "Edit this page"
+msgstr "Editați această pagină"
+
+msgid "next page"
+msgstr "pagina următoare"
+
+msgid "Source repository"
+msgstr "Depozit sursă"
+
+msgid "By"
+msgstr "De"
+
+msgid "By the"
+msgstr "Langa"
+
+msgid "previous page"
+msgstr "pagina anterioară"

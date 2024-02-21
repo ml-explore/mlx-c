@@ -8,68 +8,68 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Theme by the"
-msgstr "Teema"
-
-msgid "Open an issue"
-msgstr "Avage probleem"
-
-msgid "Contents"
-msgstr "Sisu"
-
-msgid "Download notebook file"
-msgstr "Laadige sülearvuti fail alla"
-
-msgid "Sphinx Book Theme"
-msgstr "Sfinksiraamatu teema"
-
-msgid "Fullscreen mode"
-msgstr "Täisekraanirežiim"
-
-msgid "Edit this page"
-msgstr "Muutke seda lehte"
-
-msgid "By"
-msgstr "Kõrval"
-
-msgid "Copyright"
-msgstr "Autoriõigus"
-
-msgid "Source repository"
-msgstr "Allikahoidla"
-
-msgid "previous page"
-msgstr "eelmine leht"
-
-msgid "next page"
-msgstr "järgmine leht"
-
-msgid "Toggle navigation"
-msgstr "Lülita navigeerimine sisse"
-
-msgid "repository"
-msgstr "hoidla"
+msgid "Download source file"
+msgstr "Laadige alla lähtefail"
 
 msgid "suggest edit"
 msgstr "soovita muuta"
 
+msgid "Toggle navigation"
+msgstr "Lülita navigeerimine sisse"
+
 msgid "open issue"
 msgstr "avatud küsimus"
 
-msgid "Launch"
-msgstr "Käivitage"
+msgid "Download notebook file"
+msgstr "Laadige sülearvuti fail alla"
+
+msgid "repository"
+msgstr "hoidla"
+
+msgid "Theme by the"
+msgstr "Teema"
 
 msgid "Print to PDF"
 msgstr "Prindi PDF-i"
 
-msgid "By the"
-msgstr "Autor"
+msgid "Download this page"
+msgstr "Laadige see leht alla"
+
+msgid "Copyright"
+msgstr "Autoriõigus"
 
 msgid "Last updated on"
 msgstr "Viimati uuendatud"
 
-msgid "Download source file"
-msgstr "Laadige alla lähtefail"
+msgid "Launch"
+msgstr "Käivitage"
 
-msgid "Download this page"
-msgstr "Laadige see leht alla"
+msgid "Open an issue"
+msgstr "Avage probleem"
+
+msgid "Fullscreen mode"
+msgstr "Täisekraanirežiim"
+
+msgid "Sphinx Book Theme"
+msgstr "Sfinksiraamatu teema"
+
+msgid "Contents"
+msgstr "Sisu"
+
+msgid "Edit this page"
+msgstr "Muutke seda lehte"
+
+msgid "next page"
+msgstr "järgmine leht"
+
+msgid "Source repository"
+msgstr "Allikahoidla"
+
+msgid "By"
+msgstr "Kõrval"
+
+msgid "By the"
+msgstr "Autor"
+
+msgid "previous page"
+msgstr "eelmine leht"

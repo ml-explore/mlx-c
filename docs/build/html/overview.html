@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Overview &#8212; MLX C 0.0.0 documentation</title>
   
@@ -29,20 +28,18 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'overview';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -161,6 +158,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -173,6 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -183,6 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 </ul>
 
     </div>
@@ -346,6 +346,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-object">C Object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-of-arrays-and-vector-of-vector-of-arrays">Vector of Arrays, and Vector of Vector of Arrays</a></li>
@@ -356,6 +357,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-transformations">Function Transformations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">Compilation</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-custom-ops">Fast Custom Ops</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -367,10 +372,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
 <p>MLX C wraps and follows as closely as possible the C++ API of <a class="reference external" href="https://github.com/ml-explore/mlx">MLX</a>.</p>
 <section id="c-object">
-<h2>C Object<a class="headerlink" href="#c-object" title="Permalink to this heading">#</a></h2>
+<h2>C Object<a class="headerlink" href="#c-object" title="Link to this heading">#</a></h2>
 <p>MLX C relies on several C <code class="docutils literal notranslate"><span class="pre">struct</span></code> which are all compatible with a private
 <a class="reference internal" href="object.html"><span class="doc">object struct</span></a> (that we will refer as a MLX C object),
 which implements basic memory management. When using MLX C, it is important
@@ -389,7 +394,7 @@ function which returns a string describing the contents of the object
 (which is particularly interesting for array objects).</p>
 </section>
 <section id="array">
-<h2>Array<a class="headerlink" href="#array" title="Permalink to this heading">#</a></h2>
+<h2>Array<a class="headerlink" href="#array" title="Link to this heading">#</a></h2>
 <p>The most important object in MLX C is certainly the <a class="reference internal" href="array.html"><span class="doc">array</span></a>
 (<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_array</span></code>), which holds the data on which computations are
 performed. As MLX is <a class="reference external" href="https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html">lazy</a>,
@@ -398,7 +403,7 @@ valid only if <code class="xref py py-func docutils literal notranslate"><span c
 <a class="reference internal" href="transforms.html"><span class="doc">transforms</span></a>).</p>
 </section>
 <section id="vector-of-arrays-and-vector-of-vector-of-arrays">
-<h2>Vector of Arrays, and Vector of Vector of Arrays<a class="headerlink" href="#vector-of-arrays-and-vector-of-vector-of-arrays" title="Permalink to this heading">#</a></h2>
+<h2>Vector of Arrays, and Vector of Vector of Arrays<a class="headerlink" href="#vector-of-arrays-and-vector-of-vector-of-arrays" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="vecarray.html"><span class="doc">Vector of arrays</span></a> (<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_array</span></code>) can hold
 multiple arrays, and <a class="reference internal" href="vecvecarray.html"><span class="doc">vector of vector arrays</span></a>
 (<code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code>) can hold multiple vector of arrays.</p>
@@ -409,7 +414,7 @@ vector of arrays is destroyed (via <code class="xref py py-func docutils literal
 <p>Same idea applies to <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_vector_vector_array</span></code>.</p>
 </section>
 <section id="device-and-stream">
-<h2>Device and Stream<a class="headerlink" href="#device-and-stream" title="Permalink to this heading">#</a></h2>
+<h2>Device and Stream<a class="headerlink" href="#device-and-stream" title="Link to this heading">#</a></h2>
 <p>In MLX, arrays are not tied to a device. Instead, operations on arrays are
 scheduled on a <a class="reference internal" href="stream.html"><span class="doc">stream</span></a>, which is associated to a particular
 <a class="reference internal" href="device.html"><span class="doc">device</span></a>.</p>
@@ -418,7 +423,7 @@ scheduled on a <a class="reference internal" href="stream.html"><span class="doc
 streams. See the basic <a class="reference external" href="https://github.com/ml-explore/mlx-c/blob/main/examples/example.c">MLX C example</a>.</p>
 </section>
 <section id="string-and-maps">
-<h2>String and Maps<a class="headerlink" href="#string-and-maps" title="Permalink to this heading">#</a></h2>
+<h2>String and Maps<a class="headerlink" href="#string-and-maps" title="Link to this heading">#</a></h2>
 <p>MLX C has a <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_string</span></code> which <a class="reference internal" href="string.html"><span class="doc">encapsulates a C char
 pointer</span></a>. Just like other MLX C objects, it must be freed with
 <code class="xref py py-func docutils literal notranslate"><span class="pre">mlx_free()</span></code>.</p>
@@ -426,18 +431,19 @@ pointer</span></a>. Just like other MLX C objects, it must be freed with
 <code class="xref py py-class docutils literal notranslate"><span class="pre">mlx_map_string_to_array</span></code>.</p>
 </section>
 <section id="array-operations">
-<h2>Array Operations<a class="headerlink" href="#array-operations" title="Permalink to this heading">#</a></h2>
+<h2>Array Operations<a class="headerlink" href="#array-operations" title="Link to this heading">#</a></h2>
 <p>Many array <a class="reference internal" href="ops.html"><span class="doc">operations</span></a> are available, with additional support
 for <a class="reference internal" href="random.html"><span class="doc">random number generation</span></a>, and <a class="reference internal" href="fft.html"><span class="doc">FFTs</span></a>. Advanced
 <a class="reference internal" href="linalg.html"><span class="doc">linear algebra operations</span></a> are in their early stages.</p>
 </section>
 <section id="io-operations">
-<h2>IO Operations<a class="headerlink" href="#io-operations" title="Permalink to this heading">#</a></h2>
-<p>MLX C wraps a number of <a class="reference internal" href="io.html"><span class="doc">array IO operations</span></a>, which saves and loads
-arrays in several common formats.</p>
+<h2>IO Operations<a class="headerlink" href="#io-operations" title="Link to this heading">#</a></h2>
+<p>MLX C wraps a number of <a class="reference internal" href="io.html"><span class="doc">array IO operations</span></a>, which save and
+load arrays in several common formats. See <a class="reference internal" href="ioutils.html"><span class="doc">IO utils</span></a> for
+specific MLX objects defined for IO purposes.</p>
 </section>
 <section id="function-transformations">
-<h2>Function Transformations<a class="headerlink" href="#function-transformations" title="Permalink to this heading">#</a></h2>
+<h2>Function Transformations<a class="headerlink" href="#function-transformations" title="Link to this heading">#</a></h2>
 <p>MLX supports the concept of <a class="reference external" href="https://ml-explore.github.io/mlx/build/html/python/transforms.html">function transforms</a>.</p>
 <p>These are also available in MLX C through the use of
 <a class="reference internal" href="closure.html"><span class="doc">closures</span></a> that contain a C function pointer and
@@ -449,13 +455,18 @@ return closures.</p>
 <p>For more details, see the <a class="reference external" href="https://github.com/ml-explore/mlx-c/blob/main/examples/example-grad.c">example using closures</a>.</p>
 </section>
 <section id="compilation">
-<h2>Compilation<a class="headerlink" href="#compilation" title="Permalink to this heading">#</a></h2>
+<h2>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h2>
 <p>When using the same function multiple times, compilation may be beneficial.
 Compiling functions makes them more efficient by reducing redundant work,
 fusing kernels, and reducing overhead. <a class="reference internal" href="compile.html"><span class="doc">Compilation operations</span></a>
 are function transformations which take a closure and return a new closure
 (which is the compiled version of the given closure).</p>
 </section>
+</section>
+<section id="fast-custom-ops">
+<h1>Fast Custom Ops<a class="headerlink" href="#fast-custom-ops" title="Link to this heading">#</a></h1>
+<p>To maximize performance MLX has <a class="reference internal" href="fast.html"><span class="doc">fast</span></a> custom implementations
+for some common operations.</p>
 </section>
 
 
@@ -503,6 +514,7 @@ are function transformations which take a closure and return a new closure
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-object">C Object</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array">Array</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-of-arrays-and-vector-of-vector-of-arrays">Vector of Arrays, and Vector of Vector of Arrays</a></li>
@@ -513,6 +525,10 @@ are function transformations which take a closure and return a new closure
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function-transformations">Function Transformations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation">Compilation</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-custom-ops">Fast Custom Ops</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
