@@ -46,6 +46,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ioutils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
