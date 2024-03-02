@@ -14,8 +14,8 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-extern "C" mlx_closure mlx_compile(mlx_closure fun) {
-  return MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun)));
+extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
+  return MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun), shapeless));
 }
 extern "C" void mlx_disable_compile() {
   return MLX_C_VOID(mlx::core::disable_compile());

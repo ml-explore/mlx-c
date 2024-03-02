@@ -23,7 +23,7 @@ extern "C" {
  * \defgroup compile Compilation operations
  */
 /**@{*/
-mlx_closure mlx_compile(mlx_closure fun);
+mlx_closure mlx_compile(mlx_closure fun, bool shapeless);
 void mlx_disable_compile();
 void mlx_enable_compile();
 /**@}*/

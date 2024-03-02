@@ -146,6 +146,15 @@ mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::astype(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
+extern "C" mlx_array mlx_atleast_1d(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::atleast_1d(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::atleast_2d(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::atleast_3d(a->ctx, s->ctx));
+}
 extern "C" mlx_vector_array mlx_broadcast_arrays(
     const mlx_vector_array inputs,
     mlx_stream s) {
@@ -210,6 +219,34 @@ extern "C" mlx_array mlx_conv2d(
       MLX_CPP_INTPAIR(f_padding, s_padding),
       MLX_CPP_INTPAIR(f_dilation, s_dilation),
       groups,
+      s->ctx));
+}
+extern "C" mlx_array mlx_conv_general(
+    mlx_array input,
+    mlx_array weight,
+    const int* stride,
+    size_t num_stride,
+    const int* padding_lo,
+    size_t num_padding_lo,
+    const int* padding_hi,
+    size_t num_padding_hi,
+    const int* kernel_dilation,
+    size_t num_kernel_dilation,
+    const int* input_dilation,
+    size_t num_input_dilation,
+    int groups,
+    bool flip,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::conv_general(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTVEC(stride, num_stride),
+      MLX_CPP_INTVEC(padding_lo, num_padding_lo),
+      MLX_CPP_INTVEC(padding_hi, num_padding_hi),
+      MLX_CPP_INTVEC(kernel_dilation, num_kernel_dilation),
+      MLX_CPP_INTVEC(input_dilation, num_input_dilation),
+      groups,
+      flip,
       s->ctx));
 }
 extern "C" mlx_array mlx_copy(mlx_array a, mlx_stream s) {

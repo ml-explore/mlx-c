@@ -128,6 +128,8 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
 #define MLX_C_ARRAY_DTYPE(dtype) (mlx_c_dtypes[(int)((dtype).val)])
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
+#define MLX_CPP_UINT64VEC(vals, size) \
+  (std::vector<uint64_t>((vals), (vals) + (size)))
 #define MLX_CPP_OPT_INTVEC(vals, size)                                    \
   ((vals) ? std::make_optional(std::vector<int>((vals), (vals) + (size))) \
           : std::nullopt)

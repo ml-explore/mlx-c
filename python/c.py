@@ -221,6 +221,10 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
+            elif pti == "std::vector<uint64_t>":
+                c_call.append("const uint64_t* " + pni)
+                c_call.append("size_t num_" + pni)
+                cpp_call.append("MLX_CPP_UINT64VEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::optional<std::vector<int>>":
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
