@@ -135,6 +135,9 @@ $(function() {
 <li>mlx_array_strides()&#160;:&#160;<a class="el" href="group__mlx__array.html#gaaf3c54f70a4dc4c71446f4e1182d68a6">array.h</a></li>
 <li>mlx_as_strided()&#160;:&#160;<a class="el" href="group__ops.html#ga934804ff3f2cd5fd749a6b932a567df1">ops.h</a></li>
 <li>mlx_astype()&#160;:&#160;<a class="el" href="group__ops.html#gaa4ac882059fc54ff8bc9be6c316bce62">ops.h</a></li>
+<li>mlx_atleast_1d()&#160;:&#160;<a class="el" href="group__ops.html#gadfa1d62060c62a5e21a6699d5498c744">ops.h</a></li>
+<li>mlx_atleast_2d()&#160;:&#160;<a class="el" href="group__ops.html#ga5e68fc0533dcbd1dedee189eb68d481a">ops.h</a></li>
+<li>mlx_atleast_3d()&#160;:&#160;<a class="el" href="group__ops.html#ga3e949d4e45e054b0fec0957ebb4e8e97">ops.h</a></li>
 <li>mlx_broadcast_arrays()&#160;:&#160;<a class="el" href="group__ops.html#gad59519f3707988ce5d534565e50d1213">ops.h</a></li>
 <li>mlx_broadcast_to()&#160;:&#160;<a class="el" href="group__ops.html#gab5c34546a0bc9881e7b91b5f0decc4e4">ops.h</a></li>
 <li>mlx_ceil()&#160;:&#160;<a class="el" href="group__ops.html#ga65651ee7ffdf9c7f58e5ae08a8171164">ops.h</a></li>
@@ -145,11 +148,12 @@ $(function() {
 <li>mlx_closure_new_unary()&#160;:&#160;<a class="el" href="group__mlx__closure.html#ga45952f16faf15ae11aaf798fd5bc28c7">closure.h</a></li>
 <li>mlx_closure_new_with_payload()&#160;:&#160;<a class="el" href="group__mlx__closure.html#ga51d007c217461faca06972a15d6e3649">closure.h</a></li>
 <li>mlx_closure_value_and_grad_apply()&#160;:&#160;<a class="el" href="group__mlx__closure.html#gab5d7efa2d147102094b4a1eeeef0ed79">closure.h</a></li>
-<li>mlx_compile()&#160;:&#160;<a class="el" href="group__compile.html#gafb5bf26392a47ace404f162204423c86">compile.h</a></li>
+<li>mlx_compile()&#160;:&#160;<a class="el" href="group__compile.html#ga66eddc203ea77675c510f98a090c3586">compile.h</a></li>
 <li>mlx_concatenate()&#160;:&#160;<a class="el" href="group__ops.html#ga985eff9826441886e8953547667e87a3">ops.h</a></li>
 <li>mlx_concatenate_all()&#160;:&#160;<a class="el" href="group__ops.html#ga5e1e77dd224982be48ca87a30c35106f">ops.h</a></li>
 <li>mlx_conv1d()&#160;:&#160;<a class="el" href="group__ops.html#ga2a51381e90055f926b330b2ce669bb5d">ops.h</a></li>
 <li>mlx_conv2d()&#160;:&#160;<a class="el" href="group__ops.html#gabc48f57ee0036997572a8cd7aca89130">ops.h</a></li>
+<li>mlx_conv_general()&#160;:&#160;<a class="el" href="group__ops.html#ga4cceed894d8995de7bb79d1a79f79799">ops.h</a></li>
 <li>mlx_copy()&#160;:&#160;<a class="el" href="group__ops.html#gad0ffbbd7e56ac154d8d5ab6ad82c7903">ops.h</a></li>
 <li>mlx_cos()&#160;:&#160;<a class="el" href="group__ops.html#gaae35f3ee9b20ad86e476ecf05c016a66">ops.h</a></li>
 <li>mlx_cosh()&#160;:&#160;<a class="el" href="group__ops.html#gaeef5d9c7ce299830a1ca969a5461bf7f">ops.h</a></li>
@@ -161,7 +165,7 @@ $(function() {
 <li>mlx_default_stream()&#160;:&#160;<a class="el" href="group__mlx__stream.html#gaf2839578faded9dfabe73d524910e821">stream.h</a></li>
 <li>mlx_depends()&#160;:&#160;<a class="el" href="group__ops.html#gacdaae7f5d2bd036db124fc56af9f3e49">ops.h</a></li>
 <li>mlx_dequantize()&#160;:&#160;<a class="el" href="group__ops.html#ga8247cca1f9d34b37e375299f877013c7">ops.h</a></li>
-<li>mlx_detail_compile()&#160;:&#160;<a class="el" href="group__transforms__impl.html#ga1da87125d06225bfecaea406e25fc54e">transforms_impl.h</a></li>
+<li>mlx_detail_compile()&#160;:&#160;<a class="el" href="group__transforms__impl.html#ga824cae3171b644d3af2281f3c7a3ecbc">transforms_impl.h</a></li>
 <li>mlx_detail_compile_erase()&#160;:&#160;<a class="el" href="group__transforms__impl.html#gac290646a0f504866960490179515ba37">transforms_impl.h</a></li>
 <li>mlx_detail_vmap_replace()&#160;:&#160;<a class="el" href="group__transforms__impl.html#gabe2b710b91f0e0c09e7eb2ad60cc8eb5">transforms_impl.h</a></li>
 <li>mlx_detail_vmap_trace()&#160;:&#160;<a class="el" href="group__transforms__impl.html#ga590a0268fb827c2449b756c3e8ba4f1a">transforms_impl.h</a></li>
@@ -252,6 +256,12 @@ $(function() {
 <li>mlx_maximum()&#160;:&#160;<a class="el" href="group__ops.html#gadb3705fac337a587411e28f1f73b7bdf">ops.h</a></li>
 <li>mlx_mean()&#160;:&#160;<a class="el" href="group__ops.html#gac834151f7fd0230c1951b93e91df7e0d">ops.h</a></li>
 <li>mlx_mean_all()&#160;:&#160;<a class="el" href="group__ops.html#gaa30c2f66981389532e50f148f64feebc">ops.h</a></li>
+<li>mlx_metal_get_active_memory()&#160;:&#160;<a class="el" href="group__metal.html#ga58d3c2d28a11314cacbdce9e88f561f9">metal.h</a></li>
+<li>mlx_metal_get_cache_memory()&#160;:&#160;<a class="el" href="group__metal.html#ga5d816ae11a3984fca078ee45fee0d461">metal.h</a></li>
+<li>mlx_metal_get_peak_memory()&#160;:&#160;<a class="el" href="group__metal.html#ga83ff30d5e30e7198e799c6cc471d7aeb">metal.h</a></li>
+<li>mlx_metal_is_available()&#160;:&#160;<a class="el" href="group__metal.html#ga98947196aa2985486b6079e35ff6a30c">metal.h</a></li>
+<li>mlx_metal_set_cache_limit()&#160;:&#160;<a class="el" href="group__metal.html#ga2d425340a678224cdabbf34de311ba6d">metal.h</a></li>
+<li>mlx_metal_set_memory_limit()&#160;:&#160;<a class="el" href="group__metal.html#ga7c1593a542f4f6552c7ca90c191c7638">metal.h</a></li>
 <li>mlx_min()&#160;:&#160;<a class="el" href="group__ops.html#ga271c0b34fb6ba26a62fe77e23745ef34">ops.h</a></li>
 <li>mlx_min_all()&#160;:&#160;<a class="el" href="group__ops.html#ga4f8010c11be8dc3d2ada067c0410e236">ops.h</a></li>
 <li>mlx_minimum()&#160;:&#160;<a class="el" href="group__ops.html#ga73f9e69589c5f84b2497789f2f03af1f">ops.h</a></li>
@@ -338,7 +348,8 @@ $(function() {
 <li>mlx_take_along_axis()&#160;:&#160;<a class="el" href="group__ops.html#gaf0b74213078ef732e73b7879924db476">ops.h</a></li>
 <li>mlx_tan()&#160;:&#160;<a class="el" href="group__ops.html#gad00757f014f0875183efcd59a2ce101a">ops.h</a></li>
 <li>mlx_tanh()&#160;:&#160;<a class="el" href="group__ops.html#ga9aa6ebecf8b0282797e87b2ad42bada6">ops.h</a></li>
-<li>mlx_tensordot()&#160;:&#160;<a class="el" href="group__ops.html#ga53c77f4548d6e748946d623f0b14ec45">ops.h</a></li>
+<li>mlx_tensordot()&#160;:&#160;<a class="el" href="group__ops.html#ga5c8d562993c6c2297e950b2f39f8887d">ops.h</a></li>
+<li>mlx_tensordot_along_axis()&#160;:&#160;<a class="el" href="group__ops.html#ga445843d6f026546fdd4cf10157366e23">ops.h</a></li>
 <li>mlx_tile()&#160;:&#160;<a class="el" href="group__ops.html#ga5134dd94eb95836f294edd6b7af02eff">ops.h</a></li>
 <li>mlx_topk()&#160;:&#160;<a class="el" href="group__ops.html#gaf053492e8bcfc3e13c68ce48bbc84fba">ops.h</a></li>
 <li>mlx_topk_all()&#160;:&#160;<a class="el" href="group__ops.html#ga34c57d8ddba77ccace96de92eee5a91b">ops.h</a></li>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; MLX C 0.0.0 documentation</title>
+    <title>Overview &#8212; MLX C 0.0.3 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/documentation_options.js?v=4acdca81"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -133,8 +133,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.0 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -158,6 +158,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
@@ -183,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
 </ul>
 
     </div>
@@ -359,6 +361,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-custom-ops">Fast Custom Ops</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metal-backend-specific-functions">Metal backend-specific functions</a></li>
 </ul>
 
             </nav>
@@ -468,6 +471,10 @@ are function transformations which take a closure and return a new closure
 <p>To maximize performance MLX has <a class="reference internal" href="fast.html"><span class="doc">fast</span></a> custom implementations
 for some common operations.</p>
 </section>
+<section id="metal-backend-specific-functions">
+<h1>Metal backend-specific functions<a class="headerlink" href="#metal-backend-specific-functions" title="Link to this heading">#</a></h1>
+<p>MLX C exposes some useful functions related to the MLX <a class="reference internal" href="metal.html"><span class="doc">Metal backend</span></a>.</p>
+</section>
 
 
                 </article>
@@ -527,6 +534,7 @@ for some common operations.</p>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-custom-ops">Fast Custom Ops</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metal-backend-specific-functions">Metal backend-specific functions</a></li>
 </ul>
 
   </nav></div>
@@ -552,7 +560,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023, MLX Contributors.
+      © Copyright 2023-2024, MLX Contributors.
       <br/>
     
   </p>

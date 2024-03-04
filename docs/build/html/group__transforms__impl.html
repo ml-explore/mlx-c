@@ -77,8 +77,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga1da87125d06225bfecaea406e25fc54e" id="r_ga1da87125d06225bfecaea406e25fc54e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__transforms__impl.html#ga1da87125d06225bfecaea406e25fc54e">mlx_detail_compile</a> (<a class="el" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> fun, size_t fun_id)</td></tr>
-<tr class="separator:ga1da87125d06225bfecaea406e25fc54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga824cae3171b644d3af2281f3c7a3ecbc" id="r_ga824cae3171b644d3af2281f3c7a3ecbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__transforms__impl.html#ga824cae3171b644d3af2281f3c7a3ecbc">mlx_detail_compile</a> (<a class="el" href="group__mlx__closure.html#gab304bffccbf5d2ef4a09bdca4778cb5f">mlx_closure</a> fun, size_t fun_id, bool shapeless, const uint64_t *constants, size_t num_constants)</td></tr>
+<tr class="separator:ga824cae3171b644d3af2281f3c7a3ecbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac290646a0f504866960490179515ba37" id="r_gac290646a0f504866960490179515ba37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__transforms__impl.html#gac290646a0f504866960490179515ba37">mlx_detail_compile_erase</a> (size_t fun_id)</td></tr>
 <tr class="separator:gac290646a0f504866960490179515ba37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabe2b710b91f0e0c09e7eb2ad60cc8eb5" id="r_gabe2b710b91f0e0c09e7eb2ad60cc8eb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__transforms__impl.html#gabe2b710b91f0e0c09e7eb2ad60cc8eb5">mlx_detail_vmap_replace</a> (const <a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a> inputs, const <a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a> s_inputs, const <a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a> s_outputs, const int *in_axes, size_t num_in_axes, const int *out_axes, size_t num_out_axes)</td></tr>
@@ -88,8 +88,8 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga1da87125d06225bfecaea406e25fc54e" name="ga1da87125d06225bfecaea406e25fc54e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1da87125d06225bfecaea406e25fc54e">&#9670;&#160;</a></span>mlx_detail_compile()</h2>
+<a id="ga824cae3171b644d3af2281f3c7a3ecbc" name="ga824cae3171b644d3af2281f3c7a3ecbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga824cae3171b644d3af2281f3c7a3ecbc">&#9670;&#160;</a></span>mlx_detail_compile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +104,25 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>fun_id</em>&#160;</td>
+          <td class="paramname"><em>fun_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>shapeless</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint64_t *&#160;</td>
+          <td class="paramname"><em>constants</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>num_constants</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

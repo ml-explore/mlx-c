@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Compilation &#8212; MLX C 0.0.0 documentation</title>
+    <title>Compilation &#8212; MLX C 0.0.3 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/documentation_options.js?v=4acdca81"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -133,8 +133,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.0 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -158,6 +158,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
@@ -183,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
 </ul>
 
     </div>
@@ -346,7 +348,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
 </ul>
@@ -363,8 +365,8 @@ document.write(`
   <section id="compilation">
 <h1>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h1>
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv411mlx_compile11mlx_closure">
-<span id="_CPPv311mlx_compile11mlx_closure"></span><span id="_CPPv211mlx_compile11mlx_closure"></span><span id="mlx_compile__mlx_closure"></span><span class="target" id="group__compile_1gafb5bf26392a47ace404f162204423c86"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compile11mlx_closure" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv411mlx_compile11mlx_closureb">
+<span id="_CPPv311mlx_compile11mlx_closureb"></span><span id="_CPPv211mlx_compile11mlx_closureb"></span><span id="mlx_compile__mlx_closure.b"></span><span class="target" id="group__compile_1ga66eddc203ea77675c510f98a090c3586"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compile11mlx_closureb" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -424,7 +426,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
 </ul>
@@ -451,7 +453,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023, MLX Contributors.
+      © Copyright 2023-2024, MLX Contributors.
       <br/>
     
   </p>

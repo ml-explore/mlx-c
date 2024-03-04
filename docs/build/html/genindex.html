@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; MLX C 0.0.0 documentation</title>
+    <title>Index &#8212; MLX C 0.0.3 documentation</title>
   
   
   
@@ -35,7 +35,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=5db94ae7"></script>
+    <script src="_static/documentation_options.js?v=4acdca81"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.0 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.0 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -157,6 +157,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
@@ -182,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
 </ul>
 
     </div>
@@ -467,6 +469,12 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv410mlx_astype9mlx_array15mlx_array_dtype10mlx_stream">mlx_astype (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv414mlx_atleast_1d9mlx_array10mlx_stream">mlx_atleast_1d (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv414mlx_atleast_2d9mlx_array10mlx_stream">mlx_atleast_2d (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv414mlx_atleast_3d9mlx_array10mlx_stream">mlx_atleast_3d (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv420mlx_broadcast_arraysK16mlx_vector_array10mlx_stream">mlx_broadcast_arrays (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv416mlx_broadcast_to9mlx_arrayPKi6size_t10mlx_stream">mlx_broadcast_to (C++ function)</a>
@@ -491,7 +499,7 @@ document.write(`
 </li>
       <li><a href="closure.html#_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array">mlx_closure_value_and_grad_apply (C++ function)</a>
 </li>
-      <li><a href="compile.html#_CPPv411mlx_compile11mlx_closure">mlx_compile (C++ function)</a>
+      <li><a href="compile.html#_CPPv411mlx_compile11mlx_closureb">mlx_compile (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv415mlx_concatenateK16mlx_vector_arrayi10mlx_stream">mlx_concatenate (C++ function)</a>
 </li>
@@ -500,6 +508,8 @@ document.write(`
       <li><a href="ops.html#_CPPv410mlx_conv1d9mlx_array9mlx_arrayiiii10mlx_stream">mlx_conv1d (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_conv2d9mlx_array9mlx_arrayiiiiiii10mlx_stream">mlx_conv2d (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv416mlx_conv_general9mlx_array9mlx_arrayPKi6size_tPKi6size_tPKi6size_tPKi6size_tPKi6size_tib10mlx_stream">mlx_conv_general (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_copy9mlx_array10mlx_stream">mlx_copy (C++ function)</a>
 </li>
@@ -633,12 +643,12 @@ document.write(`
 </li>
       <li><a href="linalg.html#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream">mlx_linalg_norm_ord (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="linalg.html#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream">mlx_linalg_norm_p (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream">mlx_linalg_qr (C++ function)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ops.html#_CPPv412mlx_linspaceddi15mlx_array_dtype10mlx_stream">mlx_linspace (C++ function)</a>
 </li>
       <li><a href="io.html#_CPPv48mlx_load10mlx_string10mlx_stream">mlx_load (C++ function)</a>
@@ -720,6 +730,18 @@ document.write(`
       <li><a href="ops.html#_CPPv48mlx_mean9mlx_arrayPKi6size_tb10mlx_stream">mlx_mean (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_mean_all9mlx_arrayb10mlx_stream">mlx_mean_all (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv427mlx_metal_get_active_memoryv">mlx_metal_get_active_memory (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv426mlx_metal_get_cache_memoryv">mlx_metal_get_cache_memory (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv425mlx_metal_get_peak_memoryv">mlx_metal_get_peak_memory (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv422mlx_metal_is_availablev">mlx_metal_is_available (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv425mlx_metal_set_cache_limit6size_t">mlx_metal_set_cache_limit (C++ function)</a>
+</li>
+      <li><a href="metal.html#_CPPv426mlx_metal_set_memory_limit6size_tb">mlx_metal_set_memory_limit (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_min9mlx_arrayPKi6size_tb10mlx_stream">mlx_min (C++ function)</a>
 </li>
@@ -899,7 +921,9 @@ document.write(`
 </li>
       <li><a href="ops.html#_CPPv48mlx_tanh9mlx_array10mlx_stream">mlx_tanh (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_tensordot9mlx_array9mlx_arrayi10mlx_stream">mlx_tensordot (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_tensordot9mlx_array9mlx_arrayPKi6size_tPKi6size_t10mlx_stream">mlx_tensordot (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv424mlx_tensordot_along_axis9mlx_array9mlx_arrayi10mlx_stream">mlx_tensordot_along_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_tile9mlx_arrayPKi6size_t10mlx_stream">mlx_tile (C++ function)</a>
 </li>
@@ -1004,7 +1028,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023, MLX Contributors.
+      © Copyright 2023-2024, MLX Contributors.
       <br/>
     
   </p>
