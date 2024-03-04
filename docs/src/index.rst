@@ -52,3 +52,4 @@ bindings to MLX.
    transforms
    compile
    fast
+   metal
