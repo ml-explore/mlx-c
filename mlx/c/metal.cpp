@@ -23,6 +23,9 @@ extern "C" size_t mlx_metal_get_cache_memory() {
 extern "C" size_t mlx_metal_get_peak_memory() {
   return size_t(mlx::core::metal::get_peak_memory());
 }
+extern "C" bool mlx_metal_is_available() {
+  return bool(mlx::core::metal::is_available());
+}
 extern "C" size_t mlx_metal_set_cache_limit(size_t limit) {
   return size_t(mlx::core::metal::set_cache_limit(limit));
 }
