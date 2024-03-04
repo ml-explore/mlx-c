@@ -388,6 +388,8 @@ mlx_array mlx_tensordot(
     size_t num_axes_b,
     mlx_stream s);
 mlx_array
+mlx_tensordot_along_axis(mlx_array a, mlx_array b, int axis, mlx_stream s);
+mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s);
 mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s);
 mlx_array mlx_topk_all(mlx_array a, int k, mlx_stream s);

@@ -818,6 +818,10 @@ extern "C" mlx_array mlx_tensordot(
       s->ctx));
 }
 extern "C" mlx_array
+mlx_tensordot_along_axis(mlx_array a, mlx_array b, int axis, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::tensordot(a->ctx, b->ctx, axis, s->ctx));
+}
+extern "C" mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::tile(arr->ctx, MLX_CPP_INTVEC(reps, num_reps), s->ctx));

@@ -34,6 +34,12 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
             if len(variants) == 1:
                 sorted_funcs.append(variants[0])
+            elif name == "tensordot":
+                var0 = variants[0]
+                var1 = variants[1]
+                var1["variant"] = "along_axis"
+                sorted_funcs.append(var0)
+                sorted_funcs.append(var1)
             elif name == "split":
                 var0 = variants[0]
                 var1 = variants[1]
