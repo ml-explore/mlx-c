@@ -147,6 +147,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
         return_t = f["return_t"]
         if return_t == "void":
             signature.append("void")
+        elif return_t == "size_t":
+            signature.append("size_t")
         elif return_t == "array":
             signature.append("mlx_array")
         elif (
@@ -279,6 +281,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
         if return_t == "void":
             cpp_code.append("MLX_C_VOID")
+        elif return_t == "size_t":
+            cpp_code.append("size_t")
         elif return_t == "array":
             cpp_code.append("MLX_C_ARRAY")
         elif return_t == "std::vector<array>":
