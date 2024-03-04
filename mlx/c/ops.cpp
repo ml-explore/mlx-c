@@ -802,9 +802,20 @@ extern "C" mlx_array mlx_tan(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_tanh(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::tanh(a->ctx, s->ctx));
 }
-extern "C" mlx_array
-mlx_tensordot(mlx_array a, mlx_array b, int dims, mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::tensordot(a->ctx, b->ctx, dims, s->ctx));
+extern "C" mlx_array mlx_tensordot(
+    mlx_array a,
+    mlx_array b,
+    const int* axes_a,
+    size_t num_axes_a,
+    const int* axes_b,
+    size_t num_axes_b,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::tensordot(
+      a->ctx,
+      b->ctx,
+      MLX_CPP_INTVEC(axes_a, num_axes_a),
+      MLX_CPP_INTVEC(axes_b, num_axes_b),
+      s->ctx));
 }
 extern "C" mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s) {

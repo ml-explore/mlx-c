@@ -379,7 +379,14 @@ mlx_array
 mlx_take_along_axis(mlx_array a, mlx_array indices, int axis, mlx_stream s);
 mlx_array mlx_tan(mlx_array a, mlx_stream s);
 mlx_array mlx_tanh(mlx_array a, mlx_stream s);
-mlx_array mlx_tensordot(mlx_array a, mlx_array b, int dims, mlx_stream s);
+mlx_array mlx_tensordot(
+    mlx_array a,
+    mlx_array b,
+    const int* axes_a,
+    size_t num_axes_a,
+    const int* axes_b,
+    size_t num_axes_b,
+    mlx_stream s);
 mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s);
 mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s);
