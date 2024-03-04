@@ -85,6 +85,9 @@ mlx_array mlx_as_strided(
     size_t offset,
     mlx_stream s);
 mlx_array mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
+mlx_array mlx_atleast_1d(mlx_array a, mlx_stream s);
+mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s);
+mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s);
 mlx_vector_array mlx_broadcast_arrays(
     const mlx_vector_array inputs,
     mlx_stream s);
@@ -113,6 +116,22 @@ mlx_array mlx_conv2d(
     int f_dilation,
     int s_dilation,
     int groups,
+    mlx_stream s);
+mlx_array mlx_conv_general(
+    mlx_array input,
+    mlx_array weight,
+    const int* stride,
+    size_t num_stride,
+    const int* padding_lo,
+    size_t num_padding_lo,
+    const int* padding_hi,
+    size_t num_padding_hi,
+    const int* kernel_dilation,
+    size_t num_kernel_dilation,
+    const int* input_dilation,
+    size_t num_input_dilation,
+    int groups,
+    bool flip,
     mlx_stream s);
 mlx_array mlx_copy(mlx_array a, mlx_stream s);
 mlx_array mlx_cos(mlx_array a, mlx_stream s);
@@ -360,7 +379,16 @@ mlx_array
 mlx_take_along_axis(mlx_array a, mlx_array indices, int axis, mlx_stream s);
 mlx_array mlx_tan(mlx_array a, mlx_stream s);
 mlx_array mlx_tanh(mlx_array a, mlx_stream s);
-mlx_array mlx_tensordot(mlx_array a, mlx_array b, int dims, mlx_stream s);
+mlx_array mlx_tensordot(
+    mlx_array a,
+    mlx_array b,
+    const int* axes_a,
+    size_t num_axes_a,
+    const int* axes_b,
+    size_t num_axes_b,
+    mlx_stream s);
+mlx_array
+mlx_tensordot_along_axis(mlx_array a, mlx_array b, int axis, mlx_stream s);
 mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s);
 mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s);

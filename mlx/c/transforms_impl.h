@@ -23,7 +23,12 @@ extern "C" {
  * \defgroup transforms_impl Implementation detail operations
  */
 /**@{*/
-mlx_closure mlx_detail_compile(mlx_closure fun, size_t fun_id);
+mlx_closure mlx_detail_compile(
+    mlx_closure fun,
+    size_t fun_id,
+    bool shapeless,
+    const uint64_t* constants,
+    size_t num_constants);
 void mlx_detail_compile_erase(size_t fun_id);
 mlx_vector_array mlx_detail_vmap_replace(
     const mlx_vector_array inputs,

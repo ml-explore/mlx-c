@@ -14,9 +14,17 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-extern "C" mlx_closure mlx_detail_compile(mlx_closure fun, size_t fun_id) {
-  return MLX_C_CLOSURE(
-      mlx::core::detail::compile(MLX_CPP_CLOSURE(fun), fun_id));
+extern "C" mlx_closure mlx_detail_compile(
+    mlx_closure fun,
+    size_t fun_id,
+    bool shapeless,
+    const uint64_t* constants,
+    size_t num_constants) {
+  return MLX_C_CLOSURE(mlx::core::detail::compile(
+      MLX_CPP_CLOSURE(fun),
+      fun_id,
+      shapeless,
+      MLX_CPP_UINT64VEC(constants, num_constants)));
 }
 extern "C" void mlx_detail_compile_erase(size_t fun_id) {
   return MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));

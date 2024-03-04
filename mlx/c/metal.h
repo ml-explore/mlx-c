@@ -3,8 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_COMPILE_H
-#define MLX_COMPILE_H
+#ifndef MLX_METAL_H
+#define MLX_METAL_H
 
 #include <stdio.h>
 
@@ -20,12 +20,15 @@ extern "C" {
 #endif
 
 /**
- * \defgroup compile Compilation operations
+ * \defgroup metal Metal specific operations
  */
 /**@{*/
-mlx_closure mlx_compile(mlx_closure fun, bool shapeless);
-void mlx_disable_compile();
-void mlx_enable_compile();
+size_t mlx_metal_get_active_memory();
+size_t mlx_metal_get_cache_memory();
+size_t mlx_metal_get_peak_memory();
+bool mlx_metal_is_available();
+size_t mlx_metal_set_cache_limit(size_t limit);
+size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
 /**@}*/
 
 #ifdef __cplusplus

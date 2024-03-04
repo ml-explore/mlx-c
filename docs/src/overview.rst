@@ -122,3 +122,9 @@ Fast Custom Ops
 
 To maximize performance MLX has :doc:`fast <fast>` custom implementations
 for some common operations.
+
+Metal backend-specific functions
+================================
+
+MLX C exposes some useful functions related to the MLX :doc:`Metal backend
+<metal>`.

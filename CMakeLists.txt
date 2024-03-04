@@ -30,7 +30,7 @@ set(MLX_BUILD_METAL ON)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.3.0)
+  GIT_TAG v0.5.1)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------
@@ -46,6 +46,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ioutils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp

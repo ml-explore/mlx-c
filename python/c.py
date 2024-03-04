@@ -34,6 +34,12 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
             if len(variants) == 1:
                 sorted_funcs.append(variants[0])
+            elif name == "tensordot":
+                var0 = variants[0]
+                var1 = variants[1]
+                var1["variant"] = "along_axis"
+                sorted_funcs.append(var0)
+                sorted_funcs.append(var1)
             elif name == "split":
                 var0 = variants[0]
                 var1 = variants[1]
@@ -147,6 +153,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
         return_t = f["return_t"]
         if return_t == "void":
             signature.append("void")
+        elif return_t == "bool" or return_t == "size_t":
+            signature.append(return_t)
         elif return_t == "array":
             signature.append("mlx_array")
         elif (
@@ -221,6 +229,10 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
                 cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
+            elif pti == "std::vector<uint64_t>":
+                c_call.append("const uint64_t* " + pni)
+                c_call.append("size_t num_" + pni)
+                cpp_call.append("MLX_CPP_UINT64VEC(" + pni + ", num_" + pni + ")")
             elif pti == "std::optional<std::vector<int>>":
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
@@ -275,6 +287,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
         if return_t == "void":
             cpp_code.append("MLX_C_VOID")
+        elif return_t == "bool" or return_t == "size_t":
+            cpp_code.append(return_t)
         elif return_t == "array":
             cpp_code.append("MLX_C_ARRAY")
         elif return_t == "std::vector<array>":
