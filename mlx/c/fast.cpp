@@ -8,6 +8,7 @@
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
@@ -23,4 +24,19 @@ extern "C" mlx_array mlx_fast_rope(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::fast::rope(
       x->ctx, dims, traditional, base, scale, offset, s->ctx));
+}
+extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
+    mlx_array queries,
+    mlx_array keys,
+    mlx_array values,
+    float scale,
+    mlx_array mask,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::fast::scaled_dot_product_attention(
+      queries->ctx,
+      keys->ctx,
+      values->ctx,
+      scale,
+      (mask ? std::make_optional(mask->ctx) : std::nullopt),
+      s->ctx));
 }
