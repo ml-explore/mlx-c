@@ -30,7 +30,7 @@ set(MLX_BUILD_METAL ON)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.5.1)
+  GIT_TAG v0.6.0)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------

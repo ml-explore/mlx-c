@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
@@ -29,6 +30,13 @@ mlx_array mlx_fast_rope(
     float base,
     float scale,
     int offset,
+    mlx_stream s);
+mlx_array mlx_fast_scaled_dot_product_attention(
+    mlx_array queries,
+    mlx_array keys,
+    mlx_array values,
+    float scale,
+    mlx_array mask,
     mlx_stream s);
 /**@}*/
 
