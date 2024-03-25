@@ -23,7 +23,7 @@ class CFILEReader : public mlx::core::io::Reader {
   virtual bool good() const override {
     return ferror(f) == 0;
   };
-  virtual size_t tell() const override {
+  virtual size_t tell() override {
     return ftell(f);
   }
   virtual void seek(
@@ -63,7 +63,7 @@ class CFILEWriter : public mlx::core::io::Writer {
   virtual bool good() const override {
     return ferror(f) == 0;
   };
-  virtual size_t tell() const override {
+  virtual size_t tell() override {
     return ftell(f);
   }
   virtual void seek(
