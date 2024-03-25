@@ -511,6 +511,20 @@ extern "C" mlx_array mlx_negative(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_not_equal(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::not_equal(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_number_of_elements(
+    mlx_array a,
+    const int* axes,
+    size_t num_axes,
+    bool inverted,
+    mlx_array_dtype dtype,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::number_of_elements(
+      a->ctx,
+      MLX_CPP_INTVEC(axes, num_axes),
+      inverted,
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      s->ctx));
+}
 extern "C" mlx_array mlx_ones(
     const int* shape,
     size_t num_shape,
@@ -706,6 +720,24 @@ extern "C" mlx_array mlx_slice(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::slice(
       a->ctx,
+      MLX_CPP_INTVEC(start, num_start),
+      MLX_CPP_INTVEC(stop, num_stop),
+      MLX_CPP_INTVEC(strides, num_strides),
+      s->ctx));
+}
+extern "C" mlx_array mlx_slice_update(
+    mlx_array src,
+    mlx_array update,
+    const int* start,
+    size_t num_start,
+    const int* stop,
+    size_t num_stop,
+    const int* strides,
+    size_t num_strides,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::slice_update(
+      src->ctx,
+      update->ctx,
       MLX_CPP_INTVEC(start, num_start),
       MLX_CPP_INTVEC(stop, num_stop),
       MLX_CPP_INTVEC(strides, num_strides),

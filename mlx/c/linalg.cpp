@@ -14,6 +14,9 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::linalg::inv(a->ctx, s->ctx));
+}
 extern "C" mlx_array mlx_linalg_norm_p(
     mlx_array a,
     double ord,
@@ -49,4 +52,7 @@ extern "C" mlx_array mlx_linalg_norm(
 }
 extern "C" mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAYPAIR(mlx::core::linalg::qr(a->ctx, s->ctx));
+}
+extern "C" mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAYS(mlx::core::linalg::svd(a->ctx, s->ctx));
 }

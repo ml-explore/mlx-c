@@ -249,6 +249,13 @@ mlx_array mlx_moveaxis(mlx_array a, int source, int destination, mlx_stream s);
 mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_negative(mlx_array a, mlx_stream s);
 mlx_array mlx_not_equal(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_number_of_elements(
+    mlx_array a,
+    const int* axes,
+    size_t num_axes,
+    bool inverted,
+    mlx_array_dtype dtype,
+    mlx_stream s);
 mlx_array mlx_ones(
     const int* shape,
     size_t num_shape,
@@ -336,6 +343,16 @@ mlx_array mlx_sin(mlx_array a, mlx_stream s);
 mlx_array mlx_sinh(mlx_array a, mlx_stream s);
 mlx_array mlx_slice(
     mlx_array a,
+    const int* start,
+    size_t num_start,
+    const int* stop,
+    size_t num_stop,
+    const int* strides,
+    size_t num_strides,
+    mlx_stream s);
+mlx_array mlx_slice_update(
+    mlx_array src,
+    mlx_array update,
     const int* start,
     size_t num_start,
     const int* stop,

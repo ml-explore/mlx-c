@@ -23,6 +23,7 @@ extern "C" {
  * \defgroup linalg Linear algebra operations
  */
 /**@{*/
+mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s);
 mlx_array mlx_linalg_norm_p(
     mlx_array a,
     double ord,
@@ -44,6 +45,7 @@ mlx_array mlx_linalg_norm(
     bool keepdims,
     mlx_stream s);
 mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s);
+mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus
