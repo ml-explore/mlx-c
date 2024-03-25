@@ -23,6 +23,14 @@ extern "C" {
  * \defgroup fast Fast custom operations
  */
 /**@{*/
+mlx_array mlx_fast_layer_norm(
+    mlx_array x,
+    mlx_array weight,
+    mlx_array bias,
+    float eps,
+    mlx_stream s);
+mlx_array
+mlx_fast_rms_norm(mlx_array x, mlx_array weight, float eps, mlx_stream s);
 mlx_array mlx_fast_rope(
     mlx_array x,
     int dims,

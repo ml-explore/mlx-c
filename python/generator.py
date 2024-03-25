@@ -27,6 +27,8 @@ def getname(t):
         return getname(t.arg)
     elif type(t) == cxxheaderparser.types.Reference:
         return getname(t.ref_to)
+    elif type(t) == cxxheaderparser.types.MoveReference:
+        return getname(t.moveref_to)
     elif type(t) == cxxheaderparser.types.PQName:
         res = []
         for s in t.segments:

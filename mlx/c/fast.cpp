@@ -14,6 +14,24 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" mlx_array mlx_fast_layer_norm(
+    mlx_array x,
+    mlx_array weight,
+    mlx_array bias,
+    float eps,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::fast::layer_norm(
+      x->ctx,
+      (weight ? std::make_optional(weight->ctx) : std::nullopt),
+      (bias ? std::make_optional(bias->ctx) : std::nullopt),
+      eps,
+      s->ctx));
+}
+extern "C" mlx_array
+mlx_fast_rms_norm(mlx_array x, mlx_array weight, float eps, mlx_stream s) {
+  return MLX_C_ARRAY(
+      mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx));
+}
 extern "C" mlx_array mlx_fast_rope(
     mlx_array x,
     int dims,
