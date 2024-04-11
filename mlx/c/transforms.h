@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -23,6 +24,7 @@ extern "C" {
  * \defgroup transforms Transform operations
  */
 /**@{*/
+mlx_future mlx_async_eval(const mlx_vector_array outputs);
 mlx_closure mlx_checkpoint(mlx_closure fun);
 void mlx_eval(const mlx_vector_array outputs);
 mlx_vector_vector_array mlx_jvp(

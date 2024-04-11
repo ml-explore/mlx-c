@@ -8,6 +8,7 @@
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
@@ -16,7 +17,7 @@
 
 extern "C" mlx_closure mlx_detail_compile(
     mlx_closure fun,
-    size_t fun_id,
+    uintptr_t fun_id,
     bool shapeless,
     const uint64_t* constants,
     size_t num_constants) {
@@ -26,7 +27,7 @@ extern "C" mlx_closure mlx_detail_compile(
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
 }
-extern "C" void mlx_detail_compile_erase(size_t fun_id) {
+extern "C" void mlx_detail_compile_erase(uintptr_t fun_id) {
   return MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));
 }
 extern "C" mlx_vector_array mlx_detail_vmap_replace(

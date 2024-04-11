@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -165,6 +166,7 @@ mlx_array mlx_erfinv(mlx_array a, mlx_stream s);
 mlx_array mlx_exp(mlx_array a, mlx_stream s);
 mlx_array
 mlx_expand_dims(mlx_array a, const int* axes, size_t num_axes, mlx_stream s);
+mlx_array mlx_expm1(mlx_array a, mlx_stream s);
 mlx_array mlx_eye(int n, int m, int k, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_flatten(mlx_array a, int start_axis, int end_axis, mlx_stream s);
 mlx_array mlx_floor(mlx_array a, mlx_stream s);
@@ -237,6 +239,11 @@ mlx_array mlx_mean(
     bool keepdims,
     mlx_stream s);
 mlx_array mlx_mean_all(mlx_array a, bool keepdims, mlx_stream s);
+mlx_vector_array mlx_meshgrid(
+    const mlx_vector_array arrays,
+    bool sparse,
+    mlx_string indexing,
+    mlx_stream s);
 mlx_array mlx_min(
     mlx_array a,
     const int* axes,
@@ -360,9 +367,13 @@ mlx_array mlx_slice_update(
     const int* strides,
     size_t num_strides,
     mlx_stream s);
-mlx_array
-mlx_softmax(mlx_array a, const int* axes, size_t num_axes, mlx_stream s);
-mlx_array mlx_softmax_all(mlx_array a, mlx_stream s);
+mlx_array mlx_softmax(
+    mlx_array a,
+    const int* axes,
+    size_t num_axes,
+    bool precise,
+    mlx_stream s);
+mlx_array mlx_softmax_all(mlx_array a, bool precise, mlx_stream s);
 mlx_array mlx_sort(mlx_array a, int axis, mlx_stream s);
 mlx_array mlx_sort_all(mlx_array a, mlx_stream s);
 mlx_vector_array
@@ -380,6 +391,14 @@ mlx_squeeze(mlx_array a, const int* axes, size_t num_axes, mlx_stream s);
 mlx_array mlx_squeeze_all(mlx_array a, mlx_stream s);
 mlx_array mlx_stack(const mlx_vector_array arrays, int axis, mlx_stream s);
 mlx_array mlx_stack_all(const mlx_vector_array arrays, mlx_stream s);
+mlx_array mlx_std(
+    mlx_array a,
+    const int* axes,
+    size_t num_axes,
+    bool keepdims,
+    int ddof,
+    mlx_stream s);
+mlx_array mlx_std_all(mlx_array a, bool keepdims, int ddof, mlx_stream s);
 mlx_array mlx_stop_gradient(mlx_array a, mlx_stream s);
 mlx_array mlx_subtract(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_sum(
