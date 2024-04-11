@@ -225,6 +225,9 @@ def generate(funcs, headername, namespace, implementation, docstring):
             ):
                 c_call.append(pti + " " + pni)
                 cpp_call.append(pni)
+            elif pti == "std::uintptr_t":
+                c_call.append(pti.lstrip("std::") + " " + pni)
+                cpp_call.append(pni)
             elif pti == "std::vector<int>":
                 c_call.append("const int* " + pni)
                 c_call.append("size_t num_" + pni)
