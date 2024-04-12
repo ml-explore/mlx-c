@@ -113,6 +113,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
     #include "mlx/c/mlx.h"
     #include "mlx/c/private/array.h"
     #include "mlx/c/private/closure.h"
+    #include "mlx/c/private/future.h"
     #include "mlx/c/private/io.h"
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
@@ -130,6 +131,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
+    #include "mlx/c/future.h"
     #include "mlx/c/ioutils.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
@@ -177,6 +179,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
             signature.append("mlx_safetensors")
         elif return_t == "std::string":
             signature.append("mlx_string")
+        elif return_t == "std::shared_future<void>":
+            signature.append("mlx_future")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
@@ -224,6 +228,9 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 or pti == "uint64_t"
             ):
                 c_call.append(pti + " " + pni)
+                cpp_call.append(pni)
+            elif pti == "std::uintptr_t":
+                c_call.append(pti.lstrip("std::") + " " + pni)
                 cpp_call.append(pni)
             elif pti == "std::vector<int>":
                 c_call.append("const int* " + pni)
@@ -311,6 +318,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
             cpp_code.append("MLX_C_SAFETENSORS")
         elif return_t == "std::string":
             cpp_code.append("MLX_C_STRING")
+        elif return_t == "std::shared_future<void>":
+            cpp_code.append("MLX_C_FUTURE")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)

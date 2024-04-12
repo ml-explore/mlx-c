@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -29,6 +30,8 @@ size_t mlx_metal_get_peak_memory();
 bool mlx_metal_is_available();
 size_t mlx_metal_set_cache_limit(size_t limit);
 size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
+bool mlx_metal_start_capture(mlx_string path);
+void mlx_metal_stop_capture();
 /**@}*/
 
 #ifdef __cplusplus

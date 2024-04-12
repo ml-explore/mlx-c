@@ -38,6 +38,7 @@ bindings to MLX.
    string
    map
    closure
+   future
    ioutils
 
 .. toctree::

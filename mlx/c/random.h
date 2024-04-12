@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -57,6 +58,14 @@ mlx_array mlx_random_gumbel(
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_key(uint64_t seed);
+mlx_array mlx_random_multivariate_normal(
+    mlx_array mean,
+    mlx_array cov,
+    const int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    mlx_array key,
+    mlx_stream s);
 mlx_array mlx_random_normal(
     const int* shape,
     size_t num_shape,

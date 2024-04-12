@@ -154,5 +154,6 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_STRING(str) ((str)->ctx)
 #define MLX_C_STRING(str) (new mlx_string_(str))
 #define MLX_C_SAFETENSORS(st) (new mlx_safetensors_(st))
+#define MLX_C_FUTURE(f) (new mlx_future_(f))
 
 #endif

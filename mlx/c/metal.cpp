@@ -8,6 +8,7 @@
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
@@ -31,4 +32,10 @@ extern "C" size_t mlx_metal_set_cache_limit(size_t limit) {
 }
 extern "C" size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed) {
   return size_t(mlx::core::metal::set_memory_limit(limit, relaxed));
+}
+extern "C" bool mlx_metal_start_capture(mlx_string path) {
+  return bool(mlx::core::metal::start_capture(MLX_CPP_STRING(path)));
+}
+extern "C" void mlx_metal_stop_capture() {
+  return MLX_C_VOID(mlx::core::metal::stop_capture());
 }
