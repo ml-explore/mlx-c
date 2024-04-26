@@ -3,6 +3,8 @@
 #ifndef MLX_FUTURE_PRIVATE_H
 #define MLX_FUTURE_PRIVATE_H
 
+#include <future>
+
 #include "mlx/c/future.h"
 #include "mlx/c/private/object.h"
 #include "mlx/mlx.h"

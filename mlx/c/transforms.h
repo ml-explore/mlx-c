@@ -24,7 +24,7 @@ extern "C" {
  * \defgroup transforms Transform operations
  */
 /**@{*/
-mlx_future mlx_async_eval(const mlx_vector_array outputs);
+void mlx_async_eval(const mlx_vector_array outputs);
 mlx_closure mlx_checkpoint(mlx_closure fun);
 void mlx_eval(const mlx_vector_array outputs);
 mlx_vector_vector_array mlx_jvp(

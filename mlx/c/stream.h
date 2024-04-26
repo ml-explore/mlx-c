@@ -35,6 +35,10 @@ mlx_stream mlx_stream_new_on_device(mlx_device dev);
  */
 bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs);
 /**
+ * Synchronize with the provided stream.
+ */
+void mlx_synchronize(mlx_stream stream);
+/**
  * Returns the default stream on the given device.
  */
 mlx_stream mlx_default_stream(mlx_device dev);

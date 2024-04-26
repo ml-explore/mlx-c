@@ -15,6 +15,9 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" void mlx_metal_clear_cache() {
+  return MLX_C_VOID(mlx::core::metal::clear_cache());
+}
 extern "C" size_t mlx_metal_get_active_memory() {
   return size_t(mlx::core::metal::get_active_memory());
 }
@@ -33,8 +36,8 @@ extern "C" size_t mlx_metal_set_cache_limit(size_t limit) {
 extern "C" size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed) {
   return size_t(mlx::core::metal::set_memory_limit(limit, relaxed));
 }
-extern "C" bool mlx_metal_start_capture(mlx_string path) {
-  return bool(mlx::core::metal::start_capture(MLX_CPP_STRING(path)));
+extern "C" void mlx_metal_start_capture(mlx_string path) {
+  return MLX_C_VOID(mlx::core::metal::start_capture(MLX_CPP_STRING(path)));
 }
 extern "C" void mlx_metal_stop_capture() {
   return MLX_C_VOID(mlx::core::metal::stop_capture());
