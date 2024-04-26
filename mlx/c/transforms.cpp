@@ -15,8 +15,8 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-extern "C" mlx_future mlx_async_eval(const mlx_vector_array outputs) {
-  return MLX_C_FUTURE(mlx::core::async_eval(MLX_CPP_ARRVEC(outputs)));
+extern "C" void mlx_async_eval(const mlx_vector_array outputs) {
+  return MLX_C_VOID(mlx::core::async_eval(MLX_CPP_ARRVEC(outputs)));
 }
 extern "C" mlx_closure mlx_checkpoint(mlx_closure fun) {
   return MLX_C_CLOSURE(mlx::core::checkpoint(MLX_CPP_CLOSURE(fun)));

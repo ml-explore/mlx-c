@@ -156,6 +156,23 @@ extern "C" mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::atleast_3d(a->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_block_masked_mm(
+    mlx_array a,
+    mlx_array b,
+    int block_size,
+    mlx_array mask_out,
+    mlx_array mask_lhs,
+    mlx_array mask_rhs,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::block_masked_mm(
+      a->ctx,
+      b->ctx,
+      block_size,
+      (mask_out ? std::make_optional(mask_out->ctx) : std::nullopt),
+      (mask_lhs ? std::make_optional(mask_lhs->ctx) : std::nullopt),
+      (mask_rhs ? std::make_optional(mask_rhs->ctx) : std::nullopt),
+      s->ctx));
+}
 extern "C" mlx_vector_array mlx_broadcast_arrays(
     const mlx_vector_array inputs,
     mlx_stream s) {
@@ -278,6 +295,9 @@ extern "C" mlx_array
 mlx_cumsum(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::cumsum(a->ctx, axis, reverse, inclusive, s->ctx));
+}
+extern "C" mlx_array mlx_degrees(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::degrees(a->ctx, s->ctx));
 }
 extern "C" mlx_vector_array mlx_depends(
     const mlx_vector_array inputs,
@@ -614,6 +634,9 @@ extern "C" mlx_array mlx_quantized_matmul(
       group_size,
       bits,
       s->ctx));
+}
+extern "C" mlx_array mlx_radians(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::radians(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_reciprocal(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::reciprocal(a->ctx, s->ctx));

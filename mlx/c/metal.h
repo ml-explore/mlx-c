@@ -24,13 +24,14 @@ extern "C" {
  * \defgroup metal Metal specific operations
  */
 /**@{*/
+void mlx_metal_clear_cache();
 size_t mlx_metal_get_active_memory();
 size_t mlx_metal_get_cache_memory();
 size_t mlx_metal_get_peak_memory();
 bool mlx_metal_is_available();
 size_t mlx_metal_set_cache_limit(size_t limit);
 size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
-bool mlx_metal_start_capture(mlx_string path);
+void mlx_metal_start_capture(mlx_string path);
 void mlx_metal_stop_capture();
 /**@}*/
 

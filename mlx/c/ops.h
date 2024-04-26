@@ -89,6 +89,14 @@ mlx_array mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_atleast_1d(mlx_array a, mlx_stream s);
 mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s);
 mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s);
+mlx_array mlx_block_masked_mm(
+    mlx_array a,
+    mlx_array b,
+    int block_size,
+    mlx_array mask_out,
+    mlx_array mask_lhs,
+    mlx_array mask_rhs,
+    mlx_stream s);
 mlx_vector_array mlx_broadcast_arrays(
     const mlx_vector_array inputs,
     mlx_stream s);
@@ -145,6 +153,7 @@ mlx_array
 mlx_cumprod(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s);
 mlx_array
 mlx_cumsum(mlx_array a, int axis, bool reverse, bool inclusive, mlx_stream s);
+mlx_array mlx_degrees(mlx_array a, mlx_stream s);
 mlx_vector_array mlx_depends(
     const mlx_vector_array inputs,
     const mlx_vector_array dependencies);
@@ -301,6 +310,7 @@ mlx_array mlx_quantized_matmul(
     int group_size,
     int bits,
     mlx_stream s);
+mlx_array mlx_radians(mlx_array a, mlx_stream s);
 mlx_array mlx_reciprocal(mlx_array a, mlx_stream s);
 mlx_array mlx_remainder(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_repeat(mlx_array arr, int repeats, int axis, mlx_stream s);
