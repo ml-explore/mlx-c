@@ -13,21 +13,25 @@ void print_array(const char* msg, mlx_array arr) {
 }
 
 mlx_array inc_fun(mlx_array in) {
+  mlx_stream stream = mlx_gpu_stream();
   mlx_array y = mlx_array_from_float(1.0);
-  mlx_array res = mlx_add(in, y, MLX_GPU_STREAM);
+  mlx_array res = mlx_add(in, y, stream);
   mlx_free(y);
+  mlx_free(stream);
   return res;
 }
 
 mlx_vector_array inc_fun_value(mlx_vector_array in, void* payload) {
+  mlx_stream stream = mlx_gpu_stream();
   if (mlx_vector_array_size(in) != 1) {
     fprintf(stderr, "inc_func_value: expected 1 argument");
     exit(EXIT_FAILURE);
   }
   mlx_array value = (mlx_array)payload;
-  mlx_array res = mlx_add(mlx_vector_array_get(in, 0), value, MLX_GPU_STREAM);
+  mlx_array res = mlx_add(mlx_vector_array_get(in, 0), value, stream);
   mlx_vector_array vres = mlx_vector_array_from_array(res);
   mlx_free(res);
+  mlx_free(stream);
   return vres;
 }
 

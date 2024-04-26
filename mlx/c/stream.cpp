@@ -15,11 +15,6 @@ mlx_string_* mlx_stream_::tostring() {
   return new mlx_string_(str);
 }
 
-mlx_stream MLX_CPU_STREAM =
-    new mlx_stream_(default_stream(mlx::core::Device::DeviceType::cpu));
-mlx_stream MLX_GPU_STREAM =
-    new mlx_stream_(default_stream(mlx::core::Device::DeviceType::gpu));
-
 extern "C" mlx_stream mlx_stream_new(int index, mlx_device dev) {
   return new mlx_stream_(mlx::core::Stream(index, dev->ctx));
 }
@@ -38,4 +33,10 @@ extern "C" mlx_stream mlx_default_stream(mlx_device dev) {
 extern "C" mlx_stream mlx_set_default_stream(mlx_stream stream) {
   set_default_stream(stream->ctx);
   return stream;
+}
+extern "C" mlx_stream mlx_cpu_stream() {
+  return new mlx_stream_(default_stream(mlx::core::Device::DeviceType::cpu));
+}
+extern "C" mlx_stream mlx_gpu_stream() {
+  return new mlx_stream_(default_stream(mlx::core::Device::DeviceType::gpu));
 }
