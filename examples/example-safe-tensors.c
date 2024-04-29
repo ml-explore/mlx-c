@@ -17,7 +17,8 @@ int main() {
     return -1;
   }
 
-  mlx_safetensors st = mlx_load_safetensors_file(f, MLX_CPU_STREAM);
+  mlx_stream stream = mlx_gpu_stream();
+  mlx_safetensors st = mlx_load_safetensors_file(f, stream);
   mlx_map_string_to_array map = mlx_safetensors_data(st);
 
   mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(map);
@@ -35,6 +36,7 @@ int main() {
 
   mlx_free(map);
   mlx_free(st);
+  mlx_free(stream);
   fclose(f);
 
   return 0;

@@ -46,15 +46,14 @@ mlx_stream mlx_default_stream(mlx_device dev);
  * Set default stream.
  */
 mlx_stream mlx_set_default_stream(mlx_stream stream);
-
 /**
- * Current default CPU stream.
+ * Returns the current default CPU stream.
  */
-extern mlx_stream MLX_CPU_STREAM;
+mlx_stream mlx_cpu_stream();
 /**
- * Current default GPU stream.
+ * Returns the current default GPU stream.
  */
-extern mlx_stream MLX_GPU_STREAM;
+mlx_stream mlx_gpu_stream();
 
 /**@}*/
 
