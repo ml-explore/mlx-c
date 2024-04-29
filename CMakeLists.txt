@@ -26,7 +26,6 @@ set(MLX_BUILD_TESTS OFF)
 set(MLX_BUILD_EXAMPLES OFF)
 set(MLX_BUILD_BENCHMARKS "Build benchmarks for mlx" OFF)
 set(MLX_BUILD_PYTHON_BINDINGS OFF)
-set(MLX_BUILD_METAL ON)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
