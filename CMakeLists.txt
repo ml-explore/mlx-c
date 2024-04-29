@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # ----------------------------- Configuration -----------------------------
 if(NOT MLX_C_VERSION)
-  set(MLX_C_VERSION 0.0.6)
+  set(MLX_C_VERSION 0.0.7)
 endif()
 
 option(MLX_C_BUILD_EXAMPLES "Build examples for mlx C" ON)
