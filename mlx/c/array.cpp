@@ -280,3 +280,7 @@ extern "C" const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr) {
   return MLX_CPP_ARRAY(arr).data<bfloat16_t>();
 }
 #endif
+
+extern "C" void mlx_overwrite_descriptor(mlx_array arr, mlx_array other) {
+  return MLX_CPP_ARRAY(arr).overwrite_descriptor(MLX_CPP_ARRAY(other));
+}

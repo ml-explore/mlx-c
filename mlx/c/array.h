@@ -247,6 +247,12 @@ const float16_t* mlx_array_data_float16(mlx_array arr);
  */
 const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr);
 #endif
+
+/**
+ * Replaces the array descriptor with that of another array.
+ */
+void mlx_overwrite_descriptor(mlx_array arr, mlx_array other);
+
 /**@}*/
 
 /**
