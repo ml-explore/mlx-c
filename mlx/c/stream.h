@@ -35,6 +35,14 @@ mlx_stream mlx_stream_new_on_device(mlx_device dev);
  */
 bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs);
 /**
+ * Return the device of the stream.
+ */
+mlx_device mlx_stream_get_device(mlx_stream stream);
+/**
+ * Return the device type of the stream.
+ */
+mlx_device_type mlx_stream_get_device_type(mlx_stream stream);
+/**
  * Synchronize with the provided stream.
  */
 void mlx_synchronize(mlx_stream stream);
@@ -50,6 +58,7 @@ mlx_stream mlx_set_default_stream(mlx_stream stream);
  * Returns the current default CPU stream.
  */
 mlx_stream mlx_cpu_stream();
+
 /**
  * Returns the current default GPU stream.
  */
