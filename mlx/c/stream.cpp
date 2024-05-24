@@ -24,6 +24,9 @@ extern "C" mlx_stream mlx_stream_new_on_device(mlx_device dev) {
 extern "C" bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs) {
   return lhs->ctx == rhs->ctx;
 }
+extern "C" mlx_device mlx_stream_get_device(mlx_stream stream) {
+  return new mlx_device_(stream->ctx.device);
+}
 extern "C" void mlx_synchronize(mlx_stream stream) {
   mlx::core::synchronize(stream->ctx);
 }
