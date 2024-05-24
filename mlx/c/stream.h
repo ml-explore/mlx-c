@@ -39,10 +39,6 @@ bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs);
  */
 mlx_device mlx_stream_get_device(mlx_stream stream);
 /**
- * Return the device type of the stream.
- */
-mlx_device_type mlx_stream_get_device_type(mlx_stream stream);
-/**
  * Synchronize with the provided stream.
  */
 void mlx_synchronize(mlx_stream stream);

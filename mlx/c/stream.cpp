@@ -8,13 +8,6 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/stream.h"
 
-namespace {
-mlx_device_type to_c_device_type(mlx::core::Device::DeviceType type) {
-  static mlx_device_type map[] = {MLX_CPU, MLX_GPU};
-  return map[(int)type];
-}
-} // namespace
-
 mlx_string_* mlx_stream_::tostring() {
   std::ostringstream os;
   os << ctx;
@@ -33,9 +26,6 @@ extern "C" bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs) {
 }
 extern "C" mlx_device mlx_stream_get_device(mlx_stream stream) {
   return new mlx_device_(stream->ctx.device);
-}
-extern "C" mlx_device_type mlx_stream_get_device_type(mlx_stream stream) {
-  return to_c_device_type(stream->ctx.device.type);
 }
 extern "C" void mlx_synchronize(mlx_stream stream) {
   mlx::core::synchronize(stream->ctx);
