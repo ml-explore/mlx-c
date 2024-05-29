@@ -255,6 +255,20 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 c_call.append("int f_" + pni)
                 c_call.append("int s_" + pni)
                 cpp_call.append("MLX_CPP_INTPAIR(f_" + pni + ", s_" + pni + ")")
+            elif pti == "std::tuple<int, int, int>":
+                c_call.append("int " + pni + "_0")
+                c_call.append("int " + pni + "_1")
+                c_call.append("int " + pni + "_2")
+                cpp_call.append(
+                    "MLX_CPP_INTTUPLE3("
+                    + pni
+                    + "_0, "
+                    + pni
+                    + "_1, "
+                    + pni
+                    + "_2"
+                    + ")"
+                )
             elif pti == "std::shared_ptr<io::Reader>":
                 c_call.append("FILE* " + pni)
                 cpp_call.append("MLX_CPP_READER(" + pni + ")")
