@@ -66,6 +66,7 @@ mlx_array mlx_arccosh(mlx_array a, mlx_stream s);
 mlx_array mlx_arcsin(mlx_array a, mlx_stream s);
 mlx_array mlx_arcsinh(mlx_array a, mlx_stream s);
 mlx_array mlx_arctan(mlx_array a, mlx_stream s);
+mlx_array mlx_arctan2(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_arctanh(mlx_array a, mlx_stream s);
 mlx_array mlx_argmax(mlx_array a, int axis, bool keepdims, mlx_stream s);
 mlx_array mlx_argmax_all(mlx_array a, bool keepdims, mlx_stream s);
@@ -89,6 +90,9 @@ mlx_array mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_atleast_1d(mlx_array a, mlx_stream s);
 mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s);
 mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s);
+mlx_array mlx_bitwise_and(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_bitwise_or(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_bitwise_xor(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_block_masked_mm(
     mlx_array a,
     mlx_array b,
@@ -107,6 +111,7 @@ mlx_array mlx_clip(mlx_array a, mlx_array a_min, mlx_array a_max, mlx_stream s);
 mlx_array
 mlx_concatenate(const mlx_vector_array arrays, int axis, mlx_stream s);
 mlx_array mlx_concatenate_all(const mlx_vector_array arrays, mlx_stream s);
+mlx_array mlx_conjugate(mlx_array a, mlx_stream s);
 mlx_array mlx_conv1d(
     mlx_array input,
     mlx_array weight,
@@ -124,6 +129,20 @@ mlx_array mlx_conv2d(
     int s_padding,
     int f_dilation,
     int s_dilation,
+    int groups,
+    mlx_stream s);
+mlx_array mlx_conv3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
     int groups,
     mlx_stream s);
 mlx_array mlx_conv_general(
@@ -194,6 +213,23 @@ mlx_array mlx_gather(
     const int* slice_sizes,
     size_t num_slice_sizes,
     mlx_stream s);
+mlx_array mlx_gather_mm(
+    mlx_array a,
+    mlx_array b,
+    mlx_array lhs_indices,
+    mlx_array rhs_indices,
+    mlx_stream s);
+mlx_array mlx_gather_qmm(
+    mlx_array x,
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    mlx_array lhs_indices,
+    mlx_array rhs_indices,
+    bool transpose,
+    int group_size,
+    int bits,
+    mlx_stream s);
 mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s);
@@ -209,6 +245,7 @@ mlx_array mlx_isinf(mlx_array a, mlx_stream s);
 mlx_array mlx_isnan(mlx_array a, mlx_stream s);
 mlx_array mlx_isneginf(mlx_array a, mlx_stream s);
 mlx_array mlx_isposinf(mlx_array a, mlx_stream s);
+mlx_array mlx_left_shift(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_less_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_linspace(
@@ -317,6 +354,7 @@ mlx_array mlx_repeat(mlx_array arr, int repeats, int axis, mlx_stream s);
 mlx_array mlx_repeat_all(mlx_array arr, int repeats, mlx_stream s);
 mlx_array
 mlx_reshape(mlx_array a, const int* shape, size_t num_shape, mlx_stream s);
+mlx_array mlx_right_shift(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s);
 mlx_array mlx_rsqrt(mlx_array a, mlx_stream s);
 mlx_array mlx_scatter(
@@ -439,6 +477,13 @@ mlx_array
 mlx_tile(mlx_array arr, const int* reps, size_t num_reps, mlx_stream s);
 mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s);
 mlx_array mlx_topk_all(mlx_array a, int k, mlx_stream s);
+mlx_array mlx_trace(
+    mlx_array a,
+    int offset,
+    int axis1,
+    int axis2,
+    mlx_array_dtype dtype,
+    mlx_stream s);
 mlx_array
 mlx_transpose(mlx_array a, const int* axes, size_t num_axes, mlx_stream s);
 mlx_array mlx_transpose_all(mlx_array a, mlx_stream s);

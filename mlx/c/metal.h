@@ -29,6 +29,7 @@ size_t mlx_metal_get_active_memory();
 size_t mlx_metal_get_cache_memory();
 size_t mlx_metal_get_peak_memory();
 bool mlx_metal_is_available();
+void mlx_metal_reset_peak_memory();
 size_t mlx_metal_set_cache_limit(size_t limit);
 size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
 void mlx_metal_start_capture(mlx_string path);

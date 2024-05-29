@@ -140,6 +140,8 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_C_ARRAYTUPLE3(atuple) (new mlx_vector_array_(atuple))
 #define MLX_CPP_ARRVEC(vec) ((vec)->ctx)
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
+#define MLX_CPP_INTTUPLE3(i0, i1, i2) \
+  (std::tuple<int, int, int>((i0), (i1), (i2)))
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
 #define MLX_C_CLOSURE(f) (new mlx_closure_(f))

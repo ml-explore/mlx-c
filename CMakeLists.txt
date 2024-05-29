@@ -29,7 +29,7 @@ set(MLX_BUILD_PYTHON_BINDINGS OFF)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.12.1)
+  GIT_TAG v0.14.0)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------

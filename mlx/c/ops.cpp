@@ -93,6 +93,9 @@ extern "C" mlx_array mlx_arcsinh(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_arctan(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::arctan(a->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_arctan2(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::arctan2(a->ctx, b->ctx, s->ctx));
+}
 extern "C" mlx_array mlx_arctanh(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::arctanh(a->ctx, s->ctx));
 }
@@ -156,6 +159,15 @@ extern "C" mlx_array mlx_atleast_2d(mlx_array a, mlx_stream s) {
 extern "C" mlx_array mlx_atleast_3d(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::atleast_3d(a->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_bitwise_and(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::bitwise_and(a->ctx, b->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_bitwise_or(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::bitwise_or(a->ctx, b->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_bitwise_xor(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::bitwise_xor(a->ctx, b->ctx, s->ctx));
+}
 extern "C" mlx_array mlx_block_masked_mm(
     mlx_array a,
     mlx_array b,
@@ -208,6 +220,9 @@ extern "C" mlx_array mlx_concatenate_all(
     mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::concatenate(MLX_CPP_ARRVEC(arrays), s->ctx));
 }
+extern "C" mlx_array mlx_conjugate(mlx_array a, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::conjugate(a->ctx, s->ctx));
+}
 extern "C" mlx_array mlx_conv1d(
     mlx_array input,
     mlx_array weight,
@@ -236,6 +251,29 @@ extern "C" mlx_array mlx_conv2d(
       MLX_CPP_INTPAIR(f_stride, s_stride),
       MLX_CPP_INTPAIR(f_padding, s_padding),
       MLX_CPP_INTPAIR(f_dilation, s_dilation),
+      groups,
+      s->ctx));
+}
+extern "C" mlx_array mlx_conv3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
+    int groups,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::conv3d(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTTUPLE3(stride_0, stride_1, stride_2),
+      MLX_CPP_INTTUPLE3(padding_0, padding_1, padding_2),
+      MLX_CPP_INTTUPLE3(dilation_0, dilation_1, dilation_2),
       groups,
       s->ctx));
 }
@@ -390,6 +428,42 @@ extern "C" mlx_array mlx_gather(
       MLX_CPP_INTVEC(slice_sizes, num_slice_sizes),
       s->ctx));
 }
+extern "C" mlx_array mlx_gather_mm(
+    mlx_array a,
+    mlx_array b,
+    mlx_array lhs_indices,
+    mlx_array rhs_indices,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::gather_mm(
+      a->ctx,
+      b->ctx,
+      (lhs_indices ? std::make_optional(lhs_indices->ctx) : std::nullopt),
+      (rhs_indices ? std::make_optional(rhs_indices->ctx) : std::nullopt),
+      s->ctx));
+}
+extern "C" mlx_array mlx_gather_qmm(
+    mlx_array x,
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    mlx_array lhs_indices,
+    mlx_array rhs_indices,
+    bool transpose,
+    int group_size,
+    int bits,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::gather_qmm(
+      x->ctx,
+      w->ctx,
+      scales->ctx,
+      biases->ctx,
+      (lhs_indices ? std::make_optional(lhs_indices->ctx) : std::nullopt),
+      (rhs_indices ? std::make_optional(rhs_indices->ctx) : std::nullopt),
+      transpose,
+      group_size,
+      bits,
+      s->ctx));
+}
 extern "C" mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::greater(a->ctx, b->ctx, s->ctx));
 }
@@ -424,6 +498,9 @@ extern "C" mlx_array mlx_isneginf(mlx_array a, mlx_stream s) {
 }
 extern "C" mlx_array mlx_isposinf(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::isposinf(a->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_left_shift(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::left_shift(a->ctx, b->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_less(mlx_array a, mlx_array b, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::less(a->ctx, b->ctx, s->ctx));
@@ -655,6 +732,9 @@ extern "C" mlx_array
 mlx_reshape(mlx_array a, const int* shape, size_t num_shape, mlx_stream s) {
   return MLX_C_ARRAY(
       mlx::core::reshape(a->ctx, MLX_CPP_INTVEC(shape, num_shape), s->ctx));
+}
+extern "C" mlx_array mlx_right_shift(mlx_array a, mlx_array b, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::right_shift(a->ctx, b->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_round(mlx_array a, int decimals, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::round(a->ctx, decimals, s->ctx));
@@ -916,6 +996,16 @@ extern "C" mlx_array mlx_topk(mlx_array a, int k, int axis, mlx_stream s) {
 }
 extern "C" mlx_array mlx_topk_all(mlx_array a, int k, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::topk(a->ctx, k, s->ctx));
+}
+extern "C" mlx_array mlx_trace(
+    mlx_array a,
+    int offset,
+    int axis1,
+    int axis2,
+    mlx_array_dtype dtype,
+    mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::trace(
+      a->ctx, offset, axis1, axis2, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
 extern "C" mlx_array
 mlx_transpose(mlx_array a, const int* axes, size_t num_axes, mlx_stream s) {

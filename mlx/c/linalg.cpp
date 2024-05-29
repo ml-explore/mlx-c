@@ -15,6 +15,10 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" mlx_array
+mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s) {
+  return MLX_C_ARRAY(mlx::core::linalg::cholesky(a->ctx, upper, s->ctx));
+}
 extern "C" mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s) {
   return MLX_C_ARRAY(mlx::core::linalg::inv(a->ctx, s->ctx));
 }
