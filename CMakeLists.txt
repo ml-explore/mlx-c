@@ -45,7 +45,6 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ioutils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg_try.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
@@ -55,7 +54,16 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
+    
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_try.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl_try.cpp
+    )
 
 add_library(mlxc STATIC ${mlxc-src})
 
