@@ -19,10 +19,8 @@ int main() {
   mlx_array arr = mlx_array_from_data(data, shape, 2, MLX_FLOAT32);
   print_array("hello world!", arr);
 
-  mlx_array two = mlx_array_from_int(2);
-  mlx_array res = mlx_divide(arr, two, stream);
-  print_array("divive by 2!", res);
-
+  // The following arange is expected to succeed.
+  printf("arange(0, 3, 0.5)\n");
   mlx_array_result arange_result =
       mlx_arange_try(0, 3, 0.5, MLX_FLOAT32, stream);
   mlx_result_tag tag = mlx_array_result_get_tag(&arange_result);
@@ -38,6 +36,7 @@ int main() {
   }
 
   // The arange below is expected to fail because the step is 0.
+  printf("arange(0, 3, 0)\n");
   mlx_array_result arange_result2 =
       mlx_arange_try(0, 3, 0, MLX_FLOAT32, stream);
   mlx_result_tag tag2 = mlx_array_result_get_tag(&arange_result2);
@@ -51,6 +50,10 @@ int main() {
     printf("Error: %s\n", mlx_string_data(error_message2));
     mlx_free(error_message2);
   }
+
+  mlx_array two = mlx_array_from_int(2);
+  mlx_array res = mlx_divide(arr, two, stream);
+  print_array("divive by 2!", res);
 
   mlx_free(arr);
   mlx_free(res);
