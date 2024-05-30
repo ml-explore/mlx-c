@@ -162,7 +162,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_C_ARRAY_TRY(expr)\
   try {\
       mlx_array result_arr = MLX_C_ARRAY(expr);\
-      return mlx_array_result_new_ok(result_arr);\        
+      return mlx_array_result_new_ok(result_arr);\
   } catch (std::runtime_error e) {\
       return mlx_array_result_new_runtime_error(mlx_string_new(e.what()));\
   } catch (std::invalid_argument e) {\

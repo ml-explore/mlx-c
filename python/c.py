@@ -117,6 +117,7 @@ def generate_include(sorted_funcs, headername, namespace, implementation, docstr
         print('#include "mlx/c/' + headername + '.h"')
         if trycatch:
             print('#include "mlx/c/' + headername + '_try.h"')
+            print('#include "mlx/c/result.h"')
         print(
             """
     #include "mlx/c/mlx.h"
@@ -132,16 +133,19 @@ def generate_include(sorted_funcs, headername, namespace, implementation, docstr
     """
         )
     else:
+        print("""
+            #include <stdio.h>
+
+        """)
         if not trycatch:
             print("#ifndef MLX_" + headername.upper() + "_H")
             print("#define MLX_" + headername.upper() + "_H")
         else:
             print("#ifndef MLX_" + headername.upper() + "_TRY_H")
             print("#define MLX_" + headername.upper() + "_TRY_H")
+            print('#include "mlx/c/result.h"')
         print(
             """
-    #include <stdio.h>
-
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
     #include "mlx/c/future.h"
@@ -433,7 +437,7 @@ def generate_trycatch(sorted_funcs, headername, namespace, implementation, docst
         signature = " ".join(signature)
 
         c_code = [signature, ";"]
-        cpp_code = ['extern "C"', signature, "{", "return"]
+        cpp_code = ['extern "C"', signature, "{"]
 
         if return_t == "array":
             cpp_code.append("MLX_C_ARRAY_TRY")
@@ -456,7 +460,6 @@ def generate_trycatch(sorted_funcs, headername, namespace, implementation, docst
         cpp_code.append(cpp_call)
         cpp_code.append(")")
         cpp_code.append(")")
-        cpp_code.append(";")
         cpp_code.append("}")
         if implementation:
             print(" ".join(cpp_code))
