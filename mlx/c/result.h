@@ -37,25 +37,41 @@ mlx_result mlx_result_new_invalid_argument(mlx_string error_message);
 mlx_result mlx_result_new_out_of_range(mlx_string error_message);
 
 #ifdef __cplusplus
-#define TRY(function, ...) \
-    mlx_result try_ ## function(__VA_ARGS__); \
+#define TRY_ARRAY(expr)\
+    try {\
+        mlx_array result_arr = expr;\
+        return mlx_result_new_ok_array(result_arr);\        
+    } catch (std::runtime_error e) {\
+        return mlx_result_new_runtime_error(mlx_string_new(e.what()));\
+    } catch (std::invalid_argument e) {\
+        return mlx_result_new_invalid_argument(mlx_string_new(e.what()));\
+    } catch (std::out_of_range e) {\
+        return mlx_result_new_out_of_range(mlx_string_new(e.what()));\
+    }
 
-// #define TRY_ARRAY_IMPL(fn_name, ...) \
-//     mlx_result try_ ## fn_name(__VA_ARGS__) { \
-//         try {
-//             mlx_array a = fn_name(__VA_ARGS__); \
-//             return mlx_result_new_ok_array(a); \
-//         } catch (std::runtime_error e) { \
-//             return mlx_result_new_runtime_error(mlx_string_new(e.what())); \
-//         } catch (std::invalid_argument e) { \
-//             return mlx_result_new_invalid_argument(mlx_string_new(e.what())); \
-//         } catch (std::out_of_range e) { \
-//             return mlx_result_new_out_of_range(mlx_string_new(e.what())); \
-//         } \
-//     }
+#define TRY_VECTOR_ARRAY(expr)\
+    try {\
+        mlx_vector_array result_arr = expr;\
+        return mlx_result_new_ok_vector_array(result_arr);\        
+    } catch (std::runtime_error e) {\
+        return mlx_result_new_runtime_error(mlx_string_new(e.what()));\
+    } catch (std::invalid_argument e) {\
+        return mlx_result_new_invalid_argument(mlx_string_new(e.what()));\
+    } catch (std::out_of_range e) {\
+        return mlx_result_new_out_of_range(mlx_string_new(e.what()));\
+    }
 
-// #define MACROFOO(function, ...)  (function)(__VA_ARGS__)
-
+#define TRY_VECTOR_VECTOR_ARRAY(expr)\
+    try {\
+        mlx_vector_vector_array result_arr = expr;\
+        return mlx_result_new_ok_vector_vector_array(result_arr);\        
+    } catch (std::runtime_error e) {\
+        return mlx_result_new_runtime_error(mlx_string_new(e.what()));\
+    } catch (std::invalid_argument e) {\
+        return mlx_result_new_invalid_argument(mlx_string_new(e.what()));\
+    } catch (std::out_of_range e) {\
+        return mlx_result_new_out_of_range(mlx_string_new(e.what()));\
+    }
 #endif
 
 #ifdef __cplusplus
