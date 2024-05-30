@@ -8,6 +8,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/private/array.h"
+#include "mlx/c/result.h"
 #include "mlx/mlx.h"
 #include "mlx/transforms_impl.h"
 
@@ -157,5 +158,65 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_C_STRING(str) (new mlx_string_(str))
 #define MLX_C_SAFETENSORS(st) (new mlx_safetensors_(st))
 #define MLX_C_FUTURE(f) (new mlx_future_(f))
+
+#define MLX_C_ARRAY_TRY(expr)\
+  try {\
+      mlx_array result_arr = MLX_C_ARRAY(expr);\
+      return mlx_array_result_new_ok(result_arr);\        
+  } catch (std::runtime_error e) {\
+      return mlx_array_result_new_runtime_error(mlx_string_new(e.what()));\
+  } catch (std::invalid_argument e) {\
+      return mlx_array_result_new_invalid_argument(mlx_string_new(e.what()));\
+  } catch (std::out_of_range e) {\
+      return mlx_array_result_new_out_of_range(mlx_string_new(e.what()));\
+  }
+
+#define MLX_C_ARRAYS_TRY(expr)\
+  try {\
+      mlx_vector_array result_arr = MLX_C_ARRAYS(expr);\
+      return mlx_vector_array_result_new_ok(result_arr);\
+  } catch (std::runtime_error e) {\
+      return mlx_vector_array_result_new_runtime_error(mlx_string_new(e.what()));\
+  } catch (std::invalid_argument e) {\
+      return mlx_vector_array_result_new_invalid_argument(mlx_string_new(e.what()));\
+  } catch (std::out_of_range e) {\
+      return mlx_vector_array_result_new_out_of_range(mlx_string_new(e.what()));\
+  }
+
+#define MLX_C_ARRAYPAIR_TRY(expr)\
+  try {\
+      mlx_vector_array result_arr = MLX_C_ARRAYPAIR(expr);\
+      return mlx_vector_array_result_new_ok(result_arr);\
+  } catch (std::runtime_error e) {\
+      return mlx_vector_array_result_new_runtime_error(mlx_string_new(e.what()));\
+  } catch (std::invalid_argument e) {\
+      return mlx_vector_array_result_new_invalid_argument(mlx_string_new(e.what()));\
+  } catch (std::out_of_range e) {\
+      return mlx_vector_array_result_new_out_of_range(mlx_string_new(e.what()));\
+  }
+
+#define MLX_C_ARRAYTUPLE3_TRY(expr)\
+  try {\
+      mlx_vector_array result_arr = MLX_C_ARRAYTUPLE3(expr);\
+      return mlx_vector_array_result_new_ok(result_arr);\
+  } catch (std::runtime_error e) {\
+      return mlx_vector_array_result_new_runtime_error(mlx_string_new(e.what()));\
+  } catch (std::invalid_argument e) {\
+      return mlx_vector_array_result_new_invalid_argument(mlx_string_new(e.what()));\
+  } catch (std::out_of_range e) {\
+      return mlx_vector_array_result_new_out_of_range(mlx_string_new(e.what()));\
+  }
+
+#define MLX_C_VECTORARRAYPAIR_TRY(expr)\
+  try {\
+      mlx_vector_vector_array result_arr = MLX_C_VECTORARRAYPAIR(expr);\
+      return mlx_vector_vector_array_result_new_ok(result_arr);\
+  } catch (std::runtime_error e) {\
+      return mlx_vector_vector_array_result_new_runtime_error(mlx_string_new(e.what()));\
+  } catch (std::invalid_argument e) {\
+      return mlx_vector_vector_array_result_new_invalid_argument(mlx_string_new(e.what()));\
+  } catch (std::out_of_range e) {\
+      return mlx_vector_vector_array_result_new_out_of_range(mlx_string_new(e.what()));\
+  }
 
 #endif

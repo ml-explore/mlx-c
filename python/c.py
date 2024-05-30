@@ -3,12 +3,7 @@
 import sys
 
 
-def generate(funcs, headername, namespace, implementation, docstring):
-    namespace_prefix = namespace.split("::")
-    if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
-        namespace_prefix.pop(1)  # we pop core
-    namespace_prefix = "_".join(namespace_prefix)
-
+def sort_funcs(funcs):
     sorted_funcs = []
     for name in funcs:
         variants = funcs[name]
@@ -98,7 +93,19 @@ def generate(funcs, headername, namespace, implementation, docstring):
                 sorted_funcs.append(variants[0])  # abandon
 
     sorted_funcs.sort(key=lambda x: x["name"])
+    return sorted_funcs
 
+
+def resolve_namespace_prefix(namespace):
+    namespace_prefix = namespace.split("::")
+    if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
+        namespace_prefix.pop(1)  # we pop core
+    namespace_prefix = "_".join(namespace_prefix)
+
+    return namespace_prefix
+
+
+def generate_include(sorted_funcs, headername, namespace, implementation, docstring, trycatch=False):
     print(
         """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
@@ -108,6 +115,8 @@ def generate(funcs, headername, namespace, implementation, docstring):
     )
     if implementation:
         print('#include "mlx/c/' + headername + '.h"')
+        if trycatch:
+            print('#include "mlx/c/' + headername + '_try.h"')
         print(
             """
     #include "mlx/c/mlx.h"
@@ -123,8 +132,12 @@ def generate(funcs, headername, namespace, implementation, docstring):
     """
         )
     else:
-        print("#ifndef MLX_" + headername.upper() + "_H")
-        print("#define MLX_" + headername.upper() + "_H")
+        if not trycatch:
+            print("#ifndef MLX_" + headername.upper() + "_H")
+            print("#define MLX_" + headername.upper() + "_H")
+        else:
+            print("#ifndef MLX_" + headername.upper() + "_TRY_H")
+            print("#define MLX_" + headername.upper() + "_TRY_H")
         print(
             """
     #include <stdio.h>
@@ -148,6 +161,116 @@ def generate(funcs, headername, namespace, implementation, docstring):
             print("* \defgroup " + headername + " " + docstring)
             print("*/")
             print("/**@{*/")
+
+
+def resolve_call(f):
+    c_call = []
+    cpp_call = []
+    pt = f["params_t"]
+    pn = f["params_name"]
+    encountered_unsupported_type = False
+    for i in range(len(pt)):
+        pti = pt[i]
+        pni = pn[i]
+        if pni is None:
+            pni = "param"  # good luck
+        if pti == "array":
+            c_call.append("mlx_array " + pni)
+            cpp_call.append(pni + "->ctx")
+        elif pti == "std::optional<array>":
+            c_call.append("mlx_array " + pni)
+            cpp_call.append(
+                "("
+                + pni
+                + " ? std::make_optional("
+                + pni
+                + "->ctx) : std::nullopt)"
+            )
+        elif pti == "StreamOrDevice":
+            c_call.append("mlx_stream " + pni)
+            cpp_call.append(pni + "->ctx")
+        elif pti == "Dtype":
+            c_call.append("mlx_array_dtype " + pni)
+            cpp_call.append("MLX_CPP_ARRAY_DTYPE(" + pni + ")")
+        elif (
+            pti == "bool"
+            or pti == "float"
+            or pti == "double"
+            or pti == "int"
+            or pti == "size_t"
+            or pti == "uint64_t"
+        ):
+            c_call.append(pti + " " + pni)
+            cpp_call.append(pni)
+        elif pti == "std::uintptr_t":
+            c_call.append(pti.lstrip("std::") + " " + pni)
+            cpp_call.append(pni)
+        elif pti == "std::vector<int>":
+            c_call.append("const int* " + pni)
+            c_call.append("size_t num_" + pni)
+            cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
+        elif pti == "std::vector<uint64_t>":
+            c_call.append("const uint64_t* " + pni)
+            c_call.append("size_t num_" + pni)
+            cpp_call.append("MLX_CPP_UINT64VEC(" + pni + ", num_" + pni + ")")
+        elif pti == "std::optional<std::vector<int>>":
+            c_call.append("const int* " + pni)
+            c_call.append("size_t num_" + pni)
+            cpp_call.append("MLX_CPP_OPT_INTVEC(" + pni + ", num_" + pni + ")")
+        elif pti == "std::vector<size_t>":
+            c_call.append("const size_t* " + pni)
+            c_call.append("size_t num_" + pni)
+            cpp_call.append("MLX_CPP_SIZEVEC(" + pni + ", num_" + pni + ")")
+        elif pti == "std::vector<array>":
+            c_call.append("const mlx_vector_array " + pni)
+            cpp_call.append("MLX_CPP_ARRVEC(" + pni + ")")
+        elif pti == "std::pair<int, int>":
+            c_call.append("int f_" + pni)
+            c_call.append("int s_" + pni)
+            cpp_call.append("MLX_CPP_INTPAIR(f_" + pni + ", s_" + pni + ")")
+        elif pti == "std::tuple<int, int, int>":
+            c_call.append("int " + pni + "_0")
+            c_call.append("int " + pni + "_1")
+            c_call.append("int " + pni + "_2")
+            cpp_call.append(
+                "MLX_CPP_INTTUPLE3("
+                + pni
+                + "_0, "
+                + pni
+                + "_1, "
+                + pni
+                + "_2"
+                + ")"
+            )
+        elif pti == "std::shared_ptr<io::Reader>":
+            c_call.append("FILE* " + pni)
+            cpp_call.append("MLX_CPP_READER(" + pni + ")")
+        elif pti == "std::shared_ptr<io::Writer>":
+            c_call.append("FILE* " + pni)
+            cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
+        elif pti == "std::function<std::vector<array>(std::vector<array>)>":
+            c_call.append("mlx_closure " + pni)
+            cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
+        elif pti == "std::unordered_map<std::string, array>":
+            c_call.append("mlx_map_string_to_array " + pni)
+            cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
+        elif pti == "std::unordered_map<std::string, std::string>":
+            c_call.append("mlx_map_string_to_string " + pni)
+            cpp_call.append("MLX_CPP_MAP_STRING_TO_STRING(" + pni + ")")
+        elif pti == "std::string":
+            c_call.append("mlx_string " + pni)
+            cpp_call.append("MLX_CPP_STRING(" + pni + ")")
+        else:
+            print("unsupported type: " + pti, file=sys.stderr)
+            encountered_unsupported_type = True
+            break
+
+    return c_call, cpp_call, encountered_unsupported_type
+
+
+def generate_regular(sorted_funcs, headername, namespace, implementation, docstring):
+    namespace_prefix = resolve_namespace_prefix(namespace)
+    generate_include(sorted_funcs, headername, namespace, implementation, docstring)
 
     for f in sorted_funcs:
         # print(f["return_t"])
@@ -191,106 +314,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
             signature.append(namespace_prefix + "_" + f["name"])
         signature.append("(")
 
-        c_call = []
-        cpp_call = []
-        pt = f["params_t"]
-        pn = f["params_name"]
-        encountered_unsupported_type = False
-        for i in range(len(pt)):
-            pti = pt[i]
-            pni = pn[i]
-            if pni is None:
-                pni = "param"  # good luck
-            if pti == "array":
-                c_call.append("mlx_array " + pni)
-                cpp_call.append(pni + "->ctx")
-            elif pti == "std::optional<array>":
-                c_call.append("mlx_array " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + pni
-                    + "->ctx) : std::nullopt)"
-                )
-            elif pti == "StreamOrDevice":
-                c_call.append("mlx_stream " + pni)
-                cpp_call.append(pni + "->ctx")
-            elif pti == "Dtype":
-                c_call.append("mlx_array_dtype " + pni)
-                cpp_call.append("MLX_CPP_ARRAY_DTYPE(" + pni + ")")
-            elif (
-                pti == "bool"
-                or pti == "float"
-                or pti == "double"
-                or pti == "int"
-                or pti == "size_t"
-                or pti == "uint64_t"
-            ):
-                c_call.append(pti + " " + pni)
-                cpp_call.append(pni)
-            elif pti == "std::uintptr_t":
-                c_call.append(pti.lstrip("std::") + " " + pni)
-                cpp_call.append(pni)
-            elif pti == "std::vector<int>":
-                c_call.append("const int* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<uint64_t>":
-                c_call.append("const uint64_t* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_UINT64VEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::optional<std::vector<int>>":
-                c_call.append("const int* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_OPT_INTVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<size_t>":
-                c_call.append("const size_t* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_SIZEVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<array>":
-                c_call.append("const mlx_vector_array " + pni)
-                cpp_call.append("MLX_CPP_ARRVEC(" + pni + ")")
-            elif pti == "std::pair<int, int>":
-                c_call.append("int f_" + pni)
-                c_call.append("int s_" + pni)
-                cpp_call.append("MLX_CPP_INTPAIR(f_" + pni + ", s_" + pni + ")")
-            elif pti == "std::tuple<int, int, int>":
-                c_call.append("int " + pni + "_0")
-                c_call.append("int " + pni + "_1")
-                c_call.append("int " + pni + "_2")
-                cpp_call.append(
-                    "MLX_CPP_INTTUPLE3("
-                    + pni
-                    + "_0, "
-                    + pni
-                    + "_1, "
-                    + pni
-                    + "_2"
-                    + ")"
-                )
-            elif pti == "std::shared_ptr<io::Reader>":
-                c_call.append("FILE* " + pni)
-                cpp_call.append("MLX_CPP_READER(" + pni + ")")
-            elif pti == "std::shared_ptr<io::Writer>":
-                c_call.append("FILE* " + pni)
-                cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
-            elif pti == "std::function<std::vector<array>(std::vector<array>)>":
-                c_call.append("mlx_closure " + pni)
-                cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
-            elif pti == "std::unordered_map<std::string, array>":
-                c_call.append("mlx_map_string_to_array " + pni)
-                cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
-            elif pti == "std::unordered_map<std::string, std::string>":
-                c_call.append("mlx_map_string_to_string " + pni)
-                cpp_call.append("MLX_CPP_MAP_STRING_TO_STRING(" + pni + ")")
-            elif pti == "std::string":
-                c_call.append("mlx_string " + pni)
-                cpp_call.append("MLX_CPP_STRING(" + pni + ")")
-            else:
-                print("unsupported type: " + pti, file=sys.stderr)
-                encountered_unsupported_type = True
-                break
+        c_call, cpp_call, encountered_unsupported_type = resolve_call(f)
 
         if encountered_unsupported_type:
             print("skipping", f, file=sys.stderr)
@@ -366,3 +390,99 @@ def generate(funcs, headername, namespace, implementation, docstring):
     #endif
     """
         )
+
+
+def generate_trycatch(sorted_funcs, headername, namespace, implementation, docstring):
+    namespace_prefix = resolve_namespace_prefix(namespace)
+    generate_include(sorted_funcs, headername, namespace, implementation, docstring, trycatch=True)
+
+    for f in sorted_funcs:
+        signature = []
+        return_t = f["return_t"]
+
+        # Only cover array, vector array, and vector vector array for now
+        if return_t == "array":
+            signature.append("mlx_array_result")
+        elif (
+            return_t == "std::vector<array>"
+            or return_t == "std::pair<array, array>"
+            or return_t == "std::tuple<array, array, array>"
+        ):
+            signature.append("mlx_vector_array_result")
+        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
+            signature.append("mlx_vector_vector_array_result")
+        else:
+            print("unsupported return type: " + return_t, file=sys.stderr)
+            print("skipping", f, file=sys.stderr)
+            continue
+
+        if "variant" in f:
+            signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"] + "_try")
+        else:
+            signature.append(namespace_prefix + "_" + f["name"] + "_try")
+
+        signature.append("(")
+
+        c_call, cpp_call, encountered_unsupported_type = resolve_call(f)
+
+        # print(f)
+        c_call = ", ".join(c_call)
+        cpp_call = ", ".join(cpp_call)
+        signature.append(c_call)
+        signature.append(")")
+        signature = " ".join(signature)
+
+        c_code = [signature, ";"]
+        cpp_code = ['extern "C"', signature, "{", "return"]
+
+        if return_t == "array":
+            cpp_code.append("MLX_C_ARRAY_TRY")
+        elif return_t == "std::vector<array>":
+            cpp_code.append("MLX_C_ARRAYS_TRY")
+        elif return_t == "std::pair<array, array>":
+            cpp_code.append("MLX_C_ARRAYPAIR_TRY")
+        elif return_t == "std::tuple<array, array, array>":
+            cpp_code.append("MLX_C_ARRAYTUPLE3_TRY")
+        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
+            cpp_code.append("MLX_C_VECTORARRAYPAIR_TRY")
+        else:
+            print("unsupported return type: " + return_t, file=sys.stderr)
+            print("skipping", f, file=sys.stderr)
+            continue
+
+        cpp_code.append("(")
+        cpp_code.append(namespace + "::" + f["name"])
+        cpp_code.append("(")
+        cpp_code.append(cpp_call)
+        cpp_code.append(")")
+        cpp_code.append(")")
+        cpp_code.append(";")
+        cpp_code.append("}")
+        if implementation:
+            print(" ".join(cpp_code))
+        else:
+            print(" ".join(c_code))
+
+    if implementation:
+        pass
+    else:
+        if docstring:
+            print("/**@}*/")
+        print(
+            """
+    #ifdef __cplusplus
+    }
+    #endif
+
+    #endif
+    """
+        )
+
+
+def generate(funcs, headername, namespace, implementation, docstring, trycatch=False):
+    sorted_funcs = sort_funcs(funcs)
+
+    if not trycatch:
+        generate_regular(sorted_funcs, headername, namespace, implementation, docstring)
+    else:
+        generate_trycatch(sorted_funcs, headername, namespace, implementation, docstring)
