@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include "mlx/c/mlx.h"
-#include "mlx/c/ops_try.h"
+#include "mlx/c/try_ops.h"
 #include "mlx/c/result.h"
 
 void print_array(const char* msg, mlx_array arr) {
@@ -22,7 +22,7 @@ int main() {
   // The following arange is expected to succeed.
   printf("arange(0, 3, 0.5)\n");
   mlx_array_result arange_result =
-      mlx_arange_try(0, 3, 0.5, MLX_FLOAT32, stream);
+      mlx_try_arange(0, 3, 0.5, MLX_FLOAT32, stream);
   mlx_result_tag tag = mlx_array_result_get_tag(&arange_result);
   if (tag == mlx_result_tag_ok) {
     mlx_array arange = mlx_array_result_get_ok(arange_result);
@@ -38,7 +38,7 @@ int main() {
   // The arange below is expected to fail because the step is 0.
   printf("arange(0, 3, 0)\n");
   mlx_array_result arange_result2 =
-      mlx_arange_try(0, 3, 0, MLX_FLOAT32, stream);
+      mlx_try_arange(0, 3, 0, MLX_FLOAT32, stream);
   mlx_result_tag tag2 = mlx_array_result_get_tag(&arange_result2);
   if (tag2 == mlx_result_tag_ok) {
     mlx_array arange2 = mlx_array_result_get_ok(arange_result2);

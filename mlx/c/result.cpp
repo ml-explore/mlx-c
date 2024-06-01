@@ -30,7 +30,7 @@ mlx_array_result mlx_array_result_new_out_of_range(mlx_string error_message) {
 }
 
 mlx_result_tag mlx_array_result_get_tag(mlx_array_result* result) {
-    return result->tag;
+  return result->tag;
 }
 
 mlx_array mlx_array_result_get_ok(mlx_array_result result) {
@@ -73,7 +73,8 @@ mlx_vector_array_result mlx_vector_array_result_new_out_of_range(
   return result;
 }
 
-mlx_result_tag mlx_vector_array_result_get_tag(mlx_vector_array_result* result) {
+mlx_result_tag mlx_vector_array_result_get_tag(
+    mlx_vector_array_result* result) {
   return result->tag;
 }
 
@@ -121,7 +122,7 @@ mlx_vector_vector_array_result mlx_vector_vector_array_result_new_out_of_range(
 
 mlx_result_tag mlx_vector_vector_array_result_get_tag(
     mlx_vector_vector_array_result* result) {
-    return result->tag;
+  return result->tag;
 }
 
 mlx_vector_vector_array mlx_vector_vector_array_result_get_ok(

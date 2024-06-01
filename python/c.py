@@ -116,7 +116,7 @@ def generate_include(sorted_funcs, headername, namespace, implementation, docstr
     if implementation:
         print('#include "mlx/c/' + headername + '.h"')
         if trycatch:
-            print('#include "mlx/c/' + headername + '_try.h"')
+            print('#include "mlx/c/' + 'try_' + headername + '.h"')
             print('#include "mlx/c/result.h"')
         print(
             """
@@ -141,8 +141,8 @@ def generate_include(sorted_funcs, headername, namespace, implementation, docstr
             print("#ifndef MLX_" + headername.upper() + "_H")
             print("#define MLX_" + headername.upper() + "_H")
         else:
-            print("#ifndef MLX_" + headername.upper() + "_TRY_H")
-            print("#define MLX_" + headername.upper() + "_TRY_H")
+            print("#ifndef MLX_TRY_" + headername.upper() + "_H")
+            print("#define MLX_TRY_" + headername.upper() + "_H")
             print('#include "mlx/c/result.h"')
         print(
             """
@@ -421,9 +421,9 @@ def generate_trycatch(sorted_funcs, headername, namespace, implementation, docst
             continue
 
         if "variant" in f:
-            signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"] + "_try")
+            signature.append(namespace_prefix + "_try_" + f["name"] + "_" + f["variant"])
         else:
-            signature.append(namespace_prefix + "_" + f["name"] + "_try")
+            signature.append(namespace_prefix + "_try_" + f["name"])
 
         signature.append("(")
 
