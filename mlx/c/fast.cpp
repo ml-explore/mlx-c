@@ -21,7 +21,7 @@ extern "C" mlx_array mlx_fast_layer_norm(
     mlx_array bias,
     float eps,
     mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::fast::layer_norm(
+  RETURN_MLX_C_ARRAY(mlx::core::fast::layer_norm(
       x->ctx,
       (weight ? std::make_optional(weight->ctx) : std::nullopt),
       (bias ? std::make_optional(bias->ctx) : std::nullopt),
@@ -30,7 +30,7 @@ extern "C" mlx_array mlx_fast_layer_norm(
 }
 extern "C" mlx_array
 mlx_fast_rms_norm(mlx_array x, mlx_array weight, float eps, mlx_stream s) {
-  return MLX_C_ARRAY(
+  RETURN_MLX_C_ARRAY(
       mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx));
 }
 extern "C" mlx_array mlx_fast_rope(
@@ -41,7 +41,7 @@ extern "C" mlx_array mlx_fast_rope(
     float scale,
     int offset,
     mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::fast::rope(
+  RETURN_MLX_C_ARRAY(mlx::core::fast::rope(
       x->ctx, dims, traditional, base, scale, offset, s->ctx));
 }
 extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
@@ -51,7 +51,7 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
     float scale,
     mlx_array mask,
     mlx_stream s) {
-  return MLX_C_ARRAY(mlx::core::fast::scaled_dot_product_attention(
+  RETURN_MLX_C_ARRAY(mlx::core::fast::scaled_dot_product_attention(
       queries->ctx,
       keys->ctx,
       values->ctx,

@@ -21,14 +21,14 @@ extern "C" mlx_closure mlx_detail_compile(
     bool shapeless,
     const uint64_t* constants,
     size_t num_constants) {
-  return MLX_C_CLOSURE(mlx::core::detail::compile(
+  RETURN_MLX_C_CLOSURE(mlx::core::detail::compile(
       MLX_CPP_CLOSURE(fun),
       fun_id,
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
 }
 extern "C" void mlx_detail_compile_erase(uintptr_t fun_id) {
-  return MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));
+  RETURN_MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));
 }
 extern "C" mlx_vector_array mlx_detail_vmap_replace(
     const mlx_vector_array inputs,
@@ -38,7 +38,7 @@ extern "C" mlx_vector_array mlx_detail_vmap_replace(
     size_t num_in_axes,
     const int* out_axes,
     size_t num_out_axes) {
-  return MLX_C_ARRAYS(mlx::core::detail::vmap_replace(
+  RETURN_MLX_C_VECTOR_ARRAY(mlx::core::detail::vmap_replace(
       MLX_CPP_ARRVEC(inputs),
       MLX_CPP_ARRVEC(s_inputs),
       MLX_CPP_ARRVEC(s_outputs),
@@ -50,7 +50,7 @@ extern "C" mlx_vector_vector_array mlx_detail_vmap_trace(
     const mlx_vector_array inputs,
     const int* in_axes,
     size_t num_in_axes) {
-  return MLX_C_VECTORARRAYPAIR(mlx::core::detail::vmap_trace(
+  RETURN_MLX_C_VECTORARRAYPAIR(mlx::core::detail::vmap_trace(
       MLX_CPP_CLOSURE(fun),
       MLX_CPP_ARRVEC(inputs),
       MLX_CPP_INTVEC(in_axes, num_in_axes)));

@@ -16,11 +16,11 @@
 #include "mlx/c/private/utils.h"
 
 extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
-  return MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun), shapeless));
+  RETURN_MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun), shapeless));
 }
 extern "C" void mlx_disable_compile() {
-  return MLX_C_VOID(mlx::core::disable_compile());
+  RETURN_MLX_C_VOID(mlx::core::disable_compile());
 }
 extern "C" void mlx_enable_compile() {
-  return MLX_C_VOID(mlx::core::enable_compile());
+  RETURN_MLX_C_VOID(mlx::core::enable_compile());
 }

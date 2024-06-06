@@ -5,12 +5,13 @@
 #include "mlx/c/device.h"
 #include "mlx/c/private/device.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/utils.h"
 
 mlx_string_* mlx_device_::tostring() {
   std::ostringstream os;
   os << ctx;
   std::string str = os.str();
-  return new mlx_string_(str);
+  RETURN_MLX_C_STRING(str);
 }
 
 namespace {
@@ -27,7 +28,7 @@ mlx::core::Device::DeviceType to_cpp_device_type(mlx_device_type type) {
 
 extern "C" mlx_device mlx_device_new(mlx_device_type type, int index) {
   auto cpp_type = to_cpp_device_type(type);
-  return new mlx_device_(mlx::core::Device(cpp_type, index));
+  RETURN_MLX_C_DEVICE(mlx::core::Device(cpp_type, index));
 }
 
 extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
@@ -37,9 +38,9 @@ extern "C" bool mlx_device_equal(mlx_device lhs, mlx_device rhs) {
   return lhs->ctx == rhs->ctx;
 }
 extern "C" mlx_device mlx_default_device(void) {
-  return new mlx_device_(mlx::core::default_device());
+  RETURN_MLX_C_DEVICE(mlx::core::default_device());
 }
 extern "C" mlx_device mlx_set_default_device(mlx_device dev) {
-  mlx::core::set_default_device(dev->ctx);
-  return dev;
+  MLX_TRY_CATCH(mlx::core::set_default_device(dev->ctx);
+                return dev, return nullptr);
 }

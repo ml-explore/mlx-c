@@ -7,23 +7,26 @@
 #include "mlx/c/private/utils.h"
 
 mlx_string_* mlx_map_string_to_array_::tostring() {
-  return new mlx_string_("mlx_map_string_to_array");
+  MLX_TRY_CATCH(return new mlx_string_("mlx_map_string_to_array"),
+                       return nullptr);
 }
 
 mlx_string_* mlx_map_string_to_array_iterator_::tostring() {
-  return new mlx_string_("mlx_map_string_to_array_iterator");
+  MLX_TRY_CATCH(return new mlx_string_("mlx_map_string_to_array_iterator"),
+                       return nullptr);
 }
 
 extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
-  return new mlx_map_string_to_array_();
+  MLX_TRY_CATCH(return new mlx_map_string_to_array_(), return nullptr);
 }
 
 extern "C" bool mlx_map_string_to_array_insert(
     mlx_map_string_to_array map,
     const mlx_string key,
     const mlx_array value) {
-  auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
-  return res.second;
+  MLX_TRY_CATCH(
+      auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
+      return res.second, return false);
 }
 
 extern "C" mlx_array mlx_map_string_to_array_get(
@@ -39,7 +42,8 @@ extern "C" mlx_array mlx_map_string_to_array_get(
 
 extern "C" mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
     mlx_map_string_to_array map) {
-  return new mlx_map_string_to_array_iterator_(map);
+  MLX_TRY_CATCH(return new mlx_map_string_to_array_iterator_(map),
+                       return nullptr);
 }
 
 extern "C" bool mlx_map_string_to_array_iterator_next(
@@ -80,23 +84,26 @@ extern "C" mlx_array mlx_map_string_to_array_iterator_value(
 }
 
 mlx_string_* mlx_map_string_to_string_::tostring() {
-  return new mlx_string_("mlx_map_string_to_string");
+  MLX_TRY_CATCH(return new mlx_string_("mlx_map_string_to_string"),
+                       return nullptr);
 }
 
 mlx_string_* mlx_map_string_to_string_iterator_::tostring() {
-  return new mlx_string_("mlx_map_string_to_string_iterator");
+  MLX_TRY_CATCH(return new mlx_string_("mlx_map_string_to_string_iterator"),
+                       return nullptr);
 }
 
 extern "C" mlx_map_string_to_string mlx_map_string_to_string_new(void) {
-  return new mlx_map_string_to_string_();
+  MLX_TRY_CATCH(return new mlx_map_string_to_string_(), return nullptr);
 }
 
 extern "C" bool mlx_map_string_to_string_insert(
     mlx_map_string_to_string map,
     const mlx_string key,
     const mlx_string value) {
-  auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
-  return res.second;
+  MLX_TRY_CATCH(
+      auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
+      return res.second, return false);
 }
 
 extern "C" mlx_string mlx_map_string_to_string_get(
@@ -112,7 +119,8 @@ extern "C" mlx_string mlx_map_string_to_string_get(
 
 extern "C" mlx_map_string_to_string_iterator mlx_map_string_to_string_iterate(
     mlx_map_string_to_string map) {
-  return new mlx_map_string_to_string_iterator_(map);
+  MLX_TRY_CATCH(return new mlx_map_string_to_string_iterator_(map),
+                       return nullptr);
 }
 
 extern "C" bool mlx_map_string_to_string_iterator_next(
