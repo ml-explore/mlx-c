@@ -2,6 +2,8 @@
 
 #include "mlx/c/error.h"
 
+#include <memory>
+
 #include <cstdarg>
 #include <cstdio>
 #include <cstdlib>
@@ -11,13 +13,14 @@ static void mlx_error_handler_default_(const char* msg, void* data) {
   exit(-1);
 }
 
-static void* mlx_error_handler_data_ = nullptr;
+static std::shared_ptr<void> mlx_error_handler_data_ = nullptr;
 static mlx_error_handler_func mlx_error_handler_ = mlx_error_handler_default_;
 
 extern "C" void mlx_set_error_handler(
     mlx_error_handler_func handler,
-    void* data) {
-  mlx_error_handler_data_ = data;
+    void* data,
+    void (*dtor)(void*)) {
+  mlx_error_handler_data_ = std::shared_ptr<void>(data, dtor);
   if (handler) {
     mlx_error_handler_ = handler;
   } else {
@@ -41,5 +44,5 @@ _mlx_error(const char* file, const int line, const char* fmt, ...) {
   snprintf(msg + size, size_loc + 1, " at %s:%d", file, line);
   va_end(args);
 
-  mlx_error_handler_(msg, mlx_error_handler_data_);
+  mlx_error_handler_(msg, mlx_error_handler_data_.get());
 }

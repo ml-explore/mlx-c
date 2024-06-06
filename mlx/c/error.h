@@ -17,7 +17,10 @@ typedef void (*mlx_error_handler_func)(const char* msg, void* data);
 /**
  * Set the error handler.
  */
-void mlx_set_error_handler(mlx_error_handler_func handler, void* data);
+void mlx_set_error_handler(
+    mlx_error_handler_func handler,
+    void* data,
+    void (*dtor)(void*));
 
 /**
  * Throw an error.
