@@ -10,28 +10,29 @@
 #include "mlx/c/string.h"
 
 mlx_string mlx_array_::tostring() {
-  std::ostringstream os;
-  os << ctx;
-  std::string str = os.str();
-  return new mlx_string_(str);
+  MLX_TRY_CATCH(std::ostringstream os; os << ctx; std::string str = os.str();
+                return new mlx_string_(str);
+                , return nullptr);
 }
 
 mlx_string mlx_vector_array_::tostring() {
-  std::ostringstream os;
-  os << "vector of arrays (size=" << ctx.size() << ")";
-  std::string str = os.str();
-  return new mlx_string_(str);
+  MLX_TRY_CATCH(std::ostringstream os;
+                os << "vector of arrays (size=" << ctx.size() << ")";
+                std::string str = os.str();
+                return new mlx_string_(str);
+                , return nullptr);
 }
 
 mlx_string mlx_vector_vector_array_::tostring() {
-  std::ostringstream os;
-  os << "vector of vector of arrays (size=" << ctx.size() << ")";
-  std::string str = os.str();
-  return new mlx_string_(str);
+  MLX_TRY_CATCH(std::ostringstream os;
+                os << "vector of vector of arrays (size=" << ctx.size() << ")";
+                std::string str = os.str();
+                return new mlx_string_(str);
+                , return nullptr);
 }
 
 extern "C" mlx_vector_array mlx_vector_array_new() {
-  return new mlx_vector_array_();
+  RETURN_MLX_C_VECTOR_ARRAY();
 }
 
 mlx_vector_array mlx_vector_array_from_arrays(
@@ -41,30 +42,30 @@ mlx_vector_array mlx_vector_array_from_arrays(
   for (size_t i = 0; i < num_arrs; i++) {
     cpp_arrs.push_back(arrs[i]->ctx);
   }
-  return new mlx_vector_array_(cpp_arrs);
+  RETURN_MLX_C_VECTOR_ARRAY(cpp_arrs);
 }
 
 extern "C" mlx_vector_array mlx_vector_array_from_array(const mlx_array arr) {
-  return new mlx_vector_array_({arr->ctx});
+  RETURN_MLX_C_VECTOR_ARRAY({arr->ctx});
 }
 
 extern "C" void mlx_vector_array_add(
     mlx_vector_array vec,
     const mlx_array arr) {
-  vec->ctx.push_back(arr->ctx);
+  MLX_TRY_CATCH(vec->ctx.push_back(arr->ctx);, )
 }
 
 extern "C" void mlx_vector_array_add_arrays(
     mlx_vector_array vec,
     const mlx_array* arrs,
     size_t num_arrs) {
-  for (size_t i = 0; i < num_arrs; i++) {
-    vec->ctx.push_back(arrs[i]->ctx);
-  }
+  MLX_TRY_CATCH(
+      for (size_t i = 0; i < num_arrs;
+           i++) { vec->ctx.push_back(arrs[i]->ctx); }, );
 }
 
 extern "C" mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index) {
-  return new mlx_array_(vec->ctx.at(index));
+  RETURN_MLX_C_ARRAY(vec->ctx.at(index));
 }
 
 extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
@@ -72,26 +73,26 @@ extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
-  return new mlx_vector_vector_array_();
+  RETURN_MLX_C_VECTOR_VECTOR_ARRAY();
 }
 
 extern "C" void mlx_vector_vector_array_add(
     mlx_vector_vector_array vec2,
     const mlx_vector_array vec) {
-  vec2->ctx.push_back(vec->ctx);
+  MLX_TRY_CATCH(vec2->ctx.push_back(vec->ctx);, );
 }
 
 extern "C" mlx_vector_array mlx_vector_vector_array_get(
     mlx_vector_vector_array vec2,
     size_t index) {
-  return new mlx_vector_array_(vec2->ctx.at(index));
+  RETURN_MLX_C_VECTOR_ARRAY(vec2->ctx.at(index));
 }
 
 extern "C" mlx_array mlx_vector_vector_array_get2d(
     mlx_vector_vector_array vec2,
     size_t index,
     size_t arr_index) {
-  return new mlx_array_(vec2->ctx.at(index).at(arr_index));
+  RETURN_MLX_C_ARRAY(vec2->ctx.at(index).at(arr_index));
 }
 
 extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec2) {
@@ -99,17 +100,17 @@ extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec2) {
 }
 
 extern "C" mlx_array mlx_array_from_bool(bool val) {
-  return MLX_C_ARRAY(mlx::core::array(val));
+  RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
 extern "C" mlx_array mlx_array_from_int(int val) {
-  return MLX_C_ARRAY(mlx::core::array(val));
+  RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
 extern "C" mlx_array mlx_array_from_float(float val) {
-  return MLX_C_ARRAY(mlx::core::array(val));
+  RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
 extern "C" mlx_array mlx_array_from_complex(float real_val, float imag_val) {
   std::complex<float> cpp_val(real_val, imag_val);
-  return MLX_C_ARRAY(mlx::core::array(cpp_val));
+  RETURN_MLX_C_ARRAY(mlx::core::array(cpp_val));
 }
 extern "C" mlx_array mlx_array_from_data(
     const void* data,
@@ -121,43 +122,44 @@ extern "C" mlx_array mlx_array_from_data(
   mlx::core::Dtype cpp_dtype = MLX_CPP_ARRAY_DTYPE(dtype);
   switch (cpp_dtype) {
     case mlx::core::bool_:
-      return MLX_C_ARRAY(mlx::core::array((bool*)data, cpp_shape, cpp_dtype));
+      RETURN_MLX_C_ARRAY(mlx::core::array((bool*)data, cpp_shape, cpp_dtype));
     case mlx::core::uint8:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((uint8_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::uint16:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((uint16_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::uint32:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((uint32_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::uint64:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((uint64_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::int8:
-      return MLX_C_ARRAY(mlx::core::array((int8_t*)data, cpp_shape, cpp_dtype));
+      RETURN_MLX_C_ARRAY(mlx::core::array((int8_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::int16:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((int16_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::int32:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((int32_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::int64:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((int64_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::float16:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((mlx::core::float16_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::float32:
-      return MLX_C_ARRAY(mlx::core::array((float*)data, cpp_shape, cpp_dtype));
+      RETURN_MLX_C_ARRAY(mlx::core::array((float*)data, cpp_shape, cpp_dtype));
     case mlx::core::bfloat16:
-      return MLX_C_ARRAY(
+      RETURN_MLX_C_ARRAY(
           mlx::core::array((mlx::core::bfloat16_t*)data, cpp_shape, cpp_dtype));
     case mlx::core::complex64:
-      return MLX_C_ARRAY(mlx::core::array(
+      RETURN_MLX_C_ARRAY(mlx::core::array(
           (mlx::core::complex64_t*)data, cpp_shape, cpp_dtype));
     default:
-      return nullptr; // TODO: error
+      mlx_error("unknown data type");
+      return nullptr;
   }
 }
 
@@ -183,7 +185,7 @@ extern "C" int mlx_array_dim(mlx_array arr, int dim) {
   return MLX_CPP_ARRAY(arr).shape(dim);
 }
 extern "C" mlx_array_dtype mlx_array_get_dtype(mlx_array arr) {
-  return MLX_C_ARRAY_DTYPE(MLX_CPP_ARRAY(arr).dtype());
+  RETURN_MLX_C_ARRAY_DTYPE(MLX_CPP_ARRAY(arr).dtype());
 }
 extern "C" void mlx_array_eval(mlx_array arr) {
   MLX_CPP_ARRAY(arr).eval();

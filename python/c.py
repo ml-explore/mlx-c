@@ -304,36 +304,35 @@ def generate(funcs, headername, namespace, implementation, docstring):
         signature = " ".join(signature)
 
         c_code = [signature, ";"]
-        cpp_code = ['extern "C"', signature, "{", "return"]
-
+        cpp_code = ['extern "C"', signature, "{"]
         if return_t == "void":
-            cpp_code.append("MLX_C_VOID")
+            cpp_code.append("RETURN_MLX_C_VOID")
         elif return_t == "bool" or return_t == "size_t":
-            cpp_code.append(return_t)
+            cpp_code.append("return " + return_t)
         elif return_t == "array":
-            cpp_code.append("MLX_C_ARRAY")
+            cpp_code.append("RETURN_MLX_C_ARRAY")
         elif return_t == "std::vector<array>":
-            cpp_code.append("MLX_C_ARRAYS")
+            cpp_code.append("RETURN_MLX_C_VECTOR_ARRAY")
         elif return_t == "std::pair<array, array>":
-            cpp_code.append("MLX_C_ARRAYPAIR")
+            cpp_code.append("RETURN_MLX_C_ARRAYPAIR")
         elif return_t == "std::tuple<array, array, array>":
-            cpp_code.append("MLX_C_ARRAYTUPLE3")
+            cpp_code.append("RETURN_MLX_C_ARRAYTUPLE3")
         elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
-            cpp_code.append("MLX_C_VECTORARRAYPAIR")
+            cpp_code.append("RETURN_MLX_C_VECTORARRAYPAIR")
         elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
-            cpp_code.append("MLX_C_CLOSURE")
+            cpp_code.append("RETURN_MLX_C_CLOSURE")
         elif return_t == "ValueAndGradFn":
-            cpp_code.append("MLX_C_CLOSURE_VALUE_AND_GRAD")
+            cpp_code.append("RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD")
         elif return_t == "std::unordered_map<std::string, array>":
-            cpp_code.append("MLX_C_MAP_STRING_TO_ARRAY")
+            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_ARRAY")
         elif return_t == "std::unordered_map<std::string, std::string>":
-            cpp_code.append("MLX_C_MAP_STRING_TO_STRING")
+            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING")
         elif return_t == "SafetensorsLoad":
-            cpp_code.append("MLX_C_SAFETENSORS")
+            cpp_code.append("RETURN_MLX_C_SAFETENSORS")
         elif return_t == "std::string":
-            cpp_code.append("MLX_C_STRING")
+            cpp_code.append("RETURN_MLX_C_STRING")
         elif return_t == "std::shared_future<void>":
-            cpp_code.append("MLX_C_FUTURE")
+            cpp_code.append("RETURN_MLX_C_FUTURE")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)

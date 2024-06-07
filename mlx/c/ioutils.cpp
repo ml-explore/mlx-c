@@ -4,27 +4,26 @@
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/utils.h"
 
 mlx_string_* mlx_safetensors_::tostring() {
-  return new mlx_string_("mlx_safetensors");
+  MLX_TRY_CATCH(return new mlx_string_("mlx_safetensors"), return nullptr);
 }
 
 extern "C" mlx_safetensors mlx_safetensors_new() {
-  return new mlx_safetensors_();
+  MLX_TRY_CATCH(return new mlx_safetensors_(), return nullptr);
 }
 
 /**
  * Returns the data map.
  */
 extern "C" mlx_map_string_to_array mlx_safetensors_data(mlx_safetensors st) {
-  mlx_retain(st->data);
-  return st->data;
+  MLX_TRY_CATCH(mlx_retain(st->data); return st->data, return nullptr);
 }
 /**
  * Returns the metadata map.
  */
 extern "C" mlx_map_string_to_string mlx_safetensors_metadata(
     mlx_safetensors st) {
-  mlx_retain(st->metadata);
-  return st->metadata;
+  MLX_TRY_CATCH(mlx_retain(st->metadata); return st->metadata, return nullptr);
 }

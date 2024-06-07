@@ -39,6 +39,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/future.cpp
