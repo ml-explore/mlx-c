@@ -27,6 +27,9 @@ extern "C" mlx_closure mlx_detail_compile(
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
 }
+extern "C" void mlx_detail_compile_clear_cache() {
+  RETURN_MLX_C_VOID(mlx::core::detail::compile_clear_cache());
+}
 extern "C" void mlx_detail_compile_erase(uintptr_t fun_id) {
   RETURN_MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));
 }

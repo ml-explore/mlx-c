@@ -1041,6 +1041,11 @@ mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::var(a->ctx, keepdims, ddof, s->ctx));
 }
 extern "C" mlx_array
+mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(
+      mlx::core::view(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
+}
+extern "C" mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::where(condition->ctx, x->ctx, y->ctx, s->ctx));
 }

@@ -30,6 +30,7 @@ mlx_closure mlx_detail_compile(
     bool shapeless,
     const uint64_t* constants,
     size_t num_constants);
+void mlx_detail_compile_clear_cache();
 void mlx_detail_compile_erase(uintptr_t fun_id);
 mlx_vector_array mlx_detail_vmap_replace(
     const mlx_vector_array inputs,
