@@ -3,7 +3,7 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/compile.h"
+#include "mlx/c/ops.h"
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
@@ -16,12 +16,15 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
-  RETURN_MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun), shapeless));
+extern "C" mlx_array mlx_distributed_all_gather(
+    mlx_array x,
+    mlx_distributed_group group) {
+  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_gather(
+      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt)));
 }
-extern "C" void mlx_disable_compile() {
-  RETURN_MLX_C_VOID(mlx::core::disable_compile());
-}
-extern "C" void mlx_enable_compile() {
-  RETURN_MLX_C_VOID(mlx::core::enable_compile());
+extern "C" mlx_array mlx_distributed_all_sum(
+    mlx_array x,
+    mlx_distributed_group group) {
+  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_sum(
+      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt)));
 }

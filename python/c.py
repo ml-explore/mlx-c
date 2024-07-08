@@ -113,6 +113,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
     #include "mlx/c/mlx.h"
     #include "mlx/c/private/array.h"
     #include "mlx/c/private/closure.h"
+    #include "mlx/c/private/distributed_group.h"
     #include "mlx/c/private/future.h"
     #include "mlx/c/private/io.h"
     #include "mlx/c/private/map.h"
@@ -131,6 +132,7 @@ def generate(funcs, headername, namespace, implementation, docstring):
 
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
+    #include "mlx/c/distributed_group.h"
     #include "mlx/c/future.h"
     #include "mlx/c/ioutils.h"
     #include "mlx/c/map.h"
@@ -287,6 +289,15 @@ def generate(funcs, headername, namespace, implementation, docstring):
             elif pti == "std::string":
                 c_call.append("mlx_string " + pni)
                 cpp_call.append("MLX_CPP_STRING(" + pni + ")")
+            elif pti == "std::optional<Group>":
+                c_call.append("mlx_distributed_group " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + pni
+                    + "->ctx) : std::nullopt)"
+                )
             else:
                 print("unsupported type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
