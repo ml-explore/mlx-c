@@ -39,6 +39,7 @@ bindings to MLX.
    map
    closure
    future
+   distributed_group
    ioutils
 
 .. toctree::
@@ -51,6 +52,7 @@ bindings to MLX.
    random
    io
    transforms
+   distributed_ops
    compile
    fast
    metal

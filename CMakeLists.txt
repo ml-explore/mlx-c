@@ -29,7 +29,7 @@ set(MLX_BUILD_PYTHON_BINDINGS OFF)
 FetchContent_Declare(
   mlx
   GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.14.0)
+  GIT_TAG v0.15.2)
 FetchContent_MakeAvailable(mlx)
 
 # ----------------------------- lib -----------------------------
@@ -39,6 +39,8 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp

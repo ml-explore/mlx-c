@@ -8,6 +8,7 @@
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
@@ -26,6 +27,9 @@ extern "C" mlx_closure mlx_detail_compile(
       fun_id,
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
+}
+extern "C" void mlx_detail_compile_clear_cache() {
+  RETURN_MLX_C_VOID(mlx::core::detail::compile_clear_cache());
 }
 extern "C" void mlx_detail_compile_erase(uintptr_t fun_id) {
   RETURN_MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));

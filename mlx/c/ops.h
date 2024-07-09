@@ -10,6 +10,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
+#include "mlx/c/distributed_group.h"
 #include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
@@ -498,6 +499,7 @@ mlx_array mlx_var(
     int ddof,
     mlx_stream s);
 mlx_array mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream s);
+mlx_array mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
 mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s);
 mlx_array mlx_zeros(

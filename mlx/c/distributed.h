@@ -3,8 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_METAL_H
-#define MLX_METAL_H
+#ifndef MLX_OPS_H
+#define MLX_OPS_H
 
 #include <stdio.h>
 
@@ -22,19 +22,11 @@ extern "C" {
 #endif
 
 /**
- * \defgroup metal Metal specific operations
+ * \defgroup distributed_ops Distributed collectives
  */
 /**@{*/
-void mlx_metal_clear_cache();
-size_t mlx_metal_get_active_memory();
-size_t mlx_metal_get_cache_memory();
-size_t mlx_metal_get_peak_memory();
-bool mlx_metal_is_available();
-void mlx_metal_reset_peak_memory();
-size_t mlx_metal_set_cache_limit(size_t limit);
-size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
-void mlx_metal_start_capture(mlx_string path);
-void mlx_metal_stop_capture();
+mlx_array mlx_distributed_all_gather(mlx_array x, mlx_distributed_group group);
+mlx_array mlx_distributed_all_sum(mlx_array x, mlx_distributed_group group);
 /**@}*/
 
 #ifdef __cplusplus
