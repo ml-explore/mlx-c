@@ -45,11 +45,6 @@ bool mlx_distributed_is_available();
  */
 mlx_distributed_group mlx_distributed_init(bool strict);
 
-/**
- * Get the distributed stream.
- */
-mlx_stream mlx_distributed_communication_stream();
-
 /**@}*/
 
 #ifdef __cplusplus

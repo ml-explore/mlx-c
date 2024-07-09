@@ -32,7 +32,3 @@ extern "C" bool mlx_distributed_is_available() {
 extern "C" mlx_distributed_group mlx_distributed_init(bool strict) {
   RETURN_MLX_C_DISTRIBUTED_GROUP(mlx::core::distributed::init(strict));
 }
-
-extern "C" mlx_stream mlx_distributed_communication_stream() {
-  RETURN_MLX_C_STREAM(mlx::core::distributed::detail::communication_stream());
-}
