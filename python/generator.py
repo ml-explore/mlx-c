@@ -11,6 +11,7 @@ parser.add_argument("--namespace", default="mlx::core", type=str)
 parser.add_argument("--implementation", default=False, action="store_true")
 parser.add_argument("--language", default="C", type=str)
 parser.add_argument("--docstring", default="", type=str)
+parser.add_argument("--dockey", default="", type=str)
 args = parser.parse_args()
 
 headername = os.path.basename(args.header)
@@ -92,4 +93,6 @@ if args.language == "C":
 else:
     raise RuntimeError("Unsupported language")
 
-generate(funcs, headername, args.namespace, args.implementation, args.docstring)
+generate(
+    funcs, headername, args.namespace, args.implementation, args.docstring, args.dockey
+)

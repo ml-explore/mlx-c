@@ -3,7 +3,7 @@
 import sys
 
 
-def generate(funcs, headername, namespace, implementation, docstring):
+def generate(funcs, headername, namespace, implementation, docstring, dockey):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -147,7 +147,9 @@ def generate(funcs, headername, namespace, implementation, docstring):
         if docstring:
             docstring = docstring.replace("\n", "\n* ")
             print("/**")
-            print("* \defgroup " + headername + " " + docstring)
+            if not dockey:
+                dockey = headername
+            print("* \defgroup " + dockey + " " + docstring)
             print("*/")
             print("/**@{*/")
 

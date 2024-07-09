@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /**
- * \defgroup ops Distributed collectives
+ * \defgroup distributed_ops Distributed collectives
  */
 /**@{*/
 mlx_array mlx_distributed_all_gather(mlx_array x, mlx_distributed_group group);

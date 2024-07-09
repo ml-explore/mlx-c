@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * \defgroup mlx_distributed MLX distributed support
+ * \defgroup mlx_distributed_group MLX distributed
  */
 /**@{*/
 
