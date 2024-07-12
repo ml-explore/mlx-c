@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Linear Algebra &#8212; MLX C 0.0.3 documentation</title>
+    <title>Linear Algebra &#8212; MLX C 0.0.9 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=4acdca81"></script>
+    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -133,8 +133,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -172,6 +172,8 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
@@ -182,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_ops.html">Distributed Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
@@ -348,10 +351,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_linalg_cholesky9mlx_arrayb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_cholesky()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_linalg_inv9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_inv()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm_p()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm_ord()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_linalg_norm9mlx_arrayPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_qr()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_linalg_svd9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_svd()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -365,6 +371,16 @@ document.write(`
                   
   <section id="linear-algebra">
 <h1>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">#</a></h1>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419mlx_linalg_cholesky9mlx_arrayb10mlx_stream">
+<span id="_CPPv319mlx_linalg_cholesky9mlx_arrayb10mlx_stream"></span><span id="_CPPv219mlx_linalg_cholesky9mlx_arrayb10mlx_stream"></span><span id="mlx_linalg_cholesky__mlx_array.b.mlx_stream"></span><span class="target" id="group__linalg_1ga4508d117f85ddb23bafd310bf2abe56c"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_cholesky</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">upper</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_linalg_cholesky9mlx_arrayb10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_linalg_inv9mlx_array10mlx_stream">
+<span id="_CPPv314mlx_linalg_inv9mlx_array10mlx_stream"></span><span id="_CPPv214mlx_linalg_inv9mlx_array10mlx_stream"></span><span id="mlx_linalg_inv__mlx_array.mlx_stream"></span><span class="target" id="group__linalg_1ga537541d1c0140016c366726571cdeea5"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_inv</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_linalg_inv9mlx_array10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream">
 <span id="_CPPv317mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream"></span><span id="_CPPv217mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream"></span><span id="mlx_linalg_norm_p__mlx_array.double.iCP.s.b.mlx_stream"></span><span class="target" id="group__linalg_1ga8ca062fe63821e28fb241e61a9aac545"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_norm_p</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ord</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">axis</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">num_axis</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">keepdims</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream" title="Link to this definition">#</a><br /></dt>
@@ -383,6 +399,11 @@ document.write(`
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv413mlx_linalg_qr9mlx_array10mlx_stream">
 <span id="_CPPv313mlx_linalg_qr9mlx_array10mlx_stream"></span><span id="_CPPv213mlx_linalg_qr9mlx_array10mlx_stream"></span><span id="mlx_linalg_qr__mlx_array.mlx_stream"></span><span class="target" id="group__linalg_1ga48aa8cc6506c78518d62980f8df3106c"></span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_qr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_linalg_svd9mlx_array10mlx_stream">
+<span id="_CPPv314mlx_linalg_svd9mlx_array10mlx_stream"></span><span id="_CPPv214mlx_linalg_svd9mlx_array10mlx_stream"></span><span id="mlx_linalg_svd__mlx_array.mlx_stream"></span><span class="target" id="group__linalg_1gaaeab40bba996ebc51e322ba813918aba"></span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_linalg_svd</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_linalg_svd9mlx_array10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -432,10 +453,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_linalg_cholesky9mlx_arrayb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_cholesky()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_linalg_inv9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_inv()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_linalg_norm_p9mlx_arraydPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm_p()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_linalg_norm_ord9mlx_array10mlx_stringPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm_ord()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_linalg_norm9mlx_arrayPKi6size_tb10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_norm()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_linalg_qr9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_qr()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_linalg_svd9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_linalg_svd()</span></code></a></li>
 </ul>
   </nav></div>
 

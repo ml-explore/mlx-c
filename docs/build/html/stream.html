@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Stream &#8212; MLX C 0.0.3 documentation</title>
+    <title>Stream &#8212; MLX C 0.0.9 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=4acdca81"></script>
+    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -133,8 +133,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -172,6 +172,8 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
@@ -182,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_ops.html">Distributed Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
@@ -349,13 +352,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv410mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414MLX_CPU_STREAM"><code class="docutils literal notranslate"><span class="pre">MLX_CPU_STREAM</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414MLX_GPU_STREAM"><code class="docutils literal notranslate"><span class="pre">MLX_GPU_STREAM</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_stream_newi10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_stream_new()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_stream_new_on_device10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_stream_new_on_device()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_stream_equal10mlx_stream10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream_equal()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_stream_get_device10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream_get_device()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_synchronize10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_synchronize()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_default_stream10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_default_stream()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_set_default_stream10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_set_default_stream()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_cpu_streamv"><code class="docutils literal notranslate"><span class="pre">mlx_cpu_stream()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_gpu_streamv"><code class="docutils literal notranslate"><span class="pre">mlx_gpu_stream()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -373,18 +378,6 @@ document.write(`
 <dt class="sig sig-object cpp" id="_CPPv410mlx_stream">
 <span id="_CPPv310mlx_stream"></span><span id="_CPPv210mlx_stream"></span><span id="mlx_stream"></span><span class="target" id="group__mlx__stream_1gab839c1c1f2106d30d7af085c5aa852d2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_stream_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream</span></span></span><a class="headerlink" href="#_CPPv410mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd><p>A MLX stream object. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv414MLX_CPU_STREAM">
-<span id="_CPPv314MLX_CPU_STREAM"></span><span id="_CPPv214MLX_CPU_STREAM"></span><span id="MLX_CPU_STREAM__mlx_stream"></span><span class="target" id="group__mlx__stream_1ga71e17e49521c44cad862694eff7974bd"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_CPU_STREAM</span></span></span><a class="headerlink" href="#_CPPv414MLX_CPU_STREAM" title="Link to this definition">#</a><br /></dt>
-<dd><p>Current default CPU stream. </p>
-</dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv414MLX_GPU_STREAM">
-<span id="_CPPv314MLX_GPU_STREAM"></span><span id="_CPPv214MLX_GPU_STREAM"></span><span id="MLX_GPU_STREAM__mlx_stream"></span><span class="target" id="group__mlx__stream_1ga4082b278b0f736d4330d12a2fee9109a"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_GPU_STREAM</span></span></span><a class="headerlink" href="#_CPPv414MLX_GPU_STREAM" title="Link to this definition">#</a><br /></dt>
-<dd><p>Current default GPU stream. </p>
 </dd></dl>
 
 <dl class="cpp function">
@@ -406,6 +399,18 @@ document.write(`
 </dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421mlx_stream_get_device10mlx_stream">
+<span id="_CPPv321mlx_stream_get_device10mlx_stream"></span><span id="_CPPv221mlx_stream_get_device10mlx_stream"></span><span id="mlx_stream_get_device__mlx_stream"></span><span class="target" id="group__mlx__stream_1gad886a20260fdfef3262d0c12f39264dd"></span><a class="reference internal" href="device.html#_CPPv410mlx_device" title="mlx_device"><span class="n"><span class="pre">mlx_device</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_stream_get_device</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421mlx_stream_get_device10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd><p>Return the device of the stream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415mlx_synchronize10mlx_stream">
+<span id="_CPPv315mlx_synchronize10mlx_stream"></span><span id="_CPPv215mlx_synchronize10mlx_stream"></span><span id="mlx_synchronize__mlx_stream"></span><span class="target" id="group__mlx__stream_1gaf5270555869ce8dad8f3089349551a64"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_synchronize</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415mlx_synchronize10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd><p>Synchronize with the provided stream. </p>
+</dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418mlx_default_stream10mlx_device">
 <span id="_CPPv318mlx_default_stream10mlx_device"></span><span id="_CPPv218mlx_default_stream10mlx_device"></span><span id="mlx_default_stream__mlx_device"></span><span class="target" id="group__mlx__stream_1gaf2839578faded9dfabe73d524910e821"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_default_stream</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="device.html#_CPPv410mlx_device" title="mlx_device"><span class="n"><span class="pre">mlx_device</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dev</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_default_stream10mlx_device" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns the default stream on the given device. </p>
@@ -415,6 +420,18 @@ document.write(`
 <dt class="sig sig-object cpp" id="_CPPv422mlx_set_default_stream10mlx_stream">
 <span id="_CPPv322mlx_set_default_stream10mlx_stream"></span><span id="_CPPv222mlx_set_default_stream10mlx_stream"></span><span id="mlx_set_default_stream__mlx_stream"></span><span class="target" id="group__mlx__stream_1gab1619f0ecd6945c912594ad20dbecbe7"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_set_default_stream</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422mlx_set_default_stream10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd><p>Set default stream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_cpu_streamv">
+<span id="_CPPv314mlx_cpu_streamv"></span><span id="_CPPv214mlx_cpu_streamv"></span><span id="mlx_cpu_stream"></span><span class="target" id="group__mlx__stream_1ga97ed02c8c36f2d02cb16e0c48418f5af"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_cpu_stream</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_cpu_streamv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Returns the current default CPU stream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414mlx_gpu_streamv">
+<span id="_CPPv314mlx_gpu_streamv"></span><span id="_CPPv214mlx_gpu_streamv"></span><span id="mlx_gpu_stream"></span><span class="target" id="group__mlx__stream_1gaa116d668570248549b0bc0110906da1e"></span><a class="reference internal" href="#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_gpu_stream</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414mlx_gpu_streamv" title="Link to this definition">#</a><br /></dt>
+<dd><p>Returns the current default GPU stream. </p>
 </dd></dl>
 
 </section>
@@ -465,13 +482,15 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv410mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414MLX_CPU_STREAM"><code class="docutils literal notranslate"><span class="pre">MLX_CPU_STREAM</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414MLX_GPU_STREAM"><code class="docutils literal notranslate"><span class="pre">MLX_GPU_STREAM</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_stream_newi10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_stream_new()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_stream_new_on_device10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_stream_new_on_device()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_stream_equal10mlx_stream10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream_equal()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_stream_get_device10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_stream_get_device()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_synchronize10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_synchronize()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_default_stream10mlx_device"><code class="docutils literal notranslate"><span class="pre">mlx_default_stream()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_set_default_stream10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_set_default_stream()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_cpu_streamv"><code class="docutils literal notranslate"><span class="pre">mlx_cpu_stream()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_gpu_streamv"><code class="docutils literal notranslate"><span class="pre">mlx_gpu_stream()</span></code></a></li>
 </ul>
   </nav></div>
 

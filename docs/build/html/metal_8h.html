@@ -81,6 +81,8 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">mlx/c/array.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="closure_8h_source.html">mlx/c/closure.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="distributed__group_8h_source.html">mlx/c/distributed_group.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="future_8h_source.html">mlx/c/future.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ioutils_8h_source.html">mlx/c/ioutils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="map_8h_source.html">mlx/c/map.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="stream_8h_source.html">mlx/c/stream.h</a>&quot;</code><br />
@@ -90,6 +92,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga4a75c0a00aff0b7c8782f48d3994f62e" id="r_ga4a75c0a00aff0b7c8782f48d3994f62e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga4a75c0a00aff0b7c8782f48d3994f62e">mlx_metal_clear_cache</a> ()</td></tr>
+<tr class="separator:ga4a75c0a00aff0b7c8782f48d3994f62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga58d3c2d28a11314cacbdce9e88f561f9" id="r_ga58d3c2d28a11314cacbdce9e88f561f9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga58d3c2d28a11314cacbdce9e88f561f9">mlx_metal_get_active_memory</a> ()</td></tr>
 <tr class="separator:ga58d3c2d28a11314cacbdce9e88f561f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5d816ae11a3984fca078ee45fee0d461" id="r_ga5d816ae11a3984fca078ee45fee0d461"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga5d816ae11a3984fca078ee45fee0d461">mlx_metal_get_cache_memory</a> ()</td></tr>
@@ -98,10 +102,16 @@ Functions</h2></td></tr>
 <tr class="separator:ga83ff30d5e30e7198e799c6cc471d7aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga98947196aa2985486b6079e35ff6a30c" id="r_ga98947196aa2985486b6079e35ff6a30c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga98947196aa2985486b6079e35ff6a30c">mlx_metal_is_available</a> ()</td></tr>
 <tr class="separator:ga98947196aa2985486b6079e35ff6a30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7785109cf6a2d04238883d07f112601f" id="r_ga7785109cf6a2d04238883d07f112601f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga7785109cf6a2d04238883d07f112601f">mlx_metal_reset_peak_memory</a> ()</td></tr>
+<tr class="separator:ga7785109cf6a2d04238883d07f112601f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2d425340a678224cdabbf34de311ba6d" id="r_ga2d425340a678224cdabbf34de311ba6d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga2d425340a678224cdabbf34de311ba6d">mlx_metal_set_cache_limit</a> (size_t limit)</td></tr>
 <tr class="separator:ga2d425340a678224cdabbf34de311ba6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7c1593a542f4f6552c7ca90c191c7638" id="r_ga7c1593a542f4f6552c7ca90c191c7638"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga7c1593a542f4f6552c7ca90c191c7638">mlx_metal_set_memory_limit</a> (size_t limit, bool relaxed)</td></tr>
 <tr class="separator:ga7c1593a542f4f6552c7ca90c191c7638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1d3a55c8b0e7105d12a76e8236218c25" id="r_ga1d3a55c8b0e7105d12a76e8236218c25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga1d3a55c8b0e7105d12a76e8236218c25">mlx_metal_start_capture</a> (<a class="el" href="group__mlx__string.html#gace79c22ecc692b1c157818c43714e2d6">mlx_string</a> path)</td></tr>
+<tr class="separator:ga1d3a55c8b0e7105d12a76e8236218c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ec958e796dbab0e6ad8d488a633b741" id="r_ga5ec958e796dbab0e6ad8d488a633b741"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__metal.html#ga5ec958e796dbab0e6ad8d488a633b741">mlx_metal_stop_capture</a> ()</td></tr>
+<tr class="separator:ga5ec958e796dbab0e6ad8d488a633b741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

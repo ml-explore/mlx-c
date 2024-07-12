@@ -91,6 +91,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga295256c50faaf60463d2dbed444d9d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7159fba1c10a2cf1d690c7b437341d93" id="r_ga7159fba1c10a2cf1d690c7b437341d93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__random.html#ga7159fba1c10a2cf1d690c7b437341d93">mlx_random_key</a> (uint64_t seed)</td></tr>
 <tr class="separator:ga7159fba1c10a2cf1d690c7b437341d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab31e99211483a0ed95e874152f9c9886" id="r_gab31e99211483a0ed95e874152f9c9886"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__random.html#gab31e99211483a0ed95e874152f9c9886">mlx_random_multivariate_normal</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mean, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> cov, const int *shape, size_t num_shape, <a class="el" href="group__mlx__array.html#ga58b14c486e3d2f4c716ea2173ea2821c">mlx_array_dtype</a> dtype, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> key, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:gab31e99211483a0ed95e874152f9c9886"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad087da542f656649ece8bf0bda8e5ca2" id="r_gad087da542f656649ece8bf0bda8e5ca2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__random.html#gad087da542f656649ece8bf0bda8e5ca2">mlx_random_normal</a> (const int *shape, size_t num_shape, <a class="el" href="group__mlx__array.html#ga58b14c486e3d2f4c716ea2173ea2821c">mlx_array_dtype</a> dtype, float loc, float scale, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> key, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
 <tr class="separator:gad087da542f656649ece8bf0bda8e5ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2ae33f98382a8d9a403fdcbe7c0f500e" id="r_ga2ae33f98382a8d9a403fdcbe7c0f500e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__random.html#ga2ae33f98382a8d9a403fdcbe7c0f500e">mlx_random_randint</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> low, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> high, const int *shape, size_t num_shape, <a class="el" href="group__mlx__array.html#ga58b14c486e3d2f4c716ea2173ea2821c">mlx_array_dtype</a> dtype, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> key, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
@@ -396,6 +398,64 @@ Functions</h2></td></tr>
           <td class="paramtype">uint64_t&#160;</td>
           <td class="paramname"><em>seed</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gab31e99211483a0ed95e874152f9c9886" name="gab31e99211483a0ed95e874152f9c9886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab31e99211483a0ed95e874152f9c9886">&#9670;&#160;</a></span>mlx_random_multivariate_normal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mlx_random_multivariate_normal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>mean</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>cov</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>num_shape</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga58b14c486e3d2f4c716ea2173ea2821c">mlx_array_dtype</a>&#160;</td>
+          <td class="paramname"><em>dtype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

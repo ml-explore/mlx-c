@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['vector_20of_20array_20vectors_0',['Vector of array vectors',['../group__mlx__vector__vector__array.html',1,'']]],
-  ['vector_20of_20arrays_1',['A vector of arrays',['../group__mlx__vector__array.html',1,'']]],
-  ['vectors_2',['Vector of array vectors',['../group__mlx__vector__vector__array.html',1,'']]]
+  ['to_20array_20map_0',['String-to-array map',['../group__mlx__map__string__to__array.html',1,'']]],
+  ['transform_20operations_1',['Transform operations',['../group__transforms.html',1,'']]]
 ];

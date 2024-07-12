@@ -81,6 +81,9 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">mlx/c/array.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="closure_8h_source.html">mlx/c/closure.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="distributed__group_8h_source.html">mlx/c/distributed_group.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="future_8h_source.html">mlx/c/future.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ioutils_8h_source.html">mlx/c/ioutils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="map_8h_source.html">mlx/c/map.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="stream_8h_source.html">mlx/c/stream.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="string_8h_source.html">mlx/c/string.h</a>&quot;</code><br />
@@ -89,8 +92,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga3fbc04e145e3db2a2470edaef036cd35" id="r_ga3fbc04e145e3db2a2470edaef036cd35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga3fbc04e145e3db2a2470edaef036cd35">mlx_fast_layer_norm</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> weight, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> bias, float eps, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga3fbc04e145e3db2a2470edaef036cd35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadb15787fe5a29e352a541d851fe675cf" id="r_gadb15787fe5a29e352a541d851fe675cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#gadb15787fe5a29e352a541d851fe675cf">mlx_fast_rms_norm</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> weight, float eps, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:gadb15787fe5a29e352a541d851fe675cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga272d727bbff0900ac42c58c09b9a2127" id="r_ga272d727bbff0900ac42c58c09b9a2127"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga272d727bbff0900ac42c58c09b9a2127">mlx_fast_rope</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, int dims, bool traditional, float base, float scale, int offset, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
 <tr class="separator:ga272d727bbff0900ac42c58c09b9a2127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9dd1a216b79eec2eac831b1fc1c986ae" id="r_ga9dd1a216b79eec2eac831b1fc1c986ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga9dd1a216b79eec2eac831b1fc1c986ae">mlx_fast_scaled_dot_product_attention</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> queries, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> keys, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> values, float scale, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mask, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga9dd1a216b79eec2eac831b1fc1c986ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Metal backend API &#8212; MLX C 0.0.3 documentation</title>
+    <title>Metal backend API &#8212; MLX C 0.0.9 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=4acdca81"></script>
+    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -171,6 +171,8 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
@@ -181,6 +183,7 @@
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_ops.html">Distributed Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Metal backend API</a></li>
@@ -347,12 +350,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_metal_clear_cachev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_clear_cache()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_metal_get_active_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_active_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_metal_get_cache_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_cache_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_metal_get_peak_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_peak_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_metal_is_availablev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_is_available()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_metal_reset_peak_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_reset_peak_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_metal_set_cache_limit6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_metal_set_cache_limit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_metal_set_memory_limit6size_tb"><code class="docutils literal notranslate"><span class="pre">mlx_metal_set_memory_limit()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_metal_start_capture10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_metal_start_capture()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_metal_stop_capturev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_stop_capture()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -366,6 +373,11 @@ document.write(`
                   
   <section id="metal-backend-api">
 <h1>Metal backend API<a class="headerlink" href="#metal-backend-api" title="Link to this heading">#</a></h1>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421mlx_metal_clear_cachev">
+<span id="_CPPv321mlx_metal_clear_cachev"></span><span id="_CPPv221mlx_metal_clear_cachev"></span><span id="mlx_metal_clear_cache"></span><span class="target" id="group__metal_1ga4a75c0a00aff0b7c8782f48d3994f62e"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_clear_cache</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421mlx_metal_clear_cachev" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv427mlx_metal_get_active_memoryv">
 <span id="_CPPv327mlx_metal_get_active_memoryv"></span><span id="_CPPv227mlx_metal_get_active_memoryv"></span><span id="mlx_metal_get_active_memory"></span><span class="target" id="group__metal_1ga58d3c2d28a11314cacbdce9e88f561f9"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_get_active_memory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_metal_get_active_memoryv" title="Link to this definition">#</a><br /></dt>
@@ -387,6 +399,11 @@ document.write(`
 <dd></dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_metal_reset_peak_memoryv">
+<span id="_CPPv327mlx_metal_reset_peak_memoryv"></span><span id="_CPPv227mlx_metal_reset_peak_memoryv"></span><span id="mlx_metal_reset_peak_memory"></span><span class="target" id="group__metal_1ga7785109cf6a2d04238883d07f112601f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_reset_peak_memory</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_metal_reset_peak_memoryv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425mlx_metal_set_cache_limit6size_t">
 <span id="_CPPv325mlx_metal_set_cache_limit6size_t"></span><span id="_CPPv225mlx_metal_set_cache_limit6size_t"></span><span id="mlx_metal_set_cache_limit__s"></span><span class="target" id="group__metal_1ga2d425340a678224cdabbf34de311ba6d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_set_cache_limit</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">limit</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425mlx_metal_set_cache_limit6size_t" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
@@ -394,6 +411,16 @@ document.write(`
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv426mlx_metal_set_memory_limit6size_tb">
 <span id="_CPPv326mlx_metal_set_memory_limit6size_tb"></span><span id="_CPPv226mlx_metal_set_memory_limit6size_tb"></span><span id="mlx_metal_set_memory_limit__s.b"></span><span class="target" id="group__metal_1ga7c1593a542f4f6552c7ca90c191c7638"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_set_memory_limit</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">limit</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">relaxed</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_metal_set_memory_limit6size_tb" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423mlx_metal_start_capture10mlx_string">
+<span id="_CPPv323mlx_metal_start_capture10mlx_string"></span><span id="_CPPv223mlx_metal_start_capture10mlx_string"></span><span id="mlx_metal_start_capture__mlx_string"></span><span class="target" id="group__metal_1ga1d3a55c8b0e7105d12a76e8236218c25"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_start_capture</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423mlx_metal_start_capture10mlx_string" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_metal_stop_capturev">
+<span id="_CPPv322mlx_metal_stop_capturev"></span><span id="_CPPv222mlx_metal_stop_capturev"></span><span id="mlx_metal_stop_capture"></span><span class="target" id="group__metal_1ga5ec958e796dbab0e6ad8d488a633b741"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_metal_stop_capture</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422mlx_metal_stop_capturev" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -434,12 +461,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_metal_clear_cachev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_clear_cache()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_metal_get_active_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_active_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_metal_get_cache_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_cache_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_metal_get_peak_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_get_peak_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_metal_is_availablev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_is_available()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_metal_reset_peak_memoryv"><code class="docutils literal notranslate"><span class="pre">mlx_metal_reset_peak_memory()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_metal_set_cache_limit6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_metal_set_cache_limit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_metal_set_memory_limit6size_tb"><code class="docutils literal notranslate"><span class="pre">mlx_metal_set_memory_limit()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_metal_start_capture10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_metal_start_capture()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_metal_stop_capturev"><code class="docutils literal notranslate"><span class="pre">mlx_metal_stop_capture()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -81,6 +81,8 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="array_8h_source.html">mlx/c/array.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="closure_8h_source.html">mlx/c/closure.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="distributed__group_8h_source.html">mlx/c/distributed_group.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="future_8h_source.html">mlx/c/future.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ioutils_8h_source.html">mlx/c/ioutils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="map_8h_source.html">mlx/c/map.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="stream_8h_source.html">mlx/c/stream.h</a>&quot;</code><br />
@@ -90,6 +92,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga4508d117f85ddb23bafd310bf2abe56c" id="r_ga4508d117f85ddb23bafd310bf2abe56c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#ga4508d117f85ddb23bafd310bf2abe56c">mlx_linalg_cholesky</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, bool upper, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga4508d117f85ddb23bafd310bf2abe56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga537541d1c0140016c366726571cdeea5" id="r_ga537541d1c0140016c366726571cdeea5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#ga537541d1c0140016c366726571cdeea5">mlx_linalg_inv</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga537541d1c0140016c366726571cdeea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8ca062fe63821e28fb241e61a9aac545" id="r_ga8ca062fe63821e28fb241e61a9aac545"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#ga8ca062fe63821e28fb241e61a9aac545">mlx_linalg_norm_p</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, double ord, const int *axis, size_t num_axis, bool keepdims, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
 <tr class="separator:ga8ca062fe63821e28fb241e61a9aac545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9f6c1e2d7593f1a92452c8abaa3f2b4a" id="r_ga9f6c1e2d7593f1a92452c8abaa3f2b4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#ga9f6c1e2d7593f1a92452c8abaa3f2b4a">mlx_linalg_norm_ord</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, <a class="el" href="group__mlx__string.html#gace79c22ecc692b1c157818c43714e2d6">mlx_string</a> ord, const int *axis, size_t num_axis, bool keepdims, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
@@ -98,6 +104,8 @@ Functions</h2></td></tr>
 <tr class="separator:gac578f9097e3f5e4c9770e92d8e31015e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga48aa8cc6506c78518d62980f8df3106c" id="r_ga48aa8cc6506c78518d62980f8df3106c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#ga48aa8cc6506c78518d62980f8df3106c">mlx_linalg_qr</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
 <tr class="separator:ga48aa8cc6506c78518d62980f8df3106c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaeab40bba996ebc51e322ba813918aba" id="r_gaaeab40bba996ebc51e322ba813918aba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__vector__array.html#gaaa676b4f577904702c78a2067cf3c8a8">mlx_vector_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__linalg.html#gaaeab40bba996ebc51e322ba813918aba">mlx_linalg_svd</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> a, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:gaaeab40bba996ebc51e322ba813918aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['object_2eh_0',['object.h',['../object_8h.html',1,'']]],
-  ['ops_2eh_1',['ops.h',['../ops_8h.html',1,'']]]
+  ['map_2eh_0',['map.h',['../map_8h.html',1,'']]],
+  ['metal_2eh_1',['metal.h',['../metal_8h.html',1,'']]],
+  ['mlx_2eh_2',['mlx.h',['../mlx_8h.html',1,'']]]
 ];

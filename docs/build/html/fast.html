@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fast Custom Ops &#8212; MLX C 0.0.3 documentation</title>
+    <title>Fast Custom Ops &#8212; MLX C 0.0.9 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=4acdca81"></script>
+    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
@@ -133,8 +133,8 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.3 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.3 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -172,6 +172,8 @@
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
 <li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
@@ -182,6 +184,7 @@
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_ops.html">Distributed Operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
@@ -348,7 +351,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_layer_norm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rms_norm()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rope()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_scaled_dot_product_attention()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -363,8 +369,23 @@ document.write(`
   <section id="fast-custom-ops">
 <h1>Fast Custom Ops<a class="headerlink" href="#fast-custom-ops" title="Link to this heading">#</a></h1>
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream">
+<span id="_CPPv319mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream"></span><span id="_CPPv219mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream"></span><span id="mlx_fast_layer_norm__mlx_array.mlx_array.mlx_array.float.mlx_stream"></span><span class="target" id="group__fast_1ga3fbc04e145e3db2a2470edaef036cd35"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fast_layer_norm</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">weight</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bias</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream">
+<span id="_CPPv317mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream"></span><span id="_CPPv217mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream"></span><span id="mlx_fast_rms_norm__mlx_array.mlx_array.float.mlx_stream"></span><span class="target" id="group__fast_1gadb15787fe5a29e352a541d851fe675cf"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fast_rms_norm</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">weight</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">eps</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream">
 <span id="_CPPv313mlx_fast_rope9mlx_arrayibffi10mlx_stream"></span><span id="_CPPv213mlx_fast_rope9mlx_arrayibffi10mlx_stream"></span><span id="mlx_fast_rope__mlx_array.i.b.float.float.i.mlx_stream"></span><span class="target" id="group__fast_1ga272d727bbff0900ac42c58c09b9a2127"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fast_rope</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">dims</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">traditional</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">base</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">offset</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream">
+<span id="_CPPv337mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream"></span><span id="_CPPv237mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream"></span><span id="mlx_fast_scaled_dot_product_attention__mlx_array.mlx_array.mlx_array.float.mlx_array.mlx_stream"></span><span class="target" id="group__fast_1ga9dd1a216b79eec2eac831b1fc1c986ae"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fast_scaled_dot_product_attention</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">queries</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">keys</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">values</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">scale</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mask</span></span>, <a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -414,7 +435,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_fast_layer_norm9mlx_array9mlx_array9mlx_arrayf10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_layer_norm()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_fast_rms_norm9mlx_array9mlx_arrayf10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rms_norm()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fast_rope9mlx_arrayibffi10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_rope()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_fast_scaled_dot_product_attention9mlx_array9mlx_array9mlx_arrayf9mlx_array10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fast_scaled_dot_product_attention()</span></code></a></li>
 </ul>
   </nav></div>
 

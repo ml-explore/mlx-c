@@ -77,11 +77,103 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga3fbc04e145e3db2a2470edaef036cd35" id="r_ga3fbc04e145e3db2a2470edaef036cd35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga3fbc04e145e3db2a2470edaef036cd35">mlx_fast_layer_norm</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> weight, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> bias, float eps, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga3fbc04e145e3db2a2470edaef036cd35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadb15787fe5a29e352a541d851fe675cf" id="r_gadb15787fe5a29e352a541d851fe675cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#gadb15787fe5a29e352a541d851fe675cf">mlx_fast_rms_norm</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> weight, float eps, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:gadb15787fe5a29e352a541d851fe675cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga272d727bbff0900ac42c58c09b9a2127" id="r_ga272d727bbff0900ac42c58c09b9a2127"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga272d727bbff0900ac42c58c09b9a2127">mlx_fast_rope</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> x, int dims, bool traditional, float base, float scale, int offset, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
 <tr class="separator:ga272d727bbff0900ac42c58c09b9a2127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9dd1a216b79eec2eac831b1fc1c986ae" id="r_ga9dd1a216b79eec2eac831b1fc1c986ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fast.html#ga9dd1a216b79eec2eac831b1fc1c986ae">mlx_fast_scaled_dot_product_attention</a> (<a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> queries, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> keys, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> values, float scale, <a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mask, <a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a> s)</td></tr>
+<tr class="separator:ga9dd1a216b79eec2eac831b1fc1c986ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga3fbc04e145e3db2a2470edaef036cd35" name="ga3fbc04e145e3db2a2470edaef036cd35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3fbc04e145e3db2a2470edaef036cd35">&#9670;&#160;</a></span>mlx_fast_layer_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mlx_fast_layer_norm </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>weight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>bias</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>eps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gadb15787fe5a29e352a541d851fe675cf" name="gadb15787fe5a29e352a541d851fe675cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadb15787fe5a29e352a541d851fe675cf">&#9670;&#160;</a></span>mlx_fast_rms_norm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mlx_fast_rms_norm </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>weight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>eps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ga272d727bbff0900ac42c58c09b9a2127" name="ga272d727bbff0900ac42c58c09b9a2127"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga272d727bbff0900ac42c58c09b9a2127">&#9670;&#160;</a></span>mlx_fast_rope()</h2>
 
@@ -123,6 +215,58 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__stream.html#gab839c1c1f2106d30d7af085c5aa852d2">mlx_stream</a>&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga9dd1a216b79eec2eac831b1fc1c986ae" name="ga9dd1a216b79eec2eac831b1fc1c986ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9dd1a216b79eec2eac831b1fc1c986ae">&#9670;&#160;</a></span>mlx_fast_scaled_dot_product_attention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a> mlx_fast_scaled_dot_product_attention </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>queries</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>keys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__mlx__array.html#ga74a41c6be8b4520da3788a5626d5c783">mlx_array</a>&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
