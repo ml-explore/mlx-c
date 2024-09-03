@@ -27,8 +27,8 @@ mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s) {
 extern "C" mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::linalg::inv(a->ctx, s->ctx));
 }
-extern "C" mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s){
-    RETURN_MLX_C_ARRAY(mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx));
+extern "C" mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx));
 }
 extern "C" mlx_array mlx_linalg_norm_p(
     mlx_array a,

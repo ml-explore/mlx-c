@@ -9,7 +9,7 @@
 
 struct mlx_distributed_group_ : mlx_object_ {
   mlx_distributed_group_(mlx::core::distributed::Group ctx)
-      : mlx_object_(), ctx(ctx){};
+      : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   mlx::core::distributed::Group ctx;
 };

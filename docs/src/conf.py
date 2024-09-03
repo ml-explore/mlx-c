@@ -18,7 +18,7 @@ release = version
 # -- General configuration ---------------------------------------------------
 
 extensions = ["breathe"]
-breathe_projects = {"mlxc" : "../build/xml"}
+breathe_projects = {"mlxc": "../build/xml"}
 breathe_default_project = "mlxc"
 templates_path = ["_templates"]
 html_static_path = ["_static"]

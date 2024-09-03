@@ -44,10 +44,14 @@ extern "C" mlx_array mlx_fast_rope(
     mlx_array freqs,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::fast::rope(
-      x->ctx, dims, traditional, base, scale, offset,
+      x->ctx,
+      dims,
+      traditional,
+      base,
+      scale,
+      offset,
       (freqs ? std::make_optional(freqs->ctx) : std::nullopt),
-       s->ctx));
-
+      s->ctx));
 }
 extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array queries,
@@ -63,6 +67,8 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
       values->ctx,
       scale,
       (mask ? std::make_optional(mask->ctx) : std::nullopt),
-      (memory_efficient_threshold ? std::make_optional(*memory_efficient_threshold) : std::nullopt),
+      (memory_efficient_threshold
+           ? std::make_optional(*memory_efficient_threshold)
+           : std::nullopt),
       s->ctx));
 }

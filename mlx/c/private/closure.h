@@ -12,7 +12,7 @@
 struct mlx_closure_ : mlx_object_ {
   mlx_closure_(std::function<std::vector<mlx::core::array>(
                    const std::vector<mlx::core::array>&)> ctx)
-      : mlx_object_(), ctx(ctx){};
+      : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   std::function<std::vector<mlx::core::array>(
       const std::vector<mlx::core::array>&)>
@@ -25,7 +25,7 @@ struct mlx_closure_value_and_grad_ : mlx_object_ {
           std::vector<mlx::core::array>,
           std::vector<mlx::core::array>>(const std::vector<mlx::core::array>&)>
           ctx)
-      : mlx_object_(), ctx(ctx){};
+      : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   std::function<
       std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>(

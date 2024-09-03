@@ -1,9 +1,10 @@
 # Copyright © 2023-2024 Apple Inc.
 
-import cxxheaderparser
-from cxxheaderparser.simple import parse_string
 import argparse
 import os
+
+import cxxheaderparser
+from cxxheaderparser.simple import parse_string
 
 parser = argparse.ArgumentParser("MLX C bindings generator", add_help=False)
 parser.add_argument("--header", type=str)

@@ -492,7 +492,7 @@ extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_isfinite(mlx_array a, mlx_stream s) {
-    RETURN_MLX_C_ARRAY(mlx::core::isfinite(a->ctx, s->ctx));
+  RETURN_MLX_C_ARRAY(mlx::core::isfinite(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_isnan(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isnan(a->ctx, s->ctx));
@@ -1051,11 +1051,18 @@ mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::view(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
-extern "C" mlx_array
-mlx_nan_to_num(mlx_array a, float nan, float* posinf, float* neginf, mlx_stream s){
-    RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(a->ctx, nan, 
-    (posinf ? std::make_optional(*posinf) : std::nullopt), 
-    (neginf ? std::make_optional(*neginf) : std::nullopt), s->ctx));
+extern "C" mlx_array mlx_nan_to_num(
+    mlx_array a,
+    float nan,
+    float* posinf,
+    float* neginf,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(
+      a->ctx,
+      nan,
+      (posinf ? std::make_optional(*posinf) : std::nullopt),
+      (neginf ? std::make_optional(*neginf) : std::nullopt),
+      s->ctx));
 }
 extern "C" mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s) {
