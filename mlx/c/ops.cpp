@@ -1052,12 +1052,10 @@ mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
       mlx::core::view(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
 }
 extern "C" mlx_array
-mlx_nan_to_num(mlx_array a, float nan, float posinf_, float neginf_, mlx_stream s){
-    RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(a->ctx,
-                                             nan,
-                                             posinf_,
-                                             neginf_,
-                                             s->ctx));
+mlx_nan_to_num(mlx_array a, float nan, float* posinf, float* neginf, mlx_stream s){
+    RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(a->ctx, nan, 
+    (posinf ? std::make_optional(*posinf) : std::nullopt), 
+    (neginf ? std::make_optional(*neginf) : std::nullopt), s->ctx));
 }
 extern "C" mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s) {

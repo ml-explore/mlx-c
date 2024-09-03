@@ -502,7 +502,7 @@ mlx_array mlx_var(
     mlx_stream s);
 mlx_array mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream s);
 mlx_array mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
-mlx_array mlx_nan_to_num(mlx_array a, float nan, float posinf_, float neginf_, mlx_stream s);
+mlx_array mlx_nan_to_num(mlx_array a, float nan, float *posinf, float *neginf, mlx_stream s);
 mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s);
 mlx_array mlx_zeros(

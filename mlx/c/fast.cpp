@@ -55,7 +55,7 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array values,
     float scale,
     mlx_array mask,
-    int memory_efficient_threshold,
+    int* memory_efficient_threshold,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::fast::scaled_dot_product_attention(
       queries->ctx,
@@ -63,6 +63,6 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
       values->ctx,
       scale,
       (mask ? std::make_optional(mask->ctx) : std::nullopt),
-      memory_efficient_threshold,
+      (memory_efficient_threshold ? std::make_optional(*memory_efficient_threshold) : std::nullopt),
       s->ctx));
 }
