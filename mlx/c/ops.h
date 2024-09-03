@@ -243,6 +243,7 @@ mlx_array mlx_isclose(
     bool equal_nan,
     mlx_stream s);
 mlx_array mlx_isinf(mlx_array a, mlx_stream s);
+mlx_array mlx_isfinite(mlx_array a, mlx_stream s);
 mlx_array mlx_isnan(mlx_array a, mlx_stream s);
 mlx_array mlx_isneginf(mlx_array a, mlx_stream s);
 mlx_array mlx_isposinf(mlx_array a, mlx_stream s);
@@ -326,6 +327,7 @@ mlx_array mlx_pad(
     const int* high_pad_size,
     size_t num_high_pad_size,
     mlx_array pad_value,
+    mlx_string mode,
     mlx_stream s);
 mlx_array mlx_partition(mlx_array a, int kth, int axis, mlx_stream s);
 mlx_array mlx_partition_all(mlx_array a, int kth, mlx_stream s);
@@ -500,6 +502,7 @@ mlx_array mlx_var(
     mlx_stream s);
 mlx_array mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream s);
 mlx_array mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s);
+mlx_array mlx_nan_to_num(mlx_array a, float nan, float posinf_, float neginf_, mlx_stream s);
 mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s);
 mlx_array mlx_zeros(

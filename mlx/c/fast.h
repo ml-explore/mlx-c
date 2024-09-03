@@ -40,6 +40,7 @@ mlx_array mlx_fast_rope(
     float base,
     float scale,
     int offset,
+    mlx_array freqs,
     mlx_stream s);
 mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array queries,
@@ -47,6 +48,7 @@ mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array values,
     float scale,
     mlx_array mask,
+    int memory_efficient_threshold,
     mlx_stream s);
 /**@}*/
 

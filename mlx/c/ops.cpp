@@ -491,6 +491,9 @@ extern "C" mlx_array mlx_isclose(
 extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_isfinite(mlx_array a, mlx_stream s) {
+    RETURN_MLX_C_ARRAY(mlx::core::isfinite(a->ctx, s->ctx));
+}
 extern "C" mlx_array mlx_isnan(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isnan(a->ctx, s->ctx));
 }
@@ -658,6 +661,7 @@ extern "C" mlx_array mlx_pad(
     const int* high_pad_size,
     size_t num_high_pad_size,
     mlx_array pad_value,
+    mlx_string mode,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::pad(
       a->ctx,
@@ -665,6 +669,7 @@ extern "C" mlx_array mlx_pad(
       MLX_CPP_INTVEC(low_pad_size, num_low_pad_size),
       MLX_CPP_INTVEC(high_pad_size, num_high_pad_size),
       pad_value->ctx,
+      MLX_CPP_STRING(mode),
       s->ctx));
 }
 extern "C" mlx_array
@@ -1045,6 +1050,14 @@ extern "C" mlx_array
 mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::view(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
+}
+extern "C" mlx_array
+mlx_nan_to_num(mlx_array a, float nan, float posinf_, float neginf_, mlx_stream s){
+    RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(a->ctx,
+                                             nan,
+                                             posinf_,
+                                             neginf_,
+                                             s->ctx));
 }
 extern "C" mlx_array
 mlx_where(mlx_array condition, mlx_array x, mlx_array y, mlx_stream s) {
