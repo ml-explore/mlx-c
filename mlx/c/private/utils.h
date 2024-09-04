@@ -135,8 +135,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
     }                                  \
   }
 
-#define RETURN_MLX_C_PTR(ptr) \
-	MLX_TRY_CATCH(return (ptr), return nullptr)
+#define RETURN_MLX_C_PTR(ptr) MLX_TRY_CATCH(return (ptr), return nullptr)
 
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
@@ -159,27 +158,29 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_MAP_STRING_TO_STRING(map) ((map)->ctx)
 #define MLX_CPP_STRING(str) ((str)->ctx)
 
-#define RETURN_MLX_C_VOID(scope) \
-	MLX_TRY_CATCH(scope, return)
+#define RETURN_MLX_C_VOID(scope) MLX_TRY_CATCH(scope, return)
 #define RETURN_MLX_C_ARRAY_DTYPE(dtype) return mlx_c_dtypes[(int)((dtype).val)]
-#define RETURN_MLX_C_ARRAY(arr) \
-  RETURN_MLX_C_PTR(new mlx_array_(arr))
-#define RETURN_MLX_C_STREAM(stream) \
-  RETURN_MLX_C_PTR(new mlx_stream_(stream))
-#define RETURN_MLX_C_DEVICE(device) \
-  RETURN_MLX_C_PTR(new mlx_device_(device))
+#define RETURN_MLX_C_ARRAY(arr) RETURN_MLX_C_PTR(new mlx_array_(arr))
+#define RETURN_MLX_C_STREAM(stream) RETURN_MLX_C_PTR(new mlx_stream_(stream))
+#define RETURN_MLX_C_DEVICE(device) RETURN_MLX_C_PTR(new mlx_device_(device))
 #define RETURN_MLX_C_VECTOR_ARRAY(vec) \
   RETURN_MLX_C_PTR(new mlx_vector_array_(vec))
 #define RETURN_MLX_C_VECTOR_VECTOR_ARRAY(vec) \
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_(vec))
-#define RETURN_MLX_C_ARRAYPAIR(apair) RETURN_MLX_C_PTR(new mlx_vector_array_(apair))
-#define RETURN_MLX_C_ARRAYTUPLE3(atuple) RETURN_MLX_C_PTR(new mlx_vector_array_(atuple))
+#define RETURN_MLX_C_ARRAYPAIR(apair) \
+  RETURN_MLX_C_PTR(new mlx_vector_array_(apair))
+#define RETURN_MLX_C_ARRAYTUPLE3(atuple) \
+  RETURN_MLX_C_PTR(new mlx_vector_array_(atuple))
 #define RETURN_MLX_C_CLOSURE(closure) \
-	RETURN_MLX_C_PTR(new mlx_closure_(closure))
-#define RETURN_MLX_C_VECTORARRAYPAIR(apair) RETURN_MLX_C_PTR(new mlx_vector_vector_array_(apair))
-#define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
-#define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) RETURN_MLX_C_PTR(new mlx_map_string_to_array_(map))
-#define RETURN_MLX_C_MAP_STRING_TO_STRING(map) RETURN_MLX_C_PTR(new mlx_map_string_to_string_(map))
+  RETURN_MLX_C_PTR(new mlx_closure_(closure))
+#define RETURN_MLX_C_VECTORARRAYPAIR(apair) \
+  RETURN_MLX_C_PTR(new mlx_vector_vector_array_(apair))
+#define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) \
+  RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
+#define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) \
+  RETURN_MLX_C_PTR(new mlx_map_string_to_array_(map))
+#define RETURN_MLX_C_MAP_STRING_TO_STRING(map) \
+  RETURN_MLX_C_PTR(new mlx_map_string_to_string_(map))
 #define RETURN_MLX_C_STRING(str) RETURN_MLX_C_PTR(new mlx_string_(str))
 #define RETURN_MLX_C_SAFETENSORS(st) RETURN_MLX_C_PTR(new mlx_safetensors_(st))
 #define RETURN_MLX_C_FUTURE(f) RETURN_MLX_C_PTR(new mlx_future_(f))
