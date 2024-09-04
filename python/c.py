@@ -233,6 +233,17 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             ):
                 c_call.append(pti + " " + pni)
                 cpp_call.append(pni)
+            elif (
+                pti == "std::optional<bool>"
+                or pti == "std::optional<float>"
+                or pti == "std::optional<double>"
+                or pti == "std::optional<int>"
+                or pti == "std::optional<size_t>"
+                or pti == "std::optional<uint64_t>"
+            ):
+                pti_wo_opt = pti[14:][:-1]
+                c_call.append(pti_wo_opt + " " + pni)
+                cpp_call.append(pni)
             elif pti == "std::uintptr_t":
                 c_call.append(pti.lstrip("std::") + " " + pni)
                 cpp_call.append(pni)
