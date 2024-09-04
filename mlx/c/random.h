@@ -59,6 +59,14 @@ mlx_array mlx_random_gumbel(
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_key(uint64_t seed);
+mlx_array mlx_random_laplace(
+    const int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    float loc,
+    float scale,
+    mlx_array key,
+    mlx_stream s);
 mlx_array mlx_random_multivariate_normal(
     mlx_array mean,
     mlx_array cov,

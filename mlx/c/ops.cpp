@@ -471,6 +471,10 @@ extern "C" mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s) {
 extern "C" mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::greater_equal(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array
+mlx_hadamard_transform(mlx_array a, float scale, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::hadamard_transform(a->ctx, scale, s->ctx));
+}
 extern "C" mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::identity(n, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
@@ -487,6 +491,9 @@ extern "C" mlx_array mlx_isclose(
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::isclose(a->ctx, b->ctx, rtol, atol, equal_nan, s->ctx));
+}
+extern "C" mlx_array mlx_isfinite(mlx_array a, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::isfinite(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
@@ -615,6 +622,15 @@ mlx_moveaxis(mlx_array a, int source, int destination, mlx_stream s) {
 extern "C" mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::multiply(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_nan_to_num(
+    mlx_array a,
+    float nan,
+    float posinf,
+    float neginf,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(
+      mlx::core::nan_to_num(a->ctx, nan, posinf, neginf, s->ctx));
+}
 extern "C" mlx_array mlx_negative(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::negative(a->ctx, s->ctx));
 }
@@ -658,6 +674,7 @@ extern "C" mlx_array mlx_pad(
     const int* high_pad_size,
     size_t num_high_pad_size,
     mlx_array pad_value,
+    mlx_string mode,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::pad(
       a->ctx,
@@ -665,6 +682,7 @@ extern "C" mlx_array mlx_pad(
       MLX_CPP_INTVEC(low_pad_size, num_low_pad_size),
       MLX_CPP_INTVEC(high_pad_size, num_high_pad_size),
       pad_value->ctx,
+      MLX_CPP_STRING(mode),
       s->ctx));
 }
 extern "C" mlx_array

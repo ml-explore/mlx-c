@@ -25,6 +25,20 @@ extern "C" {
  * \defgroup fast Fast custom operations
  */
 /**@{*/
+mlx_array mlx_fast_affine_dequantize(
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    int group_size,
+    int bits,
+    mlx_stream s);
+mlx_array mlx_fast_affine_quantize(
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    int group_size,
+    int bits,
+    mlx_stream s);
 mlx_array mlx_fast_layer_norm(
     mlx_array x,
     mlx_array weight,
@@ -40,6 +54,7 @@ mlx_array mlx_fast_rope(
     float base,
     float scale,
     int offset,
+    mlx_array freqs,
     mlx_stream s);
 mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array queries,
@@ -47,6 +62,7 @@ mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array values,
     float scale,
     mlx_array mask,
+    int memory_efficient_threshold,
     mlx_stream s);
 /**@}*/
 

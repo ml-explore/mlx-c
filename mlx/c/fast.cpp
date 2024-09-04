@@ -16,6 +16,26 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
+extern "C" mlx_array mlx_fast_affine_dequantize(
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    int group_size,
+    int bits,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::fast::affine_dequantize(
+      w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx));
+}
+extern "C" mlx_array mlx_fast_affine_quantize(
+    mlx_array w,
+    mlx_array scales,
+    mlx_array biases,
+    int group_size,
+    int bits,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::fast::affine_quantize(
+      w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx));
+}
 extern "C" mlx_array mlx_fast_layer_norm(
     mlx_array x,
     mlx_array weight,
@@ -41,9 +61,17 @@ extern "C" mlx_array mlx_fast_rope(
     float base,
     float scale,
     int offset,
+    mlx_array freqs,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::fast::rope(
-      x->ctx, dims, traditional, base, scale, offset, s->ctx));
+      x->ctx,
+      dims,
+      traditional,
+      base,
+      scale,
+      offset,
+      (freqs ? std::make_optional(freqs->ctx) : std::nullopt),
+      s->ctx));
 }
 extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array queries,
@@ -51,6 +79,7 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array values,
     float scale,
     mlx_array mask,
+    int memory_efficient_threshold,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::fast::scaled_dot_product_attention(
       queries->ctx,
@@ -58,5 +87,6 @@ extern "C" mlx_array mlx_fast_scaled_dot_product_attention(
       values->ctx,
       scale,
       (mask ? std::make_optional(mask->ctx) : std::nullopt),
+      memory_efficient_threshold,
       s->ctx));
 }

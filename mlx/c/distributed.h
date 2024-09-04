@@ -25,8 +25,29 @@ extern "C" {
  * \defgroup distributed_ops Distributed collectives
  */
 /**@{*/
-mlx_array mlx_distributed_all_gather(mlx_array x, mlx_distributed_group group);
-mlx_array mlx_distributed_all_sum(mlx_array x, mlx_distributed_group group);
+mlx_array mlx_distributed_all_gather(
+    mlx_array x,
+    mlx_distributed_group group,
+    mlx_stream S);
+mlx_array
+mlx_distributed_all_sum(mlx_array x, mlx_distributed_group group, mlx_stream s);
+mlx_array mlx_distributed_recv(
+    const int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    int src,
+    mlx_distributed_group group,
+    mlx_stream s);
+mlx_array mlx_distributed_recv_like(
+    mlx_array x,
+    int src,
+    mlx_distributed_group group,
+    mlx_stream s);
+mlx_array mlx_distributed_send(
+    mlx_array x,
+    int dst,
+    mlx_distributed_group group,
+    mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus
