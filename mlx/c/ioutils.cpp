@@ -10,6 +10,18 @@ mlx_string_* mlx_safetensors_::tostring() {
   MLX_TRY_CATCH(return new mlx_string_("mlx_safetensors"), return nullptr);
 }
 
+// void CParallelFileReader::read(char* data, size_t n) {
+
+// }
+
+// void CParallelFileReader::read(char* data, size_t n, size_t offset) {
+//   while (size != 0)
+//   {
+//     /* code */
+//   }
+
+// }
+
 extern "C" mlx_safetensors mlx_safetensors_new() {
   MLX_TRY_CATCH(return new mlx_safetensors_(), return nullptr);
 }

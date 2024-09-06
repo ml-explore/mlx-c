@@ -13,12 +13,14 @@
 #include "mlx/mlx.h"
 #include "mlx/transforms_impl.h"
 
-class CFILEReader : public mlx::core::io::Reader {
+class CParallelFileReader : public mlx::core::io::Reader {
  private:
   FILE* f;
+  static const size_t batch_size_ = 1 << 25;
+  static ThreadPool& therad_pool;
 
  public:
-  CFILEReader(FILE* f) : f(f) {};
+  CParallelFileReader(FILE* f) : f(f) {};
   virtual bool is_open() const override {
     return f != nullptr;
   };
@@ -31,6 +33,7 @@ class CFILEReader : public mlx::core::io::Reader {
   virtual void seek(
       int64_t off,
       std::ios_base::seekdir way = std::ios_base::beg) override {
+    // throw std::runtime_error("[ParallelFileReader::seek] Not allowed");
     switch (way) {
       case std::ios_base::beg:
         fseek(f, off, SEEK_SET);
@@ -45,9 +48,13 @@ class CFILEReader : public mlx::core::io::Reader {
         throw std::runtime_error("FILE: invalid seek way");
     }
   }
+
   virtual void read(char* data, size_t n) override {
     fread(data, 1, n, f);
-  };
+  }
+  virtual void read(char* data, size_t n, size_t offset) override {
+    fread(data, 1, n, f);
+  }
   virtual std::string label() const override {
     return "FILE (read mode)";
   };
@@ -151,7 +158,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_INTTUPLE3(i0, i1, i2) \
   (std::tuple<int, int, int>((i0), (i1), (i2)))
-#define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
+#define MLX_CPP_READER(f) (std::make_shared<CParallelFileReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
 #define MLX_CPP_CLOSURE(f) ((f)->ctx)
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
