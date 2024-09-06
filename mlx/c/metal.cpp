@@ -19,6 +19,10 @@
 extern "C" void mlx_metal_clear_cache() {
   RETURN_MLX_C_VOID(mlx::core::metal::clear_cache());
 }
+extern "C" mlx_map_string_to_string_size_t_variant mlx_metal_device_info() {
+  RETURN_MLX_C_MAP_STRING_TO_STRING_SIZE_T_VARIANT(
+      mlx::core::metal::device_info());
+}
 extern "C" size_t mlx_metal_get_active_memory() {
   return size_t(mlx::core::metal::get_active_memory());
 }

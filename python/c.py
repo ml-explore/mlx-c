@@ -219,6 +219,11 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             signature.append("mlx_map_string_to_array")
         elif return_t == "std::unordered_map<std::string, std::string>":
             signature.append("mlx_map_string_to_string")
+        elif (
+            return_t
+            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
+        ):
+            signature.append("mlx_map_string_to_string_size_t_variant")
         elif return_t == "SafetensorsLoad":
             signature.append("mlx_safetensors")
         elif return_t == "std::string":
@@ -394,6 +399,11 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_ARRAY")
         elif return_t == "std::unordered_map<std::string, std::string>":
             cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING")
+        elif (
+            return_t
+            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
+        ):
+            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING_SIZE_T_VARIANT")
         elif return_t == "SafetensorsLoad":
             cpp_code.append("RETURN_MLX_C_SAFETENSORS")
         elif return_t == "std::string":
