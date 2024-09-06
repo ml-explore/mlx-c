@@ -9,10 +9,10 @@
 #include "mlx/mlx.h"
 
 struct mlx_map_string_to_array_ : mlx_object_ {
-  mlx_map_string_to_array_() : mlx_object_(){};
+  mlx_map_string_to_array_() : mlx_object_() {};
   mlx_map_string_to_array_(
       std::unordered_map<std::string, mlx::core::array>&& ctx)
-      : mlx_object_(), ctx(ctx){};
+      : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   std::unordered_map<std::string, mlx::core::array> ctx;
 };
@@ -31,9 +31,9 @@ struct mlx_map_string_to_array_iterator_ : mlx_object_ {
 };
 
 struct mlx_map_string_to_string_ : mlx_object_ {
-  mlx_map_string_to_string_() : mlx_object_(){};
+  mlx_map_string_to_string_() : mlx_object_() {};
   mlx_map_string_to_string_(std::unordered_map<std::string, std::string>&& ctx)
-      : mlx_object_(), ctx(ctx){};
+      : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   std::unordered_map<std::string, std::string> ctx;
 };

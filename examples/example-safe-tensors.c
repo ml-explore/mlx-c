@@ -1,6 +1,7 @@
 /* Copyright © 2023-2024 Apple Inc. */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
@@ -11,6 +12,12 @@ void print_array(const char* msg, mlx_array arr) {
 }
 
 int main() {
+  char cwd[1024];
+  if (getcwd(cwd, sizeof(cwd)) != 0) {
+    printf("Current working directory: %s\n", cwd);
+  } else {
+    perror("getcwd() error");
+  }
   FILE* f = fopen("arrays.safetensors", "rb");
   if (!f) {
     printf("could not load <arrays.safetensors>\n");

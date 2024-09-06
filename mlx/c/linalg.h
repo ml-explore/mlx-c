@@ -26,7 +26,9 @@ extern "C" {
  */
 /**@{*/
 mlx_array mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s);
+mlx_array mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s);
 mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s);
+mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s);
 mlx_array mlx_linalg_norm_p(
     mlx_array a,
     double ord,

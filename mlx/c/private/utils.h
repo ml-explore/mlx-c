@@ -13,12 +13,14 @@
 #include "mlx/mlx.h"
 #include "mlx/transforms_impl.h"
 
-class CFILEReader : public mlx::core::io::Reader {
+class CParallelFileReader : public mlx::core::io::Reader {
  private:
   FILE* f;
+  static const size_t batch_size_ = 1 << 25;
+  static ThreadPool& therad_pool;
 
  public:
-  CFILEReader(FILE* f) : f(f){};
+  CParallelFileReader(FILE* f) : f(f) {};
   virtual bool is_open() const override {
     return f != nullptr;
   };
@@ -31,6 +33,7 @@ class CFILEReader : public mlx::core::io::Reader {
   virtual void seek(
       int64_t off,
       std::ios_base::seekdir way = std::ios_base::beg) override {
+    // throw std::runtime_error("[ParallelFileReader::seek] Not allowed");
     switch (way) {
       case std::ios_base::beg:
         fseek(f, off, SEEK_SET);
@@ -45,9 +48,13 @@ class CFILEReader : public mlx::core::io::Reader {
         throw std::runtime_error("FILE: invalid seek way");
     }
   }
+
   virtual void read(char* data, size_t n) override {
     fread(data, 1, n, f);
-  };
+  }
+  virtual void read(char* data, size_t n, size_t offset) override {
+    fread(data, 1, n, f);
+  }
   virtual std::string label() const override {
     return "FILE (read mode)";
   };
@@ -58,7 +65,7 @@ class CFILEWriter : public mlx::core::io::Writer {
   FILE* f;
 
  public:
-  CFILEWriter(FILE* f) : f(f){};
+  CFILEWriter(FILE* f) : f(f) {};
   virtual bool is_open() const override {
     return f != nullptr;
   };
@@ -135,8 +142,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
     }                                  \
   }
 
-#define RETURN_MLX_C_PTR(ptr) \
-	MLX_TRY_CATCH(return (ptr), return nullptr)
+#define RETURN_MLX_C_PTR(ptr) MLX_TRY_CATCH(return (ptr), return nullptr)
 
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
 #define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
@@ -152,34 +158,36 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_INTTUPLE3(i0, i1, i2) \
   (std::tuple<int, int, int>((i0), (i1), (i2)))
-#define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
+#define MLX_CPP_READER(f) (std::make_shared<CParallelFileReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
 #define MLX_CPP_CLOSURE(f) ((f)->ctx)
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
 #define MLX_CPP_MAP_STRING_TO_STRING(map) ((map)->ctx)
 #define MLX_CPP_STRING(str) ((str)->ctx)
 
-#define RETURN_MLX_C_VOID(scope) \
-	MLX_TRY_CATCH(scope, return)
+#define RETURN_MLX_C_VOID(scope) MLX_TRY_CATCH(scope, return)
 #define RETURN_MLX_C_ARRAY_DTYPE(dtype) return mlx_c_dtypes[(int)((dtype).val)]
-#define RETURN_MLX_C_ARRAY(arr) \
-  RETURN_MLX_C_PTR(new mlx_array_(arr))
-#define RETURN_MLX_C_STREAM(stream) \
-  RETURN_MLX_C_PTR(new mlx_stream_(stream))
-#define RETURN_MLX_C_DEVICE(device) \
-  RETURN_MLX_C_PTR(new mlx_device_(device))
+#define RETURN_MLX_C_ARRAY(arr) RETURN_MLX_C_PTR(new mlx_array_(arr))
+#define RETURN_MLX_C_STREAM(stream) RETURN_MLX_C_PTR(new mlx_stream_(stream))
+#define RETURN_MLX_C_DEVICE(device) RETURN_MLX_C_PTR(new mlx_device_(device))
 #define RETURN_MLX_C_VECTOR_ARRAY(vec) \
   RETURN_MLX_C_PTR(new mlx_vector_array_(vec))
 #define RETURN_MLX_C_VECTOR_VECTOR_ARRAY(vec) \
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_(vec))
-#define RETURN_MLX_C_ARRAYPAIR(apair) RETURN_MLX_C_PTR(new mlx_vector_array_(apair))
-#define RETURN_MLX_C_ARRAYTUPLE3(atuple) RETURN_MLX_C_PTR(new mlx_vector_array_(atuple))
+#define RETURN_MLX_C_ARRAYPAIR(apair) \
+  RETURN_MLX_C_PTR(new mlx_vector_array_(apair))
+#define RETURN_MLX_C_ARRAYTUPLE3(atuple) \
+  RETURN_MLX_C_PTR(new mlx_vector_array_(atuple))
 #define RETURN_MLX_C_CLOSURE(closure) \
-	RETURN_MLX_C_PTR(new mlx_closure_(closure))
-#define RETURN_MLX_C_VECTORARRAYPAIR(apair) RETURN_MLX_C_PTR(new mlx_vector_vector_array_(apair))
-#define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
-#define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) RETURN_MLX_C_PTR(new mlx_map_string_to_array_(map))
-#define RETURN_MLX_C_MAP_STRING_TO_STRING(map) RETURN_MLX_C_PTR(new mlx_map_string_to_string_(map))
+  RETURN_MLX_C_PTR(new mlx_closure_(closure))
+#define RETURN_MLX_C_VECTORARRAYPAIR(apair) \
+  RETURN_MLX_C_PTR(new mlx_vector_vector_array_(apair))
+#define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) \
+  RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
+#define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) \
+  RETURN_MLX_C_PTR(new mlx_map_string_to_array_(map))
+#define RETURN_MLX_C_MAP_STRING_TO_STRING(map) \
+  RETURN_MLX_C_PTR(new mlx_map_string_to_string_(map))
 #define RETURN_MLX_C_STRING(str) RETURN_MLX_C_PTR(new mlx_string_(str))
 #define RETURN_MLX_C_SAFETENSORS(st) RETURN_MLX_C_PTR(new mlx_safetensors_(st))
 #define RETURN_MLX_C_FUTURE(f) RETURN_MLX_C_PTR(new mlx_future_(f))

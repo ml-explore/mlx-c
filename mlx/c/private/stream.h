@@ -7,7 +7,7 @@
 #include "mlx/mlx.h"
 
 struct mlx_stream_ : mlx_object_ {
-  mlx_stream_(mlx::core::Stream ctx) : mlx_object_(), ctx(ctx){};
+  mlx_stream_(mlx::core::Stream ctx) : mlx_object_(), ctx(ctx) {};
   virtual mlx_string_* tostring() override;
   mlx::core::Stream ctx;
 };

@@ -104,6 +104,16 @@ int main() {
     mlx_free(vag);
   }
 
+  {
+    int a[] = {1, 2, 3, 4};
+    int shape[] = {2, 2};
+    int axes[] = {-1};
+    mlx_array arr = mlx_array_from_data(a, shape, 2, MLX_INT32);
+    mlx_array sums = mlx_sum(arr, axes, 1, 0, mlx_gpu_stream());
+    print_array("sums", sums);
+    mlx_free(arr);
+  }
+
   mlx_free(cls_with_value);
   mlx_free(cls);
   mlx_free(x);
