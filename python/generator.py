@@ -61,9 +61,15 @@ def getname(t):
 
 
 funcs = {}
+enums = {}
 l = Z.namespace
 for namespace in args.namespace.split("::"):
     l = l.namespaces[namespace]
+
+for e in l.enums:
+    name = getname(e.typename)
+    values = [v.name for v in e.values]
+    enums[name] = values
 
 for f in l.functions:
     name = getname(f.name)
@@ -94,5 +100,11 @@ else:
     raise RuntimeError("Unsupported language")
 
 generate(
-    funcs, headername, args.namespace, args.implementation, args.docstring, args.dockey
+    funcs,
+    enums,
+    headername,
+    args.namespace,
+    args.implementation,
+    args.docstring,
+    args.dockey,
 )

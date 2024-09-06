@@ -1,9 +1,15 @@
 # Copyright © 2023-2024 Apple Inc.
 
+import re
 import sys
 
 
-def generate(funcs, headername, namespace, implementation, docstring, dockey):
+def to_snake_letters(name):
+    name = re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+    return name
+
+
+def generate(funcs, enums, headername, namespace, implementation, docstring, dockey):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -152,6 +158,40 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             print("* \defgroup " + dockey + " " + docstring)
             print("*/")
             print("/**@{*/")
+
+    for enum, values in enums.items():
+        c_typename = "mlx_" + to_snake_letters(enum)
+        cpp_typename = namespace + "::" + enum
+        c_vals = []
+        cpp_vals = []
+        for value in values:
+            c_vals.append("MLX_" + to_snake_letters(enum).upper() + "_" + value.upper())
+            cpp_vals.append(cpp_typename + "::" + value)
+        if implementation:
+            impl = ["namespace {"]
+            impl.append(c_typename + " to_c_type(" + cpp_typename + " type) {")
+            impl.append(
+                "static " + c_typename + " map[] = {" + ", ".join(c_vals) + "};"
+            )
+            impl.append("return map[(int)type];")
+            impl.append("}")
+            impl.append(cpp_typename + " to_cpp_type(" + c_typename + " type) {")
+            impl.append(
+                "static " + cpp_typename + " map[] = {" + ", ".join(cpp_vals) + "};"
+            )
+            impl.append("return map[(int)type];")
+            impl.append("}")
+            impl.append("}")  # namespace
+            print(" ".join(impl))
+        else:
+            decl = ["typedef enum "]
+            decl.append(c_typename + "_")
+            decl.append("{")
+            decl.append(", ".join(c_vals))
+            decl.append("}")
+            decl.append(c_typename)
+            decl.append(";")
+            print(" ".join(decl))
 
     for f in sorted_funcs:
         # print(f["return_t"])
@@ -311,6 +351,9 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
                     + pni
                     + "->ctx) : std::nullopt)"
                 )
+            elif pti == "CompileMode":
+                c_call.append("mlx_compile_mode " + pni)
+                cpp_call.append("to_cpp_type(" + pni + ")")
             else:
                 print("unsupported type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
