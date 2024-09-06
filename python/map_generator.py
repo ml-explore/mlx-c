@@ -212,6 +212,7 @@ define_begin = """/* Copyright © 2023-2024 Apple Inc. */
 
 #include "mlx/c/array.h"
 #include "mlx/c/string.h"
+#include "mlx/c/variant.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -236,6 +237,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/variant.h"
 """
 
 impl_end = """
@@ -263,14 +265,32 @@ if args.implementation:
     print(impl_begin)
     print(impl_map("mlx_string", "mlx_array", "string", "array"))
     print(impl_map("mlx_string", "mlx_string", "string", "string"))
+    print(
+        impl_map(
+            "mlx_string", "mlx_string_size_t_variant", "string", "string_size_t_variant"
+        )
+    )
     print(impl_end)
 elif args.private:
     print(priv_begin)
     print(priv_map("std::string", "mlx::core::array", "string", "array"))
     print(priv_map("std::string", "std::string", "string", "string"))
+    print(
+        priv_map(
+            "std::string",
+            "std::variant<std::string, size_t>",
+            "string",
+            "string_size_t_variant",
+        )
+    )
     print(priv_end)
 else:
     print(define_begin)
     print(define_map("mlx_string", "mlx_array", "string", "array"))
     print(define_map("mlx_string", "mlx_string", "string", "string"))
+    print(
+        define_map(
+            "mlx_string", "mlx_string_size_t_variant", "string", "string_size_t_variant"
+        )
+    )
     print(define_end)
