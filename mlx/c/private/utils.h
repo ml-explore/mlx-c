@@ -158,6 +158,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
 #define MLX_CPP_CLOSURE(f) ((f)->ctx)
+#define MLX_CPP_CLOSURE_CUSTOM_FUNCTION(f) ((f)->ctx)
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
 #define MLX_CPP_MAP_STRING_TO_STRING(map) ((map)->ctx)
 #define MLX_CPP_STRING(str) ((str)->ctx)
@@ -181,6 +182,8 @@ static mlx_array_dtype mlx_c_dtypes[] = {
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_(apair))
 #define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) \
   RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
+#define RETURN_MLX_C_CLOSURE_CUSTOM_FUNCTION(closure) \
+  RETURN_MLX_C_PTR(new mlx_closure_custom_function_(closure))
 #define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) \
   RETURN_MLX_C_PTR(new mlx_map_string_to_array_(map))
 #define RETURN_MLX_C_MAP_STRING_TO_STRING(map) \
