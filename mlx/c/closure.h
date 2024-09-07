@@ -94,6 +94,47 @@ mlx_vector_array mlx_closure_custom_function_apply(
     const mlx_vector_array arr2,
     const mlx_vector_array arr3);
 
+/**
+ * A closure encapsulating a function taking a two vector of arrays and a vector
+ * of int, and returning a vector of arrays
+ */
+typedef struct mlx_closure_custom_function_jvp_*
+    mlx_closure_custom_function_jvp;
+
+/**
+ * Returns a closure encapsulating the specified function.
+ */
+mlx_closure_custom_function_jvp mlx_closure_custom_function_jvp_new(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_array,
+        const int*,
+        size_t));
+/**
+ * Returns a closure encapsulating the specified function, with the given
+ * payload. If `dtor` is not `NULL`, it will called when the closure is
+ * destroyed to free the payload.
+ */
+mlx_closure_custom_function_jvp
+mlx_closure_custom_function_jvp_new_with_payload(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_array,
+        const int*,
+        size_t,
+        void*),
+    void* payload,
+    void (*dtor)(void*));
+/**
+ * Applies the closure over the given vector of arrays argument.
+ */
+mlx_vector_array mlx_closure_custom_function_jvp_apply(
+    mlx_closure_custom_function_jvp cls,
+    const mlx_vector_array arr1,
+    const mlx_vector_array arr2,
+    const int* idx,
+    size_t idx_size);
+
 /**@}*/
 
 #ifdef __cplusplus
