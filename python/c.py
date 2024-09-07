@@ -215,6 +215,11 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             signature.append("mlx_closure")
         elif return_t == "ValueAndGradFn":
             signature.append("mlx_closure_value_and_grad")
+        elif (
+            return_t
+            == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
+        ):
+            signature.append("mlx_closure_custom_function")
         elif return_t == "std::unordered_map<std::string, array>":
             signature.append("mlx_map_string_to_array")
         elif return_t == "std::unordered_map<std::string, std::string>":
@@ -338,6 +343,26 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             elif pti == "std::function<std::vector<array>(std::vector<array>)>":
                 c_call.append("mlx_closure " + pni)
                 cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
+            elif (
+                pti
+                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
+            ):
+                c_call.append("mlx_closure_custom_function " + pni)
+                cpp_call.append("MLX_CPP_CLOSURE_CUSTOM_FUNCTION(" + pni + ")")
+            elif (
+                pti
+                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "MLX_CPP_CLOSURE_CUSTOM_FUNCTION("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
             elif pti == "std::unordered_map<std::string, array>":
                 c_call.append("mlx_map_string_to_array " + pni)
                 cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
