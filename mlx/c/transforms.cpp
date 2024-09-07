@@ -22,6 +22,12 @@ extern "C" void mlx_async_eval(const mlx_vector_array outputs) {
 extern "C" mlx_closure mlx_checkpoint(mlx_closure fun) {
   RETURN_MLX_C_CLOSURE(mlx::core::checkpoint(MLX_CPP_CLOSURE(fun)));
 }
+extern "C" mlx_closure mlx_custom_vjp(
+    mlx_closure fun,
+    mlx_closure_custom_function fun_vjp) {
+  RETURN_MLX_C_CLOSURE(mlx::core::custom_vjp(
+      MLX_CPP_CLOSURE(fun), MLX_CPP_CLOSURE_CUSTOM_FUNCTION(fun_vjp)));
+}
 extern "C" void mlx_eval(const mlx_vector_array outputs) {
   RETURN_MLX_C_VOID(mlx::core::eval(MLX_CPP_ARRVEC(outputs)));
 }

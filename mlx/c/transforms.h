@@ -27,6 +27,9 @@ extern "C" {
 /**@{*/
 void mlx_async_eval(const mlx_vector_array outputs);
 mlx_closure mlx_checkpoint(mlx_closure fun);
+mlx_closure mlx_custom_vjp(
+    mlx_closure fun,
+    mlx_closure_custom_function fun_vjp);
 void mlx_eval(const mlx_vector_array outputs);
 mlx_vector_vector_array mlx_jvp(
     mlx_closure fun,
