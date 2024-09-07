@@ -58,6 +58,42 @@ mlx_vector_vector_array mlx_closure_value_and_grad_apply(
     mlx_closure_value_and_grad cls,
     const mlx_vector_array inputs);
 
+/**
+ * A closure encapsulating a function taking a three vector of arrays, and
+ * returning a vector of arrays
+ */
+typedef struct mlx_closure_custom_function_* mlx_closure_custom_function;
+
+/**
+ * Returns a closure encapsulating the specified function.
+ */
+mlx_closure_custom_function mlx_closure_custom_function_new(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_array,
+        const mlx_vector_array));
+/**
+ * Returns a closure encapsulating the specified function, with the given
+ * payload. If `dtor` is not `NULL`, it will called when the closure is
+ * destroyed to free the payload.
+ */
+mlx_closure_custom_function mlx_closure_custom_function_new_with_payload(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_array,
+        const mlx_vector_array,
+        void*),
+    void* payload,
+    void (*dtor)(void*));
+/**
+ * Applies the closure over the given vector of arrays argument.
+ */
+mlx_vector_array mlx_closure_custom_function_apply(
+    mlx_closure_custom_function cls,
+    const mlx_vector_array arr1,
+    const mlx_vector_array arr2,
+    const mlx_vector_array arr3);
+
 /**@}*/
 
 #ifdef __cplusplus
