@@ -15,6 +15,7 @@
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array
 mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s) {

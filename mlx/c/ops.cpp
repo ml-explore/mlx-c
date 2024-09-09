@@ -15,6 +15,7 @@
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_abs(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::abs(a->ctx, s->ctx));

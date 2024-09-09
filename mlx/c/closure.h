@@ -4,6 +4,7 @@
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {

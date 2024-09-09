@@ -7,6 +7,7 @@
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 mlx_string_* mlx_closure_::tostring() {
   RETURN_MLX_C_STRING("mlx_vector_array closure(mlx_vector_array, void*)");

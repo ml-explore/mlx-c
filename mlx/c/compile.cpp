@@ -15,6 +15,7 @@
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 namespace {
 mlx_compile_mode to_c_type(mlx::core::CompileMode type) {

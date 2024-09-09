@@ -15,6 +15,7 @@
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" void mlx_async_eval(const mlx_vector_array outputs) {
   RETURN_MLX_C_VOID(mlx::core::async_eval(MLX_CPP_ARRVEC(outputs)));

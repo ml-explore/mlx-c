@@ -15,6 +15,7 @@
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_distributed_all_gather(
     mlx_array x,
