@@ -126,6 +126,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/string.h"
     #include "mlx/c/private/utils.h"
+    #include "mlx/c/private/vector.h"
 
     """
         )
