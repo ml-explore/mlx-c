@@ -21,6 +21,16 @@ mlx_array inc_fun(mlx_array in) {
   return res;
 }
 
+mlx_array mlx_vector_vector_array_get2d(
+    mlx_vector_vector_array arr,
+    size_t idx1,
+    size_t idx2) {
+  mlx_vector_array subarr = mlx_vector_vector_array_get(arr, idx1);
+  mlx_array res = mlx_vector_array_get(subarr, idx2);
+  mlx_free(subarr);
+  return res;
+}
+
 mlx_vector_array inc_fun_value(mlx_vector_array in, void* payload) {
   mlx_stream stream = mlx_gpu_stream();
   if (mlx_vector_array_size(in) != 1) {
@@ -28,9 +38,11 @@ mlx_vector_array inc_fun_value(mlx_vector_array in, void* payload) {
     exit(EXIT_FAILURE);
   }
   mlx_array value = (mlx_array)payload;
-  mlx_array res = mlx_add(mlx_vector_array_get(in, 0), value, stream);
-  mlx_vector_array vres = mlx_vector_array_from_array(res);
+  mlx_array lhs = mlx_vector_array_get(in, 0);
+  mlx_array res = mlx_add(lhs, value, stream);
+  mlx_vector_array vres = mlx_vector_array_from_value(res);
   mlx_free(res);
+  mlx_free(lhs);
   mlx_free(stream);
   return vres;
 }
@@ -46,8 +58,8 @@ int main() {
   {
     printf("jvp:\n");
     mlx_array one = mlx_array_from_float(1.0);
-    mlx_vector_array primals = mlx_vector_array_from_array(x);
-    mlx_vector_array tangents = mlx_vector_array_from_array(one);
+    mlx_vector_array primals = mlx_vector_array_from_value(x);
+    mlx_vector_array tangents = mlx_vector_array_from_value(one);
     mlx_vector_vector_array res = mlx_jvp(cls, primals, tangents);
     mlx_array out = mlx_vector_vector_array_get2d(res, 0, 0);
     mlx_array dout = mlx_vector_vector_array_get2d(res, 1, 0);
@@ -68,7 +80,7 @@ int main() {
     printf("value_and_grad:\n");
     int garg = 0;
     mlx_closure_value_and_grad vag = mlx_value_and_grad(cls, &garg, 1);
-    mlx_vector_array inputs = mlx_vector_array_from_array(x);
+    mlx_vector_array inputs = mlx_vector_array_from_value(x);
     mlx_vector_vector_array res = mlx_closure_value_and_grad_apply(vag, inputs);
     mlx_array out = mlx_vector_vector_array_get2d(res, 0, 0);
     mlx_array dout = mlx_vector_vector_array_get2d(res, 1, 0);
@@ -89,7 +101,7 @@ int main() {
     int garg = 0;
     mlx_closure_value_and_grad vag =
         mlx_value_and_grad(cls_with_value, &garg, 1);
-    mlx_vector_array inputs = mlx_vector_array_from_array(x);
+    mlx_vector_array inputs = mlx_vector_array_from_value(x);
     mlx_vector_vector_array res = mlx_closure_value_and_grad_apply(vag, inputs);
     mlx_array out = mlx_vector_vector_array_get2d(res, 0, 0);
     mlx_array dout = mlx_vector_vector_array_get2d(res, 1, 0);
