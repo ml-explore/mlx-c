@@ -52,6 +52,19 @@ mlx_vector_array mlx_vector_vector_array_get(
     size_t idx);
 mlx_vector_array* mlx_vector_vector_array_data(mlx_vector_vector_array vec);
 
+/**
+ * A vector of int.
+ */
+typedef struct mlx_vector_int_* mlx_vector_int;
+mlx_vector_int mlx_vector_int_new();
+mlx_vector_int mlx_vector_int_from_data(const int* data, size_t size);
+mlx_vector_int mlx_vector_int_from_value(const int val);
+void mlx_vector_int_add_data(mlx_vector_int vec, const int* data, size_t size);
+void mlx_vector_int_add_value(mlx_vector_int vec, const int val);
+size_t mlx_vector_int_size(mlx_vector_int vec);
+int mlx_vector_int_get(mlx_vector_int vec, size_t idx);
+int* mlx_vector_int_data(mlx_vector_int vec);
+
 #ifdef __cplusplus
 }
 #endif

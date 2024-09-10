@@ -215,14 +215,25 @@ if args.implementation:
             lambda s: "RETURN_MLX_C_PTR(new mlx_vector_array_(" + s + "))",
         )
     )
+    print(
+        implementation(
+            "int",
+            "int",
+            "int",
+            lambda s: s,
+            lambda s: "return " + s,
+        )
+    )
     print(impl_end)
 elif args.private:
     print(priv_begin)
     print(private("mlx::core::array", "array"))
     print(private("std::vector<mlx::core::array>", "vector_array"))
+    print(private("int", "int"))
     print(priv_end)
 else:
     print(define_begin)
     print(definition("mlx_array", "array"))
     print(definition("mlx_vector_array", "vector_array"))
+    print(definition("int", "int"))
     print(define_end)
