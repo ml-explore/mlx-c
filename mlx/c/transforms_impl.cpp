@@ -14,6 +14,7 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -50,7 +51,7 @@ extern "C" mlx_vector_array mlx_detail_vmap_replace(
       MLX_CPP_INTVEC(in_axes, num_in_axes),
       MLX_CPP_INTVEC(out_axes, num_out_axes)));
 }
-extern "C" mlx_vector_vector_array mlx_detail_vmap_trace(
+extern "C" mlx_tuple_vector_array_vector_array mlx_detail_vmap_trace(
     mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,

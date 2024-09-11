@@ -14,6 +14,7 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -708,7 +709,7 @@ extern "C" mlx_array mlx_prod(
 extern "C" mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::prod(a->ctx, keepdims, s->ctx));
 }
-extern "C" mlx_vector_array
+extern "C" mlx_tuple_array_array_array
 mlx_quantize(mlx_array w, int group_size, int bits, mlx_stream s) {
   RETURN_MLX_C_ARRAYTUPLE3(
       mlx::core::quantize(w->ctx, group_size, bits, s->ctx));

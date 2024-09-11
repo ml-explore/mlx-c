@@ -346,7 +346,7 @@ mlx_array mlx_prod(
     bool keepdims,
     mlx_stream s);
 mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream s);
-mlx_vector_array
+mlx_tuple_array_array_array
 mlx_quantize(mlx_array w, int group_size, int bits, mlx_stream s);
 mlx_array mlx_quantized_matmul(
     mlx_array x,

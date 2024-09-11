@@ -14,6 +14,7 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -32,7 +33,7 @@ extern "C" mlx_closure mlx_custom_vjp(
 extern "C" void mlx_eval(const mlx_vector_array outputs) {
   RETURN_MLX_C_VOID(mlx::core::eval(MLX_CPP_ARRVEC(outputs)));
 }
-extern "C" mlx_vector_vector_array mlx_jvp(
+extern "C" mlx_tuple_vector_array_vector_array mlx_jvp(
     mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array tangents) {
@@ -44,7 +45,7 @@ mlx_value_and_grad(mlx_closure fun, const int* argnums, size_t num_argnums) {
   RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(mlx::core::value_and_grad(
       MLX_CPP_CLOSURE(fun), MLX_CPP_INTVEC(argnums, num_argnums)));
 }
-extern "C" mlx_vector_vector_array mlx_vjp(
+extern "C" mlx_tuple_vector_array_vector_array mlx_vjp(
     mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array cotangents) {

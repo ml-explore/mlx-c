@@ -49,7 +49,7 @@ mlx_array mlx_linalg_norm(
     bool keepdims,
     mlx_stream s);
 mlx_array mlx_linalg_pinv(mlx_array a, mlx_stream s);
-mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s);
+mlx_tuple_array_array mlx_linalg_qr(mlx_array a, mlx_stream s);
 mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s);
 mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s);
 /**@}*/

@@ -31,13 +31,13 @@ mlx_closure mlx_custom_vjp(
     mlx_closure fun,
     mlx_closure_custom_function fun_vjp);
 void mlx_eval(const mlx_vector_array outputs);
-mlx_vector_vector_array mlx_jvp(
+mlx_tuple_vector_array_vector_array mlx_jvp(
     mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array tangents);
 mlx_closure_value_and_grad
 mlx_value_and_grad(mlx_closure fun, const int* argnums, size_t num_argnums);
-mlx_vector_vector_array mlx_vjp(
+mlx_tuple_vector_array_vector_array mlx_vjp(
     mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array cotangents);

@@ -93,7 +93,7 @@ mlx_array mlx_random_randint(
     mlx_stream s);
 void mlx_random_seed(uint64_t seed);
 mlx_array mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s);
-mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s);
+mlx_tuple_array_array mlx_random_split(mlx_array key, mlx_stream s);
 mlx_array mlx_random_truncated_normal(
     mlx_array lower,
     mlx_array upper,

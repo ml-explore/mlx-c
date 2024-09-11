@@ -125,6 +125,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/string.h"
+    #include "mlx/c/private/tuple.h"
     #include "mlx/c/private/utils.h"
     #include "mlx/c/private/vector.h"
 
@@ -204,14 +205,14 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             signature.append(return_t)
         elif return_t == "array":
             signature.append("mlx_array")
-        elif (
-            return_t == "std::vector<array>"
-            or return_t == "std::pair<array, array>"
-            or return_t == "std::tuple<array, array, array>"
-        ):
+        elif return_t == "std::vector<array>":
             signature.append("mlx_vector_array")
+        elif return_t == "std::pair<array, array>":
+            signature.append("mlx_tuple_array_array")
+        elif return_t == "std::tuple<array, array, array>":
+            signature.append("mlx_tuple_array_array_array")
         elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
-            signature.append("mlx_vector_vector_array")
+            signature.append("mlx_tuple_vector_array_vector_array")
         elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
             signature.append("mlx_closure")
         elif return_t == "ValueAndGradFn":

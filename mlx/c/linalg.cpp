@@ -14,6 +14,7 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -64,7 +65,7 @@ extern "C" mlx_array mlx_linalg_norm(
 extern "C" mlx_array mlx_linalg_pinv(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::linalg::pinv(a->ctx, s->ctx));
 }
-extern "C" mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s) {
+extern "C" mlx_tuple_array_array mlx_linalg_qr(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAYPAIR(mlx::core::linalg::qr(a->ctx, s->ctx));
 }
 extern "C" mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s) {

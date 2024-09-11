@@ -14,6 +14,7 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -165,7 +166,7 @@ extern "C" mlx_array
 mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::random::split(key->ctx, num, s->ctx));
 }
-extern "C" mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s) {
+extern "C" mlx_tuple_array_array mlx_random_split(mlx_array key, mlx_stream s) {
   RETURN_MLX_C_ARRAYPAIR(mlx::core::random::split(key->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_random_truncated_normal(
