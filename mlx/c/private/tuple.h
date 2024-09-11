@@ -60,4 +60,13 @@ struct mlx_tuple_vector_array_vector_int_ : mlx_object_ {
   std::pair<std::vector<mlx::core::array>, std::vector<int>> ctx;
 };
 
+struct mlx_tuple_int_int_int_ : mlx_object_ {
+  mlx_tuple_int_int_int_(std::tuple<int, int, int>&& ctx)
+      : mlx_object_(), ctx(std::move(ctx)){};
+  mlx_tuple_int_int_int_(const std::tuple<int, int, int>& ctx)
+      : mlx_object_(), ctx(ctx){};
+  virtual mlx_string_* tostring() override;
+  std::tuple<int, int, int> ctx;
+};
+
 #endif

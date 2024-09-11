@@ -101,3 +101,27 @@ extern "C" mlx_vector_int mlx_tuple_vector_array_vector_int_get_1(
     mlx_tuple_vector_array_vector_int tuple) {
   RETURN_MLX_C_PTR(new mlx_vector_int_(std::get<1>(tuple->ctx)));
 }
+
+mlx_string mlx_tuple_int_int_int_::tostring() {
+  RETURN_MLX_C_STRING("mlx_tuple(const int, const int, const int)");
+}
+
+extern "C" mlx_tuple_int_int_int mlx_tuple_int_int_int_new(
+    const int input_0,
+    const int input_1,
+    const int input_2) {
+  RETURN_MLX_C_PTR(
+      new mlx_tuple_int_int_int_(std::make_tuple(input_0, input_1, input_2)));
+}
+
+extern "C" int mlx_tuple_int_int_int_get_0(mlx_tuple_int_int_int tuple) {
+  return std::get<0>(tuple->ctx);
+}
+
+extern "C" int mlx_tuple_int_int_int_get_1(mlx_tuple_int_int_int tuple) {
+  return std::get<1>(tuple->ctx);
+}
+
+extern "C" int mlx_tuple_int_int_int_get_2(mlx_tuple_int_int_int tuple) {
+  return std::get<2>(tuple->ctx);
+}

@@ -72,6 +72,19 @@ mlx_vector_array mlx_tuple_vector_array_vector_int_get_0(
 mlx_vector_int mlx_tuple_vector_array_vector_int_get_1(
     mlx_tuple_vector_array_vector_int tuple);
 
+/**
+ * A tuple of (const int, const int, const int).
+ */
+typedef struct mlx_tuple_int_int_int_* mlx_tuple_int_int_int;
+mlx_tuple_int_int_int mlx_tuple_int_int_int_new(
+    const int input_0,
+    const int input_1,
+    const int input_2);
+
+int mlx_tuple_int_int_int_get_0(mlx_tuple_int_int_int tuple);
+int mlx_tuple_int_int_int_get_1(mlx_tuple_int_int_int tuple);
+int mlx_tuple_int_int_int_get_2(mlx_tuple_int_int_int tuple);
+
 /**@}*/
 
 #ifdef __cplusplus

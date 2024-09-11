@@ -1,6 +1,19 @@
 import argparse
-import re
+import regex
 import string
+
+
+def replace_match_parenthesis(string, keyword, fun):
+    pattern = regex.compile(keyword + r"(\((?:[^()]++|(?1))++\))")
+    res = []
+    pos = 0
+    for m in pattern.finditer(string):
+        res.append(string[pos : m.start()])
+        res.append(fun(m[1][1:-1]))
+        pos = m.end()
+    res.append(string[pos:])
+    return "".join(res)
+
 
 parser = argparse.ArgumentParser("MLX C tuple code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -33,7 +46,7 @@ NAME_new(CARGS_TYPE_NAME) {
 impl_code_get = """
 extern "C" CARG NAME_get_IDX(
     NAME tuple) {
-  RETURN_MLX_C_PTR(new CARG_(std::get<IDX>(tuple->ctx)));
+  ARG_RETURN(std::get<IDX>(tuple->ctx));
 }
 """
 
@@ -51,7 +64,7 @@ struct NAME_ : mlx_object_ {
 """
 
 
-def generate(code, code_get, cargs, cppargs):
+def generate(code, code_get, cargs, cppargs, raw_c_type=None):
     assert len(cargs) == len(cppargs)
     cargs_name = []
     cargs_type_name = []
@@ -64,12 +77,20 @@ def generate(code, code_get, cargs, cppargs):
         cargs_name.append("input" + suffix)
         cargs_type_name.append("const " + carg + " input" + suffix)
         # cppargs_type_name.append("const " + cpparg + "& cpp_input" + suffix)
-        cargs_ctx.append("input" + suffix + "->ctx")
+        if raw_c_type is not None and raw_c_type[i]:
+            cargs_ctx.append("input" + suffix)
+            arg_return = lambda s: "return " + s
+        else:
+            cargs_ctx.append("input" + suffix + "->ctx")
+            arg_return = lambda s: "RETURN_MLX_C_PTR(new CARG_(" + s + "))"
 
         if code_get:
-            code = code + code_get.replace("CARG", carg).replace("IDX", str(i))
+            code_get_carg = replace_match_parenthesis(
+                code_get, "ARG_RETURN", arg_return
+            )
+            code = code + code_get_carg.replace("CARG", carg).replace("IDX", str(i))
 
-        name.append(re.sub("^mlx_", "", carg))
+        name.append(regex.sub("^mlx_", "", carg))
 
     if len(cargs) == 2:
         tuple_type = "std::pair"
@@ -201,6 +222,15 @@ print(
         code_get,
         ["mlx_vector_array", "mlx_vector_int"],
         ["std::vector<mlx::core::array>", "std::vector<int>"],
+    )
+)
+print(
+    generate(
+        code,
+        code_get,
+        ["int"] * 3,
+        ["int"] * 3,
+        [True] * 3,
     )
 )
 print(end)
