@@ -308,6 +308,60 @@ extern "C" mlx_array mlx_conv_general(
       flip,
       s->ctx));
 }
+extern "C" mlx_array mlx_conv_transpose1d(
+    mlx_array input,
+    mlx_array weight,
+    int stride,
+    int padding,
+    int dilation,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose1d(
+      input->ctx, weight->ctx, stride, padding, dilation, groups, s->ctx));
+}
+extern "C" mlx_array mlx_conv_transpose2d(
+    mlx_array input,
+    mlx_array weight,
+    int f_stride,
+    int s_stride,
+    int f_padding,
+    int s_padding,
+    int f_dilation,
+    int s_dilation,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose2d(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTPAIR(f_stride, s_stride),
+      MLX_CPP_INTPAIR(f_padding, s_padding),
+      MLX_CPP_INTPAIR(f_dilation, s_dilation),
+      groups,
+      s->ctx));
+}
+extern "C" mlx_array mlx_conv_transpose3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose3d(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTTUPLE3(stride_0, stride_1, stride_2),
+      MLX_CPP_INTTUPLE3(padding_0, padding_1, padding_2),
+      MLX_CPP_INTTUPLE3(dilation_0, dilation_1, dilation_2),
+      groups,
+      s->ctx));
+}
 extern "C" mlx_array mlx_copy(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::copy(a->ctx, s->ctx));
 }

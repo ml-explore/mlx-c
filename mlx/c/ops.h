@@ -162,6 +162,39 @@ mlx_array mlx_conv_general(
     int groups,
     bool flip,
     mlx_stream s);
+mlx_array mlx_conv_transpose1d(
+    mlx_array input,
+    mlx_array weight,
+    int stride,
+    int padding,
+    int dilation,
+    int groups,
+    mlx_stream s);
+mlx_array mlx_conv_transpose2d(
+    mlx_array input,
+    mlx_array weight,
+    int f_stride,
+    int s_stride,
+    int f_padding,
+    int s_padding,
+    int f_dilation,
+    int s_dilation,
+    int groups,
+    mlx_stream s);
+mlx_array mlx_conv_transpose3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
+    int groups,
+    mlx_stream s);
 mlx_array mlx_copy(mlx_array a, mlx_stream s);
 mlx_array mlx_cos(mlx_array a, mlx_stream s);
 mlx_array mlx_cosh(mlx_array a, mlx_stream s);
