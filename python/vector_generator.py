@@ -244,4 +244,14 @@ print(
         lambda s: "RETURN_MLX_C_PTR(new mlx_string_(" + s + "))",
     )
 )
+print(
+    generate(
+        code,
+        "mlx::core::Dtype",
+        "mlx_array_dtype",
+        "array_dtype",
+        lambda s: "MLX_CPP_ARRAY_DTYPE(" + s + ")",
+        lambda s: "RETURN_MLX_C_ARRAY_DTYPE(" + s + ")",
+    )
+)
 print(end)

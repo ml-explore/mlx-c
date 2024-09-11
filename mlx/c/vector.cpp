@@ -297,3 +297,63 @@ extern "C" size_t mlx_vector_string_size(mlx_vector_string vec) {
 }
 
 /**@}*/
+
+/**
+ * \defgroup mlx_vector_array_dtype A vector of array_dtypes
+ * MLX vector of array_dtype object.
+ */
+/**@{*/
+
+mlx_string mlx_vector_array_dtype_::tostring() {
+  MLX_TRY_CATCH(std::ostringstream os;
+                os << "vector of array_dtypes (size=" << ctx.size() << ")";
+                std::string str = os.str();
+                return new mlx_string_(str);
+                , return nullptr);
+}
+
+extern "C" mlx_vector_array_dtype mlx_vector_array_dtype_new() {
+  RETURN_MLX_C_PTR(new mlx_vector_array_dtype_())
+}
+
+extern "C" mlx_vector_array_dtype mlx_vector_array_dtype_from_data(
+    const mlx_array_dtype* data,
+    size_t size) {
+  std::vector<mlx::core::Dtype> cpp_arrs;
+  for (size_t i = 0; i < size; i++) {
+    cpp_arrs.push_back(MLX_CPP_ARRAY_DTYPE(data[i]));
+  }
+  RETURN_MLX_C_PTR(new mlx_vector_array_dtype_(cpp_arrs))
+}
+
+extern "C" mlx_vector_array_dtype mlx_vector_array_dtype_from_value(
+    const mlx_array_dtype val) {
+  RETURN_MLX_C_PTR(new mlx_vector_array_dtype_({MLX_CPP_ARRAY_DTYPE(val)}))
+}
+
+extern "C" void mlx_vector_array_dtype_add_data(
+    mlx_vector_array_dtype vec,
+    const mlx_array_dtype* data,
+    size_t size) {
+  MLX_TRY_CATCH(
+      for (size_t i = 0; i < size;
+           i++) { vec->ctx.push_back(MLX_CPP_ARRAY_DTYPE(data[i])); }, );
+}
+
+extern "C" void mlx_vector_array_dtype_add_value(
+    mlx_vector_array_dtype vec,
+    const mlx_array_dtype value) {
+  MLX_TRY_CATCH(vec->ctx.push_back(MLX_CPP_ARRAY_DTYPE(value));, )
+}
+
+extern "C" mlx_array_dtype mlx_vector_array_dtype_get(
+    mlx_vector_array_dtype vec,
+    size_t index) {
+  RETURN_MLX_C_ARRAY_DTYPE(vec->ctx.at(index));
+}
+
+extern "C" size_t mlx_vector_array_dtype_size(mlx_vector_array_dtype vec) {
+  return vec->ctx.size();
+}
+
+/**@}*/
