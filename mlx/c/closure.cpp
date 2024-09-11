@@ -257,3 +257,62 @@ extern "C" mlx_vector_array mlx_closure_custom_function_jvp_apply(
       auto cpp_res = cls->ctx(input_0->ctx, input_1->ctx, input_2->ctx);
       return new mlx_vector_array_(cpp_res), return nullptr);
 }
+
+mlx_string_* mlx_closure_custom_function_vmap_::tostring() {
+  RETURN_MLX_C_STRING(
+      "mlx_tuple_vector_array_vector_int mlx_closure(const mlx_vector_array, const mlx_vector_int, void*)");
+}
+
+extern "C" mlx_closure_custom_function_vmap
+mlx_closure_custom_function_vmap_new(mlx_tuple_vector_array_vector_int (
+    *fun)(const mlx_vector_array, const mlx_vector_int)) {
+  MLX_TRY_CATCH(
+      auto cpp_closure =
+          [fun](
+              const std::vector<mlx::core::array>& cpp_input_0,
+              const std::vector<int>& cpp_input_1) {
+            auto input_0 = new mlx_vector_array_(cpp_input_0);
+            auto input_1 = new mlx_vector_int_(cpp_input_1);
+            auto res = fun(input_0, input_1);
+            mlx_free(input_0);
+            mlx_free(input_1);
+            auto cpp_res = res->ctx;
+            mlx_free(res);
+            return cpp_res;
+          };
+      return new mlx_closure_custom_function_vmap_(cpp_closure),
+             return nullptr);
+}
+
+extern "C" mlx_closure_custom_function_vmap
+mlx_closure_custom_function_vmap_new_with_payload(
+    mlx_tuple_vector_array_vector_int (
+        *fun)(const mlx_vector_array, const mlx_vector_int, void*),
+    void* payload,
+    void (*dtor)(void*)) {
+  auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+  auto cpp_closure = [fun, cpp_payload, dtor](
+                         const std::vector<mlx::core::array>& cpp_input_0,
+                         const std::vector<int>& cpp_input_1) {
+    auto input_0 = new mlx_vector_array_(cpp_input_0);
+    auto input_1 = new mlx_vector_int_(cpp_input_1);
+    auto res = fun(input_0, input_1, cpp_payload.get());
+    mlx_free(input_0);
+    mlx_free(input_1);
+    auto cpp_res = res->ctx;
+    mlx_free(res);
+    return cpp_res;
+  };
+  MLX_TRY_CATCH(return new mlx_closure_custom_function_vmap_(cpp_closure),
+                       return nullptr);
+}
+
+extern "C" mlx_tuple_vector_array_vector_int
+mlx_closure_custom_function_vmap_apply(
+    mlx_closure_custom_function_vmap cls,
+    const mlx_vector_array input_0,
+    const mlx_vector_int input_1) {
+  MLX_TRY_CATCH(auto cpp_res = cls->ctx(input_0->ctx, input_1->ctx);
+                return new mlx_tuple_vector_array_vector_int_(cpp_res),
+                       return nullptr);
+}

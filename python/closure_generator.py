@@ -278,4 +278,17 @@ print(
         ],
     )
 )
+print(
+    generate(
+        code,
+        "mlx_closure_custom_function_vmap",
+        "mlx_tuple_vector_array_vector_int",
+        "std::pair<std::vector<mlx::core::array>, std::vector<int>>",
+        ["mlx_vector_array", "mlx_vector_int"],
+        [
+            "std::vector<mlx::core::array>",
+            "std::vector<int>",
+        ],
+    )
+)
 print(end)

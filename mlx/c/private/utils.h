@@ -157,8 +157,6 @@ static mlx_array_dtype mlx_c_dtypes[] = {
   (std::tuple<int, int, int>((i0), (i1), (i2)))
 #define MLX_CPP_READER(f) (std::make_shared<CFILEReader>(f))
 #define MLX_CPP_WRITER(f) (std::make_shared<CFILEWriter>(f))
-#define MLX_CPP_CLOSURE(f) ((f)->ctx)
-#define MLX_CPP_CLOSURE_CUSTOM_FUNCTION(f) ((f)->ctx)
 #define MLX_CPP_MAP_STRING_TO_ARRAY(map) ((map)->ctx)
 #define MLX_CPP_MAP_STRING_TO_STRING(map) ((map)->ctx)
 #define MLX_CPP_STRING(str) ((str)->ctx)

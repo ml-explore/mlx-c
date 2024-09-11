@@ -37,7 +37,7 @@ mlx::core::CompileMode to_cpp_type(mlx_compile_mode type) {
 }
 } // namespace
 extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
-  RETURN_MLX_C_CLOSURE(mlx::core::compile(MLX_CPP_CLOSURE(fun), shapeless));
+  RETURN_MLX_C_CLOSURE(mlx::core::compile((fun)->ctx, shapeless));
 }
 extern "C" void mlx_disable_compile() {
   RETURN_MLX_C_VOID(mlx::core::disable_compile());

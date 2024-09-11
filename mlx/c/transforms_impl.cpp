@@ -25,7 +25,7 @@ extern "C" mlx_closure mlx_detail_compile(
     const uint64_t* constants,
     size_t num_constants) {
   RETURN_MLX_C_CLOSURE(mlx::core::detail::compile(
-      MLX_CPP_CLOSURE(fun),
+      (fun)->ctx,
       fun_id,
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
@@ -57,7 +57,7 @@ extern "C" mlx_tuple_vector_array_vector_array mlx_detail_vmap_trace(
     const int* in_axes,
     size_t num_in_axes) {
   RETURN_MLX_C_VECTORARRAYPAIR(mlx::core::detail::vmap_trace(
-      MLX_CPP_CLOSURE(fun),
+      (fun)->ctx,
       MLX_CPP_ARRVEC(inputs),
       MLX_CPP_INTVEC(in_axes, num_in_axes)));
 }

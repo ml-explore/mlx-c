@@ -85,6 +85,22 @@ mlx_vector_array mlx_closure_custom_function_jvp_apply(
     const mlx_vector_array input_1,
     const mlx_vector_int input_2);
 
+typedef struct mlx_closure_custom_function_vmap_*
+    mlx_closure_custom_function_vmap;
+mlx_closure_custom_function_vmap mlx_closure_custom_function_vmap_new(
+    mlx_tuple_vector_array_vector_int (
+        *fun)(const mlx_vector_array, const mlx_vector_int));
+mlx_closure_custom_function_vmap
+mlx_closure_custom_function_vmap_new_with_payload(
+    mlx_tuple_vector_array_vector_int (
+        *fun)(const mlx_vector_array, const mlx_vector_int, void*),
+    void* payload,
+    void (*dtor)(void*));
+mlx_tuple_vector_array_vector_int mlx_closure_custom_function_vmap_apply(
+    mlx_closure_custom_function_vmap cls,
+    const mlx_vector_array input_0,
+    const mlx_vector_int input_1);
+
 /**@}*/
 
 #ifdef __cplusplus

@@ -344,13 +344,13 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                 cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
             elif pti == "std::function<std::vector<array>(std::vector<array>)>":
                 c_call.append("mlx_closure " + pni)
-                cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
+                cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
             ):
                 c_call.append("mlx_closure_custom_function " + pni)
-                cpp_call.append("MLX_CPP_CLOSURE_CUSTOM_FUNCTION(" + pni + ")")
+                cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>>"
@@ -360,7 +360,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                     "("
                     + pni
                     + " ? std::make_optional("
-                    + "MLX_CPP_CLOSURE_CUSTOM_FUNCTION("
+                    + "("
                     + pni
                     + ")"
                     + "->ctx) : std::nullopt)"
@@ -370,7 +370,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                 == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>"
             ):
                 c_call.append("mlx_closure_custom_function_jvp " + pni)
-                cpp_call.append("MLX_CPP_CLOSURE_CUSTOM_FUNCTION_JVP(" + pni + ")")
+                cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>>"
@@ -380,7 +380,27 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                     "("
                     + pni
                     + " ? std::make_optional("
-                    + "MLX_CPP_CLOSURE_CUSTOM_FUNCTION_JVP("
+                    + "("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
+            elif (
+                pti
+                == "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>"
+            ):
+                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                cpp_call.append("(" + pni + ")->ctx")
+            elif (
+                pti
+                == "std::optional<std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "("
                     + pni
                     + ")"
                     + "->ctx) : std::nullopt)"

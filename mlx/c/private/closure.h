@@ -62,4 +62,17 @@ struct mlx_closure_custom_function_jvp_ : mlx_object_ {
       ctx;
 };
 
+struct mlx_closure_custom_function_vmap_ : mlx_object_ {
+  mlx_closure_custom_function_vmap_(
+      std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(
+          const std::vector<mlx::core::array>&,
+          const std::vector<int>&)> ctx)
+      : mlx_object_(), ctx(ctx){};
+  virtual mlx_string_* tostring() override;
+  std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(
+      const std::vector<mlx::core::array>&,
+      const std::vector<int>&)>
+      ctx;
+};
+
 #endif
