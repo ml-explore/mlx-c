@@ -59,13 +59,13 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(
     size_t size) {
   std::vector<CPPTYPE> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back(CTX(data[i]));
+    cpp_arrs.push_back(C_TO_CPP(data[i]));
   }
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_(cpp_arrs))
 }
 
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_value(const CTYPE val) {
-  RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_({CTX(val)}))
+  RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_({C_TO_CPP(val)}))
 }
 
 extern "C" void mlx_vector_SCTYPE_add_data(
@@ -74,17 +74,17 @@ extern "C" void mlx_vector_SCTYPE_add_data(
     size_t size) {
   MLX_TRY_CATCH(
       for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back(CTX(data[i])); }, );
+           i++) { vec->ctx.push_back(C_TO_CPP(data[i])); }, );
 }
 
 extern "C" void mlx_vector_SCTYPE_add_value(
     mlx_vector_SCTYPE vec,
     const CTYPE value) {
-  MLX_TRY_CATCH(vec->ctx.push_back(CTX(value));, )
+  MLX_TRY_CATCH(vec->ctx.push_back(C_TO_CPP(value));, )
 }
 
 extern "C" CTYPE mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index) {
-   NEW(vec->ctx.at(index));
+   RETURN_CPP_TO_C(vec->ctx.at(index));
 }
 
 extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
@@ -114,12 +114,19 @@ struct mlx_vector_SCTYPE_ : mlx_object_ {
 """
 
 
-def generate(code, cpptype, ctype, sctype, ctx, new):
+def generate(
+    code,
+    cpptype,
+    ctype,
+    sctype,
+    c_to_cpp=lambda s: s + "->ctx",
+    return_cpp_to_c=lambda s: "RETURN_MLX_C_PTR(new CTYPE_(" + s + "))",
+):
+    code = replace_match_parenthesis(code, "C_TO_CPP", c_to_cpp)
+    code = replace_match_parenthesis(code, "RETURN_CPP_TO_C", return_cpp_to_c)
     code = code.replace("SCTYPE", sctype)
     code = code.replace("CPPTYPE", cpptype)
     code = code.replace("CTYPE", ctype)
-    code = replace_match_parenthesis(code, "CTX", ctx)
-    code = replace_match_parenthesis(code, "NEW", new)
     return code
 
 
@@ -200,8 +207,6 @@ print(
         "mlx::core::array",
         "mlx_array",
         "array",
-        lambda s: s + "->ctx",
-        lambda s: "RETURN_MLX_C_PTR(new mlx_array_(" + s + "))",
     )
 )
 print(
@@ -210,8 +215,6 @@ print(
         "std::vector<mlx::core::array>",
         "mlx_vector_array",
         "vector_array",
-        lambda s: s + "->ctx",
-        lambda s: "RETURN_MLX_C_PTR(new mlx_vector_array_(" + s + "))",
     )
 )
 print(
@@ -230,8 +233,6 @@ print(
         "std::vector<int>",
         "mlx_vector_int",
         "vector_int",
-        lambda s: s + "->ctx",
-        lambda s: "RETURN_MLX_C_PTR(new mlx_vector_int_(" + s + "))",
     )
 )
 print(
@@ -240,8 +241,6 @@ print(
         "std::string",
         "mlx_string",
         "string",
-        lambda s: s + "->ctx",
-        lambda s: "RETURN_MLX_C_PTR(new mlx_string_(" + s + "))",
     )
 )
 print(
