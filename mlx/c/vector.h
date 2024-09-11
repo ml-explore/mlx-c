@@ -65,6 +65,27 @@ size_t mlx_vector_int_size(mlx_vector_int vec);
 int mlx_vector_int_get(mlx_vector_int vec, size_t idx);
 int* mlx_vector_int_data(mlx_vector_int vec);
 
+/**
+ * A vector of vector_int.
+ */
+typedef struct mlx_vector_vector_int_* mlx_vector_vector_int;
+mlx_vector_vector_int mlx_vector_vector_int_new();
+mlx_vector_vector_int mlx_vector_vector_int_from_data(
+    const mlx_vector_int* data,
+    size_t size);
+mlx_vector_vector_int mlx_vector_vector_int_from_value(
+    const mlx_vector_int val);
+void mlx_vector_vector_int_add_data(
+    mlx_vector_vector_int vec,
+    const mlx_vector_int* data,
+    size_t size);
+void mlx_vector_vector_int_add_value(
+    mlx_vector_vector_int vec,
+    const mlx_vector_int val);
+size_t mlx_vector_vector_int_size(mlx_vector_vector_int vec);
+mlx_vector_int mlx_vector_vector_int_get(mlx_vector_vector_int vec, size_t idx);
+mlx_vector_int* mlx_vector_vector_int_data(mlx_vector_vector_int vec);
+
 #ifdef __cplusplus
 }
 #endif
