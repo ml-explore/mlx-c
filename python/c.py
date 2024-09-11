@@ -365,6 +365,26 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                     + ")"
                     + "->ctx) : std::nullopt)"
                 )
+            elif (
+                pti
+                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>"
+            ):
+                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                cpp_call.append("MLX_CPP_CLOSURE_CUSTOM_FUNCTION_JVP(" + pni + ")")
+            elif (
+                pti
+                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "MLX_CPP_CLOSURE_CUSTOM_FUNCTION_JVP("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
             elif pti == "std::unordered_map<std::string, array>":
                 c_call.append("mlx_map_string_to_array " + pni)
                 cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
