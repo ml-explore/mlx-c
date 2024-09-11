@@ -1,9 +1,13 @@
 /* Copyright © 2023-2024 Apple Inc. */
+/*                                                    */
+/* This file is auto-generated. Do not edit manually. */
+/*                                                    */
 
 #ifndef MLX_CLOSURE_H
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
 
 #ifdef __cplusplus
@@ -16,68 +20,35 @@ extern "C" {
  */
 /**@{*/
 
-/**
- * A closure encapsulating a function taking a vector of arrays, and
- * returning a vector of arrays
- */
 typedef struct mlx_closure_* mlx_closure;
-
-/**
- * Returns a closure encapsulating the specified function.
- */
-mlx_closure mlx_closure_new(
-    mlx_vector_array (*fun)(const mlx_vector_array arrs));
-/**
- * Returns a closure encapsulating the specified function.
- * This is a convenience function, mapping `mlx_array` to `mlx_vector_array`
- * under the hood.
- */
-mlx_closure mlx_closure_new_unary(mlx_array (*fun)(const mlx_array));
-/**
- * Returns a closure encapsulating the specified function, with the given
- * payload. If `dtor` is not `NULL`, it will called when the closure is
- * destroyed to free the payload.
- */
+mlx_closure mlx_closure_new(mlx_vector_array (*fun)(const mlx_vector_array));
 mlx_closure mlx_closure_new_with_payload(
     mlx_vector_array (*fun)(const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*));
-/**
- * Applies the closure over the given vector of arrays argument.
- */
-mlx_vector_array mlx_closure_apply(mlx_closure cls, const mlx_vector_array);
+mlx_vector_array mlx_closure_apply(
+    mlx_closure cls,
+    const mlx_vector_array input);
 
-/**
- * A closure which takes a vector of arrays, and returns a vector of vector of
- * arrays of size 2.
- */
+mlx_closure mlx_closure_new_unary(mlx_array (*fun)(const mlx_array));
+
 typedef struct mlx_closure_value_and_grad_* mlx_closure_value_and_grad;
-/**
- * Applies the closure over the given vector of arrays argument.
- */
-mlx_vector_vector_array mlx_closure_value_and_grad_apply(
+mlx_closure_value_and_grad mlx_closure_value_and_grad_new(
+    mlx_tuple_vector_array_vector_array (*fun)(const mlx_vector_array));
+mlx_closure_value_and_grad mlx_closure_value_and_grad_new_with_payload(
+    mlx_tuple_vector_array_vector_array (*fun)(const mlx_vector_array, void*),
+    void* payload,
+    void (*dtor)(void*));
+mlx_tuple_vector_array_vector_array mlx_closure_value_and_grad_apply(
     mlx_closure_value_and_grad cls,
-    const mlx_vector_array inputs);
+    const mlx_vector_array input);
 
-/**
- * A closure encapsulating a function taking a three vector of arrays, and
- * returning a vector of arrays
- */
 typedef struct mlx_closure_custom_function_* mlx_closure_custom_function;
-
-/**
- * Returns a closure encapsulating the specified function.
- */
 mlx_closure_custom_function mlx_closure_custom_function_new(
     mlx_vector_array (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
         const mlx_vector_array));
-/**
- * Returns a closure encapsulating the specified function, with the given
- * payload. If `dtor` is not `NULL`, it will called when the closure is
- * destroyed to free the payload.
- */
 mlx_closure_custom_function mlx_closure_custom_function_new_with_payload(
     mlx_vector_array (*fun)(
         const mlx_vector_array,
@@ -86,55 +57,33 @@ mlx_closure_custom_function mlx_closure_custom_function_new_with_payload(
         void*),
     void* payload,
     void (*dtor)(void*));
-/**
- * Applies the closure over the given vector of arrays argument.
- */
 mlx_vector_array mlx_closure_custom_function_apply(
     mlx_closure_custom_function cls,
-    const mlx_vector_array arr1,
-    const mlx_vector_array arr2,
-    const mlx_vector_array arr3);
+    const mlx_vector_array input_0,
+    const mlx_vector_array input_1,
+    const mlx_vector_array input_2);
 
-/**
- * A closure encapsulating a function taking a two vector of arrays and a vector
- * of int, and returning a vector of arrays
- */
 typedef struct mlx_closure_custom_function_jvp_*
     mlx_closure_custom_function_jvp;
-
-/**
- * Returns a closure encapsulating the specified function.
- */
 mlx_closure_custom_function_jvp mlx_closure_custom_function_jvp_new(
     mlx_vector_array (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
-        const int*,
-        size_t));
-/**
- * Returns a closure encapsulating the specified function, with the given
- * payload. If `dtor` is not `NULL`, it will called when the closure is
- * destroyed to free the payload.
- */
+        const mlx_vector_int));
 mlx_closure_custom_function_jvp
 mlx_closure_custom_function_jvp_new_with_payload(
     mlx_vector_array (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
-        const int*,
-        size_t,
+        const mlx_vector_int,
         void*),
     void* payload,
     void (*dtor)(void*));
-/**
- * Applies the closure over the given vector of arrays argument.
- */
 mlx_vector_array mlx_closure_custom_function_jvp_apply(
     mlx_closure_custom_function_jvp cls,
-    const mlx_vector_array arr1,
-    const mlx_vector_array arr2,
-    const int* idx,
-    size_t idx_size);
+    const mlx_vector_array input_0,
+    const mlx_vector_array input_1,
+    const mlx_vector_int input_2);
 
 /**@}*/
 
