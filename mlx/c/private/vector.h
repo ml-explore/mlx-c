@@ -81,4 +81,20 @@ struct mlx_vector_vector_int_ : mlx_object_ {
   std::vector<std::vector<int>> ctx;
 };
 
+struct mlx_vector_string_ : mlx_object_ {
+  mlx_vector_string_() : mlx_object_(){};
+  mlx_vector_string_(const std::vector<std::string>& ctx)
+      : mlx_object_(), ctx(ctx){};
+  mlx_vector_string_(std::vector<std::string>&& ctx)
+      : mlx_object_(), ctx(std::move(ctx)){};
+  mlx_vector_string_(const std::pair<std::string, std::string>& ctx)
+      : mlx_object_(), ctx({ctx.first, ctx.second}){};
+  mlx_vector_string_(
+      const std::tuple<std::string, std::string, std::string>& ctx)
+      : mlx_object_(),
+        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
+  virtual mlx_string_* tostring() override;
+  std::vector<std::string> ctx;
+};
+
 #endif

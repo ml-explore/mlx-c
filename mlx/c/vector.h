@@ -86,6 +86,24 @@ size_t mlx_vector_vector_int_size(mlx_vector_vector_int vec);
 mlx_vector_int mlx_vector_vector_int_get(mlx_vector_vector_int vec, size_t idx);
 mlx_vector_int* mlx_vector_vector_int_data(mlx_vector_vector_int vec);
 
+/**
+ * A vector of string.
+ */
+typedef struct mlx_vector_string_* mlx_vector_string;
+mlx_vector_string mlx_vector_string_new();
+mlx_vector_string mlx_vector_string_from_data(
+    const mlx_string* data,
+    size_t size);
+mlx_vector_string mlx_vector_string_from_value(const mlx_string val);
+void mlx_vector_string_add_data(
+    mlx_vector_string vec,
+    const mlx_string* data,
+    size_t size);
+void mlx_vector_string_add_value(mlx_vector_string vec, const mlx_string val);
+size_t mlx_vector_string_size(mlx_vector_string vec);
+mlx_string mlx_vector_string_get(mlx_vector_string vec, size_t idx);
+mlx_string* mlx_vector_string_data(mlx_vector_string vec);
+
 #ifdef __cplusplus
 }
 #endif

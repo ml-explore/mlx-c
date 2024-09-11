@@ -234,4 +234,14 @@ print(
         lambda s: "RETURN_MLX_C_PTR(new mlx_vector_int_(" + s + "))",
     )
 )
+print(
+    generate(
+        code,
+        "std::string",
+        "mlx_string",
+        "string",
+        lambda s: s + "->ctx",
+        lambda s: "RETURN_MLX_C_PTR(new mlx_string_(" + s + "))",
+    )
+)
 print(end)
