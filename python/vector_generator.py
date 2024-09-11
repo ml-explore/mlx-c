@@ -14,7 +14,7 @@ def replace_match_parenthesis(string, keyword, fun):
     pos = 0
     for m in pattern.finditer(string):
         res.append(string[pos : m.start()])
-        res.append(fun(m[1]))
+        res.append(fun(m[1][1:-1]))
         pos = m.end()
     res.append(string[pos:])
     return "".join(res)
@@ -114,15 +114,7 @@ struct mlx_vector_SCTYPE_ : mlx_object_ {
 """
 
 
-def definition(ctype, sctype):
-    code = decl_code
-    code = code.replace("SCTYPE", sctype)
-    code = code.replace("CTYPE", ctype)
-    return code
-
-
-def implementation(cpptype, ctype, sctype, ctx, new):
-    code = impl_code
+def generate(code, cpptype, ctype, sctype, ctx, new):
     code = code.replace("SCTYPE", sctype)
     code = code.replace("CPPTYPE", cpptype)
     code = code.replace("CTYPE", ctype)
@@ -131,14 +123,7 @@ def implementation(cpptype, ctype, sctype, ctx, new):
     return code
 
 
-def private(cpptype, sctype):
-    code = priv_code
-    code = code.replace("SCTYPE", sctype)
-    code = code.replace("CPPTYPE", cpptype)
-    return code
-
-
-define_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -154,7 +139,7 @@ extern "C" {
 #endif
 """
 
-define_end = """
+decl_end = """
 #ifdef __cplusplus
 }
 #endif
@@ -196,44 +181,47 @@ priv_end = """
 """
 
 if args.implementation:
-    print(impl_begin)
-    print(
-        implementation(
-            "mlx::core::array",
-            "mlx_array",
-            "array",
-            lambda s: s + "->ctx",
-            lambda s: "RETURN_MLX_C_PTR(new mlx_array_(" + s + "))",
-        )
-    )
-    print(
-        implementation(
-            "std::vector<mlx::core::array>",
-            "mlx_vector_array",
-            "vector_array",
-            lambda s: s + "->ctx",
-            lambda s: "RETURN_MLX_C_PTR(new mlx_vector_array_(" + s + "))",
-        )
-    )
-    print(
-        implementation(
-            "int",
-            "int",
-            "int",
-            lambda s: s,
-            lambda s: "return " + s,
-        )
-    )
-    print(impl_end)
+    code = impl_code
+    begin = impl_begin
+    end = impl_end
 elif args.private:
-    print(priv_begin)
-    print(private("mlx::core::array", "array"))
-    print(private("std::vector<mlx::core::array>", "vector_array"))
-    print(private("int", "int"))
-    print(priv_end)
+    code = priv_code
+    begin = priv_begin
+    end = priv_end
 else:
-    print(define_begin)
-    print(definition("mlx_array", "array"))
-    print(definition("mlx_vector_array", "vector_array"))
-    print(definition("int", "int"))
-    print(define_end)
+    code = decl_code
+    begin = decl_begin
+    end = decl_end
+
+print(begin)
+print(
+    generate(
+        code,
+        "mlx::core::array",
+        "mlx_array",
+        "array",
+        lambda s: s + "->ctx",
+        lambda s: "RETURN_MLX_C_PTR(new mlx_array_(" + s + "))",
+    )
+)
+print(
+    generate(
+        code,
+        "std::vector<mlx::core::array>",
+        "mlx_vector_array",
+        "vector_array",
+        lambda s: s + "->ctx",
+        lambda s: "RETURN_MLX_C_PTR(new mlx_vector_array_(" + s + "))",
+    )
+)
+print(
+    generate(
+        code,
+        "int",
+        "int",
+        "int",
+        lambda s: s,
+        lambda s: "return " + s,
+    )
+)
+print(end)

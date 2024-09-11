@@ -32,13 +32,13 @@ extern "C" mlx_vector_array mlx_vector_array_from_data(
     size_t size) {
   std::vector<mlx::core::array> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back((data[i])->ctx);
+    cpp_arrs.push_back(data[i]->ctx);
   }
   RETURN_MLX_C_PTR(new mlx_vector_array_(cpp_arrs))
 }
 
 extern "C" mlx_vector_array mlx_vector_array_from_value(const mlx_array val) {
-  RETURN_MLX_C_PTR(new mlx_vector_array_({(val)->ctx}))
+  RETURN_MLX_C_PTR(new mlx_vector_array_({val->ctx}))
 }
 
 extern "C" void mlx_vector_array_add_data(
@@ -47,17 +47,17 @@ extern "C" void mlx_vector_array_add_data(
     size_t size) {
   MLX_TRY_CATCH(
       for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back((data[i])->ctx); }, );
+           i++) { vec->ctx.push_back(data[i]->ctx); }, );
 }
 
 extern "C" void mlx_vector_array_add_value(
     mlx_vector_array vec,
     const mlx_array value) {
-  MLX_TRY_CATCH(vec->ctx.push_back((value)->ctx);, )
+  MLX_TRY_CATCH(vec->ctx.push_back(value->ctx);, )
 }
 
 extern "C" mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index) {
-  RETURN_MLX_C_PTR(new mlx_array_((vec->ctx.at(index))));
+  RETURN_MLX_C_PTR(new mlx_array_(vec->ctx.at(index)));
 }
 
 extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
@@ -89,14 +89,14 @@ extern "C" mlx_vector_vector_array mlx_vector_vector_array_from_data(
     size_t size) {
   std::vector<std::vector<mlx::core::array>> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back((data[i])->ctx);
+    cpp_arrs.push_back(data[i]->ctx);
   }
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_(cpp_arrs))
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_from_value(
     const mlx_vector_array val) {
-  RETURN_MLX_C_PTR(new mlx_vector_vector_array_({(val)->ctx}))
+  RETURN_MLX_C_PTR(new mlx_vector_vector_array_({val->ctx}))
 }
 
 extern "C" void mlx_vector_vector_array_add_data(
@@ -105,19 +105,19 @@ extern "C" void mlx_vector_vector_array_add_data(
     size_t size) {
   MLX_TRY_CATCH(
       for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back((data[i])->ctx); }, );
+           i++) { vec->ctx.push_back(data[i]->ctx); }, );
 }
 
 extern "C" void mlx_vector_vector_array_add_value(
     mlx_vector_vector_array vec,
     const mlx_vector_array value) {
-  MLX_TRY_CATCH(vec->ctx.push_back((value)->ctx);, )
+  MLX_TRY_CATCH(vec->ctx.push_back(value->ctx);, )
 }
 
 extern "C" mlx_vector_array mlx_vector_vector_array_get(
     mlx_vector_vector_array vec,
     size_t index) {
-  RETURN_MLX_C_PTR(new mlx_vector_array_((vec->ctx.at(index))));
+  RETURN_MLX_C_PTR(new mlx_vector_array_(vec->ctx.at(index)));
 }
 
 extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec) {
@@ -149,27 +149,27 @@ extern "C" mlx_vector_int mlx_vector_int_from_data(
     size_t size) {
   std::vector<int> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back((data[i]));
+    cpp_arrs.push_back(data[i]);
   }
   RETURN_MLX_C_PTR(new mlx_vector_int_(cpp_arrs))
 }
 
 extern "C" mlx_vector_int mlx_vector_int_from_value(const int val) {
-  RETURN_MLX_C_PTR(new mlx_vector_int_({(val)}))
+  RETURN_MLX_C_PTR(new mlx_vector_int_({val}))
 }
 
 extern "C" void
 mlx_vector_int_add_data(mlx_vector_int vec, const int* data, size_t size) {
   MLX_TRY_CATCH(
-      for (size_t i = 0; i < size; i++) { vec->ctx.push_back((data[i])); }, );
+      for (size_t i = 0; i < size; i++) { vec->ctx.push_back(data[i]); }, );
 }
 
 extern "C" void mlx_vector_int_add_value(mlx_vector_int vec, const int value) {
-  MLX_TRY_CATCH(vec->ctx.push_back((value));, )
+  MLX_TRY_CATCH(vec->ctx.push_back(value);, )
 }
 
 extern "C" int mlx_vector_int_get(mlx_vector_int vec, size_t index) {
-  return (vec->ctx.at(index));
+  return vec->ctx.at(index);
 }
 
 extern "C" size_t mlx_vector_int_size(mlx_vector_int vec) {
