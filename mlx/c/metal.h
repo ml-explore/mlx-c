@@ -26,7 +26,7 @@ extern "C" {
  */
 /**@{*/
 void mlx_metal_clear_cache();
-mlx_map_string_to_string_size_t_variant mlx_metal_device_info();
+mlx_map_string_to_variant_string_size_t mlx_metal_device_info();
 size_t mlx_metal_get_active_memory();
 size_t mlx_metal_get_cache_memory();
 size_t mlx_metal_get_peak_memory();

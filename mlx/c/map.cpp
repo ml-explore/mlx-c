@@ -164,55 +164,55 @@ extern "C" mlx_string mlx_map_string_to_string_iterator_value(
   }
 }
 
-mlx_string_* mlx_map_string_to_string_size_t_variant_::tostring() {
+mlx_string_* mlx_map_string_to_variant_string_size_t_::tostring() {
   MLX_TRY_CATCH(
-      return new mlx_string_("mlx_map_string_to_string_size_t_variant"),
+      return new mlx_string_("mlx_map_string_to_variant_string_size_t"),
              return nullptr);
 }
 
-mlx_string_* mlx_map_string_to_string_size_t_variant_iterator_::tostring() {
+mlx_string_* mlx_map_string_to_variant_string_size_t_iterator_::tostring() {
   MLX_TRY_CATCH(return new mlx_string_(
-                           "mlx_map_string_to_string_size_t_variant_iterator"),
+                           "mlx_map_string_to_variant_string_size_t_iterator"),
                        return nullptr);
 }
 
-extern "C" mlx_map_string_to_string_size_t_variant
-mlx_map_string_to_string_size_t_variant_new(void) {
-  MLX_TRY_CATCH(return new mlx_map_string_to_string_size_t_variant_(),
+extern "C" mlx_map_string_to_variant_string_size_t
+mlx_map_string_to_variant_string_size_t_new(void) {
+  MLX_TRY_CATCH(return new mlx_map_string_to_variant_string_size_t_(),
                        return nullptr);
 }
 
-extern "C" bool mlx_map_string_to_string_size_t_variant_insert(
-    mlx_map_string_to_string_size_t_variant map,
+extern "C" bool mlx_map_string_to_variant_string_size_t_insert(
+    mlx_map_string_to_variant_string_size_t map,
     const mlx_string key,
-    const mlx_string_size_t_variant value) {
+    const mlx_variant_string_size_t value) {
   MLX_TRY_CATCH(
       auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
       return res.second, return false);
 }
 
-extern "C" mlx_string_size_t_variant
-mlx_map_string_to_string_size_t_variant_get(
-    mlx_map_string_to_string_size_t_variant map,
+extern "C" mlx_variant_string_size_t
+mlx_map_string_to_variant_string_size_t_get(
+    mlx_map_string_to_variant_string_size_t map,
     const mlx_string key) {
   auto search = map->ctx.find(key->ctx);
   if (search == map->ctx.end()) {
     return nullptr;
   } else {
-    return new mlx_string_size_t_variant_(search->second);
+    return new mlx_variant_string_size_t_(search->second);
   }
 }
 
-extern "C" mlx_map_string_to_string_size_t_variant_iterator
-mlx_map_string_to_string_size_t_variant_iterate(
-    mlx_map_string_to_string_size_t_variant map) {
+extern "C" mlx_map_string_to_variant_string_size_t_iterator
+mlx_map_string_to_variant_string_size_t_iterate(
+    mlx_map_string_to_variant_string_size_t map) {
   MLX_TRY_CATCH(
-      return new mlx_map_string_to_string_size_t_variant_iterator_(map),
+      return new mlx_map_string_to_variant_string_size_t_iterator_(map),
              return nullptr);
 }
 
-extern "C" bool mlx_map_string_to_string_size_t_variant_iterator_next(
-    mlx_map_string_to_string_size_t_variant_iterator it) {
+extern "C" bool mlx_map_string_to_variant_string_size_t_iterator_next(
+    mlx_map_string_to_variant_string_size_t_iterator it) {
   it->ctx++;
   if (it->ctx == it->map->ctx.end()) {
     return false;
@@ -221,8 +221,8 @@ extern "C" bool mlx_map_string_to_string_size_t_variant_iterator_next(
   }
 }
 
-extern "C" bool mlx_map_string_to_string_size_t_variant_iterator_end(
-    mlx_map_string_to_string_size_t_variant_iterator it) {
+extern "C" bool mlx_map_string_to_variant_string_size_t_iterator_end(
+    mlx_map_string_to_variant_string_size_t_iterator it) {
   if (it->ctx == it->map->ctx.end()) {
     return true;
   } else {
@@ -230,8 +230,8 @@ extern "C" bool mlx_map_string_to_string_size_t_variant_iterator_end(
   }
 }
 
-extern "C" mlx_string mlx_map_string_to_string_size_t_variant_iterator_key(
-    mlx_map_string_to_string_size_t_variant_iterator it) {
+extern "C" mlx_string mlx_map_string_to_variant_string_size_t_iterator_key(
+    mlx_map_string_to_variant_string_size_t_iterator it) {
   if (it->ctx == it->map->ctx.end()) {
     return nullptr;
   } else {
@@ -239,12 +239,12 @@ extern "C" mlx_string mlx_map_string_to_string_size_t_variant_iterator_key(
   }
 }
 
-extern "C" mlx_string_size_t_variant
-mlx_map_string_to_string_size_t_variant_iterator_value(
-    mlx_map_string_to_string_size_t_variant_iterator it) {
+extern "C" mlx_variant_string_size_t
+mlx_map_string_to_variant_string_size_t_iterator_value(
+    mlx_map_string_to_variant_string_size_t_iterator it) {
   if (it->ctx == it->map->ctx.end()) {
     return nullptr;
   } else {
-    return new mlx_string_size_t_variant_(it->ctx->second);
+    return new mlx_variant_string_size_t_(it->ctx->second);
   }
 }

@@ -54,26 +54,26 @@ struct mlx_map_string_to_string_iterator_ : mlx_object_ {
   }
 };
 
-struct mlx_map_string_to_string_size_t_variant_ : mlx_object_ {
-  mlx_map_string_to_string_size_t_variant_() : mlx_object_(){};
-  mlx_map_string_to_string_size_t_variant_(
+struct mlx_map_string_to_variant_string_size_t_ : mlx_object_ {
+  mlx_map_string_to_variant_string_size_t_() : mlx_object_(){};
+  mlx_map_string_to_variant_string_size_t_(
       std::unordered_map<std::string, std::variant<std::string, size_t>>&& ctx)
       : mlx_object_(), ctx(ctx){};
   virtual mlx_string_* tostring() override;
   std::unordered_map<std::string, std::variant<std::string, size_t>> ctx;
 };
 
-struct mlx_map_string_to_string_size_t_variant_iterator_ : mlx_object_ {
-  mlx_map_string_to_string_size_t_variant_iterator_(
-      mlx_map_string_to_string_size_t_variant_* map)
+struct mlx_map_string_to_variant_string_size_t_iterator_ : mlx_object_ {
+  mlx_map_string_to_variant_string_size_t_iterator_(
+      mlx_map_string_to_variant_string_size_t_* map)
       : mlx_object_(), map(map), ctx(map->ctx.begin()) {
     mlx_retain(map);
   };
   virtual mlx_string_* tostring() override;
-  mlx_map_string_to_string_size_t_variant_* map;
+  mlx_map_string_to_variant_string_size_t_* map;
   std::unordered_map<std::string, std::variant<std::string, size_t>>::iterator
       ctx;
-  virtual ~mlx_map_string_to_string_size_t_variant_iterator_() {
+  virtual ~mlx_map_string_to_variant_string_size_t_iterator_() {
     mlx_free(map);
   }
 };

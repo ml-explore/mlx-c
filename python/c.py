@@ -230,7 +230,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             return_t
             == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
         ):
-            signature.append("mlx_map_string_to_string_size_t_variant")
+            signature.append("mlx_map_string_to_variant_string_size_t")
         elif return_t == "SafetensorsLoad":
             signature.append("mlx_safetensors")
         elif return_t == "std::string":
