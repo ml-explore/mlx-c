@@ -69,4 +69,16 @@ struct mlx_tuple_int_int_int_ : mlx_object_ {
   std::tuple<int, int, int> ctx;
 };
 
+struct mlx_tuple_string_variant_int_bool_array_dtype_ : mlx_object_ {
+  mlx_tuple_string_variant_int_bool_array_dtype_(
+      std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>&& ctx)
+      : mlx_object_(), ctx(std::move(ctx)){};
+  mlx_tuple_string_variant_int_bool_array_dtype_(
+      const std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>&
+          ctx)
+      : mlx_object_(), ctx(ctx){};
+  virtual mlx_string_* tostring() override;
+  std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>> ctx;
+};
+
 #endif

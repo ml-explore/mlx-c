@@ -130,6 +130,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 
 #include "mlx/c/array.h"
 #include "mlx/c/string.h"
+#include "mlx/c/variant.h"
 #include "mlx/c/vector.h"
 
 #ifdef __cplusplus
@@ -162,6 +163,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/variant.h"
 #include "mlx/c/private/vector.h"
 
 """
@@ -231,6 +233,14 @@ print(
         ["int"] * 3,
         ["int"] * 3,
         [True] * 3,
+    )
+)
+print(
+    generate(
+        code,
+        code_get,
+        ["mlx_string", "mlx_variant_int_bool_array_dtype"],
+        ["std::string", "std::variant<int, bool, mlx::core::Dtype>"],
     )
 )
 print(end)

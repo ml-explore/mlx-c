@@ -8,6 +8,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/string.h"
+#include "mlx/c/variant.h"
 #include "mlx/c/vector.h"
 
 #ifdef __cplusplus
@@ -84,6 +85,22 @@ mlx_tuple_int_int_int mlx_tuple_int_int_int_new(
 int mlx_tuple_int_int_int_get_0(mlx_tuple_int_int_int tuple);
 int mlx_tuple_int_int_int_get_1(mlx_tuple_int_int_int tuple);
 int mlx_tuple_int_int_int_get_2(mlx_tuple_int_int_int tuple);
+
+/**
+ * A tuple of (const mlx_string, const mlx_variant_int_bool_array_dtype).
+ */
+typedef struct mlx_tuple_string_variant_int_bool_array_dtype_*
+    mlx_tuple_string_variant_int_bool_array_dtype;
+mlx_tuple_string_variant_int_bool_array_dtype
+mlx_tuple_string_variant_int_bool_array_dtype_new(
+    const mlx_string input_0,
+    const mlx_variant_int_bool_array_dtype input_1);
+
+mlx_string mlx_tuple_string_variant_int_bool_array_dtype_get_0(
+    mlx_tuple_string_variant_int_bool_array_dtype tuple);
+mlx_variant_int_bool_array_dtype
+mlx_tuple_string_variant_int_bool_array_dtype_get_1(
+    mlx_tuple_string_variant_int_bool_array_dtype tuple);
 
 /**@}*/
 

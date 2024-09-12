@@ -7,6 +7,7 @@
 #include "mlx/c/object.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/variant.h"
 #include "mlx/c/private/vector.h"
 
 mlx_string mlx_tuple_array_array_::tostring() {
@@ -124,4 +125,29 @@ extern "C" int mlx_tuple_int_int_int_get_1(mlx_tuple_int_int_int tuple) {
 
 extern "C" int mlx_tuple_int_int_int_get_2(mlx_tuple_int_int_int tuple) {
   return std::get<2>(tuple->ctx);
+}
+
+mlx_string mlx_tuple_string_variant_int_bool_array_dtype_::tostring() {
+  RETURN_MLX_C_STRING(
+      "mlx_tuple(const mlx_string, const mlx_variant_int_bool_array_dtype)");
+}
+
+extern "C" mlx_tuple_string_variant_int_bool_array_dtype
+mlx_tuple_string_variant_int_bool_array_dtype_new(
+    const mlx_string input_0,
+    const mlx_variant_int_bool_array_dtype input_1) {
+  RETURN_MLX_C_PTR(new mlx_tuple_string_variant_int_bool_array_dtype_(
+      std::make_pair(input_0->ctx, input_1->ctx)));
+}
+
+extern "C" mlx_string mlx_tuple_string_variant_int_bool_array_dtype_get_0(
+    mlx_tuple_string_variant_int_bool_array_dtype tuple) {
+  RETURN_MLX_C_PTR(new mlx_string_(std::get<0>(tuple->ctx)));
+}
+
+extern "C" mlx_variant_int_bool_array_dtype
+mlx_tuple_string_variant_int_bool_array_dtype_get_1(
+    mlx_tuple_string_variant_int_bool_array_dtype tuple) {
+  RETURN_MLX_C_PTR(
+      new mlx_variant_int_bool_array_dtype_(std::get<1>(tuple->ctx)));
 }
