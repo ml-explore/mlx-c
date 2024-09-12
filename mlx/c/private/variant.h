@@ -23,4 +23,15 @@ struct mlx_variant_string_size_t_ : mlx_object_ {
   std::variant<std::string, size_t> ctx;
 };
 
+struct mlx_variant_int_bool_array_dtype_ : mlx_object_ {
+  mlx_variant_int_bool_array_dtype_(
+      const std::variant<int, bool, mlx::core::Dtype>& ctx)
+      : mlx_object_(), ctx(ctx){};
+  mlx_variant_int_bool_array_dtype_(
+      const std::variant<int, bool, mlx::core::Dtype>&& ctx)
+      : mlx_object_(), ctx(std::move(ctx)){};
+  virtual mlx_string_* tostring() override;
+  std::variant<int, bool, mlx::core::Dtype> ctx;
+};
+
 #endif

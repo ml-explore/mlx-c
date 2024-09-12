@@ -222,4 +222,16 @@ print(
         [None, lambda s: "return " + s],
     )
 )
+print(
+    generate(
+        code,
+        code_new,
+        code_get,
+        code_holds,
+        ["int", "bool", "mlx_array_dtype"],
+        ["int", "bool", "mlx::core::Dtype"],
+        [lambda s: s, lambda s: s, lambda s: "MLX_CPP_ARRAY_DTYPE(" + s + ")"],
+        [lambda s: "return " + s, lambda s: "return " + s, lambda s: "RETURN_MLX_C_ARRAY_DTYPE(" + s + ")"],
+    )
+)
 print(end)
