@@ -6,6 +6,7 @@
 #include "mlx/c/closure.h"
 #include "mlx/c/object.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
@@ -51,8 +52,7 @@ extern "C" mlx_closure mlx_closure_new_with_payload(
 extern "C" mlx_vector_array mlx_closure_apply(
     mlx_closure cls,
     const mlx_vector_array input) {
-  MLX_TRY_CATCH(auto cpp_res = cls->ctx(input->ctx);
-                return new mlx_vector_array_(cpp_res), return nullptr);
+  RETURN_MLX_C_PTR(new mlx_vector_array_(cls->ctx(input->ctx)));
 }
 
 extern "C" mlx_closure mlx_closure_new_unary(
@@ -115,9 +115,8 @@ mlx_closure_value_and_grad_new_with_payload(
 extern "C" mlx_tuple_vector_array_vector_array mlx_closure_value_and_grad_apply(
     mlx_closure_value_and_grad cls,
     const mlx_vector_array input) {
-  MLX_TRY_CATCH(auto cpp_res = cls->ctx(input->ctx);
-                return new mlx_tuple_vector_array_vector_array_(cpp_res),
-                       return nullptr);
+  RETURN_MLX_C_PTR(
+      new mlx_tuple_vector_array_vector_array_(cls->ctx(input->ctx)));
 }
 
 mlx_string_* mlx_closure_custom_function_::tostring() {
@@ -184,9 +183,8 @@ extern "C" mlx_vector_array mlx_closure_custom_function_apply(
     const mlx_vector_array input_0,
     const mlx_vector_array input_1,
     const mlx_vector_array input_2) {
-  MLX_TRY_CATCH(
-      auto cpp_res = cls->ctx(input_0->ctx, input_1->ctx, input_2->ctx);
-      return new mlx_vector_array_(cpp_res), return nullptr);
+  RETURN_MLX_C_PTR(new mlx_vector_array_(
+      cls->ctx(input_0->ctx, input_1->ctx, input_2->ctx)));
 }
 
 mlx_string_* mlx_closure_custom_function_jvp_::tostring() {
@@ -253,9 +251,8 @@ extern "C" mlx_vector_array mlx_closure_custom_function_jvp_apply(
     const mlx_vector_array input_0,
     const mlx_vector_array input_1,
     const mlx_vector_int input_2) {
-  MLX_TRY_CATCH(
-      auto cpp_res = cls->ctx(input_0->ctx, input_1->ctx, input_2->ctx);
-      return new mlx_vector_array_(cpp_res), return nullptr);
+  RETURN_MLX_C_PTR(new mlx_vector_array_(
+      cls->ctx(input_0->ctx, input_1->ctx, input_2->ctx)));
 }
 
 mlx_string_* mlx_closure_custom_function_vmap_::tostring() {
@@ -312,7 +309,6 @@ mlx_closure_custom_function_vmap_apply(
     mlx_closure_custom_function_vmap cls,
     const mlx_vector_array input_0,
     const mlx_vector_int input_1) {
-  MLX_TRY_CATCH(auto cpp_res = cls->ctx(input_0->ctx, input_1->ctx);
-                return new mlx_tuple_vector_array_vector_int_(cpp_res),
-                       return nullptr);
+  RETURN_MLX_C_PTR(new mlx_tuple_vector_array_vector_int_(
+      cls->ctx(input_0->ctx, input_1->ctx)));
 }

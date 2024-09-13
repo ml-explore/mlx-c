@@ -7,6 +7,7 @@
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/stream.h"
 #include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
 

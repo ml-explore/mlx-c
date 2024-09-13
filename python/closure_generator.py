@@ -1,11 +1,25 @@
 import argparse
 import regex
 import string
+import mlxtypes as mt
 
 parser = argparse.ArgumentParser("MLX C closure code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
 parser.add_argument("--private", default=False, action="store_true")
 args = parser.parse_args()
+
+
+def replace_match_parenthesis(string, keyword, fun):
+    pattern = regex.compile(keyword + r"(\((?:[^()]++|(?1))++\))")
+    res = []
+    pos = 0
+    for m in pattern.finditer(string):
+        res.append(string[pos : m.start()])
+        res.append(fun(m[1][1:-1]))
+        pos = m.end()
+    res.append(string[pos:])
+    return "".join(res)
+
 
 decl_code = """
 typedef struct NAME_* NAME;
@@ -18,50 +32,57 @@ RCARG NAME_apply(NAME cls, CARGS_TYPE_NAME);
 """
 
 
-def generate(code, name, rcarg, rcpparg, cargs, cppargs):
-    assert len(cargs) == len(cppargs)
+def generate(code, name, rctype, ctypes):
     cargs_name = []
     cargs_type_name = []
-    # cppargs_name = []
     cppargs_type_name = []
     cppargs_to_cargs = []
     cargs_free = []
     cargs_ctx = []
-    for i in range(len(cargs)):
-        carg = cargs[i]
-        cpparg = cppargs[i]
-        suffix = "_" + str(i) if len(cargs) > 1 else ""
+    for i in range(len(ctypes)):
+        ctype = mt.ctypes[ctypes[i]]
+        cpparg = ctype["cpp"]
+        suffix = "_" + str(i) if len(ctypes) > 1 else ""
         cargs_name.append("input" + suffix)
-        # cppargs_name.append("cpp_input" + suffix)
-        cargs_type_name.append("const " + carg + " input" + suffix)
-        cppargs_type_name.append("const " + cpparg + "& cpp_input" + suffix)
+        cargs_type_name.append(ctype["c_arg"]("input" + suffix))
+        cppargs_type_name.append(ctype["cpp_arg"]("cpp_input" + suffix))
         cppargs_to_cargs.append(
-            "auto input" + suffix + " = new " + carg + "_(cpp_input" + suffix + ");"
+            "auto input"
+            + suffix
+            + " = "
+            + ctype["cpp_to_c"]("cpp_input" + suffix)
+            + ";"
         )
-        cargs_free.append("mlx_free(input" + suffix + ");")
-        cargs_ctx.append("input" + suffix + "->ctx")
+        cargs_free.append(ctype["free"]("input" + suffix) + ";")
+        cargs_ctx.append(ctype["c_to_cpp"]("input" + suffix))
 
     cargs_name = ", ".join(cargs_name)
-    # cppargs_name = ", ".join(cppargs_name)
     cargs_type_name = ", ".join(cargs_type_name)
     cppargs_type_name = ", ".join(cppargs_type_name)
     cppargs_to_cargs = "\n".join(cppargs_to_cargs)
     cargs_free = "\n".join(cargs_free)
     cargs_ctx = ", ".join(cargs_ctx)
-    cargs = ", ".join(["const " + carg for carg in cargs])
-    cppargs = ", ".join(["const " + cpparg + "&" for cpparg in cppargs])
+    cppargs = ", ".join([mt.ctypes[ctype]["cpp_arg"]("") for ctype in ctypes])
+    cargs = " ".join([mt.ctypes[ctype]["c_arg"]("") for ctype in ctypes])
 
+    code = replace_match_parenthesis(
+        code,
+        "RETURN_CPP_TO_C",
+        lambda s: mt.ctypes[rctype]["return"](mt.ctypes[rctype]["cpp_to_c"](s)),
+    )
     code = code.replace("CARGS_TYPE_NAME", cargs_type_name)
     code = code.replace("CPPARGS_TYPE_NAME", cppargs_type_name)
     code = code.replace("CPPARGS_TO_CARGS", cppargs_to_cargs)
     code = code.replace("CARGS_FREE", cargs_free)
     code = code.replace("CARGS_NAME", cargs_name)
     code = code.replace("CARGS_CTX", cargs_ctx)
-    code = code.replace("CARGS", cargs)
+    code = code.replace(
+        "CARGS", ", ".join([mt.ctypes[ctype]["c_arg"]("") for ctype in ctypes])
+    )
     code = code.replace("CPPARGS", cppargs)
     code = code.replace("NAME", name)
-    code = code.replace("RCARG", rcarg)
-    code = code.replace("RCPPARG", rcpparg)
+    code = code.replace("RCARG", mt.ctypes[rctype]["c"])
+    code = code.replace("RCPPARG", mt.ctypes[rctype]["cpp"])
 
     return code
 
@@ -106,8 +127,7 @@ extern "C" NAME NAME_new_with_payload(
 extern "C" RCARG NAME_apply(
     NAME cls,
     CARGS_TYPE_NAME) {
-  MLX_TRY_CATCH(auto cpp_res = cls->ctx(CARGS_CTX);
-                return new RCARG_(cpp_res), return nullptr);
+  RETURN_CPP_TO_C(cls->ctx(CARGS_CTX));
 }
 """
 
@@ -129,6 +149,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/stream.h"
 #include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
 
@@ -161,6 +182,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/closure.h"
 #include "mlx/c/object.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
@@ -209,9 +231,7 @@ print(
         code,
         "mlx_closure",
         "mlx_vector_array",
-        "std::vector<mlx::core::array>",
         ["mlx_vector_array"],
-        ["std::vector<mlx::core::array>"],
     )
 )
 if args.implementation:
@@ -249,9 +269,7 @@ print(
         code,
         "mlx_closure_value_and_grad",
         "mlx_tuple_vector_array_vector_array",
-        "std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>",
         ["mlx_vector_array"],
-        ["std::vector<mlx::core::array>"],
     )
 )
 print(
@@ -259,9 +277,7 @@ print(
         code,
         "mlx_closure_custom_function",
         "mlx_vector_array",
-        "std::vector<mlx::core::array>",
         ["mlx_vector_array"] * 3,
-        ["std::vector<mlx::core::array>"] * 3,
     )
 )
 print(
@@ -269,13 +285,7 @@ print(
         code,
         "mlx_closure_custom_function_jvp",
         "mlx_vector_array",
-        "std::vector<mlx::core::array>",
         ["mlx_vector_array", "mlx_vector_array", "mlx_vector_int"],
-        [
-            "std::vector<mlx::core::array>",
-            "std::vector<mlx::core::array>",
-            "std::vector<int>",
-        ],
     )
 )
 print(
@@ -283,12 +293,7 @@ print(
         code,
         "mlx_closure_custom_function_vmap",
         "mlx_tuple_vector_array_vector_int",
-        "std::pair<std::vector<mlx::core::array>, std::vector<int>>",
         ["mlx_vector_array", "mlx_vector_int"],
-        [
-            "std::vector<mlx::core::array>",
-            "std::vector<int>",
-        ],
     )
 )
 print(end)
