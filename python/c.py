@@ -318,6 +318,9 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             elif pti == "std::vector<array>":
                 c_call.append("const mlx_vector_array " + pni)
                 cpp_call.append("MLX_CPP_ARRVEC(" + pni + ")")
+            elif pti == "std::vector<std::string>":
+                c_call.append("const mlx_vector_string " + pni)
+                cpp_call.append("MLX_CPP_STRINGVEC(" + pni + ")")
             elif pti == "std::pair<int, int>":
                 c_call.append("int f_" + pni)
                 c_call.append("int s_" + pni)

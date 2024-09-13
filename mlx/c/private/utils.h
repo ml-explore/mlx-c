@@ -152,6 +152,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_SIZEVEC(vals, size) \
   (std::vector<size_t>((vals), (vals) + (size)))
 #define MLX_CPP_ARRVEC(vec) ((vec)->ctx)
+#define MLX_CPP_STRINGVEC(vec) ((vec)->ctx)
 #define MLX_CPP_INTPAIR(f, s) (std::pair<int, int>((f), (s)))
 #define MLX_CPP_INTTUPLE3(i0, i1, i2) \
   (std::tuple<int, int, int>((i0), (i1), (i2)))
