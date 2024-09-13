@@ -54,6 +54,35 @@ for ctype in ["float", "bool"]:
             "cpp_arg": lambda s, ctype=ctype: (ctype + " " + s).strip(),
         }
     )
+    types.append(
+        {
+            "c": "mlx_optional_" + ctype,
+            "cpp": "std::optional<" + ctype + ">",
+            "free": lambda s: "",
+            "cpp_to_c": lambda s, ctype=ctype: "("
+            + s
+            + ".has_value() ? mlx_optional_"
+            + ctype
+            + "_"
+            + "({"
+            + s
+            + ".value(), true}) : mlx_optional_"
+            + ctype
+            + "_({0, false}))",
+            "c_to_cpp": lambda s, ctype=ctype: "("
+            + s
+            + ".has_value ? std::make_optional<"
+            + ctype
+            + ">("
+            + s
+            + ".value) : std::nullopt)",
+            "return": lambda s: "return" + s,
+            "c_arg": lambda s, ctype=ctype: ("mlx_optional_" + ctype + " " + s).strip(),
+            "cpp_arg": lambda s, ctype=ctype: (
+                "std::optional<" + ctype + "> " + s
+            ).strip(),
+        }
+    )
 
 ctypes = {}
 for t in types:

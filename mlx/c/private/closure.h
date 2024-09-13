@@ -85,7 +85,7 @@ struct mlx_closure_metal_kernel_function_ : mlx_object_ {
           const std::tuple<int, int, int>&,
           const std::vector<
               std::pair<std::string, mlx::core::fast::TemplateArg>>&,
-          float,
+          std::optional<float>,
           bool,
           const mlx::core::Stream&)> ctx)
       : mlx_object_(), ctx(ctx){};
@@ -97,7 +97,7 @@ struct mlx_closure_metal_kernel_function_ : mlx_object_ {
       const std::tuple<int, int, int>&,
       const std::tuple<int, int, int>&,
       const std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>&,
-      float,
+      std::optional<float>,
       bool,
       const mlx::core::Stream&)>
       ctx;

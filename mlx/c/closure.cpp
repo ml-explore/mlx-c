@@ -315,7 +315,7 @@ mlx_closure_custom_function_vmap_apply(
 
 mlx_string_* mlx_closure_metal_kernel_function_::tostring() {
   RETURN_MLX_C_STRING(
-      "mlx_vector_array mlx_closure(const mlx_vector_array, const mlx_vector_vector_int, const mlx_vector_array_dtype, const mlx_tuple_int_int_int, const mlx_tuple_int_int_int, const mlx_vector_tuple_string_variant_int_bool_array_dtype, float, bool, const mlx_stream, void*)");
+      "mlx_vector_array mlx_closure(const mlx_vector_array, const mlx_vector_vector_int, const mlx_vector_array_dtype, const mlx_tuple_int_int_int, const mlx_tuple_int_int_int, const mlx_vector_tuple_string_variant_int_bool_array_dtype, mlx_optional_float, bool, const mlx_stream, void*)");
 }
 
 extern "C" mlx_closure_metal_kernel_function
@@ -326,7 +326,7 @@ mlx_closure_metal_kernel_function_new(mlx_vector_array (*fun)(
     const mlx_tuple_int_int_int,
     const mlx_tuple_int_int_int,
     const mlx_vector_tuple_string_variant_int_bool_array_dtype,
-    float,
+    mlx_optional_float,
     bool,
     const mlx_stream)) {
   MLX_TRY_CATCH(
@@ -340,7 +340,7 @@ mlx_closure_metal_kernel_function_new(mlx_vector_array (*fun)(
               const std::vector<
                   std::pair<std::string, mlx::core::fast::TemplateArg>>&
                   cpp_input_5,
-              float cpp_input_6,
+              std::optional<float> cpp_input_6,
               bool cpp_input_7,
               const mlx::core::Stream& cpp_input_8) {
             auto input_0 = new mlx_vector_array_(cpp_input_0);
@@ -351,7 +351,10 @@ mlx_closure_metal_kernel_function_new(mlx_vector_array (*fun)(
             auto input_5 =
                 new mlx_vector_tuple_string_variant_int_bool_array_dtype_(
                     cpp_input_5);
-            auto input_6 = cpp_input_6;
+            auto input_6 =
+                (cpp_input_6.has_value()
+                     ? mlx_optional_float_({cpp_input_6.value(), true})
+                     : mlx_optional_float_({0, false}));
             auto input_7 = cpp_input_7;
             auto input_8 = new mlx_stream_(cpp_input_8);
             auto res =
@@ -390,7 +393,7 @@ mlx_closure_metal_kernel_function_new_with_payload(
         const mlx_tuple_int_int_int,
         const mlx_tuple_int_int_int,
         const mlx_vector_tuple_string_variant_int_bool_array_dtype,
-        float,
+        mlx_optional_float,
         bool,
         const mlx_stream,
         void*),
@@ -407,7 +410,7 @@ mlx_closure_metal_kernel_function_new_with_payload(
           const std::vector<
               std::pair<std::string, mlx::core::fast::TemplateArg>>&
               cpp_input_5,
-          float cpp_input_6,
+          std::optional<float> cpp_input_6,
           bool cpp_input_7,
           const mlx::core::Stream& cpp_input_8) {
         auto input_0 = new mlx_vector_array_(cpp_input_0);
@@ -418,7 +421,10 @@ mlx_closure_metal_kernel_function_new_with_payload(
         auto input_5 =
             new mlx_vector_tuple_string_variant_int_bool_array_dtype_(
                 cpp_input_5);
-        auto input_6 = cpp_input_6;
+        auto input_6 =
+            (cpp_input_6.has_value()
+                 ? mlx_optional_float_({cpp_input_6.value(), true})
+                 : mlx_optional_float_({0, false}));
         auto input_7 = cpp_input_7;
         auto input_8 = new mlx_stream_(cpp_input_8);
         auto res =
@@ -457,7 +463,7 @@ extern "C" mlx_vector_array mlx_closure_metal_kernel_function_apply(
     const mlx_tuple_int_int_int input_3,
     const mlx_tuple_int_int_int input_4,
     const mlx_vector_tuple_string_variant_int_bool_array_dtype input_5,
-    float input_6,
+    mlx_optional_float input_6,
     bool input_7,
     const mlx_stream input_8) {
   RETURN_MLX_C_PTR(new mlx_vector_array_(cls->ctx(
@@ -467,7 +473,8 @@ extern "C" mlx_vector_array mlx_closure_metal_kernel_function_apply(
       input_3->ctx,
       input_4->ctx,
       input_5->ctx,
-      input_6,
+      (input_6.has_value ? std::make_optional<float>(input_6.value)
+                         : std::nullopt),
       input_7,
       input_8->ctx)));
 }

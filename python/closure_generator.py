@@ -149,6 +149,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
@@ -308,7 +309,7 @@ print(
             "mlx_tuple_int_int_int",
             "mlx_tuple_int_int_int",
             "mlx_vector_tuple_string_variant_int_bool_array_dtype",
-            "float",
+            "mlx_optional_float",
             "bool",
             "mlx_stream",
         ],

@@ -7,6 +7,7 @@
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
@@ -112,7 +113,7 @@ mlx_closure_metal_kernel_function mlx_closure_metal_kernel_function_new(
         const mlx_tuple_int_int_int,
         const mlx_tuple_int_int_int,
         const mlx_vector_tuple_string_variant_int_bool_array_dtype,
-        float,
+        mlx_optional_float,
         bool,
         const mlx_stream));
 mlx_closure_metal_kernel_function
@@ -124,7 +125,7 @@ mlx_closure_metal_kernel_function_new_with_payload(
         const mlx_tuple_int_int_int,
         const mlx_tuple_int_int_int,
         const mlx_vector_tuple_string_variant_int_bool_array_dtype,
-        float,
+        mlx_optional_float,
         bool,
         const mlx_stream,
         void*),
@@ -138,7 +139,7 @@ mlx_vector_array mlx_closure_metal_kernel_function_apply(
     const mlx_tuple_int_int_int input_3,
     const mlx_tuple_int_int_int input_4,
     const mlx_vector_tuple_string_variant_int_bool_array_dtype input_5,
-    float input_6,
+    mlx_optional_float input_6,
     bool input_7,
     const mlx_stream input_8);
 
