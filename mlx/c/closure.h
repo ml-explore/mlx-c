@@ -102,6 +102,46 @@ mlx_tuple_vector_array_vector_int mlx_closure_custom_function_vmap_apply(
     const mlx_vector_array input_0,
     const mlx_vector_int input_1);
 
+typedef struct mlx_closure_metal_kernel_function_*
+    mlx_closure_metal_kernel_function;
+mlx_closure_metal_kernel_function mlx_closure_metal_kernel_function_new(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_vector_int,
+        const mlx_vector_array_dtype,
+        const mlx_tuple_int_int_int,
+        const mlx_tuple_int_int_int,
+        const mlx_vector_tuple_string_variant_int_bool_array_dtype,
+        float,
+        bool,
+        const mlx_stream));
+mlx_closure_metal_kernel_function
+mlx_closure_metal_kernel_function_new_with_payload(
+    mlx_vector_array (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_vector_int,
+        const mlx_vector_array_dtype,
+        const mlx_tuple_int_int_int,
+        const mlx_tuple_int_int_int,
+        const mlx_vector_tuple_string_variant_int_bool_array_dtype,
+        float,
+        bool,
+        const mlx_stream,
+        void*),
+    void* payload,
+    void (*dtor)(void*));
+mlx_vector_array mlx_closure_metal_kernel_function_apply(
+    mlx_closure_metal_kernel_function cls,
+    const mlx_vector_array input_0,
+    const mlx_vector_vector_int input_1,
+    const mlx_vector_array_dtype input_2,
+    const mlx_tuple_int_int_int input_3,
+    const mlx_tuple_int_int_int input_4,
+    const mlx_vector_tuple_string_variant_int_bool_array_dtype input_5,
+    float input_6,
+    bool input_7,
+    const mlx_stream input_8);
+
 /**@}*/
 
 #ifdef __cplusplus

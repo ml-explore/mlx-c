@@ -217,6 +217,8 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             signature.append("mlx_closure")
         elif return_t == "ValueAndGradFn":
             signature.append("mlx_closure_value_and_grad")
+        elif return_t == "MetalKernelFunction":
+            signature.append("mlx_closure_metal_kernel_function")
         elif (
             return_t
             == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
@@ -465,6 +467,8 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
             cpp_code.append("RETURN_MLX_C_CLOSURE")
         elif return_t == "ValueAndGradFn":
             cpp_code.append("RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD")
+        elif return_t == "MetalKernelFunction":
+            cpp_code.append("RETURN_MLX_C_CLOSURE_METAL_KERNEL_FUNCTION")
         elif return_t == "std::unordered_map<std::string, array>":
             cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_ARRAY")
         elif return_t == "std::unordered_map<std::string, std::string>":

@@ -45,6 +45,14 @@ mlx_array mlx_fast_layer_norm(
     mlx_array bias,
     float eps,
     mlx_stream s);
+mlx_closure_metal_kernel_function mlx_fast_metal_kernel(
+    mlx_string name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    mlx_string source,
+    mlx_string header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs);
 mlx_array
 mlx_fast_rms_norm(mlx_array x, mlx_array weight, float eps, mlx_stream s);
 mlx_array mlx_fast_rope(

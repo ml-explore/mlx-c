@@ -75,4 +75,32 @@ struct mlx_closure_custom_function_vmap_ : mlx_object_ {
       ctx;
 };
 
+struct mlx_closure_metal_kernel_function_ : mlx_object_ {
+  mlx_closure_metal_kernel_function_(
+      std::function<std::vector<mlx::core::array>(
+          const std::vector<mlx::core::array>&,
+          const std::vector<std::vector<int>>&,
+          const std::vector<mlx::core::Dtype>&,
+          const std::tuple<int, int, int>&,
+          const std::tuple<int, int, int>&,
+          const std::vector<
+              std::pair<std::string, mlx::core::fast::TemplateArg>>&,
+          float,
+          bool,
+          const mlx::core::Stream&)> ctx)
+      : mlx_object_(), ctx(ctx){};
+  virtual mlx_string_* tostring() override;
+  std::function<std::vector<mlx::core::array>(
+      const std::vector<mlx::core::array>&,
+      const std::vector<std::vector<int>>&,
+      const std::vector<mlx::core::Dtype>&,
+      const std::tuple<int, int, int>&,
+      const std::tuple<int, int, int>&,
+      const std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>&,
+      float,
+      bool,
+      const mlx::core::Stream&)>
+      ctx;
+};
+
 #endif

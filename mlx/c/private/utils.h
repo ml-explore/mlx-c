@@ -181,6 +181,8 @@ static mlx_array_dtype mlx_c_dtypes[] = {
   RETURN_MLX_C_PTR(new mlx_tuple_vector_array_vector_array_(apair))
 #define RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD(f) \
   RETURN_MLX_C_PTR(new mlx_closure_value_and_grad_(f))
+#define RETURN_MLX_C_CLOSURE_METAL_KERNEL_FUNCTION(f) \
+  RETURN_MLX_C_PTR(new mlx_closure_metal_kernel_function_(f))
 #define RETURN_MLX_C_CLOSURE_CUSTOM_FUNCTION(closure) \
   RETURN_MLX_C_PTR(new mlx_closure_custom_function_(closure))
 #define RETURN_MLX_C_MAP_STRING_TO_ARRAY(map) \

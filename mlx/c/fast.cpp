@@ -51,6 +51,23 @@ extern "C" mlx_array mlx_fast_layer_norm(
       eps,
       s->ctx));
 }
+extern "C" mlx_closure_metal_kernel_function mlx_fast_metal_kernel(
+    mlx_string name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    mlx_string source,
+    mlx_string header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs) {
+  RETURN_MLX_C_CLOSURE_METAL_KERNEL_FUNCTION(mlx::core::fast::metal_kernel(
+      MLX_CPP_STRING(name),
+      MLX_CPP_STRINGVEC(input_names),
+      MLX_CPP_STRINGVEC(output_names),
+      MLX_CPP_STRING(source),
+      MLX_CPP_STRING(header),
+      ensure_row_contiguous,
+      atomic_outputs));
+}
 extern "C" mlx_array
 mlx_fast_rms_norm(mlx_array x, mlx_array weight, float eps, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
