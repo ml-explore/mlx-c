@@ -129,6 +129,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_TUPLE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/map.h"
 #include "mlx/c/string.h"
 #include "mlx/c/variant.h"
 #include "mlx/c/vector.h"
@@ -160,6 +161,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
 
 #include "mlx/c/object.h"
+#include "mlx/c/private/map.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
@@ -241,6 +243,17 @@ print(
         code_get,
         ["mlx_string", "mlx_variant_int_bool_array_dtype"],
         ["std::string", "std::variant<int, bool, mlx::core::Dtype>"],
+    )
+)
+print(
+    generate(
+        code,
+        code_get,
+        ["mlx_map_string_to_array", "mlx_map_string_to_string"],
+        [
+            "std::unordered_map<std::string, mlx::core::array>",
+            "std::unordered_map<std::string, std::string>",
+        ],
     )
 )
 print(end)

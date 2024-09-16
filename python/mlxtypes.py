@@ -3,7 +3,18 @@ import string
 types = []
 
 for t in [
-    ["mlx_vector_array", "std::vector<mlx::core::array>"],
+    ["mlx_array", "mlx::core::array", "array"],
+    ["mlx_vector_array", "std::vector<mlx::core::array>", "std::vector<array>"],
+    [
+        "mlx_tuple_array_array",
+        "std::pair<mlx::core::array, mlx::core::array>",
+        "std::pair<array, array>",
+    ],
+    [
+        "mlx_tuple_array_array_array",
+        "std::tuple<mlx::core::array, mlx::core::array, mlx::core::array>",
+        "std::tuple<array, array, array>",
+    ],
     [
         "mlx_tuple_vector_array_vector_array",
         "std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>",
@@ -24,12 +35,40 @@ for t in [
         "mlx_stream",
         "mlx::core::Stream",
     ],
+    [
+        "mlx_map_string_to_variant_string_size_t",
+        "std::unordered_map<std::string, std::variant<std::string, size_t>>",
+    ],
+    [
+        "mlx_closure",
+        "std::function<std::vector<array>(std::vector<array>)>",
+    ],
+    [
+        "mlx_closure_value_and_grad",
+        "mlx::core::fast::ValueAndGradFn",
+        "ValueAndGradFn",
+    ],
+    [
+        "mlx_closure_metal_kernel_function",
+        "mlx::core::fast::MetalKernelFunction",
+        "MetalKernelFunction",
+    ],
+    [
+        "mlx_tuple_vector_array_vector_array",
+        "std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>",
+        "std::pair<std::vector<array>, std::vector<array>>",
+    ],
 ]:
-    ctype, cpptype = t
+    if len(t) == 2:
+        ctype, cpptype = t
+        alt = None
+    else:
+        ctype, cpptype, alt = t
     types.append(
         {
             "c": ctype,
             "cpp": cpptype,
+            "alt": alt,
             "free": lambda s: "mlx_free(" + s + ")",
             "cpp_to_c": lambda s, ctype=ctype: "new " + ctype + "_(" + s + ")",
             "c_to_cpp": lambda s: s + "->ctx",
@@ -41,11 +80,12 @@ for t in [
         }
     )
 
-for ctype in ["float", "bool"]:
+for ctype in ["void", "size_t", "float", "bool"]:
     types.append(
         {
             "c": ctype,
             "cpp": ctype,
+            "alt": None,
             "free": lambda s: "",
             "cpp_to_c": lambda s: s,
             "c_to_cpp": lambda s: s,
@@ -58,6 +98,7 @@ for ctype in ["float", "bool"]:
         {
             "c": "mlx_optional_" + ctype,
             "cpp": "std::optional<" + ctype + ">",
+            "alt": None,
             "free": lambda s: "",
             "cpp_to_c": lambda s, ctype=ctype: "("
             + s
@@ -85,6 +126,15 @@ for ctype in ["float", "bool"]:
     )
 
 ctypes = {}
+cpptypes = {}
+alttypes = {}
 for t in types:
     ctype = t["c"]
     ctypes[ctype] = t
+
+    cpptype = t["cpp"]
+    cpptypes[cpptype] = t
+
+    alttype = t["alt"]
+    if alttype:
+        alttypes[alttype] = t

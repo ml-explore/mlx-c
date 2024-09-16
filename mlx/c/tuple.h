@@ -7,6 +7,7 @@
 #define MLX_TUPLE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/map.h"
 #include "mlx/c/string.h"
 #include "mlx/c/variant.h"
 #include "mlx/c/vector.h"
@@ -101,6 +102,23 @@ mlx_string mlx_tuple_string_variant_int_bool_array_dtype_get_0(
 mlx_variant_int_bool_array_dtype
 mlx_tuple_string_variant_int_bool_array_dtype_get_1(
     mlx_tuple_string_variant_int_bool_array_dtype tuple);
+
+/**
+ * A tuple of (const mlx_map_string_to_array, const mlx_map_string_to_string).
+ */
+typedef struct mlx_tuple_map_string_to_array_map_string_to_string_*
+    mlx_tuple_map_string_to_array_map_string_to_string;
+mlx_tuple_map_string_to_array_map_string_to_string
+mlx_tuple_map_string_to_array_map_string_to_string_new(
+    const mlx_map_string_to_array input_0,
+    const mlx_map_string_to_string input_1);
+
+mlx_map_string_to_array
+mlx_tuple_map_string_to_array_map_string_to_string_get_0(
+    mlx_tuple_map_string_to_array_map_string_to_string tuple);
+mlx_map_string_to_string
+mlx_tuple_map_string_to_array_map_string_to_string_get_1(
+    mlx_tuple_map_string_to_array_map_string_to_string tuple);
 
 /**@}*/
 

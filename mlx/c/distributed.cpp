@@ -21,15 +21,19 @@ extern "C" mlx_array mlx_distributed_all_gather(
     mlx_array x,
     mlx_distributed_group group,
     mlx_stream S) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_gather(
-      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt), S->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::distributed::all_gather(
+      x->ctx,
+      (group ? std::make_optional(group->ctx) : std::nullopt),
+      S->ctx))));
 }
 extern "C" mlx_array mlx_distributed_all_sum(
     mlx_array x,
     mlx_distributed_group group,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_sum(
-      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt), s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::distributed::all_sum(
+      x->ctx,
+      (group ? std::make_optional(group->ctx) : std::nullopt),
+      s->ctx))));
 }
 extern "C" mlx_array mlx_distributed_recv(
     const int* shape,
@@ -38,32 +42,32 @@ extern "C" mlx_array mlx_distributed_recv(
     int src,
     mlx_distributed_group group,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::recv(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::distributed::recv(
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       src,
       (group ? std::make_optional(group->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_distributed_recv_like(
     mlx_array x,
     int src,
     mlx_distributed_group group,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::recv_like(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::distributed::recv_like(
       x->ctx,
       src,
       (group ? std::make_optional(group->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_distributed_send(
     mlx_array x,
     int dst,
     mlx_distributed_group group,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::send(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::distributed::send(
       x->ctx,
       dst,
       (group ? std::make_optional(group->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }

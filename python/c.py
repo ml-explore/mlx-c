@@ -3,6 +3,8 @@
 import re
 import sys
 
+import mlxtypes as mt
+
 
 def to_snake_letters(name):
     name = re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
@@ -199,48 +201,16 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
         # print(f["return_t"])
         signature = []
         return_t = f["return_t"]
-        if return_t == "void":
-            signature.append("void")
-        elif return_t == "bool" or return_t == "size_t":
-            signature.append(return_t)
-        elif return_t == "array":
-            signature.append("mlx_array")
-        elif return_t == "std::vector<array>":
-            signature.append("mlx_vector_array")
-        elif return_t == "std::pair<array, array>":
-            signature.append("mlx_tuple_array_array")
-        elif return_t == "std::tuple<array, array, array>":
-            signature.append("mlx_tuple_array_array_array")
-        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
-            signature.append("mlx_tuple_vector_array_vector_array")
-        elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
-            signature.append("mlx_closure")
-        elif return_t == "ValueAndGradFn":
-            signature.append("mlx_closure_value_and_grad")
-        elif return_t == "MetalKernelFunction":
-            signature.append("mlx_closure_metal_kernel_function")
-        elif (
-            return_t
-            == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
-        ):
-            signature.append("mlx_closure_custom_function")
-        elif return_t == "std::unordered_map<std::string, array>":
-            signature.append("mlx_map_string_to_array")
-        elif return_t == "std::unordered_map<std::string, std::string>":
-            signature.append("mlx_map_string_to_string")
-        elif (
-            return_t
-            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
-        ):
-            signature.append("mlx_map_string_to_variant_string_size_t")
-        elif return_t == "SafetensorsLoad":
-            signature.append("mlx_safetensors")
-        elif return_t == "std::string":
-            signature.append("mlx_string")
+        if return_t in mt.cpptypes:
+            return_t = mt.cpptypes[return_t]
+        elif return_t in mt.alttypes:
+            return_t = mt.alttypes[return_t]
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
             continue
+
+        signature.append(return_t["c"])
         if "variant" in f:
             signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"])
         else:
@@ -455,50 +425,9 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
 
         c_code = [signature, ";"]
         cpp_code = ['extern "C"', signature, "{"]
-        if return_t == "void":
-            cpp_code.append("RETURN_MLX_C_VOID")
-        elif return_t == "bool" or return_t == "size_t":
-            cpp_code.append("return " + return_t)
-        elif return_t == "array":
-            cpp_code.append("RETURN_MLX_C_ARRAY")
-        elif return_t == "std::vector<array>":
-            cpp_code.append("RETURN_MLX_C_VECTOR_ARRAY")
-        elif return_t == "std::pair<array, array>":
-            cpp_code.append("RETURN_MLX_C_ARRAYPAIR")
-        elif return_t == "std::tuple<array, array, array>":
-            cpp_code.append("RETURN_MLX_C_ARRAYTUPLE3")
-        elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
-            cpp_code.append("RETURN_MLX_C_VECTORARRAYPAIR")
-        elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
-            cpp_code.append("RETURN_MLX_C_CLOSURE")
-        elif return_t == "ValueAndGradFn":
-            cpp_code.append("RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD")
-        elif return_t == "MetalKernelFunction":
-            cpp_code.append("RETURN_MLX_C_CLOSURE_METAL_KERNEL_FUNCTION")
-        elif return_t == "std::unordered_map<std::string, array>":
-            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_ARRAY")
-        elif return_t == "std::unordered_map<std::string, std::string>":
-            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING")
-        elif (
-            return_t
-            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
-        ):
-            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING_SIZE_T_VARIANT")
-        elif return_t == "SafetensorsLoad":
-            cpp_code.append("RETURN_MLX_C_SAFETENSORS")
-        elif return_t == "std::string":
-            cpp_code.append("RETURN_MLX_C_STRING")
-        else:
-            print("unsupported return type: " + return_t, file=sys.stderr)
-            print("skipping", f, file=sys.stderr)
-            continue
-
-        cpp_code.append("(")
-        cpp_code.append(namespace + "::" + f["name"])
-        cpp_code.append("(")
-        cpp_code.append(cpp_call)
-        cpp_code.append(")")
-        cpp_code.append(")")
+        cpp_call = ["(", namespace + "::" + f["name"], "(", cpp_call, ")", ")"]
+        cpp_call = "".join(cpp_call)
+        cpp_code.append(return_t["return"](return_t["cpp_to_c"](cpp_call)))
         cpp_code.append(";")
         cpp_code.append("}")
         if implementation:
