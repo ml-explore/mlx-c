@@ -24,11 +24,11 @@ extern "C" mlx_array mlx_random_bernoulli(
     size_t num_shape,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::bernoulli(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::bernoulli(
       p->ctx,
       MLX_CPP_INTVEC(shape, num_shape),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_bits(
     const int* shape,
@@ -36,11 +36,11 @@ extern "C" mlx_array mlx_random_bits(
     int width,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::bits(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::bits(
       MLX_CPP_INTVEC(shape, num_shape),
       width,
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_categorical_shape(
     mlx_array logits,
@@ -49,12 +49,12 @@ extern "C" mlx_array mlx_random_categorical_shape(
     size_t num_shape,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::categorical(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::categorical(
       logits->ctx,
       axis,
       MLX_CPP_INTVEC(shape, num_shape),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_categorical_num_samples(
     mlx_array logits_,
@@ -62,23 +62,23 @@ extern "C" mlx_array mlx_random_categorical_num_samples(
     int num_samples,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::categorical(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::categorical(
       logits_->ctx,
       axis,
       num_samples,
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_categorical(
     mlx_array logits,
     int axis,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::categorical(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::categorical(
       logits->ctx,
       axis,
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_gumbel(
     const int* shape,
@@ -86,14 +86,14 @@ extern "C" mlx_array mlx_random_gumbel(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::gumbel(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::gumbel(
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_key(uint64_t seed) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::key(seed));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::key(seed))));
 }
 extern "C" mlx_array mlx_random_laplace(
     const int* shape,
@@ -103,13 +103,13 @@ extern "C" mlx_array mlx_random_laplace(
     float scale,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::laplace(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::laplace(
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       loc,
       scale,
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_multivariate_normal(
     mlx_array mean,
@@ -119,13 +119,13 @@ extern "C" mlx_array mlx_random_multivariate_normal(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::multivariate_normal(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::multivariate_normal(
       mean->ctx,
       cov->ctx,
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_normal(
     const int* shape,
@@ -135,13 +135,13 @@ extern "C" mlx_array mlx_random_normal(
     float scale,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::normal(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::normal(
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       loc,
       scale,
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_randint(
     mlx_array low,
@@ -151,23 +151,25 @@ extern "C" mlx_array mlx_random_randint(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::randint(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::randint(
       low->ctx,
       high->ctx,
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" void mlx_random_seed(uint64_t seed) {
-  RETURN_MLX_C_VOID(mlx::core::random::seed(seed));
+  return (mlx::core::random::seed(seed));
 }
 extern "C" mlx_array
 mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::split(key->ctx, num, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::random::split(key->ctx, num, s->ctx))));
 }
 extern "C" mlx_tuple_array_array mlx_random_split(mlx_array key, mlx_stream s) {
-  RETURN_MLX_C_ARRAYPAIR(mlx::core::random::split(key->ctx, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_tuple_array_array_((mlx::core::random::split(key->ctx, s->ctx))));
 }
 extern "C" mlx_array mlx_random_truncated_normal(
     mlx_array lower,
@@ -177,13 +179,13 @@ extern "C" mlx_array mlx_random_truncated_normal(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::truncated_normal(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::truncated_normal(
       lower->ctx,
       upper->ctx,
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_random_uniform(
     mlx_array low,
@@ -193,11 +195,11 @@ extern "C" mlx_array mlx_random_uniform(
     mlx_array_dtype dtype,
     mlx_array key,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::random::uniform(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::random::uniform(
       low->ctx,
       high->ctx,
       MLX_CPP_INTVEC(shape, num_shape),
       MLX_CPP_ARRAY_DTYPE(dtype),
       (key ? std::make_optional(key->ctx) : std::nullopt),
-      s->ctx));
+      s->ctx))));
 }

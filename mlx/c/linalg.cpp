@@ -20,14 +20,16 @@
 
 extern "C" mlx_array
 mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::cholesky(a->ctx, upper, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::linalg::cholesky(a->ctx, upper, s->ctx))));
 }
 extern "C" mlx_array
 mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::cholesky_inv(a->ctx, upper, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::linalg::cholesky_inv(a->ctx, upper, s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::inv(a->ctx, s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::linalg::inv(a->ctx, s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_norm_p(
     mlx_array a,
@@ -36,8 +38,8 @@ extern "C" mlx_array mlx_linalg_norm_p(
     size_t num_axis,
     bool keepdims,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::norm(
-      a->ctx, ord, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::linalg::norm(
+      a->ctx, ord, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_norm_ord(
     mlx_array a,
@@ -46,12 +48,12 @@ extern "C" mlx_array mlx_linalg_norm_ord(
     size_t num_axis,
     bool keepdims,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::norm(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::linalg::norm(
       a->ctx,
       MLX_CPP_STRING(ord),
       MLX_CPP_OPT_INTVEC(axis, num_axis),
       keepdims,
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_norm(
     mlx_array a,
@@ -59,18 +61,21 @@ extern "C" mlx_array mlx_linalg_norm(
     size_t num_axis,
     bool keepdims,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::norm(
-      a->ctx, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::linalg::norm(
+      a->ctx, MLX_CPP_OPT_INTVEC(axis, num_axis), keepdims, s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_pinv(mlx_array a, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::pinv(a->ctx, s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::linalg::pinv(a->ctx, s->ctx))));
 }
 extern "C" mlx_tuple_array_array mlx_linalg_qr(mlx_array a, mlx_stream s) {
-  RETURN_MLX_C_ARRAYPAIR(mlx::core::linalg::qr(a->ctx, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_tuple_array_array_((mlx::core::linalg::qr(a->ctx, s->ctx))));
 }
 extern "C" mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s) {
-  RETURN_MLX_C_VECTOR_ARRAY(mlx::core::linalg::svd(a->ctx, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_vector_array_((mlx::core::linalg::svd(a->ctx, s->ctx))));
 }
 extern "C" mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx))));
 }

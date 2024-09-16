@@ -19,7 +19,8 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_fft_fft(mlx_array a, int n, int axis, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::fft(a->ctx, n, axis, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::fft::fft(a->ctx, n, axis, s->ctx))));
 }
 extern "C" mlx_array mlx_fft_fft2(
     mlx_array a,
@@ -28,11 +29,11 @@ extern "C" mlx_array mlx_fft_fft2(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::fft2(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::fft2(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_fftn(
     mlx_array a,
@@ -41,14 +42,15 @@ extern "C" mlx_array mlx_fft_fftn(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::fftn(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::fftn(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_ifft(mlx_array a, int n, int axis, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::ifft(a->ctx, n, axis, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::fft::ifft(a->ctx, n, axis, s->ctx))));
 }
 extern "C" mlx_array mlx_fft_ifft2(
     mlx_array a,
@@ -57,11 +59,11 @@ extern "C" mlx_array mlx_fft_ifft2(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::ifft2(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::ifft2(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_ifftn(
     mlx_array a,
@@ -70,14 +72,15 @@ extern "C" mlx_array mlx_fft_ifftn(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::ifftn(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::ifftn(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_irfft(mlx_array a, int n, int axis, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::irfft(a->ctx, n, axis, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::fft::irfft(a->ctx, n, axis, s->ctx))));
 }
 extern "C" mlx_array mlx_fft_irfft2(
     mlx_array a,
@@ -86,11 +89,11 @@ extern "C" mlx_array mlx_fft_irfft2(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::irfft2(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::irfft2(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_irfftn(
     mlx_array a,
@@ -99,14 +102,15 @@ extern "C" mlx_array mlx_fft_irfftn(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::irfftn(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::irfftn(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_rfft(mlx_array a, int n, int axis, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::rfft(a->ctx, n, axis, s->ctx));
+  RETURN_MLX_C_PTR(
+      new mlx_array_((mlx::core::fft::rfft(a->ctx, n, axis, s->ctx))));
 }
 extern "C" mlx_array mlx_fft_rfft2(
     mlx_array a,
@@ -115,11 +119,11 @@ extern "C" mlx_array mlx_fft_rfft2(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::rfft2(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::rfft2(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }
 extern "C" mlx_array mlx_fft_rfftn(
     mlx_array a,
@@ -128,9 +132,9 @@ extern "C" mlx_array mlx_fft_rfftn(
     const int* axes,
     size_t num_axes,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::fft::rfftn(
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::fft::rfftn(
       a->ctx,
       MLX_CPP_INTVEC(n, num_n),
       MLX_CPP_INTVEC(axes, num_axes),
-      s->ctx));
+      s->ctx))));
 }

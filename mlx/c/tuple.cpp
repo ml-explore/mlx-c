@@ -5,6 +5,7 @@
 
 #include "mlx/c/private/tuple.h"
 #include "mlx/c/object.h"
+#include "mlx/c/private/map.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/variant.h"
@@ -150,4 +151,29 @@ mlx_tuple_string_variant_int_bool_array_dtype_get_1(
     mlx_tuple_string_variant_int_bool_array_dtype tuple) {
   RETURN_MLX_C_PTR(
       new mlx_variant_int_bool_array_dtype_(std::get<1>(tuple->ctx)));
+}
+
+mlx_string mlx_tuple_map_string_to_array_map_string_to_string_::tostring() {
+  RETURN_MLX_C_STRING(
+      "mlx_tuple(const mlx_map_string_to_array, const mlx_map_string_to_string)");
+}
+
+extern "C" mlx_tuple_map_string_to_array_map_string_to_string
+mlx_tuple_map_string_to_array_map_string_to_string_new(
+    const mlx_map_string_to_array input_0,
+    const mlx_map_string_to_string input_1) {
+  RETURN_MLX_C_PTR(new mlx_tuple_map_string_to_array_map_string_to_string_(
+      std::make_pair(input_0->ctx, input_1->ctx)));
+}
+
+extern "C" mlx_map_string_to_array
+mlx_tuple_map_string_to_array_map_string_to_string_get_0(
+    mlx_tuple_map_string_to_array_map_string_to_string tuple) {
+  RETURN_MLX_C_PTR(new mlx_map_string_to_array_(std::get<0>(tuple->ctx)));
+}
+
+extern "C" mlx_map_string_to_string
+mlx_tuple_map_string_to_array_map_string_to_string_get_1(
+    mlx_tuple_map_string_to_array_map_string_to_string tuple) {
+  RETURN_MLX_C_PTR(new mlx_map_string_to_string_(std::get<1>(tuple->ctx)));
 }

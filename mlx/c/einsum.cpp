@@ -22,6 +22,6 @@ extern "C" mlx_array mlx_einsum(
     mlx_string subscripts,
     const mlx_vector_array operands,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::einsum(
-      MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx));
+  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::einsum(
+      MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx))));
 }

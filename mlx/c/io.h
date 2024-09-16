@@ -27,8 +27,6 @@ extern "C" {
 /**@{*/
 mlx_array mlx_load_file(FILE* in_stream, mlx_stream s);
 mlx_array mlx_load(mlx_string file, mlx_stream s);
-mlx_safetensors mlx_load_safetensors_file(FILE* in_stream, mlx_stream s);
-mlx_safetensors mlx_load_safetensors(mlx_string file, mlx_stream s);
 void mlx_save_file(FILE* out_stream, mlx_array a);
 void mlx_save(mlx_string file, mlx_array a);
 void mlx_save_safetensors_file(

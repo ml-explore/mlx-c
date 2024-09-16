@@ -81,4 +81,22 @@ struct mlx_tuple_string_variant_int_bool_array_dtype_ : mlx_object_ {
   std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>> ctx;
 };
 
+struct mlx_tuple_map_string_to_array_map_string_to_string_ : mlx_object_ {
+  mlx_tuple_map_string_to_array_map_string_to_string_(
+      std::pair<
+          std::unordered_map<std::string, mlx::core::array>,
+          std::unordered_map<std::string, std::string>>&& ctx)
+      : mlx_object_(), ctx(std::move(ctx)){};
+  mlx_tuple_map_string_to_array_map_string_to_string_(
+      const std::pair<
+          std::unordered_map<std::string, mlx::core::array>,
+          std::unordered_map<std::string, std::string>>& ctx)
+      : mlx_object_(), ctx(ctx){};
+  virtual mlx_string_* tostring() override;
+  std::pair<
+      std::unordered_map<std::string, mlx::core::array>,
+      std::unordered_map<std::string, std::string>>
+      ctx;
+};
+
 #endif
