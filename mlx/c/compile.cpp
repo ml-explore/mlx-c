@@ -7,7 +7,7 @@
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
+//    #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
@@ -35,16 +35,39 @@ mlx::core::CompileMode to_cpp_type(mlx_compile_mode type) {
   return map[(int)type];
 }
 } // namespace
-extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
-  RETURN_MLX_C_PTR(
-      new mlx_closure_((mlx::core::compile((fun)->ctx, shapeless))));
+extern "C" int mlx_compile(mlx_closure fun, bool shapeless, mlx_closure res) {
+  try {
+    res->ctx = mlx::core::compile((fun)->ctx, shapeless);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_disable_compile() {
-  return (mlx::core::disable_compile());
+extern "C" int mlx_disable_compile() {
+  try {
+    mlx::core::disable_compile();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_enable_compile() {
-  return (mlx::core::enable_compile());
+extern "C" int mlx_enable_compile() {
+  try {
+    mlx::core::enable_compile();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_set_compile_mode(mlx_compile_mode mode) {
-  return (mlx::core::set_compile_mode(to_cpp_type(mode)));
+extern "C" int mlx_set_compile_mode(mlx_compile_mode mode) {
+  try {
+    mlx::core::set_compile_mode(to_cpp_type(mode));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

@@ -9,12 +9,13 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,34 +25,46 @@ extern "C" {
  * \defgroup linalg Linear algebra operations
  */
 /**@{*/
-mlx_array mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s);
-mlx_array mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s);
-mlx_array mlx_linalg_cross(mlx_array a, mlx_array b, int axis, mlx_stream s);
-mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s);
-mlx_array mlx_linalg_norm_p(
+int mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s, mlx_array res);
+int mlx_linalg_cholesky_inv(
+    mlx_array a,
+    bool upper,
+    mlx_stream s,
+    mlx_array res);
+int mlx_linalg_cross(
+    mlx_array a,
+    mlx_array b,
+    int axis,
+    mlx_stream s,
+    mlx_array res);
+int mlx_linalg_inv(mlx_array a, mlx_stream s, mlx_array res);
+int mlx_linalg_norm_p(
     mlx_array a,
     double ord,
     const int* axis,
     size_t num_axis,
     bool keepdims,
-    mlx_stream s);
-mlx_array mlx_linalg_norm_ord(
+    mlx_stream s,
+    mlx_array res);
+int mlx_linalg_norm_ord(
     mlx_array a,
     mlx_string ord,
     const int* axis,
     size_t num_axis,
     bool keepdims,
-    mlx_stream s);
-mlx_array mlx_linalg_norm(
+    mlx_stream s,
+    mlx_array res);
+int mlx_linalg_norm(
     mlx_array a,
     const int* axis,
     size_t num_axis,
     bool keepdims,
-    mlx_stream s);
-mlx_array mlx_linalg_pinv(mlx_array a, mlx_stream s);
-mlx_tuple_array_array mlx_linalg_qr(mlx_array a, mlx_stream s);
-mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s);
-mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s);
+    mlx_stream s,
+    mlx_array res);
+int mlx_linalg_pinv(mlx_array a, mlx_stream s, mlx_array res);
+int mlx_linalg_qr(mlx_array a, mlx_stream s, mlx_array res_0, mlx_array res_1);
+int mlx_linalg_svd(mlx_array a, mlx_stream s, mlx_vector_array res);
+int mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s, mlx_array res);
 /**@}*/
 
 #ifdef __cplusplus

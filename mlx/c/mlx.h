@@ -4,8 +4,8 @@
 #define MLX_ALL_H
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
-#include "mlx/c/compile.h"
+// #include "mlx/c/closure.h"
+// #include "mlx/c/compile.h"
 #include "mlx/c/device.h"
 #include "mlx/c/distributed.h"
 #include "mlx/c/distributed_group.h"

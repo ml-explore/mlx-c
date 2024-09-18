@@ -9,12 +9,13 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,17 +25,16 @@ extern "C" {
  * \defgroup metal Metal specific operations
  */
 /**@{*/
-void mlx_metal_clear_cache();
-mlx_map_string_to_variant_string_size_t mlx_metal_device_info();
-size_t mlx_metal_get_active_memory();
-size_t mlx_metal_get_cache_memory();
-size_t mlx_metal_get_peak_memory();
-bool mlx_metal_is_available();
-void mlx_metal_reset_peak_memory();
-size_t mlx_metal_set_cache_limit(size_t limit);
-size_t mlx_metal_set_memory_limit(size_t limit, bool relaxed);
-void mlx_metal_start_capture(mlx_string path);
-void mlx_metal_stop_capture();
+int mlx_metal_clear_cache();
+int mlx_metal_get_active_memory(size_t* res);
+int mlx_metal_get_cache_memory(size_t* res);
+int mlx_metal_get_peak_memory(size_t* res);
+int mlx_metal_is_available(bool* res);
+int mlx_metal_reset_peak_memory();
+int mlx_metal_set_cache_limit(size_t limit, size_t* res);
+int mlx_metal_set_memory_limit(size_t limit, bool relaxed, size_t* res);
+int mlx_metal_start_capture(mlx_string path);
+int mlx_metal_stop_capture();
 /**@}*/
 
 #ifdef __cplusplus

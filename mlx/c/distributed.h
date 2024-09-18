@@ -9,12 +9,13 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,29 +25,36 @@ extern "C" {
  * \defgroup distributed Distributed collectives
  */
 /**@{*/
-mlx_array mlx_distributed_all_gather(
+int mlx_distributed_all_gather(
     mlx_array x,
     mlx_distributed_group group,
-    mlx_stream S);
-mlx_array
-mlx_distributed_all_sum(mlx_array x, mlx_distributed_group group, mlx_stream s);
-mlx_array mlx_distributed_recv(
+    mlx_stream S,
+    mlx_array res);
+int mlx_distributed_all_sum(
+    mlx_array x,
+    mlx_distributed_group group,
+    mlx_stream s,
+    mlx_array res);
+int mlx_distributed_recv(
     const int* shape,
     size_t num_shape,
     mlx_array_dtype dtype,
     int src,
     mlx_distributed_group group,
-    mlx_stream s);
-mlx_array mlx_distributed_recv_like(
+    mlx_stream s,
+    mlx_array res);
+int mlx_distributed_recv_like(
     mlx_array x,
     int src,
     mlx_distributed_group group,
-    mlx_stream s);
-mlx_array mlx_distributed_send(
+    mlx_stream s,
+    mlx_array res);
+int mlx_distributed_send(
     mlx_array x,
     int dst,
     mlx_distributed_group group,
-    mlx_stream s);
+    mlx_stream s,
+    mlx_array res);
 /**@}*/
 
 #ifdef __cplusplus
