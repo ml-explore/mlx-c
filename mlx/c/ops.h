@@ -266,7 +266,8 @@ mlx_array mlx_gather_qmm(
     mlx_stream s);
 mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s);
-mlx_array mlx_hadamard_transform(mlx_array a, float scale, mlx_stream s);
+mlx_array
+mlx_hadamard_transform(mlx_array a, mlx_optional_float scale, mlx_stream s);
 mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_isclose(
@@ -339,8 +340,8 @@ mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_nan_to_num(
     mlx_array a,
     float nan,
-    float posinf,
-    float neginf,
+    mlx_optional_float posinf,
+    mlx_optional_float neginf,
     mlx_stream s);
 mlx_array mlx_negative(mlx_array a, mlx_stream s);
 mlx_array mlx_not_equal(mlx_array a, mlx_array b, mlx_stream s);

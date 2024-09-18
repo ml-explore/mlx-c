@@ -528,8 +528,11 @@ extern "C" mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::greater_equal(a->ctx, b->ctx, s->ctx));
 }
 extern "C" mlx_array
-mlx_hadamard_transform(mlx_array a, float scale, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::hadamard_transform(a->ctx, scale, s->ctx));
+mlx_hadamard_transform(mlx_array a, mlx_optional_float scale, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::hadamard_transform(
+      a->ctx,
+      (scale.has_value ? std::make_optional<float>(scale.value) : std::nullopt),
+      s->ctx));
 }
 extern "C" mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
@@ -681,11 +684,17 @@ extern "C" mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s) {
 extern "C" mlx_array mlx_nan_to_num(
     mlx_array a,
     float nan,
-    float posinf,
-    float neginf,
+    mlx_optional_float posinf,
+    mlx_optional_float neginf,
     mlx_stream s) {
-  RETURN_MLX_C_ARRAY(
-      mlx::core::nan_to_num(a->ctx, nan, posinf, neginf, s->ctx));
+  RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(
+      a->ctx,
+      nan,
+      (posinf.has_value ? std::make_optional<float>(posinf.value)
+                        : std::nullopt),
+      (neginf.has_value ? std::make_optional<float>(neginf.value)
+                        : std::nullopt),
+      s->ctx));
 }
 extern "C" mlx_array mlx_negative(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::negative(a->ctx, s->ctx));

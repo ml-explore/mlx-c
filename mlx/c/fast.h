@@ -59,7 +59,7 @@ mlx_array mlx_fast_rope(
     mlx_array x,
     int dims,
     bool traditional,
-    float base,
+    mlx_optional_float base,
     float scale,
     int offset,
     mlx_array freqs,
@@ -70,7 +70,7 @@ mlx_array mlx_fast_scaled_dot_product_attention(
     mlx_array values,
     float scale,
     mlx_array mask,
-    int memory_efficient_threshold,
+    mlx_optional_int memory_efficient_threshold,
     mlx_stream s);
 /**@}*/
 

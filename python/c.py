@@ -296,8 +296,16 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
                 or pti == "std::optional<uint64_t>"
             ):
                 pti_wo_opt = pti[14:][:-1]
-                c_call.append(pti_wo_opt + " " + pni)
-                cpp_call.append(pni)
+                c_call.append("mlx_optional_" + pti_wo_opt + " " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + ".has_value ? std::make_optional<"
+                    + pti_wo_opt
+                    + ">("
+                    + pni
+                    + ".value) : std::nullopt)"
+                )
             elif pti == "std::uintptr_t":
                 c_call.append(pti.lstrip("std::") + " " + pni)
                 cpp_call.append(pni)

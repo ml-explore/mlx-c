@@ -17,6 +17,14 @@ extern "C" {
 /**@{*/
 
 /**
+ * A int optional.
+ */
+typedef struct mlx_optional_int_ {
+  int value;
+  bool has_value;
+} mlx_optional_int;
+
+/**
  * A float optional.
  */
 typedef struct mlx_optional_float_ {
