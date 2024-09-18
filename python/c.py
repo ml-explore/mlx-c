@@ -9,7 +9,7 @@ def to_snake_letters(name):
     return name
 
 
-def generate(funcs, enums, headername, namespace, implementation, docstring, dockey):
+def generate(funcs, enums, headername, namespace, implementation, docstring):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -155,9 +155,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring, doc
         if docstring:
             docstring = docstring.replace("\n", "\n* ")
             print("/**")
-            if not dockey:
-                dockey = headername
-            print("* \defgroup " + dockey + " " + docstring)
+            print("* \defgroup " + headername + " " + docstring)
             print("*/")
             print("/**@{*/")
 
