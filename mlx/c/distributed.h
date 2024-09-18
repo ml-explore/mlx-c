@@ -3,8 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_OPS_H
-#define MLX_OPS_H
+#ifndef MLX_DISTRIBUTED_H
+#define MLX_DISTRIBUTED_H
 
 #include <stdio.h>
 
@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /**
- * \defgroup distributed_ops Distributed collectives
+ * \defgroup distributed Distributed collectives
  */
 /**@{*/
 mlx_array mlx_distributed_all_gather(

@@ -3,7 +3,7 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/ops.h"
+#include "mlx/c/distributed.h"
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
