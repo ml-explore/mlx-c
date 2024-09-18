@@ -7,7 +7,7 @@
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
-//    #include "mlx/c/private/closure.h"
+#include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"

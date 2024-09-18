@@ -36,8 +36,8 @@ FetchContent_MakeAvailable(mlx)
 
 set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/array.cpp
-#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
-#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
@@ -55,7 +55,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
 #    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
-#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
 #    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/tuple.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/variant.cpp)

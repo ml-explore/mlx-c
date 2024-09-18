@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-//    #include "mlx/c/closure.h"
+#include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
@@ -29,13 +29,13 @@ int mlx_async_eval(const mlx_vector_array outputs);
 int mlx_checkpoint(mlx_closure fun, mlx_closure res);
 int mlx_custom_function(
     mlx_closure fun,
-    mlx_closure_custom_function fun_vjp,
-    mlx_closure_custom_function_jvp fun_jvp,
-    mlx_closure_custom_function_vmap fun_vmap,
+    mlx_closure_custom fun_vjp,
+    mlx_closure_custom_jvp fun_jvp,
+    mlx_closure_custom_vmap fun_vmap,
     mlx_closure res);
 int mlx_custom_vjp(
     mlx_closure fun,
-    mlx_closure_custom_function fun_vjp,
+    mlx_closure_custom fun_vjp,
     mlx_closure res);
 int mlx_eval(const mlx_vector_array outputs);
 int mlx_jvp(
