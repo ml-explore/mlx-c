@@ -120,7 +120,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             """
     #include "mlx/c/mlx.h"
     #include "mlx/c/private/array.h"
-    #include "mlx/c/private/closure.h"
+//    #include "mlx/c/private/closure.h"
     #include "mlx/c/private/distributed_group.h"
     #include "mlx/c/private/future.h"
     #include "mlx/c/private/io.h"
@@ -141,13 +141,14 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
     #include <stdio.h>
 
     #include "mlx/c/array.h"
-    #include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
     #include "mlx/c/future.h"
     #include "mlx/c/ioutils.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
     #include "mlx/c/string.h"
+    #include "mlx/c/vector.h"
 
     #ifdef __cplusplus
     extern "C" {
@@ -208,7 +209,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             print("skipping", f, file=sys.stderr)
             continue
 
-        signature.append(return_t["c"])
+        signature.append("int")  # return_t["c"]
         if "variant" in f:
             signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"])
         else:
@@ -414,6 +415,10 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             print("skipping", f, file=sys.stderr)
             continue
 
+        res_arg = return_t["c_return_arg"]("res")
+        if res_arg:
+            c_call.append(res_arg)
+
         # print(f)
         c_call = ", ".join(c_call)
         cpp_call = ", ".join(cpp_call)
@@ -423,10 +428,16 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
 
         c_code = [signature, ";"]
         cpp_code = ['extern "C"', signature, "{"]
-        cpp_call = ["(", namespace + "::" + f["name"], "(", cpp_call, ")", ")"]
+        cpp_code.append("try {")
+        cpp_call = [namespace + "::" + f["name"], "(", cpp_call, ")"]
         cpp_call = "".join(cpp_call)
-        cpp_code.append(return_t["return"](return_t["cpp_to_c"](cpp_call)))
+        cpp_code.append(return_t["c_assign_from_cpp"]("res", cpp_call))
         cpp_code.append(";")
+        cpp_code.append("} catch (std::exception & e) {")
+        cpp_code.append("mlx_error(e.what());")
+        cpp_code.append("return 1;")
+        cpp_code.append("}")
+        cpp_code.append("return 0;")
         cpp_code.append("}")
         if implementation:
             print(" ".join(cpp_code))

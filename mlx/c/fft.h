@@ -9,13 +9,14 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,66 +26,74 @@ extern "C" {
  * \defgroup fft FFT operations
  */
 /**@{*/
-mlx_array mlx_fft_fft(mlx_array a, int n, int axis, mlx_stream s);
-mlx_array mlx_fft_fft2(
+int mlx_fft_fft(mlx_array a, int n, int axis, mlx_stream s, mlx_array res);
+int mlx_fft_fft2(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_fftn(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_fftn(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_ifft(mlx_array a, int n, int axis, mlx_stream s);
-mlx_array mlx_fft_ifft2(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_ifft(mlx_array a, int n, int axis, mlx_stream s, mlx_array res);
+int mlx_fft_ifft2(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_ifftn(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_ifftn(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_irfft(mlx_array a, int n, int axis, mlx_stream s);
-mlx_array mlx_fft_irfft2(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_irfft(mlx_array a, int n, int axis, mlx_stream s, mlx_array res);
+int mlx_fft_irfft2(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_irfftn(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_irfftn(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_rfft(mlx_array a, int n, int axis, mlx_stream s);
-mlx_array mlx_fft_rfft2(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_rfft(mlx_array a, int n, int axis, mlx_stream s, mlx_array res);
+int mlx_fft_rfft2(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
-mlx_array mlx_fft_rfftn(
+    mlx_stream s,
+    mlx_array res);
+int mlx_fft_rfftn(
     mlx_array a,
     const int* n,
     size_t num_n,
     const int* axes,
     size_t num_axes,
-    mlx_stream s);
+    mlx_stream s,
+    mlx_array res);
 /**@}*/
 
 #ifdef __cplusplus

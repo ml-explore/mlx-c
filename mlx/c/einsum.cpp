@@ -7,7 +7,7 @@
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
+//    #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
@@ -18,10 +18,17 @@
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
-extern "C" mlx_array mlx_einsum(
+extern "C" int mlx_einsum(
     mlx_string subscripts,
     const mlx_vector_array operands,
-    mlx_stream s) {
-  RETURN_MLX_C_PTR(new mlx_array_((mlx::core::einsum(
-      MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx))));
+    mlx_stream s,
+    mlx_array res) {
+  try {
+    res->ctx = mlx::core::einsum(
+        MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

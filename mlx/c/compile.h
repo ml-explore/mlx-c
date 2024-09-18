@@ -9,13 +9,14 @@
 #include <stdio.h>
 
 #include "mlx/c/array.h"
-#include "mlx/c/closure.h"
+//    #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,10 +32,10 @@ typedef enum mlx_compile_mode_ {
   MLX_COMPILE_MODE_NO_FUSE,
   MLX_COMPILE_MODE_ENABLED
 } mlx_compile_mode;
-mlx_closure mlx_compile(mlx_closure fun, bool shapeless);
-void mlx_disable_compile();
-void mlx_enable_compile();
-void mlx_set_compile_mode(mlx_compile_mode mode);
+int mlx_compile(mlx_closure fun, bool shapeless, mlx_closure res);
+int mlx_disable_compile();
+int mlx_enable_compile();
+int mlx_set_compile_mode(mlx_compile_mode mode);
 /**@}*/
 
 #ifdef __cplusplus
