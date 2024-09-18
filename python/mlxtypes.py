@@ -44,7 +44,10 @@ for t in [
             "return": lambda s: "RETURN_MLX_C_PTR(" + s + ")",
             "c_assign_from_cpp": lambda d, s: d + "->ctx = " + s,
             "c_arg": lambda s, ctype=ctype: ("const " + ctype + " " + s).strip(),
-            "c_return_arg": lambda s, ctype=ctype: (ctype + " " + s).strip(),
+            "c_return_arg": lambda s, untyped=False, ctype=ctype: (
+                ("" if untyped else ctype + " ") + s
+            ).strip(),
+            "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
             "cpp_arg": lambda s, cpptype=cpptype: (
                 "const " + cpptype + "& " + s
             ).strip(),
@@ -63,17 +66,35 @@ def register_return_tuple_type(cpp_types, alts=[]):
     n = len(cpp_types)
     c_types = []
     alt_types = []
+    c_to_cpps = []
     for cpp_type in cpp_types:
         typedef = find_cpp_type(cpp_type)
         c_types.append(typedef["c"])
         alt_types.append(typedef["alt"])
+        c_to_cpps.append(typedef["c_to_cpp"])
     cpp_tuple = "std::pair" if n == 2 else "std::tuple"
     types.append(
         {
             "cpp": cpp_tuple + "<" + ", ".join(cpp_types) + ">",
             "alt": [cpp_tuple + "<" + ", ".join(alt_types) + ">"] + alts,
-            "c_return_arg": lambda s: ", ".join(
-                [c_types[i] + " " + s + "_" + str(i) for i in range(n)]
+            "c_to_cpp": lambda s: "std::tie("
+            + ", ".join([c_to_cpps[i](s + "_" + str(i)) for i in range(n)])
+            + ")",
+            "c_return_arg": lambda s, untyped=False: ", ".join(
+                [
+                    ("" if untyped else c_types[i])
+                    + (" " + s + "_" + str(i) if s else "")
+                    for i in range(n)
+                ]
+            ),
+            "c_new": lambda s: "\n".join(
+                [
+                    "auto " + s + "_" + str(i) + " = new " + ctype + "_();"
+                    for i, ctype in enumerate(c_types)
+                ]
+            ),
+            "free": lambda s: "\n".join(
+                ["mlx_free(" + s + "_" + str(i) + ");" for i in range(n)]
             ),
             "c_assign_from_cpp": lambda d, s: "std::tie("
             + ", ".join([d + "_" + str(i) + "->ctx" for i in range(n)])

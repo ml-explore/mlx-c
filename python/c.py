@@ -120,7 +120,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             """
     #include "mlx/c/mlx.h"
     #include "mlx/c/private/array.h"
-//    #include "mlx/c/private/closure.h"
+    #include "mlx/c/private/closure.h"
     #include "mlx/c/private/distributed_group.h"
     #include "mlx/c/private/future.h"
     #include "mlx/c/private/io.h"
@@ -141,7 +141,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
     #include <stdio.h>
 
     #include "mlx/c/array.h"
-//    #include "mlx/c/closure.h"
+    #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
     #include "mlx/c/future.h"
     #include "mlx/c/ioutils.h"
@@ -329,13 +329,13 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
                 pti
                 == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
             ):
-                c_call.append("mlx_closure_custom_function " + pni)
+                c_call.append("mlx_closure_custom " + pni)
                 cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>>"
             ):
-                c_call.append("mlx_closure_custom_function " + pni)
+                c_call.append("mlx_closure_custom " + pni)
                 cpp_call.append(
                     "("
                     + pni
@@ -349,13 +349,13 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
                 pti
                 == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>"
             ):
-                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                c_call.append("mlx_closure_custom_jvp " + pni)
                 cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>>"
             ):
-                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                c_call.append("mlx_closure_custom_jvp " + pni)
                 cpp_call.append(
                     "("
                     + pni
@@ -369,13 +369,13 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
                 pti
                 == "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>"
             ):
-                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                c_call.append("mlx_closure_custom_vmap " + pni)
                 cpp_call.append("(" + pni + ")->ctx")
             elif (
                 pti
                 == "std::optional<std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>>"
             ):
-                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                c_call.append("mlx_closure_custom_vmap " + pni)
                 cpp_call.append(
                     "("
                     + pni

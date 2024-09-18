@@ -23,13 +23,62 @@ extern "C" {
 /**@{*/
 
 typedef struct mlx_closure_* mlx_closure;
-mlx_closure mlx_closure_new(mlx_vector_array (*fun)(const mlx_vector_array));
+mlx_closure mlx_closure_new(
+    void (*fun)(const mlx_vector_array, mlx_vector_array));
 mlx_closure mlx_closure_new_with_payload(
-    mlx_vector_array (*fun)(const mlx_vector_array, void*),
+    void (*fun)(const mlx_vector_array, void*, mlx_vector_array),
     void* payload,
     void (*dtor)(void*));
-mlx_vector_array mlx_closure_apply(
+int mlx_closure_apply(
     mlx_closure cls,
-    const mlx_vector_array input);
+    const mlx_vector_array input,
+    mlx_vector_array res);
 
-mlx_closure mlx_closure_new_unary(mlx_array (*fun)(const mlx_array));
+mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array));
+
+typedef struct mlx_closure_value_and_grad_* mlx_closure_value_and_grad;
+mlx_closure_value_and_grad mlx_closure_value_and_grad_new(
+    void (*fun)(const mlx_vector_array, mlx_vector_array, mlx_vector_array));
+mlx_closure_value_and_grad mlx_closure_value_and_grad_new_with_payload(
+    void (*fun)(
+        const mlx_vector_array,
+        void*,
+        mlx_vector_array,
+        mlx_vector_array),
+    void* payload,
+    void (*dtor)(void*));
+int mlx_closure_value_and_grad_apply(
+    mlx_closure_value_and_grad cls,
+    const mlx_vector_array input,
+    mlx_vector_array res_0,
+    mlx_vector_array res_1);
+
+typedef struct mlx_closure_custom_* mlx_closure_custom;
+mlx_closure_custom mlx_closure_custom_new(void (*fun)(
+    const mlx_vector_array,
+    const mlx_vector_array,
+    const mlx_vector_array,
+    mlx_vector_array));
+mlx_closure_custom mlx_closure_custom_new_with_payload(
+    void (*fun)(
+        const mlx_vector_array,
+        const mlx_vector_array,
+        const mlx_vector_array,
+        void*,
+        mlx_vector_array),
+    void* payload,
+    void (*dtor)(void*));
+int mlx_closure_custom_apply(
+    mlx_closure_custom cls,
+    const mlx_vector_array input_0,
+    const mlx_vector_array input_1,
+    const mlx_vector_array input_2,
+    mlx_vector_array res);
+
+/**@}*/
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

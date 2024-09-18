@@ -7,7 +7,7 @@
 
 #include "mlx/c/mlx.h"
 #include "mlx/c/private/array.h"
-//    #include "mlx/c/private/closure.h"
+#include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
@@ -38,9 +38,9 @@ extern "C" int mlx_checkpoint(mlx_closure fun, mlx_closure res) {
 }
 extern "C" int mlx_custom_function(
     mlx_closure fun,
-    mlx_closure_custom_function fun_vjp,
-    mlx_closure_custom_function_jvp fun_jvp,
-    mlx_closure_custom_function_vmap fun_vmap,
+    mlx_closure_custom fun_vjp,
+    mlx_closure_custom_jvp fun_jvp,
+    mlx_closure_custom_vmap fun_vmap,
     mlx_closure res) {
   try {
     res->ctx = mlx::core::custom_function(
@@ -54,10 +54,8 @@ extern "C" int mlx_custom_function(
   }
   return 0;
 }
-extern "C" int mlx_custom_vjp(
-    mlx_closure fun,
-    mlx_closure_custom_function fun_vjp,
-    mlx_closure res) {
+extern "C" int
+mlx_custom_vjp(mlx_closure fun, mlx_closure_custom fun_vjp, mlx_closure res) {
   try {
     res->ctx = mlx::core::custom_vjp((fun)->ctx, (fun_vjp)->ctx);
   } catch (std::exception& e) {
