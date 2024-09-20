@@ -15,6 +15,10 @@ mlx_string mlx_array_::tostring() {
                 , return nullptr);
 }
 
+extern "C" mlx_array mlx_array_new() {
+  RETURN_MLX_C_PTR(new mlx_array_());
+}
+
 extern "C" mlx_array mlx_array_from_bool(bool val) {
   RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
