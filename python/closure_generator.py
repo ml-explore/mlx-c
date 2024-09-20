@@ -173,7 +173,6 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/array.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
-#include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
 
 #ifdef __cplusplus
@@ -207,7 +206,6 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 

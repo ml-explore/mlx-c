@@ -6,7 +6,6 @@
 #include "mlx/c/vector.h"
 #include "mlx/c/object.h"
 #include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
@@ -308,67 +307,5 @@ extern "C" mlx_array_dtype mlx_vector_array_dtype_get(
 }
 
 extern "C" size_t mlx_vector_array_dtype_size(mlx_vector_array_dtype vec) {
-  return vec->ctx.size();
-}
-
-mlx_string mlx_vector_tuple_string_variant_int_bool_array_dtype_::tostring() {
-  MLX_TRY_CATCH(std::ostringstream os; os
-                << "vector of tuple_string_variant_int_bool_array_dtypes (size="
-                << ctx.size() << ")";
-                std::string str = os.str();
-                return new mlx_string_(str);
-                , return nullptr);
-}
-
-extern "C" mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_new() {
-  RETURN_MLX_C_PTR(new mlx_vector_tuple_string_variant_int_bool_array_dtype_())
-}
-
-extern "C" mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_data(
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size) {
-  std::vector<std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>
-      cpp_arrs;
-  for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back(data[i]->ctx);
-  }
-  RETURN_MLX_C_PTR(
-      new mlx_vector_tuple_string_variant_int_bool_array_dtype_(cpp_arrs))
-}
-
-extern "C" mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_value(
-    const mlx_tuple_string_variant_int_bool_array_dtype val) {
-  RETURN_MLX_C_PTR(
-      new mlx_vector_tuple_string_variant_int_bool_array_dtype_({val->ctx}))
-}
-
-extern "C" void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_data(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back(data[i]->ctx); }, );
-}
-
-extern "C" void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_value(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype value) {
-  MLX_TRY_CATCH(vec->ctx.push_back(value->ctx);, )
-}
-
-extern "C" mlx_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_get(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    size_t index) {
-  RETURN_MLX_C_PTR(
-      new mlx_tuple_string_variant_int_bool_array_dtype_(vec->ctx.at(index)));
-}
-
-extern "C" size_t mlx_vector_tuple_string_variant_int_bool_array_dtype_size(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec) {
   return vec->ctx.size();
 }
