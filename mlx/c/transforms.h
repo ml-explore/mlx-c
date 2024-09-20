@@ -44,6 +44,11 @@ int mlx_jvp(
     const mlx_vector_array tangents,
     mlx_vector_array res_0,
     mlx_vector_array res_1);
+int mlx_value_and_grad(
+    mlx_closure fun,
+    const int* argnums,
+    size_t num_argnums,
+    mlx_closure_value_and_grad res);
 int mlx_vjp(
     mlx_closure fun,
     const mlx_vector_array primals,

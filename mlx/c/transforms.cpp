@@ -87,6 +87,20 @@ extern "C" int mlx_jvp(
   }
   return 0;
 }
+extern "C" int mlx_value_and_grad(
+    mlx_closure fun,
+    const int* argnums,
+    size_t num_argnums,
+    mlx_closure_value_and_grad res) {
+  try {
+    res->ctx = mlx::core::value_and_grad(
+        (fun)->ctx, MLX_CPP_INTVEC(argnums, num_argnums));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_vjp(
     mlx_closure fun,
     const mlx_vector_array primals,
