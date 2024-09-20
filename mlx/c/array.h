@@ -46,6 +46,11 @@ typedef enum mlx_array_dtype_ {
 } mlx_array_dtype;
 
 /**
+ * New empty array.
+ */
+mlx_array mlx_array_new();
+
+/**
  * New array from a bool scalar.
  */
 mlx_array mlx_array_from_bool(bool val);
