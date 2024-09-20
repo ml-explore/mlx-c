@@ -43,19 +43,15 @@ def generate(code, name, rcpptype, cpptypes):
         cpptype = mt.cpptypes[cpptypes[i]]
         cpparg = cpptype["cpp"]
         suffix = "_" + str(i) if len(cpptypes) > 1 else ""
-        cargs_untyped.append("input" + suffix)
+        cargs_untyped.append(cpptype["c_arg"]("input" + suffix, untyped=True))
         cargs.append(cpptype["c_arg"]("input" + suffix))
         cppargs_type_name.append(cpptype["cpp_arg"]("cpp_input" + suffix))
-        cppargs_to_cargs.append(
-            "auto input"
-            + suffix
-            + " = "
-            + cpptype["cpp_to_c"]("cpp_input" + suffix)
-            + ";"
-        )
-
         cargs_free.append(cpptype["free"]("input" + suffix) + ";")
         cargs_ctx.append(cpptype["c_to_cpp"]("input" + suffix))
+        cppargs_to_cargs.append(cpptype["c_new"]("input" + suffix) + ";")
+        cppargs_to_cargs.append(
+            cpptype["c_assign_from_cpp"]("input" + suffix, "cpp_input" + suffix) + ";"
+        )
 
     rcargs_new = mt.cpptypes[rcpptype]["c_new"]("res") + ";"
     rcargs_free = mt.cpptypes[rcpptype]["free"]("res") + ";"
@@ -75,11 +71,6 @@ def generate(code, name, rcpptype, cpptypes):
     rcargs = mt.cpptypes[rcpptype]["c_return_arg"]("res")
     rcargs_untyped = mt.cpptypes[rcpptype]["c_return_arg"]("res", untyped=True)
 
-    code = replace_match_parenthesis(
-        code,
-        "RETURN_CPP_TO_C",
-        lambda s: mt.cpptypes[rcpptype]["return"](mt.cpptypes[rcpptype]["cpp_to_c"](s)),
-    )
     code = code.replace("RCARGS_UNTYPED", rcargs_untyped)
     code = code.replace("RCARGS_UNNAMED", rcargs_unnamed)
     code = code.replace("CPPARGS_TYPE_NAME", cppargs_type_name)
@@ -90,7 +81,7 @@ def generate(code, name, rcpptype, cpptypes):
     code = code.replace("CARGS_UNTYPED", cargs_untyped)
     code = code.replace("CARGS_CTX", cargs_ctx)
     code = code.replace("CARGS_FREE", cargs_free)
-    code = code.replace("RCPPARG", mt.cpptypes[rcpptype]["cpp"])
+    code = code.replace("RCPPARG", mt.cpptypes[rcpptype]["cpp"].replace("@", ""))
     code = code.replace(
         "CARGS_UNNAMED",
         ", ".join([mt.cpptypes[cpptype]["c_arg"]("") for cpptype in cpptypes]),
@@ -313,22 +304,26 @@ print(
         ["std::vector<mlx::core::array>"] * 3,
     )
 )
-# print(
-#     generate(
-#         code,
-#         "mlx_closure_custom_jvp",
-#         "std::vector<mlx::core::array>",
-#         ["std::vector<mlx::core::array>", "std::vector<mlx::core::array>", "std::vector<int>"],
-#     )
-# )
-# print(
-#     generate(
-#         code,
-#         "mlx_closure_custom_function_vmap",
-#         "mlx_tuple_vector_array_vector_int",
-#         ["mlx_vector_array", "mlx_vector_int"],
-#     )
-# )
+print(
+    generate(
+        code,
+        "mlx_closure_custom_jvp",
+        "std::vector<mlx::core::array>",
+        [
+            "std::vector<mlx::core::array>",
+            "std::vector<mlx::core::array>",
+            "std::vector<int>",
+        ],
+    )
+)
+print(
+    generate(
+        code,
+        "mlx_closure_custom_vmap",
+        "std::pair<std::vector<mlx::core::array>, @std::vector<int>>",
+        ["std::vector<mlx::core::array>", "std::vector<int>"],
+    )
+)
 # print(
 #     generate(
 #         code,
