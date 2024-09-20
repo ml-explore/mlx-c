@@ -133,40 +133,6 @@ mlx_array_dtype mlx_vector_array_dtype_get(
     size_t idx);
 mlx_array_dtype* mlx_vector_array_dtype_data(mlx_vector_array_dtype vec);
 
-typedef struct mlx_tuple_string_variant_int_bool_array_dtype_*
-    mlx_tuple_string_variant_int_bool_array_dtype;
-
-/**
- * A vector of tuple_string_variant_int_bool_array_dtype.
- */
-typedef struct mlx_vector_tuple_string_variant_int_bool_array_dtype_*
-    mlx_vector_tuple_string_variant_int_bool_array_dtype;
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_new();
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_data(
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size);
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_value(
-    const mlx_tuple_string_variant_int_bool_array_dtype val);
-void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_data(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size);
-void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_value(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype val);
-size_t mlx_vector_tuple_string_variant_int_bool_array_dtype_size(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec);
-mlx_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_get(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    size_t idx);
-mlx_tuple_string_variant_int_bool_array_dtype*
-mlx_vector_tuple_string_variant_int_bool_array_dtype_data(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec);
-
 /**@}*/
 
 #ifdef __cplusplus

@@ -13,7 +13,6 @@
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 

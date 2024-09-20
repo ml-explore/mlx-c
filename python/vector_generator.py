@@ -162,7 +162,6 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/object.h"
 #include "mlx/c/vector.h"
 #include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 """
@@ -252,21 +251,6 @@ print(
         "array_dtype",
         lambda s: "MLX_CPP_ARRAY_DTYPE(" + s + ")",
         lambda s: "RETURN_MLX_C_ARRAY_DTYPE(" + s + ")",
-    )
-)
-if not args.implementation and not args.private:
-    # avoid circular dependencies
-    print(
-        """
-typedef struct mlx_tuple_string_variant_int_bool_array_dtype_* mlx_tuple_string_variant_int_bool_array_dtype;
-    """
-    )
-print(
-    generate(
-        code,
-        "std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>",
-        "mlx_tuple_string_variant_int_bool_array_dtype",
-        "tuple_string_variant_int_bool_array_dtype",
     )
 )
 print(end)

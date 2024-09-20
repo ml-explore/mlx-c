@@ -115,35 +115,4 @@ struct mlx_vector_array_dtype_ : mlx_object_ {
   std::vector<mlx::core::Dtype> ctx;
 };
 
-struct mlx_vector_tuple_string_variant_int_bool_array_dtype_ : mlx_object_ {
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_() : mlx_object_(){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::vector<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      std::vector<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&&
-          ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::pair<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::tuple<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>
-      ctx;
-};
-
 #endif
