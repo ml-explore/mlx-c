@@ -26,6 +26,15 @@ extern "C" {
  */
 /**@{*/
 int mlx_metal_clear_cache();
+
+typedef struct mlx_metal_device_info_t_ {
+  char architecture[256];
+  size_t max_buffer_length;
+  size_t max_recommended_working_set_size;
+  size_t memory_size;
+} mlx_metal_device_info_t;
+mlx_metal_device_info_t mlx_metal_device_info();
+
 int mlx_metal_get_active_memory(size_t* res);
 int mlx_metal_get_cache_memory(size_t* res);
 int mlx_metal_get_peak_memory(size_t* res);

@@ -4,6 +4,7 @@ import re
 import sys
 
 import mlxtypes as mt
+import mlxhooks as hooks
 
 
 def to_snake_letters(name):
@@ -195,6 +196,14 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             print(" ".join(decl))
 
     for f in sorted_funcs:
+        if "variant" in f:
+            func_name = namespace_prefix + "_" + f["name"] + "_" + f["variant"]
+        else:
+            func_name = namespace_prefix + "_" + f["name"]
+        if hasattr(hooks, func_name):
+            getattr(hooks, func_name)(f, implementation)
+            continue
+
         # print(f["return_t"])
         signature = []
         return_t = f["return_t"]
@@ -208,10 +217,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             continue
 
         signature.append("int")  # return_t["c"]
-        if "variant" in f:
-            signature.append(namespace_prefix + "_" + f["name"] + "_" + f["variant"])
-        else:
-            signature.append(namespace_prefix + "_" + f["name"])
+        signature.append(func_name)
         signature.append("(")
 
         c_call = []
