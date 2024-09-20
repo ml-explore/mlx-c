@@ -28,6 +28,11 @@ for t in [
         "mlx_closure",
         "std::function<std::vector<array>(std::vector<array>)>",
     ],
+    [
+        "mlx_closure_value_and_grad",
+        "std::function<std::pair<std::vector<array>, std::vector<array>>(const std::vector<array>&)>",
+        "ValueAndGradFn",
+    ],
 ]:
     if len(t) == 2:
         ctype, cpptype = t
