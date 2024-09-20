@@ -41,16 +41,18 @@ valid only if :func:`mlx_eval()` as been called (see
 Vector of Arrays, and Vector of Vector of Arrays
 ------------------------------------------------
 
-:doc:`Vector of arrays <vecarray>` (:class:`mlx_vector_array`) can hold
-multiple arrays, and :doc:`vector of vector arrays <vecvecarray>`
-(:class:`mlx_vector_vector_array`) can hold multiple vector of arrays.
+MLX defines several types of :doc:`vectors <vector>`, including vector of
+arrays (:class:`mlx_vector_array`) which can hold multiple arrays, and
+vector of vector arrays (:class:`mlx_vector_vector_array`) which can hold
+multiple vector of arrays.
 
 An array added to a :class:`mlx_vector_array` will stay alive until the
 vector of arrays is destroyed (via :func:`mlx_free()`). Arrays returned by
 :func:`mlx_vector_array_get()` will need to be matched with a corresponding
 :func:`mlx_free()`.
 
-Same idea applies to :class:`mlx_vector_vector_array`.
+Same idea applies to :class:`mlx_vector_vector_array`, or other types of
+arrays.
 
 
 Device and Stream

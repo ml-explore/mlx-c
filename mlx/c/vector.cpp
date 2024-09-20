@@ -10,12 +10,6 @@
 #include "mlx/c/private/utils.h"
 #include "mlx/c/private/vector.h"
 
-/**
- * \defgroup mlx_vector_array A vector of arrays
- * MLX vector of array object.
- */
-/**@{*/
-
 mlx_string mlx_vector_array_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
                 os << "vector of arrays (size=" << ctx.size() << ")";
@@ -64,14 +58,6 @@ extern "C" mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index) {
 extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
   return vec->ctx.size();
 }
-
-/**@}*/
-
-/**
- * \defgroup mlx_vector_vector_array A vector of vector_arrays
- * MLX vector of vector_array object.
- */
-/**@{*/
 
 mlx_string mlx_vector_vector_array_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
@@ -125,14 +111,6 @@ extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec) {
   return vec->ctx.size();
 }
 
-/**@}*/
-
-/**
- * \defgroup mlx_vector_int A vector of ints
- * MLX vector of int object.
- */
-/**@{*/
-
 mlx_string mlx_vector_int_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
                 os << "vector of ints (size=" << ctx.size() << ")";
@@ -176,14 +154,6 @@ extern "C" int mlx_vector_int_get(mlx_vector_int vec, size_t index) {
 extern "C" size_t mlx_vector_int_size(mlx_vector_int vec) {
   return vec->ctx.size();
 }
-
-/**@}*/
-
-/**
- * \defgroup mlx_vector_vector_int A vector of vector_ints
- * MLX vector of vector_int object.
- */
-/**@{*/
 
 mlx_string mlx_vector_vector_int_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
@@ -237,14 +207,6 @@ extern "C" size_t mlx_vector_vector_int_size(mlx_vector_vector_int vec) {
   return vec->ctx.size();
 }
 
-/**@}*/
-
-/**
- * \defgroup mlx_vector_string A vector of strings
- * MLX vector of string object.
- */
-/**@{*/
-
 mlx_string mlx_vector_string_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
                 os << "vector of strings (size=" << ctx.size() << ")";
@@ -297,14 +259,6 @@ extern "C" size_t mlx_vector_string_size(mlx_vector_string vec) {
   return vec->ctx.size();
 }
 
-/**@}*/
-
-/**
- * \defgroup mlx_vector_array_dtype A vector of array_dtypes
- * MLX vector of array_dtype object.
- */
-/**@{*/
-
 mlx_string mlx_vector_array_dtype_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
                 os << "vector of array_dtypes (size=" << ctx.size() << ")";
@@ -356,15 +310,6 @@ extern "C" mlx_array_dtype mlx_vector_array_dtype_get(
 extern "C" size_t mlx_vector_array_dtype_size(mlx_vector_array_dtype vec) {
   return vec->ctx.size();
 }
-
-/**@}*/
-
-/**
- * \defgroup mlx_vector_tuple_string_variant_int_bool_array_dtype A vector of
- * tuple_string_variant_int_bool_array_dtypes MLX vector of
- * tuple_string_variant_int_bool_array_dtype object.
- */
-/**@{*/
 
 mlx_string mlx_vector_tuple_string_variant_int_bool_array_dtype_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os; os
@@ -427,5 +372,3 @@ extern "C" size_t mlx_vector_tuple_string_variant_int_bool_array_dtype_size(
     mlx_vector_tuple_string_variant_int_bool_array_dtype vec) {
   return vec->ctx.size();
 }
-
-/**@}*/

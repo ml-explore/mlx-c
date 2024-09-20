@@ -15,8 +15,8 @@ extern "C" {
 #endif
 
 /**
- * \defgroup mlx_map_string_to_array string-to-array map
- * MLX string-to-array map object.
+ * \defgroup mlx_map Maps
+ * MLX map objects.
  */
 /**@{*/
 
@@ -75,14 +75,6 @@ mlx_string mlx_map_string_to_array_iterator_key(
 mlx_array mlx_map_string_to_array_iterator_value(
     mlx_map_string_to_array_iterator it);
 
-/**@}*/
-
-/**
- * \defgroup mlx_map_string_to_string string-to-string map
- * MLX string-to-string map object.
- */
-/**@{*/
-
 /**
  * A string-to-string map
  */
@@ -139,15 +131,6 @@ mlx_string mlx_map_string_to_string_iterator_key(
  */
 mlx_string mlx_map_string_to_string_iterator_value(
     mlx_map_string_to_string_iterator it);
-
-/**@}*/
-
-/**
- * \defgroup mlx_map_string_to_variant_string_size_t
- * string-to-variant_string_size_t map MLX string-to-variant_string_size_t map
- * object.
- */
-/**@{*/
 
 /**
  * A string-to-variant_string_size_t map

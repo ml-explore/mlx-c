@@ -7,12 +7,6 @@ args = parser.parse_args()
 
 decl_code = """
 /**
- * \defgroup mlx_map_SCTYPE1_to_SCTYPE2 SCTYPE1-to-SCTYPE2 map
- * MLX SCTYPE1-to-SCTYPE2 map object.
- */
-/**@{*/
-
-/**
  * A SCTYPE1-to-SCTYPE2 map
  */
 typedef struct mlx_map_SCTYPE1_to_SCTYPE2_* mlx_map_SCTYPE1_to_SCTYPE2;
@@ -66,9 +60,6 @@ CTYPE1 mlx_map_SCTYPE1_to_SCTYPE2_iterator_key(
  */
 CTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_iterator_value(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
-
-/**@}*/
-
 """
 
 impl_code = """
@@ -217,9 +208,17 @@ define_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * \defgroup mlx_map Maps
+ * MLX map objects.
+ */
+/**@{*/
 """
 
 define_end = """
+/**@}*/
+
 #ifdef __cplusplus
 }
 #endif

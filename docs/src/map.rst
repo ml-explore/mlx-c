@@ -1,5 +1,5 @@
-Map
-===
+Maps
+====
 
-.. doxygengroup:: mlx_map_string_to_array
+.. doxygengroup:: mlx_map
    :content-only:

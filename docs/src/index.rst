@@ -31,12 +31,14 @@ bindings to MLX.
 
    object
    array
-   vecarray
-   vecvecarray
+   vector
    stream
    device
    string
    map
+   tuple
+   variant
+   optional
    closure
    future
    distributed_group
@@ -49,6 +51,7 @@ bindings to MLX.
    ops
    fft
    linalg
+   einsum
    random
    io
    transforms

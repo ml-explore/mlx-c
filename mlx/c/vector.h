@@ -14,6 +14,12 @@ extern "C" {
 #endif
 
 /**
+ * \defgroup mlx_vector Vectors
+ * MLX vector objects.
+ */
+/**@{*/
+
+/**
  * A vector of array.
  */
 typedef struct mlx_vector_array_* mlx_vector_array;
@@ -160,6 +166,8 @@ mlx_vector_tuple_string_variant_int_bool_array_dtype_get(
 mlx_tuple_string_variant_int_bool_array_dtype*
 mlx_vector_tuple_string_variant_int_bool_array_dtype_data(
     mlx_vector_tuple_string_variant_int_bool_array_dtype vec);
+
+/**@}*/
 
 #ifdef __cplusplus
 }

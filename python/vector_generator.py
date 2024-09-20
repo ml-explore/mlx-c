@@ -36,12 +36,6 @@ CTYPE* mlx_vector_SCTYPE_data(mlx_vector_SCTYPE vec);
 """
 
 impl_code = """
-/**
- * \defgroup mlx_vector_SCTYPE A vector of SCTYPEs
- * MLX vector of SCTYPE object.
- */
-/**@{*/
-
 mlx_string mlx_vector_SCTYPE_::tostring() {
   MLX_TRY_CATCH(std::ostringstream os;
                 os << "vector of SCTYPEs (size=" << ctx.size() << ")";
@@ -90,8 +84,6 @@ extern "C" CTYPE mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index) {
 extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
   return vec->ctx.size();
 }
-
-/**@}*/
 """
 
 priv_code = """
@@ -144,9 +136,17 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * \defgroup mlx_vector Vectors
+ * MLX vector objects.
+ */
+/**@{*/
 """
 
 decl_end = """
+/**@}*/
+
 #ifdef __cplusplus
 }
 #endif
@@ -257,7 +257,9 @@ print(
 if not args.implementation and not args.private:
     # avoid circular dependencies
     print(
-        "typedef struct mlx_tuple_string_variant_int_bool_array_dtype_* mlx_tuple_string_variant_int_bool_array_dtype;"
+        """
+typedef struct mlx_tuple_string_variant_int_bool_array_dtype_* mlx_tuple_string_variant_int_bool_array_dtype;
+    """
     )
 print(
     generate(
