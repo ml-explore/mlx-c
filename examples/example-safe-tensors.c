@@ -18,10 +18,11 @@ int main() {
   }
 
   mlx_stream stream = mlx_gpu_stream();
-  mlx_safetensors st = mlx_load_safetensors_file(f, stream);
-  mlx_map_string_to_array map = mlx_safetensors_data(st);
+  mlx_map_string_to_array data = mlx_map_string_to_array_new();
+  mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
+  mlx_load_safetensors_file(f, stream, data, metadata);
 
-  mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(map);
+  mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(data);
   while (!mlx_map_string_to_array_iterator_end(it)) {
     mlx_string key = mlx_map_string_to_array_iterator_key(it);
     mlx_array value = mlx_map_string_to_array_iterator_value(it);
@@ -34,8 +35,8 @@ int main() {
     mlx_map_string_to_array_iterator_next(it);
   }
 
-  mlx_free(map);
-  mlx_free(st);
+  mlx_free(data);
+  mlx_free(metadata);
   mlx_free(stream);
   fclose(f);
 
