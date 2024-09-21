@@ -16,7 +16,19 @@ mlx_string_* mlx_closure_::tostring() {
       "void mlx_closure(const mlx_vector_array, void*, mlx_vector_array)");
 }
 
-extern "C" mlx_closure mlx_closure_new(
+extern "C" mlx_closure mlx_closure_new() {
+  try {
+    auto cpp_closure = [](const std::vector<mlx::core::array>& cpp_input) {
+      return std::vector<mlx::core::array>();
+    };
+    return new mlx_closure_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" mlx_closure mlx_closure_from_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -33,7 +45,7 @@ extern "C" mlx_closure mlx_closure_new(
       return new mlx_closure_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure mlx_closure_new_with_payload(
+extern "C" mlx_closure mlx_closure_from_func_payload(
     void (*fun)(const mlx_vector_array, void*, mlx_vector_array),
     void* payload,
     void (*dtor)(void*)) {
@@ -65,7 +77,7 @@ extern "C" int mlx_closure_apply(
   return 0;
 }
 
-extern "C" mlx_closure mlx_closure_new_unary(
+extern "C" mlx_closure mlx_closure_from_unary(
     void (*fun)(const mlx_array, mlx_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -89,7 +101,20 @@ mlx_string_* mlx_closure_value_and_grad_::tostring() {
       "void mlx_closure(const mlx_vector_array, void*, mlx_vector_array, mlx_vector_array)");
 }
 
-extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new(
+extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new() {
+  try {
+    auto cpp_closure = [](const std::vector<mlx::core::array>& cpp_input) {
+      return std::
+          pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>();
+    };
+    return new mlx_closure_value_and_grad_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_from_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array, mlx_vector_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -111,7 +136,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new(
 }
 
 extern "C" mlx_closure_value_and_grad
-mlx_closure_value_and_grad_new_with_payload(
+mlx_closure_value_and_grad_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         void*,
@@ -158,7 +183,21 @@ mlx_string_* mlx_closure_custom_::tostring() {
       "void mlx_closure(const mlx_vector_array, const mlx_vector_array, const mlx_vector_array, void*, mlx_vector_array)");
 }
 
-extern "C" mlx_closure_custom mlx_closure_custom_new(void (*fun)(
+extern "C" mlx_closure_custom mlx_closure_custom_new() {
+  try {
+    auto cpp_closure = [](const std::vector<mlx::core::array>& cpp_input_0,
+                          const std::vector<mlx::core::array>& cpp_input_1,
+                          const std::vector<mlx::core::array>& cpp_input_2) {
+      return std::vector<mlx::core::array>();
+    };
+    return new mlx_closure_custom_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" mlx_closure_custom mlx_closure_custom_from_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const mlx_vector_array,
@@ -187,7 +226,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new(void (*fun)(
       return new mlx_closure_custom_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom mlx_closure_custom_new_with_payload(
+extern "C" mlx_closure_custom mlx_closure_custom_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -239,7 +278,21 @@ mlx_string_* mlx_closure_custom_jvp_::tostring() {
       "void mlx_closure(const mlx_vector_array, const mlx_vector_array, const int* , size_t _num, void*, mlx_vector_array)");
 }
 
-extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new(void (*fun)(
+extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new() {
+  try {
+    auto cpp_closure = [](const std::vector<mlx::core::array>& cpp_input_0,
+                          const std::vector<mlx::core::array>& cpp_input_1,
+                          const std::vector<int>& cpp_input_2) {
+      return std::vector<mlx::core::array>();
+    };
+    return new mlx_closure_custom_jvp_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const int*,
@@ -271,7 +324,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new(void (*fun)(
       return new mlx_closure_custom_jvp_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_with_payload(
+extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -331,12 +384,26 @@ mlx_string_* mlx_closure_custom_vmap_::tostring() {
       "void mlx_closure(const mlx_vector_array, const int* , size_t _num, void*, mlx_vector_array, mlx_vector_int)");
 }
 
-extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new(void (*fun)(
-    const mlx_vector_array,
-    const int*,
-    size_t _num,
-    mlx_vector_array,
-    mlx_vector_int)) {
+extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new() {
+  try {
+    auto cpp_closure = [](const std::vector<mlx::core::array>& cpp_input_0,
+                          const std::vector<int>& cpp_input_1) {
+      return std::pair<std::vector<mlx::core::array>, std::vector<int>>();
+    };
+    return new mlx_closure_custom_vmap_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func(
+    void (*fun)(
+        const mlx_vector_array,
+        const int*,
+        size_t _num,
+        mlx_vector_array,
+        mlx_vector_int)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
           [fun](
@@ -363,7 +430,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new(void (*fun)(
       return new mlx_closure_custom_vmap_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_with_payload(
+extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const int*,

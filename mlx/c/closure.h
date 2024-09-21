@@ -22,9 +22,10 @@ extern "C" {
 /**@{*/
 
 typedef struct mlx_closure_* mlx_closure;
-mlx_closure mlx_closure_new(
+mlx_closure mlx_closure_new();
+mlx_closure mlx_closure_from_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array));
-mlx_closure mlx_closure_new_with_payload(
+mlx_closure mlx_closure_from_func_payload(
     void (*fun)(const mlx_vector_array, void*, mlx_vector_array),
     void* payload,
     void (*dtor)(void*));
@@ -33,12 +34,13 @@ int mlx_closure_apply(
     const mlx_vector_array input,
     mlx_vector_array res);
 
-mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array));
+mlx_closure mlx_closure_from_unary(void (*fun)(const mlx_array, mlx_array));
 
 typedef struct mlx_closure_value_and_grad_* mlx_closure_value_and_grad;
-mlx_closure_value_and_grad mlx_closure_value_and_grad_new(
+mlx_closure_value_and_grad mlx_closure_value_and_grad_new();
+mlx_closure_value_and_grad mlx_closure_value_and_grad_from_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array, mlx_vector_array));
-mlx_closure_value_and_grad mlx_closure_value_and_grad_new_with_payload(
+mlx_closure_value_and_grad mlx_closure_value_and_grad_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         void*,
@@ -53,12 +55,13 @@ int mlx_closure_value_and_grad_apply(
     mlx_vector_array res_1);
 
 typedef struct mlx_closure_custom_* mlx_closure_custom;
-mlx_closure_custom mlx_closure_custom_new(void (*fun)(
+mlx_closure_custom mlx_closure_custom_new();
+mlx_closure_custom mlx_closure_custom_from_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const mlx_vector_array,
     mlx_vector_array));
-mlx_closure_custom mlx_closure_custom_new_with_payload(
+mlx_closure_custom mlx_closure_custom_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -75,13 +78,14 @@ int mlx_closure_custom_apply(
     mlx_vector_array res);
 
 typedef struct mlx_closure_custom_jvp_* mlx_closure_custom_jvp;
-mlx_closure_custom_jvp mlx_closure_custom_jvp_new(void (*fun)(
+mlx_closure_custom_jvp mlx_closure_custom_jvp_new();
+mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const int*,
     size_t _num,
     mlx_vector_array));
-mlx_closure_custom_jvp mlx_closure_custom_jvp_new_with_payload(
+mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -100,13 +104,14 @@ int mlx_closure_custom_jvp_apply(
     mlx_vector_array res);
 
 typedef struct mlx_closure_custom_vmap_* mlx_closure_custom_vmap;
-mlx_closure_custom_vmap mlx_closure_custom_vmap_new(void (*fun)(
+mlx_closure_custom_vmap mlx_closure_custom_vmap_new();
+mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func(void (*fun)(
     const mlx_vector_array,
     const int*,
     size_t _num,
     mlx_vector_array,
     mlx_vector_int));
-mlx_closure_custom_vmap mlx_closure_custom_vmap_new_with_payload(
+mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const int*,
