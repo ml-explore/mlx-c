@@ -97,22 +97,4 @@ struct mlx_vector_string_ : mlx_object_ {
   std::vector<std::string> ctx;
 };
 
-struct mlx_vector_array_dtype_ : mlx_object_ {
-  mlx_vector_array_dtype_() : mlx_object_(){};
-  mlx_vector_array_dtype_(const std::vector<mlx::core::Dtype>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_array_dtype_(std::vector<mlx::core::Dtype>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_array_dtype_(
-      const std::pair<mlx::core::Dtype, mlx::core::Dtype>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_array_dtype_(
-      const std::tuple<mlx::core::Dtype, mlx::core::Dtype, mlx::core::Dtype>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<mlx::core::Dtype> ctx;
-};
-
 #endif
