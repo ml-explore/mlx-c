@@ -23,8 +23,9 @@ def replace_match_parenthesis(string, keyword, fun):
 
 decl_code = """
 typedef struct NAME_* NAME;
-NAME NAME_new(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
-NAME NAME_new_with_payload(
+NAME NAME_new();
+NAME NAME_from_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
+NAME NAME_from_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
     void* payload,
     void (*dtor)(void*));
@@ -106,7 +107,20 @@ mlx_string_* NAME_::tostring() {
   RETURN_MLX_C_STRING("void mlx_closure(CARGS_UNNAMED, void*, RCARGS_UNNAMED)");
 }
 
-extern "C" NAME NAME_new(
+extern "C" NAME NAME_new() {
+  try {
+    auto cpp_closure =
+          [](CPPARGS_TYPE_NAME) {
+              return RCPPARG();
+          };
+    return new NAME_(cpp_closure);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+
+extern "C" NAME NAME_from_func(
     void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -122,7 +136,7 @@ extern "C" NAME NAME_new(
       return new NAME_(cpp_closure), return nullptr);
 }
 
-extern "C" NAME NAME_new_with_payload(
+extern "C" NAME NAME_from_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
     void* payload,
     void (*dtor)(void*)) {
@@ -258,7 +272,7 @@ print(
 if args.implementation:
     print(
         """
-extern "C" mlx_closure mlx_closure_new_unary(
+extern "C" mlx_closure mlx_closure_from_unary(
     void (*fun)(const mlx_array, mlx_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -283,7 +297,7 @@ elif args.private:
 else:
     print(
         """
-mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array));
+mlx_closure mlx_closure_from_unary(void (*fun)(const mlx_array, mlx_array));
     """
     )
 print(
