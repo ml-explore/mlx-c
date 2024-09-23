@@ -70,6 +70,30 @@ extern "C" int mlx_fast_layer_norm(
   }
   return 0;
 }
+extern "C" int mlx_fast_metal_kernel(
+    mlx_string name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    mlx_string source,
+    mlx_string header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs,
+    mlx_closure_metal_kernel res) {
+  try {
+    res->ctx = mlx::core::fast::metal_kernel(
+        MLX_CPP_STRING(name),
+        MLX_CPP_STRINGVEC(input_names),
+        MLX_CPP_STRINGVEC(output_names),
+        MLX_CPP_STRING(source),
+        MLX_CPP_STRING(header),
+        ensure_row_contiguous,
+        atomic_outputs);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_fast_rms_norm(
     mlx_array x,
     mlx_array weight,
