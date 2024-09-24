@@ -39,7 +39,7 @@ extern "C" mlx_array mlx_array_from_data(
     mlx_dtype dtype) {
   std::vector<int> cpp_shape;
   cpp_shape.assign(shape, shape + dim);
-  mlx::core::Dtype cpp_dtype = MLX_CPP_DTYPE(dtype);
+  mlx::core::Dtype cpp_dtype = mlx_dtype_to_cpp(dtype);
   switch (cpp_dtype) {
     case mlx::core::bool_:
       RETURN_MLX_C_ARRAY(mlx::core::array((bool*)data, cpp_shape, cpp_dtype));
@@ -105,7 +105,7 @@ extern "C" int mlx_array_dim(mlx_array arr, int dim) {
   return MLX_CPP_ARRAY(arr).shape(dim);
 }
 extern "C" mlx_dtype mlx_array_dtype(mlx_array arr) {
-  RETURN_MLX_C_ARRAY_DTYPE(MLX_CPP_ARRAY(arr).dtype());
+  return mlx_dtype_to_c(MLX_CPP_ARRAY(arr).dtype());
 }
 extern "C" void mlx_array_eval(mlx_array arr) {
   MLX_CPP_ARRAY(arr).eval();

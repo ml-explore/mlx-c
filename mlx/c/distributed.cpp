@@ -17,9 +17,9 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int mlx_distributed_all_gather(
-    mlx_array x,
-    mlx_distributed_group group,
-    mlx_stream S,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream S,
     mlx_array res) {
   try {
     res->ctx = mlx::core::distributed::all_gather(
@@ -33,9 +33,9 @@ extern "C" int mlx_distributed_all_gather(
   return 0;
 }
 extern "C" int mlx_distributed_all_sum(
-    mlx_array x,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::distributed::all_sum(
@@ -50,16 +50,16 @@ extern "C" int mlx_distributed_all_sum(
 }
 extern "C" int mlx_distributed_recv(
     const int* shape,
-    size_t num_shape,
+    size_t shape_num,
     mlx_dtype dtype,
     int src,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::distributed::recv(
-        MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_DTYPE(dtype),
+        std::vector<int>(shape, shape + shape_num),
+        mlx_dtype_to_cpp(dtype),
         src,
         (group ? std::make_optional(group->ctx) : std::nullopt),
         s->ctx);
@@ -70,10 +70,10 @@ extern "C" int mlx_distributed_recv(
   return 0;
 }
 extern "C" int mlx_distributed_recv_like(
-    mlx_array x,
+    const mlx_array x,
     int src,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::distributed::recv_like(
@@ -88,10 +88,10 @@ extern "C" int mlx_distributed_recv_like(
   return 0;
 }
 extern "C" int mlx_distributed_send(
-    mlx_array x,
+    const mlx_array x,
     int dst,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::distributed::send(

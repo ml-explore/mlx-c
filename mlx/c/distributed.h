@@ -25,34 +25,34 @@ extern "C" {
  */
 /**@{*/
 int mlx_distributed_all_gather(
-    mlx_array x,
-    mlx_distributed_group group,
-    mlx_stream S,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream S,
     mlx_array res);
 int mlx_distributed_all_sum(
-    mlx_array x,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res);
 int mlx_distributed_recv(
     const int* shape,
-    size_t num_shape,
+    size_t shape_num,
     mlx_dtype dtype,
     int src,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res);
 int mlx_distributed_recv_like(
-    mlx_array x,
+    const mlx_array x,
     int src,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res);
 int mlx_distributed_send(
-    mlx_array x,
+    const mlx_array x,
     int dst,
-    mlx_distributed_group group,
-    mlx_stream s,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s,
     mlx_array res);
 /**@}*/
 
