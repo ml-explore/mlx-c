@@ -17,13 +17,13 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
       "out[elem] = metal::exp(tmp);";
   mlx_string input_name0 = mlx_string_new("inp");
   mlx_string output_name0 = mlx_string_new("out");
-  mlx_vector_string input_names = mlx_vector_string_from_value(input_name0);
-  mlx_vector_string output_names = mlx_vector_string_from_value(output_name0);
+  mlx_vector_string input_names = mlx_vector_string_new_value(input_name0);
+  mlx_vector_string output_names = mlx_vector_string_new_value(output_name0);
   mlx_closure_metal_kernel kernel = mlx_closure_metal_kernel_new();
   mlx_fast_metal_kernel(
       "myexp", input_names, output_names, source, "", true, false, kernel);
 
-  mlx_vector_array inputs = mlx_vector_array_from_value(input);
+  mlx_vector_array inputs = mlx_vector_array_new_value(input);
   mlx_closure_metal_kernel_desc desc = mlx_closure_metal_kernel_desc_new();
   mlx_closure_metal_kernel_desc_add_template_arg_dtype(desc, "T", MLX_FLOAT32);
   mlx_closure_metal_kernel_desc_set_grid(desc, mlx_array_size(input), 1, 1);

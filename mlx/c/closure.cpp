@@ -28,7 +28,7 @@ extern "C" mlx_closure mlx_closure_new() {
   }
 }
 
-extern "C" mlx_closure mlx_closure_from_func(
+extern "C" mlx_closure mlx_closure_new_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -45,7 +45,7 @@ extern "C" mlx_closure mlx_closure_from_func(
       return new mlx_closure_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure mlx_closure_from_func_payload(
+extern "C" mlx_closure mlx_closure_new_func_payload(
     void (*fun)(const mlx_vector_array, void*, mlx_vector_array),
     void* payload,
     void (*dtor)(void*)) {
@@ -77,7 +77,7 @@ extern "C" int mlx_closure_apply(
   return 0;
 }
 
-extern "C" mlx_closure mlx_closure_from_unary(
+extern "C" mlx_closure mlx_closure_new_unary(
     void (*fun)(const mlx_array, mlx_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -114,7 +114,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new() {
   }
 }
 
-extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_from_func(
+extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array, mlx_vector_array)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
@@ -136,7 +136,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_from_func(
 }
 
 extern "C" mlx_closure_value_and_grad
-mlx_closure_value_and_grad_from_func_payload(
+mlx_closure_value_and_grad_new_func_payload(
     void (*fun)(
         const mlx_vector_array,
         void*,
@@ -197,7 +197,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new() {
   }
 }
 
-extern "C" mlx_closure_custom mlx_closure_custom_from_func(void (*fun)(
+extern "C" mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const mlx_vector_array,
@@ -226,7 +226,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_from_func(void (*fun)(
       return new mlx_closure_custom_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom mlx_closure_custom_from_func_payload(
+extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -292,7 +292,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new() {
   }
 }
 
-extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func(void (*fun)(
+extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
     const int*,
@@ -324,7 +324,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func(void (*fun)(
       return new mlx_closure_custom_jvp_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_from_func_payload(
+extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const mlx_vector_array,
@@ -397,13 +397,12 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new() {
   }
 }
 
-extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func(
-    void (*fun)(
-        const mlx_vector_array,
-        const int*,
-        size_t _num,
-        mlx_vector_array,
-        mlx_vector_int)) {
+extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
+    const mlx_vector_array,
+    const int*,
+    size_t _num,
+    mlx_vector_array,
+    mlx_vector_int)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
           [fun](
@@ -430,7 +429,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func(
       return new mlx_closure_custom_vmap_(cpp_closure), return nullptr);
 }
 
-extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_from_func_payload(
+extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
     void (*fun)(
         const mlx_vector_array,
         const int*,

@@ -29,10 +29,10 @@ int main() {
   mlx_stream stream = mlx_gpu_stream();
   float data[] = {1, 2, 3, 4, 5, 6};
   int shape[] = {2, 3};
-  mlx_array arr = mlx_array_from_data(data, shape, 2, MLX_FLOAT32);
+  mlx_array arr = mlx_array_new_data(data, shape, 2, MLX_FLOAT32);
   print_array("hello world!", arr);
 
-  mlx_array two = mlx_array_from_int(2);
+  mlx_array two = mlx_array_new_int(2);
   mlx_divide(arr, two, stream, arr);
   print_array("divive by 2!", arr);
 
