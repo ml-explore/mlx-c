@@ -21,7 +21,7 @@ extern "C" mlx_vector_array mlx_vector_array_new() {
   RETURN_MLX_C_PTR(new mlx_vector_array_())
 }
 
-extern "C" mlx_vector_array mlx_vector_array_from_data(
+extern "C" mlx_vector_array mlx_vector_array_new_data(
     const mlx_array* data,
     size_t size) {
   std::vector<mlx::core::array> cpp_arrs;
@@ -31,7 +31,7 @@ extern "C" mlx_vector_array mlx_vector_array_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_array_(cpp_arrs))
 }
 
-extern "C" mlx_vector_array mlx_vector_array_from_value(const mlx_array val) {
+extern "C" mlx_vector_array mlx_vector_array_new_value(const mlx_array val) {
   RETURN_MLX_C_PTR(new mlx_vector_array_({val->ctx}))
 }
 
@@ -106,7 +106,7 @@ extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_())
 }
 
-extern "C" mlx_vector_vector_array mlx_vector_vector_array_from_data(
+extern "C" mlx_vector_vector_array mlx_vector_vector_array_new_data(
     const mlx_vector_array* data,
     size_t size) {
   std::vector<std::vector<mlx::core::array>> cpp_arrs;
@@ -116,7 +116,7 @@ extern "C" mlx_vector_vector_array mlx_vector_vector_array_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_(cpp_arrs))
 }
 
-extern "C" mlx_vector_vector_array mlx_vector_vector_array_from_value(
+extern "C" mlx_vector_vector_array mlx_vector_vector_array_new_value(
     const mlx_vector_array val) {
   RETURN_MLX_C_PTR(new mlx_vector_vector_array_({val->ctx}))
 }
@@ -194,7 +194,7 @@ extern "C" mlx_vector_int mlx_vector_int_new() {
   RETURN_MLX_C_PTR(new mlx_vector_int_())
 }
 
-extern "C" mlx_vector_int mlx_vector_int_from_data(
+extern "C" mlx_vector_int mlx_vector_int_new_data(
     const int* data,
     size_t size) {
   std::vector<int> cpp_arrs;
@@ -204,7 +204,7 @@ extern "C" mlx_vector_int mlx_vector_int_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_int_(cpp_arrs))
 }
 
-extern "C" mlx_vector_int mlx_vector_int_from_value(const int val) {
+extern "C" mlx_vector_int mlx_vector_int_new_value(const int val) {
   RETURN_MLX_C_PTR(new mlx_vector_int_({val}))
 }
 
@@ -269,7 +269,7 @@ extern "C" mlx_vector_vector_int mlx_vector_vector_int_new() {
   RETURN_MLX_C_PTR(new mlx_vector_vector_int_())
 }
 
-extern "C" mlx_vector_vector_int mlx_vector_vector_int_from_data(
+extern "C" mlx_vector_vector_int mlx_vector_vector_int_new_data(
     const mlx_vector_int* data,
     size_t size) {
   std::vector<std::vector<int>> cpp_arrs;
@@ -279,7 +279,7 @@ extern "C" mlx_vector_vector_int mlx_vector_vector_int_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_vector_int_(cpp_arrs))
 }
 
-extern "C" mlx_vector_vector_int mlx_vector_vector_int_from_value(
+extern "C" mlx_vector_vector_int mlx_vector_vector_int_new_value(
     const mlx_vector_int val) {
   RETURN_MLX_C_PTR(new mlx_vector_vector_int_({val->ctx}))
 }
@@ -357,7 +357,7 @@ extern "C" mlx_vector_string mlx_vector_string_new() {
   RETURN_MLX_C_PTR(new mlx_vector_string_())
 }
 
-extern "C" mlx_vector_string mlx_vector_string_from_data(
+extern "C" mlx_vector_string mlx_vector_string_new_data(
     const mlx_string* data,
     size_t size) {
   std::vector<std::string> cpp_arrs;
@@ -367,8 +367,7 @@ extern "C" mlx_vector_string mlx_vector_string_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_string_(cpp_arrs))
 }
 
-extern "C" mlx_vector_string mlx_vector_string_from_value(
-    const mlx_string val) {
+extern "C" mlx_vector_string mlx_vector_string_new_value(const mlx_string val) {
   RETURN_MLX_C_PTR(new mlx_vector_string_({val->ctx}))
 }
 

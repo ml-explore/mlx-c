@@ -53,19 +53,19 @@ mlx_array mlx_array_new();
 /**
  * New array from a bool scalar.
  */
-mlx_array mlx_array_from_bool(bool val);
+mlx_array mlx_array_new_bool(bool val);
 /**
  * New array from a int scalar.
  */
-mlx_array mlx_array_from_int(int val);
+mlx_array mlx_array_new_int(int val);
 /**
  * New array from a float scalar.
  */
-mlx_array mlx_array_from_float(float val);
+mlx_array mlx_array_new_float(float val);
 /**
  * New array from a complex scalar.
  */
-mlx_array mlx_array_from_complex(float real_val, float imag_val);
+mlx_array mlx_array_new_complex(float real_val, float imag_val);
 /**
  * New array from existing buffer.
  * @param data A buffer which will be copied.
@@ -73,7 +73,7 @@ mlx_array mlx_array_from_complex(float real_val, float imag_val);
  * @param dim Number of dimensions (size of `shape`).
  * @param dtype Type of array elements.
  */
-mlx_array mlx_array_from_data(
+mlx_array mlx_array_new_data(
     const void* data,
     const int* shape,
     int dim,

@@ -26,8 +26,8 @@ decl_code = """
  */
 typedef struct mlx_vector_SCTYPE_* mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
-mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(const CTYPE* data, size_t size);
-mlx_vector_SCTYPE mlx_vector_SCTYPE_from_value(const CTYPE val);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(const CTYPE* data, size_t size);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(const CTYPE val);
 int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, const CTYPE* data, size_t size);
 int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, const CTYPE val);
 void mlx_vector_SCTYPE_add_data(mlx_vector_SCTYPE vec, const CTYPE* data, size_t size);
@@ -49,7 +49,7 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_())
 }
 
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
     const CTYPE* data,
     size_t size) {
   std::vector<CPPTYPE> cpp_arrs;
@@ -59,7 +59,7 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_(cpp_arrs))
 }
 
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_value(const CTYPE val) {
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(const CTYPE val) {
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_({C_TO_CPP(val)}))
 }
 

@@ -19,20 +19,20 @@ extern "C" mlx_array mlx_array_new() {
   RETURN_MLX_C_PTR(new mlx_array_());
 }
 
-extern "C" mlx_array mlx_array_from_bool(bool val) {
+extern "C" mlx_array mlx_array_new_bool(bool val) {
   RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
-extern "C" mlx_array mlx_array_from_int(int val) {
+extern "C" mlx_array mlx_array_new_int(int val) {
   RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
-extern "C" mlx_array mlx_array_from_float(float val) {
+extern "C" mlx_array mlx_array_new_float(float val) {
   RETURN_MLX_C_ARRAY(mlx::core::array(val));
 }
-extern "C" mlx_array mlx_array_from_complex(float real_val, float imag_val) {
+extern "C" mlx_array mlx_array_new_complex(float real_val, float imag_val) {
   std::complex<float> cpp_val(real_val, imag_val);
   RETURN_MLX_C_ARRAY(mlx::core::array(cpp_val));
 }
-extern "C" mlx_array mlx_array_from_data(
+extern "C" mlx_array mlx_array_new_data(
     const void* data,
     const int* shape,
     int dim,
