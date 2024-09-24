@@ -5,6 +5,7 @@ types = []
 for t in [
     ["mlx_array", "mlx::core::array", "array"],
     ["mlx_vector_int", "@std::vector<int>", "@std::vector<int>"],
+    ["mlx_vector_string", "std::vector<std::string>", "std::vector<std::string>"],
     ["mlx_vector_array", "std::vector<mlx::core::array>", "std::vector<array>"],
     [
         "mlx_stream",
@@ -23,6 +24,12 @@ for t in [
     [
         "mlx_stream",
         "mlx::core::Stream",
+        "StreamOrDevice",
+    ],
+    [
+        "mlx_distributed_group",
+        "mlx::core::distributed::Group",
+        "Group",
     ],
     [
         "mlx_closure",
@@ -32,6 +39,21 @@ for t in [
         "mlx_closure_value_and_grad",
         "std::function<std::pair<std::vector<array>, std::vector<array>>(const std::vector<array>&)>",
         "ValueAndGradFn",
+    ],
+    [
+        "mlx_closure_custom",
+        "std::function<std::vector<mlx::core::array>(std::vector<mlx::core::array>,std::vector<mlx::core::array>,std::vector<mlx::core::array>)>",
+        "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>",
+    ],
+    [
+        "mlx_closure_custom_jvp",
+        "std::function<std::vector<mlx::core::array>(std::vector<mlx::core::array>,std::vector<mlx::core::array>,std::vector<int>)>",
+        "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>",
+    ],
+    [
+        "mlx_closure_custom_vmap",
+        "std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(std::vector<mlx::core::array>,std::vector<int>)>",
+        "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>",
     ],
     [
         "mlx_closure_metal_kernel",
@@ -75,14 +97,13 @@ def find_cpp_type(cpp_type):
     raise RuntimeError("Could not find type " + cpp_type)
 
 
-def register_raw_array_type(cpptype):
+def register_raw_vector_type(cpptype):
     types.append(
         {
             # "c": "mlx_vector_" + cpptype, # DEBUG: ONLY FOR RETURN?
             # "alt": "std::vector<" + cpptype + ">", # DEBUG: ONLY FOR RETURN?
             "cpp": "std::vector<" + cpptype + ">",
             "free": lambda s: "",
-            # "cpp_to_c": lambda s, ctype=ctype: "new " + ctype + "_(" + s + ")",
             "c_to_cpp": lambda s, cpptype=cpptype: "std::vector<"
             + cpptype
             + ">("
@@ -93,7 +114,6 @@ def register_raw_array_type(cpptype):
             + s
             + "_num"
             + ")",
-            # "return": lambda s: "RETURN_MLX_C_PTR(" + s + ")",
             "c_assign_from_cpp": lambda d, s: d
             + " = "
             + s
@@ -118,13 +138,102 @@ def register_raw_array_type(cpptype):
             # "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
             "cpp_arg": lambda s, cpptype=cpptype: (
                 "const std::vector<" + cpptype + ">& " + s
-            ).strip()
-            # ).strip(),
+            ).strip(),
         }
     )
 
 
-register_raw_array_type("int")
+register_raw_vector_type("int")
+register_raw_vector_type("size_t")
+register_raw_vector_type("uint64_t")
+
+
+def register_optional_raw_vector_type(cpptype):
+    cpp = "std::optional<std::vector<" + cpptype + ">>"
+
+    def free(s):
+        return ""
+
+    def c_to_cpp(s):
+        return "".join(
+            [
+                "(",
+                s,
+                "? std::make_optional(std::vector<",
+                cpptype,
+                ">(",
+                s,
+                ", ",
+                s,
+                " + ",
+                s,
+                "_num))",
+                " : std::nullopt)",
+            ]
+        )
+
+    def c_assign_from_cpp(d, s):
+        return "".join(
+            [
+                "if(",
+                s,
+                ".has_value()) {",
+                d,
+                " = ",
+                s,
+                ".data();",
+                d,
+                "_num = ",
+                s,
+                ".size();",
+                "} else {",
+                d,
+                " = nullptr;",
+                d,
+                "_num = 0;",
+                "}",
+            ]
+        )
+
+    def c_arg(s, untyped=False):
+        if untyped:
+            return "".join([s, ", ", s, "_num"])
+        else:
+            return "".join(
+                ["const ", cpptype, "*", s, "/* may be null */", ", size_t ", s, "_num"]
+            )
+
+    types.append(
+        {
+            "cpp": cpp,
+            "free": free,
+            "c_to_cpp": c_to_cpp,
+            "c_assign_from_cpp": c_assign_from_cpp,
+            "c_arg": c_arg,
+        }
+    )
+
+
+register_optional_raw_vector_type("int")
+
+# "c_arg": lambda s, untyped=False, cpptype=cpptype: (s + ", " + s + "_num")
+#         if untyped
+#         else ("const " + cpptype + "* " + s + ", size_t " + s + "_num").strip(),
+#         "c_new": lambda s, cpptype=cpptype: "const "
+#         + cpptype
+#         + "* "
+#         + s
+#         + "= nullptr;  size_t "
+#         + s
+#         + "_num = 0",
+#         # "c_return_arg": lambda s, untyped=False, ctype=ctype: (
+#         #     ("" if untyped else ctype + " ") + s
+#         # ).strip(),
+#         # "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
+#         "cpp_arg": lambda s, cpptype=cpptype: (
+#             "const std::vector<" + cpptype + ">& " + s
+#         ).strip()
+#     }
 
 
 def register_return_tuple_type(cpp_types, alts=[]):
@@ -169,30 +278,6 @@ def register_return_tuple_type(cpp_types, alts=[]):
     )
 
 
-# raw_cpp_type = "int"
-# types.append(
-#     {
-#         "cpp": "@std::vector<" + raw_cpp_type + ">",
-#         "alt": "@std::vector<" + raw_cpp_type + ">",
-#         "c_to_cpp": lambda s: s + "->ctx",
-#         "c_return_arg": lambda s, untyped=False: (
-#             ("" if untyped else "mlx_vector_" + raw_cpp_type + " ") + s
-#         ).strip(),
-#         "c_new": lambda s: "\n".join(
-#             [
-#                 "auto " + s + "_" + str(i) + " = new " + ctype + "_();"
-#                 for i, ctype in enumerate(c_types)
-#             ]
-#         ),
-#         "free": lambda s: "\n".join(
-#             ["mlx_free(" + s + "_" + str(i) + ");" for i in range(n)]
-#         ),
-#         "c_assign_from_cpp": lambda d, s: "std::tie("
-#         + ", ".join([d + "_" + str(i) + "->ctx" for i in range(n)])
-#         + ") = "
-#         + s,
-#     }
-
 register_return_tuple_type(["mlx::core::array", "mlx::core::array"])
 register_return_tuple_type(["mlx::core::array", "mlx::core::array", "mlx::core::array"])
 register_return_tuple_type(
@@ -215,7 +300,72 @@ types.append(
     }
 )
 
-for ctype in ["int", "size_t", "float", "bool"]:
+types.append(
+    {
+        "cpp": "mlx::core::Dtype",
+        "alt": "Dtype",
+        "c_to_cpp": lambda s: "mlx_dtype_to_cpp(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "mlx_dtype " + s,
+        "c_return_arg": lambda s, untyped=False: s if untyped else "mlx_dtype* " + s,
+        "c_new": lambda s: "mlx_dtype " + s,
+        "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: d
+        + " = "
+        + "mlx_dtype_to_c((int)(("
+        + s
+        + ").val))",
+    }
+)
+
+types.append(
+    {
+        "cpp": "mlx::core::CompileMode",
+        "alt": "CompileMode",
+        "c_to_cpp": lambda s: "mlx_compile_mode_to_cpp(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "mlx_compile_mode " + s,
+        "c_return_arg": lambda s, untyped=False: s
+        if untyped
+        else "mlx_compile_mode* " + s,
+        "c_new": lambda s: "mlx_dtype " + s,
+        "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: d
+        + " = "
+        + "mlx_compile_mode_to_c((int)(("
+        + s
+        + ").val))",
+    }
+)
+
+types.append(
+    {
+        "cpp": "std::string",
+        "alt": "std::string",
+        "c_to_cpp": lambda s: "std::string(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "const char* " + s,
+        "c_return_arg": lambda s, untyped=False: s if untyped else "char** " + s,
+        # "c_new": lambda s: "char* " + s,
+        # "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: d + " = " + s + ".c_str()",
+    }
+)
+
+types.append(
+    {
+        "cpp": "std::shared_ptr<io::Reader>",
+        "c_to_cpp": lambda s: "std::make_shared<CFILEReader>(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "FILE* " + s,
+    }
+)
+
+types.append(
+    {
+        "cpp": "std::shared_ptr<io::Writer>",
+        "c_to_cpp": lambda s: "std::make_shared<CFILEWriter>(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "FILE* " + s,
+    }
+)
+
+for ctype in ["int", "size_t", "float", "double", "bool", "uint64_t", "uintptr_t"]:
     types.append(
         {
             "c": ctype,
@@ -231,36 +381,128 @@ for ctype in ["int", "size_t", "float", "bool"]:
             "c_assign_from_cpp": lambda d, s: "*" + d + " = " + s,
         }
     )
-#     types.append(
-#         {
-#             "c": "mlx_optional_" + ctype,
-#             "cpp": "std::optional<" + ctype + ">",
-#             "alt": None,
-#             "free": lambda s: "",
-#             "cpp_to_c": lambda s, ctype=ctype: "("
-#             + s
-#             + ".has_value() ? mlx_optional_"
-#             + ctype
-#             + "_"
-#             + "({"
-#             + s
-#             + ".value(), true}) : mlx_optional_"
-#             + ctype
-#             + "_({0, false}))",
-#             "c_to_cpp": lambda s, ctype=ctype: "("
-#             + s
-#             + ".has_value ? std::make_optional<"
-#             + ctype
-#             + ">("
-#             + s
-#             + ".value) : std::nullopt)",
-#             "return": lambda s: "return" + s,
-#             "c_arg": lambda s, ctype=ctype: ("mlx_optional_" + ctype + " " + s).strip(),
-#             "cpp_arg": lambda s, ctype=ctype: (
-#                 "std::optional<" + ctype + "> " + s
-#             ).strip(),
-#         }
-#     )
+types[-1]["alt"] = "std::uintptr_t"
+
+for ctype in ["float", "int"]:
+    types.append(
+        {
+            "c": "mlx_optional_" + ctype,
+            "cpp": "std::optional<" + ctype + ">",
+            "alt": None,
+            "free": lambda s: "",
+            "cpp_to_c": lambda s, ctype=ctype: "("
+            + s
+            + ".has_value() ? mlx_optional_"
+            + ctype
+            + "_"
+            + "({"
+            + s
+            + ".value(), true}) : mlx_optional_"
+            + ctype
+            + "_({0, false}))",
+            "c_to_cpp": lambda s, ctype=ctype: "("
+            + s
+            + ".has_value ? std::make_optional<"
+            + ctype
+            + ">("
+            + s
+            + ".value) : std::nullopt)",
+            "return": lambda s: "return" + s,
+            "c_arg": lambda s, ctype=ctype: ("mlx_optional_" + ctype + " " + s).strip(),
+            "cpp_arg": lambda s, ctype=ctype: (
+                "std::optional<" + ctype + "> " + s
+            ).strip(),
+        }
+    )
+
+types.append(
+    {
+        "cpp": "std::pair<int, int>",
+        "alt": "std::pair<int, int>",
+        "c_to_cpp": lambda s: "std::make_pair(" + s + "_0, " + s + "_1)",
+        "c_arg": lambda s, untyped=False: (s + "_0, " + s + "_1")
+        if untyped
+        else ("int " + s + "_0, int " + s + "_1"),
+        "c_return_arg": lambda s, untyped=False: (s + "_0, " + s + "_1")
+        if untyped
+        else ("int* " + s + "_0, int* " + s + "_1"),
+        # "c_new": lambda s: "char* " + s,
+        # "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: "std::tie(" + d + "_0, " + d + "_1) = " + s,
+    }
+)
+
+types.append(
+    {
+        "cpp": "std::tuple<int, int, int>",
+        "alt": "std::tuple<int, int, int>",
+        "c_to_cpp": lambda s: "std::make_tuple(" + s + "_0, " + s + "_1," + s + "_2)",
+        "c_arg": lambda s, untyped=False: (s + "_0, " + s + "_1, " + s + "_2")
+        if untyped
+        else ("int " + s + "_0, int " + s + "_1, int " + s + "_2"),
+        "c_return_arg": lambda s, untyped=False: (s + "_0, " + s + "_1, " + s + "_2")
+        if untyped
+        else ("int* " + s + "_0, int* " + s + "_1, int " + s + "_2"),
+        # "c_new": lambda s: "char* " + s,
+        # "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: "std::tie("
+        + d
+        + "_0, "
+        + d
+        + "_1, "
+        + d
+        + "_2) = "
+        + s,
+    }
+)
+
+
+def register_optional_type(cpptype):
+    typedef = find_cpp_type(cpptype)
+    opt_t = {}
+    for k in typedef:
+        opt_t[k] = typedef[k]
+
+    def c_arg(s):
+        return "".join(
+            [
+                typedef["c_arg"](s),
+                " /* may be null */",
+            ]
+        )
+
+    def c_to_cpp(s):
+        return (
+            "("
+            + s
+            + " ? std::make_optional("
+            + typedef["c_to_cpp"](s)
+            + ") : std::nullopt)"
+        )
+
+    def c_assign_from_cpp(d, s):
+        return "(" + s + ".has_value() ? " + s + ".value() : nullptr)"
+
+    opt_t["cpp"] = "std::optional<" + typedef["cpp"] + ">"
+    opt_t["alt"] = "std::optional<" + typedef["alt"] + ">"
+    opt_t["c_arg"] = c_arg
+    opt_t["c_to_cpp"] = c_to_cpp
+    opt_t["c_assign_from_cpp"] = c_assign_from_cpp
+
+    types.append(opt_t)
+
+
+register_optional_type("mlx::core::array")
+register_optional_type("mlx::core::distributed::Group")
+register_optional_type(
+    "std::function<std::vector<mlx::core::array>(std::vector<mlx::core::array>,std::vector<mlx::core::array>,std::vector<mlx::core::array>)>"
+)
+register_optional_type(
+    "std::function<std::vector<mlx::core::array>(std::vector<mlx::core::array>,std::vector<mlx::core::array>,std::vector<int>)>"
+)
+register_optional_type(
+    "std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(std::vector<mlx::core::array>,std::vector<int>)>"
+)
 
 ctypes = {}
 cpptypes = {}

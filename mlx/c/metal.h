@@ -41,7 +41,7 @@ int mlx_metal_is_available(bool* res);
 int mlx_metal_reset_peak_memory();
 int mlx_metal_set_cache_limit(size_t limit, size_t* res);
 int mlx_metal_set_memory_limit(size_t limit, bool relaxed, size_t* res);
-int mlx_metal_start_capture(mlx_string path);
+int mlx_metal_start_capture(const char* path);
 int mlx_metal_stop_capture();
 /**@}*/
 

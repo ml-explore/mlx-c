@@ -161,28 +161,11 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
 
     for enum, values in enums.items():
         c_typename = "mlx_" + to_snake_letters(enum)
-        cpp_typename = namespace + "::" + enum
         c_vals = []
-        cpp_vals = []
         for value in values:
             c_vals.append("MLX_" + to_snake_letters(enum).upper() + "_" + value.upper())
-            cpp_vals.append(cpp_typename + "::" + value)
         if implementation:
-            impl = ["namespace {"]
-            impl.append(c_typename + " to_c_type(" + cpp_typename + " type) {")
-            impl.append(
-                "static " + c_typename + " map[] = {" + ", ".join(c_vals) + "};"
-            )
-            impl.append("return map[(int)type];")
-            impl.append("}")
-            impl.append(cpp_typename + " to_cpp_type(" + c_typename + " type) {")
-            impl.append(
-                "static " + cpp_typename + " map[] = {" + ", ".join(cpp_vals) + "};"
-            )
-            impl.append("return map[(int)type];")
-            impl.append("}")
-            impl.append("}")  # namespace
-            print(" ".join(impl))
+            pass
         else:
             decl = ["typedef enum "]
             decl.append(c_typename + "_")
@@ -202,7 +185,6 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             getattr(hooks, func_name)(f, implementation)
             continue
 
-        # print(f["return_t"])
         signature = []
         return_t = f["return_t"]
         if return_t in mt.cpptypes:
@@ -214,7 +196,7 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             print("skipping", f, file=sys.stderr)
             continue
 
-        signature.append("int")  # return_t["c"]
+        signature.append("int")
         signature.append(func_name)
         signature.append("(")
 
@@ -228,190 +210,19 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
             pni = pn[i]
             if pni is None:
                 pni = "param"  # good luck
-            if pti == "array":
-                c_call.append("mlx_array " + pni)
-                cpp_call.append(pni + "->ctx")
-            elif pti == "std::optional<array>":
-                c_call.append("mlx_array " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + pni
-                    + "->ctx) : std::nullopt)"
-                )
-            elif pti == "StreamOrDevice":
-                c_call.append("mlx_stream " + pni)
-                cpp_call.append(pni + "->ctx")
-            elif pti == "Dtype":
-                c_call.append("mlx_dtype " + pni)
-                cpp_call.append("MLX_CPP_DTYPE(" + pni + ")")
-            elif (
-                pti == "bool"
-                or pti == "float"
-                or pti == "double"
-                or pti == "int"
-                or pti == "size_t"
-                or pti == "uint64_t"
-            ):
-                c_call.append(pti + " " + pni)
-                cpp_call.append(pni)
-            elif (
-                pti == "std::optional<bool>"
-                or pti == "std::optional<float>"
-                or pti == "std::optional<double>"
-                or pti == "std::optional<int>"
-                or pti == "std::optional<size_t>"
-                or pti == "std::optional<uint64_t>"
-            ):
-                pti_wo_opt = pti[14:][:-1]
-                c_call.append("mlx_optional_" + pti_wo_opt + " " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + ".has_value ? std::make_optional<"
-                    + pti_wo_opt
-                    + ">("
-                    + pni
-                    + ".value) : std::nullopt)"
-                )
-            elif pti == "std::uintptr_t":
-                c_call.append(pti.lstrip("std::") + " " + pni)
-                cpp_call.append(pni)
-            elif pti == "std::vector<int>":
-                c_call.append("const int* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_INTVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<uint64_t>":
-                c_call.append("const uint64_t* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_UINT64VEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::optional<std::vector<int>>":
-                c_call.append("const int* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_OPT_INTVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<size_t>":
-                c_call.append("const size_t* " + pni)
-                c_call.append("size_t num_" + pni)
-                cpp_call.append("MLX_CPP_SIZEVEC(" + pni + ", num_" + pni + ")")
-            elif pti == "std::vector<array>":
-                c_call.append("const mlx_vector_array " + pni)
-                cpp_call.append("MLX_CPP_ARRVEC(" + pni + ")")
-            elif pti == "std::vector<std::string>":
-                c_call.append("const mlx_vector_string " + pni)
-                cpp_call.append("MLX_CPP_STRINGVEC(" + pni + ")")
-            elif pti == "std::pair<int, int>":
-                c_call.append("int f_" + pni)
-                c_call.append("int s_" + pni)
-                cpp_call.append("MLX_CPP_INTPAIR(f_" + pni + ", s_" + pni + ")")
-            elif pti == "std::tuple<int, int, int>":
-                c_call.append("int " + pni + "_0")
-                c_call.append("int " + pni + "_1")
-                c_call.append("int " + pni + "_2")
-                cpp_call.append(
-                    "MLX_CPP_INTTUPLE3("
-                    + pni
-                    + "_0, "
-                    + pni
-                    + "_1, "
-                    + pni
-                    + "_2"
-                    + ")"
-                )
-            elif pti == "std::shared_ptr<io::Reader>":
-                c_call.append("FILE* " + pni)
-                cpp_call.append("MLX_CPP_READER(" + pni + ")")
-            elif pti == "std::shared_ptr<io::Writer>":
-                c_call.append("FILE* " + pni)
-                cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
-            elif pti == "std::function<std::vector<array>(std::vector<array>)>":
-                c_call.append("mlx_closure " + pni)
-                cpp_call.append("(" + pni + ")->ctx")
-            elif (
-                pti
-                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
-            ):
-                c_call.append("mlx_closure_custom " + pni)
-                cpp_call.append("(" + pni + ")->ctx")
-            elif (
-                pti
-                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>>"
-            ):
-                c_call.append("mlx_closure_custom " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + "("
-                    + pni
-                    + ")"
-                    + "->ctx) : std::nullopt)"
-                )
-            elif (
-                pti
-                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>"
-            ):
-                c_call.append("mlx_closure_custom_jvp " + pni)
-                cpp_call.append("(" + pni + ")->ctx")
-            elif (
-                pti
-                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>>"
-            ):
-                c_call.append("mlx_closure_custom_jvp " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + "("
-                    + pni
-                    + ")"
-                    + "->ctx) : std::nullopt)"
-                )
-            elif (
-                pti
-                == "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>"
-            ):
-                c_call.append("mlx_closure_custom_vmap " + pni)
-                cpp_call.append("(" + pni + ")->ctx")
-            elif (
-                pti
-                == "std::optional<std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>>"
-            ):
-                c_call.append("mlx_closure_custom_vmap " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + "("
-                    + pni
-                    + ")"
-                    + "->ctx) : std::nullopt)"
-                )
-            elif pti == "std::unordered_map<std::string, array>":
-                c_call.append("mlx_map_string_to_array " + pni)
-                cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
-            elif pti == "std::unordered_map<std::string, std::string>":
-                c_call.append("mlx_map_string_to_string " + pni)
-                cpp_call.append("MLX_CPP_MAP_STRING_TO_STRING(" + pni + ")")
-            elif pti == "std::string":
-                c_call.append("mlx_string " + pni)
-                cpp_call.append("MLX_CPP_STRING(" + pni + ")")
-            elif pti == "std::optional<Group>":
-                c_call.append("mlx_distributed_group " + pni)
-                cpp_call.append(
-                    "("
-                    + pni
-                    + " ? std::make_optional("
-                    + pni
-                    + "->ctx) : std::nullopt)"
-                )
-            elif pti == "CompileMode":
-                c_call.append("mlx_compile_mode " + pni)
-                cpp_call.append("to_cpp_type(" + pni + ")")
+
+            if pti in mt.cpptypes:
+                pti = mt.cpptypes[pti]
+            elif pti in mt.alttypes:
+                pti = mt.alttypes[pti]
             else:
-                print("unsupported type: " + pti, file=sys.stderr)
+                print("unsupported argument type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
+                print("skipping", f, file=sys.stderr)
                 break
+
+            c_call.append(pti["c_arg"](pni))
+            cpp_call.append(pti["c_to_cpp"](pni))
 
         if encountered_unsupported_type:
             print("skipping", f, file=sys.stderr)

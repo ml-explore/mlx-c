@@ -25,9 +25,9 @@ extern "C" {
  */
 /**@{*/
 int mlx_einsum(
-    mlx_string subscripts,
+    const char* subscripts,
     const mlx_vector_array operands,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res);
 /**@}*/
 

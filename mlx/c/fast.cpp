@@ -17,12 +17,12 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int mlx_fast_affine_dequantize(
-    mlx_array w,
-    mlx_array scales,
-    mlx_array biases,
+    const mlx_array w,
+    const mlx_array scales,
+    const mlx_array biases,
     int group_size,
     int bits,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::affine_dequantize(
@@ -34,12 +34,12 @@ extern "C" int mlx_fast_affine_dequantize(
   return 0;
 }
 extern "C" int mlx_fast_affine_quantize(
-    mlx_array w,
-    mlx_array scales,
-    mlx_array biases,
+    const mlx_array w,
+    const mlx_array scales,
+    const mlx_array biases,
     int group_size,
     int bits,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::affine_quantize(
@@ -51,11 +51,11 @@ extern "C" int mlx_fast_affine_quantize(
   return 0;
 }
 extern "C" int mlx_fast_layer_norm(
-    mlx_array x,
-    mlx_array weight,
-    mlx_array bias,
+    const mlx_array x,
+    const mlx_array weight /* may be null */,
+    const mlx_array bias /* may be null */,
     float eps,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::layer_norm(
@@ -71,21 +71,21 @@ extern "C" int mlx_fast_layer_norm(
   return 0;
 }
 extern "C" int mlx_fast_metal_kernel(
-    mlx_string name,
+    const char* name,
     const mlx_vector_string input_names,
     const mlx_vector_string output_names,
-    mlx_string source,
-    mlx_string header,
+    const char* source,
+    const char* header,
     bool ensure_row_contiguous,
     bool atomic_outputs,
     mlx_closure_metal_kernel res) {
   try {
     res->ctx = mlx::core::fast::metal_kernel(
-        MLX_CPP_STRING(name),
-        MLX_CPP_STRINGVEC(input_names),
-        MLX_CPP_STRINGVEC(output_names),
-        MLX_CPP_STRING(source),
-        MLX_CPP_STRING(header),
+        std::string(name),
+        input_names->ctx,
+        output_names->ctx,
+        std::string(source),
+        std::string(header),
         ensure_row_contiguous,
         atomic_outputs);
   } catch (std::exception& e) {
@@ -95,10 +95,10 @@ extern "C" int mlx_fast_metal_kernel(
   return 0;
 }
 extern "C" int mlx_fast_rms_norm(
-    mlx_array x,
-    mlx_array weight,
+    const mlx_array x,
+    const mlx_array weight,
     float eps,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx);
@@ -109,14 +109,14 @@ extern "C" int mlx_fast_rms_norm(
   return 0;
 }
 extern "C" int mlx_fast_rope(
-    mlx_array x,
+    const mlx_array x,
     int dims,
     bool traditional,
     mlx_optional_float base,
     float scale,
     int offset,
-    mlx_array freqs,
-    mlx_stream s,
+    const mlx_array freqs /* may be null */,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::rope(
@@ -135,13 +135,13 @@ extern "C" int mlx_fast_rope(
   return 0;
 }
 extern "C" int mlx_fast_scaled_dot_product_attention(
-    mlx_array queries,
-    mlx_array keys,
-    mlx_array values,
+    const mlx_array queries,
+    const mlx_array keys,
+    const mlx_array values,
     float scale,
-    mlx_array mask,
+    const mlx_array mask /* may be null */,
     mlx_optional_int memory_efficient_threshold,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::fast::scaled_dot_product_attention(

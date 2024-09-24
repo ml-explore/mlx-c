@@ -17,18 +17,18 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int mlx_detail_compile(
-    mlx_closure fun,
+    const mlx_closure fun,
     uintptr_t fun_id,
     bool shapeless,
     const uint64_t* constants,
-    size_t num_constants,
+    size_t constants_num,
     mlx_closure res) {
   try {
     res->ctx = mlx::core::detail::compile(
-        (fun)->ctx,
+        fun->ctx,
         fun_id,
         shapeless,
-        MLX_CPP_UINT64VEC(constants, num_constants));
+        std::vector<uint64_t>(constants, constants + constants_num));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -58,17 +58,17 @@ extern "C" int mlx_detail_vmap_replace(
     const mlx_vector_array s_inputs,
     const mlx_vector_array s_outputs,
     const int* in_axes,
-    size_t num_in_axes,
+    size_t in_axes_num,
     const int* out_axes,
-    size_t num_out_axes,
+    size_t out_axes_num,
     mlx_vector_array res) {
   try {
     res->ctx = mlx::core::detail::vmap_replace(
-        MLX_CPP_ARRVEC(inputs),
-        MLX_CPP_ARRVEC(s_inputs),
-        MLX_CPP_ARRVEC(s_outputs),
-        MLX_CPP_INTVEC(in_axes, num_in_axes),
-        MLX_CPP_INTVEC(out_axes, num_out_axes));
+        inputs->ctx,
+        s_inputs->ctx,
+        s_outputs->ctx,
+        std::vector<int>(in_axes, in_axes + in_axes_num),
+        std::vector<int>(out_axes, out_axes + out_axes_num));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -76,17 +76,17 @@ extern "C" int mlx_detail_vmap_replace(
   return 0;
 }
 extern "C" int mlx_detail_vmap_trace(
-    mlx_closure fun,
+    const mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,
-    size_t num_in_axes,
+    size_t in_axes_num,
     mlx_vector_array res_0,
     mlx_vector_array res_1) {
   try {
     std::tie(res_0->ctx, res_1->ctx) = mlx::core::detail::vmap_trace(
-        (fun)->ctx,
-        MLX_CPP_ARRVEC(inputs),
-        MLX_CPP_INTVEC(in_axes, num_in_axes));
+        fun->ctx,
+        inputs->ctx,
+        std::vector<int>(in_axes, in_axes + in_axes_num));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

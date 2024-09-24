@@ -17,13 +17,13 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int mlx_einsum(
-    mlx_string subscripts,
+    const char* subscripts,
     const mlx_vector_array operands,
-    mlx_stream s,
+    const mlx_stream s,
     mlx_array res) {
   try {
-    res->ctx = mlx::core::einsum(
-        MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx);
+    res->ctx =
+        mlx::core::einsum(std::string(subscripts), operands->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
