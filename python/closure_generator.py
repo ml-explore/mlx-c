@@ -335,24 +335,6 @@ print(
         ["std::vector<mlx::core::array>", "std::vector<int>"],
     )
 )
-# print(
-#     generate(
-#         code,
-#         "mlx_closure_metal_kernel_function",
-#         "mlx_vector_array",
-#         [
-#             "mlx_vector_array",
-#             "mlx_vector_vector_int",
-#             "mlx_vector_array_dtype",
-#             "mlx_tuple_int_int_int",
-#             "mlx_tuple_int_int_int",
-#             "mlx_vector_tuple_string_variant_int_bool_array_dtype",
-#             "mlx_optional_float",
-#             "bool",
-#             "mlx_stream",
-#         ],
-#     )
-# )
 if args.private:
     print(
         """
