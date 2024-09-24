@@ -56,8 +56,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
     # ${CMAKE_CURRENT_LIST_DIR}/mlx/c/tuple.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/variant.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp)
 
 add_library(mlxc STATIC ${mlxc-src})
 
