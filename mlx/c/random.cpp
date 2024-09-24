@@ -116,14 +116,14 @@ extern "C" int mlx_random_categorical(
 extern "C" int mlx_random_gumbel(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::random::gumbel(
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
         s->ctx);
   } catch (std::exception& e) {
@@ -144,7 +144,7 @@ extern "C" int mlx_random_key(uint64_t seed, mlx_array res) {
 extern "C" int mlx_random_laplace(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     float loc,
     float scale,
     mlx_array key,
@@ -153,7 +153,7 @@ extern "C" int mlx_random_laplace(
   try {
     res->ctx = mlx::core::random::laplace(
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         loc,
         scale,
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -169,7 +169,7 @@ extern "C" int mlx_random_multivariate_normal(
     mlx_array cov,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res) {
@@ -178,7 +178,7 @@ extern "C" int mlx_random_multivariate_normal(
         mean->ctx,
         cov->ctx,
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
         s->ctx);
   } catch (std::exception& e) {
@@ -190,7 +190,7 @@ extern "C" int mlx_random_multivariate_normal(
 extern "C" int mlx_random_normal(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     float loc,
     float scale,
     mlx_array key,
@@ -199,7 +199,7 @@ extern "C" int mlx_random_normal(
   try {
     res->ctx = mlx::core::random::normal(
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         loc,
         scale,
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -215,7 +215,7 @@ extern "C" int mlx_random_randint(
     mlx_array high,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res) {
@@ -224,7 +224,7 @@ extern "C" int mlx_random_randint(
         low->ctx,
         high->ctx,
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
         s->ctx);
   } catch (std::exception& e) {
@@ -274,7 +274,7 @@ extern "C" int mlx_random_truncated_normal(
     mlx_array upper,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res) {
@@ -283,7 +283,7 @@ extern "C" int mlx_random_truncated_normal(
         lower->ctx,
         upper->ctx,
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
         s->ctx);
   } catch (std::exception& e) {
@@ -297,7 +297,7 @@ extern "C" int mlx_random_uniform(
     mlx_array high,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res) {
@@ -306,7 +306,7 @@ extern "C" int mlx_random_uniform(
         low->ctx,
         high->ctx,
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
         s->ctx);
   } catch (std::exception& e) {

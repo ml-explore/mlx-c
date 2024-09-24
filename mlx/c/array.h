@@ -29,7 +29,7 @@ typedef struct mlx_array_* mlx_array;
 /**
  * Array element type.
  */
-typedef enum mlx_array_dtype_ {
+typedef enum mlx_dtype_ {
   MLX_BOOL,
   MLX_UINT8,
   MLX_UINT16,
@@ -43,7 +43,7 @@ typedef enum mlx_array_dtype_ {
   MLX_FLOAT32,
   MLX_BFLOAT16,
   MLX_COMPLEX64,
-} mlx_array_dtype;
+} mlx_dtype;
 
 /**
  * New empty array.
@@ -77,7 +77,7 @@ mlx_array mlx_array_from_data(
     const void* data,
     const int* shape,
     int dim,
-    mlx_array_dtype dtype);
+    mlx_dtype dtype);
 
 /**
  * The size of the array's datatype in bytes.
@@ -116,7 +116,7 @@ int mlx_array_dim(mlx_array arr, int dim);
 /**
  * The array element type.
  */
-mlx_array_dtype mlx_array_get_dtype(mlx_array arr);
+mlx_dtype mlx_array_dtype(mlx_array arr);
 /**
  * Evaluate the array.
  */

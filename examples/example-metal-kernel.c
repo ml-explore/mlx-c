@@ -34,7 +34,7 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
       desc,
       mlx_array_shape(input),
       mlx_array_ndim(input),
-      mlx_array_get_dtype(input));
+      mlx_array_dtype(input));
 
   mlx_vector_array outputs = mlx_vector_array_new();
   mlx_closure_metal_kernel_apply(kernel, inputs, desc, stream, outputs);

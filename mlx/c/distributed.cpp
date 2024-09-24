@@ -51,7 +51,7 @@ extern "C" int mlx_distributed_all_sum(
 extern "C" int mlx_distributed_recv(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     int src,
     mlx_distributed_group group,
     mlx_stream s,
@@ -59,7 +59,7 @@ extern "C" int mlx_distributed_recv(
   try {
     res->ctx = mlx::core::distributed::recv(
         MLX_CPP_INTVEC(shape, num_shape),
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         src,
         (group ? std::make_optional(group->ctx) : std::nullopt),
         s->ctx);
