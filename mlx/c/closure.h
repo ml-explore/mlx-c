@@ -135,7 +135,7 @@ int mlx_closure_metal_kernel_desc_add_output_arg(
     mlx_closure_metal_kernel_desc desc,
     const int* shape,
     size_t size,
-    mlx_array_dtype dtype);
+    mlx_dtype dtype);
 int mlx_closure_metal_kernel_desc_set_grid(
     mlx_closure_metal_kernel_desc desc,
     int grid1,
@@ -155,7 +155,7 @@ int mlx_closure_metal_kernel_desc_set_verbose(
 int mlx_closure_metal_kernel_desc_add_template_arg_dtype(
     mlx_closure_metal_kernel_desc desc,
     const char* name,
-    mlx_array_dtype dtype);
+    mlx_dtype dtype);
 int mlx_closure_metal_kernel_desc_add_template_arg_int(
     mlx_closure_metal_kernel_desc desc,
     const char* name,

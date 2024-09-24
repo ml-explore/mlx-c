@@ -137,12 +137,12 @@ extern "C" int mlx_arange(
     double start,
     double stop,
     double step,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
-    res->ctx = mlx::core::arange(
-        start, stop, step, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx =
+        mlx::core::arange(start, stop, step, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -328,9 +328,9 @@ extern "C" int mlx_as_strided(
   return 0;
 }
 extern "C" int
-mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s, mlx_array res) {
+mlx_astype(mlx_array a, mlx_dtype dtype, mlx_stream s, mlx_array res) {
   try {
-    res->ctx = mlx::core::astype(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx = mlx::core::astype(a->ctx, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -936,15 +936,10 @@ extern "C" int mlx_expm1(mlx_array a, mlx_stream s, mlx_array res) {
   }
   return 0;
 }
-extern "C" int mlx_eye(
-    int n,
-    int m,
-    int k,
-    mlx_array_dtype dtype,
-    mlx_stream s,
-    mlx_array res) {
+extern "C" int
+mlx_eye(int n, int m, int k, mlx_dtype dtype, mlx_stream s, mlx_array res) {
   try {
-    res->ctx = mlx::core::eye(n, m, k, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx = mlx::core::eye(n, m, k, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -988,14 +983,14 @@ extern "C" int mlx_full(
     const int* shape,
     size_t num_shape,
     mlx_array vals,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::full(
         MLX_CPP_INTVEC(shape, num_shape),
         vals->ctx,
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -1113,9 +1108,9 @@ extern "C" int mlx_hadamard_transform(
   return 0;
 }
 extern "C" int
-mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s, mlx_array res) {
+mlx_identity(int n, mlx_dtype dtype, mlx_stream s, mlx_array res) {
   try {
-    res->ctx = mlx::core::identity(n, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx = mlx::core::identity(n, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1227,12 +1222,12 @@ extern "C" int mlx_linspace(
     double start,
     double stop,
     int num,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
-    res->ctx = mlx::core::linspace(
-        start, stop, num, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx =
+        mlx::core::linspace(start, stop, num, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1533,7 +1528,7 @@ extern "C" int mlx_number_of_elements(
     const int* axes,
     size_t num_axes,
     bool inverted,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
@@ -1541,7 +1536,7 @@ extern "C" int mlx_number_of_elements(
         a->ctx,
         MLX_CPP_INTVEC(axes, num_axes),
         inverted,
-        MLX_CPP_ARRAY_DTYPE(dtype),
+        MLX_CPP_DTYPE(dtype),
         s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -1552,12 +1547,12 @@ extern "C" int mlx_number_of_elements(
 extern "C" int mlx_ones(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::ones(
-        MLX_CPP_INTVEC(shape, num_shape), MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+        MLX_CPP_INTVEC(shape, num_shape), MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2358,12 +2353,12 @@ extern "C" int mlx_trace(
     int offset,
     int axis1,
     int axis2,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::trace(
-        a->ctx, offset, axis1, axis2, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+        a->ctx, offset, axis1, axis2, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2394,15 +2389,10 @@ extern "C" int mlx_transpose_all(mlx_array a, mlx_stream s, mlx_array res) {
   }
   return 0;
 }
-extern "C" int mlx_tri(
-    int n,
-    int m,
-    int k,
-    mlx_array_dtype type,
-    mlx_stream s,
-    mlx_array res) {
+extern "C" int
+mlx_tri(int n, int m, int k, mlx_dtype type, mlx_stream s, mlx_array res) {
   try {
-    res->ctx = mlx::core::tri(n, m, k, MLX_CPP_ARRAY_DTYPE(type), s->ctx);
+    res->ctx = mlx::core::tri(n, m, k, MLX_CPP_DTYPE(type), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2455,9 +2445,9 @@ mlx_var_all(mlx_array a, bool keepdims, int ddof, mlx_stream s, mlx_array res) {
   return 0;
 }
 extern "C" int
-mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s, mlx_array res) {
+mlx_view(mlx_array a, mlx_dtype dtype, mlx_stream s, mlx_array res) {
   try {
-    res->ctx = mlx::core::view(a->ctx, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+    res->ctx = mlx::core::view(a->ctx, MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2481,12 +2471,12 @@ extern "C" int mlx_where(
 extern "C" int mlx_zeros(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res) {
   try {
     res->ctx = mlx::core::zeros(
-        MLX_CPP_INTVEC(shape, num_shape), MLX_CPP_ARRAY_DTYPE(dtype), s->ctx);
+        MLX_CPP_INTVEC(shape, num_shape), MLX_CPP_DTYPE(dtype), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

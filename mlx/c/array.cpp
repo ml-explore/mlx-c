@@ -36,10 +36,10 @@ extern "C" mlx_array mlx_array_from_data(
     const void* data,
     const int* shape,
     int dim,
-    mlx_array_dtype dtype) {
+    mlx_dtype dtype) {
   std::vector<int> cpp_shape;
   cpp_shape.assign(shape, shape + dim);
-  mlx::core::Dtype cpp_dtype = MLX_CPP_ARRAY_DTYPE(dtype);
+  mlx::core::Dtype cpp_dtype = MLX_CPP_DTYPE(dtype);
   switch (cpp_dtype) {
     case mlx::core::bool_:
       RETURN_MLX_C_ARRAY(mlx::core::array((bool*)data, cpp_shape, cpp_dtype));
@@ -104,7 +104,7 @@ extern "C" size_t* mlx_array_strides(mlx_array arr) {
 extern "C" int mlx_array_dim(mlx_array arr, int dim) {
   return MLX_CPP_ARRAY(arr).shape(dim);
 }
-extern "C" mlx_array_dtype mlx_array_get_dtype(mlx_array arr) {
+extern "C" mlx_dtype mlx_array_dtype(mlx_array arr) {
   RETURN_MLX_C_ARRAY_DTYPE(MLX_CPP_ARRAY(arr).dtype());
 }
 extern "C" void mlx_array_eval(mlx_array arr) {

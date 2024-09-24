@@ -248,8 +248,8 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
                 c_call.append("mlx_stream " + pni)
                 cpp_call.append(pni + "->ctx")
             elif pti == "Dtype":
-                c_call.append("mlx_array_dtype " + pni)
-                cpp_call.append("MLX_CPP_ARRAY_DTYPE(" + pni + ")")
+                c_call.append("mlx_dtype " + pni)
+                cpp_call.append("MLX_CPP_DTYPE(" + pni + ")")
             elif (
                 pti == "bool"
                 or pti == "float"

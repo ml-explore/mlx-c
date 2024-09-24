@@ -113,7 +113,7 @@ static mlx::core::Dtype mlx_cpp_dtypes[] = {
     mlx::core::complex64,
 };
 
-static mlx_array_dtype mlx_c_dtypes[] = {
+static mlx_dtype mlx_c_dtypes[] = {
     MLX_BOOL,
     MLX_UINT8,
     MLX_UINT16,
@@ -142,7 +142,7 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define RETURN_MLX_C_PTR(ptr) MLX_TRY_CATCH(return (ptr), return nullptr)
 
 #define MLX_CPP_ARRAY(arr) ((arr)->ctx)
-#define MLX_CPP_ARRAY_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
+#define MLX_CPP_DTYPE(dtype) (mlx_cpp_dtypes[dtype])
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
 #define MLX_CPP_UINT64VEC(vals, size) \
   (std::vector<uint64_t>((vals), (vals) + (size)))

@@ -62,7 +62,7 @@ int mlx_random_categorical(
 int mlx_random_gumbel(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res);
@@ -70,7 +70,7 @@ int mlx_random_key(uint64_t seed, mlx_array res);
 int mlx_random_laplace(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     float loc,
     float scale,
     mlx_array key,
@@ -81,14 +81,14 @@ int mlx_random_multivariate_normal(
     mlx_array cov,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res);
 int mlx_random_normal(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     float loc,
     float scale,
     mlx_array key,
@@ -99,7 +99,7 @@ int mlx_random_randint(
     mlx_array high,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res);
@@ -119,7 +119,7 @@ int mlx_random_truncated_normal(
     mlx_array upper,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res);
@@ -128,7 +128,7 @@ int mlx_random_uniform(
     mlx_array high,
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_array key,
     mlx_stream s,
     mlx_array res);

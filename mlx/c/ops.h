@@ -68,7 +68,7 @@ int mlx_arange(
     double start,
     double stop,
     double step,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_arccos(mlx_array a, mlx_stream s, mlx_array res);
@@ -116,7 +116,7 @@ int mlx_as_strided(
     size_t offset,
     mlx_stream s,
     mlx_array res);
-int mlx_astype(mlx_array a, mlx_array_dtype dtype, mlx_stream s, mlx_array res);
+int mlx_astype(mlx_array a, mlx_dtype dtype, mlx_stream s, mlx_array res);
 int mlx_atleast_1d(mlx_array a, mlx_stream s, mlx_array res);
 int mlx_atleast_2d(mlx_array a, mlx_stream s, mlx_array res);
 int mlx_atleast_3d(mlx_array a, mlx_stream s, mlx_array res);
@@ -318,13 +318,7 @@ int mlx_expand_dims(
     mlx_stream s,
     mlx_array res);
 int mlx_expm1(mlx_array a, mlx_stream s, mlx_array res);
-int mlx_eye(
-    int n,
-    int m,
-    int k,
-    mlx_array_dtype dtype,
-    mlx_stream s,
-    mlx_array res);
+int mlx_eye(int n, int m, int k, mlx_dtype dtype, mlx_stream s, mlx_array res);
 int mlx_flatten(
     mlx_array a,
     int start_axis,
@@ -337,7 +331,7 @@ int mlx_full(
     const int* shape,
     size_t num_shape,
     mlx_array vals,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_gather(
@@ -375,7 +369,7 @@ int mlx_hadamard_transform(
     mlx_optional_float scale,
     mlx_stream s,
     mlx_array res);
-int mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s, mlx_array res);
+int mlx_identity(int n, mlx_dtype dtype, mlx_stream s, mlx_array res);
 int mlx_inner(mlx_array a, mlx_array b, mlx_stream s, mlx_array res);
 int mlx_isclose(
     mlx_array a,
@@ -397,7 +391,7 @@ int mlx_linspace(
     double start,
     double stop,
     int num,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_log(mlx_array a, mlx_stream s, mlx_array res);
@@ -470,13 +464,13 @@ int mlx_number_of_elements(
     const int* axes,
     size_t num_axes,
     bool inverted,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_ones(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_ones_like(mlx_array a, mlx_stream s, mlx_array res);
@@ -724,7 +718,7 @@ int mlx_trace(
     int offset,
     int axis1,
     int axis2,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_transpose(
@@ -734,13 +728,7 @@ int mlx_transpose(
     mlx_stream s,
     mlx_array res);
 int mlx_transpose_all(mlx_array a, mlx_stream s, mlx_array res);
-int mlx_tri(
-    int n,
-    int m,
-    int k,
-    mlx_array_dtype type,
-    mlx_stream s,
-    mlx_array res);
+int mlx_tri(int n, int m, int k, mlx_dtype type, mlx_stream s, mlx_array res);
 int mlx_tril(mlx_array x, int k, mlx_stream s, mlx_array res);
 int mlx_triu(mlx_array x, int k, mlx_stream s, mlx_array res);
 int mlx_var(
@@ -757,7 +745,7 @@ int mlx_var_all(
     int ddof,
     mlx_stream s,
     mlx_array res);
-int mlx_view(mlx_array a, mlx_array_dtype dtype, mlx_stream s, mlx_array res);
+int mlx_view(mlx_array a, mlx_dtype dtype, mlx_stream s, mlx_array res);
 int mlx_where(
     mlx_array condition,
     mlx_array x,
@@ -767,7 +755,7 @@ int mlx_where(
 int mlx_zeros(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     mlx_stream s,
     mlx_array res);
 int mlx_zeros_like(mlx_array a, mlx_stream s, mlx_array res);

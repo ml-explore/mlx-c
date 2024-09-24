@@ -500,10 +500,10 @@ extern "C" int mlx_closure_metal_kernel_desc_add_output_arg(
     mlx_closure_metal_kernel_desc desc,
     const int* shape,
     size_t size,
-    mlx_array_dtype dtype) {
+    mlx_dtype dtype) {
   try {
     desc->output_shapes.push_back(std::vector<int>(shape, shape + size));
-    desc->output_dtypes.push_back(MLX_CPP_ARRAY_DTYPE(dtype));
+    desc->output_dtypes.push_back(MLX_CPP_DTYPE(dtype));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -561,10 +561,10 @@ extern "C" int mlx_closure_metal_kernel_desc_set_verbose(
 extern "C" int mlx_closure_metal_kernel_desc_add_template_arg_dtype(
     mlx_closure_metal_kernel_desc desc,
     const char* name,
-    mlx_array_dtype dtype) {
+    mlx_dtype dtype) {
   try {
     desc->template_args.push_back(
-        std::make_pair(std::string(name), MLX_CPP_ARRAY_DTYPE(dtype)));
+        std::make_pair(std::string(name), MLX_CPP_DTYPE(dtype)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

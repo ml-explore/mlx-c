@@ -37,7 +37,7 @@ int mlx_distributed_all_sum(
 int mlx_distributed_recv(
     const int* shape,
     size_t num_shape,
-    mlx_array_dtype dtype,
+    mlx_dtype dtype,
     int src,
     mlx_distributed_group group,
     mlx_stream s,
