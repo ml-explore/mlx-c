@@ -82,3 +82,25 @@ mlx_string_* mlx_closure_value_and_grad_::tostring() {
                  "mlx_vector_vector_array closure(mlx_vector_array, void*)"),
              return nullptr);
 }
+
+extern "C" mlx_closure mlx_fallible_closure_new_with_payload(
+  mlx_vector_array_result (*fun)(const mlx_vector_array, void*),
+  void* payload,
+  void (*dtor)(void*)) {
+    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    auto cpp_closure = 
+      [fun, cpp_payload, dtor](const std::vector<mlx::core::array>& input) {
+        auto c_input = new mlx_vector_array_(input);
+        mlx_vector_array_result c_res = fun(c_input, cpp_payload.get());
+        mlx_free(c_input);
+        if (mlx_vector_array_result_is_err(&c_res)) {
+          mlx_string err = mlx_vector_array_result_into_err(c_res);
+          throw std::runtime_error(err->ctx);
+        }
+        mlx_vector_array c_ok = mlx_vector_array_result_into_ok(c_res);
+        auto res = c_ok->ctx;
+        mlx_free(c_ok);
+        return res;
+      };
+    MLX_TRY_CATCH(return new mlx_closure_(cpp_closure), return nullptr);
+}

@@ -4,6 +4,7 @@
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/result.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,6 +60,11 @@ mlx_vector_vector_array mlx_closure_value_and_grad_apply(
     const mlx_vector_array inputs);
 
 /**@}*/
+
+mlx_closure mlx_fallible_closure_new_with_payload(
+    mlx_vector_array_result (*fun)(const mlx_vector_array, void*),
+    void* payload,
+    void (*dtor)(void*));
 
 #ifdef __cplusplus
 }
