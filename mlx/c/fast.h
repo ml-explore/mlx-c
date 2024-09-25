@@ -47,15 +47,65 @@ int mlx_fast_layer_norm(
     float eps,
     const mlx_stream s,
     mlx_array res);
-int mlx_fast_metal_kernel(
+
+typedef struct mlx_fast_metal_kernel_* mlx_fast_metal_kernel;
+mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* name,
-    const mlx_vector_string input_names,
-    const mlx_vector_string output_names,
     const char* source,
-    const char* header,
-    bool ensure_row_contiguous,
-    bool atomic_outputs,
-    mlx_closure_metal_kernel res);
+    const char* header);
+int mlx_fast_metal_kernel_set_input_names(
+    mlx_fast_metal_kernel cls,
+    int num,
+    ...);
+int mlx_fast_metal_kernel_set_output_names(
+    mlx_fast_metal_kernel cls,
+    int num,
+    ...);
+int mlx_fast_metal_kernel_set_contiguous_rows(
+    mlx_fast_metal_kernel cls,
+    bool flag);
+int mlx_fast_metal_kernel_set_atomic_outputs(
+    mlx_fast_metal_kernel cls,
+    bool flag);
+
+int mlx_fast_metal_kernel_add_output_arg(
+    mlx_fast_metal_kernel cls,
+    const int* shape,
+    size_t size,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_set_grid(
+    mlx_fast_metal_kernel cls,
+    int grid1,
+    int grid2,
+    int grid3);
+int mlx_fast_metal_kernel_set_thread_group(
+    mlx_fast_metal_kernel cls,
+    int thread1,
+    int thread2,
+    int thread3);
+int mlx_fast_metal_kernel_set_init_value(
+    mlx_fast_metal_kernel cls,
+    float value);
+int mlx_fast_metal_kernel_set_verbose(mlx_fast_metal_kernel cls, bool verbose);
+int mlx_fast_metal_kernel_add_template_arg_dtype(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_add_template_arg_int(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    int value);
+int mlx_fast_metal_kernel_add_template_arg_bool(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    bool value);
+
+int mlx_fast_metal_kernel_apply(
+    mlx_fast_metal_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_stream stream,
+    mlx_vector_array outputs);
+
 int mlx_fast_rms_norm(
     const mlx_array x,
     const mlx_array weight,

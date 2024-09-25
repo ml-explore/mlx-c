@@ -129,47 +129,6 @@ int mlx_closure_custom_vmap_apply(
     mlx_vector_array res_0,
     mlx_vector_int res_1);
 
-typedef struct mlx_closure_metal_kernel_* mlx_closure_metal_kernel;
-mlx_closure_metal_kernel mlx_closure_metal_kernel_new();
-int mlx_closure_metal_kernel_apply(
-    mlx_closure_metal_kernel cls,
-    const mlx_vector_array inputs,
-    const mlx_stream stream,
-    mlx_vector_array outputs);
-int mlx_closure_metal_kernel_add_output_arg(
-    mlx_closure_metal_kernel cls,
-    const int* shape,
-    size_t size,
-    mlx_dtype dtype);
-int mlx_closure_metal_kernel_set_grid(
-    mlx_closure_metal_kernel cls,
-    int grid1,
-    int grid2,
-    int grid3);
-int mlx_closure_metal_kernel_set_thread_group(
-    mlx_closure_metal_kernel cls,
-    int thread1,
-    int thread2,
-    int thread3);
-int mlx_closure_metal_kernel_set_init_value(
-    mlx_closure_metal_kernel cls,
-    float value);
-int mlx_closure_metal_kernel_set_verbose(
-    mlx_closure_metal_kernel cls,
-    bool verbose);
-int mlx_closure_metal_kernel_add_template_arg_dtype(
-    mlx_closure_metal_kernel cls,
-    const char* name,
-    mlx_dtype dtype);
-int mlx_closure_metal_kernel_add_template_arg_int(
-    mlx_closure_metal_kernel cls,
-    const char* name,
-    int value);
-int mlx_closure_metal_kernel_add_template_arg_bool(
-    mlx_closure_metal_kernel cls,
-    const char* name,
-    bool value);
-
 /**@}*/
 
 #ifdef __cplusplus

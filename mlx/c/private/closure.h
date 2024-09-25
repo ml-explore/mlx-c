@@ -75,24 +75,26 @@ struct mlx_closure_custom_vmap_ : mlx_object_ {
       ctx;
 };
 
-struct mlx_closure_metal_kernel_ : mlx_object_ {
-  mlx_closure_metal_kernel_() : mlx_object_() {
-    ctx = [](const std::vector<mlx::core::array>&,
-             const std::vector<std::vector<int>>&,
-             const std::vector<mlx::core::Dtype>&,
-             std::tuple<int, int, int>,
-             std::tuple<int, int, int>,
-             std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>,
-             std::optional<float>,
-             bool,
-             mlx::core::StreamOrDevice) {
-      return std::vector<mlx::core::array>();
-    };
-  };
-  mlx_closure_metal_kernel_(mlx::core::fast::MetalKernelFunction ctx)
-      : mlx_object_(), ctx(ctx){};
+struct mlx_fast_metal_kernel_ : mlx_object_ {
+  mlx_fast_metal_kernel_(
+      const std::string& name,
+      const std::string& source,
+      const std::string& header)
+      : mlx_object_(),
+        name(name),
+        source(source),
+        header(header),
+        contiguous_rows(true){};
   virtual mlx_string_* tostring() override;
   mlx::core::fast::MetalKernelFunction ctx;
+  std::string name;
+  std::vector<std::string> input_names;
+  std::vector<std::string> output_names;
+  std::string source;
+  std::string header;
+  bool contiguous_rows;
+  bool atomic_outputs;
+
   std::vector<std::vector<int>> output_shapes;
   std::vector<mlx::core::Dtype> output_dtypes;
   std::tuple<int, int, int> grid;
