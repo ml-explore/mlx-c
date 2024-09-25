@@ -194,9 +194,7 @@ extern "C" mlx_vector_int mlx_vector_int_new() {
   RETURN_MLX_C_PTR(new mlx_vector_int_())
 }
 
-extern "C" mlx_vector_int mlx_vector_int_new_data(
-    const int* data,
-    size_t size) {
+extern "C" mlx_vector_int mlx_vector_int_new_data(int* data, size_t size) {
   std::vector<int> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
     cpp_arrs.push_back(data[i]);
@@ -204,12 +202,12 @@ extern "C" mlx_vector_int mlx_vector_int_new_data(
   RETURN_MLX_C_PTR(new mlx_vector_int_(cpp_arrs))
 }
 
-extern "C" mlx_vector_int mlx_vector_int_new_value(const int val) {
+extern "C" mlx_vector_int mlx_vector_int_new_value(int val) {
   RETURN_MLX_C_PTR(new mlx_vector_int_({val}))
 }
 
 extern "C" int
-mlx_vector_int_set_data(mlx_vector_int vec, const int* data, size_t size) {
+mlx_vector_int_set_data(mlx_vector_int vec, int* data, size_t size) {
   try {
     std::vector<int> cpp_arrs;
     for (size_t i = 0; i < size; i++) {
@@ -223,7 +221,7 @@ mlx_vector_int_set_data(mlx_vector_int vec, const int* data, size_t size) {
   return 0;
 }
 
-extern "C" int mlx_vector_int_set_value(mlx_vector_int vec, const int val) {
+extern "C" int mlx_vector_int_set_value(mlx_vector_int vec, int val) {
   try {
     vec->ctx = std::vector<int>({val});
   } catch (std::exception& e) {
@@ -234,12 +232,12 @@ extern "C" int mlx_vector_int_set_value(mlx_vector_int vec, const int val) {
 }
 
 extern "C" void
-mlx_vector_int_add_data(mlx_vector_int vec, const int* data, size_t size) {
+mlx_vector_int_add_data(mlx_vector_int vec, int* data, size_t size) {
   MLX_TRY_CATCH(
       for (size_t i = 0; i < size; i++) { vec->ctx.push_back(data[i]); }, );
 }
 
-extern "C" void mlx_vector_int_add_value(mlx_vector_int vec, const int value) {
+extern "C" void mlx_vector_int_add_value(mlx_vector_int vec, int value) {
   MLX_TRY_CATCH(vec->ctx.push_back(value);, )
 }
 
@@ -358,27 +356,27 @@ extern "C" mlx_vector_string mlx_vector_string_new() {
 }
 
 extern "C" mlx_vector_string mlx_vector_string_new_data(
-    const mlx_string* data,
+    const char** data,
     size_t size) {
   std::vector<std::string> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back(data[i]->ctx);
+    cpp_arrs.push_back(data[i]);
   }
   RETURN_MLX_C_PTR(new mlx_vector_string_(cpp_arrs))
 }
 
-extern "C" mlx_vector_string mlx_vector_string_new_value(const mlx_string val) {
-  RETURN_MLX_C_PTR(new mlx_vector_string_({val->ctx}))
+extern "C" mlx_vector_string mlx_vector_string_new_value(const char* val) {
+  RETURN_MLX_C_PTR(new mlx_vector_string_({val}))
 }
 
 extern "C" int mlx_vector_string_set_data(
     mlx_vector_string vec,
-    const mlx_string* data,
+    const char** data,
     size_t size) {
   try {
     std::vector<std::string> cpp_arrs;
     for (size_t i = 0; i < size; i++) {
-      cpp_arrs.push_back(data[i]->ctx);
+      cpp_arrs.push_back(data[i]);
     }
     vec->ctx = cpp_arrs;
   } catch (std::exception& e) {
@@ -390,9 +388,9 @@ extern "C" int mlx_vector_string_set_data(
 
 extern "C" int mlx_vector_string_set_value(
     mlx_vector_string vec,
-    const mlx_string val) {
+    const char* val) {
   try {
-    vec->ctx = std::vector<std::string>({val->ctx});
+    vec->ctx = std::vector<std::string>({val});
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -402,23 +400,22 @@ extern "C" int mlx_vector_string_set_value(
 
 extern "C" void mlx_vector_string_add_data(
     mlx_vector_string vec,
-    const mlx_string* data,
+    const char** data,
     size_t size) {
   MLX_TRY_CATCH(
-      for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back(data[i]->ctx); }, );
+      for (size_t i = 0; i < size; i++) { vec->ctx.push_back(data[i]); }, );
 }
 
 extern "C" void mlx_vector_string_add_value(
     mlx_vector_string vec,
-    const mlx_string value) {
-  MLX_TRY_CATCH(vec->ctx.push_back(value->ctx);, )
+    const char* value) {
+  MLX_TRY_CATCH(vec->ctx.push_back(value);, )
 }
 
 extern "C" int
-mlx_vector_string_get(mlx_vector_string vec, size_t index, mlx_string res) {
+mlx_vector_string_get(mlx_vector_string vec, size_t index, char** res) {
   try {
-    res->ctx = vec->ctx.at(index);
+    *res = vec->ctx.at(index).data();
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
