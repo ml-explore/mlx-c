@@ -1,9 +1,23 @@
 import argparse
+import regex
 
 parser = argparse.ArgumentParser("MLX C map code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
 parser.add_argument("--private", default=False, action="store_true")
 args = parser.parse_args()
+
+
+def replace_match_parenthesis(string, keyword, fun):
+    pattern = regex.compile(keyword + r"(\((?:[^()]++|(?1))++\))")
+    res = []
+    pos = 0
+    for m in pattern.finditer(string):
+        res.append(string[pos : m.start()])
+        res.append(fun(m[1][1:-1]))
+        pos = m.end()
+    res.append(string[pos:])
+    return "".join(res)
+
 
 decl_code = """
 /**
@@ -21,15 +35,16 @@ mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void);
  */
 bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    const CTYPE1 key,
-    const CTYPE2 value);
+    CTYPE1 key,
+    CTYPE2 value);
 /**
  * Returns the value indexed at the specified `key` in the map.
  * Returns `NULL` if no value was found for `key`.
  */
-CTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_get(
+bool mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    const CTYPE1 key);
+    CTYPE1 key,
+    RCTYPE2 value);
 
 /**
  * An iterator over a SCTYPE1-to-SCTYPE2 map.
@@ -45,21 +60,7 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterate(
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_end(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-CTYPE1 mlx_map_SCTYPE1_to_SCTYPE2_iterator_key(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-CTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_iterator_value(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
+bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value);
 """
 
 impl_code = """
@@ -79,21 +80,22 @@ extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    const CTYPE1 key,
-    const CTYPE2 value) {
+    CTYPE1 key,
+    CTYPE2 value) {
   MLX_TRY_CATCH(
-      auto res = map->ctx.insert(std::make_pair(key->ctx, value->ctx));
+      auto res = map->ctx.insert(std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
       return res.second, return false);
 }
 
-extern "C" CTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_get(
+extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    const CTYPE1 key) {
-  auto search = map->ctx.find(key->ctx);
+    CTYPE1 key, RCTYPE2 value) {
+  auto search = map->ctx.find(CTYPE1_TO_CPP(key));
   if (search == map->ctx.end()) {
-    return nullptr;
+    return false;
   } else {
-    return new CTYPE2_(search->second);
+    CTYPE2_ASSIGN(value) = CTYPE2_ASSIGN_GET(search->second);
+    return true;
   }
 }
 
@@ -104,39 +106,14 @@ extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterat
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
-  it->ctx++;
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value) {
   if (it->ctx == it->map->ctx.end()) {
     return false;
   } else {
+    CTYPE1_ASSIGN(key) = CTYPE1_ASSIGN_GET(it->ctx->first);
+    CTYPE2_ASSIGN(value) = CTYPE2_ASSIGN_GET(it->ctx->second);
+    it->ctx++;
     return true;
-  }
-}
-
-extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_end(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
-  if (it->ctx == it->map->ctx.end()) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-extern "C" CTYPE1 mlx_map_SCTYPE1_to_SCTYPE2_iterator_key(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
-  if (it->ctx == it->map->ctx.end()) {
-    return nullptr;
-  } else {
-    return new CTYPE1_(it->ctx->first);
-  }
-}
-
-extern "C" CTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_iterator_value(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
-  if (it->ctx == it->map->ctx.end()) {
-    return nullptr;
-  } else {
-    return new CTYPE2_(it->ctx->second);
   }
 }
 """
@@ -166,34 +143,25 @@ struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ : mlx_object_ {
 """
 
 
-def define_map(ctype1, ctype2, sctype1, sctype2):
-    code = decl_code
-    code = code.replace("SCTYPE1", sctype1)
-    code = code.replace("SCTYPE2", sctype2)
-    code = code.replace("CTYPE1", ctype1)
-    code = code.replace("CTYPE2", ctype2)
+def generate(code, type1, type2):
+    code = replace_match_parenthesis(code, "CTYPE1_TO_CPP", type1["c_to_cpp"])
+    code = replace_match_parenthesis(code, "CTYPE2_TO_CPP", type2["c_to_cpp"])
+    code = replace_match_parenthesis(code, "CTYPE1_ASSIGN", type1["c_assign"])
+    code = replace_match_parenthesis(code, "CTYPE2_ASSIGN", type2["c_assign"])
+    code = replace_match_parenthesis(code, "CTYPE1_ASSIGN_GET", type1["c_assign_get"])
+    code = replace_match_parenthesis(code, "CTYPE2_ASSIGN_GET", type2["c_assign_get"])
+    code = code.replace("SCTYPE1", type1["nick"])
+    code = code.replace("SCTYPE2", type2["nick"])
+    code = code.replace("RCTYPE1", type1["c_return"])
+    code = code.replace("RCTYPE2", type2["c_return"])
+    code = code.replace("CTYPE1", type1["c"])
+    code = code.replace("CTYPE2", type2["c"])
+    code = code.replace("CPPTYPE1", type1["cpp"])
+    code = code.replace("CPPTYPE2", type2["cpp"])
     return code
 
 
-def impl_map(ctype1, ctype2, sctype1, sctype2):
-    code = impl_code
-    code = code.replace("SCTYPE1", sctype1)
-    code = code.replace("SCTYPE2", sctype2)
-    code = code.replace("CTYPE1", ctype1)
-    code = code.replace("CTYPE2", ctype2)
-    return code
-
-
-def priv_map(cpptype1, cpptype2, sctype1, sctype2):
-    code = priv_code
-    code = code.replace("SCTYPE1", sctype1)
-    code = code.replace("SCTYPE2", sctype2)
-    code = code.replace("CPPTYPE1", cpptype1)
-    code = code.replace("CPPTYPE2", cpptype2)
-    return code
-
-
-define_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -215,7 +183,7 @@ extern "C" {
 /**@{*/
 """
 
-define_end = """
+decl_end = """
 /**@}*/
 
 #ifdef __cplusplus
@@ -259,17 +227,39 @@ priv_end = """
 """
 
 if args.implementation:
-    print(impl_begin)
-    print(impl_map("mlx_string", "mlx_array", "string", "array"))
-    print(impl_map("mlx_string", "mlx_string", "string", "string"))
-    print(impl_end)
+    begin = impl_begin
+    code = impl_code
+    end = impl_end
 elif args.private:
-    print(priv_begin)
-    print(priv_map("std::string", "mlx::core::array", "string", "array"))
-    print(priv_map("std::string", "std::string", "string", "string"))
-    print(priv_end)
+    begin = priv_begin
+    code = priv_code
+    end = priv_end
 else:
-    print(define_begin)
-    print(define_map("mlx_string", "mlx_array", "string", "array"))
-    print(define_map("mlx_string", "mlx_string", "string", "string"))
-    print(define_end)
+    begin = decl_begin
+    code = decl_code
+    end = decl_end
+
+array_t = {
+    "c": "const mlx_array",
+    "cpp": "mlx::core::array",
+    "nick": "array",
+    "c_return": "mlx_array",
+    "c_to_cpp": lambda s: s + "->ctx",
+    "c_assign": lambda s: s + "->ctx",
+    "c_assign_get": lambda s: s,
+}
+
+string_t = {
+    "c": "const char*",
+    "cpp": "std::string",
+    "nick": "string",
+    "c_return": "const char**",
+    "c_to_cpp": lambda s: "std::string(" + s + ")",
+    "c_assign": lambda s: "* " + s,
+    "c_assign_get": lambda s: s + ".data()",
+}
+
+print(begin)
+print(generate(code, string_t, array_t))
+print(generate(code, string_t, string_t))
+print(end)

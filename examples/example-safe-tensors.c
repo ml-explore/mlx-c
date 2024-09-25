@@ -23,18 +23,13 @@ int main() {
   mlx_load_safetensors_file(f, stream, data, metadata);
 
   mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(data);
-  while (!mlx_map_string_to_array_iterator_end(it)) {
-    mlx_string key = mlx_map_string_to_array_iterator_key(it);
-    mlx_array value = mlx_map_string_to_array_iterator_value(it);
-
-    print_array(mlx_string_data(key), value);
-
-    mlx_free(key);
-    mlx_free(value);
-
-    mlx_map_string_to_array_iterator_next(it);
+	const char* key;
+	mlx_array value = mlx_array_new();
+  while (mlx_map_string_to_array_iterator_next(it, &key, value)) {
+    print_array(key, value);
   }
 
+	mlx_free(value);
   mlx_free(data);
   mlx_free(metadata);
   mlx_free(stream);
