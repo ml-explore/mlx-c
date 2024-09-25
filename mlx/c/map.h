@@ -34,15 +34,16 @@ mlx_map_string_to_array mlx_map_string_to_array_new(void);
  */
 bool mlx_map_string_to_array_insert(
     mlx_map_string_to_array map,
-    const mlx_string key,
+    const char* key,
     const mlx_array value);
 /**
  * Returns the value indexed at the specified `key` in the map.
  * Returns `NULL` if no value was found for `key`.
  */
-mlx_array mlx_map_string_to_array_get(
+bool mlx_map_string_to_array_get(
     mlx_map_string_to_array map,
-    const mlx_string key);
+    const char* key,
+    mlx_array value);
 
 /**
  * An iterator over a string-to-array map.
@@ -58,21 +59,10 @@ mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_string_to_array_iterator_next(mlx_map_string_to_array_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_string_to_array_iterator_end(mlx_map_string_to_array_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_array_iterator_key(
-    mlx_map_string_to_array_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-mlx_array mlx_map_string_to_array_iterator_value(
-    mlx_map_string_to_array_iterator it);
+bool mlx_map_string_to_array_iterator_next(
+    mlx_map_string_to_array_iterator it,
+    const char** key,
+    mlx_array value);
 
 /**
  * A string-to-string map
@@ -89,15 +79,16 @@ mlx_map_string_to_string mlx_map_string_to_string_new(void);
  */
 bool mlx_map_string_to_string_insert(
     mlx_map_string_to_string map,
-    const mlx_string key,
-    const mlx_string value);
+    const char* key,
+    const char* value);
 /**
  * Returns the value indexed at the specified `key` in the map.
  * Returns `NULL` if no value was found for `key`.
  */
-mlx_string mlx_map_string_to_string_get(
+bool mlx_map_string_to_string_get(
     mlx_map_string_to_string map,
-    const mlx_string key);
+    const char* key,
+    const char** value);
 
 /**
  * An iterator over a string-to-string map.
@@ -114,22 +105,9 @@ mlx_map_string_to_string_iterator mlx_map_string_to_string_iterate(
  * Returns `true` if iterator could actually be incremented.
  */
 bool mlx_map_string_to_string_iterator_next(
-    mlx_map_string_to_string_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_string_to_string_iterator_end(
-    mlx_map_string_to_string_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_string_iterator_key(
-    mlx_map_string_to_string_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_string_iterator_value(
-    mlx_map_string_to_string_iterator it);
+    mlx_map_string_to_string_iterator it,
+    const char** key,
+    const char** value);
 
 /**@}*/
 
