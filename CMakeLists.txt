@@ -53,6 +53,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/result.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
