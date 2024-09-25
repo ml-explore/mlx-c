@@ -26,14 +26,14 @@ decl_code = """
  */
 typedef struct mlx_vector_SCTYPE_* mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
-mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(const CTYPE* data, size_t size);
-mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(const CTYPE val);
-int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, const CTYPE* data, size_t size);
-int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, const CTYPE val);
-void mlx_vector_SCTYPE_add_data(mlx_vector_SCTYPE vec, const CTYPE* data, size_t size);
-void mlx_vector_SCTYPE_add_value(mlx_vector_SCTYPE vec, const CTYPE val);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
+int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, CTYPE* data, size_t size);
+int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val);
+void mlx_vector_SCTYPE_add_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
+void mlx_vector_SCTYPE_add_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
-int mlx_vector_SCTYPE_get(const mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE(CTYPE));
+int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE);
 """
 
 impl_code = """
@@ -50,7 +50,7 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
 }
 
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
-    const CTYPE* data,
+    CTYPE* data,
     size_t size) {
   std::vector<CPPTYPE> cpp_arrs;
   for (size_t i = 0; i < size; i++) {
@@ -59,13 +59,13 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_(cpp_arrs))
 }
 
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(const CTYPE val) {
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val) {
   RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_({C_TO_CPP(val)}))
 }
 
 extern "C" int mlx_vector_SCTYPE_set_data(
     mlx_vector_SCTYPE vec,
-    const CTYPE* data,
+    CTYPE* data,
     size_t size) {
   try {
     std::vector<CPPTYPE> cpp_arrs;
@@ -80,7 +80,7 @@ extern "C" int mlx_vector_SCTYPE_set_data(
   return 0;
 }
 
-extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, const CTYPE val) {
+extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val) {
   try {
     vec->ctx = std::vector<CPPTYPE>({C_TO_CPP(val)});
   } catch (std::exception & e) {
@@ -92,7 +92,7 @@ extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, const CTYPE va
 
 extern "C" void mlx_vector_SCTYPE_add_data(
     mlx_vector_SCTYPE vec,
-    const CTYPE* data,
+    CTYPE* data,
     size_t size) {
   MLX_TRY_CATCH(
       for (size_t i = 0; i < size;
@@ -101,13 +101,13 @@ extern "C" void mlx_vector_SCTYPE_add_data(
 
 extern "C" void mlx_vector_SCTYPE_add_value(
     mlx_vector_SCTYPE vec,
-    const CTYPE value) {
+    CTYPE value) {
   MLX_TRY_CATCH(vec->ctx.push_back(C_TO_CPP(value));, )
 }
 
-extern "C" int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index, RETURN_CTYPE(CTYPE) res) {
+extern "C" int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index, RETURN_CTYPE res) {
   try {
-    RETURN_C_TO_CPP(res) = vec->ctx.at(index);
+    C_ASSIGN(res, vec->ctx.at(index));
   } catch (std::exception & e) {
     mlx_error(e.what());
     return 1;
@@ -145,13 +145,20 @@ def generate(
     cpptype,
     ctype,
     sctype,
+    rctype=None,
     c_to_cpp=lambda s: s + "->ctx",
-    return_ctype=lambda s: s,
-    return_c_to_cpp=lambda s: s + "->ctx",
+    c_assign=lambda d, s: d + "->ctx = " + s,
 ):
-    code = replace_match_parenthesis(code, "RETURN_C_TO_CPP", return_c_to_cpp)
+    if rctype is None:
+        rctype = ctype.replace("const ", "")
+
+    def c_assign_wrap(s):
+        d, s = s.split(",")
+        return c_assign(d, s)
+
+    code = replace_match_parenthesis(code, "C_ASSIGN", c_assign_wrap)
     code = replace_match_parenthesis(code, "C_TO_CPP", c_to_cpp)
-    code = replace_match_parenthesis(code, "RETURN_CTYPE", return_ctype)
+    code = code.replace("RETURN_CTYPE", rctype)
     code = code.replace("SCTYPE", sctype)
     code = code.replace("CPPTYPE", cpptype)
     code = code.replace("CTYPE", ctype)
@@ -241,7 +248,7 @@ print(
     generate(
         code,
         "mlx::core::array",
-        "mlx_array",
+        "const mlx_array",
         "array",
     )
 )
@@ -249,7 +256,7 @@ print(
     generate(
         code,
         "std::vector<mlx::core::array>",
-        "mlx_vector_array",
+        "const mlx_vector_array",
         "vector_array",
     )
 )
@@ -259,16 +266,16 @@ print(
         "int",
         "int",
         "int",
+        "int*",
         lambda s: s,
-        lambda s: s + "*",
-        lambda s: "*" + s,
+        lambda d, s: "*" + d + " = " + s,
     )
 )
 print(
     generate(
         code,
         "std::vector<int>",
-        "mlx_vector_int",
+        "const mlx_vector_int",
         "vector_int",
     )
 )
@@ -276,8 +283,11 @@ print(
     generate(
         code,
         "std::string",
-        "mlx_string",
+        "const char*",
         "string",
+        "char**",
+        lambda s: s,
+        lambda d, s: "*" + d + " = " + s + ".data()",
     )
 )
 print(end)

@@ -15,10 +15,8 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
       "uint elem = thread_position_in_grid.x;"
       "T tmp = inp[elem];"
       "out[elem] = metal::exp(tmp);";
-  mlx_string input_name0 = mlx_string_new("inp");
-  mlx_string output_name0 = mlx_string_new("out");
-  mlx_vector_string input_names = mlx_vector_string_new_value(input_name0);
-  mlx_vector_string output_names = mlx_vector_string_new_value(output_name0);
+  mlx_vector_string input_names = mlx_vector_string_new_value("inp");
+  mlx_vector_string output_names = mlx_vector_string_new_value("out");
   mlx_closure_metal_kernel kernel = mlx_closure_metal_kernel_new();
   mlx_fast_metal_kernel(
       "myexp", input_names, output_names, source, "", true, false, kernel);
@@ -38,8 +36,6 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
   mlx_closure_metal_kernel_apply(kernel, inputs, desc, stream, outputs);
   mlx_vector_array_get(outputs, 0, output);
 
-  mlx_free(input_name0);
-  mlx_free(output_name0);
   mlx_free(input_names);
   mlx_free(output_names);
   mlx_free(kernel);
