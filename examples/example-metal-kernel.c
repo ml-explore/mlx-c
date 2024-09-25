@@ -22,25 +22,23 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
       "myexp", input_names, output_names, source, "", true, false, kernel);
 
   mlx_vector_array inputs = mlx_vector_array_new_value(input);
-  mlx_closure_metal_kernel_desc desc = mlx_closure_metal_kernel_desc_new();
-  mlx_closure_metal_kernel_desc_add_template_arg_dtype(desc, "T", MLX_FLOAT32);
-  mlx_closure_metal_kernel_desc_set_grid(desc, mlx_array_size(input), 1, 1);
-  mlx_closure_metal_kernel_desc_set_thread_group(desc, 256, 1, 1);
-  mlx_closure_metal_kernel_desc_add_output_arg(
-      desc,
+  mlx_closure_metal_kernel_add_template_arg_dtype(kernel, "T", MLX_FLOAT32);
+  mlx_closure_metal_kernel_set_grid(kernel, mlx_array_size(input), 1, 1);
+  mlx_closure_metal_kernel_set_thread_group(kernel, 256, 1, 1);
+  mlx_closure_metal_kernel_add_output_arg(
+      kernel,
       mlx_array_shape(input),
       mlx_array_ndim(input),
       mlx_array_dtype(input));
 
   mlx_vector_array outputs = mlx_vector_array_new();
-  mlx_closure_metal_kernel_apply(kernel, inputs, desc, stream, outputs);
+  mlx_closure_metal_kernel_apply(kernel, inputs, stream, outputs);
   mlx_vector_array_get(outputs, 0, output);
 
   mlx_free(input_names);
   mlx_free(output_names);
   mlx_free(kernel);
   mlx_free(inputs);
-  mlx_free(desc);
   mlx_free(outputs);
 }
 int main() {
