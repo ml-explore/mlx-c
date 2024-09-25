@@ -338,24 +338,19 @@ print(
 if args.private:
     print(
         """
-struct mlx_closure_metal_kernel_ : mlx_object_ {
-  mlx_closure_metal_kernel_() : mlx_object_() {
-    ctx = [](const std::vector<mlx::core::array>&,
-    const std::vector<std::vector<int>>&,
-    const std::vector<mlx::core::Dtype>&,
-    std::tuple<int, int, int>,
-    std::tuple<int, int, int>,
-    std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>,
-    std::optional<float>,
-    bool,
-    mlx::core::StreamOrDevice) {
-      return std::vector<mlx::core::array>();
-    };
-  };
-  mlx_closure_metal_kernel_(mlx::core::fast::MetalKernelFunction ctx)
-      : mlx_object_(), ctx(ctx){};
+struct mlx_fast_metal_kernel_ : mlx_object_ {
+  mlx_fast_metal_kernel_(const std::string& name, const std::string& source, const std::string& header)
+      : mlx_object_(), name(name), source(source), header(header), contiguous_rows(true) {};
   virtual mlx_string_* tostring() override;
   mlx::core::fast::MetalKernelFunction ctx;
+  std::string name;
+  std::vector<std::string> input_names;
+  std::vector<std::string> output_names;
+  std::string source;
+  std::string header;
+  bool contiguous_rows;
+  bool atomic_outputs;
+
   std::vector<std::vector<int>> output_shapes;
   std::vector<mlx::core::Dtype> output_dtypes;
   std::tuple<int, int, int> grid;
@@ -364,124 +359,6 @@ struct mlx_closure_metal_kernel_ : mlx_object_ {
   std::optional<float> init_value;
   bool verbose;
 };
-    """
-    )
-elif args.implementation:
-    print(
-        """
-
-extern "C" int mlx_closure_metal_kernel_add_output_arg(mlx_closure_metal_kernel cls, const int* shape, size_t size, mlx_dtype dtype) {
-  try {
-    cls->output_shapes.push_back(std::vector<int>(shape, shape+size));
-    cls->output_dtypes.push_back(mlx_dtype_to_cpp(dtype));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_set_grid(mlx_closure_metal_kernel cls, int grid1, int grid2, int grid3) {
-  try {
-    cls->grid = std::make_tuple(grid1, grid2, grid3);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_set_thread_group(mlx_closure_metal_kernel cls, int thread1, int thread2, int thread3) {
-  try {
-    cls->thread_group = std::make_tuple(thread1, thread2, thread3);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_set_init_value(mlx_closure_metal_kernel cls, float value){
-  try {
-    cls->init_value = value;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_set_verbose(mlx_closure_metal_kernel cls, bool verbose) {
-  try {
-    cls->verbose = verbose;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_add_template_arg_dtype(mlx_closure_metal_kernel cls, const char* name, mlx_dtype dtype) {
-  try {
-    cls->template_args.push_back(std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_add_template_arg_int(mlx_closure_metal_kernel cls, const char *name, int value) {
-  try {
-    cls->template_args.push_back(std::make_pair(std::string(name), value));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_closure_metal_kernel_add_template_arg_bool(mlx_closure_metal_kernel cls, const char* name, bool value)  {
-  try {
-    cls->template_args.push_back(std::make_pair(std::string(name), value));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-
-mlx_string_* mlx_closure_metal_kernel_::tostring() {
-  RETURN_MLX_C_STRING(
-      "mlx_closure_metal_kernel_");
-}
-
-extern "C" mlx_closure_metal_kernel mlx_closure_metal_kernel_new() {
-  try {
-    return new mlx_closure_metal_kernel_();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-  }
-  return nullptr;
-}
-extern "C" int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array outputs) {
-  try {
-    outputs->ctx = cls->ctx(inputs->ctx, cls->output_shapes, cls->output_dtypes, cls->grid, cls->thread_group, cls->template_args, cls->init_value, cls->verbose, stream->ctx);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-    """
-    )
-else:
-    print(
-        """
-typedef struct mlx_closure_metal_kernel_* mlx_closure_metal_kernel;
-mlx_closure_metal_kernel mlx_closure_metal_kernel_new();
-int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array outputs);
-int mlx_closure_metal_kernel_add_output_arg(mlx_closure_metal_kernel cls, const int* shape, size_t size, mlx_dtype dtype);
-int mlx_closure_metal_kernel_set_grid(mlx_closure_metal_kernel cls, int grid1, int grid2, int grid3);
-int mlx_closure_metal_kernel_set_thread_group(mlx_closure_metal_kernel cls, int thread1, int thread2, int thread3);
-int mlx_closure_metal_kernel_set_init_value(mlx_closure_metal_kernel cls, float value);
-int mlx_closure_metal_kernel_set_verbose(mlx_closure_metal_kernel cls, bool verbose);
-int mlx_closure_metal_kernel_add_template_arg_dtype(mlx_closure_metal_kernel cls, const char* name, mlx_dtype dtype);
-int mlx_closure_metal_kernel_add_template_arg_int(mlx_closure_metal_kernel cls, const char* name, int value);
-int mlx_closure_metal_kernel_add_template_arg_bool(mlx_closure_metal_kernel cls, const char* name, bool value);
     """
     )
 
