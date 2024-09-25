@@ -338,20 +338,6 @@ print(
 if args.private:
     print(
         """
-    struct mlx_closure_metal_kernel_desc_ : mlx_object_ {
-    mlx_closure_metal_kernel_desc_()
-      : mlx_object_() {};
-  virtual mlx_string_* tostring() override;
-
-    std::vector<std::vector<int>> output_shapes;
-    std::vector<mlx::core::Dtype> output_dtypes;
-    std::tuple<int, int, int> grid;
-    std::tuple<int, int, int> thread_group;
-    std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>> template_args;
-    std::optional<float> init_value;
-    bool verbose;
-};
-
 struct mlx_closure_metal_kernel_ : mlx_object_ {
   mlx_closure_metal_kernel_() : mlx_object_() {
     ctx = [](const std::vector<mlx::core::array>&,
@@ -370,6 +356,13 @@ struct mlx_closure_metal_kernel_ : mlx_object_ {
       : mlx_object_(), ctx(ctx){};
   virtual mlx_string_* tostring() override;
   mlx::core::fast::MetalKernelFunction ctx;
+  std::vector<std::vector<int>> output_shapes;
+  std::vector<mlx::core::Dtype> output_dtypes;
+  std::tuple<int, int, int> grid;
+  std::tuple<int, int, int> thread_group;
+  std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>> template_args;
+  std::optional<float> init_value;
+  bool verbose;
 };
     """
     )
@@ -377,87 +370,73 @@ elif args.implementation:
     print(
         """
 
-mlx_string_* mlx_closure_metal_kernel_desc_::tostring() {
-  RETURN_MLX_C_STRING(
-      "mlx_closure_metal_kernel_desc");
-}
-
-extern "C" mlx_closure_metal_kernel_desc mlx_closure_metal_kernel_desc_new() {
+extern "C" int mlx_closure_metal_kernel_add_output_arg(mlx_closure_metal_kernel cls, const int* shape, size_t size, mlx_dtype dtype) {
   try {
-    return new mlx_closure_metal_kernel_desc_();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return nullptr;
-  }
-}
-
-extern "C" int mlx_closure_metal_kernel_desc_add_output_arg(mlx_closure_metal_kernel_desc desc, const int* shape, size_t size, mlx_dtype dtype) {
-  try {
-    desc->output_shapes.push_back(std::vector<int>(shape, shape+size));
-    desc->output_dtypes.push_back(mlx_dtype_to_cpp(dtype));
+    cls->output_shapes.push_back(std::vector<int>(shape, shape+size));
+    cls->output_dtypes.push_back(mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_set_grid(mlx_closure_metal_kernel_desc desc, int grid1, int grid2, int grid3) {
+extern "C" int mlx_closure_metal_kernel_set_grid(mlx_closure_metal_kernel cls, int grid1, int grid2, int grid3) {
   try {
-    desc->grid = std::make_tuple(grid1, grid2, grid3);
+    cls->grid = std::make_tuple(grid1, grid2, grid3);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_set_thread_group(mlx_closure_metal_kernel_desc desc, int thread1, int thread2, int thread3) {
+extern "C" int mlx_closure_metal_kernel_set_thread_group(mlx_closure_metal_kernel cls, int thread1, int thread2, int thread3) {
   try {
-    desc->thread_group = std::make_tuple(thread1, thread2, thread3);
+    cls->thread_group = std::make_tuple(thread1, thread2, thread3);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_set_init_value(mlx_closure_metal_kernel_desc desc, float value){
+extern "C" int mlx_closure_metal_kernel_set_init_value(mlx_closure_metal_kernel cls, float value){
   try {
-    desc->init_value = value;
+    cls->init_value = value;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_set_verbose(mlx_closure_metal_kernel_desc desc, bool verbose) {
+extern "C" int mlx_closure_metal_kernel_set_verbose(mlx_closure_metal_kernel cls, bool verbose) {
   try {
-    desc->verbose = verbose;
+    cls->verbose = verbose;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_add_template_arg_dtype(mlx_closure_metal_kernel_desc desc, const char* name, mlx_dtype dtype) {
+extern "C" int mlx_closure_metal_kernel_add_template_arg_dtype(mlx_closure_metal_kernel cls, const char* name, mlx_dtype dtype) {
   try {
-    desc->template_args.push_back(std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
+    cls->template_args.push_back(std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_add_template_arg_int(mlx_closure_metal_kernel_desc desc, const char *name, int value) {
+extern "C" int mlx_closure_metal_kernel_add_template_arg_int(mlx_closure_metal_kernel cls, const char *name, int value) {
   try {
-    desc->template_args.push_back(std::make_pair(std::string(name), value));
+    cls->template_args.push_back(std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_closure_metal_kernel_desc_add_template_arg_bool(mlx_closure_metal_kernel_desc desc, const char* name, bool value)  {
+extern "C" int mlx_closure_metal_kernel_add_template_arg_bool(mlx_closure_metal_kernel cls, const char* name, bool value)  {
   try {
-    desc->template_args.push_back(std::make_pair(std::string(name), value));
+    cls->template_args.push_back(std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -478,9 +457,9 @@ extern "C" mlx_closure_metal_kernel mlx_closure_metal_kernel_new() {
   }
   return nullptr;
 }
-extern "C" int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_closure_metal_kernel_desc desc, const mlx_stream stream, mlx_vector_array outputs) {
+extern "C" int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array outputs) {
   try {
-    outputs->ctx = cls->ctx(inputs->ctx, desc->output_shapes, desc->output_dtypes, desc->grid, desc->thread_group, desc->template_args, desc->init_value, desc->verbose, stream->ctx);
+    outputs->ctx = cls->ctx(inputs->ctx, cls->output_shapes, cls->output_dtypes, cls->grid, cls->thread_group, cls->template_args, cls->init_value, cls->verbose, stream->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -492,20 +471,17 @@ extern "C" int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, cons
 else:
     print(
         """
-typedef struct mlx_closure_metal_kernel_desc_* mlx_closure_metal_kernel_desc;
-mlx_closure_metal_kernel_desc mlx_closure_metal_kernel_desc_new();
-int mlx_closure_metal_kernel_desc_add_output_arg(mlx_closure_metal_kernel_desc desc, const int* shape, size_t size, mlx_dtype dtype);
-int mlx_closure_metal_kernel_desc_set_grid(mlx_closure_metal_kernel_desc desc, int grid1, int grid2, int grid3);
-int mlx_closure_metal_kernel_desc_set_thread_group(mlx_closure_metal_kernel_desc desc, int thread1, int thread2, int thread3);
-int mlx_closure_metal_kernel_desc_set_init_value(mlx_closure_metal_kernel_desc desc, float value);
-int mlx_closure_metal_kernel_desc_set_verbose(mlx_closure_metal_kernel_desc desc, bool verbose);
-int mlx_closure_metal_kernel_desc_add_template_arg_dtype(mlx_closure_metal_kernel_desc desc, const char* name, mlx_dtype dtype);
-int mlx_closure_metal_kernel_desc_add_template_arg_int(mlx_closure_metal_kernel_desc desc, const char* name, int value);
-int mlx_closure_metal_kernel_desc_add_template_arg_bool(mlx_closure_metal_kernel_desc desc, const char* name, bool value);
-
 typedef struct mlx_closure_metal_kernel_* mlx_closure_metal_kernel;
 mlx_closure_metal_kernel mlx_closure_metal_kernel_new();
-int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_closure_metal_kernel_desc desc, const mlx_stream stream, mlx_vector_array outputs);
+int mlx_closure_metal_kernel_apply(mlx_closure_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array outputs);
+int mlx_closure_metal_kernel_add_output_arg(mlx_closure_metal_kernel cls, const int* shape, size_t size, mlx_dtype dtype);
+int mlx_closure_metal_kernel_set_grid(mlx_closure_metal_kernel cls, int grid1, int grid2, int grid3);
+int mlx_closure_metal_kernel_set_thread_group(mlx_closure_metal_kernel cls, int thread1, int thread2, int thread3);
+int mlx_closure_metal_kernel_set_init_value(mlx_closure_metal_kernel cls, float value);
+int mlx_closure_metal_kernel_set_verbose(mlx_closure_metal_kernel cls, bool verbose);
+int mlx_closure_metal_kernel_add_template_arg_dtype(mlx_closure_metal_kernel cls, const char* name, mlx_dtype dtype);
+int mlx_closure_metal_kernel_add_template_arg_int(mlx_closure_metal_kernel cls, const char* name, int value);
+int mlx_closure_metal_kernel_add_template_arg_bool(mlx_closure_metal_kernel cls, const char* name, bool value);
     """
     )
 
