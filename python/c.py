@@ -127,7 +127,6 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
     #include "mlx/c/private/array.h"
     #include "mlx/c/private/closure.h"
     #include "mlx/c/private/distributed_group.h"
-    #include "mlx/c/private/io.h"
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/string.h"
