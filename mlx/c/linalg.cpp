@@ -26,6 +26,10 @@ extern "C" mlx_array
 mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::linalg::cholesky_inv(a->ctx, upper, s->ctx));
 }
+extern "C" mlx_array
+mlx_linalg_cross(mlx_array a, mlx_array b, int axis, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::linalg::cross(a->ctx, b->ctx, axis, s->ctx));
+}
 extern "C" mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::linalg::inv(a->ctx, s->ctx));
 }

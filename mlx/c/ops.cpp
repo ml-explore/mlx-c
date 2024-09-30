@@ -772,6 +772,15 @@ extern "C" mlx_array mlx_prod(
 extern "C" mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::prod(a->ctx, keepdims, s->ctx));
 }
+extern "C" mlx_array mlx_put_along_axis(
+    mlx_array a,
+    mlx_array indices,
+    mlx_array values,
+    int axis,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::put_along_axis(
+      a->ctx, indices->ctx, values->ctx, axis, s->ctx));
+}
 extern "C" mlx_tuple_array_array_array
 mlx_quantize(mlx_array w, int group_size, int bits, mlx_stream s) {
   RETURN_MLX_C_ARRAYTUPLE3(
@@ -1035,10 +1044,6 @@ mlx_swapaxes(mlx_array a, int axis1, int axis2, mlx_stream s) {
 extern "C" mlx_array
 mlx_take(mlx_array a, mlx_array indices, int axis, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::take(a->ctx, indices->ctx, axis, s->ctx));
-}
-extern "C" mlx_array
-mlx_take_all(mlx_array a, mlx_array indices, mlx_stream s) {
-  RETURN_MLX_C_ARRAY(mlx::core::take(a->ctx, indices->ctx, s->ctx));
 }
 extern "C" mlx_array
 mlx_take_along_axis(mlx_array a, mlx_array indices, int axis, mlx_stream s) {

@@ -163,7 +163,8 @@ static mlx_array_dtype mlx_c_dtypes[] = {
 #define MLX_CPP_STRING(str) ((str)->ctx)
 
 #define RETURN_MLX_C_VOID(scope) MLX_TRY_CATCH(scope, return)
-#define RETURN_MLX_C_ARRAY_DTYPE(dtype) return mlx_c_dtypes[(int)((dtype).val)]
+#define RETURN_MLX_C_ARRAY_DTYPE(dtype) \
+  return mlx_c_dtypes[(int)((dtype).val())]
 #define RETURN_MLX_C_ARRAY(arr) RETURN_MLX_C_PTR(new mlx_array_(arr))
 #define RETURN_MLX_C_STREAM(stream) RETURN_MLX_C_PTR(new mlx_stream_(stream))
 #define RETURN_MLX_C_DEVICE(device) RETURN_MLX_C_PTR(new mlx_device_(device))
