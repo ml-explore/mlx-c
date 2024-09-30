@@ -20,9 +20,9 @@ extern "C" int mlx_fft_fft(
     int n,
     int axis,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::fft(a->ctx, n, axis, s->ctx);
+    (*res)->ctx = mlx::core::fft::fft(a->ctx, n, axis, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -36,9 +36,9 @@ extern "C" int mlx_fft_fft2(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::fft2(
+    (*res)->ctx = mlx::core::fft::fft2(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -56,9 +56,9 @@ extern "C" int mlx_fft_fftn(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::fftn(
+    (*res)->ctx = mlx::core::fft::fftn(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -74,9 +74,9 @@ extern "C" int mlx_fft_ifft(
     int n,
     int axis,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::ifft(a->ctx, n, axis, s->ctx);
+    (*res)->ctx = mlx::core::fft::ifft(a->ctx, n, axis, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -90,9 +90,9 @@ extern "C" int mlx_fft_ifft2(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::ifft2(
+    (*res)->ctx = mlx::core::fft::ifft2(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -110,9 +110,9 @@ extern "C" int mlx_fft_ifftn(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::ifftn(
+    (*res)->ctx = mlx::core::fft::ifftn(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -128,9 +128,9 @@ extern "C" int mlx_fft_irfft(
     int n,
     int axis,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::irfft(a->ctx, n, axis, s->ctx);
+    (*res)->ctx = mlx::core::fft::irfft(a->ctx, n, axis, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -144,9 +144,9 @@ extern "C" int mlx_fft_irfft2(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::irfft2(
+    (*res)->ctx = mlx::core::fft::irfft2(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -164,9 +164,9 @@ extern "C" int mlx_fft_irfftn(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::irfftn(
+    (*res)->ctx = mlx::core::fft::irfftn(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -182,9 +182,9 @@ extern "C" int mlx_fft_rfft(
     int n,
     int axis,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::rfft(a->ctx, n, axis, s->ctx);
+    (*res)->ctx = mlx::core::fft::rfft(a->ctx, n, axis, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -198,9 +198,9 @@ extern "C" int mlx_fft_rfft2(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::rfft2(
+    (*res)->ctx = mlx::core::fft::rfft2(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),
@@ -218,9 +218,9 @@ extern "C" int mlx_fft_rfftn(
     const int* axes,
     size_t axes_num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fft::rfftn(
+    (*res)->ctx = mlx::core::fft::rfftn(
         a->ctx,
         std::vector<int>(n, n + n_num),
         std::vector<int>(axes, axes + axes_num),

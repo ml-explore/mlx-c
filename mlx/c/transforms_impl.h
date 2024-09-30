@@ -30,7 +30,7 @@ int mlx_detail_compile(
     bool shapeless,
     const uint64_t* constants,
     size_t constants_num,
-    mlx_closure res);
+    mlx_closure* res);
 int mlx_detail_compile_clear_cache();
 int mlx_detail_compile_erase(uintptr_t fun_id);
 int mlx_detail_vmap_replace(
@@ -41,14 +41,14 @@ int mlx_detail_vmap_replace(
     size_t in_axes_num,
     const int* out_axes,
     size_t out_axes_num,
-    mlx_vector_array res);
+    mlx_vector_array* res);
 int mlx_detail_vmap_trace(
     const mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,
     size_t in_axes_num,
-    mlx_vector_array res_0,
-    mlx_vector_array res_1);
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1);
 /**@}*/
 
 #ifdef __cplusplus

@@ -25,35 +25,35 @@ extern "C" {
  */
 /**@{*/
 int mlx_async_eval(const mlx_vector_array outputs);
-int mlx_checkpoint(const mlx_closure fun, mlx_closure res);
+int mlx_checkpoint(const mlx_closure fun, mlx_closure* res);
 int mlx_custom_function(
     const mlx_closure fun,
     const mlx_closure_custom fun_vjp /* may be null */,
     const mlx_closure_custom_jvp fun_jvp /* may be null */,
     const mlx_closure_custom_vmap fun_vmap /* may be null */,
-    mlx_closure res);
+    mlx_closure* res);
 int mlx_custom_vjp(
     const mlx_closure fun,
     const mlx_closure_custom fun_vjp,
-    mlx_closure res);
+    mlx_closure* res);
 int mlx_eval(const mlx_vector_array outputs);
 int mlx_jvp(
     const mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array tangents,
-    mlx_vector_array res_0,
-    mlx_vector_array res_1);
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1);
 int mlx_value_and_grad(
     const mlx_closure fun,
     const int* argnums,
     size_t argnums_num,
-    mlx_closure_value_and_grad res);
+    mlx_closure_value_and_grad* res);
 int mlx_vjp(
     const mlx_closure fun,
     const mlx_vector_array primals,
     const mlx_vector_array cotangents,
-    mlx_vector_array res_0,
-    mlx_vector_array res_1);
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1);
 /**@}*/
 
 #ifdef __cplusplus

@@ -28,19 +28,19 @@ int mlx_linalg_cholesky(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_linalg_cholesky_inv(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_linalg_cross(
     const mlx_array a,
     const mlx_array b,
     int axis,
     const mlx_stream s,
-    mlx_array res);
-int mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array res);
+    mlx_array* res);
+int mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array* res);
 int mlx_linalg_norm_p(
     const mlx_array a,
     double ord,
@@ -48,7 +48,7 @@ int mlx_linalg_norm_p(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_linalg_norm_ord(
     const mlx_array a,
     const char* ord,
@@ -56,26 +56,29 @@ int mlx_linalg_norm_ord(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_linalg_norm(
     const mlx_array a,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res);
-int mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array res);
+    mlx_array* res);
+int mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array* res);
 int mlx_linalg_qr(
     const mlx_array a,
     const mlx_stream s,
-    mlx_array res_0,
-    mlx_array res_1);
-int mlx_linalg_svd(const mlx_array a, const mlx_stream s, mlx_vector_array res);
+    mlx_array* res_0,
+    mlx_array* res_1);
+int mlx_linalg_svd(
+    const mlx_array a,
+    const mlx_stream s,
+    mlx_vector_array* res);
 int mlx_linalg_tri_inv(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 /**@}*/
 
 #ifdef __cplusplus

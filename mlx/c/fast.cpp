@@ -22,9 +22,9 @@ extern "C" int mlx_fast_affine_dequantize(
     int group_size,
     int bits,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::affine_dequantize(
+    (*res)->ctx = mlx::core::fast::affine_dequantize(
         w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -39,9 +39,9 @@ extern "C" int mlx_fast_affine_quantize(
     int group_size,
     int bits,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::affine_quantize(
+    (*res)->ctx = mlx::core::fast::affine_quantize(
         w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -55,9 +55,9 @@ extern "C" int mlx_fast_layer_norm(
     const mlx_array bias /* may be null */,
     float eps,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::layer_norm(
+    (*res)->ctx = mlx::core::fast::layer_norm(
         x->ctx,
         (weight ? std::make_optional(weight->ctx) : std::nullopt),
         (bias ? std::make_optional(bias->ctx) : std::nullopt),
@@ -269,9 +269,9 @@ extern "C" int mlx_fast_rms_norm(
     const mlx_array weight,
     float eps,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx);
+    (*res)->ctx = mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -287,9 +287,9 @@ extern "C" int mlx_fast_rope(
     int offset,
     const mlx_array freqs /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::rope(
+    (*res)->ctx = mlx::core::fast::rope(
         x->ctx,
         dims,
         traditional,
@@ -312,9 +312,9 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
     const mlx_array mask /* may be null */,
     mlx_optional_int memory_efficient_threshold,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::fast::scaled_dot_product_attention(
+    (*res)->ctx = mlx::core::fast::scaled_dot_product_attention(
         queries->ctx,
         keys->ctx,
         values->ctx,

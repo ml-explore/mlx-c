@@ -19,9 +19,9 @@ extern "C" int mlx_distributed_all_gather(
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream S,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::distributed::all_gather(
+    (*res)->ctx = mlx::core::distributed::all_gather(
         x->ctx,
         (group ? std::make_optional(group->ctx) : std::nullopt),
         S->ctx);
@@ -35,9 +35,9 @@ extern "C" int mlx_distributed_all_sum(
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::distributed::all_sum(
+    (*res)->ctx = mlx::core::distributed::all_sum(
         x->ctx,
         (group ? std::make_optional(group->ctx) : std::nullopt),
         s->ctx);
@@ -54,9 +54,9 @@ extern "C" int mlx_distributed_recv(
     int src,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::distributed::recv(
+    (*res)->ctx = mlx::core::distributed::recv(
         std::vector<int>(shape, shape + shape_num),
         mlx_dtype_to_cpp(dtype),
         src,
@@ -73,9 +73,9 @@ extern "C" int mlx_distributed_recv_like(
     int src,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::distributed::recv_like(
+    (*res)->ctx = mlx::core::distributed::recv_like(
         x->ctx,
         src,
         (group ? std::make_optional(group->ctx) : std::nullopt),
@@ -91,9 +91,9 @@ extern "C" int mlx_distributed_send(
     int dst,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::distributed::send(
+    (*res)->ctx = mlx::core::distributed::send(
         x->ctx,
         dst,
         (group ? std::make_optional(group->ctx) : std::nullopt),

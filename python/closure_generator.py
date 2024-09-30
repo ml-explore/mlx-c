@@ -51,7 +51,10 @@ def generate(code, name, rcpptype, cpptypes):
         cargs_ctx.append(cpptype["c_to_cpp"]("input" + suffix))
         cppargs_to_cargs.append(cpptype["c_new"]("input" + suffix) + ";")
         cppargs_to_cargs.append(
-            cpptype["c_assign_from_cpp"]("input" + suffix, "cpp_input" + suffix) + ";"
+            cpptype["c_assign_from_cpp"](
+                "input" + suffix, "cpp_input" + suffix, returned=False
+            )
+            + ";"
         )
 
     rcargs_new = mt.cpptypes[rcpptype]["c_new"]("res") + ";"
@@ -272,7 +275,7 @@ if args.implementation:
     print(
         """
 extern "C" mlx_closure mlx_closure_new_unary(
-    void (*fun)(const mlx_array, mlx_array)) {
+    void (*fun)(const mlx_array, mlx_array*)) {
   MLX_TRY_CATCH(
       auto cpp_closure =
           [fun](const std::vector<mlx::core::array>& cpp_input) {
@@ -281,7 +284,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
             }
             auto input = new mlx_array_(cpp_input[0]);
             auto res = new mlx_array_();
-            fun(input, res);
+            fun(input, &res);
             mlx_free(input);
             std::vector<mlx::core::array> cpp_res = {res->ctx};
             mlx_free(res);
@@ -296,7 +299,7 @@ elif args.private:
 else:
     print(
         """
-mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array));
+mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array*));
     """
     )
 print(

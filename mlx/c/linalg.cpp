@@ -19,9 +19,9 @@ extern "C" int mlx_linalg_cholesky(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::cholesky(a->ctx, upper, s->ctx);
+    (*res)->ctx = mlx::core::linalg::cholesky(a->ctx, upper, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -32,9 +32,9 @@ extern "C" int mlx_linalg_cholesky_inv(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::cholesky_inv(a->ctx, upper, s->ctx);
+    (*res)->ctx = mlx::core::linalg::cholesky_inv(a->ctx, upper, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -46,9 +46,9 @@ extern "C" int mlx_linalg_cross(
     const mlx_array b,
     int axis,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::cross(a->ctx, b->ctx, axis, s->ctx);
+    (*res)->ctx = mlx::core::linalg::cross(a->ctx, b->ctx, axis, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -56,9 +56,9 @@ extern "C" int mlx_linalg_cross(
   return 0;
 }
 extern "C" int
-mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array res) {
+mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::inv(a->ctx, s->ctx);
+    (*res)->ctx = mlx::core::linalg::inv(a->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -72,9 +72,9 @@ extern "C" int mlx_linalg_norm_p(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::norm(
+    (*res)->ctx = mlx::core::linalg::norm(
         a->ctx,
         ord,
         (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
@@ -94,9 +94,9 @@ extern "C" int mlx_linalg_norm_ord(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::norm(
+    (*res)->ctx = mlx::core::linalg::norm(
         a->ctx,
         std::string(ord),
         (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
@@ -115,9 +115,9 @@ extern "C" int mlx_linalg_norm(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::norm(
+    (*res)->ctx = mlx::core::linalg::norm(
         a->ctx,
         (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
               : std::nullopt),
@@ -130,9 +130,9 @@ extern "C" int mlx_linalg_norm(
   return 0;
 }
 extern "C" int
-mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array res) {
+mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::pinv(a->ctx, s->ctx);
+    (*res)->ctx = mlx::core::linalg::pinv(a->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -142,10 +142,11 @@ mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array res) {
 extern "C" int mlx_linalg_qr(
     const mlx_array a,
     const mlx_stream s,
-    mlx_array res_0,
-    mlx_array res_1) {
+    mlx_array* res_0,
+    mlx_array* res_1) {
   try {
-    std::tie(res_0->ctx, res_1->ctx) = mlx::core::linalg::qr(a->ctx, s->ctx);
+    std::tie((*res_0)->ctx, (*res_1)->ctx) =
+        mlx::core::linalg::qr(a->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -153,9 +154,9 @@ extern "C" int mlx_linalg_qr(
   return 0;
 }
 extern "C" int
-mlx_linalg_svd(const mlx_array a, const mlx_stream s, mlx_vector_array res) {
+mlx_linalg_svd(const mlx_array a, const mlx_stream s, mlx_vector_array* res) {
   try {
-    res->ctx = mlx::core::linalg::svd(a->ctx, s->ctx);
+    (*res)->ctx = mlx::core::linalg::svd(a->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -166,9 +167,9 @@ extern "C" int mlx_linalg_tri_inv(
     const mlx_array a,
     bool upper,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx);
+    (*res)->ctx = mlx::core::linalg::tri_inv(a->ctx, upper, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

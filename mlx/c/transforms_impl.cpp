@@ -21,9 +21,9 @@ extern "C" int mlx_detail_compile(
     bool shapeless,
     const uint64_t* constants,
     size_t constants_num,
-    mlx_closure res) {
+    mlx_closure* res) {
   try {
-    res->ctx = mlx::core::detail::compile(
+    (*res)->ctx = mlx::core::detail::compile(
         fun->ctx,
         fun_id,
         shapeless,
@@ -60,9 +60,9 @@ extern "C" int mlx_detail_vmap_replace(
     size_t in_axes_num,
     const int* out_axes,
     size_t out_axes_num,
-    mlx_vector_array res) {
+    mlx_vector_array* res) {
   try {
-    res->ctx = mlx::core::detail::vmap_replace(
+    (*res)->ctx = mlx::core::detail::vmap_replace(
         inputs->ctx,
         s_inputs->ctx,
         s_outputs->ctx,
@@ -79,10 +79,10 @@ extern "C" int mlx_detail_vmap_trace(
     const mlx_vector_array inputs,
     const int* in_axes,
     size_t in_axes_num,
-    mlx_vector_array res_0,
-    mlx_vector_array res_1) {
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1) {
   try {
-    std::tie(res_0->ctx, res_1->ctx) = mlx::core::detail::vmap_trace(
+    std::tie((*res_0)->ctx, (*res_1)->ctx) = mlx::core::detail::vmap_trace(
         fun->ctx,
         inputs->ctx,
         std::vector<int>(in_axes, in_axes + in_axes_num));

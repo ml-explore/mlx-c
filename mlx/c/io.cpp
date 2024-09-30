@@ -16,9 +16,9 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int
-mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array res) {
+mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res) {
   try {
-    res->ctx =
+    (*res)->ctx =
         mlx::core::load(std::make_shared<CFILEReader>(in_stream), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -26,9 +26,9 @@ mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array res) {
   }
   return 0;
 }
-extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array res) {
+extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array* res) {
   try {
-    res->ctx = mlx::core::load(std::string(file), s->ctx);
+    (*res)->ctx = mlx::core::load(std::string(file), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -38,10 +38,10 @@ extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array res) {
 extern "C" int mlx_load_safetensors_file(
     FILE* in_stream,
     const mlx_stream s,
-    mlx_map_string_to_array res_0,
-    mlx_map_string_to_string res_1) {
+    mlx_map_string_to_array* res_0,
+    mlx_map_string_to_string* res_1) {
   try {
-    std::tie(res_0->ctx, res_1->ctx) = mlx::core::load_safetensors(
+    std::tie((*res_0)->ctx, (*res_1)->ctx) = mlx::core::load_safetensors(
         std::make_shared<CFILEReader>(in_stream), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -52,10 +52,10 @@ extern "C" int mlx_load_safetensors_file(
 extern "C" int mlx_load_safetensors(
     const char* file,
     const mlx_stream s,
-    mlx_map_string_to_array res_0,
-    mlx_map_string_to_string res_1) {
+    mlx_map_string_to_array* res_0,
+    mlx_map_string_to_string* res_1) {
   try {
-    std::tie(res_0->ctx, res_1->ctx) =
+    std::tie((*res_0)->ctx, (*res_1)->ctx) =
         mlx::core::load_safetensors(std::string(file), s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());

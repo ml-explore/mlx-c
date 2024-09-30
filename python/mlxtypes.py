@@ -75,12 +75,16 @@ for t in [
             "cpp_to_c": lambda s, ctype=ctype: "new " + ctype + "_(" + s + ")",
             "c_to_cpp": lambda s: s + "->ctx",
             "return": lambda s: "RETURN_MLX_C_PTR(" + s + ")",
-            "c_assign_from_cpp": lambda d, s: d + "->ctx = " + s,
+            "c_assign_from_cpp": lambda d, s, returned=True: ("(*" if returned else "")
+            + d
+            + (")" if returned else "")
+            + "->ctx = "
+            + s,
             "c_arg": lambda s, untyped=False, ctype=ctype: s
             if untyped
             else ("const " + ctype + " " + s).strip(),
             "c_return_arg": lambda s, untyped=False, ctype=ctype: (
-                ("" if untyped else ctype + " ") + s
+                ("&" if untyped else ctype + "* ") + s
             ).strip(),
             "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
             "cpp_arg": lambda s, cpptype=cpptype: (
@@ -114,7 +118,7 @@ def register_raw_vector_type(cpptype):
             + s
             + "_num"
             + ")",
-            "c_assign_from_cpp": lambda d, s: d
+            "c_assign_from_cpp": lambda d, s, returned=True: d
             + " = "
             + s
             + ".data(); "
@@ -172,7 +176,7 @@ def register_optional_raw_vector_type(cpptype):
             ]
         )
 
-    def c_assign_from_cpp(d, s):
+    def c_assign_from_cpp(d, s, returned=True):
         return "".join(
             [
                 "if(",
@@ -256,7 +260,7 @@ def register_return_tuple_type(cpp_types, alts=[]):
             + ")",
             "c_return_arg": lambda s, untyped=False: ", ".join(
                 [
-                    ("" if untyped else c_types[i])
+                    ("&" if untyped else c_types[i] + "*")
                     + (" " + s + "_" + str(i) if s else "")
                     for i in range(n)
                 ]
@@ -270,8 +274,8 @@ def register_return_tuple_type(cpp_types, alts=[]):
             "free": lambda s: "\n".join(
                 ["mlx_free(" + s + "_" + str(i) + ");" for i in range(n)]
             ),
-            "c_assign_from_cpp": lambda d, s: "std::tie("
-            + ", ".join([d + "_" + str(i) + "->ctx" for i in range(n)])
+            "c_assign_from_cpp": lambda d, s, returned=True: "std::tie("
+            + ", ".join(["(*" + d + "_" + str(i) + ")->ctx" for i in range(n)])
             + ") = "
             + s,
         }

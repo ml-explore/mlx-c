@@ -28,12 +28,12 @@ int mlx_distributed_all_gather(
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream S,
-    mlx_array res);
+    mlx_array* res);
 int mlx_distributed_all_sum(
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_distributed_recv(
     const int* shape,
     size_t shape_num,
@@ -41,19 +41,19 @@ int mlx_distributed_recv(
     int src,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_distributed_recv_like(
     const mlx_array x,
     int src,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_distributed_send(
     const mlx_array x,
     int dst,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 /**@}*/
 
 #ifdef __cplusplus

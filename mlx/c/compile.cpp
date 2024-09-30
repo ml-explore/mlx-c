@@ -16,9 +16,9 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" int
-mlx_compile(const mlx_closure fun, bool shapeless, mlx_closure res) {
+mlx_compile(const mlx_closure fun, bool shapeless, mlx_closure* res) {
   try {
-    res->ctx = mlx::core::compile(fun->ctx, shapeless);
+    (*res)->ctx = mlx::core::compile(fun->ctx, shapeless);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

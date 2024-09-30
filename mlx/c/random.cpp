@@ -21,9 +21,9 @@ extern "C" int mlx_random_bernoulli(
     size_t shape_num,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::bernoulli(
+    (*res)->ctx = mlx::core::random::bernoulli(
         p->ctx,
         std::vector<int>(shape, shape + shape_num),
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -40,9 +40,9 @@ extern "C" int mlx_random_bits(
     int width,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::bits(
+    (*res)->ctx = mlx::core::random::bits(
         std::vector<int>(shape, shape + shape_num),
         width,
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -60,9 +60,9 @@ extern "C" int mlx_random_categorical_shape(
     size_t shape_num,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::categorical(
+    (*res)->ctx = mlx::core::random::categorical(
         logits->ctx,
         axis,
         std::vector<int>(shape, shape + shape_num),
@@ -80,9 +80,9 @@ extern "C" int mlx_random_categorical_num_samples(
     int num_samples,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::categorical(
+    (*res)->ctx = mlx::core::random::categorical(
         logits_->ctx,
         axis,
         num_samples,
@@ -99,9 +99,9 @@ extern "C" int mlx_random_categorical(
     int axis,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::categorical(
+    (*res)->ctx = mlx::core::random::categorical(
         logits->ctx,
         axis,
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -118,9 +118,9 @@ extern "C" int mlx_random_gumbel(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::gumbel(
+    (*res)->ctx = mlx::core::random::gumbel(
         std::vector<int>(shape, shape + shape_num),
         mlx_dtype_to_cpp(dtype),
         (key ? std::make_optional(key->ctx) : std::nullopt),
@@ -131,9 +131,9 @@ extern "C" int mlx_random_gumbel(
   }
   return 0;
 }
-extern "C" int mlx_random_key(uint64_t seed, mlx_array res) {
+extern "C" int mlx_random_key(uint64_t seed, mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::key(seed);
+    (*res)->ctx = mlx::core::random::key(seed);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -148,9 +148,9 @@ extern "C" int mlx_random_laplace(
     float scale,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::laplace(
+    (*res)->ctx = mlx::core::random::laplace(
         std::vector<int>(shape, shape + shape_num),
         mlx_dtype_to_cpp(dtype),
         loc,
@@ -171,9 +171,9 @@ extern "C" int mlx_random_multivariate_normal(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::multivariate_normal(
+    (*res)->ctx = mlx::core::random::multivariate_normal(
         mean->ctx,
         cov->ctx,
         std::vector<int>(shape, shape + shape_num),
@@ -194,9 +194,9 @@ extern "C" int mlx_random_normal(
     float scale,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::normal(
+    (*res)->ctx = mlx::core::random::normal(
         std::vector<int>(shape, shape + shape_num),
         mlx_dtype_to_cpp(dtype),
         loc,
@@ -217,9 +217,9 @@ extern "C" int mlx_random_randint(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::randint(
+    (*res)->ctx = mlx::core::random::randint(
         low->ctx,
         high->ctx,
         std::vector<int>(shape, shape + shape_num),
@@ -245,9 +245,9 @@ extern "C" int mlx_random_split_equal_parts(
     const mlx_array key,
     int num,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::split(key->ctx, num, s->ctx);
+    (*res)->ctx = mlx::core::random::split(key->ctx, num, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -257,10 +257,10 @@ extern "C" int mlx_random_split_equal_parts(
 extern "C" int mlx_random_split(
     const mlx_array key,
     const mlx_stream s,
-    mlx_array res_0,
-    mlx_array res_1) {
+    mlx_array* res_0,
+    mlx_array* res_1) {
   try {
-    std::tie(res_0->ctx, res_1->ctx) =
+    std::tie((*res_0)->ctx, (*res_1)->ctx) =
         mlx::core::random::split(key->ctx, s->ctx);
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -276,9 +276,9 @@ extern "C" int mlx_random_truncated_normal(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::truncated_normal(
+    (*res)->ctx = mlx::core::random::truncated_normal(
         lower->ctx,
         upper->ctx,
         std::vector<int>(shape, shape + shape_num),
@@ -299,9 +299,9 @@ extern "C" int mlx_random_uniform(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s,
-    mlx_array res) {
+    mlx_array* res) {
   try {
-    res->ctx = mlx::core::random::uniform(
+    (*res)->ctx = mlx::core::random::uniform(
         low->ctx,
         high->ctx,
         std::vector<int>(shape, shape + shape_num),

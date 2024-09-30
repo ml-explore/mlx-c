@@ -31,7 +31,7 @@ int mlx_fast_affine_dequantize(
     int group_size,
     int bits,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_fast_affine_quantize(
     const mlx_array w,
     const mlx_array scales,
@@ -39,14 +39,14 @@ int mlx_fast_affine_quantize(
     int group_size,
     int bits,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_fast_layer_norm(
     const mlx_array x,
     const mlx_array weight /* may be null */,
     const mlx_array bias /* may be null */,
     float eps,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 
 typedef struct mlx_fast_metal_kernel_* mlx_fast_metal_kernel;
 mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
@@ -111,7 +111,7 @@ int mlx_fast_rms_norm(
     const mlx_array weight,
     float eps,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_fast_rope(
     const mlx_array x,
     int dims,
@@ -121,7 +121,7 @@ int mlx_fast_rope(
     int offset,
     const mlx_array freqs /* may be null */,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 int mlx_fast_scaled_dot_product_attention(
     const mlx_array queries,
     const mlx_array keys,
@@ -130,7 +130,7 @@ int mlx_fast_scaled_dot_product_attention(
     const mlx_array mask /* may be null */,
     mlx_optional_int memory_efficient_threshold,
     const mlx_stream s,
-    mlx_array res);
+    mlx_array* res);
 /**@}*/
 
 #ifdef __cplusplus
