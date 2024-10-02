@@ -1046,6 +1046,10 @@ mlx_take(mlx_array a, mlx_array indices, int axis, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::take(a->ctx, indices->ctx, axis, s->ctx));
 }
 extern "C" mlx_array
+mlx_take_all(mlx_array a, mlx_array indices, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::take(a->ctx, indices->ctx, s->ctx));
+}
+extern "C" mlx_array
 mlx_take_along_axis(mlx_array a, mlx_array indices, int axis, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::take_along_axis(a->ctx, indices->ctx, axis, s->ctx));

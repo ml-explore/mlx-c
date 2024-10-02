@@ -73,6 +73,10 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[2])
                 sorted_funcs.append(variants[4])
+            elif name == "take":
+                variants[2]["variant"] = "all"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[2])
             elif (
                 "axes" in variants[0]["params_name"]
                 or "axis" in variants[0]["params_name"]

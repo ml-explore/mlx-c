@@ -508,6 +508,7 @@ mlx_array mlx_sum(
 mlx_array mlx_sum_all(mlx_array a, bool keepdims, mlx_stream s);
 mlx_array mlx_swapaxes(mlx_array a, int axis1, int axis2, mlx_stream s);
 mlx_array mlx_take(mlx_array a, mlx_array indices, int axis, mlx_stream s);
+mlx_array mlx_take_all(mlx_array a, mlx_array indices, mlx_stream s);
 mlx_array
 mlx_take_along_axis(mlx_array a, mlx_array indices, int axis, mlx_stream s);
 mlx_array mlx_tan(mlx_array a, mlx_stream s);
