@@ -1,9 +1,15 @@
 # Copyright © 2023-2024 Apple Inc.
 
+import re
 import sys
 
 
-def generate(funcs, headername, namespace, implementation, docstring, dockey):
+def to_snake_letters(name):
+    name = re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+    return name
+
+
+def generate(funcs, enums, headername, namespace, implementation, docstring):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -67,6 +73,10 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[2])
                 sorted_funcs.append(variants[4])
+            elif name == "take":
+                variants[2]["variant"] = "all"
+                sorted_funcs.append(variants[0])
+                sorted_funcs.append(variants[2])
             elif (
                 "axes" in variants[0]["params_name"]
                 or "axis" in variants[0]["params_name"]
@@ -114,12 +124,13 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
     #include "mlx/c/private/array.h"
     #include "mlx/c/private/closure.h"
     #include "mlx/c/private/distributed_group.h"
-    #include "mlx/c/private/future.h"
     #include "mlx/c/private/io.h"
     #include "mlx/c/private/map.h"
     #include "mlx/c/private/stream.h"
     #include "mlx/c/private/string.h"
+    #include "mlx/c/private/tuple.h"
     #include "mlx/c/private/utils.h"
+    #include "mlx/c/private/vector.h"
 
     """
         )
@@ -133,7 +144,6 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
-    #include "mlx/c/future.h"
     #include "mlx/c/ioutils.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
@@ -147,11 +157,43 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
         if docstring:
             docstring = docstring.replace("\n", "\n* ")
             print("/**")
-            if not dockey:
-                dockey = headername
-            print("* \defgroup " + dockey + " " + docstring)
+            print("* \defgroup " + headername + " " + docstring)
             print("*/")
             print("/**@{*/")
+
+    for enum, values in enums.items():
+        c_typename = "mlx_" + to_snake_letters(enum)
+        cpp_typename = namespace + "::" + enum
+        c_vals = []
+        cpp_vals = []
+        for value in values:
+            c_vals.append("MLX_" + to_snake_letters(enum).upper() + "_" + value.upper())
+            cpp_vals.append(cpp_typename + "::" + value)
+        if implementation:
+            impl = ["namespace {"]
+            impl.append(c_typename + " to_c_type(" + cpp_typename + " type) {")
+            impl.append(
+                "static " + c_typename + " map[] = {" + ", ".join(c_vals) + "};"
+            )
+            impl.append("return map[(int)type];")
+            impl.append("}")
+            impl.append(cpp_typename + " to_cpp_type(" + c_typename + " type) {")
+            impl.append(
+                "static " + cpp_typename + " map[] = {" + ", ".join(cpp_vals) + "};"
+            )
+            impl.append("return map[(int)type];")
+            impl.append("}")
+            impl.append("}")  # namespace
+            print(" ".join(impl))
+        else:
+            decl = ["typedef enum "]
+            decl.append(c_typename + "_")
+            decl.append("{")
+            decl.append(", ".join(c_vals))
+            decl.append("}")
+            decl.append(c_typename)
+            decl.append(";")
+            print(" ".join(decl))
 
     for f in sorted_funcs:
         # print(f["return_t"])
@@ -163,28 +205,38 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             signature.append(return_t)
         elif return_t == "array":
             signature.append("mlx_array")
-        elif (
-            return_t == "std::vector<array>"
-            or return_t == "std::pair<array, array>"
-            or return_t == "std::tuple<array, array, array>"
-        ):
+        elif return_t == "std::vector<array>":
             signature.append("mlx_vector_array")
+        elif return_t == "std::pair<array, array>":
+            signature.append("mlx_tuple_array_array")
+        elif return_t == "std::tuple<array, array, array>":
+            signature.append("mlx_tuple_array_array_array")
         elif return_t == "std::pair<std::vector<array>, std::vector<array>>":
-            signature.append("mlx_vector_vector_array")
+            signature.append("mlx_tuple_vector_array_vector_array")
         elif return_t == "std::function<std::vector<array>(std::vector<array>)>":
             signature.append("mlx_closure")
         elif return_t == "ValueAndGradFn":
             signature.append("mlx_closure_value_and_grad")
+        elif return_t == "MetalKernelFunction":
+            signature.append("mlx_closure_metal_kernel_function")
+        elif (
+            return_t
+            == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
+        ):
+            signature.append("mlx_closure_custom_function")
         elif return_t == "std::unordered_map<std::string, array>":
             signature.append("mlx_map_string_to_array")
         elif return_t == "std::unordered_map<std::string, std::string>":
             signature.append("mlx_map_string_to_string")
+        elif (
+            return_t
+            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
+        ):
+            signature.append("mlx_map_string_to_variant_string_size_t")
         elif return_t == "SafetensorsLoad":
             signature.append("mlx_safetensors")
         elif return_t == "std::string":
             signature.append("mlx_string")
-        elif return_t == "std::shared_future<void>":
-            signature.append("mlx_future")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)
@@ -233,6 +285,25 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             ):
                 c_call.append(pti + " " + pni)
                 cpp_call.append(pni)
+            elif (
+                pti == "std::optional<bool>"
+                or pti == "std::optional<float>"
+                or pti == "std::optional<double>"
+                or pti == "std::optional<int>"
+                or pti == "std::optional<size_t>"
+                or pti == "std::optional<uint64_t>"
+            ):
+                pti_wo_opt = pti[14:][:-1]
+                c_call.append("mlx_optional_" + pti_wo_opt + " " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + ".has_value ? std::make_optional<"
+                    + pti_wo_opt
+                    + ">("
+                    + pni
+                    + ".value) : std::nullopt)"
+                )
             elif pti == "std::uintptr_t":
                 c_call.append(pti.lstrip("std::") + " " + pni)
                 cpp_call.append(pni)
@@ -255,6 +326,9 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             elif pti == "std::vector<array>":
                 c_call.append("const mlx_vector_array " + pni)
                 cpp_call.append("MLX_CPP_ARRVEC(" + pni + ")")
+            elif pti == "std::vector<std::string>":
+                c_call.append("const mlx_vector_string " + pni)
+                cpp_call.append("MLX_CPP_STRINGVEC(" + pni + ")")
             elif pti == "std::pair<int, int>":
                 c_call.append("int f_" + pni)
                 c_call.append("int s_" + pni)
@@ -281,7 +355,67 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
                 cpp_call.append("MLX_CPP_WRITER(" + pni + ")")
             elif pti == "std::function<std::vector<array>(std::vector<array>)>":
                 c_call.append("mlx_closure " + pni)
-                cpp_call.append("MLX_CPP_CLOSURE(" + pni + ")")
+                cpp_call.append("(" + pni + ")->ctx")
+            elif (
+                pti
+                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>"
+            ):
+                c_call.append("mlx_closure_custom_function " + pni)
+                cpp_call.append("(" + pni + ")->ctx")
+            elif (
+                pti
+                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<array>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
+            elif (
+                pti
+                == "std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>"
+            ):
+                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                cpp_call.append("(" + pni + ")->ctx")
+            elif (
+                pti
+                == "std::optional<std::function<std::vector<array>(std::vector<array>,std::vector<array>,std::vector<int>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function_jvp " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
+            elif (
+                pti
+                == "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>"
+            ):
+                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                cpp_call.append("(" + pni + ")->ctx")
+            elif (
+                pti
+                == "std::optional<std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>>"
+            ):
+                c_call.append("mlx_closure_custom_function_vmap " + pni)
+                cpp_call.append(
+                    "("
+                    + pni
+                    + " ? std::make_optional("
+                    + "("
+                    + pni
+                    + ")"
+                    + "->ctx) : std::nullopt)"
+                )
             elif pti == "std::unordered_map<std::string, array>":
                 c_call.append("mlx_map_string_to_array " + pni)
                 cpp_call.append("MLX_CPP_MAP_STRING_TO_ARRAY(" + pni + ")")
@@ -300,6 +434,9 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
                     + pni
                     + "->ctx) : std::nullopt)"
                 )
+            elif pti == "CompileMode":
+                c_call.append("mlx_compile_mode " + pni)
+                cpp_call.append("to_cpp_type(" + pni + ")")
             else:
                 print("unsupported type: " + pti, file=sys.stderr)
                 encountered_unsupported_type = True
@@ -336,16 +473,21 @@ def generate(funcs, headername, namespace, implementation, docstring, dockey):
             cpp_code.append("RETURN_MLX_C_CLOSURE")
         elif return_t == "ValueAndGradFn":
             cpp_code.append("RETURN_MLX_C_CLOSURE_VALUE_AND_GRAD")
+        elif return_t == "MetalKernelFunction":
+            cpp_code.append("RETURN_MLX_C_CLOSURE_METAL_KERNEL_FUNCTION")
         elif return_t == "std::unordered_map<std::string, array>":
             cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_ARRAY")
         elif return_t == "std::unordered_map<std::string, std::string>":
             cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING")
+        elif (
+            return_t
+            == "std::unordered_map<std::string, std::variant<std::string, size_t>>"
+        ):
+            cpp_code.append("RETURN_MLX_C_MAP_STRING_TO_STRING_SIZE_T_VARIANT")
         elif return_t == "SafetensorsLoad":
             cpp_code.append("RETURN_MLX_C_SAFETENSORS")
         elif return_t == "std::string":
             cpp_code.append("RETURN_MLX_C_STRING")
-        elif return_t == "std::shared_future<void>":
-            cpp_code.append("RETURN_MLX_C_FUTURE")
         else:
             print("unsupported return type: " + return_t, file=sys.stderr)
             print("skipping", f, file=sys.stderr)

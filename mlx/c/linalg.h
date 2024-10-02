@@ -11,7 +11,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -26,6 +25,8 @@ extern "C" {
  */
 /**@{*/
 mlx_array mlx_linalg_cholesky(mlx_array a, bool upper, mlx_stream s);
+mlx_array mlx_linalg_cholesky_inv(mlx_array a, bool upper, mlx_stream s);
+mlx_array mlx_linalg_cross(mlx_array a, mlx_array b, int axis, mlx_stream s);
 mlx_array mlx_linalg_inv(mlx_array a, mlx_stream s);
 mlx_array mlx_linalg_norm_p(
     mlx_array a,
@@ -47,8 +48,10 @@ mlx_array mlx_linalg_norm(
     size_t num_axis,
     bool keepdims,
     mlx_stream s);
-mlx_vector_array mlx_linalg_qr(mlx_array a, mlx_stream s);
+mlx_array mlx_linalg_pinv(mlx_array a, mlx_stream s);
+mlx_tuple_array_array mlx_linalg_qr(mlx_array a, mlx_stream s);
 mlx_vector_array mlx_linalg_svd(mlx_array a, mlx_stream s);
+mlx_array mlx_linalg_tri_inv(mlx_array a, bool upper, mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus

@@ -11,7 +11,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -59,6 +58,14 @@ mlx_array mlx_random_gumbel(
     mlx_array key,
     mlx_stream s);
 mlx_array mlx_random_key(uint64_t seed);
+mlx_array mlx_random_laplace(
+    const int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    float loc,
+    float scale,
+    mlx_array key,
+    mlx_stream s);
 mlx_array mlx_random_multivariate_normal(
     mlx_array mean,
     mlx_array cov,
@@ -85,7 +92,7 @@ mlx_array mlx_random_randint(
     mlx_stream s);
 void mlx_random_seed(uint64_t seed);
 mlx_array mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s);
-mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s);
+mlx_tuple_array_array mlx_random_split(mlx_array key, mlx_stream s);
 mlx_array mlx_random_truncated_normal(
     mlx_array lower,
     mlx_array upper,

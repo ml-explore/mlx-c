@@ -9,12 +9,13 @@
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_load_file(FILE* in_stream, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::load(MLX_CPP_READER(in_stream), s->ctx));

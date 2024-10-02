@@ -10,7 +10,28 @@ void print_array(const char* msg, mlx_array arr) {
   mlx_free(str);
 }
 
+void gpu_info() {
+  printf("==================================================\n");
+  printf("GPU info:\n");
+  mlx_map_string_to_variant_string_size_t info = mlx_metal_device_info();
+  mlx_map_string_to_variant_string_size_t_iterator it =
+      mlx_map_string_to_variant_string_size_t_iterate(info);
+  while (mlx_map_string_to_variant_string_size_t_iterator_next(it)) {
+    mlx_string key = mlx_map_string_to_variant_string_size_t_iterator_key(it);
+    mlx_variant_string_size_t val =
+        mlx_map_string_to_variant_string_size_t_iterator_value(it);
+    size_t val_size_t = mlx_variant_string_size_t_get_size_t(val);
+    printf("  %s: %ld\n", mlx_string_data(key), val_size_t);
+    mlx_free(key);
+    mlx_free(val);
+  }
+  mlx_free(it);
+  mlx_free(info);
+  printf("==================================================\n");
+}
 int main() {
+  gpu_info();
+
   mlx_stream stream = mlx_gpu_stream();
   float data[] = {1, 2, 3, 4, 5, 6};
   int shape[] = {2, 3};

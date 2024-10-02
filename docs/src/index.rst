@@ -31,14 +31,15 @@ bindings to MLX.
 
    object
    array
-   vecarray
-   vecvecarray
+   vector
    stream
    device
    string
    map
+   tuple
+   variant
+   optional
    closure
-   future
    distributed_group
    ioutils
 

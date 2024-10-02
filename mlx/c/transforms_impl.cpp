@@ -9,12 +9,13 @@
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_closure mlx_detail_compile(
     mlx_closure fun,
@@ -23,7 +24,7 @@ extern "C" mlx_closure mlx_detail_compile(
     const uint64_t* constants,
     size_t num_constants) {
   RETURN_MLX_C_CLOSURE(mlx::core::detail::compile(
-      MLX_CPP_CLOSURE(fun),
+      (fun)->ctx,
       fun_id,
       shapeless,
       MLX_CPP_UINT64VEC(constants, num_constants)));
@@ -49,13 +50,13 @@ extern "C" mlx_vector_array mlx_detail_vmap_replace(
       MLX_CPP_INTVEC(in_axes, num_in_axes),
       MLX_CPP_INTVEC(out_axes, num_out_axes)));
 }
-extern "C" mlx_vector_vector_array mlx_detail_vmap_trace(
+extern "C" mlx_tuple_vector_array_vector_array mlx_detail_vmap_trace(
     mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,
     size_t num_in_axes) {
   RETURN_MLX_C_VECTORARRAYPAIR(mlx::core::detail::vmap_trace(
-      MLX_CPP_CLOSURE(fun),
+      (fun)->ctx,
       MLX_CPP_ARRVEC(inputs),
       MLX_CPP_INTVEC(in_axes, num_in_axes)));
 }

@@ -9,12 +9,13 @@
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_random_bernoulli(
     mlx_array p,
@@ -93,6 +94,22 @@ extern "C" mlx_array mlx_random_gumbel(
 extern "C" mlx_array mlx_random_key(uint64_t seed) {
   RETURN_MLX_C_ARRAY(mlx::core::random::key(seed));
 }
+extern "C" mlx_array mlx_random_laplace(
+    const int* shape,
+    size_t num_shape,
+    mlx_array_dtype dtype,
+    float loc,
+    float scale,
+    mlx_array key,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::random::laplace(
+      MLX_CPP_INTVEC(shape, num_shape),
+      MLX_CPP_ARRAY_DTYPE(dtype),
+      loc,
+      scale,
+      (key ? std::make_optional(key->ctx) : std::nullopt),
+      s->ctx));
+}
 extern "C" mlx_array mlx_random_multivariate_normal(
     mlx_array mean,
     mlx_array cov,
@@ -148,7 +165,7 @@ extern "C" mlx_array
 mlx_random_split_equal_parts(mlx_array key, int num, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::random::split(key->ctx, num, s->ctx));
 }
-extern "C" mlx_vector_array mlx_random_split(mlx_array key, mlx_stream s) {
+extern "C" mlx_tuple_array_array mlx_random_split(mlx_array key, mlx_stream s) {
   RETURN_MLX_C_ARRAYPAIR(mlx::core::random::split(key->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_random_truncated_normal(

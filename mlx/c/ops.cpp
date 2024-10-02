@@ -9,12 +9,13 @@
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
+#include "mlx/c/private/tuple.h"
 #include "mlx/c/private/utils.h"
+#include "mlx/c/private/vector.h"
 
 extern "C" mlx_array mlx_abs(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::abs(a->ctx, s->ctx));
@@ -306,6 +307,60 @@ extern "C" mlx_array mlx_conv_general(
       flip,
       s->ctx));
 }
+extern "C" mlx_array mlx_conv_transpose1d(
+    mlx_array input,
+    mlx_array weight,
+    int stride,
+    int padding,
+    int dilation,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose1d(
+      input->ctx, weight->ctx, stride, padding, dilation, groups, s->ctx));
+}
+extern "C" mlx_array mlx_conv_transpose2d(
+    mlx_array input,
+    mlx_array weight,
+    int f_stride,
+    int s_stride,
+    int f_padding,
+    int s_padding,
+    int f_dilation,
+    int s_dilation,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose2d(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTPAIR(f_stride, s_stride),
+      MLX_CPP_INTPAIR(f_padding, s_padding),
+      MLX_CPP_INTPAIR(f_dilation, s_dilation),
+      groups,
+      s->ctx));
+}
+extern "C" mlx_array mlx_conv_transpose3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
+    int groups,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::conv_transpose3d(
+      input->ctx,
+      weight->ctx,
+      MLX_CPP_INTTUPLE3(stride_0, stride_1, stride_2),
+      MLX_CPP_INTTUPLE3(padding_0, padding_1, padding_2),
+      MLX_CPP_INTTUPLE3(dilation_0, dilation_1, dilation_2),
+      groups,
+      s->ctx));
+}
 extern "C" mlx_array mlx_copy(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::copy(a->ctx, s->ctx));
 }
@@ -366,6 +421,13 @@ extern "C" mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s) {
 }
 extern "C" mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_VECTOR_ARRAY(mlx::core::divmod(a->ctx, b->ctx, s->ctx));
+}
+extern "C" mlx_array mlx_einsum(
+    mlx_string subscripts,
+    const mlx_vector_array operands,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::einsum(
+      MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx));
 }
 extern "C" mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::equal(a->ctx, b->ctx, s->ctx));
@@ -471,6 +533,13 @@ extern "C" mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s) {
 extern "C" mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::greater_equal(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array
+mlx_hadamard_transform(mlx_array a, mlx_optional_float scale, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::hadamard_transform(
+      a->ctx,
+      (scale.has_value ? std::make_optional<float>(scale.value) : std::nullopt),
+      s->ctx));
+}
 extern "C" mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::identity(n, MLX_CPP_ARRAY_DTYPE(dtype), s->ctx));
@@ -487,6 +556,9 @@ extern "C" mlx_array mlx_isclose(
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(
       mlx::core::isclose(a->ctx, b->ctx, rtol, atol, equal_nan, s->ctx));
+}
+extern "C" mlx_array mlx_isfinite(mlx_array a, mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::isfinite(a->ctx, s->ctx));
 }
 extern "C" mlx_array mlx_isinf(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::isinf(a->ctx, s->ctx));
@@ -615,6 +687,21 @@ mlx_moveaxis(mlx_array a, int source, int destination, mlx_stream s) {
 extern "C" mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::multiply(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_nan_to_num(
+    mlx_array a,
+    float nan,
+    mlx_optional_float posinf,
+    mlx_optional_float neginf,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::nan_to_num(
+      a->ctx,
+      nan,
+      (posinf.has_value ? std::make_optional<float>(posinf.value)
+                        : std::nullopt),
+      (neginf.has_value ? std::make_optional<float>(neginf.value)
+                        : std::nullopt),
+      s->ctx));
+}
 extern "C" mlx_array mlx_negative(mlx_array a, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::negative(a->ctx, s->ctx));
 }
@@ -658,6 +745,7 @@ extern "C" mlx_array mlx_pad(
     const int* high_pad_size,
     size_t num_high_pad_size,
     mlx_array pad_value,
+    mlx_string mode,
     mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::pad(
       a->ctx,
@@ -665,6 +753,7 @@ extern "C" mlx_array mlx_pad(
       MLX_CPP_INTVEC(low_pad_size, num_low_pad_size),
       MLX_CPP_INTVEC(high_pad_size, num_high_pad_size),
       pad_value->ctx,
+      MLX_CPP_STRING(mode),
       s->ctx));
 }
 extern "C" mlx_array
@@ -689,7 +778,16 @@ extern "C" mlx_array mlx_prod(
 extern "C" mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::prod(a->ctx, keepdims, s->ctx));
 }
-extern "C" mlx_vector_array
+extern "C" mlx_array mlx_put_along_axis(
+    mlx_array a,
+    mlx_array indices,
+    mlx_array values,
+    int axis,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::put_along_axis(
+      a->ctx, indices->ctx, values->ctx, axis, s->ctx));
+}
+extern "C" mlx_tuple_array_array_array
 mlx_quantize(mlx_array w, int group_size, int bits, mlx_stream s) {
   RETURN_MLX_C_ARRAYTUPLE3(
       mlx::core::quantize(w->ctx, group_size, bits, s->ctx));

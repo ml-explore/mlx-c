@@ -11,7 +11,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -162,6 +161,39 @@ mlx_array mlx_conv_general(
     int groups,
     bool flip,
     mlx_stream s);
+mlx_array mlx_conv_transpose1d(
+    mlx_array input,
+    mlx_array weight,
+    int stride,
+    int padding,
+    int dilation,
+    int groups,
+    mlx_stream s);
+mlx_array mlx_conv_transpose2d(
+    mlx_array input,
+    mlx_array weight,
+    int f_stride,
+    int s_stride,
+    int f_padding,
+    int s_padding,
+    int f_dilation,
+    int s_dilation,
+    int groups,
+    mlx_stream s);
+mlx_array mlx_conv_transpose3d(
+    mlx_array input,
+    mlx_array weight,
+    int stride_0,
+    int stride_1,
+    int stride_2,
+    int padding_0,
+    int padding_1,
+    int padding_2,
+    int dilation_0,
+    int dilation_1,
+    int dilation_2,
+    int groups,
+    mlx_stream s);
 mlx_array mlx_copy(mlx_array a, mlx_stream s);
 mlx_array mlx_cos(mlx_array a, mlx_stream s);
 mlx_array mlx_cosh(mlx_array a, mlx_stream s);
@@ -189,6 +221,10 @@ mlx_array
 mlx_diagonal(mlx_array a, int offset, int axis1, int axis2, mlx_stream s);
 mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s);
 mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_einsum(
+    mlx_string subscripts,
+    const mlx_vector_array operands,
+    mlx_stream s);
 mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_erf(mlx_array a, mlx_stream s);
 mlx_array mlx_erfinv(mlx_array a, mlx_stream s);
@@ -233,6 +269,8 @@ mlx_array mlx_gather_qmm(
     mlx_stream s);
 mlx_array mlx_greater(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_greater_equal(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array
+mlx_hadamard_transform(mlx_array a, mlx_optional_float scale, mlx_stream s);
 mlx_array mlx_identity(int n, mlx_array_dtype dtype, mlx_stream s);
 mlx_array mlx_inner(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_isclose(
@@ -242,6 +280,7 @@ mlx_array mlx_isclose(
     double atol,
     bool equal_nan,
     mlx_stream s);
+mlx_array mlx_isfinite(mlx_array a, mlx_stream s);
 mlx_array mlx_isinf(mlx_array a, mlx_stream s);
 mlx_array mlx_isnan(mlx_array a, mlx_stream s);
 mlx_array mlx_isneginf(mlx_array a, mlx_stream s);
@@ -301,6 +340,12 @@ mlx_array mlx_min_all(mlx_array a, bool keepdims, mlx_stream s);
 mlx_array mlx_minimum(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_moveaxis(mlx_array a, int source, int destination, mlx_stream s);
 mlx_array mlx_multiply(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_nan_to_num(
+    mlx_array a,
+    float nan,
+    mlx_optional_float posinf,
+    mlx_optional_float neginf,
+    mlx_stream s);
 mlx_array mlx_negative(mlx_array a, mlx_stream s);
 mlx_array mlx_not_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_number_of_elements(
@@ -326,6 +371,7 @@ mlx_array mlx_pad(
     const int* high_pad_size,
     size_t num_high_pad_size,
     mlx_array pad_value,
+    mlx_string mode,
     mlx_stream s);
 mlx_array mlx_partition(mlx_array a, int kth, int axis, mlx_stream s);
 mlx_array mlx_partition_all(mlx_array a, int kth, mlx_stream s);
@@ -337,7 +383,13 @@ mlx_array mlx_prod(
     bool keepdims,
     mlx_stream s);
 mlx_array mlx_prod_all(mlx_array a, bool keepdims, mlx_stream s);
-mlx_vector_array
+mlx_array mlx_put_along_axis(
+    mlx_array a,
+    mlx_array indices,
+    mlx_array values,
+    int axis,
+    mlx_stream s);
+mlx_tuple_array_array_array
 mlx_quantize(mlx_array w, int group_size, int bits, mlx_stream s);
 mlx_array mlx_quantized_matmul(
     mlx_array x,

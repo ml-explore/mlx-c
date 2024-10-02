@@ -11,7 +11,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/future.h"
 #include "mlx/c/ioutils.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -41,7 +40,7 @@ mlx_vector_array mlx_detail_vmap_replace(
     size_t num_in_axes,
     const int* out_axes,
     size_t num_out_axes);
-mlx_vector_vector_array mlx_detail_vmap_trace(
+mlx_tuple_vector_array_vector_array mlx_detail_vmap_trace(
     mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,

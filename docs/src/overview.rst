@@ -41,16 +41,18 @@ valid only if :func:`mlx_eval()` as been called (see
 Vector of Arrays, and Vector of Vector of Arrays
 ------------------------------------------------
 
-:doc:`Vector of arrays <vecarray>` (:class:`mlx_vector_array`) can hold
-multiple arrays, and :doc:`vector of vector arrays <vecvecarray>`
-(:class:`mlx_vector_vector_array`) can hold multiple vector of arrays.
+MLX defines several types of :doc:`vectors <vector>`, including vector of
+arrays (:class:`mlx_vector_array`) which can hold multiple arrays, and
+vector of vector arrays (:class:`mlx_vector_vector_array`) which can hold
+multiple vector of arrays.
 
 An array added to a :class:`mlx_vector_array` will stay alive until the
 vector of arrays is destroyed (via :func:`mlx_free()`). Arrays returned by
 :func:`mlx_vector_array_get()` will need to be matched with a corresponding
 :func:`mlx_free()`.
 
-Same idea applies to :class:`mlx_vector_vector_array`.
+Same idea applies to :class:`mlx_vector_vector_array`, or other types of
+arrays.
 
 
 Device and Stream
@@ -74,15 +76,6 @@ pointer <string>`. Just like other MLX C objects, it must be freed with
 
 MLX C also has a :doc:`string-to-array map <map>` named
 :class:`mlx_map_string_to_array`.
-
-Futures
--------
-
-In MLX C, some async operations (see for example :doc:`transforms
-<transforms>`) may return a :doc:`future <future>`. The only operation one
-can currently perform on futures is :func:`wait()`, which ensure resources
-associated with the future are then materialized.
-
 
 Array Operations
 ----------------
