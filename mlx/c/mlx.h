@@ -9,7 +9,6 @@
 #include "mlx/c/device.h"
 #include "mlx/c/distributed.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/einsum.h"
 #include "mlx/c/error.h"
 #include "mlx/c/fast.h"
 #include "mlx/c/fft.h"

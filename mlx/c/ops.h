@@ -222,6 +222,10 @@ mlx_array
 mlx_diagonal(mlx_array a, int offset, int axis1, int axis2, mlx_stream s);
 mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s);
 mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s);
+mlx_array mlx_einsum(
+    mlx_string subscripts,
+    const mlx_vector_array operands,
+    mlx_stream s);
 mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s);
 mlx_array mlx_erf(mlx_array a, mlx_stream s);
 mlx_array mlx_erfinv(mlx_array a, mlx_stream s);

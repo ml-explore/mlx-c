@@ -41,7 +41,6 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/einsum.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp

@@ -423,6 +423,13 @@ extern "C" mlx_array mlx_divide(mlx_array a, mlx_array b, mlx_stream s) {
 extern "C" mlx_vector_array mlx_divmod(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_VECTOR_ARRAY(mlx::core::divmod(a->ctx, b->ctx, s->ctx));
 }
+extern "C" mlx_array mlx_einsum(
+    mlx_string subscripts,
+    const mlx_vector_array operands,
+    mlx_stream s) {
+  RETURN_MLX_C_ARRAY(mlx::core::einsum(
+      MLX_CPP_STRING(subscripts), MLX_CPP_ARRVEC(operands), s->ctx));
+}
 extern "C" mlx_array mlx_equal(mlx_array a, mlx_array b, mlx_stream s) {
   RETURN_MLX_C_ARRAY(mlx::core::equal(a->ctx, b->ctx, s->ctx));
 }

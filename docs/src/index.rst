@@ -51,7 +51,6 @@ bindings to MLX.
    ops
    fft
    linalg
-   einsum
    random
    io
    transforms
