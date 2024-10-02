@@ -40,7 +40,6 @@ bindings to MLX.
    variant
    optional
    closure
-   future
    distributed_group
    ioutils
 

@@ -12,7 +12,6 @@
 #include "mlx/c/error.h"
 #include "mlx/c/fast.h"
 #include "mlx/c/fft.h"
-#include "mlx/c/future.h"
 #include "mlx/c/half.h"
 #include "mlx/c/io.h"
 #include "mlx/c/ioutils.h"

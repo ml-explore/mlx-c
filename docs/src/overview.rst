@@ -77,15 +77,6 @@ pointer <string>`. Just like other MLX C objects, it must be freed with
 MLX C also has a :doc:`string-to-array map <map>` named
 :class:`mlx_map_string_to_array`.
 
-Futures
--------
-
-In MLX C, some async operations (see for example :doc:`transforms
-<transforms>`) may return a :doc:`future <future>`. The only operation one
-can currently perform on futures is :func:`wait()`, which ensure resources
-associated with the future are then materialized.
-
-
 Array Operations
 ----------------
 

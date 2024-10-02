@@ -194,7 +194,6 @@ static mlx_array_dtype mlx_c_dtypes[] = {
   RETURN_MLX_C_PTR(new mlx_map_string_to_variant_string_size_t_(map))
 #define RETURN_MLX_C_STRING(str) RETURN_MLX_C_PTR(new mlx_string_(str))
 #define RETURN_MLX_C_SAFETENSORS(st) RETURN_MLX_C_PTR(new mlx_safetensors_(st))
-#define RETURN_MLX_C_FUTURE(f) RETURN_MLX_C_PTR(new mlx_future_(f))
 #define RETURN_MLX_C_DISTRIBUTED_GROUP(group) \
   RETURN_MLX_C_PTR(new mlx_distributed_group_(group))
 
