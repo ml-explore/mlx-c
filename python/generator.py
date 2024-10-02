@@ -23,8 +23,6 @@ else:
     else:
         raise RuntimeError("are you sure you are providing a header?")
 
-Z = cxxheaderparser.simple.parse_file(args.header)
-
 
 def getname(t):
     if type(t) == cxxheaderparser.types.TemplateArgument:
@@ -65,37 +63,40 @@ def getname(t):
 
 funcs = {}
 enums = {}
-l = Z.namespace
-for namespace in args.namespace.split("::"):
-    l = l.namespaces[namespace]
+for header in args.header.split(";"):
+    Z = cxxheaderparser.simple.parse_file(header)
 
-for e in l.enums:
-    name = getname(e.typename)
-    values = [v.name for v in e.values]
-    enums[name] = values
+    l = Z.namespace
+    for namespace in args.namespace.split("::"):
+        l = l.namespaces[namespace]
 
-for f in l.functions:
-    name = getname(f.name)
-    if name.startswith("operator"):
-        continue
-    params_t = []
-    params_name = []
-    return_t = getname(f.return_type)
-    if return_t == "Stream":  # unsupported
-        continue
-    for p in f.parameters:
-        params_t.append(getname(p.type))
-        params_name.append(p.name)
-    func = {
-        "name": name,
-        "params_t": params_t,
-        "params_name": params_name,
-        "return_t": return_t,
-    }
-    if name in funcs:
-        funcs[name].append(func)
-    else:
-        funcs[name] = [func]
+    for e in l.enums:
+        name = getname(e.typename)
+        values = [v.name for v in e.values]
+        enums[name] = values
+
+    for f in l.functions:
+        name = getname(f.name)
+        if name.startswith("operator"):
+            continue
+        params_t = []
+        params_name = []
+        return_t = getname(f.return_type)
+        if return_t == "Stream":  # unsupported
+            continue
+        for p in f.parameters:
+            params_t.append(getname(p.type))
+            params_name.append(p.name)
+        func = {
+            "name": name,
+            "params_t": params_t,
+            "params_name": params_name,
+            "return_t": return_t,
+        }
+        if name in funcs:
+            funcs[name].append(func)
+        else:
+            funcs[name] = [func]
 
 if args.language == "C":
     from c import generate
