@@ -243,9 +243,9 @@ array_t = {
     "c": "const mlx_array",
     "cpp": "mlx::core::array",
     "nick": "array",
-    "c_return": "mlx_array",
+    "c_return": "mlx_array*",
     "c_to_cpp": lambda s: s + "->ctx",
-    "c_assign": lambda s: s + "->ctx",
+    "c_assign": lambda s: "(*" + s + ")->ctx",
     "c_assign_get": lambda s: s,
 }
 

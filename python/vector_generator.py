@@ -30,8 +30,8 @@ mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
 int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, CTYPE* data, size_t size);
 int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val);
-void mlx_vector_SCTYPE_add_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
-void mlx_vector_SCTYPE_add_value(mlx_vector_SCTYPE vec, CTYPE val);
+void mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
+void mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
 int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE);
 """
@@ -90,7 +90,7 @@ extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val) {
   return 0;
 }
 
-extern "C" void mlx_vector_SCTYPE_add_data(
+extern "C" void mlx_vector_SCTYPE_append_data(
     mlx_vector_SCTYPE vec,
     CTYPE* data,
     size_t size) {
@@ -99,7 +99,7 @@ extern "C" void mlx_vector_SCTYPE_add_data(
            i++) { vec->ctx.push_back(C_TO_CPP(data[i])); }, );
 }
 
-extern "C" void mlx_vector_SCTYPE_add_value(
+extern "C" void mlx_vector_SCTYPE_append_value(
     mlx_vector_SCTYPE vec,
     CTYPE value) {
   MLX_TRY_CATCH(vec->ctx.push_back(C_TO_CPP(value));, )
@@ -147,10 +147,10 @@ def generate(
     sctype,
     rctype=None,
     c_to_cpp=lambda s: s + "->ctx",
-    c_assign=lambda d, s: d + "->ctx = " + s,
+    c_assign=lambda d, s: "(*" + d + ")->ctx = " + s,
 ):
     if rctype is None:
-        rctype = ctype.replace("const ", "")
+        rctype = ctype.replace("const ", "") + "*"
 
     def c_assign_wrap(s):
         d, s = s.split(",")

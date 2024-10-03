@@ -35,12 +35,12 @@ extern "C" bool mlx_map_string_to_array_insert(
 extern "C" bool mlx_map_string_to_array_get(
     mlx_map_string_to_array map,
     const char* key,
-    mlx_array value) {
+    mlx_array* value) {
   auto search = map->ctx.find(std::string(key));
   if (search == map->ctx.end()) {
     return false;
   } else {
-    value->ctx = search->second;
+    (*value)->ctx = search->second;
     return true;
   }
 }
@@ -54,12 +54,12 @@ extern "C" mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
 extern "C" bool mlx_map_string_to_array_iterator_next(
     mlx_map_string_to_array_iterator it,
     const char** key,
-    mlx_array value) {
+    mlx_array* value) {
   if (it->ctx == it->map->ctx.end()) {
     return false;
   } else {
     *key = it->ctx->first.data();
-    value->ctx = it->ctx->second;
+    (*value)->ctx = it->ctx->second;
     it->ctx++;
     return true;
   }

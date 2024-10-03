@@ -43,7 +43,7 @@ bool mlx_map_string_to_array_insert(
 bool mlx_map_string_to_array_get(
     mlx_map_string_to_array map,
     const char* key,
-    mlx_array value);
+    mlx_array* value);
 
 /**
  * An iterator over a string-to-array map.
@@ -62,7 +62,7 @@ mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
 bool mlx_map_string_to_array_iterator_next(
     mlx_map_string_to_array_iterator it,
     const char** key,
-    mlx_array value);
+    mlx_array* value);
 
 /**
  * A string-to-string map

@@ -28,7 +28,7 @@ void inc_fun_value(mlx_vector_array in, void* payload, mlx_vector_array* vres) {
   }
   mlx_array value = (mlx_array)payload;
   mlx_array res = mlx_array_new();
-  mlx_vector_array_get(in, 0, res);
+  mlx_vector_array_get(in, 0, &res);
   mlx_add(res, value, stream, &res); // DEBUG
   mlx_vector_array_set_value(*vres, res);
   mlx_free(res);
@@ -53,8 +53,8 @@ int main() {
     mlx_jvp(cls, primals, tangents, &vout, &vdout);
     mlx_array out = mlx_array_new();
     mlx_array dout = mlx_array_new();
-    mlx_vector_array_get(vout, 0, out);
-    mlx_vector_array_get(vdout, 0, dout);
+    mlx_vector_array_get(vout, 0, &out);
+    mlx_vector_array_get(vdout, 0, &dout);
 
     print_array("out", out);
     print_array("dout", dout);
@@ -80,8 +80,8 @@ int main() {
     mlx_closure_value_and_grad_apply(vag, inputs, &vout, &vdout);
     mlx_array out = mlx_array_new();
     mlx_array dout = mlx_array_new();
-    mlx_vector_array_get(vout, 0, out);
-    mlx_vector_array_get(vdout, 0, dout);
+    mlx_vector_array_get(vout, 0, &out);
+    mlx_vector_array_get(vdout, 0, &dout);
 
     print_array("out", out);
     print_array("dout", dout);
@@ -106,8 +106,8 @@ int main() {
     mlx_closure_value_and_grad_apply(vag, inputs, &vout, &vdout);
     mlx_array out = mlx_array_new();
     mlx_array dout = mlx_array_new();
-    mlx_vector_array_get(vout, 0, out);
-    mlx_vector_array_get(vdout, 0, dout);
+    mlx_vector_array_get(vout, 0, &out);
+    mlx_vector_array_get(vdout, 0, &dout);
 
     print_array("out", out);
     print_array("dout", dout);

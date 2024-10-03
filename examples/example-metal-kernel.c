@@ -10,7 +10,10 @@ void print_array(const char* msg, mlx_array arr) {
   mlx_free(str);
 }
 
-void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
+void exp_elemwise(
+    const mlx_array input,
+    mlx_stream stream,
+    mlx_array* output_) {
   const char* source =
       "uint elem = thread_position_in_grid.x;"
       "T tmp = inp[elem];"
@@ -31,7 +34,7 @@ void exp_elemwise(const mlx_array input, mlx_stream stream, mlx_array output) {
 
   mlx_vector_array outputs = mlx_vector_array_new();
   mlx_fast_metal_kernel_apply(kernel, inputs, stream, outputs);
-  mlx_vector_array_get(outputs, 0, output);
+  mlx_vector_array_get(outputs, 0, output_);
 
   mlx_free(kernel);
   mlx_free(inputs);
@@ -43,9 +46,9 @@ int main() {
   mlx_array output = mlx_array_new();
 
   int dims[2] = {4, 16};
-  mlx_random_normal(dims, 2, MLX_FLOAT32, 0, 1, NULL, stream, input);
+  mlx_random_normal(dims, 2, MLX_FLOAT32, 0, 1, NULL, stream, &input);
 
-  exp_elemwise(input, stream, output);
+  exp_elemwise(input, stream, &output);
 
   print_array("input", input);
   print_array("output", output);
