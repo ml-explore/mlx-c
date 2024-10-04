@@ -12,8 +12,8 @@ inline mlx_distributed_group mlx_distributed_group_new_(
       {new mlx::core::distributed::Group(std::move(s))});
 }
 
-inline mlx_distributed_group mlx_distributed_group_set_(
-    mlx_distributed_group d,
+inline mlx_distributed_group& mlx_distributed_group_set_(
+    mlx_distributed_group& d,
     mlx::core::distributed::Group s) {
   if (d.ctx) {
     *static_cast<mlx::core::distributed::Group*>(d.ctx) = s;

@@ -15,16 +15,15 @@ inline mlx_map_string_to_array mlx_map_string_to_array_new_(
       {new std::unordered_map<std::string, mlx::core::array>(s)});
 }
 
-inline mlx_map_string_to_array mlx_map_string_to_array_set_(
-    mlx_map_string_to_array* d,
+inline mlx_map_string_to_array& mlx_map_string_to_array_set_(
+    mlx_map_string_to_array& d,
     std::unordered_map<std::string, mlx::core::array> s) {
-  if (d->ctx) {
-    *static_cast<std::unordered_map<std::string, mlx::core::array>*>(d->ctx) =
-        s;
+  if (d.ctx) {
+    *static_cast<std::unordered_map<std::string, mlx::core::array>*>(d.ctx) = s;
   } else {
-    d->ctx = new std::unordered_map<std::string, mlx::core::array>(s);
+    d.ctx = new std::unordered_map<std::string, mlx::core::array>(s);
   }
-  return *d;
+  return d;
 }
 
 inline std::unordered_map<std::string, mlx::core::array>&
@@ -83,15 +82,15 @@ inline mlx_map_string_to_string mlx_map_string_to_string_new_(
       {new std::unordered_map<std::string, std::string>(s)});
 }
 
-inline mlx_map_string_to_string mlx_map_string_to_string_set_(
-    mlx_map_string_to_string* d,
+inline mlx_map_string_to_string& mlx_map_string_to_string_set_(
+    mlx_map_string_to_string& d,
     std::unordered_map<std::string, std::string> s) {
-  if (d->ctx) {
-    *static_cast<std::unordered_map<std::string, std::string>*>(d->ctx) = s;
+  if (d.ctx) {
+    *static_cast<std::unordered_map<std::string, std::string>*>(d.ctx) = s;
   } else {
-    d->ctx = new std::unordered_map<std::string, std::string>(s);
+    d.ctx = new std::unordered_map<std::string, std::string>(s);
   }
-  return *d;
+  return d;
 }
 
 inline std::unordered_map<std::string, std::string>&

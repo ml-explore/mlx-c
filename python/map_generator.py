@@ -130,13 +130,13 @@ inline mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new_(std::unordered
   return mlx_map_SCTYPE1_to_SCTYPE2({new std::unordered_map<CPPTYPE1, CPPTYPE2>(s)});
 }
 
-inline mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_set_(mlx_map_SCTYPE1_to_SCTYPE2* d, std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
-  if (d->ctx) {
-    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d->ctx) = s;
+inline mlx_map_SCTYPE1_to_SCTYPE2& mlx_map_SCTYPE1_to_SCTYPE2_set_(mlx_map_SCTYPE1_to_SCTYPE2& d, std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
+  if (d.ctx) {
+    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx) = s;
   } else {
-    d->ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>(s);
+    d.ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>(s);
   }
-  return *d;
+  return d;
 }
 
 inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_get_(mlx_map_SCTYPE1_to_SCTYPE2 d) {

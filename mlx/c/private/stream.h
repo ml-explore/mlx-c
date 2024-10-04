@@ -10,7 +10,7 @@ inline mlx_stream mlx_stream_new_(mlx::core::Stream s) {
   return mlx_stream({new mlx::core::Stream(s)});
 }
 
-inline mlx_stream mlx_stream_set_(mlx_stream d, mlx::core::Stream s) {
+inline mlx_stream& mlx_stream_set_(mlx_stream& d, mlx::core::Stream s) {
   if (d.ctx) {
     *static_cast<mlx::core::Stream*>(d.ctx) = s;
   } else {

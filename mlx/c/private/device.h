@@ -14,7 +14,7 @@ mlx_device mlx_device_new_(const mlx::core::Device& s) {
   return mlx_device({new mlx::core::Device(s)});
 }
 
-mlx_device mlx_device_set_(mlx_device d, mlx::core::Device s) {
+mlx_device& mlx_device_set_(mlx_device& d, mlx::core::Device s) {
   if (d.ctx) {
     *static_cast<mlx::core::Device*>(d.ctx) = s;
   } else {
