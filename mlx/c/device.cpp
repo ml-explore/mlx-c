@@ -7,12 +7,12 @@
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-// mlx_string_* mlx_device_::tostring() {
-//   std::ostringstream os;
-//   os << ctx;
-//   std::string str = os.str();
-//   RETURN_MLX_C_STRING(str);
-// }
+extern "C" mlx_string mlx_device_tostring(mlx_device dev) {
+  std::ostringstream os;
+  os << mlx_device_get_(dev);
+  std::string str = os.str();
+  return mlx_string_new_(str);
+}
 
 namespace {
 mlx_device_type to_c_device_type(mlx::core::Device::DeviceType type) {

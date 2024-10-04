@@ -9,10 +9,12 @@
 #include "mlx/c/private/utils.h"
 #include "mlx/c/stream.h"
 
-// mlx_string_* mlx_stream_::tostring() {
-//   MLX_TRY_CATCH(std::ostringstream os; os << ctx; std::string str = os.str();
-//                 return new mlx_string_(str), return nullptr);
-// }
+mlx_string mlx_stream_tostring(mlx_stream stream) {
+  std::ostringstream os;
+  os << mlx_stream_get_(stream);
+  std::string str = os.str();
+  return mlx_string_new_(str);
+}
 
 extern "C" mlx_stream mlx_stream_new(int index, mlx_device dev) {
   return mlx_stream_new_(mlx::core::Stream(index, mlx_device_get_(dev)));

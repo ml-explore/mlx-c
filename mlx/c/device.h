@@ -3,6 +3,8 @@
 #ifndef MLX_DEVICE_H
 #define MLX_DEVICE_H
 
+#include "mlx/c/string.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,6 +31,10 @@ typedef enum mlx_device_type_ { MLX_CPU, MLX_GPU } mlx_device_type;
  * Returns a new device of specified `type`, with specified `index`.
  */
 mlx_device mlx_device_new(mlx_device_type type, int index);
+/**
+ * Get device description.
+ */
+mlx_string mlx_device_tostring(mlx_device dev);
 /**
  * Returns the type of the device.
  */

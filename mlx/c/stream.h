@@ -37,6 +37,10 @@ mlx_stream mlx_stream_new_on_device(mlx_device dev);
  */
 void mlx_stream_free(mlx_stream stream);
 /**
+ * Get stream description.
+ */
+mlx_string mlx_stream_tostring(mlx_device stream);
+/**
  * Check if streams are the same.
  */
 bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs);
