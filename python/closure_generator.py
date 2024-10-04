@@ -22,8 +22,9 @@ def replace_match_parenthesis(string, keyword, fun):
 
 
 decl_code = """
-typedef struct NAME_* NAME;
+typedef struct NAME_ { void* ctx; } NAME;
 NAME NAME_new();
+void NAME_free(NAME cls);
 NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
 NAME NAME_new_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
@@ -93,7 +94,9 @@ def generate(code, name, rcpptype, cpptypes):
 
     code = code.replace(
         "ASSIGN_CLS_TO_RCARGS",
-        mt.cpptypes[rcpptype]["c_assign_from_cpp"]("res", "cls->ctx(" + cargs_ctx + ")")
+        mt.cpptypes[rcpptype]["c_assign_from_cpp"](
+            "res", "NAME_get_(cls)(" + cargs_ctx + ")", returned=True
+        )
         + ";",
     )
 
@@ -106,21 +109,21 @@ def generate(code, name, rcpptype, cpptypes):
 
 
 impl_code = """
-mlx_string_* NAME_::tostring() {
-  RETURN_MLX_C_STRING("void mlx_closure(CARGS_UNNAMED, void*, RCARGS_UNNAMED)");
-}
-
 extern "C" NAME NAME_new() {
   try {
     auto cpp_closure =
           [](CPPARGS_TYPE_NAME) {
               return RCPPARG();
           };
-    return new NAME_(cpp_closure);
+    return NAME_new_(cpp_closure);
   } catch (std::exception & e) {
     mlx_error(e.what());
-    return nullptr;
+    return {nullptr};
   }
+}
+
+extern "C" void NAME_free(NAME cls) {
+  NAME_free_(cls);
 }
 
 extern "C" NAME NAME_new_func(
@@ -136,7 +139,7 @@ extern "C" NAME NAME_new_func(
             RCARGS_FREE
             return cpp_res;
           };
-      return new NAME_(cpp_closure), return nullptr);
+      return NAME_new_(cpp_closure), return {nullptr});
 }
 
 extern "C" NAME NAME_new_func_payload(
@@ -154,7 +157,7 @@ extern "C" NAME NAME_new_func_payload(
         RCARGS_FREE
         return cpp_res;
       };
-  MLX_TRY_CATCH(return new NAME_(cpp_closure), return nullptr);
+  MLX_TRY_CATCH(return NAME_new_(cpp_closure), return {nullptr});
 }
 
 extern "C" int NAME_apply(
@@ -171,12 +174,28 @@ extern "C" int NAME_apply(
 """
 
 priv_code = """
-struct NAME_ : mlx_object_ {
-  NAME_(std::function<RCPPARG(CPPARGS)> ctx)
-      : mlx_object_(), ctx(ctx){};
-  virtual mlx_string_* tostring() override;
-  std::function<RCPPARG(CPPARGS)> ctx;
-};
+inline NAME NAME_new_(std::function<RCPPARG(CPPARGS)>&& s) {
+  return NAME({new std::function<RCPPARG(CPPARGS)>(std::move(s))});
+}
+
+inline NAME& NAME_set_(NAME& d, std::function<RCPPARG(CPPARGS)> s) {
+  if (d.ctx) {
+    *static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::function<RCPPARG(CPPARGS)>(s);
+  }
+  return d;
+}
+
+inline std::function<RCPPARG(CPPARGS)>& NAME_get_(NAME d) {
+  return *static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx);
+}
+
+inline void NAME_free_(NAME d) {
+  if (d.ctx) {
+    delete static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx);
+  }
+}
 """
 
 decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
@@ -219,7 +238,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
 
 #include "mlx/c/closure.h"
-#include "mlx/c/object.h"
+#include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/stream.h"
 #include "mlx/c/private/string.h"
@@ -239,7 +258,6 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_CLOSURE_PRIVATE_H
 
 #include "mlx/c/closure.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 
 """
@@ -282,15 +300,15 @@ extern "C" mlx_closure mlx_closure_new_unary(
             if (cpp_input.size() != 1) {
               throw std::runtime_error("closure: expected unary input");
             }
-            auto input = new mlx_array_(cpp_input[0]);
-            auto res = new mlx_array_();
+            auto input = mlx_array_new_(cpp_input[0]);
+            auto res = mlx_array_new_();
             fun(input, &res);
-            mlx_free(input);
-            std::vector<mlx::core::array> cpp_res = {res->ctx};
-            mlx_free(res);
+            mlx_array_free(input);
+            std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
+            mlx_array_free(res);
             return cpp_res;
           };
-      return new mlx_closure_(cpp_closure), return nullptr);
+      return mlx_closure_new_(cpp_closure), return {nullptr});
 }
 """
     )
@@ -341,28 +359,7 @@ print(
 if args.private:
     print(
         """
-struct mlx_fast_metal_kernel_ : mlx_object_ {
-  mlx_fast_metal_kernel_(const std::string& name, const std::string& source, const std::string& header)
-      : mlx_object_(), name(name), source(source), header(header), contiguous_rows(true) {};
-  virtual mlx_string_* tostring() override;
-  mlx::core::fast::MetalKernelFunction ctx;
-  std::string name;
-  std::vector<std::string> input_names;
-  std::vector<std::string> output_names;
-  std::string source;
-  std::string header;
-  bool contiguous_rows;
-  bool atomic_outputs;
-
-  std::vector<std::vector<int>> output_shapes;
-  std::vector<mlx::core::Dtype> output_dtypes;
-  std::tuple<int, int, int> grid;
-  std::tuple<int, int, int> thread_group;
-  std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>> template_args;
-  std::optional<float> init_value;
-  bool verbose;
-};
-    """
+     """
     )
 
 print(end)

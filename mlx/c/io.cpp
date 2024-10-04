@@ -19,7 +19,7 @@ extern "C" int
 mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::load(
             std::make_shared<CFILEReader>(in_stream), mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -30,7 +30,8 @@ mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res) {
 }
 extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array* res) {
   try {
-    mlx_array_set_(res, mlx::core::load(std::string(file), mlx_stream_get_(s)));
+    mlx_array_set_(
+        *res, mlx::core::load(std::string(file), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

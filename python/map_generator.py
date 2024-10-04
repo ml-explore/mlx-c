@@ -30,6 +30,10 @@ typedef struct mlx_map_SCTYPE1_to_SCTYPE2_ { void* ctx; } mlx_map_SCTYPE1_to_SCT
  */
 mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void);
 /**
+ * Free a SCTYPE1-to-SCTYPE2 map.
+ */
+void mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map);
+/**
  * Insert a new `value` at the specified `key` in the map.
  * Returns `true` if the value was actually inserted.
  */
@@ -57,6 +61,10 @@ typedef struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ { void * ctx; void* map_ctx;
 mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
     mlx_map_SCTYPE1_to_SCTYPE2 map);
 /**
+ * Free iterator.
+ */
+void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
+/**
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
  */
@@ -66,6 +74,10 @@ bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterato
 impl_code = """
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
   return mlx_map_SCTYPE1_to_SCTYPE2{new std::unordered_map<CPPTYPE1, CPPTYPE2>()};
+}
+
+extern "C" void mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {
+  mlx_map_SCTYPE1_to_SCTYPE2_free_(map);
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
@@ -106,6 +118,11 @@ extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     return true;
   }
 }
+
+extern "C" void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
+  mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(it);
+}
+
 """
 
 priv_code = """
@@ -126,6 +143,12 @@ inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_get_(m
   return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx);
 }
 
+inline void mlx_map_SCTYPE1_to_SCTYPE2_free_(mlx_map_SCTYPE1_to_SCTYPE2 d) {
+  if(d.ctx) {
+    delete static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx);
+  }
+}
+
 inline mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new_(std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator&& s) {
   return mlx_map_SCTYPE1_to_SCTYPE2_iterator({new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(std::move(s))});
 }
@@ -144,6 +167,11 @@ inline std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator& mlx_map_SCTYPE1_to_SCTY
 }
 inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
   return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.map_ctx);
+}
+inline void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
+  if(d.ctx) {
+    delete static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d.ctx);
+  }
 }
 """
 
@@ -262,7 +290,7 @@ array_t = {
     "nick": "array",
     "c_return": "mlx_array*",
     "c_to_cpp": lambda s: "mlx_array_get_(" + s + ")",
-    "c_assign_from_cpp": lambda d, s: "mlx_array_set_(" + d + ", " + s + ")",
+    "c_assign_from_cpp": lambda d, s: "mlx_array_set_(*" + d + ", " + s + ")",
 }
 
 string_t = {

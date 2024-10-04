@@ -6,18 +6,17 @@
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
-  mlx_string str;
-  str = mlx_tostring(arr);
+  mlx_string str = mlx_array_tostring(arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
-  mlx_free(str);
+  mlx_string_free(str);
 }
 
-void inc_fun(mlx_array in, mlx_array* res) {
+void inc_fun(mlx_array in, mlx_array* res_) {
   mlx_stream stream = mlx_gpu_stream();
   mlx_array value = mlx_array_new_float(1.0);
-  mlx_add(in, value, stream, res);
-  mlx_free(stream);
-  mlx_free(value);
+  mlx_add(in, value, stream, res_);
+  mlx_stream_free(stream);
+  mlx_array_free(value);
 }
 
 void inc_fun_value(mlx_vector_array in, void* payload, mlx_vector_array* vres) {
@@ -26,13 +25,17 @@ void inc_fun_value(mlx_vector_array in, void* payload, mlx_vector_array* vres) {
     fprintf(stderr, "inc_func_value: expected 1 argument");
     exit(EXIT_FAILURE);
   }
-  mlx_array value = (mlx_array)payload;
   mlx_array res = mlx_array_new();
   mlx_vector_array_get(in, 0, &res);
-  mlx_add(res, value, stream, &res); // DEBUG
+  mlx_add(res, *((mlx_array*)payload), stream, &res);
   mlx_vector_array_set_value(*vres, res);
-  mlx_free(res);
-  mlx_free(stream);
+  mlx_array_free(res);
+  mlx_stream_free(stream);
+}
+
+void closure_dtor(void* ptr_) {
+  mlx_array* arr = ptr_;
+  mlx_array_free(*arr);
 }
 
 int main() {
@@ -40,7 +43,7 @@ int main() {
   mlx_array y = mlx_array_new_float(1.0);
   mlx_closure cls = mlx_closure_new_unary(inc_fun);
   mlx_closure cls_with_value =
-      mlx_closure_new_func_payload(inc_fun_value, y, mlx_free);
+      mlx_closure_new_func_payload(inc_fun_value, &y, closure_dtor);
 
   // jvp
   {
@@ -59,13 +62,13 @@ int main() {
     print_array("out", out);
     print_array("dout", dout);
 
-    mlx_free(dout);
-    mlx_free(out);
-    mlx_free(vdout);
-    mlx_free(vout);
-    mlx_free(tangents);
-    mlx_free(primals);
-    mlx_free(one);
+    mlx_array_free(dout);
+    mlx_array_free(out);
+    mlx_vector_array_free(vdout);
+    mlx_vector_array_free(vout);
+    mlx_vector_array_free(tangents);
+    mlx_vector_array_free(primals);
+    mlx_array_free(one);
   }
 
   // value_and_grad
@@ -86,12 +89,12 @@ int main() {
     print_array("out", out);
     print_array("dout", dout);
 
-    mlx_free(dout);
-    mlx_free(out);
-    mlx_free(inputs);
-    mlx_free(vdout);
-    mlx_free(vout);
-    mlx_free(vag);
+    mlx_array_free(dout);
+    mlx_array_free(out);
+    mlx_vector_array_free(inputs);
+    mlx_vector_array_free(vdout);
+    mlx_vector_array_free(vout);
+    mlx_closure_value_and_grad_free(vag);
   }
 
   // value_and_grad with payload
@@ -112,17 +115,17 @@ int main() {
     print_array("out", out);
     print_array("dout", dout);
 
-    mlx_free(dout);
-    mlx_free(out);
-    mlx_free(inputs);
-    mlx_free(vdout);
-    mlx_free(vout);
-    mlx_free(vag);
+    mlx_array_free(dout);
+    mlx_array_free(out);
+    mlx_vector_array_free(inputs);
+    mlx_vector_array_free(vdout);
+    mlx_vector_array_free(vout);
+    mlx_closure_value_and_grad_free(vag);
   }
 
-  mlx_free(cls_with_value);
-  mlx_free(cls);
-  mlx_free(x);
+  mlx_closure_free(cls_with_value);
+  mlx_closure_free(cls);
+  mlx_array_free(x);
 
   return 0;
 }

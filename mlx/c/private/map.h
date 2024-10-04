@@ -33,6 +33,13 @@ mlx_map_string_to_array_get_(mlx_map_string_to_array d) {
       d.ctx);
 }
 
+inline void mlx_map_string_to_array_free_(mlx_map_string_to_array d) {
+  if (d.ctx) {
+    delete static_cast<std::unordered_map<std::string, mlx::core::array>*>(
+        d.ctx);
+  }
+}
+
 inline mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new_(
     std::unordered_map<std::string, mlx::core::array>::iterator&& s) {
   return mlx_map_string_to_array_iterator(
@@ -62,6 +69,13 @@ mlx_map_string_to_array_iterator_get_map_(mlx_map_string_to_array_iterator d) {
   return *static_cast<std::unordered_map<std::string, mlx::core::array>*>(
       d.map_ctx);
 }
+inline void mlx_map_string_to_array_iterator_free_(
+    mlx_map_string_to_array_iterator d) {
+  if (d.ctx) {
+    delete static_cast<
+        std::unordered_map<std::string, mlx::core::array>::iterator*>(d.ctx);
+  }
+}
 
 inline mlx_map_string_to_string mlx_map_string_to_string_new_(
     std::unordered_map<std::string, std::string> s) {
@@ -83,6 +97,12 @@ inline mlx_map_string_to_string mlx_map_string_to_string_set_(
 inline std::unordered_map<std::string, std::string>&
 mlx_map_string_to_string_get_(mlx_map_string_to_string d) {
   return *static_cast<std::unordered_map<std::string, std::string>*>(d.ctx);
+}
+
+inline void mlx_map_string_to_string_free_(mlx_map_string_to_string d) {
+  if (d.ctx) {
+    delete static_cast<std::unordered_map<std::string, std::string>*>(d.ctx);
+  }
 }
 
 inline mlx_map_string_to_string_iterator mlx_map_string_to_string_iterator_new_(
@@ -113,6 +133,13 @@ inline std::unordered_map<std::string, std::string>&
 mlx_map_string_to_string_iterator_get_map_(
     mlx_map_string_to_string_iterator d) {
   return *static_cast<std::unordered_map<std::string, std::string>*>(d.map_ctx);
+}
+inline void mlx_map_string_to_string_iterator_free_(
+    mlx_map_string_to_string_iterator d) {
+  if (d.ctx) {
+    delete static_cast<std::unordered_map<std::string, std::string>::iterator*>(
+        d.ctx);
+  }
 }
 
 #endif

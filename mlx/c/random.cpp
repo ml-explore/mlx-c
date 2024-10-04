@@ -24,7 +24,7 @@ extern "C" int mlx_random_bernoulli(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::bernoulli(
             mlx_array_get_(p),
             std::vector<int>(shape, shape + shape_num),
@@ -45,7 +45,7 @@ extern "C" int mlx_random_bits(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::bits(
             std::vector<int>(shape, shape + shape_num),
             width,
@@ -67,7 +67,7 @@ extern "C" int mlx_random_categorical_shape(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::categorical(
             mlx_array_get_(logits),
             axis,
@@ -89,7 +89,7 @@ extern "C" int mlx_random_categorical_num_samples(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::categorical(
             mlx_array_get_(logits_),
             axis,
@@ -110,7 +110,7 @@ extern "C" int mlx_random_categorical(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::categorical(
             mlx_array_get_(logits),
             axis,
@@ -131,7 +131,7 @@ extern "C" int mlx_random_gumbel(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::gumbel(
             std::vector<int>(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
@@ -145,7 +145,7 @@ extern "C" int mlx_random_gumbel(
 }
 extern "C" int mlx_random_key(uint64_t seed, mlx_array* res) {
   try {
-    mlx_array_set_(res, mlx::core::random::key(seed));
+    mlx_array_set_(*res, mlx::core::random::key(seed));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -163,7 +163,7 @@ extern "C" int mlx_random_laplace(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::laplace(
             std::vector<int>(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
@@ -188,7 +188,7 @@ extern "C" int mlx_random_multivariate_normal(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::multivariate_normal(
             mlx_array_get_(mean),
             mlx_array_get_(cov),
@@ -213,7 +213,7 @@ extern "C" int mlx_random_normal(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::normal(
             std::vector<int>(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
@@ -238,7 +238,7 @@ extern "C" int mlx_random_randint(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::randint(
             mlx_array_get_(low),
             mlx_array_get_(high),
@@ -268,7 +268,7 @@ extern "C" int mlx_random_split_equal_parts(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::split(mlx_array_get_(key), num, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -301,7 +301,7 @@ extern "C" int mlx_random_truncated_normal(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::truncated_normal(
             mlx_array_get_(lower),
             mlx_array_get_(upper),
@@ -326,7 +326,7 @@ extern "C" int mlx_random_uniform(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::random::uniform(
             mlx_array_get_(low),
             mlx_array_get_(high),

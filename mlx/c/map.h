@@ -31,6 +31,10 @@ typedef struct mlx_map_string_to_array_ {
  */
 mlx_map_string_to_array mlx_map_string_to_array_new(void);
 /**
+ * Free a string-to-array map.
+ */
+void mlx_map_string_to_array_free(mlx_map_string_to_array map);
+/**
  * Insert a new `value` at the specified `key` in the map.
  * Returns `true` if the value was actually inserted.
  */
@@ -60,6 +64,10 @@ typedef struct mlx_map_string_to_array_iterator_ {
 mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new(
     mlx_map_string_to_array map);
 /**
+ * Free iterator.
+ */
+void mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
+/**
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
  */
@@ -79,6 +87,10 @@ typedef struct mlx_map_string_to_string_ {
  * Returns a new empty string-to-string map.
  */
 mlx_map_string_to_string mlx_map_string_to_string_new(void);
+/**
+ * Free a string-to-string map.
+ */
+void mlx_map_string_to_string_free(mlx_map_string_to_string map);
 /**
  * Insert a new `value` at the specified `key` in the map.
  * Returns `true` if the value was actually inserted.
@@ -108,6 +120,11 @@ typedef struct mlx_map_string_to_string_iterator_ {
  */
 mlx_map_string_to_string_iterator mlx_map_string_to_string_iterator_new(
     mlx_map_string_to_string map);
+/**
+ * Free iterator.
+ */
+void mlx_map_string_to_string_iterator_free(
+    mlx_map_string_to_string_iterator it);
 /**
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.

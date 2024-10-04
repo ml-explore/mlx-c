@@ -48,11 +48,14 @@ int mlx_fast_layer_norm(
     const mlx_stream s,
     mlx_array* res);
 
-typedef struct mlx_fast_metal_kernel_* mlx_fast_metal_kernel;
+typedef struct mlx_fast_metal_kernel_ {
+  void* ctx;
+} mlx_fast_metal_kernel;
 mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* name,
     const char* source,
     const char* header);
+void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls);
 int mlx_fast_metal_kernel_set_input_names(
     mlx_fast_metal_kernel cls,
     int num,
@@ -104,7 +107,7 @@ int mlx_fast_metal_kernel_apply(
     mlx_fast_metal_kernel cls,
     const mlx_vector_array inputs,
     const mlx_stream stream,
-    mlx_vector_array outputs);
+    mlx_vector_array* outputs);
 
 int mlx_fast_rms_norm(
     const mlx_array x,

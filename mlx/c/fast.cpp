@@ -25,7 +25,7 @@ extern "C" int mlx_fast_affine_dequantize(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::affine_dequantize(
             mlx_array_get_(w),
             mlx_array_get_(scales),
@@ -49,7 +49,7 @@ extern "C" int mlx_fast_affine_quantize(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::affine_quantize(
             mlx_array_get_(w),
             mlx_array_get_(scales),
@@ -72,7 +72,7 @@ extern "C" int mlx_fast_layer_norm(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::layer_norm(
             mlx_array_get_(x),
             (weight.ctx ? std::make_optional(mlx_array_get_(weight))
@@ -88,14 +88,55 @@ extern "C" int mlx_fast_layer_norm(
   return 0;
 }
 
+struct mlx_fast_metal_kernel_private_ {
+  mlx::core::fast::MetalKernelFunction ctx;
+  std::string name;
+  std::vector<std::string> input_names;
+  std::vector<std::string> output_names;
+  std::string source;
+  std::string header;
+  bool contiguous_rows;
+  bool atomic_outputs;
+
+  std::vector<std::vector<int>> output_shapes;
+  std::vector<mlx::core::Dtype> output_dtypes;
+  std::tuple<int, int, int> grid;
+  std::tuple<int, int, int> thread_group;
+  std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>
+      template_args;
+  std::optional<float> init_value;
+  bool verbose;
+};
+
+inline mlx_fast_metal_kernel mlx_fast_metal_kernel_new_() {
+  return mlx_fast_metal_kernel({new mlx_fast_metal_kernel_private_()});
+}
+
+inline mlx_fast_metal_kernel_private_& mlx_fast_metal_kernel_get_(
+    mlx_fast_metal_kernel d) {
+  return *static_cast<mlx_fast_metal_kernel_private_*>(d.ctx);
+}
+
+inline void mlx_fast_metal_kernel_free_(mlx_fast_metal_kernel d) {
+  if (d.ctx) {
+    delete static_cast<mlx_fast_metal_kernel_private_*>(d.ctx);
+  }
+}
+
+extern "C" void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls) {
+  mlx_fast_metal_kernel_free_(cls);
+}
+
 extern "C" int mlx_fast_metal_kernel_add_output_arg(
     mlx_fast_metal_kernel cls,
     const int* shape,
     size_t size,
     mlx_dtype dtype) {
   try {
-    cls->output_shapes.push_back(std::vector<int>(shape, shape + size));
-    cls->output_dtypes.push_back(mlx_dtype_to_cpp(dtype));
+    mlx_fast_metal_kernel_get_(cls).output_shapes.push_back(
+        std::vector<int>(shape, shape + size));
+    mlx_fast_metal_kernel_get_(cls).output_dtypes.push_back(
+        mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -108,7 +149,7 @@ extern "C" int mlx_fast_metal_kernel_set_grid(
     int grid2,
     int grid3) {
   try {
-    cls->grid = std::make_tuple(grid1, grid2, grid3);
+    mlx_fast_metal_kernel_get_(cls).grid = std::make_tuple(grid1, grid2, grid3);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -121,7 +162,8 @@ extern "C" int mlx_fast_metal_kernel_set_thread_group(
     int thread2,
     int thread3) {
   try {
-    cls->thread_group = std::make_tuple(thread1, thread2, thread3);
+    mlx_fast_metal_kernel_get_(cls).thread_group =
+        std::make_tuple(thread1, thread2, thread3);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -132,7 +174,7 @@ extern "C" int mlx_fast_metal_kernel_set_init_value(
     mlx_fast_metal_kernel cls,
     float value) {
   try {
-    cls->init_value = value;
+    mlx_fast_metal_kernel_get_(cls).init_value = value;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -143,7 +185,7 @@ extern "C" int mlx_fast_metal_kernel_set_verbose(
     mlx_fast_metal_kernel cls,
     bool verbose) {
   try {
-    cls->verbose = verbose;
+    mlx_fast_metal_kernel_get_(cls).verbose = verbose;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -155,7 +197,7 @@ extern "C" int mlx_fast_metal_kernel_add_template_arg_dtype(
     const char* name,
     mlx_dtype dtype) {
   try {
-    cls->template_args.push_back(
+    mlx_fast_metal_kernel_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -168,7 +210,8 @@ extern "C" int mlx_fast_metal_kernel_add_template_arg_int(
     const char* name,
     int value) {
   try {
-    cls->template_args.push_back(std::make_pair(std::string(name), value));
+    mlx_fast_metal_kernel_get_(cls).template_args.push_back(
+        std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -180,7 +223,8 @@ extern "C" int mlx_fast_metal_kernel_add_template_arg_bool(
     const char* name,
     bool value) {
   try {
-    cls->template_args.push_back(std::make_pair(std::string(name), value));
+    mlx_fast_metal_kernel_get_(cls).template_args.push_back(
+        std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -188,29 +232,30 @@ extern "C" int mlx_fast_metal_kernel_add_template_arg_bool(
   return 0;
 }
 
-mlx_string_* mlx_fast_metal_kernel_::tostring() {
-  RETURN_MLX_C_STRING("mlx_fast_metal_kernel_");
-}
-
 extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* name,
     const char* source,
     const char* header) {
   try {
-    return new mlx_fast_metal_kernel_(name, source, header);
+    auto cls = mlx_fast_metal_kernel_new_();
+    mlx_fast_metal_kernel_get_(cls).name = std::string(name);
+    mlx_fast_metal_kernel_get_(cls).source = std::string(source);
+    mlx_fast_metal_kernel_get_(cls).header = std::string(header);
+    return cls;
   } catch (std::exception& e) {
     mlx_error(e.what());
   }
-  return nullptr;
+  return {nullptr};
 }
 extern "C" int
 mlx_fast_metal_kernel_set_input_names(mlx_fast_metal_kernel cls, int num, ...) {
   try {
     va_list input_names;
     va_start(input_names, num);
-    cls->input_names.clear();
+    mlx_fast_metal_kernel_get_(cls).input_names.clear();
     for (int i = 0; i < num; i++) {
-      cls->input_names.push_back(va_arg(input_names, const char*));
+      mlx_fast_metal_kernel_get_(cls).input_names.push_back(
+          va_arg(input_names, const char*));
     }
     va_end(input_names);
   } catch (std::exception& e) {
@@ -226,9 +271,10 @@ extern "C" int mlx_fast_metal_kernel_set_output_names(
   try {
     va_list output_names;
     va_start(output_names, num);
-    cls->output_names.clear();
+    mlx_fast_metal_kernel_get_(cls).output_names.clear();
     for (int i = 0; i < num; i++) {
-      cls->output_names.push_back(va_arg(output_names, const char*));
+      mlx_fast_metal_kernel_get_(cls).output_names.push_back(
+          va_arg(output_names, const char*));
     }
     va_end(output_names);
   } catch (std::exception& e) {
@@ -240,41 +286,43 @@ extern "C" int mlx_fast_metal_kernel_set_output_names(
 extern "C" int mlx_fast_metal_kernel_set_contiguous_rows(
     mlx_fast_metal_kernel cls,
     bool flag) {
-  cls->contiguous_rows = flag;
+  mlx_fast_metal_kernel_get_(cls).contiguous_rows = flag;
   return 0;
 }
 extern "C" int mlx_fast_metal_kernel_set_atomic_outputs(
     mlx_fast_metal_kernel cls,
     bool flag) {
-  cls->atomic_outputs = flag;
+  mlx_fast_metal_kernel_get_(cls).atomic_outputs = flag;
   return 0;
 }
 extern "C" int mlx_fast_metal_kernel_apply(
     mlx_fast_metal_kernel cls,
     const mlx_vector_array inputs,
     const mlx_stream stream,
-    mlx_vector_array outputs) {
+    mlx_vector_array* outputs) {
   try {
-    if (!cls->ctx) {
-      cls->ctx = mlx::core::fast::metal_kernel(
-          cls->name,
-          cls->input_names,
-          cls->output_names,
-          cls->source,
-          cls->header,
-          cls->contiguous_rows,
-          cls->atomic_outputs);
+    if (!mlx_fast_metal_kernel_get_(cls).ctx) {
+      mlx_fast_metal_kernel_get_(cls).ctx = mlx::core::fast::metal_kernel(
+          mlx_fast_metal_kernel_get_(cls).name,
+          mlx_fast_metal_kernel_get_(cls).input_names,
+          mlx_fast_metal_kernel_get_(cls).output_names,
+          mlx_fast_metal_kernel_get_(cls).source,
+          mlx_fast_metal_kernel_get_(cls).header,
+          mlx_fast_metal_kernel_get_(cls).contiguous_rows,
+          mlx_fast_metal_kernel_get_(cls).atomic_outputs);
     }
-    outputs->ctx = cls->ctx(
-        inputs->ctx,
-        cls->output_shapes,
-        cls->output_dtypes,
-        cls->grid,
-        cls->thread_group,
-        cls->template_args,
-        cls->init_value,
-        cls->verbose,
-        stream->ctx);
+    mlx_vector_array_set_(
+        *outputs,
+        mlx_fast_metal_kernel_get_(cls).ctx(
+            mlx_vector_array_get_(inputs),
+            mlx_fast_metal_kernel_get_(cls).output_shapes,
+            mlx_fast_metal_kernel_get_(cls).output_dtypes,
+            mlx_fast_metal_kernel_get_(cls).grid,
+            mlx_fast_metal_kernel_get_(cls).thread_group,
+            mlx_fast_metal_kernel_get_(cls).template_args,
+            mlx_fast_metal_kernel_get_(cls).init_value,
+            mlx_fast_metal_kernel_get_(cls).verbose,
+            mlx_stream_get_(stream)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -290,7 +338,7 @@ extern "C" int mlx_fast_rms_norm(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::rms_norm(
             mlx_array_get_(x),
             mlx_array_get_(weight),
@@ -314,7 +362,7 @@ extern "C" int mlx_fast_rope(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::rope(
             mlx_array_get_(x),
             dims,
@@ -343,7 +391,7 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::fast::scaled_dot_product_attention(
             mlx_array_get_(queries),
             mlx_array_get_(keys),

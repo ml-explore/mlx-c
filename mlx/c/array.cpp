@@ -21,7 +21,7 @@ extern "C" void mlx_array_free(mlx_array arr) {
 }
 
 extern "C" mlx_array mlx_array_new() {
-  return mlx_array_({0});
+  return mlx_array_();
 }
 
 extern "C" mlx_array mlx_array_new_bool(bool val) {

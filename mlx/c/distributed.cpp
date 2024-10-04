@@ -22,7 +22,7 @@ extern "C" int mlx_distributed_all_gather(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::distributed::all_gather(
             mlx_array_get_(x),
             (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
@@ -41,7 +41,7 @@ extern "C" int mlx_distributed_all_sum(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::distributed::all_sum(
             mlx_array_get_(x),
             (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
@@ -63,7 +63,7 @@ extern "C" int mlx_distributed_recv(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::distributed::recv(
             std::vector<int>(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
@@ -85,7 +85,7 @@ extern "C" int mlx_distributed_recv_like(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::distributed::recv_like(
             mlx_array_get_(x),
             src,
@@ -106,7 +106,7 @@ extern "C" int mlx_distributed_send(
     mlx_array* res) {
   try {
     mlx_array_set_(
-        res,
+        *res,
         mlx::core::distributed::send(
             mlx_array_get_(x),
             dst,

@@ -24,7 +24,7 @@ extern "C" int mlx_detail_compile(
     mlx_closure* res) {
   try {
     mlx_closure_set_(
-        res,
+        *res,
         mlx::core::detail::compile(
             mlx_closure_get_(fun),
             fun_id,
@@ -65,7 +65,7 @@ extern "C" int mlx_detail_vmap_replace(
     mlx_vector_array* res) {
   try {
     mlx_vector_array_set_(
-        res,
+        *res,
         mlx::core::detail::vmap_replace(
             mlx_vector_array_get_(inputs),
             mlx_vector_array_get_(s_inputs),

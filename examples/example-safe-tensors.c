@@ -4,10 +4,9 @@
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
-  mlx_string str;
-  str = mlx_tostring(arr);
+  mlx_string str = mlx_array_tostring(arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
-  mlx_free(str);
+  mlx_string_free(str);
 }
 
 int main() {
@@ -22,17 +21,19 @@ int main() {
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
   mlx_load_safetensors_file(f, stream, &data, &metadata);
 
-  mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(data);
+  mlx_map_string_to_array_iterator it =
+      mlx_map_string_to_array_iterator_new(data);
   const char* key;
   mlx_array value = mlx_array_new();
   while (mlx_map_string_to_array_iterator_next(it, &key, &value)) {
     print_array(key, value);
   }
 
-  mlx_free(value);
-  mlx_free(data);
-  mlx_free(metadata);
-  mlx_free(stream);
+  mlx_array_free(value);
+  mlx_map_string_to_array_free(data);
+  mlx_map_string_to_string_free(metadata);
+  mlx_map_string_to_array_iterator_free(it);
+  mlx_stream_free(stream);
   fclose(f);
 
   return 0;

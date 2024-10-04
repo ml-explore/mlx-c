@@ -14,6 +14,10 @@ extern "C" mlx_vector_array mlx_vector_array_new() {
   return mlx_vector_array_new_({});
 }
 
+extern "C" void mlx_vector_array_free(mlx_vector_array vec) {
+  mlx_vector_array_free_(vec);
+}
+
 extern "C" mlx_vector_array mlx_vector_array_new_data(
     const mlx_array* data,
     size_t size) {
@@ -77,7 +81,7 @@ extern "C" void mlx_vector_array_append_value(
 extern "C" int
 mlx_vector_array_get(mlx_vector_array vec, size_t index, mlx_array* res) {
   try {
-    mlx_array_set_(res, mlx_vector_array_get_(vec).at(index));
+    mlx_array_set_(*res, mlx_vector_array_get_(vec).at(index));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -91,6 +95,10 @@ extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
   return mlx_vector_vector_array_new_({});
+}
+
+extern "C" void mlx_vector_vector_array_free(mlx_vector_vector_array vec) {
+  mlx_vector_vector_array_free_(vec);
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new_data(
@@ -163,7 +171,7 @@ extern "C" int mlx_vector_vector_array_get(
     size_t index,
     mlx_vector_array* res) {
   try {
-    mlx_vector_array_set_(res, mlx_vector_vector_array_get_(vec).at(index));
+    mlx_vector_array_set_(*res, mlx_vector_vector_array_get_(vec).at(index));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -177,6 +185,10 @@ extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec) {
 
 extern "C" mlx_vector_int mlx_vector_int_new() {
   return mlx_vector_int_new_({});
+}
+
+extern "C" void mlx_vector_int_free(mlx_vector_int vec) {
+  mlx_vector_int_free_(vec);
 }
 
 extern "C" mlx_vector_int mlx_vector_int_new_data(int* data, size_t size) {
@@ -243,6 +255,10 @@ extern "C" size_t mlx_vector_int_size(mlx_vector_int vec) {
 
 extern "C" mlx_vector_string mlx_vector_string_new() {
   return mlx_vector_string_new_({});
+}
+
+extern "C" void mlx_vector_string_free(mlx_vector_string vec) {
+  mlx_vector_string_free_(vec);
 }
 
 extern "C" mlx_vector_string mlx_vector_string_new_data(

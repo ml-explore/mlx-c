@@ -30,6 +30,8 @@ typedef struct mlx_array_ {
   void* ctx;
 } mlx_array;
 
+static mlx_array mlx_array_empty;
+
 /**
  * Array element type.
  */

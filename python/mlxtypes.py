@@ -71,12 +71,13 @@ for t in [
             "c": ctype,
             "cpp": cpptype,
             "alt": alt,
-            "free": lambda s: "mlx_free(" + s + ")",
+            "free": lambda s, ctype=ctype: ctype + "_free(" + s + ")",
             "cpp_to_c": lambda s, ctype=ctype: ctype + "_new_(" + s + ")",
             "c_to_cpp": lambda s, ctype=ctype: ctype + "_get_(" + s + ")",
             "return": lambda s: "RETURN_MLX_C_PTR(" + s + ")",
             "c_assign_from_cpp": lambda d, s, returned=True, ctype=ctype: ctype
             + "_set_("
+            + ("*" if returned else "")
             + d
             + ", "
             + s
@@ -87,7 +88,7 @@ for t in [
             "c_return_arg": lambda s, untyped=False, ctype=ctype: (
                 ("&" if untyped else ctype + "* ") + s
             ).strip(),
-            "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
+            "c_new": lambda s, ctype=ctype: "auto " + s + " = " + ctype + "_new_()",
             "cpp_arg": lambda s, cpptype=cpptype: (
                 "const " + cpptype.replace("@", "") + "& " + s
             ).strip(),
@@ -268,12 +269,15 @@ def register_return_tuple_type(cpp_types, alts=[]):
             ),
             "c_new": lambda s: "\n".join(
                 [
-                    "auto " + s + "_" + str(i) + " = new " + ctype + "_();"
+                    "auto " + s + "_" + str(i) + " = " + ctype + "_new_();"
                     for i, ctype in enumerate(c_types)
                 ]
             ),
             "free": lambda s: "\n".join(
-                ["mlx_free(" + s + "_" + str(i) + ");" for i in range(n)]
+                [
+                    ctype + "_free(" + s + "_" + str(i) + ");"
+                    for i, ctype in enumerate(c_types)
+                ]
             ),
             "c_assign_from_cpp": lambda d, s, returned=True: "std::tie("
             + ", ".join(

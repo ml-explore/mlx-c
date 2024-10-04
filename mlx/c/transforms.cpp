@@ -26,7 +26,7 @@ extern "C" int mlx_async_eval(const mlx_vector_array outputs) {
 }
 extern "C" int mlx_checkpoint(const mlx_closure fun, mlx_closure* res) {
   try {
-    mlx_closure_set_(res, mlx::core::checkpoint(mlx_closure_get_(fun)));
+    mlx_closure_set_(*res, mlx::core::checkpoint(mlx_closure_get_(fun)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -41,7 +41,7 @@ extern "C" int mlx_custom_function(
     mlx_closure* res) {
   try {
     mlx_closure_set_(
-        res,
+        *res,
         mlx::core::custom_function(
             mlx_closure_get_(fun),
             (fun_vjp.ctx ? std::make_optional(mlx_closure_custom_get_(fun_vjp))
@@ -64,7 +64,7 @@ extern "C" int mlx_custom_vjp(
     mlx_closure* res) {
   try {
     mlx_closure_set_(
-        res,
+        *res,
         mlx::core::custom_vjp(
             mlx_closure_get_(fun), mlx_closure_custom_get_(fun_vjp)));
   } catch (std::exception& e) {
@@ -107,7 +107,7 @@ extern "C" int mlx_value_and_grad(
     mlx_closure_value_and_grad* res) {
   try {
     mlx_closure_value_and_grad_set_(
-        res,
+        *res,
         mlx::core::value_and_grad(
             mlx_closure_get_(fun),
             std::vector<int>(argnums, argnums + argnums_num)));

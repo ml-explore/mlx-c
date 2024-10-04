@@ -26,6 +26,7 @@ decl_code = """
  */
 typedef struct mlx_vector_SCTYPE_ { void* ctx; } mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
+void mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
 int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, CTYPE* data, size_t size);
@@ -39,6 +40,10 @@ int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE);
 impl_code = """
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
   return mlx_vector_SCTYPE_new_({});
+}
+
+extern "C" void mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec) {
+  mlx_vector_SCTYPE_free_(vec);
 }
 
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
@@ -113,21 +118,30 @@ extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
 """
 
 priv_code = """
+inline mlx_vector_SCTYPE mlx_vector_SCTYPE_new_() {
+  return mlx_vector_SCTYPE({new std::vector<CPPTYPE>()});
+}
 inline mlx_vector_SCTYPE mlx_vector_SCTYPE_new_(std::vector<CPPTYPE>&& s) {
   return mlx_vector_SCTYPE({new std::vector<CPPTYPE>(std::move(s))});
 }
 
-inline mlx_vector_SCTYPE mlx_vector_SCTYPE_set_(mlx_vector_SCTYPE* d, std::vector<CPPTYPE> s) {
-  if (d->ctx) {
-    *static_cast<std::vector<CPPTYPE>*>(d->ctx) = s;
+inline mlx_vector_SCTYPE& mlx_vector_SCTYPE_set_(mlx_vector_SCTYPE& d, std::vector<CPPTYPE> s) {
+  if (d.ctx) {
+    *static_cast<std::vector<CPPTYPE>*>(d.ctx) = s;
   } else {
-    d->ctx = new std::vector<CPPTYPE>(s);
+    d.ctx = new std::vector<CPPTYPE>(s);
   }
-  return *d;
+  return d;
 }
 
 inline std::vector<CPPTYPE>& mlx_vector_SCTYPE_get_(mlx_vector_SCTYPE d) {
   return *static_cast<std::vector<CPPTYPE>*>(d.ctx);
+}
+
+inline void mlx_vector_SCTYPE_free_(mlx_vector_SCTYPE d) {
+  if(d.ctx) {
+    delete static_cast<std::vector<CPPTYPE>*>(d.ctx);
+  }
 }
 """
 
@@ -245,7 +259,7 @@ print(
         "array",
         "mlx_array*",
         lambda s: "mlx_array_get_(" + s + ")",
-        lambda d, s: "mlx_array_set_(" + d + ", " + s + ")",
+        lambda d, s: "mlx_array_set_(*" + d + ", " + s + ")",
     )
 )
 print(
@@ -256,7 +270,7 @@ print(
         "vector_array",
         "mlx_vector_array*",
         lambda s: "mlx_vector_array_get_(" + s + ")",
-        lambda d, s: "mlx_vector_array_set_(" + d + ", " + s + ")",
+        lambda d, s: "mlx_vector_array_set_(*" + d + ", " + s + ")",
     )
 )
 print(

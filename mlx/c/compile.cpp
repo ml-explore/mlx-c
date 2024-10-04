@@ -18,7 +18,8 @@
 extern "C" int
 mlx_compile(const mlx_closure fun, bool shapeless, mlx_closure* res) {
   try {
-    mlx_closure_set_(res, mlx::core::compile(mlx_closure_get_(fun), shapeless));
+    mlx_closure_set_(
+        *res, mlx::core::compile(mlx_closure_get_(fun), shapeless));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

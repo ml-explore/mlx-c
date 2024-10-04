@@ -4,10 +4,9 @@
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
-  mlx_string str;
-  str = mlx_tostring(arr);
+  mlx_string str = mlx_array_tostring(arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
-  mlx_free(str);
+  mlx_string_free(str);
 }
 
 void exp_elemwise(
@@ -33,12 +32,12 @@ void exp_elemwise(
       mlx_array_dtype(input));
 
   mlx_vector_array outputs = mlx_vector_array_new();
-  mlx_fast_metal_kernel_apply(kernel, inputs, stream, outputs);
+  mlx_fast_metal_kernel_apply(kernel, inputs, stream, &outputs);
   mlx_vector_array_get(outputs, 0, output_);
 
-  mlx_free(kernel);
-  mlx_free(inputs);
-  mlx_free(outputs);
+  mlx_fast_metal_kernel_free(kernel);
+  mlx_vector_array_free(inputs);
+  mlx_vector_array_free(outputs);
 }
 int main() {
   mlx_stream stream = mlx_gpu_stream();
@@ -46,16 +45,17 @@ int main() {
   mlx_array output = mlx_array_new();
 
   int dims[2] = {4, 16};
-  mlx_random_normal(dims, 2, MLX_FLOAT32, 0, 1, NULL, stream, &input);
+  mlx_random_normal(
+      dims, 2, MLX_FLOAT32, 0, 1, mlx_array_empty, stream, &input);
 
   exp_elemwise(input, stream, &output);
 
   print_array("input", input);
   print_array("output", output);
 
-  mlx_free(input);
-  mlx_free(output);
-  mlx_free(stream);
+  mlx_array_free(input);
+  mlx_array_free(output);
+  mlx_stream_free(stream);
 
   return 0;
 }
