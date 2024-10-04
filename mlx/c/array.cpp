@@ -9,14 +9,19 @@
 #include "mlx/c/private/utils.h"
 #include "mlx/c/string.h"
 
-mlx_string mlx_array_::tostring() {
-  MLX_TRY_CATCH(std::ostringstream os; os << ctx; std::string str = os.str();
-                return new mlx_string_(str);
-                , return nullptr);
+extern "C" mlx_string mlx_array_tostring(mlx_array arr) {
+  std::ostringstream os;
+  os << mlx_array_get_(arr);
+  std::string str = os.str();
+  return mlx_string_new_(str);
+}
+
+extern "C" void mlx_array_free(mlx_array arr) {
+  mlx_array_free_(arr);
 }
 
 extern "C" mlx_array mlx_array_new() {
-  RETURN_MLX_C_PTR(new mlx_array_());
+  return mlx_array_({0});
 }
 
 extern "C" mlx_array mlx_array_new_bool(bool val) {
@@ -79,7 +84,7 @@ extern "C" mlx_array mlx_array_new_data(
           (mlx::core::complex64_t*)data, cpp_shape, cpp_dtype));
     default:
       mlx_error("unknown data type");
-      return nullptr;
+      return mlx_array_{0};
   }
 }
 

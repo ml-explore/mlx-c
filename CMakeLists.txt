@@ -36,25 +36,25 @@ FetchContent_MakeAvailable(mlx)
 
 set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/array.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
+    # ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
+#    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp)
 
 add_library(mlxc STATIC ${mlxc-src})

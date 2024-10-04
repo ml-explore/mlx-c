@@ -5,24 +5,20 @@
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
 
-mlx_string_* mlx_distributed_group_::tostring() {
-  RETURN_MLX_C_STRING("mlx_distributed_group");
-}
-
 extern "C" int mlx_distributed_group_rank(mlx_distributed_group group) {
-  return group->ctx.rank();
+  return mlx_distributed_group_get_(group).rank();
 }
 
 extern "C" int mlx_distributed_group_size(mlx_distributed_group group) {
-  return group->ctx.size();
+  return mlx_distributed_group_get_(group).size();
 }
 
 extern "C" mlx_distributed_group
 mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
-  RETURN_MLX_C_DISTRIBUTED_GROUP(group->ctx.split(color, key));
+  return mlx_distributed_group_new_(
+      mlx_distributed_group_get_(group).split(color, key));
 }
 
 extern "C" bool mlx_distributed_is_available() {
@@ -30,5 +26,5 @@ extern "C" bool mlx_distributed_is_available() {
 }
 
 extern "C" mlx_distributed_group mlx_distributed_init(bool strict) {
-  RETURN_MLX_C_DISTRIBUTED_GROUP(mlx::core::distributed::init(strict));
+  return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
 }

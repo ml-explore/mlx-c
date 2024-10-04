@@ -3,6 +3,8 @@
 #ifndef MLX_ARRAY_H
 #define MLX_ARRAY_H
 
+#include "mlx/c/string.h"
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -24,7 +26,9 @@ extern "C" {
 /**
  * An N-dimensional array object.
  */
-typedef struct mlx_array_* mlx_array;
+typedef struct mlx_array_ {
+  void* ctx;
+} mlx_array;
 
 /**
  * Array element type.
@@ -46,9 +50,19 @@ typedef enum mlx_dtype_ {
 } mlx_dtype;
 
 /**
+ * Get array description.
+ */
+mlx_string mlx_array_tostring(mlx_array arr);
+
+/**
  * New empty array.
  */
 mlx_array mlx_array_new();
+
+/**
+ * Free an array.
+ */
+void mlx_array_free(mlx_array arr);
 
 /**
  * New array from a bool scalar.

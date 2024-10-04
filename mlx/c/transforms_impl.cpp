@@ -23,11 +23,13 @@ extern "C" int mlx_detail_compile(
     size_t constants_num,
     mlx_closure* res) {
   try {
-    (*res)->ctx = mlx::core::detail::compile(
-        fun->ctx,
-        fun_id,
-        shapeless,
-        std::vector<uint64_t>(constants, constants + constants_num));
+    mlx_closure_set_(
+        res,
+        mlx::core::detail::compile(
+            mlx_closure_get_(fun),
+            fun_id,
+            shapeless,
+            std::vector<uint64_t>(constants, constants + constants_num)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -62,12 +64,14 @@ extern "C" int mlx_detail_vmap_replace(
     size_t out_axes_num,
     mlx_vector_array* res) {
   try {
-    (*res)->ctx = mlx::core::detail::vmap_replace(
-        inputs->ctx,
-        s_inputs->ctx,
-        s_outputs->ctx,
-        std::vector<int>(in_axes, in_axes + in_axes_num),
-        std::vector<int>(out_axes, out_axes + out_axes_num));
+    mlx_vector_array_set_(
+        res,
+        mlx::core::detail::vmap_replace(
+            mlx_vector_array_get_(inputs),
+            mlx_vector_array_get_(s_inputs),
+            mlx_vector_array_get_(s_outputs),
+            std::vector<int>(in_axes, in_axes + in_axes_num),
+            std::vector<int>(out_axes, out_axes + out_axes_num)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -82,10 +86,11 @@ extern "C" int mlx_detail_vmap_trace(
     mlx_vector_array* res_0,
     mlx_vector_array* res_1) {
   try {
-    std::tie((*res_0)->ctx, (*res_1)->ctx) = mlx::core::detail::vmap_trace(
-        fun->ctx,
-        inputs->ctx,
-        std::vector<int>(in_axes, in_axes + in_axes_num));
+    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
+        mlx::core::detail::vmap_trace(
+            mlx_closure_get_(fun),
+            mlx_vector_array_get_(inputs),
+            std::vector<int>(in_axes, in_axes + in_axes_num));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

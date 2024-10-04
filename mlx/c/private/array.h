@@ -4,17 +4,29 @@
 #define MLX_ARRAY_PRIVATE_H
 
 #include "mlx/c/array.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 
-static mlx::core::array
-    mlx_empty_array_(std::vector<int>{0}, mlx::core::float32, nullptr, {});
+inline mlx_array mlx_array_new_(mlx::core::array&& s) {
+  return mlx_array({new mlx::core::array(std::move(s))});
+}
 
-struct mlx_array_ : mlx_object_ {
-  mlx_array_() : mlx_object_(), ctx(mlx_empty_array_){};
-  mlx_array_(mlx::core::array ctx) : mlx_object_(), ctx(ctx){};
-  virtual mlx_string_* tostring() override;
-  mlx::core::array ctx;
-};
+inline mlx_array mlx_array_set_(mlx_array* d, mlx::core::array s) {
+  if (d->ctx) {
+    *static_cast<mlx::core::array*>(d->ctx) = s;
+  } else {
+    d->ctx = new mlx::core::array(s);
+  }
+  return *d;
+}
+
+inline mlx::core::array& mlx_array_get_(mlx_array d) {
+  return *static_cast<mlx::core::array*>(d.ctx);
+}
+
+inline void mlx_array_free_(mlx_array d) {
+  if (d.ctx) {
+    delete static_cast<mlx::core::array*>(d.ctx);
+  }
+}
 
 #endif

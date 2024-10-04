@@ -5,9 +5,9 @@
 
 void print_array(const char* msg, mlx_array arr) {
   mlx_string str;
-  str = mlx_tostring(arr);
+  str = mlx_array_tostring(arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
-  mlx_free(str);
+  mlx_string_free(str);
 }
 
 void gpu_info() {
@@ -39,8 +39,8 @@ int main() {
   mlx_arange(0, 3, 0.5, MLX_FLOAT32, stream, &arr);
   print_array("arange", arr);
 
-  mlx_free(arr);
-  mlx_free(two);
-  mlx_free(stream);
+  mlx_array_free(arr);
+  mlx_array_free(two);
+  mlx_stream_free(stream);
   return 0;
 }

@@ -10,7 +10,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/compile.h"
 #include "mlx/c/error.h"
-#include "mlx/c/private/array.h"
 #include "mlx/mlx.h"
 #include "mlx/transforms_impl.h"
 
@@ -165,7 +164,7 @@ class CFILEWriter : public mlx::core::io::Writer {
 
 #define RETURN_MLX_C_PTR(ptr) MLX_TRY_CATCH(return (ptr), return nullptr)
 
-#define MLX_CPP_ARRAY(arr) ((arr)->ctx)
+#define MLX_CPP_ARRAY(arr) (*(static_cast<mlx::core::array*>(arr.ctx)))
 #define MLX_CPP_INTVEC(vals, size) (std::vector<int>((vals), (vals) + (size)))
 #define MLX_CPP_UINT64VEC(vals, size) \
   (std::vector<uint64_t>((vals), (vals) + (size)))
@@ -186,7 +185,7 @@ class CFILEWriter : public mlx::core::io::Writer {
 #define MLX_CPP_STRING(str) ((str)->ctx)
 
 #define RETURN_MLX_C_VOID(scope) MLX_TRY_CATCH(scope, return)
-#define RETURN_MLX_C_ARRAY(arr) RETURN_MLX_C_PTR(new mlx_array_(arr))
+#define RETURN_MLX_C_ARRAY(arr) return mlx_array_({new mlx::core::array(arr)})
 #define RETURN_MLX_C_STREAM(stream) RETURN_MLX_C_PTR(new mlx_stream_(stream))
 #define RETURN_MLX_C_DEVICE(device) RETURN_MLX_C_PTR(new mlx_device_(device))
 #define RETURN_MLX_C_VECTOR_ARRAY(vec) \

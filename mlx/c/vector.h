@@ -22,7 +22,9 @@ extern "C" {
 /**
  * A vector of array.
  */
-typedef struct mlx_vector_array_* mlx_vector_array;
+typedef struct mlx_vector_array_ {
+  void* ctx;
+} mlx_vector_array;
 mlx_vector_array mlx_vector_array_new();
 mlx_vector_array mlx_vector_array_new_data(const mlx_array* data, size_t size);
 mlx_vector_array mlx_vector_array_new_value(const mlx_array val);
@@ -42,7 +44,9 @@ int mlx_vector_array_get(mlx_vector_array vec, size_t idx, mlx_array*);
 /**
  * A vector of vector_array.
  */
-typedef struct mlx_vector_vector_array_* mlx_vector_vector_array;
+typedef struct mlx_vector_vector_array_ {
+  void* ctx;
+} mlx_vector_vector_array;
 mlx_vector_vector_array mlx_vector_vector_array_new();
 mlx_vector_vector_array mlx_vector_vector_array_new_data(
     const mlx_vector_array* data,
@@ -72,7 +76,9 @@ int mlx_vector_vector_array_get(
 /**
  * A vector of int.
  */
-typedef struct mlx_vector_int_* mlx_vector_int;
+typedef struct mlx_vector_int_ {
+  void* ctx;
+} mlx_vector_int;
 mlx_vector_int mlx_vector_int_new();
 mlx_vector_int mlx_vector_int_new_data(int* data, size_t size);
 mlx_vector_int mlx_vector_int_new_value(int val);
@@ -84,38 +90,11 @@ size_t mlx_vector_int_size(mlx_vector_int vec);
 int mlx_vector_int_get(mlx_vector_int vec, size_t idx, int*);
 
 /**
- * A vector of vector_int.
- */
-typedef struct mlx_vector_vector_int_* mlx_vector_vector_int;
-mlx_vector_vector_int mlx_vector_vector_int_new();
-mlx_vector_vector_int mlx_vector_vector_int_new_data(
-    const mlx_vector_int* data,
-    size_t size);
-mlx_vector_vector_int mlx_vector_vector_int_new_value(const mlx_vector_int val);
-int mlx_vector_vector_int_set_data(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int* data,
-    size_t size);
-int mlx_vector_vector_int_set_value(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int val);
-void mlx_vector_vector_int_append_data(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int* data,
-    size_t size);
-void mlx_vector_vector_int_append_value(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int val);
-size_t mlx_vector_vector_int_size(mlx_vector_vector_int vec);
-int mlx_vector_vector_int_get(
-    mlx_vector_vector_int vec,
-    size_t idx,
-    mlx_vector_int*);
-
-/**
  * A vector of string.
  */
-typedef struct mlx_vector_string_* mlx_vector_string;
+typedef struct mlx_vector_string_ {
+  void* ctx;
+} mlx_vector_string;
 mlx_vector_string mlx_vector_string_new();
 mlx_vector_string mlx_vector_string_new_data(const char** data, size_t size);
 mlx_vector_string mlx_vector_string_new_value(const char* val);

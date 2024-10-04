@@ -17,7 +17,7 @@
 
 extern "C" int mlx_async_eval(const mlx_vector_array outputs) {
   try {
-    mlx::core::async_eval(outputs->ctx);
+    mlx::core::async_eval(mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -26,7 +26,7 @@ extern "C" int mlx_async_eval(const mlx_vector_array outputs) {
 }
 extern "C" int mlx_checkpoint(const mlx_closure fun, mlx_closure* res) {
   try {
-    (*res)->ctx = mlx::core::checkpoint(fun->ctx);
+    mlx_closure_set_(res, mlx::core::checkpoint(mlx_closure_get_(fun)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -40,11 +40,18 @@ extern "C" int mlx_custom_function(
     const mlx_closure_custom_vmap fun_vmap /* may be null */,
     mlx_closure* res) {
   try {
-    (*res)->ctx = mlx::core::custom_function(
-        fun->ctx,
-        (fun_vjp ? std::make_optional(fun_vjp->ctx) : std::nullopt),
-        (fun_jvp ? std::make_optional(fun_jvp->ctx) : std::nullopt),
-        (fun_vmap ? std::make_optional(fun_vmap->ctx) : std::nullopt));
+    mlx_closure_set_(
+        res,
+        mlx::core::custom_function(
+            mlx_closure_get_(fun),
+            (fun_vjp.ctx ? std::make_optional(mlx_closure_custom_get_(fun_vjp))
+                         : std::nullopt),
+            (fun_jvp.ctx
+                 ? std::make_optional(mlx_closure_custom_jvp_get_(fun_jvp))
+                 : std::nullopt),
+            (fun_vmap.ctx
+                 ? std::make_optional(mlx_closure_custom_vmap_get_(fun_vmap))
+                 : std::nullopt)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -56,7 +63,10 @@ extern "C" int mlx_custom_vjp(
     const mlx_closure_custom fun_vjp,
     mlx_closure* res) {
   try {
-    (*res)->ctx = mlx::core::custom_vjp(fun->ctx, fun_vjp->ctx);
+    mlx_closure_set_(
+        res,
+        mlx::core::custom_vjp(
+            mlx_closure_get_(fun), mlx_closure_custom_get_(fun_vjp)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -65,7 +75,7 @@ extern "C" int mlx_custom_vjp(
 }
 extern "C" int mlx_eval(const mlx_vector_array outputs) {
   try {
-    mlx::core::eval(outputs->ctx);
+    mlx::core::eval(mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -79,8 +89,11 @@ extern "C" int mlx_jvp(
     mlx_vector_array* res_0,
     mlx_vector_array* res_1) {
   try {
-    std::tie((*res_0)->ctx, (*res_1)->ctx) =
-        mlx::core::jvp(fun->ctx, primals->ctx, tangents->ctx);
+    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
+        mlx::core::jvp(
+            mlx_closure_get_(fun),
+            mlx_vector_array_get_(primals),
+            mlx_vector_array_get_(tangents));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -93,8 +106,11 @@ extern "C" int mlx_value_and_grad(
     size_t argnums_num,
     mlx_closure_value_and_grad* res) {
   try {
-    (*res)->ctx = mlx::core::value_and_grad(
-        fun->ctx, std::vector<int>(argnums, argnums + argnums_num));
+    mlx_closure_value_and_grad_set_(
+        res,
+        mlx::core::value_and_grad(
+            mlx_closure_get_(fun),
+            std::vector<int>(argnums, argnums + argnums_num)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -108,8 +124,11 @@ extern "C" int mlx_vjp(
     mlx_vector_array* res_0,
     mlx_vector_array* res_1) {
   try {
-    std::tie((*res_0)->ctx, (*res_1)->ctx) =
-        mlx::core::vjp(fun->ctx, primals->ctx, cotangents->ctx);
+    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
+        mlx::core::vjp(
+            mlx_closure_get_(fun),
+            mlx_vector_array_get_(primals),
+            mlx_vector_array_get_(cotangents));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

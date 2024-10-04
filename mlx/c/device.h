@@ -16,7 +16,9 @@ extern "C" {
 /**
  * A MLX device object.
  */
-typedef struct mlx_device_* mlx_device;
+typedef struct mlx_device_ {
+  void* ctx;
+} mlx_device;
 
 /**
  * Device type.
@@ -38,7 +40,7 @@ mlx_device mlx_default_device(void);
 /**
  * Set the default MLX device.
  */
-mlx_device mlx_set_default_device(mlx_device dev);
+void mlx_set_default_device(mlx_device dev);
 
 /**@}*/
 

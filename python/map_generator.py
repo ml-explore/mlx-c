@@ -23,7 +23,7 @@ decl_code = """
 /**
  * A SCTYPE1-to-SCTYPE2 map
  */
-typedef struct mlx_map_SCTYPE1_to_SCTYPE2_* mlx_map_SCTYPE1_to_SCTYPE2;
+typedef struct mlx_map_SCTYPE1_to_SCTYPE2_ { void* ctx; } mlx_map_SCTYPE1_to_SCTYPE2;
 
 /**
  * Returns a new empty SCTYPE1-to-SCTYPE2 map.
@@ -49,12 +49,12 @@ bool mlx_map_SCTYPE1_to_SCTYPE2_get(
 /**
  * An iterator over a SCTYPE1-to-SCTYPE2 map.
  */
-typedef struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_*
+typedef struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ { void * ctx; void* map_ctx; }
     mlx_map_SCTYPE1_to_SCTYPE2_iterator;
 /**
  * Returns a new iterator over the given map.
  */
-mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterate(
+mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
     mlx_map_SCTYPE1_to_SCTYPE2 map);
 /**
  * Increment iterator.
@@ -64,18 +64,8 @@ bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterato
 """
 
 impl_code = """
-mlx_string_* mlx_map_SCTYPE1_to_SCTYPE2_::tostring() {
-  MLX_TRY_CATCH(return new mlx_string_("mlx_map_SCTYPE1_to_SCTYPE2"),
-                       return nullptr);
-}
-
-mlx_string_* mlx_map_SCTYPE1_to_SCTYPE2_iterator_::tostring() {
-  MLX_TRY_CATCH(return new mlx_string_("mlx_map_SCTYPE1_to_SCTYPE2_iterator"),
-                       return nullptr);
-}
-
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
-  MLX_TRY_CATCH(return new mlx_map_SCTYPE1_to_SCTYPE2_(), return nullptr);
+  return mlx_map_SCTYPE1_to_SCTYPE2{new std::unordered_map<CPPTYPE1, CPPTYPE2>()};
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
@@ -83,73 +73,102 @@ extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
     CTYPE1 key,
     CTYPE2 value) {
   MLX_TRY_CATCH(
-      auto res = map->ctx.insert(std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
-      return res.second, return false);
+      auto res = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert(std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
+      return true, return false);
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key, RCTYPE2 value) {
-  auto search = map->ctx.find(CTYPE1_TO_CPP(key));
-  if (search == map->ctx.end()) {
+  auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
+  if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
     return false;
   } else {
-    CTYPE2_ASSIGN(value) = CTYPE2_ASSIGN_GET(search->second);
+    CTYPE2_ASSIGN_FROM_CPP(value, search->second);
     return true;
   }
 }
 
-extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterate(
+extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
     mlx_map_SCTYPE1_to_SCTYPE2 map) {
-  MLX_TRY_CATCH(return new mlx_map_SCTYPE1_to_SCTYPE2_iterator_(map),
-                       return nullptr);
+  auto& cpp_map = mlx_map_SCTYPE1_to_SCTYPE2_get_(map);
+  return mlx_map_SCTYPE1_to_SCTYPE2_iterator{new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(cpp_map.begin()), &cpp_map};
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value) {
-  if (it->ctx == it->map->ctx.end()) {
+  if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) == mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
     return false;
   } else {
-    CTYPE1_ASSIGN(key) = CTYPE1_ASSIGN_GET(it->ctx->first);
-    CTYPE2_ASSIGN(value) = CTYPE2_ASSIGN_GET(it->ctx->second);
-    it->ctx++;
+    CTYPE1_ASSIGN_FROM_CPP(key, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->first);
+    CTYPE2_ASSIGN_FROM_CPP(value, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->second);
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)++;
     return true;
   }
 }
 """
 
 priv_code = """
-struct mlx_map_SCTYPE1_to_SCTYPE2_ : mlx_object_ {
-  mlx_map_SCTYPE1_to_SCTYPE2_() : mlx_object_(){};
-  mlx_map_SCTYPE1_to_SCTYPE2_(
-      std::unordered_map<CPPTYPE1, CPPTYPE2>&& ctx)
-      : mlx_object_(), ctx(ctx){};
-  virtual mlx_string_* tostring() override;
-  std::unordered_map<CPPTYPE1, CPPTYPE2> ctx;
-};
+inline mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new_(std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
+  return mlx_map_SCTYPE1_to_SCTYPE2({new std::unordered_map<CPPTYPE1, CPPTYPE2>(s)});
+}
 
-struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ : mlx_object_ {
-  mlx_map_SCTYPE1_to_SCTYPE2_iterator_(mlx_map_SCTYPE1_to_SCTYPE2_* map)
-      : mlx_object_(), map(map), ctx(map->ctx.begin()) {
-    mlx_retain(map);
-  };
-  virtual mlx_string_* tostring() override;
-  mlx_map_SCTYPE1_to_SCTYPE2_* map;
-  std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator ctx;
-  virtual ~mlx_map_SCTYPE1_to_SCTYPE2_iterator_() {
-    mlx_free(map);
+inline mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_set_(mlx_map_SCTYPE1_to_SCTYPE2* d, std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
+  if (d->ctx) {
+    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d->ctx) = s;
+  } else {
+    d->ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>(s);
   }
-};
+  return *d;
+}
+
+inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_get_(mlx_map_SCTYPE1_to_SCTYPE2 d) {
+  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx);
+}
+
+inline mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new_(std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator&& s) {
+  return mlx_map_SCTYPE1_to_SCTYPE2_iterator({new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(std::move(s))});
+}
+
+inline mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_set_(mlx_map_SCTYPE1_to_SCTYPE2_iterator* d, std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator s) {
+  if (d->ctx) {
+    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d->ctx) = s;
+  } else {
+    d->ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(s);
+  }
+  return *d;
+}
+
+inline std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator& mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
+  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d.ctx);
+}
+inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
+  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.map_ctx);
+}
 """
+
+
+def callback_split_string_args(func):
+    def func_split_string_args(args):
+        args = args.split(",")
+        return func(*args)
+
+    return func_split_string_args
 
 
 def generate(code, type1, type2):
     code = replace_match_parenthesis(code, "CTYPE1_TO_CPP", type1["c_to_cpp"])
     code = replace_match_parenthesis(code, "CTYPE2_TO_CPP", type2["c_to_cpp"])
-    code = replace_match_parenthesis(code, "CTYPE1_ASSIGN", type1["c_assign"])
-    code = replace_match_parenthesis(code, "CTYPE2_ASSIGN", type2["c_assign"])
-    code = replace_match_parenthesis(code, "CTYPE1_ASSIGN_GET", type1["c_assign_get"])
-    code = replace_match_parenthesis(code, "CTYPE2_ASSIGN_GET", type2["c_assign_get"])
+    code = replace_match_parenthesis(
+        code,
+        "CTYPE1_ASSIGN_FROM_CPP",
+        callback_split_string_args(type1["c_assign_from_cpp"]),
+    )
+    code = replace_match_parenthesis(
+        code,
+        "CTYPE2_ASSIGN_FROM_CPP",
+        callback_split_string_args(type2["c_assign_from_cpp"]),
+    )
     code = code.replace("SCTYPE1", type1["nick"])
     code = code.replace("SCTYPE2", type2["nick"])
     code = code.replace("RCTYPE1", type1["c_return"])
@@ -199,7 +218,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
 
 #include "mlx/c/map.h"
-#include "mlx/c/object.h"
+#include "mlx/c/private/array.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
@@ -217,8 +236,6 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_MAP_PRIVATE_H
 
 #include "mlx/c/map.h"
-#include "mlx/c/object.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 """
 
@@ -244,9 +261,8 @@ array_t = {
     "cpp": "mlx::core::array",
     "nick": "array",
     "c_return": "mlx_array*",
-    "c_to_cpp": lambda s: s + "->ctx",
-    "c_assign": lambda s: "(*" + s + ")->ctx",
-    "c_assign_get": lambda s: s,
+    "c_to_cpp": lambda s: "mlx_array_get_(" + s + ")",
+    "c_assign_from_cpp": lambda d, s: "mlx_array_set_(" + d + ", " + s + ")",
 }
 
 string_t = {
@@ -255,8 +271,7 @@ string_t = {
     "nick": "string",
     "c_return": "const char**",
     "c_to_cpp": lambda s: "std::string(" + s + ")",
-    "c_assign": lambda s: "* " + s,
-    "c_assign_get": lambda s: s + ".data()",
+    "c_assign_from_cpp": lambda d, s: "*" + d + " = " + s + ".data()",
 }
 
 print(begin)

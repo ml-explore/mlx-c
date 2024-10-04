@@ -24,8 +24,15 @@ extern "C" int mlx_fast_affine_dequantize(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::affine_dequantize(
-        w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::affine_dequantize(
+            mlx_array_get_(w),
+            mlx_array_get_(scales),
+            mlx_array_get_(biases),
+            group_size,
+            bits,
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -41,8 +48,15 @@ extern "C" int mlx_fast_affine_quantize(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::affine_quantize(
-        w->ctx, scales->ctx, biases->ctx, group_size, bits, s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::affine_quantize(
+            mlx_array_get_(w),
+            mlx_array_get_(scales),
+            mlx_array_get_(biases),
+            group_size,
+            bits,
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -57,12 +71,16 @@ extern "C" int mlx_fast_layer_norm(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::layer_norm(
-        x->ctx,
-        (weight ? std::make_optional(weight->ctx) : std::nullopt),
-        (bias ? std::make_optional(bias->ctx) : std::nullopt),
-        eps,
-        s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::layer_norm(
+            mlx_array_get_(x),
+            (weight.ctx ? std::make_optional(mlx_array_get_(weight))
+                        : std::nullopt),
+            (bias.ctx ? std::make_optional(mlx_array_get_(bias))
+                      : std::nullopt),
+            eps,
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -271,7 +289,13 @@ extern "C" int mlx_fast_rms_norm(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::rms_norm(x->ctx, weight->ctx, eps, s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::rms_norm(
+            mlx_array_get_(x),
+            mlx_array_get_(weight),
+            eps,
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -289,15 +313,19 @@ extern "C" int mlx_fast_rope(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::rope(
-        x->ctx,
-        dims,
-        traditional,
-        (base.has_value ? std::make_optional<float>(base.value) : std::nullopt),
-        scale,
-        offset,
-        (freqs ? std::make_optional(freqs->ctx) : std::nullopt),
-        s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::rope(
+            mlx_array_get_(x),
+            dims,
+            traditional,
+            (base.has_value ? std::make_optional<float>(base.value)
+                            : std::nullopt),
+            scale,
+            offset,
+            (freqs.ctx ? std::make_optional(mlx_array_get_(freqs))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -314,16 +342,19 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
     const mlx_stream s,
     mlx_array* res) {
   try {
-    (*res)->ctx = mlx::core::fast::scaled_dot_product_attention(
-        queries->ctx,
-        keys->ctx,
-        values->ctx,
-        scale,
-        (mask ? std::make_optional(mask->ctx) : std::nullopt),
-        (memory_efficient_threshold.has_value
-             ? std::make_optional<int>(memory_efficient_threshold.value)
-             : std::nullopt),
-        s->ctx);
+    mlx_array_set_(
+        res,
+        mlx::core::fast::scaled_dot_product_attention(
+            mlx_array_get_(queries),
+            mlx_array_get_(keys),
+            mlx_array_get_(values),
+            scale,
+            (mask.ctx ? std::make_optional(mlx_array_get_(mask))
+                      : std::nullopt),
+            (memory_efficient_threshold.has_value
+                 ? std::make_optional<int>(memory_efficient_threshold.value)
+                 : std::nullopt),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

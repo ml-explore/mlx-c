@@ -22,7 +22,9 @@ extern "C" {
 /**
  * A string-to-array map
  */
-typedef struct mlx_map_string_to_array_* mlx_map_string_to_array;
+typedef struct mlx_map_string_to_array_ {
+  void* ctx;
+} mlx_map_string_to_array;
 
 /**
  * Returns a new empty string-to-array map.
@@ -48,12 +50,14 @@ bool mlx_map_string_to_array_get(
 /**
  * An iterator over a string-to-array map.
  */
-typedef struct mlx_map_string_to_array_iterator_*
-    mlx_map_string_to_array_iterator;
+typedef struct mlx_map_string_to_array_iterator_ {
+  void* ctx;
+  void* map_ctx;
+} mlx_map_string_to_array_iterator;
 /**
  * Returns a new iterator over the given map.
  */
-mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
+mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new(
     mlx_map_string_to_array map);
 /**
  * Increment iterator.
@@ -67,7 +71,9 @@ bool mlx_map_string_to_array_iterator_next(
 /**
  * A string-to-string map
  */
-typedef struct mlx_map_string_to_string_* mlx_map_string_to_string;
+typedef struct mlx_map_string_to_string_ {
+  void* ctx;
+} mlx_map_string_to_string;
 
 /**
  * Returns a new empty string-to-string map.
@@ -93,12 +99,14 @@ bool mlx_map_string_to_string_get(
 /**
  * An iterator over a string-to-string map.
  */
-typedef struct mlx_map_string_to_string_iterator_*
-    mlx_map_string_to_string_iterator;
+typedef struct mlx_map_string_to_string_iterator_ {
+  void* ctx;
+  void* map_ctx;
+} mlx_map_string_to_string_iterator;
 /**
  * Returns a new iterator over the given map.
  */
-mlx_map_string_to_string_iterator mlx_map_string_to_string_iterate(
+mlx_map_string_to_string_iterator mlx_map_string_to_string_iterator_new(
     mlx_map_string_to_string map);
 /**
  * Increment iterator.

@@ -20,7 +20,9 @@ extern "C" {
 /**
  * A MLX stream object.
  */
-typedef struct mlx_stream_* mlx_stream;
+typedef struct mlx_stream_ {
+  void* ctx;
+} mlx_stream;
 
 /**
  * Returns a new stream, with specified `index`, on a device.
@@ -30,6 +32,10 @@ mlx_stream mlx_stream_new(int index, mlx_device dev);
  * Returns a new stream on a device.
  */
 mlx_stream mlx_stream_new_on_device(mlx_device dev);
+/**
+ * Free a stream.
+ */
+void mlx_stream_free(mlx_stream stream);
 /**
  * Check if streams are the same.
  */
@@ -49,7 +55,7 @@ mlx_stream mlx_default_stream(mlx_device dev);
 /**
  * Set default stream.
  */
-mlx_stream mlx_set_default_stream(mlx_stream stream);
+void mlx_set_default_stream(mlx_stream stream);
 /**
  * Returns the current default CPU stream.
  */
