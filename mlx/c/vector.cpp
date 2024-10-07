@@ -4,7 +4,6 @@
 /*                                                    */
 
 #include "mlx/c/vector.h"
-#include "mlx/c/object.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"

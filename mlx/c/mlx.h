@@ -17,7 +17,6 @@
 #include "mlx/c/linalg.h"
 #include "mlx/c/map.h"
 #include "mlx/c/metal.h"
-#include "mlx/c/object.h"
 #include "mlx/c/ops.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/random.h"

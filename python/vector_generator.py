@@ -208,7 +208,6 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/object.h"
 #include "mlx/c/vector.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/string.h"
@@ -227,9 +226,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #ifndef MLX_VECTOR_PRIVATE_H
 #define MLX_VECTOR_PRIVATE_H
 
-#include "mlx/c/object.h"
 #include "mlx/c/vector.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 """
 

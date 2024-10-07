@@ -6,8 +6,6 @@
 #ifndef MLX_VECTOR_PRIVATE_H
 #define MLX_VECTOR_PRIVATE_H
 
-#include "mlx/c/object.h"
-#include "mlx/c/private/object.h"
 #include "mlx/c/vector.h"
 #include "mlx/mlx.h"
 
