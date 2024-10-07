@@ -65,9 +65,8 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
 int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
 /**
  * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value);
+int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value);
 """
 
 impl_code = """
@@ -109,10 +108,10 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
 try {
   auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
   if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
-    return false;
+    return 1;
   } else {
     CTYPE2_ASSIGN_FROM_CPP(value, search->second);
-    return true;
+    return 0;
   }
   } catch (std::exception & e) {
     mlx_error(e.what());
@@ -132,20 +131,20 @@ try {
   }
 }
 
-extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value) {
 try {
   if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) == mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
-    return false;
+    return 1;
   } else {
     CTYPE1_ASSIGN_FROM_CPP(key, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->first);
     CTYPE2_ASSIGN_FROM_CPP(value, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->second);
     mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)++;
-    return true;
+    return 0;
   }
   } catch (std::exception & e) {
     mlx_error(e.what());
-    return false;
+    return 1;
   }
 }
 

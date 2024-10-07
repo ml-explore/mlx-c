@@ -49,10 +49,10 @@ extern "C" int mlx_map_string_to_array_get(
   try {
     auto search = mlx_map_string_to_array_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_array_get_(map).end()) {
-      return false;
+      return 1;
     } else {
       mlx_array_set_(*value, search->second);
-      return true;
+      return 0;
     }
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -75,23 +75,23 @@ mlx_map_string_to_array_iterator_new(mlx_map_string_to_array map) {
   }
 }
 
-extern "C" bool mlx_map_string_to_array_iterator_next(
+extern "C" int mlx_map_string_to_array_iterator_next(
     mlx_map_string_to_array_iterator it,
     const char** key,
     mlx_array* value) {
   try {
     if (mlx_map_string_to_array_iterator_get_(it) ==
         mlx_map_string_to_array_iterator_get_map_(it).end()) {
-      return false;
+      return 1;
     } else {
       *key = mlx_map_string_to_array_iterator_get_(it)->first.data();
       mlx_array_set_(*value, mlx_map_string_to_array_iterator_get_(it)->second);
       mlx_map_string_to_array_iterator_get_(it)++;
-      return true;
+      return 0;
     }
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return false;
+    return 1;
   }
 }
 
@@ -146,10 +146,10 @@ extern "C" int mlx_map_string_to_string_get(
   try {
     auto search = mlx_map_string_to_string_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_string_get_(map).end()) {
-      return false;
+      return 1;
     } else {
       *value = search->second.data();
-      return true;
+      return 0;
     }
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -172,23 +172,23 @@ mlx_map_string_to_string_iterator_new(mlx_map_string_to_string map) {
   }
 }
 
-extern "C" bool mlx_map_string_to_string_iterator_next(
+extern "C" int mlx_map_string_to_string_iterator_next(
     mlx_map_string_to_string_iterator it,
     const char** key,
     const char** value) {
   try {
     if (mlx_map_string_to_string_iterator_get_(it) ==
         mlx_map_string_to_string_iterator_get_map_(it).end()) {
-      return false;
+      return 1;
     } else {
       *key = mlx_map_string_to_string_iterator_get_(it)->first.data();
       *value = mlx_map_string_to_string_iterator_get_(it)->second.data();
       mlx_map_string_to_string_iterator_get_(it)++;
-      return true;
+      return 0;
     }
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return false;
+    return 1;
   }
 }
 

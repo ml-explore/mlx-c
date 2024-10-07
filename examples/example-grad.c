@@ -19,7 +19,10 @@ void inc_fun(mlx_array in, mlx_array* res_) {
   mlx_array_free(value);
 }
 
-void inc_fun_value(mlx_vector_array in, void* payload, mlx_vector_array* vres_) {
+void inc_fun_value(
+    mlx_vector_array in,
+    void* payload,
+    mlx_vector_array* vres_) {
   mlx_stream stream = mlx_gpu_stream();
   if (mlx_vector_array_size(in) != 1) {
     fprintf(stderr, "inc_func_value: expected 1 argument");

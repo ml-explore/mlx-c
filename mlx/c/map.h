@@ -67,9 +67,8 @@ mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new(
 int mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
 /**
  * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_string_to_array_iterator_next(
+int mlx_map_string_to_array_iterator_next(
     mlx_map_string_to_array_iterator it,
     const char** key,
     mlx_array* value);
@@ -123,9 +122,8 @@ int mlx_map_string_to_string_iterator_free(
     mlx_map_string_to_string_iterator it);
 /**
  * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_string_to_string_iterator_next(
+int mlx_map_string_to_string_iterator_next(
     mlx_map_string_to_string_iterator it,
     const char** key,
     const char** value);
