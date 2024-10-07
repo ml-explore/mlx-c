@@ -1,6 +1,7 @@
 import argparse
 import regex
 import string
+import type_private_generator as tpg
 
 parser = argparse.ArgumentParser("MLX C vector code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -117,34 +118,6 @@ extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
 }
 """
 
-priv_code = """
-inline mlx_vector_SCTYPE mlx_vector_SCTYPE_new_() {
-  return mlx_vector_SCTYPE({new std::vector<CPPTYPE>()});
-}
-inline mlx_vector_SCTYPE mlx_vector_SCTYPE_new_(std::vector<CPPTYPE>&& s) {
-  return mlx_vector_SCTYPE({new std::vector<CPPTYPE>(std::move(s))});
-}
-
-inline mlx_vector_SCTYPE& mlx_vector_SCTYPE_set_(mlx_vector_SCTYPE& d, std::vector<CPPTYPE> s) {
-  if (d.ctx) {
-    *static_cast<std::vector<CPPTYPE>*>(d.ctx) = s;
-  } else {
-    d.ctx = new std::vector<CPPTYPE>(s);
-  }
-  return d;
-}
-
-inline std::vector<CPPTYPE>& mlx_vector_SCTYPE_get_(mlx_vector_SCTYPE d) {
-  return *static_cast<std::vector<CPPTYPE>*>(d.ctx);
-}
-
-inline void mlx_vector_SCTYPE_free_(mlx_vector_SCTYPE d) {
-  if(d.ctx) {
-    delete static_cast<std::vector<CPPTYPE>*>(d.ctx);
-  }
-}
-"""
-
 
 def generate(
     code,
@@ -155,6 +128,11 @@ def generate(
     c_to_cpp=lambda s: s + "->ctx",
     c_assign=lambda d, s: "(*" + d + ")->ctx = " + s,
 ):
+    if code is None:
+        return tpg.generate(
+            "mlx_vector_" + sctype, "std::vector<" + cpptype + ">", empty_ctor=False
+        )
+
     if rctype is None:
         rctype = ctype.replace("const ", "") + "*"
 
@@ -239,7 +217,7 @@ if args.implementation:
     begin = impl_begin
     end = impl_end
 elif args.private:
-    code = priv_code
+    code = None
     begin = priv_begin
     end = priv_end
 else:

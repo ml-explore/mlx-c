@@ -1,5 +1,6 @@
 import argparse
 import regex
+import type_private_generator as tpg
 
 parser = argparse.ArgumentParser("MLX C map code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -125,56 +126,6 @@ extern "C" void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTY
 
 """
 
-priv_code = """
-inline mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new_(std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
-  return mlx_map_SCTYPE1_to_SCTYPE2({new std::unordered_map<CPPTYPE1, CPPTYPE2>(s)});
-}
-
-inline mlx_map_SCTYPE1_to_SCTYPE2& mlx_map_SCTYPE1_to_SCTYPE2_set_(mlx_map_SCTYPE1_to_SCTYPE2& d, std::unordered_map<CPPTYPE1, CPPTYPE2> s) {
-  if (d.ctx) {
-    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx) = s;
-  } else {
-    d.ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>(s);
-  }
-  return d;
-}
-
-inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_get_(mlx_map_SCTYPE1_to_SCTYPE2 d) {
-  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx);
-}
-
-inline void mlx_map_SCTYPE1_to_SCTYPE2_free_(mlx_map_SCTYPE1_to_SCTYPE2 d) {
-  if(d.ctx) {
-    delete static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.ctx);
-  }
-}
-
-inline mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new_(std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator&& s) {
-  return mlx_map_SCTYPE1_to_SCTYPE2_iterator({new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(std::move(s))});
-}
-
-inline mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_set_(mlx_map_SCTYPE1_to_SCTYPE2_iterator* d, std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator s) {
-  if (d->ctx) {
-    *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d->ctx) = s;
-  } else {
-    d->ctx = new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(s);
-  }
-  return *d;
-}
-
-inline std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator& mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
-  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d.ctx);
-}
-inline std::unordered_map<CPPTYPE1, CPPTYPE2>& mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
-  return *static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>*>(d.map_ctx);
-}
-inline void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(mlx_map_SCTYPE1_to_SCTYPE2_iterator d) {
-  if(d.ctx) {
-    delete static_cast<std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator*>(d.ctx);
-  }
-}
-"""
-
 
 def callback_split_string_args(func):
     def func_split_string_args(args):
@@ -185,6 +136,23 @@ def callback_split_string_args(func):
 
 
 def generate(code, type1, type2):
+    if code is None:
+        ctype = "mlx_map_" + type1["nick"] + "_to_" + type2["nick"]
+        cpptype = "std::unordered_map<" + type1["cpp"] + ", " + type2["cpp"] + ">"
+        code = tpg.generate(ctype, cpptype, empty_ctor=False)
+        code += tpg.generate(ctype + "_iterator", cpptype + "::iterator", ctor=False)
+        code += """
+inline CPPTYPE& CTYPE_iterator_get_map_(
+    CTYPE_iterator d) {
+  return *static_cast<CPPTYPE*>(d.map_ctx);
+}
+                """.replace(
+            "CTYPE", ctype
+        ).replace(
+            "CPPTYPE", cpptype
+        )
+        return code
+
     code = replace_match_parenthesis(code, "CTYPE1_TO_CPP", type1["c_to_cpp"])
     code = replace_match_parenthesis(code, "CTYPE2_TO_CPP", type2["c_to_cpp"])
     code = replace_match_parenthesis(
@@ -277,7 +245,7 @@ if args.implementation:
     end = impl_end
 elif args.private:
     begin = priv_begin
-    code = priv_code
+    code = None
     end = priv_end
 else:
     begin = decl_begin
