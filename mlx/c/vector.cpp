@@ -10,29 +10,50 @@
 #include "mlx/c/private/vector.h"
 
 extern "C" mlx_vector_array mlx_vector_array_new() {
-  return mlx_vector_array_new_({});
+  try {
+    return mlx_vector_array_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_array{0};
+  }
 }
 
-extern "C" void mlx_vector_array_free(mlx_vector_array vec) {
-  mlx_vector_array_free_(vec);
+extern "C" int mlx_vector_array_free(mlx_vector_array vec) {
+  try {
+    mlx_vector_array_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_vector_array mlx_vector_array_new_data(
     const mlx_array* data,
     size_t size) {
-  auto vec = mlx_vector_array_new();
-  for (size_t i = 0; i < size; i++) {
-    mlx_vector_array_get_(vec).push_back(mlx_array_get_(data[i]));
+  try {
+    auto vec = mlx_vector_array_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_array_get_(vec).push_back(mlx_array_get_(data[i]));
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_array{0};
   }
-  return vec;
 }
 
 extern "C" mlx_vector_array mlx_vector_array_new_value(const mlx_array val) {
-  return mlx_vector_array_new_({mlx_array_get_(val)});
+  try {
+    return mlx_vector_array_new_({mlx_array_get_(val)});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_array{0};
+  }
 }
 
 extern "C" int mlx_vector_array_set_data(
-    mlx_vector_array vec,
+    mlx_vector_array* vec_,
     const mlx_array* data,
     size_t size) {
   try {
@@ -40,7 +61,7 @@ extern "C" int mlx_vector_array_set_data(
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(mlx_array_get_(data[i]));
     }
-    mlx_vector_array_get_(vec) = cpp_arrs;
+    mlx_vector_array_get_(*vec_) = cpp_arrs;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -49,10 +70,10 @@ extern "C" int mlx_vector_array_set_data(
 }
 
 extern "C" int mlx_vector_array_set_value(
-    mlx_vector_array vec,
+    mlx_vector_array* vec_,
     const mlx_array val) {
   try {
-    mlx_vector_array_get_(vec) =
+    mlx_vector_array_get_(*vec_) =
         std::vector<mlx::core::array>({mlx_array_get_(val)});
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -61,20 +82,31 @@ extern "C" int mlx_vector_array_set_value(
   return 0;
 }
 
-extern "C" void mlx_vector_array_append_data(
+extern "C" int mlx_vector_array_append_data(
     mlx_vector_array vec,
     const mlx_array* data,
     size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size; i++) {
-        mlx_vector_array_get_(vec).push_back(mlx_array_get_(data[i]));
-      }, );
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_array_get_(vec).push_back(mlx_array_get_(data[i]));
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_array_append_value(
+extern "C" int mlx_vector_array_append_value(
     mlx_vector_array vec,
     const mlx_array value) {
-  MLX_TRY_CATCH(mlx_vector_array_get_(vec).push_back(mlx_array_get_(value));, )
+  try {
+    mlx_vector_array_get_(vec).push_back(mlx_array_get_(value));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int
@@ -89,34 +121,61 @@ mlx_vector_array_get(mlx_vector_array vec, size_t index, mlx_array* res) {
 }
 
 extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
-  return mlx_vector_array_get_(vec).size();
+  try {
+    return mlx_vector_array_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
-  return mlx_vector_vector_array_new_({});
+  try {
+    return mlx_vector_vector_array_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_vector_array{0};
+  }
 }
 
-extern "C" void mlx_vector_vector_array_free(mlx_vector_vector_array vec) {
-  mlx_vector_vector_array_free_(vec);
+extern "C" int mlx_vector_vector_array_free(mlx_vector_vector_array vec) {
+  try {
+    mlx_vector_vector_array_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new_data(
     const mlx_vector_array* data,
     size_t size) {
-  auto vec = mlx_vector_vector_array_new();
-  for (size_t i = 0; i < size; i++) {
-    mlx_vector_vector_array_get_(vec).push_back(mlx_vector_array_get_(data[i]));
+  try {
+    auto vec = mlx_vector_vector_array_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_vector_array_get_(vec).push_back(
+          mlx_vector_array_get_(data[i]));
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_vector_array{0};
   }
-  return vec;
 }
 
 extern "C" mlx_vector_vector_array mlx_vector_vector_array_new_value(
     const mlx_vector_array val) {
-  return mlx_vector_vector_array_new_({mlx_vector_array_get_(val)});
+  try {
+    return mlx_vector_vector_array_new_({mlx_vector_array_get_(val)});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_vector_array{0};
+  }
 }
 
 extern "C" int mlx_vector_vector_array_set_data(
-    mlx_vector_vector_array vec,
+    mlx_vector_vector_array* vec_,
     const mlx_vector_array* data,
     size_t size) {
   try {
@@ -124,7 +183,7 @@ extern "C" int mlx_vector_vector_array_set_data(
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(mlx_vector_array_get_(data[i]));
     }
-    mlx_vector_vector_array_get_(vec) = cpp_arrs;
+    mlx_vector_vector_array_get_(*vec_) = cpp_arrs;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -133,10 +192,10 @@ extern "C" int mlx_vector_vector_array_set_data(
 }
 
 extern "C" int mlx_vector_vector_array_set_value(
-    mlx_vector_vector_array vec,
+    mlx_vector_vector_array* vec_,
     const mlx_vector_array val) {
   try {
-    mlx_vector_vector_array_get_(vec) =
+    mlx_vector_vector_array_get_(*vec_) =
         std::vector<std::vector<mlx::core::array>>(
             {mlx_vector_array_get_(val)});
   } catch (std::exception& e) {
@@ -146,23 +205,32 @@ extern "C" int mlx_vector_vector_array_set_value(
   return 0;
 }
 
-extern "C" void mlx_vector_vector_array_append_data(
+extern "C" int mlx_vector_vector_array_append_data(
     mlx_vector_vector_array vec,
     const mlx_vector_array* data,
     size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size; i++) {
-        mlx_vector_vector_array_get_(vec).push_back(
-            mlx_vector_array_get_(data[i]));
-      }, );
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_vector_array_get_(vec).push_back(
+          mlx_vector_array_get_(data[i]));
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_vector_array_append_value(
+extern "C" int mlx_vector_vector_array_append_value(
     mlx_vector_vector_array vec,
     const mlx_vector_array value) {
-  MLX_TRY_CATCH(
-      mlx_vector_vector_array_get_(vec).push_back(mlx_vector_array_get_(value));
-      , )
+  try {
+    mlx_vector_vector_array_get_(vec).push_back(mlx_vector_array_get_(value));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_vector_vector_array_get(
@@ -179,37 +247,63 @@ extern "C" int mlx_vector_vector_array_get(
 }
 
 extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec) {
-  return mlx_vector_vector_array_get_(vec).size();
+  try {
+    return mlx_vector_vector_array_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 
 extern "C" mlx_vector_int mlx_vector_int_new() {
-  return mlx_vector_int_new_({});
+  try {
+    return mlx_vector_int_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_int{0};
+  }
 }
 
-extern "C" void mlx_vector_int_free(mlx_vector_int vec) {
-  mlx_vector_int_free_(vec);
+extern "C" int mlx_vector_int_free(mlx_vector_int vec) {
+  try {
+    mlx_vector_int_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_vector_int mlx_vector_int_new_data(int* data, size_t size) {
-  auto vec = mlx_vector_int_new();
-  for (size_t i = 0; i < size; i++) {
-    mlx_vector_int_get_(vec).push_back(data[i]);
+  try {
+    auto vec = mlx_vector_int_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_int_get_(vec).push_back(data[i]);
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_int{0};
   }
-  return vec;
 }
 
 extern "C" mlx_vector_int mlx_vector_int_new_value(int val) {
-  return mlx_vector_int_new_({val});
+  try {
+    return mlx_vector_int_new_({val});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_int{0};
+  }
 }
 
 extern "C" int
-mlx_vector_int_set_data(mlx_vector_int vec, int* data, size_t size) {
+mlx_vector_int_set_data(mlx_vector_int* vec_, int* data, size_t size) {
   try {
     std::vector<int> cpp_arrs;
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(data[i]);
     }
-    mlx_vector_int_get_(vec) = cpp_arrs;
+    mlx_vector_int_get_(*vec_) = cpp_arrs;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -217,9 +311,9 @@ mlx_vector_int_set_data(mlx_vector_int vec, int* data, size_t size) {
   return 0;
 }
 
-extern "C" int mlx_vector_int_set_value(mlx_vector_int vec, int val) {
+extern "C" int mlx_vector_int_set_value(mlx_vector_int* vec_, int val) {
   try {
-    mlx_vector_int_get_(vec) = std::vector<int>({val});
+    mlx_vector_int_get_(*vec_) = std::vector<int>({val});
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -227,15 +321,27 @@ extern "C" int mlx_vector_int_set_value(mlx_vector_int vec, int val) {
   return 0;
 }
 
-extern "C" void
+extern "C" int
 mlx_vector_int_append_data(mlx_vector_int vec, int* data, size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size;
-           i++) { mlx_vector_int_get_(vec).push_back(data[i]); }, );
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_int_get_(vec).push_back(data[i]);
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_int_append_value(mlx_vector_int vec, int value) {
-  MLX_TRY_CATCH(mlx_vector_int_get_(vec).push_back(value);, )
+extern "C" int mlx_vector_int_append_value(mlx_vector_int vec, int value) {
+  try {
+    mlx_vector_int_get_(vec).push_back(value);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_vector_int_get(mlx_vector_int vec, size_t index, int* res) {
@@ -249,33 +355,59 @@ extern "C" int mlx_vector_int_get(mlx_vector_int vec, size_t index, int* res) {
 }
 
 extern "C" size_t mlx_vector_int_size(mlx_vector_int vec) {
-  return mlx_vector_int_get_(vec).size();
+  try {
+    return mlx_vector_int_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 
 extern "C" mlx_vector_string mlx_vector_string_new() {
-  return mlx_vector_string_new_({});
+  try {
+    return mlx_vector_string_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_string{0};
+  }
 }
 
-extern "C" void mlx_vector_string_free(mlx_vector_string vec) {
-  mlx_vector_string_free_(vec);
+extern "C" int mlx_vector_string_free(mlx_vector_string vec) {
+  try {
+    mlx_vector_string_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_vector_string mlx_vector_string_new_data(
     const char** data,
     size_t size) {
-  auto vec = mlx_vector_string_new();
-  for (size_t i = 0; i < size; i++) {
-    mlx_vector_string_get_(vec).push_back(data[i]);
+  try {
+    auto vec = mlx_vector_string_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_string_get_(vec).push_back(data[i]);
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_string{0};
   }
-  return vec;
 }
 
 extern "C" mlx_vector_string mlx_vector_string_new_value(const char* val) {
-  return mlx_vector_string_new_({val});
+  try {
+    return mlx_vector_string_new_({val});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_string{0};
+  }
 }
 
 extern "C" int mlx_vector_string_set_data(
-    mlx_vector_string vec,
+    mlx_vector_string* vec_,
     const char** data,
     size_t size) {
   try {
@@ -283,7 +415,7 @@ extern "C" int mlx_vector_string_set_data(
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(data[i]);
     }
-    mlx_vector_string_get_(vec) = cpp_arrs;
+    mlx_vector_string_get_(*vec_) = cpp_arrs;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -292,10 +424,10 @@ extern "C" int mlx_vector_string_set_data(
 }
 
 extern "C" int mlx_vector_string_set_value(
-    mlx_vector_string vec,
+    mlx_vector_string* vec_,
     const char* val) {
   try {
-    mlx_vector_string_get_(vec) = std::vector<std::string>({val});
+    mlx_vector_string_get_(*vec_) = std::vector<std::string>({val});
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -303,19 +435,31 @@ extern "C" int mlx_vector_string_set_value(
   return 0;
 }
 
-extern "C" void mlx_vector_string_append_data(
+extern "C" int mlx_vector_string_append_data(
     mlx_vector_string vec,
     const char** data,
     size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size;
-           i++) { mlx_vector_string_get_(vec).push_back(data[i]); }, );
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_string_get_(vec).push_back(data[i]);
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_string_append_value(
+extern "C" int mlx_vector_string_append_value(
     mlx_vector_string vec,
     const char* value) {
-  MLX_TRY_CATCH(mlx_vector_string_get_(vec).push_back(value);, )
+  try {
+    mlx_vector_string_get_(vec).push_back(value);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int
@@ -330,5 +474,10 @@ mlx_vector_string_get(mlx_vector_string vec, size_t index, char** res) {
 }
 
 extern "C" size_t mlx_vector_string_size(mlx_vector_string vec) {
-  return mlx_vector_string_get_(vec).size();
+  try {
+    return mlx_vector_string_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }

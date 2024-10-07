@@ -33,20 +33,18 @@ mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void);
 /**
  * Free a SCTYPE1-to-SCTYPE2 map.
  */
-void mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map);
+int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map);
 /**
  * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
  */
-bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
+int mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key,
     CTYPE2 value);
 /**
  * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
  */
-bool mlx_map_SCTYPE1_to_SCTYPE2_get(
+int mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key,
     RCTYPE2 value);
@@ -64,7 +62,7 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
 /**
  * Free iterator.
  */
-void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
+int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
 /**
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
@@ -74,25 +72,41 @@ bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterato
 
 impl_code = """
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
-  return mlx_map_SCTYPE1_to_SCTYPE2{new std::unordered_map<CPPTYPE1, CPPTYPE2>()};
+try {
+  return mlx_map_SCTYPE1_to_SCTYPE2_new_();
+   } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_map_SCTYPE1_to_SCTYPE2{0};
+  }
 }
 
-extern "C" void mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {
+try {
   mlx_map_SCTYPE1_to_SCTYPE2_free_(map);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_insert(
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key,
     CTYPE2 value) {
-  MLX_TRY_CATCH(
+try {
       auto res = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert(std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
-      return true, return false);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_get(
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key, RCTYPE2 value) {
+try {
   auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
   if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
     return false;
@@ -100,16 +114,27 @@ extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_get(
     CTYPE2_ASSIGN_FROM_CPP(value, search->second);
     return true;
   }
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
     mlx_map_SCTYPE1_to_SCTYPE2 map) {
   auto& cpp_map = mlx_map_SCTYPE1_to_SCTYPE2_get_(map);
+try {
   return mlx_map_SCTYPE1_to_SCTYPE2_iterator{new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(cpp_map.begin()), &cpp_map};
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_map_SCTYPE1_to_SCTYPE2_iterator{0};
+  }
 }
 
 extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value) {
+try {
   if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) == mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
     return false;
   } else {
@@ -118,10 +143,20 @@ extern "C" bool mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)++;
     return true;
   }
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return false;
+  }
 }
 
-extern "C" void mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
+try {
   mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(it);
+}  catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 """

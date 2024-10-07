@@ -32,7 +32,7 @@ extern "C" mlx_device mlx_stream_get_device(mlx_stream stream) {
   return mlx_device_new_(mlx_stream_get_(stream).device);
 }
 extern "C" void mlx_synchronize(mlx_stream stream) {
-  MLX_TRY_CATCH(mlx::core::synchronize(mlx_stream_get_(stream)), );
+  mlx::core::synchronize(mlx_stream_get_(stream));
 }
 extern "C" mlx_stream mlx_default_stream(mlx_device dev) {
   return mlx_stream_new_(default_stream(mlx_device_get_(dev)));

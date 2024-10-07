@@ -33,20 +33,18 @@ mlx_map_string_to_array mlx_map_string_to_array_new(void);
 /**
  * Free a string-to-array map.
  */
-void mlx_map_string_to_array_free(mlx_map_string_to_array map);
+int mlx_map_string_to_array_free(mlx_map_string_to_array map);
 /**
  * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
  */
-bool mlx_map_string_to_array_insert(
+int mlx_map_string_to_array_insert(
     mlx_map_string_to_array map,
     const char* key,
     const mlx_array value);
 /**
  * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
  */
-bool mlx_map_string_to_array_get(
+int mlx_map_string_to_array_get(
     mlx_map_string_to_array map,
     const char* key,
     mlx_array* value);
@@ -66,7 +64,7 @@ mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new(
 /**
  * Free iterator.
  */
-void mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
+int mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
 /**
  * Increment iterator.
  * Returns `true` if iterator could actually be incremented.
@@ -90,20 +88,18 @@ mlx_map_string_to_string mlx_map_string_to_string_new(void);
 /**
  * Free a string-to-string map.
  */
-void mlx_map_string_to_string_free(mlx_map_string_to_string map);
+int mlx_map_string_to_string_free(mlx_map_string_to_string map);
 /**
  * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
  */
-bool mlx_map_string_to_string_insert(
+int mlx_map_string_to_string_insert(
     mlx_map_string_to_string map,
     const char* key,
     const char* value);
 /**
  * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
  */
-bool mlx_map_string_to_string_get(
+int mlx_map_string_to_string_get(
     mlx_map_string_to_string map,
     const char* key,
     const char** value);
@@ -123,7 +119,7 @@ mlx_map_string_to_string_iterator mlx_map_string_to_string_iterator_new(
 /**
  * Free iterator.
  */
-void mlx_map_string_to_string_iterator_free(
+int mlx_map_string_to_string_iterator_free(
     mlx_map_string_to_string_iterator it);
 /**
  * Increment iterator.

@@ -27,42 +27,63 @@ decl_code = """
  */
 typedef struct mlx_vector_SCTYPE_ { void* ctx; } mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
-void mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
+int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
-int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE vec, CTYPE* data, size_t size);
-int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val);
-void mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
-void mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
+int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE* vec, CTYPE* data, size_t size);
+int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec, CTYPE val);
+int mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
+int mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
 int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE);
 """
 
 impl_code = """
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
+  try {
   return mlx_vector_SCTYPE_new_({});
+   } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE{0};
+  }
 }
 
-extern "C" void mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec) {
+extern "C" int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec) {
+  try {
   mlx_vector_SCTYPE_free_(vec);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
     CTYPE* data,
     size_t size) {
+try {
   auto vec = mlx_vector_SCTYPE_new();
   for (size_t i = 0; i < size; i++) {
     mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(data[i]));
   }
   return vec;
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE{0};
+  }
 }
 
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val) {
+try{
   return mlx_vector_SCTYPE_new_({C_TO_CPP(val)});
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE{0};
+  }
 }
 
 extern "C" int mlx_vector_SCTYPE_set_data(
-    mlx_vector_SCTYPE vec,
+    mlx_vector_SCTYPE* vec_,
     CTYPE* data,
     size_t size) {
   try {
@@ -70,7 +91,7 @@ extern "C" int mlx_vector_SCTYPE_set_data(
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(C_TO_CPP(data[i]));
     }
-    mlx_vector_SCTYPE_get_(vec) = cpp_arrs;
+    mlx_vector_SCTYPE_get_(*vec_) = cpp_arrs;
   } catch (std::exception & e) {
     mlx_error(e.what());
     return 1;
@@ -78,9 +99,9 @@ extern "C" int mlx_vector_SCTYPE_set_data(
   return 0;
 }
 
-extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val) {
+extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec_, CTYPE val) {
   try {
-    mlx_vector_SCTYPE_get_(vec) = std::vector<CPPTYPE>({C_TO_CPP(val)});
+    mlx_vector_SCTYPE_get_(*vec_) = std::vector<CPPTYPE>({C_TO_CPP(val)});
   } catch (std::exception & e) {
     mlx_error(e.what());
     return 1;
@@ -88,19 +109,31 @@ extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE vec, CTYPE val) {
   return 0;
 }
 
-extern "C" void mlx_vector_SCTYPE_append_data(
+extern "C" int mlx_vector_SCTYPE_append_data(
     mlx_vector_SCTYPE vec,
     CTYPE* data,
     size_t size) {
-  MLX_TRY_CATCH(
+  try {
       for (size_t i = 0; i < size;
-           i++) { mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(data[i])); }, );
+           i++) { mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(data[i])); }
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_SCTYPE_append_value(
+extern "C" int mlx_vector_SCTYPE_append_value(
     mlx_vector_SCTYPE vec,
     CTYPE value) {
-  MLX_TRY_CATCH(mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(value));, )
+try {
+  mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(value));
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+
 }
 
 extern "C" int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index, RETURN_CTYPE res) {
@@ -114,7 +147,12 @@ extern "C" int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index, RETURN
 }
 
 extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
+try {
   return mlx_vector_SCTYPE_get_(vec).size();
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 """
 
