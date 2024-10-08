@@ -18,21 +18,9 @@ extern "C" mlx_string mlx_device_tostring(mlx_device dev) {
   }
 }
 
-namespace {
-mlx_device_type to_c_device_type(mlx::core::Device::DeviceType type) {
-  static mlx_device_type map[] = {MLX_CPU, MLX_GPU};
-  return map[(int)type];
-}
-mlx::core::Device::DeviceType to_cpp_device_type(mlx_device_type type) {
-  static mlx::core::Device::DeviceType map[] = {
-      mlx::core::Device::DeviceType::cpu, mlx::core::Device::DeviceType::gpu};
-  return map[(int)type];
-}
-} // namespace
-
 extern "C" mlx_device mlx_device_new(mlx_device_type type, int index) {
   try {
-    auto cpp_type = to_cpp_device_type(type);
+    auto cpp_type = mlx_device_type_to_cpp(type);
     return mlx_device_new_(mlx::core::Device(cpp_type, index));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -42,7 +30,7 @@ extern "C" mlx_device mlx_device_new(mlx_device_type type, int index) {
 
 extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
   try {
-    return to_c_device_type(mlx_device_get_(dev).type);
+    return mlx_device_type_to_c(mlx_device_get_(dev).type);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return MLX_CPU; // DEBUG: could have a specific value

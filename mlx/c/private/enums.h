@@ -60,6 +60,15 @@ inline mlx::core::Dtype mlx_dtype_to_cpp(mlx_dtype type) {
   };
   return map[(int)type];
 }
+mlx_device_type mlx_device_type_to_c(mlx::core::Device::DeviceType type) {
+  static mlx_device_type map[] = {MLX_CPU, MLX_GPU};
+  return map[(int)type];
+}
+mlx::core::Device::DeviceType mlx_device_type_to_cpp(mlx_device_type type) {
+  static mlx::core::Device::DeviceType map[] = {
+      mlx::core::Device::DeviceType::cpu, mlx::core::Device::DeviceType::gpu};
+  return map[(int)type];
+}
 } // namespace
 
 #endif
