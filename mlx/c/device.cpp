@@ -69,3 +69,12 @@ extern "C" int mlx_set_default_device(mlx_device dev) {
   }
   return 0;
 }
+extern "C" int mlx_device_free(mlx_device dev) {
+  try {
+    mlx_device_free_(dev);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}

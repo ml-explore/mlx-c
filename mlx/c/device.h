@@ -32,6 +32,10 @@ typedef enum mlx_device_type_ { MLX_CPU, MLX_GPU } mlx_device_type;
  */
 mlx_device mlx_device_new(mlx_device_type type, int index);
 /**
+ * Free a device.
+ */
+int mlx_device_free(mlx_device dev);
+/**
  * Get device description.
  */
 mlx_string mlx_device_tostring(mlx_device dev);
