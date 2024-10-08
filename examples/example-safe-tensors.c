@@ -19,7 +19,7 @@ int main() {
   mlx_stream stream = mlx_gpu_stream();
   mlx_map_string_to_array data = mlx_map_string_to_array_new();
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
-  mlx_load_safetensors_file(f, stream, &data, &metadata);
+  mlx_load_safetensors_file(&data, &metadata, f, stream);
 
   mlx_map_string_to_array_iterator it =
       mlx_map_string_to_array_iterator_new(data);

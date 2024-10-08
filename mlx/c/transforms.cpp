@@ -17,7 +17,7 @@ extern "C" int mlx_async_eval(const mlx_vector_array outputs) {
   }
   return 0;
 }
-extern "C" int mlx_checkpoint(const mlx_closure fun, mlx_closure* res) {
+extern "C" int mlx_checkpoint(mlx_closure* res, const mlx_closure fun) {
   try {
     mlx_closure_set_(*res, mlx::core::checkpoint(mlx_closure_get_(fun)));
   } catch (std::exception& e) {
@@ -27,11 +27,11 @@ extern "C" int mlx_checkpoint(const mlx_closure fun, mlx_closure* res) {
   return 0;
 }
 extern "C" int mlx_custom_function(
+    mlx_closure* res,
     const mlx_closure fun,
     const mlx_closure_custom fun_vjp /* may be null */,
     const mlx_closure_custom_jvp fun_jvp /* may be null */,
-    const mlx_closure_custom_vmap fun_vmap /* may be null */,
-    mlx_closure* res) {
+    const mlx_closure_custom_vmap fun_vmap /* may be null */) {
   try {
     mlx_closure_set_(
         *res,
@@ -52,9 +52,9 @@ extern "C" int mlx_custom_function(
   return 0;
 }
 extern "C" int mlx_custom_vjp(
+    mlx_closure* res,
     const mlx_closure fun,
-    const mlx_closure_custom fun_vjp,
-    mlx_closure* res) {
+    const mlx_closure_custom fun_vjp) {
   try {
     mlx_closure_set_(
         *res,
@@ -76,11 +76,11 @@ extern "C" int mlx_eval(const mlx_vector_array outputs) {
   return 0;
 }
 extern "C" int mlx_jvp(
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1,
     const mlx_closure fun,
     const mlx_vector_array primals,
-    const mlx_vector_array tangents,
-    mlx_vector_array* res_0,
-    mlx_vector_array* res_1) {
+    const mlx_vector_array tangents) {
   try {
     std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
         mlx::core::jvp(
@@ -94,10 +94,10 @@ extern "C" int mlx_jvp(
   return 0;
 }
 extern "C" int mlx_value_and_grad(
+    mlx_closure_value_and_grad* res,
     const mlx_closure fun,
     const int* argnums,
-    size_t argnums_num,
-    mlx_closure_value_and_grad* res) {
+    size_t argnums_num) {
   try {
     mlx_closure_value_and_grad_set_(
         *res,
@@ -111,11 +111,11 @@ extern "C" int mlx_value_and_grad(
   return 0;
 }
 extern "C" int mlx_vjp(
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1,
     const mlx_closure fun,
     const mlx_vector_array primals,
-    const mlx_vector_array cotangents,
-    mlx_vector_array* res_0,
-    mlx_vector_array* res_1) {
+    const mlx_vector_array cotangents) {
   try {
     std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
         mlx::core::vjp(

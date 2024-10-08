@@ -28,12 +28,12 @@ typedef struct NAME_ {
 } NAME;
 NAME NAME_new();
 int NAME_free(NAME cls);
-NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
+NAME NAME_new_func(void (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED));
 NAME NAME_new_func_payload(
-    void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
+    void (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED, void*),
     void* payload,
     void (*dtor)(void*));
-int NAME_apply(NAME cls, CARGS, RCARGS);
+int NAME_apply(RCARGS, NAME cls, CARGS);
 """
 
 
@@ -136,12 +136,12 @@ extern "C" int NAME_free(NAME cls) {
   }
 }
 
-extern "C" NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
+extern "C" NAME NAME_new_func(void (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED)) {
   try {
     auto cpp_closure = [fun](CPPARGS_TYPE_NAME) {
       CPPARGS_TO_CARGS
       RCARGS_NEW
-      fun(CARGS_UNTYPED, RCARGS_UNTYPED);
+      fun(RCARGS_UNTYPED, CARGS_UNTYPED);
       CARGS_FREE
       RCARGS_TO_CPP
       RCARGS_FREE
@@ -155,7 +155,7 @@ extern "C" NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
 }
 
 extern "C" NAME NAME_new_func_payload(
-    void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
+    void (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED, void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -163,7 +163,7 @@ extern "C" NAME NAME_new_func_payload(
     auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
       CPPARGS_TO_CARGS
       RCARGS_NEW
-      fun(CARGS_UNTYPED, cpp_payload.get(), RCARGS_UNTYPED);
+      fun(RCARGS_UNTYPED, CARGS_UNTYPED, cpp_payload.get());
       CARGS_FREE
       RCARGS_TO_CPP
       RCARGS_FREE
@@ -176,7 +176,7 @@ extern "C" NAME NAME_new_func_payload(
   }
 }
 
-extern "C" int NAME_apply(NAME cls, CARGS, RCARGS) {
+extern "C" int NAME_apply(RCARGS, NAME cls, CARGS) {
   try {
     ASSIGN_CLS_TO_RCARGS
   } catch (std::exception& e) {
@@ -280,7 +280,7 @@ if args.implementation:
     print(
         """
 extern "C" mlx_closure mlx_closure_new_unary(
-    void (*fun)(const mlx_array, mlx_array*)) {
+    void (*fun)(mlx_array*, const mlx_array)) {
   try {
     auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
       if (cpp_input.size() != 1) {
@@ -288,7 +288,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
       }
       auto input = mlx_array_new_(cpp_input[0]);
       auto res = mlx_array_new_();
-      fun(input, &res);
+      fun(&res, input);
       mlx_array_free(input);
       std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
       mlx_array_free(res);
@@ -307,7 +307,7 @@ elif args.private:
 else:
     print(
         """
-mlx_closure mlx_closure_new_unary(void (*fun)(const mlx_array, mlx_array*));
+mlx_closure mlx_closure_new_unary(void (*fun)(mlx_array*, const mlx_array));
     """
     )
 print(

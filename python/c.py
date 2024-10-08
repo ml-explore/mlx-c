@@ -197,6 +197,12 @@ def generate(funcs, enums, header, headername, namespace, implementation, docstr
 
         c_call = []
         cpp_call = []
+
+        # return values as first arguments
+        res_arg = return_t["c_return_arg"]("res")
+        if res_arg:
+            c_call.append(res_arg)
+
         pt = f["params_t"]
         pn = f["params_name"]
         encountered_unsupported_type = False
@@ -222,10 +228,6 @@ def generate(funcs, enums, header, headername, namespace, implementation, docstr
         if encountered_unsupported_type:
             print("skipping", f, file=sys.stderr)
             continue
-
-        res_arg = return_t["c_return_arg"]("res")
-        if res_arg:
-            c_call.append(res_arg)
 
         # print(f)
         c_call = ", ".join(c_call)

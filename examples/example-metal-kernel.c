@@ -10,9 +10,9 @@ void print_array(const char* msg, mlx_array arr) {
 }
 
 void exp_elemwise(
+    mlx_array* output_,
     const mlx_array input,
-    mlx_stream stream,
-    mlx_array* output_) {
+    mlx_stream stream) {
   const char* source =
       "uint elem = thread_position_in_grid.x;"
       "T tmp = inp[elem];"
@@ -46,9 +46,9 @@ int main() {
 
   int dims[2] = {4, 16};
   mlx_random_normal(
-      dims, 2, MLX_FLOAT32, 0, 1, mlx_array_empty, stream, &input);
+      &input, dims, 2, MLX_FLOAT32, 0, 1, mlx_array_empty, stream);
 
-  exp_elemwise(input, stream, &output);
+  exp_elemwise(&output, input, stream);
 
   print_array("input", input);
   print_array("output", output);

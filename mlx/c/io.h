@@ -24,18 +24,18 @@ extern "C" {
  * \defgroup io IO operations
  */
 /**@{*/
-int mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res);
-int mlx_load(const char* file, const mlx_stream s, mlx_array* res);
+int mlx_load_file(mlx_array* res, FILE* in_stream, const mlx_stream s);
+int mlx_load(mlx_array* res, const char* file, const mlx_stream s);
 int mlx_load_safetensors_file(
+    mlx_map_string_to_array* res_0,
+    mlx_map_string_to_string* res_1,
     FILE* in_stream,
-    const mlx_stream s,
-    mlx_map_string_to_array* res_0,
-    mlx_map_string_to_string* res_1);
+    const mlx_stream s);
 int mlx_load_safetensors(
-    const char* file,
-    const mlx_stream s,
     mlx_map_string_to_array* res_0,
-    mlx_map_string_to_string* res_1);
+    mlx_map_string_to_string* res_1,
+    const char* file,
+    const mlx_stream s);
 int mlx_save_file(FILE* out_stream, const mlx_array a);
 int mlx_save(const char* file, const mlx_array a);
 int mlx_save_safetensors_file(

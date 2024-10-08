@@ -25,60 +25,60 @@ extern "C" {
  */
 /**@{*/
 int mlx_linalg_cholesky(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res);
+    const mlx_stream s);
 int mlx_linalg_cholesky_inv(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res);
+    const mlx_stream s);
 int mlx_linalg_cross(
+    mlx_array* res,
     const mlx_array a,
     const mlx_array b,
     int axis,
-    const mlx_stream s,
-    mlx_array* res);
-int mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array* res);
+    const mlx_stream s);
+int mlx_linalg_inv(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_linalg_norm_p(
+    mlx_array* res,
     const mlx_array a,
     double ord,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res);
+    const mlx_stream s);
 int mlx_linalg_norm_ord(
+    mlx_array* res,
     const mlx_array a,
     const char* ord,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res);
+    const mlx_stream s);
 int mlx_linalg_norm(
+    mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res);
-int mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array* res);
+    const mlx_stream s);
+int mlx_linalg_pinv(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_linalg_qr(
-    const mlx_array a,
-    const mlx_stream s,
     mlx_array* res_0,
-    mlx_array* res_1);
-int mlx_linalg_svd(
+    mlx_array* res_1,
     const mlx_array a,
-    const mlx_stream s,
-    mlx_vector_array* res);
+    const mlx_stream s);
+int mlx_linalg_svd(
+    mlx_vector_array* res,
+    const mlx_array a,
+    const mlx_stream s);
 int mlx_linalg_tri_inv(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res);
+    const mlx_stream s);
 /**@}*/
 
 #ifdef __cplusplus

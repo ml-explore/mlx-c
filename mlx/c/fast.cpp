@@ -9,13 +9,13 @@
 #include "mlx/fast.h"
 
 extern "C" int mlx_fast_affine_dequantize(
+    mlx_array* res,
     const mlx_array w,
     const mlx_array scales,
     const mlx_array biases,
     int group_size,
     int bits,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -33,13 +33,13 @@ extern "C" int mlx_fast_affine_dequantize(
   return 0;
 }
 extern "C" int mlx_fast_affine_quantize(
+    mlx_array* res,
     const mlx_array w,
     const mlx_array scales,
     const mlx_array biases,
     int group_size,
     int bits,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -57,12 +57,12 @@ extern "C" int mlx_fast_affine_quantize(
   return 0;
 }
 extern "C" int mlx_fast_layer_norm(
+    mlx_array* res,
     const mlx_array x,
     const mlx_array weight /* may be null */,
     const mlx_array bias /* may be null */,
     float eps,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -324,11 +324,11 @@ extern "C" int mlx_fast_metal_kernel_apply(
 }
 
 extern "C" int mlx_fast_rms_norm(
+    mlx_array* res,
     const mlx_array x,
     const mlx_array weight,
     float eps,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -344,6 +344,7 @@ extern "C" int mlx_fast_rms_norm(
   return 0;
 }
 extern "C" int mlx_fast_rope(
+    mlx_array* res,
     const mlx_array x,
     int dims,
     bool traditional,
@@ -351,8 +352,7 @@ extern "C" int mlx_fast_rope(
     float scale,
     int offset,
     const mlx_array freqs /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -374,14 +374,14 @@ extern "C" int mlx_fast_rope(
   return 0;
 }
 extern "C" int mlx_fast_scaled_dot_product_attention(
+    mlx_array* res,
     const mlx_array queries,
     const mlx_array keys,
     const mlx_array values,
     float scale,
     const mlx_array mask /* may be null */,
     mlx_optional_int memory_efficient_threshold,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,

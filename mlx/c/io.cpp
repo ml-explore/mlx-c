@@ -9,7 +9,7 @@
 #include "mlx/io.h"
 
 extern "C" int
-mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res) {
+mlx_load_file(mlx_array* res, FILE* in_stream, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -21,7 +21,7 @@ mlx_load_file(FILE* in_stream, const mlx_stream s, mlx_array* res) {
   }
   return 0;
 }
-extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array* res) {
+extern "C" int mlx_load(mlx_array* res, const char* file, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::load(std::string(file), mlx_stream_get_(s)));
@@ -32,10 +32,10 @@ extern "C" int mlx_load(const char* file, const mlx_stream s, mlx_array* res) {
   return 0;
 }
 extern "C" int mlx_load_safetensors_file(
-    FILE* in_stream,
-    const mlx_stream s,
     mlx_map_string_to_array* res_0,
-    mlx_map_string_to_string* res_1) {
+    mlx_map_string_to_string* res_1,
+    FILE* in_stream,
+    const mlx_stream s) {
   try {
     std::tie(
         mlx_map_string_to_array_get_(*res_0),
@@ -49,10 +49,10 @@ extern "C" int mlx_load_safetensors_file(
   return 0;
 }
 extern "C" int mlx_load_safetensors(
-    const char* file,
-    const mlx_stream s,
     mlx_map_string_to_array* res_0,
-    mlx_map_string_to_string* res_1) {
+    mlx_map_string_to_string* res_1,
+    const char* file,
+    const mlx_stream s) {
   try {
     std::tie(
         mlx_map_string_to_array_get_(*res_0),

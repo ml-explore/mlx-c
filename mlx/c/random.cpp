@@ -9,12 +9,12 @@
 #include "mlx/random.h"
 
 extern "C" int mlx_random_bernoulli(
+    mlx_array* res,
     const mlx_array p,
     const int* shape,
     size_t shape_num,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -30,12 +30,12 @@ extern "C" int mlx_random_bernoulli(
   return 0;
 }
 extern "C" int mlx_random_bits(
+    mlx_array* res,
     const int* shape,
     size_t shape_num,
     int width,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -51,13 +51,13 @@ extern "C" int mlx_random_bits(
   return 0;
 }
 extern "C" int mlx_random_categorical_shape(
+    mlx_array* res,
     const mlx_array logits,
     int axis,
     const int* shape,
     size_t shape_num,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -74,12 +74,12 @@ extern "C" int mlx_random_categorical_shape(
   return 0;
 }
 extern "C" int mlx_random_categorical_num_samples(
+    mlx_array* res,
     const mlx_array logits_,
     int axis,
     int num_samples,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -96,11 +96,11 @@ extern "C" int mlx_random_categorical_num_samples(
   return 0;
 }
 extern "C" int mlx_random_categorical(
+    mlx_array* res,
     const mlx_array logits,
     int axis,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -116,12 +116,12 @@ extern "C" int mlx_random_categorical(
   return 0;
 }
 extern "C" int mlx_random_gumbel(
+    mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -136,7 +136,7 @@ extern "C" int mlx_random_gumbel(
   }
   return 0;
 }
-extern "C" int mlx_random_key(uint64_t seed, mlx_array* res) {
+extern "C" int mlx_random_key(mlx_array* res, uint64_t seed) {
   try {
     mlx_array_set_(*res, mlx::core::random::key(seed));
   } catch (std::exception& e) {
@@ -146,14 +146,14 @@ extern "C" int mlx_random_key(uint64_t seed, mlx_array* res) {
   return 0;
 }
 extern "C" int mlx_random_laplace(
+    mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     float loc,
     float scale,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -171,14 +171,14 @@ extern "C" int mlx_random_laplace(
   return 0;
 }
 extern "C" int mlx_random_multivariate_normal(
+    mlx_array* res,
     const mlx_array mean,
     const mlx_array cov,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -196,14 +196,14 @@ extern "C" int mlx_random_multivariate_normal(
   return 0;
 }
 extern "C" int mlx_random_normal(
+    mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     float loc,
     float scale,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -221,14 +221,14 @@ extern "C" int mlx_random_normal(
   return 0;
 }
 extern "C" int mlx_random_randint(
+    mlx_array* res,
     const mlx_array low,
     const mlx_array high,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -255,10 +255,10 @@ extern "C" int mlx_random_seed(uint64_t seed) {
   return 0;
 }
 extern "C" int mlx_random_split_equal_parts(
+    mlx_array* res,
     const mlx_array key,
     int num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -270,10 +270,10 @@ extern "C" int mlx_random_split_equal_parts(
   return 0;
 }
 extern "C" int mlx_random_split(
-    const mlx_array key,
-    const mlx_stream s,
     mlx_array* res_0,
-    mlx_array* res_1) {
+    mlx_array* res_1,
+    const mlx_array key,
+    const mlx_stream s) {
   try {
     std::tie(mlx_array_get_(*res_0), mlx_array_get_(*res_1)) =
         mlx::core::random::split(mlx_array_get_(key), mlx_stream_get_(s));
@@ -284,14 +284,14 @@ extern "C" int mlx_random_split(
   return 0;
 }
 extern "C" int mlx_random_truncated_normal(
+    mlx_array* res,
     const mlx_array lower,
     const mlx_array upper,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -309,14 +309,14 @@ extern "C" int mlx_random_truncated_normal(
   return 0;
 }
 extern "C" int mlx_random_uniform(
+    mlx_array* res,
     const mlx_array low,
     const mlx_array high,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,

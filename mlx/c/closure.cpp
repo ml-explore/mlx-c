@@ -27,13 +27,13 @@ extern "C" int mlx_closure_free(mlx_closure cls) {
 }
 
 extern "C" mlx_closure mlx_closure_new_func(
-    void (*fun)(const mlx_vector_array, mlx_vector_array*)) {
+    void (*fun)(mlx_vector_array*, const mlx_vector_array)) {
   try {
     auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
       auto input = mlx_vector_array_new_();
       mlx_vector_array_set_(input, cpp_input);
       auto res = mlx_vector_array_new_();
-      fun(input, &res);
+      fun(&res, input);
       mlx_vector_array_free(input);
       auto cpp_res = mlx_vector_array_get_(res);
       mlx_vector_array_free(res);
@@ -47,7 +47,7 @@ extern "C" mlx_closure mlx_closure_new_func(
 }
 
 extern "C" mlx_closure mlx_closure_new_func_payload(
-    void (*fun)(const mlx_vector_array, void*, mlx_vector_array*),
+    void (*fun)(mlx_vector_array*, const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -57,7 +57,7 @@ extern "C" mlx_closure mlx_closure_new_func_payload(
       auto input = mlx_vector_array_new_();
       mlx_vector_array_set_(input, cpp_input);
       auto res = mlx_vector_array_new_();
-      fun(input, cpp_payload.get(), &res);
+      fun(&res, input, cpp_payload.get());
       mlx_vector_array_free(input);
       auto cpp_res = mlx_vector_array_get_(res);
       mlx_vector_array_free(res);
@@ -71,9 +71,9 @@ extern "C" mlx_closure mlx_closure_new_func_payload(
 }
 
 extern "C" int mlx_closure_apply(
+    mlx_vector_array* res,
     mlx_closure cls,
-    const mlx_vector_array input,
-    mlx_vector_array* res) {
+    const mlx_vector_array input) {
   try {
     mlx_vector_array_set_(
         *res, mlx_closure_get_(cls)(mlx_vector_array_get_(input)));
@@ -85,7 +85,7 @@ extern "C" int mlx_closure_apply(
 }
 
 extern "C" mlx_closure mlx_closure_new_unary(
-    void (*fun)(const mlx_array, mlx_array*)) {
+    void (*fun)(mlx_array*, const mlx_array)) {
   try {
     auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
       if (cpp_input.size() != 1) {
@@ -93,7 +93,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
       }
       auto input = mlx_array_new_(cpp_input[0]);
       auto res = mlx_array_new_();
-      fun(input, &res);
+      fun(&res, input);
       mlx_array_free(input);
       std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
       mlx_array_free(res);
@@ -126,7 +126,7 @@ extern "C" int mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls) {
 }
 
 extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
-    void (*fun)(const mlx_vector_array, mlx_vector_array*, mlx_vector_array*)) {
+    void (*fun)(mlx_vector_array*, mlx_vector_array*, const mlx_vector_array)) {
   try {
     auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
       auto input = mlx_vector_array_new_();
@@ -134,7 +134,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
       auto res_0 = mlx_vector_array_new_();
       auto res_1 = mlx_vector_array_new_();
       ;
-      fun(input, &res_0, &res_1);
+      fun(&res_0, &res_1, input);
       mlx_vector_array_free(input);
       auto cpp_res =
           std::tie(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
@@ -153,10 +153,10 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
 extern "C" mlx_closure_value_and_grad
 mlx_closure_value_and_grad_new_func_payload(
     void (*fun)(
-        const mlx_vector_array,
-        void*,
         mlx_vector_array*,
-        mlx_vector_array*),
+        mlx_vector_array*,
+        const mlx_vector_array,
+        void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -168,7 +168,7 @@ mlx_closure_value_and_grad_new_func_payload(
       auto res_0 = mlx_vector_array_new_();
       auto res_1 = mlx_vector_array_new_();
       ;
-      fun(input, cpp_payload.get(), &res_0, &res_1);
+      fun(&res_0, &res_1, input, cpp_payload.get());
       mlx_vector_array_free(input);
       auto cpp_res =
           std::tie(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
@@ -185,10 +185,10 @@ mlx_closure_value_and_grad_new_func_payload(
 }
 
 extern "C" int mlx_closure_value_and_grad_apply(
-    mlx_closure_value_and_grad cls,
-    const mlx_vector_array input,
     mlx_vector_array* res_0,
-    mlx_vector_array* res_1) {
+    mlx_vector_array* res_1,
+    mlx_closure_value_and_grad cls,
+    const mlx_vector_array input) {
   try {
     std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
         mlx_closure_value_and_grad_get_(cls)(mlx_vector_array_get_(input));
@@ -219,10 +219,10 @@ extern "C" int mlx_closure_custom_free(mlx_closure_custom cls) {
 }
 
 extern "C" mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
+    mlx_vector_array*,
     const mlx_vector_array,
     const mlx_vector_array,
-    const mlx_vector_array,
-    mlx_vector_array*)) {
+    const mlx_vector_array)) {
   try {
     auto cpp_closure = [fun](
                            const std::vector<mlx::core::array>& cpp_input_0,
@@ -235,7 +235,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
       auto input_2 = mlx_vector_array_new_();
       mlx_vector_array_set_(input_2, cpp_input_2);
       auto res = mlx_vector_array_new_();
-      fun(input_0, input_1, input_2, &res);
+      fun(&res, input_0, input_1, input_2);
       mlx_vector_array_free(input_0);
       mlx_vector_array_free(input_1);
       mlx_vector_array_free(input_2);
@@ -252,11 +252,11 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
 
 extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
     void (*fun)(
+        mlx_vector_array*,
         const mlx_vector_array,
         const mlx_vector_array,
         const mlx_vector_array,
-        void*,
-        mlx_vector_array*),
+        void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -272,7 +272,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
       auto input_2 = mlx_vector_array_new_();
       mlx_vector_array_set_(input_2, cpp_input_2);
       auto res = mlx_vector_array_new_();
-      fun(input_0, input_1, input_2, cpp_payload.get(), &res);
+      fun(&res, input_0, input_1, input_2, cpp_payload.get());
       mlx_vector_array_free(input_0);
       mlx_vector_array_free(input_1);
       mlx_vector_array_free(input_2);
@@ -288,11 +288,11 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
 }
 
 extern "C" int mlx_closure_custom_apply(
+    mlx_vector_array* res,
     mlx_closure_custom cls,
     const mlx_vector_array input_0,
     const mlx_vector_array input_1,
-    const mlx_vector_array input_2,
-    mlx_vector_array* res) {
+    const mlx_vector_array input_2) {
   try {
     mlx_vector_array_set_(
         *res,
@@ -327,11 +327,11 @@ extern "C" int mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls) {
 }
 
 extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
+    mlx_vector_array*,
     const mlx_vector_array,
     const mlx_vector_array,
     const int*,
-    size_t _num,
-    mlx_vector_array*)) {
+    size_t _num)) {
   try {
     auto cpp_closure = [fun](
                            const std::vector<mlx::core::array>& cpp_input_0,
@@ -346,7 +346,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
       input_2 = cpp_input_2.data();
       input_2_num = cpp_input_2.size();
       auto res = mlx_vector_array_new_();
-      fun(input_0, input_1, input_2, input_2_num, &res);
+      fun(&res, input_0, input_1, input_2, input_2_num);
       mlx_vector_array_free(input_0);
       mlx_vector_array_free(input_1);
       ;
@@ -363,12 +363,12 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
 
 extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
     void (*fun)(
+        mlx_vector_array*,
         const mlx_vector_array,
         const mlx_vector_array,
         const int*,
         size_t _num,
-        void*,
-        mlx_vector_array*),
+        void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -386,7 +386,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
       input_2 = cpp_input_2.data();
       input_2_num = cpp_input_2.size();
       auto res = mlx_vector_array_new_();
-      fun(input_0, input_1, input_2, input_2_num, cpp_payload.get(), &res);
+      fun(&res, input_0, input_1, input_2, input_2_num, cpp_payload.get());
       mlx_vector_array_free(input_0);
       mlx_vector_array_free(input_1);
       ;
@@ -402,12 +402,12 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
 }
 
 extern "C" int mlx_closure_custom_jvp_apply(
+    mlx_vector_array* res,
     mlx_closure_custom_jvp cls,
     const mlx_vector_array input_0,
     const mlx_vector_array input_1,
     const int* input_2,
-    size_t input_2_num,
-    mlx_vector_array* res) {
+    size_t input_2_num) {
   try {
     mlx_vector_array_set_(
         *res,
@@ -442,11 +442,11 @@ extern "C" int mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls) {
 }
 
 extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
+    mlx_vector_array*,
+    mlx_vector_int*,
     const mlx_vector_array,
     const int*,
-    size_t _num,
-    mlx_vector_array*,
-    mlx_vector_int*)) {
+    size_t _num)) {
   try {
     auto cpp_closure = [fun](
                            const std::vector<mlx::core::array>& cpp_input_0,
@@ -460,7 +460,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
       auto res_0 = mlx_vector_array_new_();
       auto res_1 = mlx_vector_int_new_();
       ;
-      fun(input_0, input_1, input_1_num, &res_0, &res_1);
+      fun(&res_0, &res_1, input_0, input_1, input_1_num);
       mlx_vector_array_free(input_0);
       ;
       auto cpp_res =
@@ -479,12 +479,12 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
 
 extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
     void (*fun)(
+        mlx_vector_array*,
+        mlx_vector_int*,
         const mlx_vector_array,
         const int*,
         size_t _num,
-        void*,
-        mlx_vector_array*,
-        mlx_vector_int*),
+        void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -501,7 +501,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
       auto res_0 = mlx_vector_array_new_();
       auto res_1 = mlx_vector_int_new_();
       ;
-      fun(input_0, input_1, input_1_num, cpp_payload.get(), &res_0, &res_1);
+      fun(&res_0, &res_1, input_0, input_1, input_1_num, cpp_payload.get());
       mlx_vector_array_free(input_0);
       ;
       auto cpp_res =
@@ -519,12 +519,12 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
 }
 
 extern "C" int mlx_closure_custom_vmap_apply(
+    mlx_vector_array* res_0,
+    mlx_vector_int* res_1,
     mlx_closure_custom_vmap cls,
     const mlx_vector_array input_0,
     const int* input_1,
-    size_t input_1_num,
-    mlx_vector_array* res_0,
-    mlx_vector_int* res_1) {
+    size_t input_1_num) {
   try {
     std::tie(mlx_vector_array_get_(*res_0), mlx_vector_int_get_(*res_1)) =
         mlx_closure_custom_vmap_get_(cls)(

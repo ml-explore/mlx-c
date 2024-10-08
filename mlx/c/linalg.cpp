@@ -9,10 +9,10 @@
 #include "mlx/linalg.h"
 
 extern "C" int mlx_linalg_cholesky(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -25,10 +25,10 @@ extern "C" int mlx_linalg_cholesky(
   return 0;
 }
 extern "C" int mlx_linalg_cholesky_inv(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -41,11 +41,11 @@ extern "C" int mlx_linalg_cholesky_inv(
   return 0;
 }
 extern "C" int mlx_linalg_cross(
+    mlx_array* res,
     const mlx_array a,
     const mlx_array b,
     int axis,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -58,7 +58,7 @@ extern "C" int mlx_linalg_cross(
   return 0;
 }
 extern "C" int
-mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array* res) {
+mlx_linalg_inv(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::linalg::inv(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -69,13 +69,13 @@ mlx_linalg_inv(const mlx_array a, const mlx_stream s, mlx_array* res) {
   return 0;
 }
 extern "C" int mlx_linalg_norm_p(
+    mlx_array* res,
     const mlx_array a,
     double ord,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -93,13 +93,13 @@ extern "C" int mlx_linalg_norm_p(
   return 0;
 }
 extern "C" int mlx_linalg_norm_ord(
+    mlx_array* res,
     const mlx_array a,
     const char* ord,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -117,12 +117,12 @@ extern "C" int mlx_linalg_norm_ord(
   return 0;
 }
 extern "C" int mlx_linalg_norm(
+    mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
     size_t axis_num,
     bool keepdims,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -139,7 +139,7 @@ extern "C" int mlx_linalg_norm(
   return 0;
 }
 extern "C" int
-mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array* res) {
+mlx_linalg_pinv(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::linalg::pinv(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -150,10 +150,10 @@ mlx_linalg_pinv(const mlx_array a, const mlx_stream s, mlx_array* res) {
   return 0;
 }
 extern "C" int mlx_linalg_qr(
-    const mlx_array a,
-    const mlx_stream s,
     mlx_array* res_0,
-    mlx_array* res_1) {
+    mlx_array* res_1,
+    const mlx_array a,
+    const mlx_stream s) {
   try {
     std::tie(mlx_array_get_(*res_0), mlx_array_get_(*res_1)) =
         mlx::core::linalg::qr(mlx_array_get_(a), mlx_stream_get_(s));
@@ -164,7 +164,7 @@ extern "C" int mlx_linalg_qr(
   return 0;
 }
 extern "C" int
-mlx_linalg_svd(const mlx_array a, const mlx_stream s, mlx_vector_array* res) {
+mlx_linalg_svd(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_vector_array_set_(
         *res, mlx::core::linalg::svd(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -175,10 +175,10 @@ mlx_linalg_svd(const mlx_array a, const mlx_stream s, mlx_vector_array* res) {
   return 0;
 }
 extern "C" int mlx_linalg_tri_inv(
+    mlx_array* res,
     const mlx_array a,
     bool upper,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,

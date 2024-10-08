@@ -25,30 +25,30 @@ extern "C" {
  */
 /**@{*/
 int mlx_detail_compile(
+    mlx_closure* res,
     const mlx_closure fun,
     uintptr_t fun_id,
     bool shapeless,
     const uint64_t* constants,
-    size_t constants_num,
-    mlx_closure* res);
+    size_t constants_num);
 int mlx_detail_compile_clear_cache();
 int mlx_detail_compile_erase(uintptr_t fun_id);
 int mlx_detail_vmap_replace(
+    mlx_vector_array* res,
     const mlx_vector_array inputs,
     const mlx_vector_array s_inputs,
     const mlx_vector_array s_outputs,
     const int* in_axes,
     size_t in_axes_num,
     const int* out_axes,
-    size_t out_axes_num,
-    mlx_vector_array* res);
+    size_t out_axes_num);
 int mlx_detail_vmap_trace(
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1,
     const mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,
-    size_t in_axes_num,
-    mlx_vector_array* res_0,
-    mlx_vector_array* res_1);
+    size_t in_axes_num);
 /**@}*/
 
 #ifdef __cplusplus

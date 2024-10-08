@@ -78,7 +78,7 @@ extern "C" int mlx_metal_reset_peak_memory() {
   }
   return 0;
 }
-extern "C" int mlx_metal_set_cache_limit(size_t limit, size_t* res) {
+extern "C" int mlx_metal_set_cache_limit(size_t* res, size_t limit) {
   try {
     *res = mlx::core::metal::set_cache_limit(limit);
   } catch (std::exception& e) {
@@ -88,7 +88,7 @@ extern "C" int mlx_metal_set_cache_limit(size_t limit, size_t* res) {
   return 0;
 }
 extern "C" int
-mlx_metal_set_memory_limit(size_t limit, bool relaxed, size_t* res) {
+mlx_metal_set_memory_limit(size_t* res, size_t limit, bool relaxed) {
   try {
     *res = mlx::core::metal::set_memory_limit(limit, relaxed);
   } catch (std::exception& e) {

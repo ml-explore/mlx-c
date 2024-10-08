@@ -9,11 +9,11 @@
 #include "mlx/fft.h"
 
 extern "C" int mlx_fft_fft(
+    mlx_array* res,
     const mlx_array a,
     int n,
     int axis,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -25,13 +25,13 @@ extern "C" int mlx_fft_fft(
   return 0;
 }
 extern "C" int mlx_fft_fft2(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -47,13 +47,13 @@ extern "C" int mlx_fft_fft2(
   return 0;
 }
 extern "C" int mlx_fft_fftn(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -69,11 +69,11 @@ extern "C" int mlx_fft_fftn(
   return 0;
 }
 extern "C" int mlx_fft_ifft(
+    mlx_array* res,
     const mlx_array a,
     int n,
     int axis,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -85,13 +85,13 @@ extern "C" int mlx_fft_ifft(
   return 0;
 }
 extern "C" int mlx_fft_ifft2(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -107,13 +107,13 @@ extern "C" int mlx_fft_ifft2(
   return 0;
 }
 extern "C" int mlx_fft_ifftn(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -129,11 +129,11 @@ extern "C" int mlx_fft_ifftn(
   return 0;
 }
 extern "C" int mlx_fft_irfft(
+    mlx_array* res,
     const mlx_array a,
     int n,
     int axis,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -145,13 +145,13 @@ extern "C" int mlx_fft_irfft(
   return 0;
 }
 extern "C" int mlx_fft_irfft2(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -167,13 +167,13 @@ extern "C" int mlx_fft_irfft2(
   return 0;
 }
 extern "C" int mlx_fft_irfftn(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -189,11 +189,11 @@ extern "C" int mlx_fft_irfftn(
   return 0;
 }
 extern "C" int mlx_fft_rfft(
+    mlx_array* res,
     const mlx_array a,
     int n,
     int axis,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -205,13 +205,13 @@ extern "C" int mlx_fft_rfft(
   return 0;
 }
 extern "C" int mlx_fft_rfft2(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -227,13 +227,13 @@ extern "C" int mlx_fft_rfft2(
   return 0;
 }
 extern "C" int mlx_fft_rfftn(
+    mlx_array* res,
     const mlx_array a,
     const int* n,
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,

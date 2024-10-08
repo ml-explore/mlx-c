@@ -9,7 +9,7 @@
 #include "mlx/compile.h"
 
 extern "C" int
-mlx_compile(const mlx_closure fun, bool shapeless, mlx_closure* res) {
+mlx_compile(mlx_closure* res, const mlx_closure fun, bool shapeless) {
   try {
     mlx_closure_set_(
         *res, mlx::core::compile(mlx_closure_get_(fun), shapeless));

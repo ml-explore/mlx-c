@@ -9,10 +9,10 @@
 #include "mlx/distributed/ops.h"
 
 extern "C" int mlx_distributed_all_gather(
+    mlx_array* res,
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
-    const mlx_stream S,
-    mlx_array* res) {
+    const mlx_stream S) {
   try {
     mlx_array_set_(
         *res,
@@ -28,10 +28,10 @@ extern "C" int mlx_distributed_all_gather(
   return 0;
 }
 extern "C" int mlx_distributed_all_sum(
+    mlx_array* res,
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -47,13 +47,13 @@ extern "C" int mlx_distributed_all_sum(
   return 0;
 }
 extern "C" int mlx_distributed_recv(
+    mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     int src,
     const mlx_distributed_group group /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -71,11 +71,11 @@ extern "C" int mlx_distributed_recv(
   return 0;
 }
 extern "C" int mlx_distributed_recv_like(
+    mlx_array* res,
     const mlx_array x,
     int src,
     const mlx_distributed_group group /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
@@ -92,11 +92,11 @@ extern "C" int mlx_distributed_recv_like(
   return 0;
 }
 extern "C" int mlx_distributed_send(
+    mlx_array* res,
     const mlx_array x,
     int dst,
     const mlx_distributed_group group /* may be null */,
-    const mlx_stream s,
-    mlx_array* res) {
+    const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
