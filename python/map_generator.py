@@ -24,7 +24,9 @@ decl_code = """
 /**
  * A SCTYPE1-to-SCTYPE2 map
  */
-typedef struct mlx_map_SCTYPE1_to_SCTYPE2_ { void* ctx; } mlx_map_SCTYPE1_to_SCTYPE2;
+typedef struct mlx_map_SCTYPE1_to_SCTYPE2_ {
+  void* ctx;
+} mlx_map_SCTYPE1_to_SCTYPE2;
 
 /**
  * Returns a new empty SCTYPE1-to-SCTYPE2 map.
@@ -52,8 +54,10 @@ int mlx_map_SCTYPE1_to_SCTYPE2_get(
 /**
  * An iterator over a SCTYPE1-to-SCTYPE2 map.
  */
-typedef struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ { void * ctx; void* map_ctx; }
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator;
+typedef struct mlx_map_SCTYPE1_to_SCTYPE2_iterator_ {
+  void* ctx;
+  void* map_ctx;
+} mlx_map_SCTYPE1_to_SCTYPE2_iterator;
 /**
  * Returns a new iterator over the given map.
  */
@@ -62,27 +66,31 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
 /**
  * Free iterator.
  */
-int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
+int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
 /**
  * Increment iterator.
  */
-int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value);
+int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it,
+    RCTYPE1 key,
+    RCTYPE2 value);
 """
 
 impl_code = """
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
-try {
-  return mlx_map_SCTYPE1_to_SCTYPE2_new_({});
-   } catch (std::exception & e) {
+  try {
+    return mlx_map_SCTYPE1_to_SCTYPE2_new_({});
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_map_SCTYPE1_to_SCTYPE2_new_();
   }
 }
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {
-try {
-  mlx_map_SCTYPE1_to_SCTYPE2_free_(map);
-  } catch (std::exception & e) {
+  try {
+    mlx_map_SCTYPE1_to_SCTYPE2_free_(map);
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
@@ -93,9 +101,10 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key,
     CTYPE2 value) {
-try {
-      auto res = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert(std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
-  } catch (std::exception & e) {
+  try {
+    auto res = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert(
+        std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
@@ -104,60 +113,68 @@ try {
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    CTYPE1 key, RCTYPE2 value) {
-try {
-  auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
-  if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
-    return 1;
-  } else {
-    CTYPE2_ASSIGN_FROM_CPP(value, search->second);
-    return 0;
-  }
-  } catch (std::exception & e) {
+    CTYPE1 key,
+    RCTYPE2 value) {
+  try {
+    auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
+    if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
+      return 1;
+    } else {
+      CTYPE2_ASSIGN_FROM_CPP(value, search->second);
+      return 0;
+    }
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
 
-extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(
-    mlx_map_SCTYPE1_to_SCTYPE2 map) {
+extern "C" mlx_map_SCTYPE1_to_SCTYPE2_iterator
+mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(mlx_map_SCTYPE1_to_SCTYPE2 map) {
   auto& cpp_map = mlx_map_SCTYPE1_to_SCTYPE2_get_(map);
-try {
-  return mlx_map_SCTYPE1_to_SCTYPE2_iterator{new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(cpp_map.begin()), &cpp_map};
-  } catch (std::exception & e) {
+  try {
+    return mlx_map_SCTYPE1_to_SCTYPE2_iterator{
+        new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(cpp_map.begin()),
+        &cpp_map};
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_map_SCTYPE1_to_SCTYPE2_iterator{0};
   }
 }
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it, RCTYPE1 key, RCTYPE2 value) {
-try {
-  if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) == mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
-    return 1;
-  } else {
-    CTYPE1_ASSIGN_FROM_CPP(key, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->first);
-    CTYPE2_ASSIGN_FROM_CPP(value, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->second);
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)++;
-    return 0;
-  }
-  } catch (std::exception & e) {
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it,
+    RCTYPE1 key,
+    RCTYPE2 value) {
+  try {
+    if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) ==
+        mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
+      return 1;
+    } else {
+      CTYPE1_ASSIGN_FROM_CPP(
+          key, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->first);
+      CTYPE2_ASSIGN_FROM_CPP(
+          value, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->second);
+      mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)++;
+      return 0;
+    }
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
 }
 
-extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
-try {
-  mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(it);
-}  catch (std::exception & e) {
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
+  try {
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(it);
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-
 """
 
 
@@ -176,8 +193,7 @@ def generate(code, type1, type2):
         code = tpg.generate(ctype, cpptype)
         code += tpg.generate(ctype + "_iterator", cpptype + "::iterator", ctor=False)
         code += """
-inline CPPTYPE& CTYPE_iterator_get_map_(
-    CTYPE_iterator d) {
+inline CPPTYPE& CTYPE_iterator_get_map_(CTYPE_iterator d) {
   return *static_cast<CPPTYPE*>(d.map_ctx);
 }
                 """.replace(
@@ -210,7 +226,7 @@ inline CPPTYPE& CTYPE_iterator_get_map_(
     return code
 
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -242,7 +258,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -257,7 +273,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
+priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */

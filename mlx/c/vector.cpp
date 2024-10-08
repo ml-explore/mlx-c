@@ -1,13 +1,13 @@
-/* Copyright © 2023-2024 Apple Inc. */
+/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/vector.h"
+#include "mlx/c/private/vector.h"
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/string.h"
 #include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
+#include "mlx/c/vector.h"
 
 extern "C" mlx_vector_array mlx_vector_array_new() {
   try {

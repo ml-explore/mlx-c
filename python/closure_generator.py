@@ -23,7 +23,9 @@ def replace_match_parenthesis(string, keyword, fun):
 
 
 decl_code = """
-typedef struct NAME_ { void* ctx; } NAME;
+typedef struct NAME_ {
+  void* ctx;
+} NAME;
 NAME NAME_new();
 int NAME_free(NAME cls);
 NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
@@ -118,7 +120,7 @@ impl_code = """
 extern "C" NAME NAME_new() {
   try {
     return NAME_new_();
-  } catch (std::exception & e) {
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return NAME_new_();
   }
@@ -128,27 +130,25 @@ extern "C" int NAME_free(NAME cls) {
   try {
     NAME_free_(cls);
     return 0;
-  } catch (std::exception & e) {
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
 }
 
-extern "C" NAME NAME_new_func(
-    void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
+extern "C" NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
   try {
-      auto cpp_closure =
-          [fun](CPPARGS_TYPE_NAME) {
-            CPPARGS_TO_CARGS
-            RCARGS_NEW
-            fun(CARGS_UNTYPED, RCARGS_UNTYPED);
-            CARGS_FREE
-            RCARGS_TO_CPP
-            RCARGS_FREE
-            return cpp_res;
-          };
-      return NAME_new_(cpp_closure);
-  } catch (std::exception & e) {
+    auto cpp_closure = [fun](CPPARGS_TYPE_NAME) {
+      CPPARGS_TO_CARGS
+      RCARGS_NEW
+      fun(CARGS_UNTYPED, RCARGS_UNTYPED);
+      CARGS_FREE
+      RCARGS_TO_CPP
+      RCARGS_FREE
+      return cpp_res;
+    };
+    return NAME_new_(cpp_closure);
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return NAME_new_();
   }
@@ -158,31 +158,28 @@ extern "C" NAME NAME_new_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
     void* payload,
     void (*dtor)(void*)) {
-try {
-  auto cpp_payload = std::shared_ptr<void>(payload, dtor);
-  auto cpp_closure =
-      [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
-        CPPARGS_TO_CARGS
-        RCARGS_NEW
-        fun(CARGS_UNTYPED, cpp_payload.get(), RCARGS_UNTYPED);
-        CARGS_FREE
-        RCARGS_TO_CPP
-        RCARGS_FREE
-        return cpp_res;
-      };
-  return NAME_new_(cpp_closure);
-  } catch (std::exception & e) {
+  try {
+    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
+      CPPARGS_TO_CARGS
+      RCARGS_NEW
+      fun(CARGS_UNTYPED, cpp_payload.get(), RCARGS_UNTYPED);
+      CARGS_FREE
+      RCARGS_TO_CPP
+      RCARGS_FREE
+      return cpp_res;
+    };
+    return NAME_new_(cpp_closure);
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return NAME_new_();
   }
 }
 
-extern "C" int NAME_apply(
-    NAME cls,
-    CARGS, RCARGS) {
+extern "C" int NAME_apply(NAME cls, CARGS, RCARGS) {
   try {
-  ASSIGN_CLS_TO_RCARGS
-  } catch (std::exception & e) {
+    ASSIGN_CLS_TO_RCARGS
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
@@ -192,7 +189,7 @@ extern "C" int NAME_apply(
 
 priv_code = None
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -226,7 +223,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -243,7 +240,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
+priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -288,22 +285,21 @@ if args.implementation:
         """
 extern "C" mlx_closure mlx_closure_new_unary(
     void (*fun)(const mlx_array, mlx_array*)) {
-        try {
-      auto cpp_closure =
-          [fun](const std::vector<mlx::core::array>& cpp_input) {
-            if (cpp_input.size() != 1) {
-              throw std::runtime_error("closure: expected unary input");
-            }
-            auto input = mlx_array_new_(cpp_input[0]);
-            auto res = mlx_array_new_();
-            fun(input, &res);
-            mlx_array_free(input);
-            std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
-            mlx_array_free(res);
-            return cpp_res;
-          };
-      return mlx_closure_new_(cpp_closure);
-  } catch (std::exception & e) {
+  try {
+    auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
+      if (cpp_input.size() != 1) {
+        throw std::runtime_error("closure: expected unary input");
+      }
+      auto input = mlx_array_new_(cpp_input[0]);
+      auto res = mlx_array_new_();
+      fun(input, &res);
+      mlx_array_free(input);
+      std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
+      mlx_array_free(res);
+      return cpp_res;
+    };
+    return mlx_closure_new_(cpp_closure);
+  } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_closure_new_();
   }
