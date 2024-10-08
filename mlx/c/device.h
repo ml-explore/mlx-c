@@ -46,7 +46,7 @@ mlx_device mlx_default_device(void);
 /**
  * Set the default MLX device.
  */
-void mlx_set_default_device(mlx_device dev);
+int mlx_set_default_device(mlx_device dev);
 
 /**@}*/
 

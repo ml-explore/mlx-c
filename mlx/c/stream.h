@@ -35,7 +35,7 @@ mlx_stream mlx_stream_new_on_device(mlx_device dev);
 /**
  * Free a stream.
  */
-void mlx_stream_free(mlx_stream stream);
+int mlx_stream_free(mlx_stream stream);
 /**
  * Get stream description.
  */
@@ -51,7 +51,7 @@ mlx_device mlx_stream_get_device(mlx_stream stream);
 /**
  * Synchronize with the provided stream.
  */
-void mlx_synchronize(mlx_stream stream);
+int mlx_synchronize(mlx_stream stream);
 /**
  * Returns the default stream on the given device.
  */
@@ -59,7 +59,7 @@ mlx_stream mlx_default_stream(mlx_device dev);
 /**
  * Set default stream.
  */
-void mlx_set_default_stream(mlx_stream stream);
+int mlx_set_default_stream(mlx_stream stream);
 /**
  * Returns the current default CPU stream.
  */

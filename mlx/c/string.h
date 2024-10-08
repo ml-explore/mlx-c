@@ -30,7 +30,7 @@ mlx_string mlx_string_new(const char* str);
  */
 const char* mlx_string_data(mlx_string str);
 
-void mlx_string_free(mlx_string str);
+int mlx_string_free(mlx_string str);
 
 /**@}*/
 
