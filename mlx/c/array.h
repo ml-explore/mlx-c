@@ -64,7 +64,7 @@ mlx_array mlx_array_new();
 /**
  * Free an array.
  */
-void mlx_array_free(mlx_array arr);
+int mlx_array_free(mlx_array arr);
 
 /**
  * New array from a bool scalar.
@@ -90,6 +90,35 @@ mlx_array mlx_array_new_complex(float real_val, float imag_val);
  * @param dtype Type of array elements.
  */
 mlx_array mlx_array_new_data(
+    const void* data,
+    const int* shape,
+    int dim,
+    mlx_dtype dtype);
+/**
+ * Set array to a bool scalar.
+ */
+int mlx_array_set_bool(mlx_array* arr, bool val);
+/**
+ * Set array to a int scalar.
+ */
+int mlx_array_set_int(mlx_array* arr, int val);
+/**
+ * Set array to a float scalar.
+ */
+int mlx_array_set_float(mlx_array* arr, float val);
+/**
+ * Set array to a complex scalar.
+ */
+int mlx_array_set_complex(mlx_array* arr, float real_val, float imag_val);
+/**
+ * Set array to specified data and shape.
+ * @param data A buffer which will be copied.
+ * @param shape Shape of the array.
+ * @param dim Number of dimensions (size of `shape`).
+ * @param dtype Type of array elements.
+ */
+int mlx_array_set_data(
+    mlx_array* arr,
     const void* data,
     const int* shape,
     int dim,
