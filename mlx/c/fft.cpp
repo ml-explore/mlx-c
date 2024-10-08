@@ -4,16 +4,9 @@
 /*                                                    */
 
 #include "mlx/c/fft.h"
-
-#include "mlx/c/mlx.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
+#include "mlx/fft.h"
 
 extern "C" int mlx_fft_fft(
     const mlx_array a,

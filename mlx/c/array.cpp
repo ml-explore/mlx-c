@@ -3,9 +3,8 @@
 #include <cstring>
 
 #include "mlx/c/array.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 #include "mlx/c/string.h"
 
 extern "C" mlx_string mlx_array_tostring(mlx_array arr) {

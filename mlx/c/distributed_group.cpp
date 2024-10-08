@@ -3,9 +3,8 @@
 #include <cstring>
 
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
 extern "C" int mlx_distributed_group_rank(mlx_distributed_group group) {
   try {

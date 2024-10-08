@@ -1,8 +1,8 @@
 /* Copyright © 2023-2024 Apple Inc. */
 
 #include "mlx/c/string.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
 extern "C" mlx_string mlx_string_new(const char* str) {
   try {

@@ -4,10 +4,8 @@
 /*                                                    */
 
 #include "mlx/c/map.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
 extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
   try {

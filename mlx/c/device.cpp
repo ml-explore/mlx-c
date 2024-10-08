@@ -3,9 +3,8 @@
 #include <cstring>
 
 #include "mlx/c/device.h"
-#include "mlx/c/private/device.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
 extern "C" mlx_string mlx_device_tostring(mlx_device dev) {
   try {

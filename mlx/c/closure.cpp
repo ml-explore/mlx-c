@@ -4,12 +4,8 @@
 /*                                                    */
 
 #include "mlx/c/closure.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
 extern "C" mlx_closure mlx_closure_new() {
   try {

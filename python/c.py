@@ -12,7 +12,7 @@ def to_snake_letters(name):
     return name
 
 
-def generate(funcs, enums, headername, namespace, implementation, docstring):
+def generate(funcs, enums, header, headername, namespace, implementation, docstring):
     namespace_prefix = namespace.split("::")
     if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
         namespace_prefix.pop(1)  # we pop core
@@ -121,20 +121,12 @@ def generate(funcs, enums, headername, namespace, implementation, docstring):
     )
     if implementation:
         print('#include "mlx/c/' + headername + '.h"')
-        print(
-            """
-    #include "mlx/c/mlx.h"
-    #include "mlx/c/private/array.h"
-    #include "mlx/c/private/closure.h"
-    #include "mlx/c/private/distributed_group.h"
-    #include "mlx/c/private/map.h"
-    #include "mlx/c/private/stream.h"
-    #include "mlx/c/private/string.h"
-    #include "mlx/c/private/utils.h"
-    #include "mlx/c/private/vector.h"
-
-    """
-        )
+        for include in header.split(";"):
+            s, e = re.search("(mlx/.*$)", include).span()
+            print('#include "' + include[s:e] + '"')
+        print('#include "mlx/c/error.h"')
+        print('#include "mlx/c/private/mlx.h"')
+        print()
     else:
         print("#ifndef MLX_" + headername.upper() + "_H")
         print("#define MLX_" + headername.upper() + "_H")
