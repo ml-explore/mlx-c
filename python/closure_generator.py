@@ -2,6 +2,7 @@ import argparse
 import regex
 import string
 import mlxtypes as mt
+import type_private_generator as tpg
 
 parser = argparse.ArgumentParser("MLX C closure code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -24,7 +25,7 @@ def replace_match_parenthesis(string, keyword, fun):
 decl_code = """
 typedef struct NAME_ { void* ctx; } NAME;
 NAME NAME_new();
-void NAME_free(NAME cls);
+int NAME_free(NAME cls);
 NAME NAME_new_func(void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED));
 NAME NAME_new_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
@@ -35,6 +36,12 @@ int NAME_apply(NAME cls, CARGS, RCARGS);
 
 
 def generate(code, name, rcpptype, cpptypes):
+    rcpparg = mt.cpptypes[rcpptype]["cpp"].replace("@", "")
+    cppargs = ", ".join([mt.cpptypes[cpptype]["cpp_arg"]("") for cpptype in cpptypes])
+
+    if code is None:
+        return tpg.generate(name, "std::function<" + rcpparg + "(" + cppargs + ")>")
+
     cargs_untyped = []
     cargs = []
     cppargs_type_name = []
@@ -68,7 +75,6 @@ def generate(code, name, rcpptype, cpptypes):
     cppargs_to_cargs = "\n".join(cppargs_to_cargs)
     cargs_free = "\n".join(cargs_free)
     cargs_ctx = ", ".join(cargs_ctx)
-    cppargs = ", ".join([mt.cpptypes[cpptype]["cpp_arg"]("") for cpptype in cpptypes])
     cargs_unnamed = " ".join(
         [mt.cpptypes[cpptype]["c_arg"]("") for cpptype in cpptypes]
     )
@@ -86,7 +92,7 @@ def generate(code, name, rcpptype, cpptypes):
     code = code.replace("CARGS_UNTYPED", cargs_untyped)
     code = code.replace("CARGS_CTX", cargs_ctx)
     code = code.replace("CARGS_FREE", cargs_free)
-    code = code.replace("RCPPARG", mt.cpptypes[rcpptype]["cpp"].replace("@", ""))
+    code = code.replace("RCPPARG", rcpparg)
     code = code.replace(
         "CARGS_UNNAMED",
         ", ".join([mt.cpptypes[cpptype]["c_arg"]("") for cpptype in cpptypes]),
@@ -111,24 +117,26 @@ def generate(code, name, rcpptype, cpptypes):
 impl_code = """
 extern "C" NAME NAME_new() {
   try {
-    auto cpp_closure =
-          [](CPPARGS_TYPE_NAME) {
-              return RCPPARG();
-          };
-    return NAME_new_(cpp_closure);
+    return NAME_new_();
   } catch (std::exception & e) {
     mlx_error(e.what());
-    return {nullptr};
+    return NAME_new_();
   }
 }
 
-extern "C" void NAME_free(NAME cls) {
-  NAME_free_(cls);
+extern "C" int NAME_free(NAME cls) {
+  try {
+    NAME_free_(cls);
+    return 0;
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
 
 extern "C" NAME NAME_new_func(
     void (*fun)(CARGS_UNNAMED, RCARGS_UNNAMED)) {
-  MLX_TRY_CATCH(
+  try {
       auto cpp_closure =
           [fun](CPPARGS_TYPE_NAME) {
             CPPARGS_TO_CARGS
@@ -139,13 +147,18 @@ extern "C" NAME NAME_new_func(
             RCARGS_FREE
             return cpp_res;
           };
-      return NAME_new_(cpp_closure), return {nullptr});
+      return NAME_new_(cpp_closure);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return NAME_new_();
+  }
 }
 
 extern "C" NAME NAME_new_func_payload(
     void (*fun)(CARGS_UNNAMED, void*, RCARGS_UNNAMED),
     void* payload,
     void (*dtor)(void*)) {
+try {
   auto cpp_payload = std::shared_ptr<void>(payload, dtor);
   auto cpp_closure =
       [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
@@ -157,7 +170,11 @@ extern "C" NAME NAME_new_func_payload(
         RCARGS_FREE
         return cpp_res;
       };
-  MLX_TRY_CATCH(return NAME_new_(cpp_closure), return {nullptr});
+  return NAME_new_(cpp_closure);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return NAME_new_();
+  }
 }
 
 extern "C" int NAME_apply(
@@ -173,30 +190,7 @@ extern "C" int NAME_apply(
 }
 """
 
-priv_code = """
-inline NAME NAME_new_(std::function<RCPPARG(CPPARGS)>&& s) {
-  return NAME({new std::function<RCPPARG(CPPARGS)>(std::move(s))});
-}
-
-inline NAME& NAME_set_(NAME& d, std::function<RCPPARG(CPPARGS)> s) {
-  if (d.ctx) {
-    *static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx) = s;
-  } else {
-    d.ctx = new std::function<RCPPARG(CPPARGS)>(s);
-  }
-  return d;
-}
-
-inline std::function<RCPPARG(CPPARGS)>& NAME_get_(NAME d) {
-  return *static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx);
-}
-
-inline void NAME_free_(NAME d) {
-  if (d.ctx) {
-    delete static_cast<std::function<RCPPARG(CPPARGS)>*>(d.ctx);
-  }
-}
-"""
+priv_code = None
 
 decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 /*                                                    */
@@ -294,7 +288,7 @@ if args.implementation:
         """
 extern "C" mlx_closure mlx_closure_new_unary(
     void (*fun)(const mlx_array, mlx_array*)) {
-  MLX_TRY_CATCH(
+        try {
       auto cpp_closure =
           [fun](const std::vector<mlx::core::array>& cpp_input) {
             if (cpp_input.size() != 1) {
@@ -308,7 +302,11 @@ extern "C" mlx_closure mlx_closure_new_unary(
             mlx_array_free(res);
             return cpp_res;
           };
-      return mlx_closure_new_(cpp_closure), return {nullptr});
+      return mlx_closure_new_(cpp_closure);
+  } catch (std::exception & e) {
+    mlx_error(e.what());
+    return mlx_closure_new_();
+  }
 }
 """
     )

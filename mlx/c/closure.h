@@ -25,7 +25,7 @@ typedef struct mlx_closure_ {
   void* ctx;
 } mlx_closure;
 mlx_closure mlx_closure_new();
-void mlx_closure_free(mlx_closure cls);
+int mlx_closure_free(mlx_closure cls);
 mlx_closure mlx_closure_new_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array*));
 mlx_closure mlx_closure_new_func_payload(
@@ -43,7 +43,7 @@ typedef struct mlx_closure_value_and_grad_ {
   void* ctx;
 } mlx_closure_value_and_grad;
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new();
-void mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls);
+int mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls);
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
     void (*fun)(const mlx_vector_array, mlx_vector_array*, mlx_vector_array*));
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func_payload(
@@ -64,7 +64,7 @@ typedef struct mlx_closure_custom_ {
   void* ctx;
 } mlx_closure_custom;
 mlx_closure_custom mlx_closure_custom_new();
-void mlx_closure_custom_free(mlx_closure_custom cls);
+int mlx_closure_custom_free(mlx_closure_custom cls);
 mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
@@ -90,7 +90,7 @@ typedef struct mlx_closure_custom_jvp_ {
   void* ctx;
 } mlx_closure_custom_jvp;
 mlx_closure_custom_jvp mlx_closure_custom_jvp_new();
-void mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls);
+int mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls);
 mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
     const mlx_vector_array,
     const mlx_vector_array,
@@ -119,7 +119,7 @@ typedef struct mlx_closure_custom_vmap_ {
   void* ctx;
 } mlx_closure_custom_vmap;
 mlx_closure_custom_vmap mlx_closure_custom_vmap_new();
-void mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls);
+int mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls);
 mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
     const mlx_vector_array,
     const int*,
