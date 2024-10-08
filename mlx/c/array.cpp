@@ -86,7 +86,7 @@ extern "C" mlx_array mlx_array_new_data(
           (mlx::core::complex64_t*)data, cpp_shape, cpp_dtype));
     default:
       mlx_error("unknown data type");
-      return mlx_array_{0};
+      return mlx_array_();
   }
 }
 

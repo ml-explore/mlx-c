@@ -1,6 +1,6 @@
 ctor_code = """
 inline CTYPE CTYPE_new_() {
-  return CTYPE({DEFAULT_CTOR});
+  return CTYPE({nullptr});
 }
 
 inline CTYPE CTYPE_new_(const CPPTYPE& s) {
@@ -46,18 +46,10 @@ inline void CTYPE_free_(CTYPE d) {
 """
 
 
-def generate(
-    ctype, cpptype, empty_ctor=True, ctor=True, code=code, ctor_code=ctor_code
-):
+def generate(ctype, cpptype, ctor=True, code=code, ctor_code=ctor_code):
     if ctor:
         code = ctor_code + code
 
-    if empty_ctor:
-        default_ctor = "nullptr"
-    else:
-        default_ctor = "new CPPTYPE()"
-
-    code = code.replace("DEFAULT_CTOR", default_ctor)
     code = code.replace("CTYPE", ctype)
     code = code.replace("CPPTYPE", cpptype)
     return code

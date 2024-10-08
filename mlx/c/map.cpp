@@ -11,10 +11,10 @@
 
 extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
   try {
-    return mlx_map_string_to_array_new_();
+    return mlx_map_string_to_array_new_({});
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_map_string_to_array{0};
+    return mlx_map_string_to_array_new_();
   }
 }
 
@@ -108,10 +108,10 @@ extern "C" int mlx_map_string_to_array_iterator_free(
 
 extern "C" mlx_map_string_to_string mlx_map_string_to_string_new(void) {
   try {
-    return mlx_map_string_to_string_new_();
+    return mlx_map_string_to_string_new_({});
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_map_string_to_string{0};
+    return mlx_map_string_to_string_new_();
   }
 }
 

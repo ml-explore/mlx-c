@@ -72,10 +72,10 @@ int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(mlx_map_SCTYPE1_to_SCTYPE2_iterator
 impl_code = """
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
 try {
-  return mlx_map_SCTYPE1_to_SCTYPE2_new_();
+  return mlx_map_SCTYPE1_to_SCTYPE2_new_({});
    } catch (std::exception & e) {
     mlx_error(e.what());
-    return mlx_map_SCTYPE1_to_SCTYPE2{0};
+    return mlx_map_SCTYPE1_to_SCTYPE2_new_();
   }
 }
 
@@ -173,7 +173,7 @@ def generate(code, type1, type2):
     if code is None:
         ctype = "mlx_map_" + type1["nick"] + "_to_" + type2["nick"]
         cpptype = "std::unordered_map<" + type1["cpp"] + ", " + type2["cpp"] + ">"
-        code = tpg.generate(ctype, cpptype, empty_ctor=False)
+        code = tpg.generate(ctype, cpptype)
         code += tpg.generate(ctype + "_iterator", cpptype + "::iterator", ctor=False)
         code += """
 inline CPPTYPE& CTYPE_iterator_get_map_(

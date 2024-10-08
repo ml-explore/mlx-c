@@ -10,7 +10,7 @@
 #include "mlx/mlx.h"
 
 inline mlx_vector_array mlx_vector_array_new_() {
-  return mlx_vector_array({new std::vector<mlx::core::array>()});
+  return mlx_vector_array({nullptr});
 }
 
 inline mlx_vector_array mlx_vector_array_new_(
@@ -60,8 +60,7 @@ inline void mlx_vector_array_free_(mlx_vector_array d) {
 }
 
 inline mlx_vector_vector_array mlx_vector_vector_array_new_() {
-  return mlx_vector_vector_array(
-      {new std::vector<std::vector<mlx::core::array>>()});
+  return mlx_vector_vector_array({nullptr});
 }
 
 inline mlx_vector_vector_array mlx_vector_vector_array_new_(
@@ -113,7 +112,7 @@ inline void mlx_vector_vector_array_free_(mlx_vector_vector_array d) {
 }
 
 inline mlx_vector_int mlx_vector_int_new_() {
-  return mlx_vector_int({new std::vector<int>()});
+  return mlx_vector_int({nullptr});
 }
 
 inline mlx_vector_int mlx_vector_int_new_(const std::vector<int>& s) {
@@ -160,7 +159,7 @@ inline void mlx_vector_int_free_(mlx_vector_int d) {
 }
 
 inline mlx_vector_string mlx_vector_string_new_() {
-  return mlx_vector_string({new std::vector<std::string>()});
+  return mlx_vector_string({nullptr});
 }
 
 inline mlx_vector_string mlx_vector_string_new_(

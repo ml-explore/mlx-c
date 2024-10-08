@@ -44,7 +44,7 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
   return mlx_vector_SCTYPE_new_({});
    } catch (std::exception & e) {
     mlx_error(e.what());
-    return mlx_vector_SCTYPE{0};
+    return mlx_vector_SCTYPE_new_();
   }
 }
 
@@ -69,7 +69,7 @@ try {
   return vec;
   } catch (std::exception & e) {
     mlx_error(e.what());
-    return mlx_vector_SCTYPE{0};
+    return mlx_vector_SCTYPE_new_();
   }
 }
 
@@ -78,7 +78,7 @@ try{
   return mlx_vector_SCTYPE_new_({C_TO_CPP(val)});
   } catch (std::exception & e) {
     mlx_error(e.what());
-    return mlx_vector_SCTYPE{0};
+    return mlx_vector_SCTYPE_new_();
   }
 }
 
@@ -91,7 +91,7 @@ extern "C" int mlx_vector_SCTYPE_set_data(
     for (size_t i = 0; i < size; i++) {
       cpp_arrs.push_back(C_TO_CPP(data[i]));
     }
-    mlx_vector_SCTYPE_get_(*vec_) = cpp_arrs;
+    mlx_vector_SCTYPE_set_(*vec_, cpp_arrs);
   } catch (std::exception & e) {
     mlx_error(e.what());
     return 1;
@@ -101,7 +101,7 @@ extern "C" int mlx_vector_SCTYPE_set_data(
 
 extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec_, CTYPE val) {
   try {
-    mlx_vector_SCTYPE_get_(*vec_) = std::vector<CPPTYPE>({C_TO_CPP(val)});
+    mlx_vector_SCTYPE_set_(*vec_, std::vector<CPPTYPE>({C_TO_CPP(val)}));
   } catch (std::exception & e) {
     mlx_error(e.what());
     return 1;
@@ -167,9 +167,7 @@ def generate(
     c_assign=lambda d, s: "(*" + d + ")->ctx = " + s,
 ):
     if code is None:
-        return tpg.generate(
-            "mlx_vector_" + sctype, "std::vector<" + cpptype + ">", empty_ctor=False
-        )
+        return tpg.generate("mlx_vector_" + sctype, "std::vector<" + cpptype + ">")
 
     if rctype is None:
         rctype = ctype.replace("const ", "") + "*"

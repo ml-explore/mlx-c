@@ -10,8 +10,7 @@
 #include "mlx/mlx.h"
 
 inline mlx_map_string_to_array mlx_map_string_to_array_new_() {
-  return mlx_map_string_to_array(
-      {new std::unordered_map<std::string, mlx::core::array>()});
+  return mlx_map_string_to_array({nullptr});
 }
 
 inline mlx_map_string_to_array mlx_map_string_to_array_new_(
@@ -113,8 +112,7 @@ mlx_map_string_to_array_iterator_get_map_(mlx_map_string_to_array_iterator d) {
 }
 
 inline mlx_map_string_to_string mlx_map_string_to_string_new_() {
-  return mlx_map_string_to_string(
-      {new std::unordered_map<std::string, std::string>()});
+  return mlx_map_string_to_string({nullptr});
 }
 
 inline mlx_map_string_to_string mlx_map_string_to_string_new_(
