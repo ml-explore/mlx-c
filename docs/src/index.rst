@@ -53,3 +53,4 @@ bindings to MLX.
    compile
    fast
    metal
+   error

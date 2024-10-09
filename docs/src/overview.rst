@@ -4,8 +4,8 @@ Overview
 MLX C wraps and follows as closely as possible the C++ API of `MLX
 <https://github.com/ml-explore/mlx>`_.
 
-C Object
---------
+C Objects
+---------
 
 MLX C relies on several opaque C ``struct`` to operate. This includes:
 
@@ -142,8 +142,26 @@ Fast Custom Ops
 To maximize performance MLX has :doc:`fast <fast>` custom implementations
 for some common operations.
 
-Metal backend-specific functions
+Metal Backend-specific Functions
 ================================
 
 MLX C exposes some useful functions related to the MLX :doc:`Metal backend
 <metal>`.
+
+Error Management
+================
+
+Most of MLX operations return an ``int`` value, which will be zero if the
+operation was successful, or non-zero if some error occurred.
+
+However, by default, the program will exit when an error occurs: each time
+an error is encountered, the MLX C :doc:`error handler <error>` is called,
+and the default error handler will simply print out the error, then exit.
+
+It is possible to override the MLX C error handler, via the
+:func:`mlx_set_error_handler()` function. Passing a ``NULL`` pointer to
+this function will also reset the error handler to the default one.
+
+That way, one may install a no-op error handler and then check each
+function return value by hand, or adapt the error handler to an appropriate
+behavior when embedding MLX C in another language.
