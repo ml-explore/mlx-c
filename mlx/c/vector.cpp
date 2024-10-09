@@ -108,7 +108,7 @@ extern "C" int mlx_vector_array_append_value(
 }
 
 extern "C" int
-mlx_vector_array_get(mlx_vector_array vec, size_t index, mlx_array* res) {
+mlx_vector_array_get(mlx_array* res, mlx_vector_array vec, size_t index) {
   try {
     mlx_array_set_(*res, mlx_vector_array_get_(vec).at(index));
   } catch (std::exception& e) {
@@ -233,9 +233,9 @@ extern "C" int mlx_vector_vector_array_append_value(
 }
 
 extern "C" int mlx_vector_vector_array_get(
+    mlx_vector_array* res,
     mlx_vector_vector_array vec,
-    size_t index,
-    mlx_vector_array* res) {
+    size_t index) {
   try {
     mlx_vector_array_set_(*res, mlx_vector_vector_array_get_(vec).at(index));
   } catch (std::exception& e) {
@@ -343,7 +343,7 @@ extern "C" int mlx_vector_int_append_value(mlx_vector_int vec, int value) {
   return 0;
 }
 
-extern "C" int mlx_vector_int_get(mlx_vector_int vec, size_t index, int* res) {
+extern "C" int mlx_vector_int_get(int* res, mlx_vector_int vec, size_t index) {
   try {
     *res = mlx_vector_int_get_(vec).at(index);
   } catch (std::exception& e) {
@@ -462,7 +462,7 @@ extern "C" int mlx_vector_string_append_value(
 }
 
 extern "C" int
-mlx_vector_string_get(mlx_vector_string vec, size_t index, char** res) {
+mlx_vector_string_get(char** res, mlx_vector_string vec, size_t index) {
   try {
     *res = mlx_vector_string_get_(vec).at(index).data();
   } catch (std::exception& e) {

@@ -37,7 +37,7 @@ int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec, CTYPE val);
 int mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
 int mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
-int mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx, RETURN_CTYPE);
+int mlx_vector_SCTYPE_get(RETURN_CTYPE res, mlx_vector_SCTYPE vec, size_t idx);
 """
 
 impl_code = """
@@ -135,7 +135,7 @@ extern "C" int mlx_vector_SCTYPE_append_value(
 }
 
 extern "C" int
-mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index, RETURN_CTYPE res) {
+mlx_vector_SCTYPE_get(RETURN_CTYPE res, mlx_vector_SCTYPE vec, size_t index) {
   try {
     C_ASSIGN(res, mlx_vector_SCTYPE_get_(vec).at(index));
   } catch (std::exception& e) {

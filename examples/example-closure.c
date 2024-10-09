@@ -49,7 +49,7 @@ int inc_fun_bogus(
   }
 
   mlx_array res = mlx_array_new();
-  mlx_vector_array_get(in, 0, &res);
+  mlx_vector_array_get(&res, in, 0);
   mlx_add(&res, res, value, stream);
   mlx_vector_array_set_value(vres_, res);
   mlx_array_free(res);
@@ -71,7 +71,7 @@ int main() {
   mlx_vector_array v_x = mlx_vector_array_new_value(x);
   mlx_closure cls = mlx_closure_new_unary(inc_fun);
   mlx_closure_apply(&v_y, cls, v_x);
-  mlx_vector_array_get(v_y, 0, &y);
+  mlx_vector_array_get(&y, v_y, 0);
   print_array("+1: ", y);
 
   struct bogus_payload payload;
@@ -81,7 +81,7 @@ int main() {
   mlx_closure cls_with_value =
       mlx_closure_new_func_payload(inc_fun_bogus, &payload, NULL);
   mlx_closure_apply(&v_y, cls_with_value, v_x);
-  mlx_vector_array_get(v_y, 0, &y);
+  mlx_vector_array_get(&y, v_y, 0);
   print_array("+2: ", y);
 
   // simple +nan to input, with paylaod
@@ -90,7 +90,7 @@ int main() {
   if (mlx_closure_apply(&v_y, cls_with_value, v_x)) {
     printf("closure failed with: <%s>\n", payload.error);
   } else {
-    mlx_vector_array_get(v_y, 0, &y);
+    mlx_vector_array_get(&y, v_y, 0);
     print_array("+nan: ", y);
   }
   mlx_set_error_handler(NULL, NULL, NULL);

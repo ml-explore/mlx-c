@@ -25,7 +25,7 @@ int main() {
       mlx_map_string_to_array_iterator_new(data);
   const char* key;
   mlx_array value = mlx_array_new();
-  while (!mlx_map_string_to_array_iterator_next(it, &key, &value)) {
+  while (!mlx_map_string_to_array_iterator_next(&key, &value, it)) {
     print_array(key, value);
   }
 

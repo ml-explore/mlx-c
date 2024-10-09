@@ -47,9 +47,9 @@ int mlx_map_SCTYPE1_to_SCTYPE2_insert(
  * Returns the value indexed at the specified `key` in the map.
  */
 int mlx_map_SCTYPE1_to_SCTYPE2_get(
+    RCTYPE2 value,
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    CTYPE1 key,
-    RCTYPE2 value);
+    CTYPE1 key);
 
 /**
  * An iterator over a SCTYPE1-to-SCTYPE2 map.
@@ -72,9 +72,9 @@ int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(
  * Increment iterator.
  */
 int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it,
     RCTYPE1 key,
-    RCTYPE2 value);
+    RCTYPE2 value,
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
 """
 
 impl_code = """
@@ -112,9 +112,9 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
 }
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
+    RCTYPE2 value,
     mlx_map_SCTYPE1_to_SCTYPE2 map,
-    CTYPE1 key,
-    RCTYPE2 value) {
+    CTYPE1 key) {
   try {
     auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
     if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
@@ -144,9 +144,9 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(mlx_map_SCTYPE1_to_SCTYPE2 map) {
 }
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
-    mlx_map_SCTYPE1_to_SCTYPE2_iterator it,
     RCTYPE1 key,
-    RCTYPE2 value) {
+    RCTYPE2 value,
+    mlx_map_SCTYPE1_to_SCTYPE2_iterator it) {
   try {
     if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) ==
         mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {

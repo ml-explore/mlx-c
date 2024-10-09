@@ -40,7 +40,7 @@ int mlx_vector_array_append_data(
     size_t size);
 int mlx_vector_array_append_value(mlx_vector_array vec, const mlx_array val);
 size_t mlx_vector_array_size(mlx_vector_array vec);
-int mlx_vector_array_get(mlx_vector_array vec, size_t idx, mlx_array*);
+int mlx_vector_array_get(mlx_array* res, mlx_vector_array vec, size_t idx);
 
 /**
  * A vector of vector_array.
@@ -71,9 +71,9 @@ int mlx_vector_vector_array_append_value(
     const mlx_vector_array val);
 size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec);
 int mlx_vector_vector_array_get(
+    mlx_vector_array* res,
     mlx_vector_vector_array vec,
-    size_t idx,
-    mlx_vector_array*);
+    size_t idx);
 
 /**
  * A vector of int.
@@ -90,7 +90,7 @@ int mlx_vector_int_set_value(mlx_vector_int* vec, int val);
 int mlx_vector_int_append_data(mlx_vector_int vec, int* data, size_t size);
 int mlx_vector_int_append_value(mlx_vector_int vec, int val);
 size_t mlx_vector_int_size(mlx_vector_int vec);
-int mlx_vector_int_get(mlx_vector_int vec, size_t idx, int*);
+int mlx_vector_int_get(int* res, mlx_vector_int vec, size_t idx);
 
 /**
  * A vector of string.
@@ -113,7 +113,7 @@ int mlx_vector_string_append_data(
     size_t size);
 int mlx_vector_string_append_value(mlx_vector_string vec, const char* val);
 size_t mlx_vector_string_size(mlx_vector_string vec);
-int mlx_vector_string_get(mlx_vector_string vec, size_t idx, char**);
+int mlx_vector_string_get(char** res, mlx_vector_string vec, size_t idx);
 
 /**@}*/
 

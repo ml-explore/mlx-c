@@ -41,9 +41,9 @@ extern "C" int mlx_map_string_to_array_insert(
 }
 
 extern "C" int mlx_map_string_to_array_get(
+    mlx_array* value,
     mlx_map_string_to_array map,
-    const char* key,
-    mlx_array* value) {
+    const char* key) {
   try {
     auto search = mlx_map_string_to_array_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_array_get_(map).end()) {
@@ -74,9 +74,9 @@ mlx_map_string_to_array_iterator_new(mlx_map_string_to_array map) {
 }
 
 extern "C" int mlx_map_string_to_array_iterator_next(
-    mlx_map_string_to_array_iterator it,
     const char** key,
-    mlx_array* value) {
+    mlx_array* value,
+    mlx_map_string_to_array_iterator it) {
   try {
     if (mlx_map_string_to_array_iterator_get_(it) ==
         mlx_map_string_to_array_iterator_get_map_(it).end()) {
@@ -138,9 +138,9 @@ extern "C" int mlx_map_string_to_string_insert(
 }
 
 extern "C" int mlx_map_string_to_string_get(
+    const char** value,
     mlx_map_string_to_string map,
-    const char* key,
-    const char** value) {
+    const char* key) {
   try {
     auto search = mlx_map_string_to_string_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_string_get_(map).end()) {
@@ -171,9 +171,9 @@ mlx_map_string_to_string_iterator_new(mlx_map_string_to_string map) {
 }
 
 extern "C" int mlx_map_string_to_string_iterator_next(
-    mlx_map_string_to_string_iterator it,
     const char** key,
-    const char** value) {
+    const char** value,
+    mlx_map_string_to_string_iterator it) {
   try {
     if (mlx_map_string_to_string_iterator_get_(it) ==
         mlx_map_string_to_string_iterator_get_map_(it).end()) {

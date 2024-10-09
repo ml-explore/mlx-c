@@ -45,9 +45,9 @@ int mlx_map_string_to_array_insert(
  * Returns the value indexed at the specified `key` in the map.
  */
 int mlx_map_string_to_array_get(
+    mlx_array* value,
     mlx_map_string_to_array map,
-    const char* key,
-    mlx_array* value);
+    const char* key);
 
 /**
  * An iterator over a string-to-array map.
@@ -69,9 +69,9 @@ int mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
  * Increment iterator.
  */
 int mlx_map_string_to_array_iterator_next(
-    mlx_map_string_to_array_iterator it,
     const char** key,
-    mlx_array* value);
+    mlx_array* value,
+    mlx_map_string_to_array_iterator it);
 
 /**
  * A string-to-string map
@@ -99,9 +99,9 @@ int mlx_map_string_to_string_insert(
  * Returns the value indexed at the specified `key` in the map.
  */
 int mlx_map_string_to_string_get(
+    const char** value,
     mlx_map_string_to_string map,
-    const char* key,
-    const char** value);
+    const char* key);
 
 /**
  * An iterator over a string-to-string map.
@@ -124,9 +124,9 @@ int mlx_map_string_to_string_iterator_free(
  * Increment iterator.
  */
 int mlx_map_string_to_string_iterator_next(
-    mlx_map_string_to_string_iterator it,
     const char** key,
-    const char** value);
+    const char** value,
+    mlx_map_string_to_string_iterator it);
 
 /**@}*/
 
