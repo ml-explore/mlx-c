@@ -22,7 +22,7 @@ extern "C" {
 /**@{*/
 
 /**
- * An N-dimensional array object.
+ * A N-dimensional array object.
  */
 typedef struct mlx_array_ {
   void* ctx;
@@ -114,6 +114,7 @@ int mlx_array_set_float(mlx_array* arr, float val);
 int mlx_array_set_complex(mlx_array* arr, float real_val, float imag_val);
 /**
  * Set array to specified data and shape.
+ * @param arr Destination array.
  * @param data A buffer which will be copied.
  * @param shape Shape of the array.
  * @param dim Number of dimensions (size of `shape`).

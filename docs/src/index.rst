@@ -29,19 +29,15 @@ bindings to MLX.
    :caption: Object Reference
    :maxdepth: 1
 
-   object
    array
-   vector
-   stream
    device
+   stream
    string
+   vector
    map
-   tuple
-   variant
    optional
    closure
    distributed_group
-   ioutils
 
 .. toctree::
    :caption: API Reference
