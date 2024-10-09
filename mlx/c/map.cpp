@@ -54,7 +54,7 @@ extern "C" int mlx_map_string_to_array_insert(
 
 extern "C" int mlx_map_string_to_array_get(
     mlx_array* value,
-    mlx_map_string_to_array map,
+    const mlx_map_string_to_array map,
     const char* key) {
   try {
     auto search = mlx_map_string_to_array_get_(map).find(std::string(key));
@@ -163,7 +163,7 @@ extern "C" int mlx_map_string_to_string_insert(
 
 extern "C" int mlx_map_string_to_string_get(
     const char** value,
-    mlx_map_string_to_string map,
+    const mlx_map_string_to_string map,
     const char* key) {
   try {
     auto search = mlx_map_string_to_string_get_(map).find(std::string(key));

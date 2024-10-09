@@ -29,16 +29,25 @@ typedef struct mlx_vector_SCTYPE_ {
   void* ctx;
 } mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
-int mlx_vector_SCTYPE_set(mlx_vector_SCTYPE *vec, const mlx_vector_SCTYPE src);
+int mlx_vector_SCTYPE_set(mlx_vector_SCTYPE* vec, const mlx_vector_SCTYPE src);
 int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
-int mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE* vec, CTYPE* data, size_t size);
+int mlx_vector_SCTYPE_set_data(
+    mlx_vector_SCTYPE* vec,
+    CTYPE* data,
+    size_t size);
 int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec, CTYPE val);
-int mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec,  CTYPE* data, size_t size);
+int mlx_vector_SCTYPE_append_data(
+    mlx_vector_SCTYPE vec,
+    CTYPE* data,
+    size_t size);
 int mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
-int mlx_vector_SCTYPE_get(RETURN_CTYPE res, mlx_vector_SCTYPE vec, size_t idx);
+int mlx_vector_SCTYPE_get(
+    RETURN_CTYPE res,
+    const mlx_vector_SCTYPE vec,
+    size_t idx);
 """
 
 impl_code = """
@@ -147,8 +156,10 @@ extern "C" int mlx_vector_SCTYPE_append_value(
   return 0;
 }
 
-extern "C" int
-mlx_vector_SCTYPE_get(RETURN_CTYPE res, mlx_vector_SCTYPE vec, size_t index) {
+extern "C" int mlx_vector_SCTYPE_get(
+    RETURN_CTYPE res,
+    const mlx_vector_SCTYPE vec,
+    size_t index) {
   try {
     C_ASSIGN(res, mlx_vector_SCTYPE_get_(vec).at(index));
   } catch (std::exception& e) {

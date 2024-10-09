@@ -54,7 +54,7 @@ int mlx_map_SCTYPE1_to_SCTYPE2_insert(
  */
 int mlx_map_SCTYPE1_to_SCTYPE2_get(
     RCTYPE2 value,
-    mlx_map_SCTYPE1_to_SCTYPE2 map,
+    const mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key);
 
 /**
@@ -131,7 +131,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
     RCTYPE2 value,
-    mlx_map_SCTYPE1_to_SCTYPE2 map,
+    const mlx_map_SCTYPE1_to_SCTYPE2 map,
     CTYPE1 key) {
   try {
     auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
