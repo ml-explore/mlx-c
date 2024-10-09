@@ -215,76 +215,200 @@ extern "C" mlx_array mlx_array_new_data(
 }
 
 extern "C" size_t mlx_array_itemsize(mlx_array arr) {
-  return mlx_array_get_(arr).itemsize();
+  try {
+    return mlx_array_get_(arr).itemsize();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 extern "C" size_t mlx_array_size(mlx_array arr) {
-  return mlx_array_get_(arr).size();
+  try {
+    return mlx_array_get_(arr).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 extern "C" size_t mlx_array_nbytes(mlx_array arr) {
-  return mlx_array_get_(arr).nbytes();
+  try {
+    return mlx_array_get_(arr).nbytes();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 extern "C" size_t mlx_array_ndim(mlx_array arr) {
-  return mlx_array_get_(arr).ndim();
+  try {
+    return mlx_array_get_(arr).ndim();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 extern "C" int* mlx_array_shape(mlx_array arr) {
-  return (int*)mlx_array_get_(arr).shape().data();
+  try {
+    return (int*)mlx_array_get_(arr).shape().data();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
 }
 extern "C" size_t* mlx_array_strides(mlx_array arr) {
-  return (size_t*)mlx_array_get_(arr).strides().data();
+  try {
+    return (size_t*)mlx_array_get_(arr).strides().data();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
 }
 extern "C" int mlx_array_dim(mlx_array arr, int dim) {
-  return mlx_array_get_(arr).shape(dim);
+  try {
+    return mlx_array_get_(arr).shape(dim);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
 extern "C" mlx_dtype mlx_array_dtype(mlx_array arr) {
-  return mlx_dtype_to_c(mlx_array_get_(arr).dtype());
+  try {
+    return mlx_dtype_to_c(mlx_array_get_(arr).dtype());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return MLX_BOOL;
+  }
 }
-extern "C" void mlx_array_eval(mlx_array arr) {
-  mlx_array_get_(arr).eval();
+extern "C" int mlx_array_eval(mlx_array arr) {
+  try {
+    mlx_array_get_(arr).eval();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" bool mlx_array_item_bool(mlx_array arr) {
-  return mlx_array_get_(arr).item<bool>();
+extern "C" int mlx_array_item_bool(bool* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<bool>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" uint8_t mlx_array_item_uint8(mlx_array arr) {
-  return mlx_array_get_(arr).item<uint8_t>();
+extern "C" int mlx_array_item_uint8(uint8_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<uint8_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" uint16_t mlx_array_item_uint16(mlx_array arr) {
-  return mlx_array_get_(arr).item<uint16_t>();
+extern "C" int mlx_array_item_uint16(uint16_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<uint16_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" uint32_t mlx_array_item_uint32(mlx_array arr) {
-  return mlx_array_get_(arr).item<uint32_t>();
+extern "C" int mlx_array_item_uint32(uint32_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<uint32_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" uint64_t mlx_array_item_uint64(mlx_array arr) {
-  return mlx_array_get_(arr).item<uint64_t>();
+extern "C" int mlx_array_item_uint64(uint64_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<uint64_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" int8_t mlx_array_item_int8(mlx_array arr) {
-  return mlx_array_get_(arr).item<int8_t>();
+extern "C" int mlx_array_item_int8(int8_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<int8_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" int16_t mlx_array_item_int16(mlx_array arr) {
-  return mlx_array_get_(arr).item<int16_t>();
+extern "C" int mlx_array_item_int16(int16_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<int16_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" int32_t mlx_array_item_int32(mlx_array arr) {
-  return mlx_array_get_(arr).item<int32_t>();
+extern "C" int mlx_array_item_int32(int32_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<int32_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" int64_t mlx_array_item_int64(mlx_array arr) {
-  return mlx_array_get_(arr).item<int64_t>();
+extern "C" int mlx_array_item_int64(int64_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<int64_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" float mlx_array_item_float32(mlx_array arr) {
-  return mlx_array_get_(arr).item<float>();
+extern "C" int mlx_array_item_float32(float* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<float>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" float _Complex mlx_array_item_complex64(mlx_array arr) {
-  return mlx_array_get_(arr).item<float _Complex>();
+extern "C" int mlx_array_item_complex64(float _Complex* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<float _Complex>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 #ifdef HAS_FLOAT16
-extern "C" float16_t mlx_array_item_float16(mlx_array arr) {
-  return mlx_array_get_(arr).item<float16_t>();
+extern "C" int mlx_array_item_float16(float16_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<float16_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 #endif
 
 #ifdef HAS_BFLOAT16
-extern "C" bfloat16_t mlx_array_item_bfloat16(mlx_array arr) {
-  return mlx_array_get_(arr).item<bfloat16_t>();
+extern "C" int mlx_array_item_bfloat16(bfloat16_t* res, mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<bfloat16_t>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 #endif
 

@@ -35,11 +35,14 @@ int inc_fun_bogus(
     fprintf(stderr, "inc_func_value: expected 1 argument");
     exit(EXIT_FAILURE);
   }
+
+  // check if there is NaN in payload value
+  bool has_nan_flag;
   mlx_array value = payload->value;
   mlx_array has_nan = mlx_array_new();
   mlx_isnan(&has_nan, value, stream);
   mlx_any_all(&has_nan, has_nan, false, stream);
-  bool has_nan_flag = mlx_array_item_bool(has_nan);
+  mlx_array_item_bool(&has_nan_flag, has_nan);
   mlx_array_free(has_nan);
 
   if (has_nan_flag) {

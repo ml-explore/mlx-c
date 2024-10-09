@@ -167,65 +167,65 @@ mlx_dtype mlx_array_dtype(mlx_array arr);
 /**
  * Evaluate the array.
  */
-void mlx_array_eval(mlx_array arr);
+int mlx_array_eval(mlx_array arr);
 
 /**
  * Access the value of a scalar array.
  */
-bool mlx_array_item_bool(mlx_array arr);
+int mlx_array_item_bool(bool* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint8_t mlx_array_item_uint8(mlx_array arr);
+int mlx_array_item_uint8(uint8_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint16_t mlx_array_item_uint16(mlx_array arr);
+int mlx_array_item_uint16(uint16_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint32_t mlx_array_item_uint32(mlx_array arr);
+int mlx_array_item_uint32(uint32_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint64_t mlx_array_item_uint64(mlx_array arr);
+int mlx_array_item_uint64(uint64_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int8_t mlx_array_item_int8(mlx_array arr);
+int mlx_array_item_int8(int8_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int16_t mlx_array_item_int16(mlx_array arr);
+int mlx_array_item_int16(int16_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int32_t mlx_array_item_int32(mlx_array arr);
+int mlx_array_item_int32(int32_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int64_t mlx_array_item_int64(mlx_array arr);
+int mlx_array_item_int64(int64_t* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-float mlx_array_item_float32(mlx_array arr);
+int mlx_array_item_float32(float* res, mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-float _Complex mlx_array_item_complex64(mlx_array arr);
+int mlx_array_item_complex64(float _Complex* res, mlx_array arr);
 
 #ifdef HAS_FLOAT16
 /**
  * Access the value of a scalar array.
  */
-float16_t mlx_array_item_float16(mlx_array arr);
+int mlx_array_item_float16(float16_t* res, mlx_array arr);
 #endif
 
 #ifdef HAS_BFLOAT16
 /**
  * Access the value of a scalar array.
  */
-bfloat16_t mlx_array_item_bfloat16(mlx_array arr);
+int mlx_array_item_bfloat16(bfloat16_t* res, mlx_array arr);
 #endif
 
 /**
