@@ -27,9 +27,9 @@ typedef struct mlx_closure_ {
 mlx_closure mlx_closure_new();
 int mlx_closure_free(mlx_closure cls);
 mlx_closure mlx_closure_new_func(
-    void (*fun)(mlx_vector_array*, const mlx_vector_array));
+    int (*fun)(mlx_vector_array*, const mlx_vector_array));
 mlx_closure mlx_closure_new_func_payload(
-    void (*fun)(mlx_vector_array*, const mlx_vector_array, void*),
+    int (*fun)(mlx_vector_array*, const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*));
 int mlx_closure_apply(
@@ -37,7 +37,7 @@ int mlx_closure_apply(
     mlx_closure cls,
     const mlx_vector_array input);
 
-mlx_closure mlx_closure_new_unary(void (*fun)(mlx_array*, const mlx_array));
+mlx_closure mlx_closure_new_unary(int (*fun)(mlx_array*, const mlx_array));
 
 typedef struct mlx_closure_value_and_grad_ {
   void* ctx;
@@ -45,9 +45,9 @@ typedef struct mlx_closure_value_and_grad_ {
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new();
 int mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls);
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
-    void (*fun)(mlx_vector_array*, mlx_vector_array*, const mlx_vector_array));
+    int (*fun)(mlx_vector_array*, mlx_vector_array*, const mlx_vector_array));
 mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func_payload(
-    void (*fun)(
+    int (*fun)(
         mlx_vector_array*,
         mlx_vector_array*,
         const mlx_vector_array,
@@ -65,13 +65,13 @@ typedef struct mlx_closure_custom_ {
 } mlx_closure_custom;
 mlx_closure_custom mlx_closure_custom_new();
 int mlx_closure_custom_free(mlx_closure_custom cls);
-mlx_closure_custom mlx_closure_custom_new_func(void (*fun)(
+mlx_closure_custom mlx_closure_custom_new_func(int (*fun)(
     mlx_vector_array*,
     const mlx_vector_array,
     const mlx_vector_array,
     const mlx_vector_array));
 mlx_closure_custom mlx_closure_custom_new_func_payload(
-    void (*fun)(
+    int (*fun)(
         mlx_vector_array*,
         const mlx_vector_array,
         const mlx_vector_array,
@@ -91,14 +91,14 @@ typedef struct mlx_closure_custom_jvp_ {
 } mlx_closure_custom_jvp;
 mlx_closure_custom_jvp mlx_closure_custom_jvp_new();
 int mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls);
-mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(void (*fun)(
+mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(int (*fun)(
     mlx_vector_array*,
     const mlx_vector_array,
     const mlx_vector_array,
     const int*,
     size_t _num));
 mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
-    void (*fun)(
+    int (*fun)(
         mlx_vector_array*,
         const mlx_vector_array,
         const mlx_vector_array,
@@ -120,14 +120,14 @@ typedef struct mlx_closure_custom_vmap_ {
 } mlx_closure_custom_vmap;
 mlx_closure_custom_vmap mlx_closure_custom_vmap_new();
 int mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls);
-mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(void (*fun)(
+mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(int (*fun)(
     mlx_vector_array*,
     mlx_vector_int*,
     const mlx_vector_array,
     const int*,
     size_t _num));
 mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
-    void (*fun)(
+    int (*fun)(
         mlx_vector_array*,
         mlx_vector_int*,
         const mlx_vector_array,
