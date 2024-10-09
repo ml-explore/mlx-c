@@ -5,6 +5,7 @@
 
 #include "mlx/c/string.h"
 
+#include <float.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -13,9 +14,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define __STDC_WANT_IEC_60559_TYPES_EXT__
-#include <float.h>
 
 /**
  * \defgroup mlx_array Array
