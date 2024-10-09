@@ -55,7 +55,12 @@ extern "C" mlx_closure mlx_closure_new_func_payload(
     void* payload,
     void (*dtor)(void*)) {
   try {
-    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
     auto cpp_closure = [fun, cpp_payload, dtor](
                            const std::vector<mlx::core::array>& cpp_input) {
       auto input = mlx_vector_array_new_();
@@ -179,7 +184,12 @@ mlx_closure_value_and_grad_new_func_payload(
     void* payload,
     void (*dtor)(void*)) {
   try {
-    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
     auto cpp_closure = [fun, cpp_payload, dtor](
                            const std::vector<mlx::core::array>& cpp_input) {
       auto input = mlx_vector_array_new_();
@@ -291,7 +301,12 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
     void* payload,
     void (*dtor)(void*)) {
   try {
-    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
     auto cpp_closure = [fun, cpp_payload, dtor](
                            const std::vector<mlx::core::array>& cpp_input_0,
                            const std::vector<mlx::core::array>& cpp_input_1,
@@ -413,7 +428,12 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
     void* payload,
     void (*dtor)(void*)) {
   try {
-    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
     auto cpp_closure = [fun, cpp_payload, dtor](
                            const std::vector<mlx::core::array>& cpp_input_0,
                            const std::vector<mlx::core::array>& cpp_input_1,
@@ -542,7 +562,12 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
     void* payload,
     void (*dtor)(void*)) {
   try {
-    auto cpp_payload = std::shared_ptr<void>(payload, dtor);
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
     auto cpp_closure = [fun, cpp_payload, dtor](
                            const std::vector<mlx::core::array>& cpp_input_0,
                            const std::vector<int>& cpp_input_1) {
