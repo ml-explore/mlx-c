@@ -95,6 +95,10 @@ mlx_array mlx_array_new_data(
     int dim,
     mlx_dtype dtype);
 /**
+ * Set array to provided src array.
+ */
+int mlx_array_set(mlx_array* arr, const mlx_array src);
+/**
  * Set array to a bool scalar.
  */
 int mlx_array_set_bool(mlx_array* arr, bool val);

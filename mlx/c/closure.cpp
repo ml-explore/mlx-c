@@ -16,6 +16,16 @@ extern "C" mlx_closure mlx_closure_new() {
   }
 }
 
+extern "C" int mlx_closure_set(mlx_closure* cls, const mlx_closure src) {
+  try {
+    mlx_closure_set_(*cls, mlx_closure_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" int mlx_closure_free(mlx_closure cls) {
   try {
     mlx_closure_free_(cls);
@@ -132,6 +142,18 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new() {
   }
 }
 
+extern "C" int mlx_closure_value_and_grad_set(
+    mlx_closure_value_and_grad* cls,
+    const mlx_closure_value_and_grad src) {
+  try {
+    mlx_closure_value_and_grad_set_(*cls, mlx_closure_value_and_grad_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" int mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls) {
   try {
     mlx_closure_value_and_grad_free_(cls);
@@ -242,6 +264,18 @@ extern "C" mlx_closure_custom mlx_closure_custom_new() {
     mlx_error(e.what());
     return mlx_closure_custom_new_();
   }
+}
+
+extern "C" int mlx_closure_custom_set(
+    mlx_closure_custom* cls,
+    const mlx_closure_custom src) {
+  try {
+    mlx_closure_custom_set_(*cls, mlx_closure_custom_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_closure_custom_free(mlx_closure_custom cls) {
@@ -365,6 +399,18 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new() {
     mlx_error(e.what());
     return mlx_closure_custom_jvp_new_();
   }
+}
+
+extern "C" int mlx_closure_custom_jvp_set(
+    mlx_closure_custom_jvp* cls,
+    const mlx_closure_custom_jvp src) {
+  try {
+    mlx_closure_custom_jvp_set_(*cls, mlx_closure_custom_jvp_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls) {
@@ -496,6 +542,18 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new() {
     mlx_error(e.what());
     return mlx_closure_custom_vmap_new_();
   }
+}
+
+extern "C" int mlx_closure_custom_vmap_set(
+    mlx_closure_custom_vmap* cls,
+    const mlx_closure_custom_vmap src) {
+  try {
+    mlx_closure_custom_vmap_set_(*cls, mlx_closure_custom_vmap_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls) {

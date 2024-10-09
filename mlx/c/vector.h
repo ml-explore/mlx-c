@@ -26,6 +26,7 @@ typedef struct mlx_vector_array_ {
   void* ctx;
 } mlx_vector_array;
 mlx_vector_array mlx_vector_array_new();
+int mlx_vector_array_set(mlx_vector_array* vec, const mlx_vector_array src);
 int mlx_vector_array_free(mlx_vector_array vec);
 mlx_vector_array mlx_vector_array_new_data(const mlx_array* data, size_t size);
 mlx_vector_array mlx_vector_array_new_value(const mlx_array val);
@@ -49,6 +50,9 @@ typedef struct mlx_vector_vector_array_ {
   void* ctx;
 } mlx_vector_vector_array;
 mlx_vector_vector_array mlx_vector_vector_array_new();
+int mlx_vector_vector_array_set(
+    mlx_vector_vector_array* vec,
+    const mlx_vector_vector_array src);
 int mlx_vector_vector_array_free(mlx_vector_vector_array vec);
 mlx_vector_vector_array mlx_vector_vector_array_new_data(
     const mlx_vector_array* data,
@@ -82,6 +86,7 @@ typedef struct mlx_vector_int_ {
   void* ctx;
 } mlx_vector_int;
 mlx_vector_int mlx_vector_int_new();
+int mlx_vector_int_set(mlx_vector_int* vec, const mlx_vector_int src);
 int mlx_vector_int_free(mlx_vector_int vec);
 mlx_vector_int mlx_vector_int_new_data(int* data, size_t size);
 mlx_vector_int mlx_vector_int_new_value(int val);
@@ -99,6 +104,7 @@ typedef struct mlx_vector_string_ {
   void* ctx;
 } mlx_vector_string;
 mlx_vector_string mlx_vector_string_new();
+int mlx_vector_string_set(mlx_vector_string* vec, const mlx_vector_string src);
 int mlx_vector_string_free(mlx_vector_string vec);
 mlx_vector_string mlx_vector_string_new_data(const char** data, size_t size);
 mlx_vector_string mlx_vector_string_new_value(const char* val);

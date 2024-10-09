@@ -35,6 +35,15 @@ extern "C" mlx_stream mlx_stream_new_on_device(mlx_device dev) {
     return mlx_stream_new_();
   }
 }
+extern "C" int mlx_stream_set(mlx_stream* stream, const mlx_stream src) {
+  try {
+    mlx_stream_set_(*stream, mlx_stream_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_stream_free(mlx_stream stream) {
   try {
     mlx_stream_free_(stream);

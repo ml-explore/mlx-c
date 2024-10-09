@@ -13,6 +13,16 @@ extern "C" mlx_string mlx_string_new(const char* str) {
   }
 }
 
+extern "C" int mlx_string_set(mlx_string* str, const mlx_string src) {
+  try {
+    mlx_string_set_(*str, mlx_string_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" const char* mlx_string_data(mlx_string str) {
   try {
     return mlx_string_get_(str).c_str();

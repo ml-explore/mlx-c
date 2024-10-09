@@ -33,6 +33,7 @@ NAME NAME_new_func_payload(
     int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED, void*),
     void* payload,
     void (*dtor)(void*));
+int NAME_set(NAME *cls, const NAME src);
 int NAME_apply(RCARGS, NAME cls, CARGS);
 """
 
@@ -124,6 +125,16 @@ extern "C" NAME NAME_new() {
     mlx_error(e.what());
     return NAME_new_();
   }
+}
+
+extern "C" int NAME_set(NAME *cls, const NAME src) {
+  try {
+    NAME_set_(*cls, NAME_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int NAME_free(NAME cls) {

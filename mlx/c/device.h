@@ -36,6 +36,10 @@ mlx_device mlx_device_new(mlx_device_type type, int index);
  */
 int mlx_device_free(mlx_device dev);
 /**
+ * Set device to provided src device.
+ */
+int mlx_device_set(mlx_device* dev, const mlx_device src);
+/**
  * Get device description.
  */
 mlx_string mlx_device_tostring(mlx_device dev);

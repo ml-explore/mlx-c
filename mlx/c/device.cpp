@@ -28,6 +28,16 @@ extern "C" mlx_device mlx_device_new(mlx_device_type type, int index) {
   }
 }
 
+extern "C" int mlx_device_set(mlx_device* dev, const mlx_device src) {
+  try {
+    mlx_device_set_(*dev, mlx_device_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
   try {
     return mlx_device_type_to_c(mlx_device_get_(dev).type);

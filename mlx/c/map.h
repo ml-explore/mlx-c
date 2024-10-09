@@ -31,6 +31,12 @@ typedef struct mlx_map_string_to_array_ {
  */
 mlx_map_string_to_array mlx_map_string_to_array_new(void);
 /**
+ * Set map to provided src map.
+ */
+int mlx_map_string_to_array_set(
+    mlx_map_string_to_array* map,
+    const mlx_map_string_to_array src);
+/**
  * Free a string-to-array map.
  */
 int mlx_map_string_to_array_free(mlx_map_string_to_array map);
@@ -84,6 +90,12 @@ typedef struct mlx_map_string_to_string_ {
  * Returns a new empty string-to-string map.
  */
 mlx_map_string_to_string mlx_map_string_to_string_new(void);
+/**
+ * Set map to provided src map.
+ */
+int mlx_map_string_to_string_set(
+    mlx_map_string_to_string* map,
+    const mlx_map_string_to_string src);
 /**
  * Free a string-to-string map.
  */

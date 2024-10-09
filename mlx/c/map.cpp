@@ -16,6 +16,18 @@ extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
   }
 }
 
+extern "C" int mlx_map_string_to_array_set(
+    mlx_map_string_to_array* map,
+    const mlx_map_string_to_array src) {
+  try {
+    mlx_map_string_to_array_set_(*map, mlx_map_string_to_array_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" int mlx_map_string_to_array_free(mlx_map_string_to_array map) {
   try {
     mlx_map_string_to_array_free_(map);
@@ -111,6 +123,18 @@ extern "C" mlx_map_string_to_string mlx_map_string_to_string_new(void) {
     mlx_error(e.what());
     return mlx_map_string_to_string_new_();
   }
+}
+
+extern "C" int mlx_map_string_to_string_set(
+    mlx_map_string_to_string* map,
+    const mlx_map_string_to_string src) {
+  try {
+    mlx_map_string_to_string_set_(*map, mlx_map_string_to_string_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_map_string_to_string_free(mlx_map_string_to_string map) {

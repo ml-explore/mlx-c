@@ -32,6 +32,7 @@ mlx_closure mlx_closure_new_func_payload(
     int (*fun)(mlx_vector_array*, const mlx_vector_array, void*),
     void* payload,
     void (*dtor)(void*));
+int mlx_closure_set(mlx_closure* cls, const mlx_closure src);
 int mlx_closure_apply(
     mlx_vector_array* res,
     mlx_closure cls,
@@ -54,6 +55,9 @@ mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func_payload(
         void*),
     void* payload,
     void (*dtor)(void*));
+int mlx_closure_value_and_grad_set(
+    mlx_closure_value_and_grad* cls,
+    const mlx_closure_value_and_grad src);
 int mlx_closure_value_and_grad_apply(
     mlx_vector_array* res_0,
     mlx_vector_array* res_1,
@@ -79,6 +83,9 @@ mlx_closure_custom mlx_closure_custom_new_func_payload(
         void*),
     void* payload,
     void (*dtor)(void*));
+int mlx_closure_custom_set(
+    mlx_closure_custom* cls,
+    const mlx_closure_custom src);
 int mlx_closure_custom_apply(
     mlx_vector_array* res,
     mlx_closure_custom cls,
@@ -107,6 +114,9 @@ mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
         void*),
     void* payload,
     void (*dtor)(void*));
+int mlx_closure_custom_jvp_set(
+    mlx_closure_custom_jvp* cls,
+    const mlx_closure_custom_jvp src);
 int mlx_closure_custom_jvp_apply(
     mlx_vector_array* res,
     mlx_closure_custom_jvp cls,
@@ -136,6 +146,9 @@ mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
         void*),
     void* payload,
     void (*dtor)(void*));
+int mlx_closure_custom_vmap_set(
+    mlx_closure_custom_vmap* cls,
+    const mlx_closure_custom_vmap src);
 int mlx_closure_custom_vmap_apply(
     mlx_vector_array* res_0,
     mlx_vector_int* res_1,

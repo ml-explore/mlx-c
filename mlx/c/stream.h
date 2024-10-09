@@ -33,6 +33,10 @@ mlx_stream mlx_stream_new(int index, mlx_device dev);
  */
 mlx_stream mlx_stream_new_on_device(mlx_device dev);
 /**
+ * Set stream to provided src stream.
+ */
+int mlx_stream_set(mlx_stream* stream, const mlx_stream src);
+/**
  * Free a stream.
  */
 int mlx_stream_free(mlx_stream stream);

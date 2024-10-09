@@ -38,6 +38,15 @@ extern "C" mlx_array mlx_array_new() {
   }
 }
 
+extern "C" int mlx_array_set(mlx_array* arr, const mlx_array src) {
+  try {
+    mlx_array_set_(*arr, mlx_array_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_array_set_bool(mlx_array* arr, bool val) {
   try {
     mlx_array_set_(*arr, mlx::core::array(val));

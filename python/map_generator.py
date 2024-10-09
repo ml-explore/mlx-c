@@ -33,6 +33,12 @@ typedef struct mlx_map_SCTYPE1_to_SCTYPE2_ {
  */
 mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void);
 /**
+ * Set map to provided src map.
+ */
+int mlx_map_SCTYPE1_to_SCTYPE2_set(
+    mlx_map_SCTYPE1_to_SCTYPE2* map,
+    const mlx_map_SCTYPE1_to_SCTYPE2 src);
+/**
  * Free a SCTYPE1-to-SCTYPE2 map.
  */
 int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map);
@@ -85,6 +91,18 @@ extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
     mlx_error(e.what());
     return mlx_map_SCTYPE1_to_SCTYPE2_new_();
   }
+}
+
+extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_set(
+    mlx_map_SCTYPE1_to_SCTYPE2* map,
+    const mlx_map_SCTYPE1_to_SCTYPE2 src) {
+  try {
+    mlx_map_SCTYPE1_to_SCTYPE2_set_(*map, mlx_map_SCTYPE1_to_SCTYPE2_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {

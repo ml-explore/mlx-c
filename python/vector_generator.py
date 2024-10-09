@@ -29,6 +29,7 @@ typedef struct mlx_vector_SCTYPE_ {
   void* ctx;
 } mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
+int mlx_vector_SCTYPE_set(mlx_vector_SCTYPE *vec, const mlx_vector_SCTYPE src);
 int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
@@ -48,6 +49,18 @@ extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
     mlx_error(e.what());
     return mlx_vector_SCTYPE_new_();
   }
+}
+
+extern "C" int mlx_vector_SCTYPE_set(
+    mlx_vector_SCTYPE* vec,
+    const mlx_vector_SCTYPE src) {
+  try {
+    mlx_vector_SCTYPE_set_(*vec, mlx_vector_SCTYPE_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec) {
