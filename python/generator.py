@@ -103,4 +103,12 @@ if args.language == "C":
 else:
     raise RuntimeError("Unsupported language")
 
-generate(funcs, enums, headername, args.namespace, args.implementation, args.docstring)
+generate(
+    funcs,
+    enums,
+    header,
+    headername,
+    args.namespace,
+    args.implementation,
+    args.docstring,
+)

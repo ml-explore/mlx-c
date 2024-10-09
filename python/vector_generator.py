@@ -1,6 +1,7 @@
 import argparse
 import regex
 import string
+import type_private_generator as tpg
 
 parser = argparse.ArgumentParser("MLX C vector code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -24,85 +25,158 @@ decl_code = """
 /**
  * A vector of SCTYPE.
  */
-typedef struct mlx_vector_SCTYPE_* mlx_vector_SCTYPE;
+typedef struct mlx_vector_SCTYPE_ {
+  void* ctx;
+} mlx_vector_SCTYPE;
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
-mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(const CTYPE* data, size_t size);
-mlx_vector_SCTYPE mlx_vector_SCTYPE_from_value(const CTYPE val);
-void mlx_vector_SCTYPE_add_data(mlx_vector_SCTYPE vec, const CTYPE* data, size_t size);
-void mlx_vector_SCTYPE_add_value(mlx_vector_SCTYPE vec, const CTYPE val);
+int mlx_vector_SCTYPE_set(mlx_vector_SCTYPE* vec, const mlx_vector_SCTYPE src);
+int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val);
+int mlx_vector_SCTYPE_set_data(
+    mlx_vector_SCTYPE* vec,
+    CTYPE* data,
+    size_t size);
+int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec, CTYPE val);
+int mlx_vector_SCTYPE_append_data(
+    mlx_vector_SCTYPE vec,
+    CTYPE* data,
+    size_t size);
+int mlx_vector_SCTYPE_append_value(mlx_vector_SCTYPE vec, CTYPE val);
 size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec);
-CTYPE mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t idx);
-CTYPE* mlx_vector_SCTYPE_data(mlx_vector_SCTYPE vec);
+int mlx_vector_SCTYPE_get(
+    RETURN_CTYPE res,
+    const mlx_vector_SCTYPE vec,
+    size_t idx);
 """
 
 impl_code = """
-mlx_string mlx_vector_SCTYPE_::tostring() {
-  MLX_TRY_CATCH(std::ostringstream os;
-                os << "vector of SCTYPEs (size=" << ctx.size() << ")";
-                std::string str = os.str();
-                return new mlx_string_(str);
-                , return nullptr);
-}
-
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
-  RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_())
-}
-
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_data(
-    const CTYPE* data,
-    size_t size) {
-  std::vector<CPPTYPE> cpp_arrs;
-  for (size_t i = 0; i < size; i++) {
-    cpp_arrs.push_back(C_TO_CPP(data[i]));
+  try {
+    return mlx_vector_SCTYPE_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE_new_();
   }
-  RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_(cpp_arrs))
 }
 
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_from_value(const CTYPE val) {
-  RETURN_MLX_C_PTR(new mlx_vector_SCTYPE_({C_TO_CPP(val)}))
+extern "C" int mlx_vector_SCTYPE_set(
+    mlx_vector_SCTYPE* vec,
+    const mlx_vector_SCTYPE src) {
+  try {
+    mlx_vector_SCTYPE_set_(*vec, mlx_vector_SCTYPE_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" void mlx_vector_SCTYPE_add_data(
-    mlx_vector_SCTYPE vec,
-    const CTYPE* data,
+extern "C" int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec) {
+  try {
+    mlx_vector_SCTYPE_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(
+    CTYPE* data,
     size_t size) {
-  MLX_TRY_CATCH(
-      for (size_t i = 0; i < size;
-           i++) { vec->ctx.push_back(C_TO_CPP(data[i])); }, );
+  try {
+    auto vec = mlx_vector_SCTYPE_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(data[i]));
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE_new_();
+  }
 }
 
-extern "C" void mlx_vector_SCTYPE_add_value(
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new_value(CTYPE val) {
+  try {
+    return mlx_vector_SCTYPE_new_({C_TO_CPP(val)});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_SCTYPE_new_();
+  }
+}
+
+extern "C" int
+mlx_vector_SCTYPE_set_data(mlx_vector_SCTYPE* vec_, CTYPE* data, size_t size) {
+  try {
+    std::vector<CPPTYPE> cpp_arrs;
+    for (size_t i = 0; i < size; i++) {
+      cpp_arrs.push_back(C_TO_CPP(data[i]));
+    }
+    mlx_vector_SCTYPE_set_(*vec_, cpp_arrs);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_SCTYPE_set_value(mlx_vector_SCTYPE* vec_, CTYPE val) {
+  try {
+    mlx_vector_SCTYPE_set_(*vec_, std::vector<CPPTYPE>({C_TO_CPP(val)}));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int
+mlx_vector_SCTYPE_append_data(mlx_vector_SCTYPE vec, CTYPE* data, size_t size) {
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(data[i]));
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_SCTYPE_append_value(
     mlx_vector_SCTYPE vec,
-    const CTYPE value) {
-  MLX_TRY_CATCH(vec->ctx.push_back(C_TO_CPP(value));, )
+    CTYPE value) {
+  try {
+    mlx_vector_SCTYPE_get_(vec).push_back(C_TO_CPP(value));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" CTYPE mlx_vector_SCTYPE_get(mlx_vector_SCTYPE vec, size_t index) {
-   RETURN_CPP_TO_C(vec->ctx.at(index));
+extern "C" int mlx_vector_SCTYPE_get(
+    RETURN_CTYPE res,
+    const mlx_vector_SCTYPE vec,
+    size_t index) {
+  try {
+    C_ASSIGN(res, mlx_vector_SCTYPE_get_(vec).at(index));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" size_t mlx_vector_SCTYPE_size(mlx_vector_SCTYPE vec) {
-  return vec->ctx.size();
+  try {
+    return mlx_vector_SCTYPE_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
 }
-"""
-
-priv_code = """
-struct mlx_vector_SCTYPE_ : mlx_object_ {
-  mlx_vector_SCTYPE_() : mlx_object_(){};
-  mlx_vector_SCTYPE_(const std::vector<CPPTYPE>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_SCTYPE_(std::vector<CPPTYPE>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_SCTYPE_(const std::pair<CPPTYPE, CPPTYPE>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_SCTYPE_(
-      const std::tuple<CPPTYPE, CPPTYPE, CPPTYPE>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<CPPTYPE> ctx;
-};
 """
 
 
@@ -111,18 +185,30 @@ def generate(
     cpptype,
     ctype,
     sctype,
+    rctype=None,
     c_to_cpp=lambda s: s + "->ctx",
-    return_cpp_to_c=lambda s: "RETURN_MLX_C_PTR(new CTYPE_(" + s + "))",
+    c_assign=lambda d, s: "(*" + d + ")->ctx = " + s,
 ):
+    if code is None:
+        return tpg.generate("mlx_vector_" + sctype, "std::vector<" + cpptype + ">")
+
+    if rctype is None:
+        rctype = ctype.replace("const ", "") + "*"
+
+    def c_assign_wrap(s):
+        d, s = s.split(",")
+        return c_assign(d, s)
+
+    code = replace_match_parenthesis(code, "C_ASSIGN", c_assign_wrap)
     code = replace_match_parenthesis(code, "C_TO_CPP", c_to_cpp)
-    code = replace_match_parenthesis(code, "RETURN_CPP_TO_C", return_cpp_to_c)
+    code = code.replace("RETURN_CTYPE", rctype)
     code = code.replace("SCTYPE", sctype)
     code = code.replace("CPPTYPE", cpptype)
     code = code.replace("CTYPE", ctype)
     return code
 
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -154,23 +240,20 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/object.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 #include "mlx/c/vector.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
-#include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
 """
 
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
+priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -178,9 +261,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #ifndef MLX_VECTOR_PRIVATE_H
 #define MLX_VECTOR_PRIVATE_H
 
-#include "mlx/c/object.h"
 #include "mlx/c/vector.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 """
 
@@ -193,7 +274,7 @@ if args.implementation:
     begin = impl_begin
     end = impl_end
 elif args.private:
-    code = priv_code
+    code = None
     begin = priv_begin
     end = priv_end
 else:
@@ -206,16 +287,22 @@ print(
     generate(
         code,
         "mlx::core::array",
-        "mlx_array",
+        "const mlx_array",
         "array",
+        "mlx_array*",
+        lambda s: "mlx_array_get_(" + s + ")",
+        lambda d, s: "mlx_array_set_(*" + d + ", " + s + ")",
     )
 )
 print(
     generate(
         code,
         "std::vector<mlx::core::array>",
-        "mlx_vector_array",
+        "const mlx_vector_array",
         "vector_array",
+        "mlx_vector_array*",
+        lambda s: "mlx_vector_array_get_(" + s + ")",
+        lambda d, s: "mlx_vector_array_set_(*" + d + ", " + s + ")",
     )
 )
 print(
@@ -224,49 +311,28 @@ print(
         "int",
         "int",
         "int",
+        "int*",
         lambda s: s,
-        lambda s: "return " + s,
+        lambda d, s: "*" + d + " = " + s,
     )
 )
-print(
-    generate(
-        code,
-        "std::vector<int>",
-        "mlx_vector_int",
-        "vector_int",
-    )
-)
+# print(
+#     generate(
+#         code,
+#         "std::vector<int>",
+#         "const mlx_vector_int",
+#         "vector_int",
+#     )
+# )
 print(
     generate(
         code,
         "std::string",
-        "mlx_string",
+        "const char*",
         "string",
-    )
-)
-print(
-    generate(
-        code,
-        "mlx::core::Dtype",
-        "mlx_array_dtype",
-        "array_dtype",
-        lambda s: "MLX_CPP_ARRAY_DTYPE(" + s + ")",
-        lambda s: "RETURN_MLX_C_ARRAY_DTYPE(" + s + ")",
-    )
-)
-if not args.implementation and not args.private:
-    # avoid circular dependencies
-    print(
-        """
-typedef struct mlx_tuple_string_variant_int_bool_array_dtype_* mlx_tuple_string_variant_int_bool_array_dtype;
-    """
-    )
-print(
-    generate(
-        code,
-        "std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>",
-        "mlx_tuple_string_variant_int_bool_array_dtype",
-        "tuple_string_variant_int_bool_array_dtype",
+        "char**",
+        lambda s: s,
+        lambda d, s: "*" + d + " = " + s + ".data()",
     )
 )
 print(end)

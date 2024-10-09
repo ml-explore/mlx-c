@@ -4,10 +4,9 @@
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
-  mlx_string str;
-  str = mlx_tostring(arr);
+  mlx_string str = mlx_array_tostring(arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
-  mlx_free(str);
+  mlx_string_free(str);
 }
 
 int main() {
@@ -18,25 +17,23 @@ int main() {
   }
 
   mlx_stream stream = mlx_gpu_stream();
-  mlx_safetensors st = mlx_load_safetensors_file(f, stream);
-  mlx_map_string_to_array map = mlx_safetensors_data(st);
+  mlx_map_string_to_array data = mlx_map_string_to_array_new();
+  mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
+  mlx_load_safetensors_file(&data, &metadata, f, stream);
 
-  mlx_map_string_to_array_iterator it = mlx_map_string_to_array_iterate(map);
-  while (!mlx_map_string_to_array_iterator_end(it)) {
-    mlx_string key = mlx_map_string_to_array_iterator_key(it);
-    mlx_array value = mlx_map_string_to_array_iterator_value(it);
-
-    print_array(mlx_string_data(key), value);
-
-    mlx_free(key);
-    mlx_free(value);
-
-    mlx_map_string_to_array_iterator_next(it);
+  mlx_map_string_to_array_iterator it =
+      mlx_map_string_to_array_iterator_new(data);
+  const char* key;
+  mlx_array value = mlx_array_new();
+  while (!mlx_map_string_to_array_iterator_next(&key, &value, it)) {
+    print_array(key, value);
   }
 
-  mlx_free(map);
-  mlx_free(st);
-  mlx_free(stream);
+  mlx_array_free(value);
+  mlx_map_string_to_array_free(data);
+  mlx_map_string_to_string_free(metadata);
+  mlx_map_string_to_array_iterator_free(it);
+  mlx_stream_free(stream);
   fclose(f);
 
   return 0;

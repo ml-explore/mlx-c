@@ -2,6 +2,7 @@ import argparse
 import regex
 import string
 import mlxtypes as mt
+import type_private_generator as tpg
 
 parser = argparse.ArgumentParser("MLX C closure code generator", add_help=False)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -22,125 +23,197 @@ def replace_match_parenthesis(string, keyword, fun):
 
 
 decl_code = """
-typedef struct NAME_* NAME;
-NAME NAME_new(RCARG (*fun)(CARGS));
-NAME NAME_new_with_payload(
-    RCARG (*fun)(CARGS, void*),
+typedef struct NAME_ {
+  void* ctx;
+} NAME;
+NAME NAME_new();
+int NAME_free(NAME cls);
+NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED));
+NAME NAME_new_func_payload(
+    int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED, void*),
     void* payload,
     void (*dtor)(void*));
-RCARG NAME_apply(NAME cls, CARGS_TYPE_NAME);
+int NAME_set(NAME *cls, const NAME src);
+int NAME_apply(RCARGS, NAME cls, CARGS);
 """
 
 
-def generate(code, name, rctype, ctypes):
-    cargs_name = []
-    cargs_type_name = []
+def generate(code, name, rcpptype, cpptypes):
+    rcpparg = mt.cpptypes[rcpptype]["cpp"].replace("@", "")
+    cppargs = ", ".join([mt.cpptypes[cpptype]["cpp_arg"]("") for cpptype in cpptypes])
+
+    if code is None:
+        return tpg.generate(name, "std::function<" + rcpparg + "(" + cppargs + ")>")
+
+    cargs_untyped = []
+    cargs = []
     cppargs_type_name = []
     cppargs_to_cargs = []
     cargs_free = []
     cargs_ctx = []
-    for i in range(len(ctypes)):
-        ctype = mt.ctypes[ctypes[i]]
-        cpparg = ctype["cpp"]
-        suffix = "_" + str(i) if len(ctypes) > 1 else ""
-        cargs_name.append("input" + suffix)
-        cargs_type_name.append(ctype["c_arg"]("input" + suffix))
-        cppargs_type_name.append(ctype["cpp_arg"]("cpp_input" + suffix))
+    for i in range(len(cpptypes)):
+        cpptype = mt.cpptypes[cpptypes[i]]
+        cpparg = cpptype["cpp"]
+        suffix = "_" + str(i) if len(cpptypes) > 1 else ""
+        cargs_untyped.append(cpptype["c_arg"]("input" + suffix, untyped=True))
+        cargs.append(cpptype["c_arg"]("input" + suffix))
+        cppargs_type_name.append(cpptype["cpp_arg"]("cpp_input" + suffix))
+        cargs_free.append(cpptype["free"]("input" + suffix) + ";")
+        cargs_ctx.append(cpptype["c_to_cpp"]("input" + suffix))
+        cppargs_to_cargs.append(cpptype["c_new"]("input" + suffix) + ";")
         cppargs_to_cargs.append(
-            "auto input"
-            + suffix
-            + " = "
-            + ctype["cpp_to_c"]("cpp_input" + suffix)
+            cpptype["c_assign_from_cpp"](
+                "input" + suffix, "cpp_input" + suffix, returned=False
+            )
             + ";"
         )
-        cargs_free.append(ctype["free"]("input" + suffix) + ";")
-        cargs_ctx.append(ctype["c_to_cpp"]("input" + suffix))
 
-    cargs_name = ", ".join(cargs_name)
-    cargs_type_name = ", ".join(cargs_type_name)
+    rcargs_new = mt.cpptypes[rcpptype]["c_new"]("res") + ";"
+    rcargs_free = mt.cpptypes[rcpptype]["free"]("res") + ";"
+    rcargs_to_cpp = "auto cpp_res = " + mt.cpptypes[rcpptype]["c_to_cpp"]("res") + ";"
+
+    cargs_untyped = ", ".join(cargs_untyped)
+    cargs = ", ".join(cargs)
     cppargs_type_name = ", ".join(cppargs_type_name)
     cppargs_to_cargs = "\n".join(cppargs_to_cargs)
     cargs_free = "\n".join(cargs_free)
     cargs_ctx = ", ".join(cargs_ctx)
-    cppargs = ", ".join([mt.ctypes[ctype]["cpp_arg"]("") for ctype in ctypes])
-    cargs = " ".join([mt.ctypes[ctype]["c_arg"]("") for ctype in ctypes])
-
-    code = replace_match_parenthesis(
-        code,
-        "RETURN_CPP_TO_C",
-        lambda s: mt.ctypes[rctype]["return"](mt.ctypes[rctype]["cpp_to_c"](s)),
+    cargs_unnamed = " ".join(
+        [mt.cpptypes[cpptype]["c_arg"]("") for cpptype in cpptypes]
     )
-    code = code.replace("CARGS_TYPE_NAME", cargs_type_name)
+    rcargs_unnamed = mt.cpptypes[rcpptype]["c_return_arg"]("")
+    rcargs = mt.cpptypes[rcpptype]["c_return_arg"]("res")
+    rcargs_untyped = mt.cpptypes[rcpptype]["c_return_arg"]("res", untyped=True)
+
+    code = code.replace("RCARGS_UNTYPED", rcargs_untyped)
+    code = code.replace("RCARGS_UNNAMED", rcargs_unnamed)
     code = code.replace("CPPARGS_TYPE_NAME", cppargs_type_name)
     code = code.replace("CPPARGS_TO_CARGS", cppargs_to_cargs)
-    code = code.replace("CARGS_FREE", cargs_free)
-    code = code.replace("CARGS_NAME", cargs_name)
+    code = code.replace("RCARGS_NEW", rcargs_new)
+    code = code.replace("RCARGS_FREE", rcargs_free)
+    code = code.replace("RCARGS_TO_CPP", rcargs_to_cpp)
+    code = code.replace("CARGS_UNTYPED", cargs_untyped)
     code = code.replace("CARGS_CTX", cargs_ctx)
+    code = code.replace("CARGS_FREE", cargs_free)
+    code = code.replace("RCPPARG", rcpparg)
     code = code.replace(
-        "CARGS", ", ".join([mt.ctypes[ctype]["c_arg"]("") for ctype in ctypes])
+        "CARGS_UNNAMED",
+        ", ".join([mt.cpptypes[cpptype]["c_arg"]("") for cpptype in cpptypes]),
     )
+
+    code = code.replace(
+        "ASSIGN_CLS_TO_RCARGS",
+        mt.cpptypes[rcpptype]["c_assign_from_cpp"](
+            "res", "NAME_get_(cls)(" + cargs_ctx + ")", returned=True
+        )
+        + ";",
+    )
+
     code = code.replace("CPPARGS", cppargs)
     code = code.replace("NAME", name)
-    code = code.replace("RCARG", mt.ctypes[rctype]["c"])
-    code = code.replace("RCPPARG", mt.ctypes[rctype]["cpp"])
+    code = code.replace("RCARGS", rcargs)
+    code = code.replace("CARGS", cargs)
 
     return code
 
 
 impl_code = """
-mlx_string_* NAME_::tostring() {
-  RETURN_MLX_C_STRING("RCARG mlx_closure(CARGS, void*)");
+extern "C" NAME NAME_new() {
+  try {
+    return NAME_new_();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return NAME_new_();
+  }
 }
 
-extern "C" NAME NAME_new(
-    RCARG (*fun)(CARGS)) {
-  MLX_TRY_CATCH(
-      auto cpp_closure =
-          [fun](CPPARGS_TYPE_NAME) {
-            CPPARGS_TO_CARGS
-            auto res = fun(CARGS_NAME);
-            CARGS_FREE
-            auto cpp_res = res->ctx;
-            mlx_free(res);
-            return cpp_res;
-          };
-      return new NAME_(cpp_closure), return nullptr);
+extern "C" int NAME_set(NAME *cls, const NAME src) {
+  try {
+    NAME_set_(*cls, NAME_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
-extern "C" NAME NAME_new_with_payload(
-    RCARG (*fun)(CARGS, void*),
+extern "C" int NAME_free(NAME cls) {
+  try {
+    NAME_free_(cls);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED)) {
+  try {
+    auto cpp_closure = [fun](CPPARGS_TYPE_NAME) {
+      CPPARGS_TO_CARGS
+      RCARGS_NEW
+      auto status = fun(RCARGS_UNTYPED, CARGS_UNTYPED);
+      CARGS_FREE
+      if(status) {
+        RCARGS_FREE
+        throw std::runtime_error("NAME returned a non-zero value");
+      }
+      RCARGS_TO_CPP
+      RCARGS_FREE
+      return cpp_res;
+    };
+    return NAME_new_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return NAME_new_();
+  }
+}
+
+extern "C" NAME NAME_new_func_payload(
+    int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED, void*),
     void* payload,
     void (*dtor)(void*)) {
-  auto cpp_payload = std::shared_ptr<void>(payload, dtor);
-  auto cpp_closure =
-      [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
-        CPPARGS_TO_CARGS
-        auto res = fun(CARGS_NAME, cpp_payload.get());
-        CARGS_FREE
-        auto cpp_res = res->ctx;
-        mlx_free(res);
-        return cpp_res;
-      };
-  MLX_TRY_CATCH(return new NAME_(cpp_closure), return nullptr);
+  try {
+    std::shared_ptr<void> cpp_payload = nullptr;
+    if (dtor) {
+      cpp_payload = std::shared_ptr<void>(payload, dtor);
+    } else {
+      cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
+    }
+    auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
+      CPPARGS_TO_CARGS
+      RCARGS_NEW
+      auto status = fun(RCARGS_UNTYPED, CARGS_UNTYPED, cpp_payload.get());
+      CARGS_FREE
+      if(status) {
+        RCARGS_FREE
+        throw std::runtime_error("NAME returned a non-zero value");
+      }
+      RCARGS_TO_CPP
+      RCARGS_FREE
+      return cpp_res;
+    };
+    return NAME_new_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return NAME_new_();
+  }
 }
 
-extern "C" RCARG NAME_apply(
-    NAME cls,
-    CARGS_TYPE_NAME) {
-  RETURN_CPP_TO_C(cls->ctx(CARGS_CTX));
+extern "C" int NAME_apply(RCARGS, NAME cls, CARGS) {
+  try {
+    ASSIGN_CLS_TO_RCARGS
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 """
 
-priv_code = """
-struct NAME_ : mlx_object_ {
-  NAME_(std::function<RCPPARG(CPPARGS)> ctx)
-      : mlx_object_(), ctx(ctx){};
-  virtual mlx_string_* tostring() override;
-  std::function<RCPPARG(CPPARGS)> ctx;
-};
-"""
+priv_code = None
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -151,7 +224,6 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #include "mlx/c/array.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
-#include "mlx/c/tuple.h"
 #include "mlx/c/vector.h"
 
 #ifdef __cplusplus
@@ -175,26 +247,20 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc. */
+impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
 #include "mlx/c/closure.h"
-#include "mlx/c/object.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
-#include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
-
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 """
 
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
+priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -203,7 +269,6 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc. */
 #define MLX_CLOSURE_PRIVATE_H
 
 #include "mlx/c/closure.h"
-#include "mlx/c/private/object.h"
 #include "mlx/mlx.h"
 
 """
@@ -231,29 +296,37 @@ print(
     generate(
         code,
         "mlx_closure",
-        "mlx_vector_array",
-        ["mlx_vector_array"],
+        "std::vector<mlx::core::array>",
+        ["std::vector<mlx::core::array>"],
     )
 )
 if args.implementation:
     print(
         """
 extern "C" mlx_closure mlx_closure_new_unary(
-    mlx_array (*fun)(const mlx_array)) {
-  MLX_TRY_CATCH(
-      auto cpp_closure =
-          [fun](const std::vector<mlx::core::array>& cpp_input) {
-            if (cpp_input.size() != 1) {
-              throw std::runtime_error("closure: expected unary input");
-            }
-            auto input = new mlx_array_(cpp_input[0]);
-            auto res = fun(input);
-            mlx_free(input);
-            std::vector<mlx::core::array> cpp_res = {res->ctx};
-            mlx_free(res);
-            return cpp_res;
-          };
-      return new mlx_closure_(cpp_closure), return nullptr);
+    int (*fun)(mlx_array*, const mlx_array)) {
+  try {
+    auto cpp_closure = [fun](const std::vector<mlx::core::array>& cpp_input) {
+      if (cpp_input.size() != 1) {
+        throw std::runtime_error("closure: expected unary input");
+      }
+      auto input = mlx_array_new_(cpp_input[0]);
+      auto res = mlx_array_new_();
+      auto status = fun(&res, input);
+      if(status) {
+        mlx_array_free_(res);
+        throw std::runtime_error("mlx_closure returned a non-zero value");
+      }
+      mlx_array_free(input);
+      std::vector<mlx::core::array> cpp_res = {mlx_array_get_(res)};
+      mlx_array_free(res);
+      return cpp_res;
+    };
+    return mlx_closure_new_(cpp_closure);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_closure_new_();
+  }
 }
 """
     )
@@ -262,57 +335,49 @@ elif args.private:
 else:
     print(
         """
-mlx_closure mlx_closure_new_unary(mlx_array (*fun)(const mlx_array));        
+mlx_closure mlx_closure_new_unary(int (*fun)(mlx_array*, const mlx_array));
     """
     )
 print(
     generate(
         code,
         "mlx_closure_value_and_grad",
-        "mlx_tuple_vector_array_vector_array",
-        ["mlx_vector_array"],
+        "std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>",
+        ["std::vector<mlx::core::array>"],
     )
 )
 print(
     generate(
         code,
-        "mlx_closure_custom_function",
-        "mlx_vector_array",
-        ["mlx_vector_array"] * 3,
+        "mlx_closure_custom",
+        "std::vector<mlx::core::array>",
+        ["std::vector<mlx::core::array>"] * 3,
     )
 )
 print(
     generate(
         code,
-        "mlx_closure_custom_function_jvp",
-        "mlx_vector_array",
-        ["mlx_vector_array", "mlx_vector_array", "mlx_vector_int"],
-    )
-)
-print(
-    generate(
-        code,
-        "mlx_closure_custom_function_vmap",
-        "mlx_tuple_vector_array_vector_int",
-        ["mlx_vector_array", "mlx_vector_int"],
-    )
-)
-print(
-    generate(
-        code,
-        "mlx_closure_metal_kernel_function",
-        "mlx_vector_array",
+        "mlx_closure_custom_jvp",
+        "std::vector<mlx::core::array>",
         [
-            "mlx_vector_array",
-            "mlx_vector_vector_int",
-            "mlx_vector_array_dtype",
-            "mlx_tuple_int_int_int",
-            "mlx_tuple_int_int_int",
-            "mlx_vector_tuple_string_variant_int_bool_array_dtype",
-            "mlx_optional_float",
-            "bool",
-            "mlx_stream",
+            "std::vector<mlx::core::array>",
+            "std::vector<mlx::core::array>",
+            "std::vector<int>",
         ],
     )
 )
+print(
+    generate(
+        code,
+        "mlx_closure_custom_vmap",
+        "std::pair<std::vector<mlx::core::array>, @std::vector<int>>",
+        ["std::vector<mlx::core::array>", "std::vector<int>"],
+    )
+)
+if args.private:
+    print(
+        """
+     """
+    )
+
 print(end)
