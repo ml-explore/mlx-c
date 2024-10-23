@@ -128,6 +128,11 @@ int mlx_array_set_data(
     mlx_dtype dtype);
 
 /**
+ * The size of one element of the given datatype in bytes.
+ */
+size_t mlx_array_dtype_size(mlx_array_dtype dtype);
+
+/**
  * The size of the array's datatype in bytes.
  */
 size_t mlx_array_itemsize(const mlx_array arr);

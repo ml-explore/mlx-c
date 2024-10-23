@@ -30,6 +30,10 @@ extern "C" int mlx_array_free(mlx_array arr) {
   return 0;
 }
 
+extern "C" size_t mlx_array_dtype_size(mlx_array_dtype dtype) {
+  return MLX_CPP_ARRAY_DTYPE(dtype).size();
+}
+
 extern "C" mlx_array mlx_array_new() {
   try {
     return mlx_array_();
