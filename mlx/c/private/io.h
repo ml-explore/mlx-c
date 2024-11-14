@@ -9,7 +9,7 @@ class CFILEReader : public mlx::core::io::Reader {
   FILE* f;
 
  public:
-  CFILEReader(FILE* f) : f(f){};
+  CFILEReader(FILE* f) : f(f) {};
   virtual bool is_open() const override {
     return f != nullptr;
   };
@@ -53,7 +53,7 @@ class CFILEWriter : public mlx::core::io::Writer {
   FILE* f;
 
  public:
-  CFILEWriter(FILE* f) : f(f){};
+  CFILEWriter(FILE* f) : f(f) {};
   virtual bool is_open() const override {
     return f != nullptr;
   };
