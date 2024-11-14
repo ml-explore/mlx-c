@@ -24,15 +24,6 @@ extern "C" {
  * \defgroup transforms_impl Implementation detail operations
  */
 /**@{*/
-int mlx_detail_compile(
-    mlx_closure* res,
-    const mlx_closure fun,
-    uintptr_t fun_id,
-    bool shapeless,
-    const uint64_t* constants,
-    size_t constants_num);
-int mlx_detail_compile_clear_cache();
-int mlx_detail_compile_erase(uintptr_t fun_id);
 int mlx_detail_vmap_replace(
     mlx_vector_array* res,
     const mlx_vector_array inputs,

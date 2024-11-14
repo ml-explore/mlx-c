@@ -97,6 +97,15 @@ mlx_metal_set_memory_limit(size_t* res, size_t limit, bool relaxed) {
   }
   return 0;
 }
+extern "C" int mlx_metal_set_wired_limit(size_t* res, size_t limit) {
+  try {
+    *res = mlx::core::metal::set_wired_limit(limit);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_metal_start_capture(const char* path) {
   try {
     mlx::core::metal::start_capture(std::string(path));

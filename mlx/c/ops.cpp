@@ -1409,6 +1409,16 @@ mlx_identity(mlx_array* res, int n, mlx_dtype dtype, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int mlx_imag(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::imag(mlx_array_get_(a), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_inner(
     mlx_array* res,
     const mlx_array a,
@@ -2225,6 +2235,16 @@ mlx_radians(mlx_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int mlx_real(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::real(mlx_array_get_(a), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int
 mlx_reciprocal(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
@@ -2313,6 +2333,38 @@ extern "C" int mlx_right_shift(
         *res,
         mlx::core::right_shift(
             mlx_array_get_(a), mlx_array_get_(b), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_roll(
+    mlx_array* res,
+    const mlx_array a,
+    int shift,
+    const int* axes,
+    size_t axes_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::roll(
+            mlx_array_get_(a),
+            shift,
+            std::vector<int>(axes, axes + axes_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int
+mlx_roll_all(mlx_array* res, const mlx_array a, int shift, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::roll(mlx_array_get_(a), shift, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

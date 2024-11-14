@@ -57,6 +57,41 @@ extern "C" int mlx_linalg_cross(
   }
   return 0;
 }
+extern "C" int mlx_linalg_eigh(
+    mlx_array* res_0,
+    mlx_array* res_1,
+    const mlx_array a,
+    const char* UPLO,
+    const mlx_stream s) {
+  try {
+    {
+      auto [tpl_0, tpl_1] = mlx::core::linalg::eigh(
+          mlx_array_get_(a), std::string(UPLO), mlx_stream_get_(s));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_linalg_eigvalsh(
+    mlx_array* res,
+    const mlx_array a,
+    const char* UPLO,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::linalg::eigvalsh(
+            mlx_array_get_(a), std::string(UPLO), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int
 mlx_linalg_inv(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {

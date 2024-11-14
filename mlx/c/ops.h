@@ -448,6 +448,7 @@ int mlx_hadamard_transform(
     mlx_optional_float scale,
     const mlx_stream s);
 int mlx_identity(mlx_array* res, int n, mlx_dtype dtype, const mlx_stream s);
+int mlx_imag(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_inner(
     mlx_array* res,
     const mlx_array a,
@@ -687,6 +688,7 @@ int mlx_quantized_matmul(
     int bits,
     const mlx_stream s);
 int mlx_radians(mlx_array* res, const mlx_array a, const mlx_stream s);
+int mlx_real(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_reciprocal(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_remainder(
     mlx_array* res,
@@ -714,6 +716,18 @@ int mlx_right_shift(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
+    const mlx_stream s);
+int mlx_roll(
+    mlx_array* res,
+    const mlx_array a,
+    int shift,
+    const int* axes,
+    size_t axes_num,
+    const mlx_stream s);
+int mlx_roll_all(
+    mlx_array* res,
+    const mlx_array a,
+    int shift,
     const mlx_stream s);
 int mlx_round(
     mlx_array* res,

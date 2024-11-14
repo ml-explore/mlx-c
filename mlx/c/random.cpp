@@ -220,6 +220,44 @@ extern "C" int mlx_random_normal(
   }
   return 0;
 }
+extern "C" int mlx_random_permutation(
+    mlx_array* res,
+    const mlx_array x,
+    int axis,
+    const mlx_array key /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::random::permutation(
+            mlx_array_get_(x),
+            axis,
+            (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_random_permutation_all(
+    mlx_array* res,
+    int x,
+    const mlx_array key /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::random::permutation(
+            x,
+            (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_random_randint(
     mlx_array* res,
     const mlx_array low,

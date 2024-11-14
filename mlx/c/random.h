@@ -94,6 +94,17 @@ int mlx_random_normal(
     float scale,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_permutation(
+    mlx_array* res,
+    const mlx_array x,
+    int axis,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_permutation_all(
+    mlx_array* res,
+    int x,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
 int mlx_random_randint(
     mlx_array* res,
     const mlx_array low,
