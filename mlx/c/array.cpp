@@ -7,15 +7,16 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/c/string.h"
 
-extern "C" mlx_string mlx_array_tostring(const mlx_array arr) {
+extern "C" int mlx_array_tostring(mlx_string* str_, const mlx_array arr) {
   try {
     std::ostringstream os;
     os << mlx_array_get_(arr);
     std::string str = os.str();
-    return mlx_string_new_(str);
+    mlx_string_set_(*str_, str);
+    return 0;
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_string_new_();
+    return 1;
   }
 }
 

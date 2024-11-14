@@ -4,7 +4,11 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" mlx_string mlx_string_new(const char* str) {
+extern "C" mlx_string mlx_string_new() {
+  return mlx_string_new_();
+}
+
+extern "C" mlx_string mlx_string_new_data(const char* str) {
   try {
     return mlx_string_new_(str);
   } catch (std::exception& e) {

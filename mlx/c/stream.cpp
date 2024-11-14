@@ -7,15 +7,16 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/c/stream.h"
 
-mlx_string mlx_stream_tostring(mlx_stream stream) {
+int mlx_stream_tostring(mlx_string* str_, mlx_stream stream) {
   try {
     std::ostringstream os;
     os << mlx_stream_get_(stream);
     std::string str = os.str();
-    return mlx_string_new_(str);
+    mlx_string_set_(*str_, str);
+    return 0;
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_string_new_();
+    return 1;
   }
 }
 

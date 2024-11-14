@@ -4,7 +4,8 @@
 #include "mlx/c/mlx.h"
 
 void print_array(const char* msg, mlx_array arr) {
-  mlx_string str = mlx_array_tostring(arr);
+  mlx_string str = mlx_string_new();
+  mlx_array_tostring(&str, arr);
   printf("%s\n%s\n", msg, mlx_string_data(str));
   mlx_string_free(str);
 }

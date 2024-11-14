@@ -43,7 +43,7 @@ int mlx_stream_free(mlx_stream stream);
 /**
  * Get stream description.
  */
-mlx_string mlx_stream_tostring(mlx_stream stream);
+int mlx_stream_tostring(mlx_string* str, mlx_stream stream);
 /**
  * Check if streams are the same.
  */

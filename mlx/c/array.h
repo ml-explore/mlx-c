@@ -52,7 +52,7 @@ typedef enum mlx_dtype_ {
 /**
  * Get array description.
  */
-mlx_string mlx_array_tostring(const mlx_array arr);
+int mlx_array_tostring(mlx_string* str, const mlx_array arr);
 
 /**
  * New empty array.

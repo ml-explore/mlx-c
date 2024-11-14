@@ -6,15 +6,16 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" mlx_string mlx_device_tostring(mlx_device dev) {
+extern "C" int mlx_device_tostring(mlx_string* str_, mlx_device dev) {
   try {
     std::ostringstream os;
     os << mlx_device_get_(dev);
     std::string str = os.str();
-    return mlx_string_new_(str);
+    mlx_string_set_(*str_, str);
+    return 0;
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_string_new_();
+    return 1;
   }
 }
 

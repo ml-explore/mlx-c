@@ -42,7 +42,7 @@ int mlx_device_set(mlx_device* dev, const mlx_device src);
 /**
  * Get device description.
  */
-mlx_string mlx_device_tostring(mlx_device dev);
+int mlx_device_tostring(mlx_string* str, mlx_device dev);
 /**
  * Returns the type of the device.
  */

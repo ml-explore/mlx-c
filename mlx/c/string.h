@@ -21,9 +21,14 @@ typedef struct mlx_string_ {
 } mlx_string;
 
 /**
+ * Returns a new empty string.
+ */
+mlx_string mlx_string_new();
+
+/**
  * Returns a new string, copying contents from `str`, which must end with `\0`.
  */
-mlx_string mlx_string_new(const char* str);
+mlx_string mlx_string_new_data(const char* str);
 
 /**
  * Set string to src string.
