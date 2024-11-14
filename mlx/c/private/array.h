@@ -39,7 +39,7 @@ inline mlx_array& mlx_array_set_(mlx_array& d, mlx::core::array&& s) {
   return d;
 }
 
-inline mlx::core::array mlx_array_get_(mlx_array d) {
+inline mlx::core::array& mlx_array_get_(mlx_array d) {
   if (!d.ctx) {
     throw std::runtime_error("expected a non-empty mlx_array");
   }

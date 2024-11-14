@@ -82,11 +82,14 @@ extern "C" int mlx_jvp(
     const mlx_vector_array primals,
     const mlx_vector_array tangents) {
   try {
-    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
-        mlx::core::jvp(
-            mlx_closure_get_(fun),
-            mlx_vector_array_get_(primals),
-            mlx_vector_array_get_(tangents));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::jvp(
+          mlx_closure_get_(fun),
+          mlx_vector_array_get_(primals),
+          mlx_vector_array_get_(tangents));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -117,11 +120,14 @@ extern "C" int mlx_vjp(
     const mlx_vector_array primals,
     const mlx_vector_array cotangents) {
   try {
-    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
-        mlx::core::vjp(
-            mlx_closure_get_(fun),
-            mlx_vector_array_get_(primals),
-            mlx_vector_array_get_(cotangents));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::vjp(
+          mlx_closure_get_(fun),
+          mlx_vector_array_get_(primals),
+          mlx_vector_array_get_(cotangents));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

@@ -79,11 +79,14 @@ extern "C" int mlx_detail_vmap_trace(
     const int* in_axes,
     size_t in_axes_num) {
   try {
-    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
-        mlx::core::detail::vmap_trace(
-            mlx_closure_get_(fun),
-            mlx_vector_array_get_(inputs),
-            std::vector<int>(in_axes, in_axes + in_axes_num));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::detail::vmap_trace(
+          mlx_closure_get_(fun),
+          mlx_vector_array_get_(inputs),
+          std::vector<int>(in_axes, in_axes + in_axes_num));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

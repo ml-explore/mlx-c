@@ -37,11 +37,12 @@ extern "C" int mlx_load_safetensors_file(
     FILE* in_stream,
     const mlx_stream s) {
   try {
-    std::tie(
-        mlx_map_string_to_array_get_(*res_0),
-        mlx_map_string_to_string_get_(*res_1)) =
-        mlx::core::load_safetensors(
-            std::make_shared<CFILEReader>(in_stream), mlx_stream_get_(s));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::load_safetensors(
+          std::make_shared<CFILEReader>(in_stream), mlx_stream_get_(s));
+      mlx_map_string_to_array_set_(*res_0, tpl_0);
+      mlx_map_string_to_string_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -54,10 +55,12 @@ extern "C" int mlx_load_safetensors(
     const char* file,
     const mlx_stream s) {
   try {
-    std::tie(
-        mlx_map_string_to_array_get_(*res_0),
-        mlx_map_string_to_string_get_(*res_1)) =
-        mlx::core::load_safetensors(std::string(file), mlx_stream_get_(s));
+    {
+      auto [tpl_0, tpl_1] =
+          mlx::core::load_safetensors(std::string(file), mlx_stream_get_(s));
+      mlx_map_string_to_array_set_(*res_0, tpl_0);
+      mlx_map_string_to_string_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

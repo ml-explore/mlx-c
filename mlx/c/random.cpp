@@ -275,8 +275,12 @@ extern "C" int mlx_random_split(
     const mlx_array key,
     const mlx_stream s) {
   try {
-    std::tie(mlx_array_get_(*res_0), mlx_array_get_(*res_1)) =
-        mlx::core::random::split(mlx_array_get_(key), mlx_stream_get_(s));
+    {
+      auto [tpl_0, tpl_1] =
+          mlx::core::random::split(mlx_array_get_(key), mlx_stream_get_(s));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

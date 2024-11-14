@@ -248,8 +248,12 @@ extern "C" int mlx_closure_value_and_grad_apply(
     mlx_closure_value_and_grad cls,
     const mlx_vector_array input) {
   try {
-    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_array_get_(*res_1)) =
-        mlx_closure_value_and_grad_get_(cls)(mlx_vector_array_get_(input));
+    {
+      auto [tpl_0, tpl_1] =
+          mlx_closure_value_and_grad_get_(cls)(mlx_vector_array_get_(input));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -671,10 +675,13 @@ extern "C" int mlx_closure_custom_vmap_apply(
     const int* input_1,
     size_t input_1_num) {
   try {
-    std::tie(mlx_vector_array_get_(*res_0), mlx_vector_int_get_(*res_1)) =
-        mlx_closure_custom_vmap_get_(cls)(
-            mlx_vector_array_get_(input_0),
-            std::vector<int>(input_1, input_1 + input_1_num));
+    {
+      auto [tpl_0, tpl_1] = mlx_closure_custom_vmap_get_(cls)(
+          mlx_vector_array_get_(input_0),
+          std::vector<int>(input_1, input_1 + input_1_num));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_int_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
