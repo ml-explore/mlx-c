@@ -28,9 +28,14 @@ typedef struct mlx_device_ {
 typedef enum mlx_device_type_ { MLX_CPU, MLX_GPU } mlx_device_type;
 
 /**
+ * Returns a new empty device.
+ */
+mlx_device mlx_device_new();
+
+/**
  * Returns a new device of specified `type`, with specified `index`.
  */
-mlx_device mlx_device_new(mlx_device_type type, int index);
+mlx_device mlx_device_new_type(mlx_device_type type, int index);
 /**
  * Free a device.
  */
@@ -50,7 +55,7 @@ mlx_device_type mlx_device_get_type(mlx_device dev);
 /**
  * Returns the default MLX device.
  */
-mlx_device mlx_default_device(void);
+int mlx_get_default_device(mlx_device* dev);
 /**
  * Set the default MLX device.
  */
