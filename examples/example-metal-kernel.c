@@ -41,7 +41,7 @@ void exp_elemwise(
   mlx_vector_array_free(outputs);
 }
 int main() {
-  mlx_stream stream = mlx_gpu_stream();
+  mlx_stream stream = mlx_default_gpu_stream_new();
   mlx_array input = mlx_array_new();
   mlx_array output = mlx_array_new();
 

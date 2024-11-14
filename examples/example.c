@@ -26,7 +26,7 @@ void gpu_info() {
 int main() {
   gpu_info();
 
-  mlx_stream stream = mlx_gpu_stream();
+  mlx_stream stream = mlx_default_gpu_stream_new();
   float data[] = {1, 2, 3, 4, 5, 6};
   int shape[] = {2, 3};
   mlx_array arr = mlx_array_new_data(data, shape, 2, MLX_FLOAT32);

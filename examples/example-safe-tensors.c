@@ -17,7 +17,7 @@ int main() {
     return -1;
   }
 
-  mlx_stream stream = mlx_gpu_stream();
+  mlx_stream stream = mlx_default_gpu_stream_new();
   mlx_map_string_to_array data = mlx_map_string_to_array_new();
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
   mlx_load_safetensors_file(&data, &metadata, f, stream);
