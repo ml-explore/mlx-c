@@ -82,9 +82,9 @@ for t in [
             + ", "
             + s
             + ")",
-            "c_arg": lambda s, untyped=False, ctype=ctype: s
-            if untyped
-            else ("const " + ctype + " " + s).strip(),
+            "c_arg": lambda s, untyped=False, ctype=ctype: (
+                s if untyped else ("const " + ctype + " " + s).strip()
+            ),
             "c_return_arg": lambda s, untyped=False, ctype=ctype: (
                 ("&" if untyped else ctype + "* ") + s
             ).strip(),
@@ -128,9 +128,11 @@ def register_raw_vector_type(cpptype):
             + "_num = "
             + s
             + ".size()",
-            "c_arg": lambda s, untyped=False, cpptype=cpptype: (s + ", " + s + "_num")
-            if untyped
-            else ("const " + cpptype + "* " + s + ", size_t " + s + "_num").strip(),
+            "c_arg": lambda s, untyped=False, cpptype=cpptype: (
+                (s + ", " + s + "_num")
+                if untyped
+                else ("const " + cpptype + "* " + s + ", size_t " + s + "_num").strip()
+            ),
             "c_new": lambda s, cpptype=cpptype: "const "
             + cpptype
             + "* "
@@ -279,21 +281,27 @@ def register_return_tuple_type(cpp_types, alts=[]):
                     for i, ctype in enumerate(c_types)
                 ]
             ),
-            "c_assign_from_cpp": lambda d, s, returned=True: "std::tie("
-            + ", ".join(
+            "c_assign_from_cpp": lambda d, s, returned=True: "{ auto ["
+            + ", ".join(["tpl_" + str(i) for i in range(n)])
+            + "] = "
+            + s
+            + ";"
+            + "\n".join(
                 [
                     c_types[i]
-                    + "_get_("
+                    + "_set_("
                     + ("*" if returned else "")
                     + d
                     + "_"
                     + str(i)
-                    + ")"
+                    + ","
+                    + "tpl_"
+                    + str(i)
+                    + ");"
                     for i in range(n)
                 ]
             )
-            + ") = "
-            + s,
+            + "}",
         }
     )
 
@@ -343,9 +351,9 @@ types.append(
         "alt": "CompileMode",
         "c_to_cpp": lambda s: "mlx_compile_mode_to_cpp(" + s + ")",
         "c_arg": lambda s, untyped=False: s if untyped else "mlx_compile_mode " + s,
-        "c_return_arg": lambda s, untyped=False: s
-        if untyped
-        else "mlx_compile_mode* " + s,
+        "c_return_arg": lambda s, untyped=False: (
+            s if untyped else "mlx_compile_mode* " + s
+        ),
         "c_new": lambda s: "mlx_dtype " + s,
         "free": lambda s: "",
         "c_assign_from_cpp": lambda d, s: d
@@ -440,12 +448,14 @@ types.append(
         "cpp": "std::pair<int, int>",
         "alt": "std::pair<int, int>",
         "c_to_cpp": lambda s: "std::make_pair(" + s + "_0, " + s + "_1)",
-        "c_arg": lambda s, untyped=False: (s + "_0, " + s + "_1")
-        if untyped
-        else ("int " + s + "_0, int " + s + "_1"),
-        "c_return_arg": lambda s, untyped=False: (s + "_0, " + s + "_1")
-        if untyped
-        else ("int* " + s + "_0, int* " + s + "_1"),
+        "c_arg": lambda s, untyped=False: (
+            (s + "_0, " + s + "_1") if untyped else ("int " + s + "_0, int " + s + "_1")
+        ),
+        "c_return_arg": lambda s, untyped=False: (
+            (s + "_0, " + s + "_1")
+            if untyped
+            else ("int* " + s + "_0, int* " + s + "_1")
+        ),
         # "c_new": lambda s: "char* " + s,
         # "free": lambda s: "",
         "c_assign_from_cpp": lambda d, s: "std::tie(" + d + "_0, " + d + "_1) = " + s,
@@ -457,12 +467,16 @@ types.append(
         "cpp": "std::tuple<int, int, int>",
         "alt": "std::tuple<int, int, int>",
         "c_to_cpp": lambda s: "std::make_tuple(" + s + "_0, " + s + "_1," + s + "_2)",
-        "c_arg": lambda s, untyped=False: (s + "_0, " + s + "_1, " + s + "_2")
-        if untyped
-        else ("int " + s + "_0, int " + s + "_1, int " + s + "_2"),
-        "c_return_arg": lambda s, untyped=False: (s + "_0, " + s + "_1, " + s + "_2")
-        if untyped
-        else ("int* " + s + "_0, int* " + s + "_1, int " + s + "_2"),
+        "c_arg": lambda s, untyped=False: (
+            (s + "_0, " + s + "_1, " + s + "_2")
+            if untyped
+            else ("int " + s + "_0, int " + s + "_1, int " + s + "_2")
+        ),
+        "c_return_arg": lambda s, untyped=False: (
+            (s + "_0, " + s + "_1, " + s + "_2")
+            if untyped
+            else ("int* " + s + "_0, int* " + s + "_1, int " + s + "_2")
+        ),
         # "c_new": lambda s: "char* " + s,
         # "free": lambda s: "",
         "c_assign_from_cpp": lambda d, s: "std::tie("
