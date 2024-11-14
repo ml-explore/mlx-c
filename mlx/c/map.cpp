@@ -59,7 +59,7 @@ extern "C" int mlx_map_string_to_array_get(
   try {
     auto search = mlx_map_string_to_array_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_array_get_(map).end()) {
-      return 1;
+      return 2;
     } else {
       mlx_array_set_(*value, search->second);
       return 0;
@@ -92,7 +92,7 @@ extern "C" int mlx_map_string_to_array_iterator_next(
   try {
     if (mlx_map_string_to_array_iterator_get_(it) ==
         mlx_map_string_to_array_iterator_get_map_(it).end()) {
-      return 1;
+      return 2;
     } else {
       *key = mlx_map_string_to_array_iterator_get_(it)->first.data();
       mlx_array_set_(*value, mlx_map_string_to_array_iterator_get_(it)->second);
@@ -168,7 +168,7 @@ extern "C" int mlx_map_string_to_string_get(
   try {
     auto search = mlx_map_string_to_string_get_(map).find(std::string(key));
     if (search == mlx_map_string_to_string_get_(map).end()) {
-      return 1;
+      return 2;
     } else {
       *value = search->second.data();
       return 0;
@@ -201,7 +201,7 @@ extern "C" int mlx_map_string_to_string_iterator_next(
   try {
     if (mlx_map_string_to_string_iterator_get_(it) ==
         mlx_map_string_to_string_iterator_get_map_(it).end()) {
-      return 1;
+      return 2;
     } else {
       *key = mlx_map_string_to_string_iterator_get_(it)->first.data();
       *value = mlx_map_string_to_string_iterator_get_(it)->second.data();

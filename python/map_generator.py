@@ -136,7 +136,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
   try {
     auto search = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).find(CTYPE1_TO_CPP(key));
     if (search == mlx_map_SCTYPE1_to_SCTYPE2_get_(map).end()) {
-      return 1;
+      return 2;
     } else {
       CTYPE2_ASSIGN_FROM_CPP(value, search->second);
       return 0;
@@ -168,7 +168,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
   try {
     if (mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it) ==
         mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_map_(it).end()) {
-      return 1;
+      return 2;
     } else {
       CTYPE1_ASSIGN_FROM_CPP(
           key, mlx_map_SCTYPE1_to_SCTYPE2_iterator_get_(it)->first);
