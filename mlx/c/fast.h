@@ -56,10 +56,16 @@ mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* source,
     const char* header);
 void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls);
+int mlx_fast_metal_kernel_add_input_name(
+    mlx_fast_metal_kernel cls,
+    const char* name);
 int mlx_fast_metal_kernel_set_input_names(
     mlx_fast_metal_kernel cls,
     int num,
     ...);
+int mlx_fast_metal_kernel_add_output_name(
+    mlx_fast_metal_kernel cls,
+    const char* name);
 int mlx_fast_metal_kernel_set_output_names(
     mlx_fast_metal_kernel cls,
     int num,
@@ -104,10 +110,10 @@ int mlx_fast_metal_kernel_add_template_arg_bool(
     bool value);
 
 int mlx_fast_metal_kernel_apply(
+    mlx_vector_array* outputs,
     mlx_fast_metal_kernel cls,
     const mlx_vector_array inputs,
-    const mlx_stream stream,
-    mlx_vector_array* outputs);
+    const mlx_stream stream);
 
 int mlx_fast_rms_norm(
     mlx_array* res,

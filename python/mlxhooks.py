@@ -155,6 +155,15 @@ extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(const char* name, con
   }
   return {nullptr};
 }
+extern "C" int mlx_fast_metal_kernel_add_input_name(mlx_fast_metal_kernel cls, const char* name) {
+  try {
+    mlx_fast_metal_kernel_get_(cls).input_names.push_back(name);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_fast_metal_kernel_set_input_names(mlx_fast_metal_kernel cls, int num, ...) {
   try {
     va_list input_names;
@@ -164,6 +173,15 @@ extern "C" int mlx_fast_metal_kernel_set_input_names(mlx_fast_metal_kernel cls, 
       mlx_fast_metal_kernel_get_(cls).input_names.push_back(va_arg(input_names, const char*));
     }
     va_end(input_names);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_fast_metal_kernel_add_output_name(mlx_fast_metal_kernel cls, const char* name) {
+  try {
+    mlx_fast_metal_kernel_get_(cls).output_names.push_back(name);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -193,7 +211,7 @@ extern "C" int mlx_fast_metal_kernel_set_atomic_outputs(mlx_fast_metal_kernel cl
   mlx_fast_metal_kernel_get_(cls).atomic_outputs = flag;
   return 0;
 }
-extern "C" int mlx_fast_metal_kernel_apply(mlx_fast_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array* outputs) {
+extern "C" int mlx_fast_metal_kernel_apply(mlx_vector_array* outputs, mlx_fast_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream) {
   try {
     if(!mlx_fast_metal_kernel_get_(cls).ctx) {
       mlx_fast_metal_kernel_get_(cls).ctx = mlx::core::fast::metal_kernel(mlx_fast_metal_kernel_get_(cls).name, mlx_fast_metal_kernel_get_(cls).input_names, mlx_fast_metal_kernel_get_(cls).output_names, mlx_fast_metal_kernel_get_(cls).source, mlx_fast_metal_kernel_get_(cls).header, mlx_fast_metal_kernel_get_(cls).contiguous_rows, mlx_fast_metal_kernel_get_(cls).atomic_outputs);
@@ -213,7 +231,9 @@ extern "C" int mlx_fast_metal_kernel_apply(mlx_fast_metal_kernel cls, const mlx_
 typedef struct mlx_fast_metal_kernel_ { void* ctx; } mlx_fast_metal_kernel;
 mlx_fast_metal_kernel mlx_fast_metal_kernel_new(const char* name, const char* source, const char* header);
 void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls);
+int mlx_fast_metal_kernel_add_input_name(mlx_fast_metal_kernel cls, const char* name);
 int mlx_fast_metal_kernel_set_input_names(mlx_fast_metal_kernel cls, int num, ...);
+int mlx_fast_metal_kernel_add_output_name(mlx_fast_metal_kernel cls, const char* name);
 int mlx_fast_metal_kernel_set_output_names(mlx_fast_metal_kernel cls, int num, ...);
 int mlx_fast_metal_kernel_set_contiguous_rows(mlx_fast_metal_kernel cls, bool flag);
 int mlx_fast_metal_kernel_set_atomic_outputs(mlx_fast_metal_kernel cls, bool flag);
@@ -227,6 +247,6 @@ int mlx_fast_metal_kernel_add_template_arg_dtype(mlx_fast_metal_kernel cls, cons
 int mlx_fast_metal_kernel_add_template_arg_int(mlx_fast_metal_kernel cls, const char* name, int value);
 int mlx_fast_metal_kernel_add_template_arg_bool(mlx_fast_metal_kernel cls, const char* name, bool value);
 
-int mlx_fast_metal_kernel_apply(mlx_fast_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream, mlx_vector_array* outputs);
+int mlx_fast_metal_kernel_apply(mlx_vector_array* outputs, mlx_fast_metal_kernel cls, const mlx_vector_array inputs, const mlx_stream stream);
         """
         )

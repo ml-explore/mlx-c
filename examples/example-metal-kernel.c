@@ -32,7 +32,7 @@ void exp_elemwise(
       mlx_array_dtype(input));
 
   mlx_vector_array outputs = mlx_vector_array_new();
-  mlx_fast_metal_kernel_apply(kernel, inputs, stream, &outputs);
+  mlx_fast_metal_kernel_apply(&outputs, kernel, inputs, stream);
   mlx_vector_array_get(output_, outputs, 0);
 
   mlx_fast_metal_kernel_free(kernel);
