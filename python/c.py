@@ -12,12 +12,14 @@ def to_snake_letters(name):
     return name
 
 
-def generate(funcs, enums, header, headername, namespace, implementation, docstring):
-    namespace_prefix = namespace.split("::")
-    if namespace_prefix[0] == "mlx" and namespace_prefix[1] == "core":
-        namespace_prefix.pop(1)  # we pop core
-    namespace_prefix = "_".join(namespace_prefix)
+def c_namespace(namespace):
+    c_prefix = namespace.split("::")
+    if c_prefix[0] == "mlx" and c_prefix[1] == "core":
+        c_prefix.pop(1)  # we pop core
+    return "_".join(c_prefix)
 
+
+def generate(funcs, enums, header, headername, implementation, docstring):
     sorted_funcs = []
     for name in funcs:
         variants = funcs[name]
@@ -173,9 +175,11 @@ def generate(funcs, enums, header, headername, namespace, implementation, docstr
 
     for f in sorted_funcs:
         if "variant" in f:
-            func_name = namespace_prefix + "_" + f["name"] + "_" + f["variant"]
+            func_name = (
+                c_namespace(f["namespace"]) + "_" + f["name"] + "_" + f["variant"]
+            )
         else:
-            func_name = namespace_prefix + "_" + f["name"]
+            func_name = c_namespace(f["namespace"]) + "_" + f["name"]
         if hasattr(hooks, func_name):
             getattr(hooks, func_name)(f, implementation)
             continue
@@ -239,7 +243,7 @@ def generate(funcs, enums, header, headername, namespace, implementation, docstr
         c_code = [signature, ";"]
         cpp_code = ['extern "C"', signature, "{"]
         cpp_code.append("try {")
-        cpp_call = [namespace + "::" + f["name"], "(", cpp_call, ")"]
+        cpp_call = [f["namespace"] + "::" + f["name"], "(", cpp_call, ")"]
         cpp_call = "".join(cpp_call)
         cpp_code.append(return_t["c_assign_from_cpp"]("res", cpp_call))
         cpp_code.append(";")
