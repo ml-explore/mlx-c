@@ -32,7 +32,7 @@ operations. For example, the following code is perfectly valid in MLX C:
 
 .. code-block:: c
 
-    mlx_stream stream = mlx_gpu_stream();
+    mlx_stream stream = mlx_default_gpu_stream_new();
     mlx_array a = mlx_array_new_float(1.0);
     mlx_array b = mlx_array_new_float(1.0);
     mlx_array_add(&b, a, b, stream); // b now holds a+b=2
