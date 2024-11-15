@@ -20,6 +20,10 @@ int mlx_stream_tostring(mlx_string* str_, mlx_stream stream) {
   }
 }
 
+extern "C" mlx_stream mlx_stream_new() {
+  return mlx_stream_new_();
+}
+
 extern "C" mlx_stream mlx_stream_new_device(mlx_device dev) {
   try {
     return mlx_stream_new_(mlx::core::new_stream(mlx_device_get_(dev)));
