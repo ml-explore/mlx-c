@@ -3,44 +3,81 @@
 #include <cstring>
 
 #include "mlx/c/device.h"
-#include "mlx/c/private/device.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 
-mlx_string_* mlx_device_::tostring() {
-  std::ostringstream os;
-  os << ctx;
-  std::string str = os.str();
-  RETURN_MLX_C_STRING(str);
+extern "C" int mlx_device_tostring(mlx_string* str_, mlx_device dev) {
+  try {
+    std::ostringstream os;
+    os << mlx_device_get_(dev);
+    std::string str = os.str();
+    mlx_string_set_(*str_, str);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
 
-namespace {
-mlx_device_type to_c_device_type(mlx::core::Device::DeviceType type) {
-  static mlx_device_type map[] = {MLX_CPU, MLX_GPU};
-  return map[(int)type];
+extern "C" mlx_device mlx_device_new() {
+  return mlx_device_new_();
 }
-mlx::core::Device::DeviceType to_cpp_device_type(mlx_device_type type) {
-  static mlx::core::Device::DeviceType map[] = {
-      mlx::core::Device::DeviceType::cpu, mlx::core::Device::DeviceType::gpu};
-  return map[(int)type];
-}
-} // namespace
 
-extern "C" mlx_device mlx_device_new(mlx_device_type type, int index) {
-  auto cpp_type = to_cpp_device_type(type);
-  RETURN_MLX_C_DEVICE(mlx::core::Device(cpp_type, index));
+extern "C" mlx_device mlx_device_new_type(mlx_device_type type, int index) {
+  try {
+    auto cpp_type = mlx_device_type_to_cpp(type);
+    return mlx_device_new_(mlx::core::Device(cpp_type, index));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_device_new_();
+  }
+}
+
+extern "C" int mlx_device_set(mlx_device* dev, const mlx_device src) {
+  try {
+    mlx_device_set_(*dev, mlx_device_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 
 extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
-  return to_c_device_type(dev->ctx.type);
+  try {
+    return mlx_device_type_to_c(mlx_device_get_(dev).type);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return MLX_CPU; // DEBUG: could have a specific value
+  }
 }
 extern "C" bool mlx_device_equal(mlx_device lhs, mlx_device rhs) {
-  return lhs->ctx == rhs->ctx;
+  return mlx_device_get_(lhs) == mlx_device_get_(rhs);
 }
-extern "C" mlx_device mlx_default_device(void) {
-  RETURN_MLX_C_DEVICE(mlx::core::default_device());
+extern "C" int mlx_get_default_device(mlx_device* dev) {
+  try {
+    mlx_device_set_(*dev, mlx::core::default_device());
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
-extern "C" mlx_device mlx_set_default_device(mlx_device dev) {
-  MLX_TRY_CATCH(mlx::core::set_default_device(dev->ctx);
-                return dev, return nullptr);
+extern "C" int mlx_set_default_device(mlx_device dev) {
+  try {
+    mlx::core::set_default_device(mlx_device_get_(dev));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_device_free(mlx_device dev) {
+  try {
+    mlx_device_free_(dev);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

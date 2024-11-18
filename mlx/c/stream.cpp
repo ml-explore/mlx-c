@@ -3,42 +3,107 @@
 #include <cstring>
 
 #include "mlx/c/device.h"
-#include "mlx/c/private/device.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
 #include "mlx/c/stream.h"
 
-mlx_string_* mlx_stream_::tostring() {
-  MLX_TRY_CATCH(std::ostringstream os; os << ctx; std::string str = os.str();
-                return new mlx_string_(str), return nullptr);
+int mlx_stream_tostring(mlx_string* str_, mlx_stream stream) {
+  try {
+    std::ostringstream os;
+    os << mlx_stream_get_(stream);
+    std::string str = os.str();
+    mlx_string_set_(*str_, str);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
 
-extern "C" mlx_stream mlx_stream_new(int index, mlx_device dev) {
-  RETURN_MLX_C_STREAM(mlx::core::Stream(index, dev->ctx));
+extern "C" mlx_stream mlx_stream_new() {
+  return mlx_stream_new_();
 }
-extern "C" mlx_stream mlx_stream_new_on_device(mlx_device dev) {
-  RETURN_MLX_C_STREAM(new_stream(dev->ctx));
+
+extern "C" mlx_stream mlx_stream_new_device(mlx_device dev) {
+  try {
+    return mlx_stream_new_(mlx::core::new_stream(mlx_device_get_(dev)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_stream_new_();
+  }
+}
+extern "C" int mlx_stream_set(mlx_stream* stream, const mlx_stream src) {
+  try {
+    mlx_stream_set_(*stream, mlx_stream_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_stream_free(mlx_stream stream) {
+  try {
+    mlx_stream_free_(stream);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
 extern "C" bool mlx_stream_equal(mlx_stream lhs, mlx_stream rhs) {
-  return lhs->ctx == rhs->ctx;
+  return mlx_stream_get_(lhs) == mlx_stream_get_(rhs);
 }
-extern "C" mlx_device mlx_stream_get_device(mlx_stream stream) {
-  RETURN_MLX_C_DEVICE(stream->ctx.device);
+extern "C" int mlx_stream_get_device(mlx_device* dev, mlx_stream stream) {
+  try {
+    mlx_device_set_(*dev, mlx_stream_get_(stream).device);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
-extern "C" void mlx_synchronize(mlx_stream stream) {
-  MLX_TRY_CATCH(mlx::core::synchronize(stream->ctx), );
+extern "C" int mlx_synchronize(mlx_stream stream) {
+  try {
+    mlx::core::synchronize(mlx_stream_get_(stream));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" mlx_stream mlx_default_stream(mlx_device dev) {
-  RETURN_MLX_C_STREAM(default_stream(dev->ctx));
+extern "C" int mlx_get_default_stream(mlx_stream* stream, mlx_device dev) {
+  try {
+    mlx_stream_set_(*stream, mlx::core::default_stream(mlx_device_get_(dev)));
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
 }
-extern "C" mlx_stream mlx_set_default_stream(mlx_stream stream) {
-  MLX_TRY_CATCH(set_default_stream(stream->ctx); return stream;
-                , return nullptr);
+extern "C" int mlx_set_default_stream(mlx_stream stream) {
+  try {
+    mlx::core::set_default_stream(mlx_stream_get_(stream));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" mlx_stream mlx_cpu_stream() {
-  RETURN_MLX_C_STREAM(default_stream(mlx::core::Device::DeviceType::cpu));
+extern "C" mlx_stream mlx_default_cpu_stream_new() {
+  try {
+    return mlx_stream_new_(
+        mlx::core::default_stream(mlx::core::Device::DeviceType::cpu));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_stream_new_();
+  }
 }
-extern "C" mlx_stream mlx_gpu_stream() {
-  RETURN_MLX_C_STREAM(default_stream(mlx::core::Device::DeviceType::gpu));
+extern "C" mlx_stream mlx_default_gpu_stream_new() {
+  try {
+    return mlx_stream_new_(
+        mlx::core::default_stream(mlx::core::Device::DeviceType::gpu));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_stream_new_();
+  }
 }

@@ -17,7 +17,9 @@ extern "C" {
 /**
  * A MLX distributed group object.
  */
-typedef struct mlx_distributed_group_* mlx_distributed_group;
+typedef struct mlx_distributed_group_ {
+  void* ctx;
+} mlx_distributed_group;
 
 /**
  * Get the rank.

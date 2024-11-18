@@ -28,7 +28,7 @@ void mlx_set_error_handler(
 void _mlx_error(const char* file, const int line, const char* fmt, ...);
 
 /**
- * Throw an error.
+ * Throw an error. Macro which passes file name and line number to _mlx_error().
  */
 #define mlx_error(...) _mlx_error(__FILE__, __LINE__, __VA_ARGS__)
 

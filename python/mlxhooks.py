@@ -1,86 +1,41 @@
-/* Copyright © 2023-2024 Apple Inc.                   */
-/*                                                    */
-/* This file is auto-generated. Do not edit manually. */
-/*                                                    */
+def mlx_metal_device_info(f, implementation):
+    if implementation:
+        print(
+            """
+mlx_metal_device_info_t mlx_metal_device_info() {
+  auto info = mlx::core::metal::device_info();
 
-#include "mlx/c/fast.h"
-#include "mlx/c/error.h"
-#include "mlx/c/private/mlx.h"
-#include "mlx/fast.h"
+  mlx_metal_device_info_t c_info;
+  std::strncpy(
+      c_info.architecture,
+      std::get<std::string>(info["architecture"]).c_str(),
+      256);
+  c_info.max_buffer_length = std::get<size_t>(info["max_buffer_length"]);
+  c_info.max_recommended_working_set_size =
+      std::get<size_t>(info["max_recommended_working_set_size"]);
+  c_info.memory_size = std::get<size_t>(info["memory_size"]);
+  return c_info;
+}
+        """
+        )
+    else:
+        print(
+            """
+typedef struct mlx_metal_device_info_t_ {
+  char architecture[256];
+  size_t max_buffer_length;
+  size_t max_recommended_working_set_size;
+  size_t memory_size;
+} mlx_metal_device_info_t;
+mlx_metal_device_info_t mlx_metal_device_info();
+        """
+        )
 
-extern "C" int mlx_fast_affine_dequantize(
-    mlx_array* res,
-    const mlx_array w,
-    const mlx_array scales,
-    const mlx_array biases,
-    int group_size,
-    int bits,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::affine_dequantize(
-            mlx_array_get_(w),
-            mlx_array_get_(scales),
-            mlx_array_get_(biases),
-            group_size,
-            bits,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_fast_affine_quantize(
-    mlx_array* res,
-    const mlx_array w,
-    const mlx_array scales,
-    const mlx_array biases,
-    int group_size,
-    int bits,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::affine_quantize(
-            mlx_array_get_(w),
-            mlx_array_get_(scales),
-            mlx_array_get_(biases),
-            group_size,
-            bits,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_fast_layer_norm(
-    mlx_array* res,
-    const mlx_array x,
-    const mlx_array weight /* may be null */,
-    const mlx_array bias /* may be null */,
-    float eps,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::layer_norm(
-            mlx_array_get_(x),
-            (weight.ctx ? std::make_optional(mlx_array_get_(weight))
-                        : std::nullopt),
-            (bias.ctx ? std::make_optional(mlx_array_get_(bias))
-                      : std::nullopt),
-            eps,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 
+def mlx_fast_metal_kernel(f, implementation):
+    if implementation:
+        print(
+            """
 struct mlx_fast_metal_kernel_private_ {
   mlx::core::fast::MetalKernelFunction ctx;
   std::string name;
@@ -344,83 +299,76 @@ extern "C" int mlx_fast_metal_kernel_apply(
   }
   return 0;
 }
+        """
+        )
+    else:
+        print(
+            """
+typedef struct mlx_fast_metal_kernel_ {
+  void* ctx;
+} mlx_fast_metal_kernel;
+mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
+    const char* name,
+    const char* source,
+    const char* header);
+void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls);
+int mlx_fast_metal_kernel_add_input_name(
+    mlx_fast_metal_kernel cls,
+    const char* name);
+int mlx_fast_metal_kernel_set_input_names(
+    mlx_fast_metal_kernel cls,
+    int num,
+    ...);
+int mlx_fast_metal_kernel_add_output_name(
+    mlx_fast_metal_kernel cls,
+    const char* name);
+int mlx_fast_metal_kernel_set_output_names(
+    mlx_fast_metal_kernel cls,
+    int num,
+    ...);
+int mlx_fast_metal_kernel_set_contiguous_rows(
+    mlx_fast_metal_kernel cls,
+    bool flag);
+int mlx_fast_metal_kernel_set_atomic_outputs(
+    mlx_fast_metal_kernel cls,
+    bool flag);
 
-extern "C" int mlx_fast_rms_norm(
-    mlx_array* res,
-    const mlx_array x,
-    const mlx_array weight,
-    float eps,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::rms_norm(
-            mlx_array_get_(x),
-            mlx_array_get_(weight),
-            eps,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_fast_rope(
-    mlx_array* res,
-    const mlx_array x,
-    int dims,
-    bool traditional,
-    mlx_optional_float base,
-    float scale,
-    int offset,
-    const mlx_array freqs /* may be null */,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::rope(
-            mlx_array_get_(x),
-            dims,
-            traditional,
-            (base.has_value ? std::make_optional<float>(base.value)
-                            : std::nullopt),
-            scale,
-            offset,
-            (freqs.ctx ? std::make_optional(mlx_array_get_(freqs))
-                       : std::nullopt),
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_fast_scaled_dot_product_attention(
-    mlx_array* res,
-    const mlx_array queries,
-    const mlx_array keys,
-    const mlx_array values,
-    float scale,
-    const mlx_array mask /* may be null */,
-    mlx_optional_int memory_efficient_threshold,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::scaled_dot_product_attention(
-            mlx_array_get_(queries),
-            mlx_array_get_(keys),
-            mlx_array_get_(values),
-            scale,
-            (mask.ctx ? std::make_optional(mlx_array_get_(mask))
-                      : std::nullopt),
-            (memory_efficient_threshold.has_value
-                 ? std::make_optional<int>(memory_efficient_threshold.value)
-                 : std::nullopt),
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
+int mlx_fast_metal_kernel_add_output_arg(
+    mlx_fast_metal_kernel cls,
+    const int* shape,
+    size_t size,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_set_grid(
+    mlx_fast_metal_kernel cls,
+    int grid1,
+    int grid2,
+    int grid3);
+int mlx_fast_metal_kernel_set_thread_group(
+    mlx_fast_metal_kernel cls,
+    int thread1,
+    int thread2,
+    int thread3);
+int mlx_fast_metal_kernel_set_init_value(
+    mlx_fast_metal_kernel cls,
+    float value);
+int mlx_fast_metal_kernel_set_verbose(mlx_fast_metal_kernel cls, bool verbose);
+int mlx_fast_metal_kernel_add_template_arg_dtype(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_add_template_arg_int(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    int value);
+int mlx_fast_metal_kernel_add_template_arg_bool(
+    mlx_fast_metal_kernel cls,
+    const char* name,
+    bool value);
+
+int mlx_fast_metal_kernel_apply(
+    mlx_vector_array* outputs,
+    mlx_fast_metal_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_stream stream);
+        """
+        )

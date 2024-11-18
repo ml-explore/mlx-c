@@ -14,11 +14,9 @@
 #include "mlx/c/fft.h"
 #include "mlx/c/half.h"
 #include "mlx/c/io.h"
-#include "mlx/c/ioutils.h"
 #include "mlx/c/linalg.h"
 #include "mlx/c/map.h"
 #include "mlx/c/metal.h"
-#include "mlx/c/object.h"
 #include "mlx/c/ops.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/random.h"
@@ -26,8 +24,6 @@
 #include "mlx/c/string.h"
 #include "mlx/c/transforms.h"
 #include "mlx/c/transforms_impl.h"
-#include "mlx/c/tuple.h"
-#include "mlx/c/variant.h"
 #include "mlx/c/vector.h"
 
 #endif

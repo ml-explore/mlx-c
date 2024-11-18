@@ -7,7 +7,6 @@ import os
 
 parser = argparse.ArgumentParser("MLX C bindings generator", add_help=False)
 parser.add_argument("--header", type=str)
-parser.add_argument("--namespace", default="mlx::core", type=str)
 parser.add_argument("--implementation", default=False, action="store_true")
 parser.add_argument("--language", default="C", type=str)
 parser.add_argument("--docstring", default="", type=str)
@@ -66,41 +65,57 @@ enums = {}
 for header in args.header.split(";"):
     Z = cxxheaderparser.simple.parse_file(header)
 
-    l = Z.namespace
-    for namespace in args.namespace.split("::"):
-        l = l.namespaces[namespace]
+    def process_namespace(l, namespace, funcs, enums):
+        namespace = namespace.lstrip("::")
+        for e in l.enums:
+            name = getname(e.typename)
+            values = [v.name for v in e.values]
+            enums[name] = values
 
-    for e in l.enums:
-        name = getname(e.typename)
-        values = [v.name for v in e.values]
-        enums[name] = values
+        for f in l.functions:
+            name = getname(f.name)
+            if name.startswith("operator"):
+                continue
+            params_t = []
+            params_name = []
+            return_t = getname(f.return_type)
+            if return_t == "Stream":  # unsupported
+                continue
+            for p in f.parameters:
+                params_t.append(getname(p.type))
+                params_name.append(p.name)
+            func = {
+                "name": name,
+                "params_t": params_t,
+                "params_name": params_name,
+                "return_t": return_t,
+                "namespace": namespace,
+            }
+            if name in funcs:
+                funcs[name].append(func)
+            else:
+                funcs[name] = [func]
 
-    for f in l.functions:
-        name = getname(f.name)
-        if name.startswith("operator"):
-            continue
-        params_t = []
-        params_name = []
-        return_t = getname(f.return_type)
-        if return_t == "Stream":  # unsupported
-            continue
-        for p in f.parameters:
-            params_t.append(getname(p.type))
-            params_name.append(p.name)
-        func = {
-            "name": name,
-            "params_t": params_t,
-            "params_name": params_name,
-            "return_t": return_t,
-        }
-        if name in funcs:
-            funcs[name].append(func)
-        else:
-            funcs[name] = [func]
+        for subnamespace in l.namespaces:
+            process_namespace(
+                l.namespaces[subnamespace],
+                namespace + "::" + subnamespace,
+                funcs,
+                enums,
+            )
+
+    process_namespace(Z.namespace, "", funcs, enums)
 
 if args.language == "C":
     from c import generate
 else:
     raise RuntimeError("Unsupported language")
 
-generate(funcs, enums, headername, args.namespace, args.implementation, args.docstring)
+generate(
+    funcs,
+    enums,
+    header,
+    headername,
+    args.implementation,
+    args.docstring,
+)

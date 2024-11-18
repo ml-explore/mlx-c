@@ -1,4 +1,4 @@
-/* Copyright © 2023-2024 Apple Inc. */
+/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -22,150 +22,107 @@ extern "C" {
 /**
  * A vector of array.
  */
-typedef struct mlx_vector_array_* mlx_vector_array;
+typedef struct mlx_vector_array_ {
+  void* ctx;
+} mlx_vector_array;
 mlx_vector_array mlx_vector_array_new();
-mlx_vector_array mlx_vector_array_from_data(const mlx_array* data, size_t size);
-mlx_vector_array mlx_vector_array_from_value(const mlx_array val);
-void mlx_vector_array_add_data(
+int mlx_vector_array_set(mlx_vector_array* vec, const mlx_vector_array src);
+int mlx_vector_array_free(mlx_vector_array vec);
+mlx_vector_array mlx_vector_array_new_data(const mlx_array* data, size_t size);
+mlx_vector_array mlx_vector_array_new_value(const mlx_array val);
+int mlx_vector_array_set_data(
+    mlx_vector_array* vec,
+    const mlx_array* data,
+    size_t size);
+int mlx_vector_array_set_value(mlx_vector_array* vec, const mlx_array val);
+int mlx_vector_array_append_data(
     mlx_vector_array vec,
     const mlx_array* data,
     size_t size);
-void mlx_vector_array_add_value(mlx_vector_array vec, const mlx_array val);
+int mlx_vector_array_append_value(mlx_vector_array vec, const mlx_array val);
 size_t mlx_vector_array_size(mlx_vector_array vec);
-mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t idx);
-mlx_array* mlx_vector_array_data(mlx_vector_array vec);
+int mlx_vector_array_get(
+    mlx_array* res,
+    const mlx_vector_array vec,
+    size_t idx);
 
 /**
  * A vector of vector_array.
  */
-typedef struct mlx_vector_vector_array_* mlx_vector_vector_array;
+typedef struct mlx_vector_vector_array_ {
+  void* ctx;
+} mlx_vector_vector_array;
 mlx_vector_vector_array mlx_vector_vector_array_new();
-mlx_vector_vector_array mlx_vector_vector_array_from_data(
+int mlx_vector_vector_array_set(
+    mlx_vector_vector_array* vec,
+    const mlx_vector_vector_array src);
+int mlx_vector_vector_array_free(mlx_vector_vector_array vec);
+mlx_vector_vector_array mlx_vector_vector_array_new_data(
     const mlx_vector_array* data,
     size_t size);
-mlx_vector_vector_array mlx_vector_vector_array_from_value(
+mlx_vector_vector_array mlx_vector_vector_array_new_value(
     const mlx_vector_array val);
-void mlx_vector_vector_array_add_data(
+int mlx_vector_vector_array_set_data(
+    mlx_vector_vector_array* vec,
+    const mlx_vector_array* data,
+    size_t size);
+int mlx_vector_vector_array_set_value(
+    mlx_vector_vector_array* vec,
+    const mlx_vector_array val);
+int mlx_vector_vector_array_append_data(
     mlx_vector_vector_array vec,
     const mlx_vector_array* data,
     size_t size);
-void mlx_vector_vector_array_add_value(
+int mlx_vector_vector_array_append_value(
     mlx_vector_vector_array vec,
     const mlx_vector_array val);
 size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec);
-mlx_vector_array mlx_vector_vector_array_get(
-    mlx_vector_vector_array vec,
+int mlx_vector_vector_array_get(
+    mlx_vector_array* res,
+    const mlx_vector_vector_array vec,
     size_t idx);
-mlx_vector_array* mlx_vector_vector_array_data(mlx_vector_vector_array vec);
 
 /**
  * A vector of int.
  */
-typedef struct mlx_vector_int_* mlx_vector_int;
+typedef struct mlx_vector_int_ {
+  void* ctx;
+} mlx_vector_int;
 mlx_vector_int mlx_vector_int_new();
-mlx_vector_int mlx_vector_int_from_data(const int* data, size_t size);
-mlx_vector_int mlx_vector_int_from_value(const int val);
-void mlx_vector_int_add_data(mlx_vector_int vec, const int* data, size_t size);
-void mlx_vector_int_add_value(mlx_vector_int vec, const int val);
+int mlx_vector_int_set(mlx_vector_int* vec, const mlx_vector_int src);
+int mlx_vector_int_free(mlx_vector_int vec);
+mlx_vector_int mlx_vector_int_new_data(int* data, size_t size);
+mlx_vector_int mlx_vector_int_new_value(int val);
+int mlx_vector_int_set_data(mlx_vector_int* vec, int* data, size_t size);
+int mlx_vector_int_set_value(mlx_vector_int* vec, int val);
+int mlx_vector_int_append_data(mlx_vector_int vec, int* data, size_t size);
+int mlx_vector_int_append_value(mlx_vector_int vec, int val);
 size_t mlx_vector_int_size(mlx_vector_int vec);
-int mlx_vector_int_get(mlx_vector_int vec, size_t idx);
-int* mlx_vector_int_data(mlx_vector_int vec);
-
-/**
- * A vector of vector_int.
- */
-typedef struct mlx_vector_vector_int_* mlx_vector_vector_int;
-mlx_vector_vector_int mlx_vector_vector_int_new();
-mlx_vector_vector_int mlx_vector_vector_int_from_data(
-    const mlx_vector_int* data,
-    size_t size);
-mlx_vector_vector_int mlx_vector_vector_int_from_value(
-    const mlx_vector_int val);
-void mlx_vector_vector_int_add_data(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int* data,
-    size_t size);
-void mlx_vector_vector_int_add_value(
-    mlx_vector_vector_int vec,
-    const mlx_vector_int val);
-size_t mlx_vector_vector_int_size(mlx_vector_vector_int vec);
-mlx_vector_int mlx_vector_vector_int_get(mlx_vector_vector_int vec, size_t idx);
-mlx_vector_int* mlx_vector_vector_int_data(mlx_vector_vector_int vec);
+int mlx_vector_int_get(int* res, const mlx_vector_int vec, size_t idx);
 
 /**
  * A vector of string.
  */
-typedef struct mlx_vector_string_* mlx_vector_string;
+typedef struct mlx_vector_string_ {
+  void* ctx;
+} mlx_vector_string;
 mlx_vector_string mlx_vector_string_new();
-mlx_vector_string mlx_vector_string_from_data(
-    const mlx_string* data,
+int mlx_vector_string_set(mlx_vector_string* vec, const mlx_vector_string src);
+int mlx_vector_string_free(mlx_vector_string vec);
+mlx_vector_string mlx_vector_string_new_data(const char** data, size_t size);
+mlx_vector_string mlx_vector_string_new_value(const char* val);
+int mlx_vector_string_set_data(
+    mlx_vector_string* vec,
+    const char** data,
     size_t size);
-mlx_vector_string mlx_vector_string_from_value(const mlx_string val);
-void mlx_vector_string_add_data(
+int mlx_vector_string_set_value(mlx_vector_string* vec, const char* val);
+int mlx_vector_string_append_data(
     mlx_vector_string vec,
-    const mlx_string* data,
+    const char** data,
     size_t size);
-void mlx_vector_string_add_value(mlx_vector_string vec, const mlx_string val);
+int mlx_vector_string_append_value(mlx_vector_string vec, const char* val);
 size_t mlx_vector_string_size(mlx_vector_string vec);
-mlx_string mlx_vector_string_get(mlx_vector_string vec, size_t idx);
-mlx_string* mlx_vector_string_data(mlx_vector_string vec);
-
-/**
- * A vector of array_dtype.
- */
-typedef struct mlx_vector_array_dtype_* mlx_vector_array_dtype;
-mlx_vector_array_dtype mlx_vector_array_dtype_new();
-mlx_vector_array_dtype mlx_vector_array_dtype_from_data(
-    const mlx_array_dtype* data,
-    size_t size);
-mlx_vector_array_dtype mlx_vector_array_dtype_from_value(
-    const mlx_array_dtype val);
-void mlx_vector_array_dtype_add_data(
-    mlx_vector_array_dtype vec,
-    const mlx_array_dtype* data,
-    size_t size);
-void mlx_vector_array_dtype_add_value(
-    mlx_vector_array_dtype vec,
-    const mlx_array_dtype val);
-size_t mlx_vector_array_dtype_size(mlx_vector_array_dtype vec);
-mlx_array_dtype mlx_vector_array_dtype_get(
-    mlx_vector_array_dtype vec,
-    size_t idx);
-mlx_array_dtype* mlx_vector_array_dtype_data(mlx_vector_array_dtype vec);
-
-typedef struct mlx_tuple_string_variant_int_bool_array_dtype_*
-    mlx_tuple_string_variant_int_bool_array_dtype;
-
-/**
- * A vector of tuple_string_variant_int_bool_array_dtype.
- */
-typedef struct mlx_vector_tuple_string_variant_int_bool_array_dtype_*
-    mlx_vector_tuple_string_variant_int_bool_array_dtype;
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_new();
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_data(
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size);
-mlx_vector_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_from_value(
-    const mlx_tuple_string_variant_int_bool_array_dtype val);
-void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_data(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype* data,
-    size_t size);
-void mlx_vector_tuple_string_variant_int_bool_array_dtype_add_value(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    const mlx_tuple_string_variant_int_bool_array_dtype val);
-size_t mlx_vector_tuple_string_variant_int_bool_array_dtype_size(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec);
-mlx_tuple_string_variant_int_bool_array_dtype
-mlx_vector_tuple_string_variant_int_bool_array_dtype_get(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec,
-    size_t idx);
-mlx_tuple_string_variant_int_bool_array_dtype*
-mlx_vector_tuple_string_variant_int_bool_array_dtype_data(
-    mlx_vector_tuple_string_variant_int_bool_array_dtype vec);
+int mlx_vector_string_get(char** res, const mlx_vector_string vec, size_t idx);
 
 /**@}*/
 

@@ -4,46 +4,73 @@
 /*                                                    */
 
 #include "mlx/c/compile.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
+#include "mlx/compile_impl.h"
 
-#include "mlx/c/mlx.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/io.h"
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/tuple.h"
-#include "mlx/c/private/utils.h"
-#include "mlx/c/private/vector.h"
-
-namespace {
-mlx_compile_mode to_c_type(mlx::core::CompileMode type) {
-  static mlx_compile_mode map[] = {
-      MLX_COMPILE_MODE_DISABLED,
-      MLX_COMPILE_MODE_NO_SIMPLIFY,
-      MLX_COMPILE_MODE_NO_FUSE,
-      MLX_COMPILE_MODE_ENABLED};
-  return map[(int)type];
+extern "C" int mlx_detail_compile(
+    mlx_closure* res,
+    const mlx_closure fun,
+    uintptr_t fun_id,
+    bool shapeless,
+    const uint64_t* constants,
+    size_t constants_num) {
+  try {
+    mlx_closure_set_(
+        *res,
+        mlx::core::detail::compile(
+            mlx_closure_get_(fun),
+            fun_id,
+            shapeless,
+            std::vector<uint64_t>(constants, constants + constants_num)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-mlx::core::CompileMode to_cpp_type(mlx_compile_mode type) {
-  static mlx::core::CompileMode map[] = {
-      mlx::core::CompileMode::disabled,
-      mlx::core::CompileMode::no_simplify,
-      mlx::core::CompileMode::no_fuse,
-      mlx::core::CompileMode::enabled};
-  return map[(int)type];
+extern "C" int mlx_detail_compile_clear_cache() {
+  try {
+    mlx::core::detail::compile_clear_cache();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-} // namespace
-extern "C" mlx_closure mlx_compile(mlx_closure fun, bool shapeless) {
-  RETURN_MLX_C_CLOSURE(mlx::core::compile((fun)->ctx, shapeless));
+extern "C" int mlx_detail_compile_erase(uintptr_t fun_id) {
+  try {
+    mlx::core::detail::compile_erase(fun_id);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_disable_compile() {
-  RETURN_MLX_C_VOID(mlx::core::disable_compile());
+extern "C" int mlx_disable_compile() {
+  try {
+    mlx::core::disable_compile();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_enable_compile() {
-  RETURN_MLX_C_VOID(mlx::core::enable_compile());
+extern "C" int mlx_enable_compile() {
+  try {
+    mlx::core::enable_compile();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" void mlx_set_compile_mode(mlx_compile_mode mode) {
-  RETURN_MLX_C_VOID(mlx::core::set_compile_mode(to_cpp_type(mode)));
+extern "C" int mlx_set_compile_mode(mlx_compile_mode mode) {
+  try {
+    mlx::core::set_compile_mode(mlx_compile_mode_to_cpp(mode));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

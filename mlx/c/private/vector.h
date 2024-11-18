@@ -1,4 +1,4 @@
-/* Copyright © 2023-2024 Apple Inc. */
+/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -6,144 +6,204 @@
 #ifndef MLX_VECTOR_PRIVATE_H
 #define MLX_VECTOR_PRIVATE_H
 
-#include "mlx/c/object.h"
-#include "mlx/c/private/object.h"
 #include "mlx/c/vector.h"
 #include "mlx/mlx.h"
 
-struct mlx_vector_array_ : mlx_object_ {
-  mlx_vector_array_() : mlx_object_(){};
-  mlx_vector_array_(const std::vector<mlx::core::array>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_array_(std::vector<mlx::core::array>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_array_(const std::pair<mlx::core::array, mlx::core::array>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_array_(
-      const std::tuple<mlx::core::array, mlx::core::array, mlx::core::array>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<mlx::core::array> ctx;
-};
+inline mlx_vector_array mlx_vector_array_new_() {
+  return mlx_vector_array({nullptr});
+}
 
-struct mlx_vector_vector_array_ : mlx_object_ {
-  mlx_vector_vector_array_() : mlx_object_(){};
-  mlx_vector_vector_array_(
-      const std::vector<std::vector<mlx::core::array>>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_vector_array_(std::vector<std::vector<mlx::core::array>>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_vector_array_(const std::pair<
-                           std::vector<mlx::core::array>,
-                           std::vector<mlx::core::array>>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_vector_array_(const std::tuple<
-                           std::vector<mlx::core::array>,
-                           std::vector<mlx::core::array>,
-                           std::vector<mlx::core::array>>& ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<std::vector<mlx::core::array>> ctx;
-};
+inline mlx_vector_array mlx_vector_array_new_(
+    const std::vector<mlx::core::array>& s) {
+  return mlx_vector_array({new std::vector<mlx::core::array>(s)});
+}
 
-struct mlx_vector_int_ : mlx_object_ {
-  mlx_vector_int_() : mlx_object_(){};
-  mlx_vector_int_(const std::vector<int>& ctx) : mlx_object_(), ctx(ctx){};
-  mlx_vector_int_(std::vector<int>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_int_(const std::pair<int, int>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_int_(const std::tuple<int, int, int>& ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<int> ctx;
-};
+inline mlx_vector_array mlx_vector_array_new_(
+    std::vector<mlx::core::array>&& s) {
+  return mlx_vector_array({new std::vector<mlx::core::array>(std::move(s))});
+}
 
-struct mlx_vector_vector_int_ : mlx_object_ {
-  mlx_vector_vector_int_() : mlx_object_(){};
-  mlx_vector_vector_int_(const std::vector<std::vector<int>>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_vector_int_(std::vector<std::vector<int>>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_vector_int_(
-      const std::pair<std::vector<int>, std::vector<int>>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_vector_int_(
-      const std::tuple<std::vector<int>, std::vector<int>, std::vector<int>>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<std::vector<int>> ctx;
-};
+inline mlx_vector_array& mlx_vector_array_set_(
+    mlx_vector_array& d,
+    const std::vector<mlx::core::array>& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<mlx::core::array>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<mlx::core::array>(s);
+  }
+  return d;
+}
 
-struct mlx_vector_string_ : mlx_object_ {
-  mlx_vector_string_() : mlx_object_(){};
-  mlx_vector_string_(const std::vector<std::string>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_string_(std::vector<std::string>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_string_(const std::pair<std::string, std::string>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_string_(
-      const std::tuple<std::string, std::string, std::string>& ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<std::string> ctx;
-};
+inline mlx_vector_array& mlx_vector_array_set_(
+    mlx_vector_array& d,
+    std::vector<mlx::core::array>&& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<mlx::core::array>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<mlx::core::array>(s);
+  }
+  return d;
+}
 
-struct mlx_vector_array_dtype_ : mlx_object_ {
-  mlx_vector_array_dtype_() : mlx_object_(){};
-  mlx_vector_array_dtype_(const std::vector<mlx::core::Dtype>& ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_array_dtype_(std::vector<mlx::core::Dtype>&& ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_array_dtype_(
-      const std::pair<mlx::core::Dtype, mlx::core::Dtype>& ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_array_dtype_(
-      const std::tuple<mlx::core::Dtype, mlx::core::Dtype, mlx::core::Dtype>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<mlx::core::Dtype> ctx;
-};
+inline std::vector<mlx::core::array>& mlx_vector_array_get_(
+    mlx_vector_array d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_vector_array");
+  }
+  return *static_cast<std::vector<mlx::core::array>*>(d.ctx);
+}
 
-struct mlx_vector_tuple_string_variant_int_bool_array_dtype_ : mlx_object_ {
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_() : mlx_object_(){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::vector<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(), ctx(ctx){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      std::vector<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&&
-          ctx)
-      : mlx_object_(), ctx(std::move(ctx)){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::pair<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(), ctx({ctx.first, ctx.second}){};
-  mlx_vector_tuple_string_variant_int_bool_array_dtype_(
-      const std::tuple<
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>,
-          std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>&
-          ctx)
-      : mlx_object_(),
-        ctx({std::get<0>(ctx), std::get<1>(ctx), std::get<2>(ctx)}){};
-  virtual mlx_string_* tostring() override;
-  std::vector<std::pair<std::string, std::variant<int, bool, mlx::core::Dtype>>>
-      ctx;
-};
+inline void mlx_vector_array_free_(mlx_vector_array d) {
+  if (d.ctx) {
+    delete static_cast<std::vector<mlx::core::array>*>(d.ctx);
+  }
+}
+
+inline mlx_vector_vector_array mlx_vector_vector_array_new_() {
+  return mlx_vector_vector_array({nullptr});
+}
+
+inline mlx_vector_vector_array mlx_vector_vector_array_new_(
+    const std::vector<std::vector<mlx::core::array>>& s) {
+  return mlx_vector_vector_array(
+      {new std::vector<std::vector<mlx::core::array>>(s)});
+}
+
+inline mlx_vector_vector_array mlx_vector_vector_array_new_(
+    std::vector<std::vector<mlx::core::array>>&& s) {
+  return mlx_vector_vector_array(
+      {new std::vector<std::vector<mlx::core::array>>(std::move(s))});
+}
+
+inline mlx_vector_vector_array& mlx_vector_vector_array_set_(
+    mlx_vector_vector_array& d,
+    const std::vector<std::vector<mlx::core::array>>& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<std::vector<mlx::core::array>>(s);
+  }
+  return d;
+}
+
+inline mlx_vector_vector_array& mlx_vector_vector_array_set_(
+    mlx_vector_vector_array& d,
+    std::vector<std::vector<mlx::core::array>>&& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<std::vector<mlx::core::array>>(s);
+  }
+  return d;
+}
+
+inline std::vector<std::vector<mlx::core::array>>& mlx_vector_vector_array_get_(
+    mlx_vector_vector_array d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_vector_vector_array");
+  }
+  return *static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx);
+}
+
+inline void mlx_vector_vector_array_free_(mlx_vector_vector_array d) {
+  if (d.ctx) {
+    delete static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx);
+  }
+}
+
+inline mlx_vector_int mlx_vector_int_new_() {
+  return mlx_vector_int({nullptr});
+}
+
+inline mlx_vector_int mlx_vector_int_new_(const std::vector<int>& s) {
+  return mlx_vector_int({new std::vector<int>(s)});
+}
+
+inline mlx_vector_int mlx_vector_int_new_(std::vector<int>&& s) {
+  return mlx_vector_int({new std::vector<int>(std::move(s))});
+}
+
+inline mlx_vector_int& mlx_vector_int_set_(
+    mlx_vector_int& d,
+    const std::vector<int>& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<int>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<int>(s);
+  }
+  return d;
+}
+
+inline mlx_vector_int& mlx_vector_int_set_(
+    mlx_vector_int& d,
+    std::vector<int>&& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<int>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<int>(s);
+  }
+  return d;
+}
+
+inline std::vector<int>& mlx_vector_int_get_(mlx_vector_int d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_vector_int");
+  }
+  return *static_cast<std::vector<int>*>(d.ctx);
+}
+
+inline void mlx_vector_int_free_(mlx_vector_int d) {
+  if (d.ctx) {
+    delete static_cast<std::vector<int>*>(d.ctx);
+  }
+}
+
+inline mlx_vector_string mlx_vector_string_new_() {
+  return mlx_vector_string({nullptr});
+}
+
+inline mlx_vector_string mlx_vector_string_new_(
+    const std::vector<std::string>& s) {
+  return mlx_vector_string({new std::vector<std::string>(s)});
+}
+
+inline mlx_vector_string mlx_vector_string_new_(std::vector<std::string>&& s) {
+  return mlx_vector_string({new std::vector<std::string>(std::move(s))});
+}
+
+inline mlx_vector_string& mlx_vector_string_set_(
+    mlx_vector_string& d,
+    const std::vector<std::string>& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<std::string>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<std::string>(s);
+  }
+  return d;
+}
+
+inline mlx_vector_string& mlx_vector_string_set_(
+    mlx_vector_string& d,
+    std::vector<std::string>&& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<std::string>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<std::string>(s);
+  }
+  return d;
+}
+
+inline std::vector<std::string>& mlx_vector_string_get_(mlx_vector_string d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_vector_string");
+  }
+  return *static_cast<std::vector<std::string>*>(d.ctx);
+}
+
+inline void mlx_vector_string_free_(mlx_vector_string d) {
+  if (d.ctx) {
+    delete static_cast<std::vector<std::string>*>(d.ctx);
+  }
+}
 
 #endif

@@ -1,4 +1,4 @@
-/* Copyright © 2023-2024 Apple Inc. */
+/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -8,7 +8,6 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/string.h"
-#include "mlx/c/variant.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,175 +22,123 @@ extern "C" {
 /**
  * A string-to-array map
  */
-typedef struct mlx_map_string_to_array_* mlx_map_string_to_array;
+typedef struct mlx_map_string_to_array_ {
+  void* ctx;
+} mlx_map_string_to_array;
 
 /**
  * Returns a new empty string-to-array map.
  */
 mlx_map_string_to_array mlx_map_string_to_array_new(void);
 /**
- * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
+ * Set map to provided src map.
  */
-bool mlx_map_string_to_array_insert(
+int mlx_map_string_to_array_set(
+    mlx_map_string_to_array* map,
+    const mlx_map_string_to_array src);
+/**
+ * Free a string-to-array map.
+ */
+int mlx_map_string_to_array_free(mlx_map_string_to_array map);
+/**
+ * Insert a new `value` at the specified `key` in the map.
+ */
+int mlx_map_string_to_array_insert(
     mlx_map_string_to_array map,
-    const mlx_string key,
+    const char* key,
     const mlx_array value);
 /**
  * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
  */
-mlx_array mlx_map_string_to_array_get(
-    mlx_map_string_to_array map,
-    const mlx_string key);
+int mlx_map_string_to_array_get(
+    mlx_array* value,
+    const mlx_map_string_to_array map,
+    const char* key);
 
 /**
  * An iterator over a string-to-array map.
  */
-typedef struct mlx_map_string_to_array_iterator_*
-    mlx_map_string_to_array_iterator;
+typedef struct mlx_map_string_to_array_iterator_ {
+  void* ctx;
+  void* map_ctx;
+} mlx_map_string_to_array_iterator;
 /**
  * Returns a new iterator over the given map.
  */
-mlx_map_string_to_array_iterator mlx_map_string_to_array_iterate(
+mlx_map_string_to_array_iterator mlx_map_string_to_array_iterator_new(
     mlx_map_string_to_array map);
 /**
+ * Free iterator.
+ */
+int mlx_map_string_to_array_iterator_free(mlx_map_string_to_array_iterator it);
+/**
  * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_string_to_array_iterator_next(mlx_map_string_to_array_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_string_to_array_iterator_end(mlx_map_string_to_array_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_array_iterator_key(
-    mlx_map_string_to_array_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-mlx_array mlx_map_string_to_array_iterator_value(
+int mlx_map_string_to_array_iterator_next(
+    const char** key,
+    mlx_array* value,
     mlx_map_string_to_array_iterator it);
 
 /**
  * A string-to-string map
  */
-typedef struct mlx_map_string_to_string_* mlx_map_string_to_string;
+typedef struct mlx_map_string_to_string_ {
+  void* ctx;
+} mlx_map_string_to_string;
 
 /**
  * Returns a new empty string-to-string map.
  */
 mlx_map_string_to_string mlx_map_string_to_string_new(void);
 /**
- * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
+ * Set map to provided src map.
  */
-bool mlx_map_string_to_string_insert(
+int mlx_map_string_to_string_set(
+    mlx_map_string_to_string* map,
+    const mlx_map_string_to_string src);
+/**
+ * Free a string-to-string map.
+ */
+int mlx_map_string_to_string_free(mlx_map_string_to_string map);
+/**
+ * Insert a new `value` at the specified `key` in the map.
+ */
+int mlx_map_string_to_string_insert(
     mlx_map_string_to_string map,
-    const mlx_string key,
-    const mlx_string value);
+    const char* key,
+    const char* value);
 /**
  * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
  */
-mlx_string mlx_map_string_to_string_get(
-    mlx_map_string_to_string map,
-    const mlx_string key);
+int mlx_map_string_to_string_get(
+    const char** value,
+    const mlx_map_string_to_string map,
+    const char* key);
 
 /**
  * An iterator over a string-to-string map.
  */
-typedef struct mlx_map_string_to_string_iterator_*
-    mlx_map_string_to_string_iterator;
+typedef struct mlx_map_string_to_string_iterator_ {
+  void* ctx;
+  void* map_ctx;
+} mlx_map_string_to_string_iterator;
 /**
  * Returns a new iterator over the given map.
  */
-mlx_map_string_to_string_iterator mlx_map_string_to_string_iterate(
+mlx_map_string_to_string_iterator mlx_map_string_to_string_iterator_new(
     mlx_map_string_to_string map);
 /**
- * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
+ * Free iterator.
  */
-bool mlx_map_string_to_string_iterator_next(
+int mlx_map_string_to_string_iterator_free(
     mlx_map_string_to_string_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_string_to_string_iterator_end(
-    mlx_map_string_to_string_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_string_iterator_key(
-    mlx_map_string_to_string_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_string_iterator_value(
-    mlx_map_string_to_string_iterator it);
-
-/**
- * A string-to-variant_string_size_t map
- */
-typedef struct mlx_map_string_to_variant_string_size_t_*
-    mlx_map_string_to_variant_string_size_t;
-
-/**
- * Returns a new empty string-to-variant_string_size_t map.
- */
-mlx_map_string_to_variant_string_size_t
-mlx_map_string_to_variant_string_size_t_new(void);
-/**
- * Insert a new `value` at the specified `key` in the map.
- * Returns `true` if the value was actually inserted.
- */
-bool mlx_map_string_to_variant_string_size_t_insert(
-    mlx_map_string_to_variant_string_size_t map,
-    const mlx_string key,
-    const mlx_variant_string_size_t value);
-/**
- * Returns the value indexed at the specified `key` in the map.
- * Returns `NULL` if no value was found for `key`.
- */
-mlx_variant_string_size_t mlx_map_string_to_variant_string_size_t_get(
-    mlx_map_string_to_variant_string_size_t map,
-    const mlx_string key);
-
-/**
- * An iterator over a string-to-variant_string_size_t map.
- */
-typedef struct mlx_map_string_to_variant_string_size_t_iterator_*
-    mlx_map_string_to_variant_string_size_t_iterator;
-/**
- * Returns a new iterator over the given map.
- */
-mlx_map_string_to_variant_string_size_t_iterator
-mlx_map_string_to_variant_string_size_t_iterate(
-    mlx_map_string_to_variant_string_size_t map);
 /**
  * Increment iterator.
- * Returns `true` if iterator could actually be incremented.
  */
-bool mlx_map_string_to_variant_string_size_t_iterator_next(
-    mlx_map_string_to_variant_string_size_t_iterator it);
-/**
- * Returns `true` iif iterator is at the end of the map.
- */
-bool mlx_map_string_to_variant_string_size_t_iterator_end(
-    mlx_map_string_to_variant_string_size_t_iterator it);
-/**
- * Returns the key associated to the current iterator position in the map.
- */
-mlx_string mlx_map_string_to_variant_string_size_t_iterator_key(
-    mlx_map_string_to_variant_string_size_t_iterator it);
-/**
- * Returns the value associated to the current iterator position in the map.
- */
-mlx_variant_string_size_t
-mlx_map_string_to_variant_string_size_t_iterator_value(
-    mlx_map_string_to_variant_string_size_t_iterator it);
+int mlx_map_string_to_string_iterator_next(
+    const char** key,
+    const char** value,
+    mlx_map_string_to_string_iterator it);
 
 /**@}*/
 
