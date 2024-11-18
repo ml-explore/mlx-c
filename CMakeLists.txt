@@ -13,6 +13,7 @@ endif()
 
 option(BUILD_SHARED_LIBS "Build mlx C as a shared library" OFF)
 option(MLX_C_BUILD_EXAMPLES "Build examples for mlx C" ON)
+option(MLX_C_USE_SYSTEM_MLX "Use system MLX" OFF)
 
 # ----------------------------- mlx -----------------------------
 
@@ -27,11 +28,16 @@ set(MLX_BUILD_TESTS OFF)
 set(MLX_BUILD_EXAMPLES OFF)
 set(MLX_BUILD_BENCHMARKS "Build benchmarks for mlx" OFF)
 set(MLX_BUILD_PYTHON_BINDINGS OFF)
-FetchContent_Declare(
-  mlx
-  GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.20.0)
-FetchContent_MakeAvailable(mlx)
+
+if(MLX_C_USE_SYSTEM_MLX)
+  find_package(MLX REQUIRED)
+else()
+  FetchContent_Declare(
+    mlx
+    GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
+    GIT_TAG v0.20.0)
+  FetchContent_MakeAvailable(mlx)
+endif()
 
 # ----------------------------- lib -----------------------------
 
