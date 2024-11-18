@@ -11,6 +11,7 @@ if(NOT MLX_C_VERSION)
   set(MLX_C_VERSION 0.0.10)
 endif()
 
+option(BUILD_SHARED_LIBS "Build mlx C as a shared library" OFF)
 option(MLX_C_BUILD_EXAMPLES "Build examples for mlx C" ON)
 
 # ----------------------------- mlx -----------------------------
@@ -60,7 +61,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/variant.cpp)
 
-add_library(mlxc STATIC ${mlxc-src})
+add_library(mlxc ${mlxc-src})
 
 target_link_libraries(mlxc PRIVATE mlx)
 target_include_directories(mlxc
