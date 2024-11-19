@@ -1,5 +1,5 @@
-#include <cstdarg>
-#include <cstring>
+#include <stdarg.h>
+#include <string.h>
 
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"

@@ -6,9 +6,8 @@
 #ifndef MLX_COMPILE_H
 #define MLX_COMPILE_H
 
+#include <stdint.h>
 #include <stdio.h>
-
-#include <cstdint>
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
