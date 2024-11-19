@@ -1,5 +1,6 @@
 #include <stdarg.h>
-#include <string.h>
+
+#include <cstring> // for strncpy
 
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
