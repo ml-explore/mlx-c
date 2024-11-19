@@ -50,6 +50,11 @@ typedef enum mlx_dtype_ {
 } mlx_dtype;
 
 /**
+ * Size of given mlx_dtype datatype in bytes.
+ */
+size_t mlx_dtype_size(mlx_dtype dtype);
+
+/**
  * Get array description.
  */
 int mlx_array_tostring(mlx_string* str, const mlx_array arr);
@@ -126,11 +131,6 @@ int mlx_array_set_data(
     const int* shape,
     int dim,
     mlx_dtype dtype);
-
-/**
- * The size of one element of the given datatype in bytes.
- */
-size_t mlx_array_dtype_size(mlx_array_dtype dtype);
 
 /**
  * The size of the array's datatype in bytes.

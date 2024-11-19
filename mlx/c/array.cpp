@@ -7,6 +7,10 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/c/string.h"
 
+extern "C" size_t mlx_dtype_size(mlx_dtype dtype) {
+  return mlx_dtype_to_cpp(dtype).size();
+}
+
 extern "C" int mlx_array_tostring(mlx_string* str_, const mlx_array arr) {
   try {
     std::ostringstream os;
@@ -28,10 +32,6 @@ extern "C" int mlx_array_free(mlx_array arr) {
     return 1;
   }
   return 0;
-}
-
-extern "C" size_t mlx_array_dtype_size(mlx_array_dtype dtype) {
-  return MLX_CPP_ARRAY_DTYPE(dtype).size();
 }
 
 extern "C" mlx_array mlx_array_new() {
