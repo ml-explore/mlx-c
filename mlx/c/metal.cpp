@@ -3,6 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
+#include <cstring>
+
 #include "mlx/c/metal.h"
 #include "mlx/backend/metal/metal.h"
 #include "mlx/c/error.h"

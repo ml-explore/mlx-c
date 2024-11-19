@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 
+#include <cstdint>
+
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"

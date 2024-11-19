@@ -5,6 +5,7 @@
 
 #include "mlx/c/string.h"
 
+#include <cstdint>
 #include <float.h>
 #include <stdbool.h>
 #include <stdlib.h>

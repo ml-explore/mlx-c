@@ -183,7 +183,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
             "mlx_closure_value_and_grad returned a non-zero value");
       }
       auto cpp_res =
-          std::tie(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
+          std::make_pair(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
       mlx_vector_array_free(res_0);
       mlx_vector_array_free(res_1);
       ;
@@ -229,7 +229,7 @@ mlx_closure_value_and_grad_new_func_payload(
             "mlx_closure_value_and_grad returned a non-zero value");
       }
       auto cpp_res =
-          std::tie(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
+          std::make_pair(mlx_vector_array_get_(res_0), mlx_vector_array_get_(res_1));
       mlx_vector_array_free(res_0);
       mlx_vector_array_free(res_1);
       ;
@@ -600,7 +600,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(int (*fun)(
             "mlx_closure_custom_vmap returned a non-zero value");
       }
       auto cpp_res =
-          std::tie(mlx_vector_array_get_(res_0), mlx_vector_int_get_(res_1));
+          std::make_pair(mlx_vector_array_get_(res_0), mlx_vector_int_get_(res_1));
       mlx_vector_array_free(res_0);
       mlx_vector_int_free(res_1);
       ;
@@ -654,7 +654,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
             "mlx_closure_custom_vmap returned a non-zero value");
       }
       auto cpp_res =
-          std::tie(mlx_vector_array_get_(res_0), mlx_vector_int_get_(res_1));
+          std::make_pair(mlx_vector_array_get_(res_0), mlx_vector_int_get_(res_1));
       mlx_vector_array_free(res_0);
       mlx_vector_int_free(res_1);
       ;
