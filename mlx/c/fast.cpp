@@ -3,8 +3,6 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include <cstdarg>
-
 #include "mlx/c/fast.h"
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
