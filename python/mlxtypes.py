@@ -254,12 +254,13 @@ def register_return_tuple_type(cpp_types, alts=[]):
         c_types.append(typedef["c"])
         alt_types.append(typedef["alt"])
         c_to_cpps.append(typedef["c_to_cpp"])
+    cpp_make_tuple = "std::make_pair" if n == 2 else "std::tie"
     cpp_tuple = "std::pair" if n == 2 else "std::tuple"
     types.append(
         {
             "cpp": cpp_tuple + "<" + ", ".join(cpp_types) + ">",
             "alt": [cpp_tuple + "<" + ", ".join(alt_types) + ">"] + alts,
-            "c_to_cpp": lambda s: "std::tie("
+            "c_to_cpp": lambda s: cpp_make_tuple +"("
             + ", ".join([c_to_cpps[i](s + "_" + str(i)) for i in range(n)])
             + ")",
             "c_return_arg": lambda s, untyped=False: ", ".join(
