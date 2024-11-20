@@ -1,5 +1,4 @@
-#include <stdarg.h>
-
+#include <cstdarg>
 #include <cstring> // for strncpy
 
 #include "mlx/c/private/array.h"
