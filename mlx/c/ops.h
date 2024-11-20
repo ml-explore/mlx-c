@@ -6,6 +6,7 @@
 #ifndef MLX_OPS_H
 #define MLX_OPS_H
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"

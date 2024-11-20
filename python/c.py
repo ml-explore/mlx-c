@@ -134,6 +134,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         print("#define MLX_" + headername.upper() + "_H")
         print(
             """
+    #include <stdint.h>
     #include <stdio.h>
 
     #include "mlx/c/array.h"

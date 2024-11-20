@@ -6,6 +6,7 @@
 #ifndef MLX_RANDOM_H
 #define MLX_RANDOM_H
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"
