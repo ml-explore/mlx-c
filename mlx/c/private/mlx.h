@@ -1,3 +1,6 @@
+#include <cstdarg>
+#include <cstring> // for strncpy
+
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
 #include "mlx/c/private/device.h"

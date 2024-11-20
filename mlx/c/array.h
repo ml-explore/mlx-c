@@ -7,6 +7,7 @@
 
 #include <float.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "half.h"

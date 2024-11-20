@@ -6,6 +6,7 @@
 #ifndef MLX_TRANSFORMS_H
 #define MLX_TRANSFORMS_H
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"

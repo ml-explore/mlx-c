@@ -6,6 +6,7 @@
 #ifndef MLX_FFT_H
 #define MLX_FFT_H
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"
