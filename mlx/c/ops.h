@@ -208,6 +208,11 @@ int mlx_concatenate_all(
     const mlx_vector_array arrays,
     const mlx_stream s);
 int mlx_conjugate(mlx_array* res, const mlx_array a, const mlx_stream s);
+int mlx_contiguous(
+    mlx_array* res,
+    const mlx_array a,
+    bool allow_col_major,
+    const mlx_stream s);
 int mlx_conv1d(
     mlx_array* res,
     const mlx_array input,
