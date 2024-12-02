@@ -34,10 +34,10 @@ int mlx_fast_affine_dequantize(
     int bits,
     const mlx_stream s);
 int mlx_fast_affine_quantize(
-    mlx_array* res,
+    mlx_array* res_0,
+    mlx_array* res_1,
+    mlx_array* res_2,
     const mlx_array w,
-    const mlx_array scales,
-    const mlx_array biases,
     int group_size,
     int bits,
     const mlx_stream s);

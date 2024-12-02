@@ -663,6 +663,22 @@ mlx_conjugate(mlx_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int mlx_contiguous(
+    mlx_array* res,
+    const mlx_array a,
+    bool allow_col_major,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::contiguous(
+            mlx_array_get_(a), allow_col_major, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_conv1d(
     mlx_array* res,
     const mlx_array input,

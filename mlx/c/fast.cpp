@@ -33,23 +33,21 @@ extern "C" int mlx_fast_affine_dequantize(
   return 0;
 }
 extern "C" int mlx_fast_affine_quantize(
-    mlx_array* res,
+    mlx_array* res_0,
+    mlx_array* res_1,
+    mlx_array* res_2,
     const mlx_array w,
-    const mlx_array scales,
-    const mlx_array biases,
     int group_size,
     int bits,
     const mlx_stream s) {
   try {
-    mlx_array_set_(
-        *res,
-        mlx::core::fast::affine_quantize(
-            mlx_array_get_(w),
-            mlx_array_get_(scales),
-            mlx_array_get_(biases),
-            group_size,
-            bits,
-            mlx_stream_get_(s)));
+    {
+      auto [tpl_0, tpl_1, tpl_2] = mlx::core::fast::affine_quantize(
+          mlx_array_get_(w), group_size, bits, mlx_stream_get_(s));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+      mlx_array_set_(*res_2, tpl_2);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
