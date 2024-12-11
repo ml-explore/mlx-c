@@ -39,6 +39,12 @@ else()
   FetchContent_MakeAvailable(mlx)
 endif()
 
+if(WIN32)
+   find_package(dlfcn-win32 REQUIRED)
+   message(STATUS "dlfcn-win32 lib " ${dlfcn-win32_LIBRARIES})
+   message(STATUS "dlfcn-win32 include " ${dlfcn-win32_INCLUDE_DIRS})
+endif()
+
 # ----------------------------- lib -----------------------------
 
 set(mlxc-src
