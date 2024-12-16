@@ -43,6 +43,15 @@ extern "C" int mlx_device_set(mlx_device* dev, const mlx_device src) {
   return 0;
 }
 
+extern "C" int mlx_device_get_index(mlx_device dev) {
+  try {
+    return mlx_device_get_(dev).index;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0; // DEBUG: could have a specific value
+  }
+}
+
 extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
   try {
     return mlx_device_type_to_c(mlx_device_get_(dev).type);
@@ -51,9 +60,11 @@ extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
     return MLX_CPU; // DEBUG: could have a specific value
   }
 }
+
 extern "C" bool mlx_device_equal(mlx_device lhs, mlx_device rhs) {
   return mlx_device_get_(lhs) == mlx_device_get_(rhs);
 }
+
 extern "C" int mlx_get_default_device(mlx_device* dev) {
   try {
     mlx_device_set_(*dev, mlx::core::default_device());
@@ -63,6 +74,7 @@ extern "C" int mlx_get_default_device(mlx_device* dev) {
     return 1;
   }
 }
+
 extern "C" int mlx_set_default_device(mlx_device dev) {
   try {
     mlx::core::set_default_device(mlx_device_get_(dev));
@@ -72,6 +84,7 @@ extern "C" int mlx_set_default_device(mlx_device dev) {
   }
   return 0;
 }
+
 extern "C" int mlx_device_free(mlx_device dev) {
   try {
     mlx_device_free_(dev);
