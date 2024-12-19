@@ -169,6 +169,19 @@ int mlx_array_dim(const mlx_array arr, int dim);
 mlx_dtype mlx_array_dtype(const mlx_array arr);
 
 /**
+ * Whether the array is contiguous in memory.
+ */
+bool mlx_array_contiguous(const mlx_array arr);
+/**
+ * Whether the array's rows are contiguous in memory.
+ */
+bool mlx_array_row_contiguous(const mlx_array arr);
+/**
+ * Whether the array's columns are contiguous in memory.
+ */
+bool mlx_array_col_contiguous(const mlx_array arr);
+
+/**
  * Evaluate the array.
  */
 int mlx_array_eval(mlx_array arr);

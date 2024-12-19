@@ -284,6 +284,31 @@ extern "C" mlx_dtype mlx_array_dtype(const mlx_array arr) {
   }
 }
 
+extern "C" bool mlx_array_contiguous(const mlx_array arr) {
+  try {
+    return mlx_array_get_(arr).flags().contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return false; // DEBUG: could have a specific value
+  }
+}
+extern "C" bool mlx_array_row_contiguous(const mlx_array arr) {
+  try {
+    return mlx_array_get_(arr).flags().row_contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return false; // DEBUG: could have a specific value
+  }
+}
+extern "C" bool mlx_array_col_contiguous(const mlx_array arr) {
+  try {
+    return mlx_array_get_(arr).flags().col_contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return false; // DEBUG: could have a specific value
+  }
+}
+
 extern "C" int mlx_array_eval(mlx_array arr) {
   try {
     mlx_array_get_(arr).eval();
