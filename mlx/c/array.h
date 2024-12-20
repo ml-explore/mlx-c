@@ -50,6 +50,13 @@ typedef enum mlx_dtype_ {
   MLX_COMPLEX64,
 } mlx_dtype;
 
+typedef enum mlx_eval_status_ {
+    MLX_UNSCHEDULED,
+    MLX_SCHEDULED,
+    MLX_EVALUATED,
+    MLX_AVAILABLE,
+} mlx_eval_status;
+
 /**
  * Size of given mlx_dtype datatype in bytes.
  */
@@ -167,6 +174,9 @@ int mlx_array_dim(const mlx_array arr, int dim);
  * The array element type.
  */
 mlx_dtype mlx_array_dtype(const mlx_array arr);
+
+mlx_eval_status mlx_array_eval_status(const mlx_array arr);
+
 /**
  * Evaluate the array.
  */
