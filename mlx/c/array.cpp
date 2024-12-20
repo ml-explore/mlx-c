@@ -283,6 +283,16 @@ extern "C" mlx_dtype mlx_array_dtype(const mlx_array arr) {
     return MLX_BOOL;
   }
 }
+
+extern "C" mlx_eval_status mlx_array_eval_status(const mlx_array arr) {
+  try {
+    return mlx_eval_status_to_c(mlx_array_get_(arr).status());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return MLX_UNSCHEDULED; // DEBUG: could have a specific value
+  }
+}
+
 extern "C" int mlx_array_eval(mlx_array arr) {
   try {
     mlx_array_get_(arr).eval();
