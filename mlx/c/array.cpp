@@ -542,3 +542,30 @@ extern "C" int _mlx_array_eval_status(
   }
   return 0;
 }
+extern "C" int _mlx_array_is_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int _mlx_array_is_row_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().row_contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int _mlx_array_is_col_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().col_contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
