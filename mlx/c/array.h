@@ -169,19 +169,6 @@ int mlx_array_dim(const mlx_array arr, int dim);
 mlx_dtype mlx_array_dtype(const mlx_array arr);
 
 /**
- * Whether the array is contiguous in memory.
- */
-bool mlx_array_contiguous(const mlx_array arr);
-/**
- * Whether the array's rows are contiguous in memory.
- */
-bool mlx_array_row_contiguous(const mlx_array arr);
-/**
- * Whether the array's columns are contiguous in memory.
- */
-bool mlx_array_col_contiguous(const mlx_array arr);
-
-/**
  * Evaluate the array.
  */
 int mlx_array_eval(mlx_array arr);
@@ -319,7 +306,7 @@ const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 
 /**
  * Internal array eval status.
- * Use at your own risks.
+ * Use at your own risk.
  */
 typedef enum mlx_eval_status_ {
   MLX_EVAL_STATUS_UNSCHEDULED,
@@ -330,9 +317,24 @@ typedef enum mlx_eval_status_ {
 
 /**
  * Returns array eval status.
- * Internal function: use at your own risks.
+ * Internal function: use at your own risk.
  */
 int _mlx_array_eval_status(mlx_eval_status* res, const mlx_array arr);
+/**
+ * Whether the array is contiguous in memory.
+ * Internal function: use at your own risk.
+ */
+int _mlx_array_is_contiguous(bool* res, const mlx_array arr);
+/**
+ * Whether the array's rows are contiguous in memory.
+ * Internal function: use at your own risk.
+ */
+int _mlx_array_is_row_contiguous(bool* res, const mlx_array arr);
+/**
+ * Whether the array's columns are contiguous in memory.
+ * Internal function: use at your own risk.
+ */
+int _mlx_array_is_col_contiguous(bool* res, const mlx_array arr);
 
 /**@}*/
 

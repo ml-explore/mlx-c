@@ -284,31 +284,6 @@ extern "C" mlx_dtype mlx_array_dtype(const mlx_array arr) {
   }
 }
 
-extern "C" bool mlx_array_contiguous(const mlx_array arr) {
-  try {
-    return mlx_array_get_(arr).flags().contiguous;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return false; // DEBUG: could have a specific value
-  }
-}
-extern "C" bool mlx_array_row_contiguous(const mlx_array arr) {
-  try {
-    return mlx_array_get_(arr).flags().row_contiguous;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return false; // DEBUG: could have a specific value
-  }
-}
-extern "C" bool mlx_array_col_contiguous(const mlx_array arr) {
-  try {
-    return mlx_array_get_(arr).flags().col_contiguous;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return false; // DEBUG: could have a specific value
-  }
-}
-
 extern "C" int mlx_array_eval(mlx_array arr) {
   try {
     mlx_array_get_(arr).eval();
@@ -561,6 +536,33 @@ extern "C" int _mlx_array_eval_status(
     const mlx_array arr) {
   try {
     *res = mlx_eval_status_to_c(mlx_array_get_(arr).status());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int _mlx_array_is_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int _mlx_array_is_row_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().row_contiguous;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int _mlx_array_is_col_contiguous(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).flags().col_contiguous;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
