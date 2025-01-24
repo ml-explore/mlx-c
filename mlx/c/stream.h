@@ -56,7 +56,7 @@ int mlx_stream_get_device(mlx_device* dev, mlx_stream stream);
 /**
  * Return the index of the stream.
  */
-int mlx_stream_get_index(mlx_stream stream);
+int mlx_stream_get_index(int* index, mlx_stream stream);
 /**
  * Synchronize with the provided stream.
  */

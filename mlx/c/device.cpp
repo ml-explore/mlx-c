@@ -43,22 +43,24 @@ extern "C" int mlx_device_set(mlx_device* dev, const mlx_device src) {
   return 0;
 }
 
-extern "C" int mlx_device_get_index(mlx_device dev) {
+extern "C" int mlx_device_get_index(int* index, mlx_device dev) {
   try {
-    return mlx_device_get_(dev).index;
+    *index = mlx_device_get_(dev).index;
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return 0; // DEBUG: could have a specific value
+    return 1;
   }
+  return 0;
 }
 
-extern "C" mlx_device_type mlx_device_get_type(mlx_device dev) {
+extern "C" int mlx_device_get_type(mlx_device_type* type, mlx_device dev) {
   try {
-    return mlx_device_type_to_c(mlx_device_get_(dev).type);
+    *type = mlx_device_type_to_c(mlx_device_get_(dev).type);
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return MLX_CPU; // DEBUG: could have a specific value
+    return 1;
   }
+  return 0;
 }
 
 extern "C" bool mlx_device_equal(mlx_device lhs, mlx_device rhs) {

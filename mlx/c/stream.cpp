@@ -62,13 +62,14 @@ extern "C" int mlx_stream_get_device(mlx_device* dev, mlx_stream stream) {
     return 1;
   }
 }
-extern "C" int mlx_stream_get_index(mlx_stream stream) {
+extern "C" int mlx_stream_get_index(int* index, mlx_stream stream) {
   try {
-    return mlx_stream_get_(stream).index;
+    *index = mlx_stream_get_(stream).index;
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return 0; // DEBUG: could have a specific value
+    return 1;
   }
+  return 0;
 }
 extern "C" int mlx_synchronize(mlx_stream stream) {
   try {

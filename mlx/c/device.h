@@ -55,11 +55,11 @@ bool mlx_device_equal(mlx_device lhs, mlx_device rhs);
 /**
  * Returns the index of the device.
  */
-int mlx_device_get_index(mlx_device dev);
+int mlx_device_get_index(int* index, mlx_device dev);
 /**
  * Returns the type of the device.
  */
-mlx_device_type mlx_device_get_type(mlx_device dev);
+int mlx_device_get_type(mlx_device_type* type, mlx_device dev);
 /**
  * Returns the default MLX device.
  */
