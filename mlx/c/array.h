@@ -50,13 +50,6 @@ typedef enum mlx_dtype_ {
   MLX_COMPLEX64,
 } mlx_dtype;
 
-typedef enum mlx_eval_status_ {
-  MLX_UNSCHEDULED,
-  MLX_SCHEDULED,
-  MLX_EVALUATED,
-  MLX_AVAILABLE,
-} mlx_eval_status;
-
 /**
  * Size of given mlx_dtype datatype in bytes.
  */
@@ -310,6 +303,17 @@ const float16_t* mlx_array_data_float16(const mlx_array arr);
  */
 const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 #endif
+
+/**
+ * Internal array eval status.
+ * Use at your own risks.
+ */
+typedef enum mlx_eval_status_ {
+  MLX_EVAL_STATUS_UNSCHEDULED,
+  MLX_EVAL_STATUS_SCHEDULED,
+  MLX_EVAL_STATUS_EVALUATED,
+  MLX_EVAL_STATUS_AVAILABLE,
+} mlx_eval_status;
 
 /**
  * Returns array eval status.

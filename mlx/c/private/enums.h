@@ -72,19 +72,19 @@ mlx::core::Device::DeviceType mlx_device_type_to_cpp(mlx_device_type type) {
 
 mlx_eval_status mlx_eval_status_to_c(mlx::core::array::Status type) {
   static mlx_eval_status map[] = {
-    MLX_UNSCHEDULED,
-    MLX_SCHEDULED,
-    MLX_EVALUATED,
-    MLX_AVAILABLE,
+      MLX_EVAL_STATUS_UNSCHEDULED,
+      MLX_EVAL_STATUS_SCHEDULED,
+      MLX_EVAL_STATUS_EVALUATED,
+      MLX_EVAL_STATUS_AVAILABLE,
   };
   return map[(int)type];
 }
 mlx::core::array::Status mlx_eval_status_to_cpp(mlx_eval_status type) {
   static mlx::core::array::Status map[] = {
-    mlx::core::array::Status::unscheduled,
-    mlx::core::array::Status::scheduled,
-    mlx::core::array::Status::evaluated,
-    mlx::core::array::Status::available,
+      mlx::core::array::Status::unscheduled,
+      mlx::core::array::Status::scheduled,
+      mlx::core::array::Status::evaluated,
+      mlx::core::array::Status::available,
   };
   return map[(int)type];
 }
