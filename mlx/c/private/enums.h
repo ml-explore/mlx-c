@@ -69,6 +69,26 @@ mlx::core::Device::DeviceType mlx_device_type_to_cpp(mlx_device_type type) {
       mlx::core::Device::DeviceType::cpu, mlx::core::Device::DeviceType::gpu};
   return map[(int)type];
 }
+
+mlx_eval_status mlx_eval_status_to_c(mlx::core::array::Status type) {
+  static mlx_eval_status map[] = {
+      MLX_EVAL_STATUS_UNSCHEDULED,
+      MLX_EVAL_STATUS_SCHEDULED,
+      MLX_EVAL_STATUS_EVALUATED,
+      MLX_EVAL_STATUS_AVAILABLE,
+  };
+  return map[(int)type];
+}
+mlx::core::array::Status mlx_eval_status_to_cpp(mlx_eval_status type) {
+  static mlx::core::array::Status map[] = {
+      mlx::core::array::Status::unscheduled,
+      mlx::core::array::Status::scheduled,
+      mlx::core::array::Status::evaluated,
+      mlx::core::array::Status::available,
+  };
+  return map[(int)type];
+}
+
 } // namespace
 
 #endif
