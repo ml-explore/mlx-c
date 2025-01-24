@@ -51,10 +51,10 @@ typedef enum mlx_dtype_ {
 } mlx_dtype;
 
 typedef enum mlx_eval_status_ {
-    MLX_UNSCHEDULED,
-    MLX_SCHEDULED,
-    MLX_EVALUATED,
-    MLX_AVAILABLE,
+  MLX_UNSCHEDULED,
+  MLX_SCHEDULED,
+  MLX_EVALUATED,
+  MLX_AVAILABLE,
 } mlx_eval_status;
 
 /**
@@ -174,8 +174,6 @@ int mlx_array_dim(const mlx_array arr, int dim);
  * The array element type.
  */
 mlx_dtype mlx_array_dtype(const mlx_array arr);
-
-mlx_eval_status mlx_array_eval_status(const mlx_array arr);
 
 /**
  * Evaluate the array.
@@ -312,6 +310,13 @@ const float16_t* mlx_array_data_float16(const mlx_array arr);
  */
 const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 #endif
+
+/**
+ * Returns array eval status.
+ * Internal function: use at your own risks.
+ */
+int _mlx_array_eval_status(mlx_eval_status* res, const mlx_array arr);
+
 /**@}*/
 
 #ifdef __cplusplus

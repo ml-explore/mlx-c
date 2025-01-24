@@ -284,15 +284,6 @@ extern "C" mlx_dtype mlx_array_dtype(const mlx_array arr) {
   }
 }
 
-extern "C" mlx_eval_status mlx_array_eval_status(const mlx_array arr) {
-  try {
-    return mlx_eval_status_to_c(mlx_array_get_(arr).status());
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return MLX_UNSCHEDULED; // DEBUG: could have a specific value
-  }
-}
-
 extern "C" int mlx_array_eval(mlx_array arr) {
   try {
     mlx_array_get_(arr).eval();
@@ -539,3 +530,15 @@ extern "C" const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr) {
   }
 }
 #endif
+
+extern "C" int _mlx_array_eval_status(
+    mlx_eval_status* res,
+    const mlx_array arr) {
+  try {
+    *res = mlx_eval_status_to_c(mlx_array_get_(arr).status());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
