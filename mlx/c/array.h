@@ -174,6 +174,16 @@ mlx_dtype mlx_array_dtype(const mlx_array arr);
 int mlx_array_eval(mlx_array arr);
 
 /**
+ * Check if the array is available.
+ */
+int mlx_array_is_available(bool* res, const mlx_array arr);
+
+/**
+ * Wait on the array to be available. After this `mlx_array_is_available` returns `true`.
+ */
+int mlx_array_wait(const mlx_array arr);
+
+/**
  * Access the value of a scalar array.
  */
 int mlx_array_item_bool(bool* res, const mlx_array arr);
