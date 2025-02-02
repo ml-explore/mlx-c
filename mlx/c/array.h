@@ -315,22 +315,6 @@ const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 #endif
 
 /**
- * Internal array eval status.
- * Use at your own risk.
- */
-typedef enum mlx_eval_status_ {
-  MLX_EVAL_STATUS_UNSCHEDULED,
-  MLX_EVAL_STATUS_SCHEDULED,
-  MLX_EVAL_STATUS_EVALUATED,
-  MLX_EVAL_STATUS_AVAILABLE,
-} mlx_eval_status;
-
-/**
- * Returns array eval status.
- * Internal function: use at your own risk.
- */
-int _mlx_array_eval_status(mlx_eval_status* res, const mlx_array arr);
-/**
  * Whether the array is contiguous in memory.
  * Internal function: use at your own risk.
  */
