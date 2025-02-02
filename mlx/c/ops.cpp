@@ -420,7 +420,7 @@ extern "C" int mlx_as_strided(
         mlx::core::as_strided(
             mlx_array_get_(a),
             std::vector<int>(shape, shape + shape_num),
-            std::vector<size_t>(strides, strides + strides_num),
+            std::vector<int64_t>(strides, strides + strides_num),
             offset,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
