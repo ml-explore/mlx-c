@@ -294,26 +294,6 @@ extern "C" int mlx_array_eval(mlx_array arr) {
   return 0;
 }
 
-extern "C" int mlx_array_is_available(bool* res, const mlx_array arr) {
-  try {
-    *res = mlx_array_get_(arr).is_available();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-
-extern "C" int mlx_array_wait(const mlx_array arr) {
-  try {
-    mlx_array_get_(arr).wait();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-
 extern "C" int mlx_array_item_bool(bool* res, const mlx_array arr) {
   try {
     *res = mlx_array_get_(arr).item<bool>();
@@ -550,6 +530,26 @@ extern "C" const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr) {
   }
 }
 #endif
+
+extern "C" int _mlx_array_is_available(bool* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).is_available();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int _mlx_array_wait(const mlx_array arr) {
+  try {
+    mlx_array_get_(arr).wait();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 
 extern "C" int _mlx_array_is_contiguous(bool* res, const mlx_array arr) {
   try {

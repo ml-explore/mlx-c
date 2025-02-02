@@ -174,16 +174,6 @@ mlx_dtype mlx_array_dtype(const mlx_array arr);
 int mlx_array_eval(mlx_array arr);
 
 /**
- * Check if the array is available.
- */
-int mlx_array_is_available(bool* res, const mlx_array arr);
-
-/**
- * Wait on the array to be available. After this `mlx_array_is_available` returns `true`.
- */
-int mlx_array_wait(const mlx_array arr);
-
-/**
  * Access the value of a scalar array.
  */
 int mlx_array_item_bool(bool* res, const mlx_array arr);
@@ -315,15 +305,29 @@ const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 #endif
 
 /**
+ * Check if the array is available.
+ * Internal function: use at your own risk.
+ */
+int _mlx_array_is_available(bool* res, const mlx_array arr);
+
+/**
+ * Wait on the array to be available. After this `_mlx_array_is_available` returns `true`.
+ * Internal function: use at your own risk.
+ */
+int _mlx_array_wait(const mlx_array arr);
+
+/**
  * Whether the array is contiguous in memory.
  * Internal function: use at your own risk.
  */
 int _mlx_array_is_contiguous(bool* res, const mlx_array arr);
+
 /**
  * Whether the array's rows are contiguous in memory.
  * Internal function: use at your own risk.
  */
 int _mlx_array_is_row_contiguous(bool* res, const mlx_array arr);
+
 /**
  * Whether the array's columns are contiguous in memory.
  * Internal function: use at your own risk.
