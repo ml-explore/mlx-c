@@ -56,6 +56,10 @@ def getname(t):
             params_t.append(getname(p.type))
         res = return_t + "(" + ",".join(params_t) + ")"
         return res
+    elif type(t) == cxxheaderparser.types.Pointer:
+        # circumvents parser crashing on pointers
+        res = "*(" + getname(t.ptr_to) + ")"
+        return res
 
     raise RuntimeError("unsupported type: " + str(t))
 
