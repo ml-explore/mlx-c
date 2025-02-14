@@ -292,7 +292,7 @@ extern "C" int mlx_random_seed(uint64_t seed) {
   }
   return 0;
 }
-extern "C" int mlx_random_split_equal_parts(
+extern "C" int mlx_random_split(
     mlx_array* res,
     const mlx_array key,
     int num,
@@ -301,24 +301,6 @@ extern "C" int mlx_random_split_equal_parts(
     mlx_array_set_(
         *res,
         mlx::core::random::split(mlx_array_get_(key), num, mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_random_split(
-    mlx_array* res_0,
-    mlx_array* res_1,
-    const mlx_array key,
-    const mlx_stream s) {
-  try {
-    {
-      auto [tpl_0, tpl_1] =
-          mlx::core::random::split(mlx_array_get_(key), mlx_stream_get_(s));
-      mlx_array_set_(*res_0, tpl_0);
-      mlx_array_set_(*res_1, tpl_1);
-    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
