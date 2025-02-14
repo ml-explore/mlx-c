@@ -74,7 +74,11 @@ for header in args.header.split(";"):
         for e in l.enums:
             name = getname(e.typename)
             values = [v.name for v in e.values]
-            enums[name] = values
+            enums[namespace + "::" + name] = {
+                "name": name,
+                "namespace": namespace,
+                "values": values,
+            }
 
         for f in l.functions:
             name = getname(f.name)
@@ -95,10 +99,11 @@ for header in args.header.split(";"):
                 "return_t": return_t,
                 "namespace": namespace,
             }
-            if name in funcs:
-                funcs[name].append(func)
+            ns_name = namespace + "::" + name
+            if ns_name in funcs:
+                funcs[ns_name].append(func)
             else:
-                funcs[name] = [func]
+                funcs[ns_name] = [func]
 
         for subnamespace in l.namespaces:
             process_namespace(

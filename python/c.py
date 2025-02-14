@@ -28,7 +28,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         else:
             variants.sort(key=lambda x: len(x["params_name"]), reverse=True)
 
-            if name != "all" and name != "norm":
+            if name != "mlx::core::all" and name != "mlx::core::linalg::norm":
                 idx = 0
                 while idx < len(variants) - 1:
                     pidx = variants[idx]["params_name"]
@@ -45,40 +45,40 @@ def generate(funcs, enums, header, headername, implementation, docstring):
 
             if len(variants) == 1:
                 sorted_funcs.append(variants[0])
-            elif name == "tensordot":
+            elif name == "mlx::core::tensordot":
                 var0 = variants[0]
                 var1 = variants[1]
                 var1["variant"] = "along_axis"
                 sorted_funcs.append(var0)
                 sorted_funcs.append(var1)
-            elif name == "split":
+            elif name == "mlx::core::split":
                 var0 = variants[0]
                 var1 = variants[1]
                 var0["variant"] = "equal_parts"
                 sorted_funcs.append(var0)
                 sorted_funcs.append(var1)
-            elif name == "pad":
+            elif name == "mlx::core::pad":
                 sorted_funcs.append(variants[0])
-            elif name == "all":
+            elif name == "mlx::core::all":
                 variants[0]["variant"] = "axes"
                 variants[1]["variant"] = "axis"
                 variants[2]["variant"] = "all"
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[1])
                 sorted_funcs.append(variants[2])
-            elif name == "categorical":
+            elif name == "mlx::core::random::categorical":
                 variants[0]["variant"] = "shape"
                 variants[1]["variant"] = "num_samples"
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[1])
                 sorted_funcs.append(variants[2])
-            elif name == "norm":
+            elif name == "mlx::core::linalg::norm":
                 variants[0]["variant"] = "p"
                 variants[2]["variant"] = "ord"
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[2])
                 sorted_funcs.append(variants[4])
-            elif name == "take":
+            elif name == "mlx::core::take":
                 variants[2]["variant"] = "all"
                 sorted_funcs.append(variants[0])
                 sorted_funcs.append(variants[2])
@@ -157,11 +157,13 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             print("*/")
             print("/**@{*/")
 
-    for enum, values in enums.items():
-        c_typename = "mlx_" + to_snake_letters(enum)
+    for _, enum in enums.items():
+        c_typename = "mlx_" + to_snake_letters(enum["name"])
         c_vals = []
-        for value in values:
-            c_vals.append("MLX_" + to_snake_letters(enum).upper() + "_" + value.upper())
+        for value in enum["values"]:
+            c_vals.append(
+                "MLX_" + to_snake_letters(enum["name"]).upper() + "_" + value.upper()
+            )
         if implementation:
             pass
         else:
