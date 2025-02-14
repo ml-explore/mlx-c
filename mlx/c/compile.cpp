@@ -47,6 +47,57 @@ extern "C" int mlx_detail_compile_erase(uintptr_t fun_id) {
   }
   return 0;
 }
+extern "C" int mlx_detail_compile_replace(
+    mlx_vector_array* res,
+    const mlx_vector_array tape,
+    const mlx_vector_array trace_inputs,
+    const mlx_vector_array trace_outputs,
+    const mlx_vector_array inputs,
+    bool shapeless) {
+  try {
+    mlx_vector_array_set_(
+        *res,
+        mlx::core::detail::compile_replace(
+            mlx_vector_array_get_(tape),
+            mlx_vector_array_get_(trace_inputs),
+            mlx_vector_array_get_(trace_outputs),
+            mlx_vector_array_get_(inputs),
+            shapeless));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_detail_compile_trace(
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1,
+    const mlx_closure fun,
+    const mlx_vector_array inputs,
+    bool shapeless) {
+  try {
+    {
+      auto [tpl_0, tpl_1] = mlx::core::detail::compile_trace(
+          mlx_closure_get_(fun), mlx_vector_array_get_(inputs), shapeless);
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_detail_compile_validate_shapeless(
+    const mlx_vector_array tape) {
+  try {
+    mlx::core::detail::compile_validate_shapeless(mlx_vector_array_get_(tape));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_disable_compile() {
   try {
     mlx::core::disable_compile();
