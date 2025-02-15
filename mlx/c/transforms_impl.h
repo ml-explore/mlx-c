@@ -25,9 +25,6 @@ extern "C" {
  * \defgroup transforms_impl Implementation detail operations
  */
 /**@{*/
-int mlx_detail_in_dynamic_tracing(bool* res);
-int mlx_detail_in_tracing(bool* res);
-int mlx_detail_retain_graph(bool* res);
 int mlx_detail_vmap_replace(
     mlx_vector_array* res,
     const mlx_vector_array inputs,

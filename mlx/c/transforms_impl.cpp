@@ -8,33 +8,6 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/transforms_impl.h"
 
-extern "C" int mlx_detail_in_dynamic_tracing(bool* res) {
-  try {
-    *res = mlx::core::detail::in_dynamic_tracing();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_detail_in_tracing(bool* res) {
-  try {
-    *res = mlx::core::detail::in_tracing();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_detail_retain_graph(bool* res) {
-  try {
-    *res = mlx::core::detail::retain_graph();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 extern "C" int mlx_detail_vmap_replace(
     mlx_vector_array* res,
     const mlx_vector_array inputs,

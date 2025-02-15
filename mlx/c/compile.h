@@ -41,20 +41,6 @@ int mlx_detail_compile(
     size_t constants_num);
 int mlx_detail_compile_clear_cache();
 int mlx_detail_compile_erase(uintptr_t fun_id);
-int mlx_detail_compile_replace(
-    mlx_vector_array* res,
-    const mlx_vector_array tape,
-    const mlx_vector_array trace_inputs,
-    const mlx_vector_array trace_outputs,
-    const mlx_vector_array inputs,
-    bool shapeless);
-int mlx_detail_compile_trace(
-    mlx_vector_array* res_0,
-    mlx_vector_array* res_1,
-    const mlx_closure fun,
-    const mlx_vector_array inputs,
-    bool shapeless);
-int mlx_detail_compile_validate_shapeless(const mlx_vector_array tape);
 int mlx_disable_compile();
 int mlx_enable_compile();
 int mlx_set_compile_mode(mlx_compile_mode mode);

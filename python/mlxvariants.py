@@ -75,3 +75,16 @@ def mlx_core_random(name, defs):
         defs[1]["variant"] = "arange"
 
     return defs
+
+
+def mlx_core_detail(name, defs):
+    if name not in [
+        "compile",
+        "compile_clear_cache",
+        "compile_erase",
+        "vmap_replace",
+        "vmap_trace",
+    ]:
+        defs = []
+
+    return defs
