@@ -116,10 +116,15 @@ int mlx_random_randint(
     const mlx_array key /* may be null */,
     const mlx_stream s);
 int mlx_random_seed(uint64_t seed);
-int mlx_random_split(
+int mlx_random_split_num(
     mlx_array* res,
     const mlx_array key,
     int num,
+    const mlx_stream s);
+int mlx_random_split(
+    mlx_array* res_0,
+    mlx_array* res_1,
+    const mlx_array key,
     const mlx_stream s);
 int mlx_random_truncated_normal(
     mlx_array* res,

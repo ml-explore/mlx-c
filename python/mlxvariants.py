@@ -74,6 +74,9 @@ def mlx_core_random(name, defs):
     if name == "permutation":
         defs[1]["variant"] = "arange"
 
+    if name == "split":
+        defs[0]["variant"] = "num"
+
     return defs
 
 
