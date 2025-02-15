@@ -101,7 +101,7 @@ int mlx_random_permutation(
     int axis,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_permutation_all(
+int mlx_random_permutation_arange(
     mlx_array* res,
     int x,
     const mlx_array key /* may be null */,

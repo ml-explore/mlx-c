@@ -240,7 +240,7 @@ extern "C" int mlx_random_permutation(
   }
   return 0;
 }
-extern "C" int mlx_random_permutation_all(
+extern "C" int mlx_random_permutation_arange(
     mlx_array* res,
     int x,
     const mlx_array key /* may be null */,
