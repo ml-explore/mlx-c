@@ -103,11 +103,11 @@ def find_cpp_type(cpp_type):
     raise RuntimeError("Could not find type " + cpp_type)
 
 
-def register_raw_vector_type(cpptype):
+def register_raw_vector_type(cpptype, alt=None):
     types.append(
         {
             # "c": "mlx_vector_" + cpptype, # DEBUG: ONLY FOR RETURN?
-            # "alt": "std::vector<" + cpptype + ">", # DEBUG: ONLY FOR RETURN?
+            "alt": alt,  # "alt": "std::vector<" + cpptype + ">", # DEBUG: ONLY FOR RETURN?
             "cpp": "std::vector<" + cpptype + ">",
             "free": lambda s: "",
             "c_to_cpp": lambda s, cpptype=cpptype: "std::vector<"
@@ -151,7 +151,8 @@ def register_raw_vector_type(cpptype):
     )
 
 
-register_raw_vector_type("int")
+register_raw_vector_type("int", alt="Shape")
+register_raw_vector_type("int64_t", alt="Strides")
 register_raw_vector_type("size_t")
 register_raw_vector_type("uint64_t")
 
@@ -260,7 +261,8 @@ def register_return_tuple_type(cpp_types, alts=[]):
         {
             "cpp": cpp_tuple + "<" + ", ".join(cpp_types) + ">",
             "alt": [cpp_tuple + "<" + ", ".join(alt_types) + ">"] + alts,
-            "c_to_cpp": lambda s: cpp_make_tuple +"("
+            "c_to_cpp": lambda s: cpp_make_tuple
+            + "("
             + ", ".join([c_to_cpps[i](s + "_" + str(i)) for i in range(n)])
             + ")",
             "c_return_arg": lambda s, untyped=False: ", ".join(

@@ -5,6 +5,7 @@ import sys
 
 import mlxtypes as mt
 import mlxhooks as hooks
+import mlxvariants as variants
 
 
 def to_snake_letters(name):
@@ -19,98 +20,33 @@ def c_namespace(namespace):
     return "_".join(c_prefix)
 
 
+def uniq_defs(defs):
+    uniq_defs = []
+    variants = {}
+    for d in defs:
+        variant = d["variant"] if "variant" in d else ""
+        if variant in variants:
+            continue
+        else:
+            variants[variant] = True
+            uniq_defs.append(d)
+    return uniq_defs
+
+
 def generate(funcs, enums, header, headername, implementation, docstring):
     sorted_funcs = []
-    for name in funcs:
-        variants = funcs[name]
-        if len(variants) == 1:
-            sorted_funcs.append(variants[0])
-        else:
-            variants.sort(key=lambda x: len(x["params_name"]), reverse=True)
+    for name, defs in funcs.items():
+        name_split = name.split("::")
+        namespace = "_".join(name_split[:-1])
+        name = name_split[-1]
 
-            if name != "all" and name != "norm":
-                idx = 0
-                while idx < len(variants) - 1:
-                    pidx = variants[idx]["params_name"]
-                    pidxp1 = variants[idx + 1]["params_name"]
-                    mpidx = [p if p != "axis" else "axes" for p in pidx]
-                    mpidxp1 = [p if p != "axis" else "axes" for p in pidxp1]
-                    if mpidx == mpidxp1:
-                        if pidx == mpidx:
-                            variants.pop(idx + 1)
-                        else:
-                            variants.pop(idx)
-                    else:
-                        idx = idx + 1
+        defs.sort(key=lambda x: len(x["params_name"]), reverse=True)
 
-            if len(variants) == 1:
-                sorted_funcs.append(variants[0])
-            elif name == "tensordot":
-                var0 = variants[0]
-                var1 = variants[1]
-                var1["variant"] = "along_axis"
-                sorted_funcs.append(var0)
-                sorted_funcs.append(var1)
-            elif name == "split":
-                var0 = variants[0]
-                var1 = variants[1]
-                var0["variant"] = "equal_parts"
-                sorted_funcs.append(var0)
-                sorted_funcs.append(var1)
-            elif name == "pad":
-                sorted_funcs.append(variants[0])
-            elif name == "all":
-                variants[0]["variant"] = "axes"
-                variants[1]["variant"] = "axis"
-                variants[2]["variant"] = "all"
-                sorted_funcs.append(variants[0])
-                sorted_funcs.append(variants[1])
-                sorted_funcs.append(variants[2])
-            elif name == "categorical":
-                variants[0]["variant"] = "shape"
-                variants[1]["variant"] = "num_samples"
-                sorted_funcs.append(variants[0])
-                sorted_funcs.append(variants[1])
-                sorted_funcs.append(variants[2])
-            elif name == "norm":
-                variants[0]["variant"] = "p"
-                variants[2]["variant"] = "ord"
-                sorted_funcs.append(variants[0])
-                sorted_funcs.append(variants[2])
-                sorted_funcs.append(variants[4])
-            elif name == "take":
-                variants[2]["variant"] = "all"
-                sorted_funcs.append(variants[0])
-                sorted_funcs.append(variants[2])
-            elif (
-                "axes" in variants[0]["params_name"]
-                or "axis" in variants[0]["params_name"]
-            ) and (
-                "axes" not in variants[1]["params_name"]
-                and "axis" not in variants[1]["params_name"]
-            ):
-                var0 = variants[0]
-                var1 = variants[1]
-                var1["variant"] = "all"
-                sorted_funcs.append(var0)
-                sorted_funcs.append(var1)
-            elif (
-                "std::shared_ptr<io::Reader>" in variants[0]["params_t"]
-                or "std::shared_ptr<io::Reader>" in variants[1]["params_t"]
-                or "std::shared_ptr<io::Writer>" in variants[0]["params_t"]
-                or "std::shared_ptr<io::Writer>" in variants[1]["params_t"]
-            ):
-                if (
-                    "std::shared_ptr<io::Reader>" in variants[0]["params_t"]
-                    or "std::shared_ptr<io::Writer>" in variants[0]["params_t"]
-                ):
-                    variants[0]["variant"] = "file"
-                else:
-                    variants[1]["variant"] = "file"
-                sorted_funcs.append(variants[0])
-                sorted_funcs.append(variants[1])
-            else:
-                sorted_funcs.append(variants[0])  # abandon
+        # handle duplicates and other exceptions
+        if hasattr(variants, namespace):
+            defs = getattr(variants, namespace)(name, defs)
+
+        sorted_funcs += uniq_defs(defs)
 
     sorted_funcs.sort(key=lambda x: x["name"])
 
@@ -157,11 +93,13 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             print("*/")
             print("/**@{*/")
 
-    for enum, values in enums.items():
-        c_typename = "mlx_" + to_snake_letters(enum)
+    for _, enum in enums.items():
+        c_typename = "mlx_" + to_snake_letters(enum["name"])
         c_vals = []
-        for value in values:
-            c_vals.append("MLX_" + to_snake_letters(enum).upper() + "_" + value.upper())
+        for value in enum["values"]:
+            c_vals.append(
+                "MLX_" + to_snake_letters(enum["name"]).upper() + "_" + value.upper()
+            )
         if implementation:
             pass
         else:

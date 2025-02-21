@@ -240,7 +240,7 @@ extern "C" int mlx_random_permutation(
   }
   return 0;
 }
-extern "C" int mlx_random_permutation_all(
+extern "C" int mlx_random_permutation_arange(
     mlx_array* res,
     int x,
     const mlx_array key /* may be null */,
@@ -292,7 +292,7 @@ extern "C" int mlx_random_seed(uint64_t seed) {
   }
   return 0;
 }
-extern "C" int mlx_random_split_equal_parts(
+extern "C" int mlx_random_split_num(
     mlx_array* res,
     const mlx_array key,
     int num,
