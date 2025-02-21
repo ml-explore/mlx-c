@@ -531,17 +531,26 @@ extern "C" const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr) {
 }
 #endif
 
-extern "C" int _mlx_array_eval_status(
-    mlx_eval_status* res,
-    const mlx_array arr) {
+extern "C" int _mlx_array_is_available(bool* res, const mlx_array arr) {
   try {
-    *res = mlx_eval_status_to_c(mlx_array_get_(arr).status());
+    *res = mlx_array_get_(arr).is_available();
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
+
+extern "C" int _mlx_array_wait(const mlx_array arr) {
+  try {
+    mlx_array_get_(arr).wait();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" int _mlx_array_is_contiguous(bool* res, const mlx_array arr) {
   try {
     *res = mlx_array_get_(arr).flags().contiguous;
