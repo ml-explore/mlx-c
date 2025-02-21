@@ -311,8 +311,8 @@ const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 int _mlx_array_is_available(bool* res, const mlx_array arr);
 
 /**
- * Wait on the array to be available. After this `_mlx_array_is_available` returns `true`.
- * Internal function: use at your own risk.
+ * Wait on the array to be available. After this `_mlx_array_is_available`
+ * returns `true`. Internal function: use at your own risk.
  */
 int _mlx_array_wait(const mlx_array arr);
 
