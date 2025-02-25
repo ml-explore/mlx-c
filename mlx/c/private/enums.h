@@ -37,6 +37,7 @@ inline mlx_dtype mlx_dtype_to_c(mlx::core::Dtype type) {
       MLX_INT64,
       MLX_FLOAT16,
       MLX_FLOAT32,
+      MLX_FLOAT64,
       MLX_BFLOAT16,
       MLX_COMPLEX64,
   };
@@ -55,6 +56,7 @@ inline mlx::core::Dtype mlx_dtype_to_cpp(mlx_dtype type) {
       mlx::core::int64,
       mlx::core::float16,
       mlx::core::float32,
+      mlx::core::float64,
       mlx::core::bfloat16,
       mlx::core::complex64,
   };
