@@ -15,8 +15,12 @@ def _pretty_string_def(d):
 
 
 def _make_variant_suffixes(name, defs, variants):
+    if len(defs) > 1:
+        print("OVL", file=sys.stderr)
     if name in variants:
         variants = variants[name]
+        for i, d in enumerate(defs):
+            print("OVL", i, _pretty_string_def(d), " -> ", variants[i], file=sys.stderr)
         if len(variants) != len(defs):
             print("function overloads length:", len(defs), file=sys.stderr)
             for i, d in enumerate(defs):
@@ -34,16 +38,23 @@ def _make_variant_suffixes(name, defs, variants):
 
         return newdefs
     else:
+        if len(defs) > 1:
+            for i, d in enumerate(defs):
+                print("OVL", i, _pretty_string_def(d), " -> ", "" if i == 0 else "None", file=sys.stderr)
         return [defs[0]]  # with largest number of arguments
 
 
 def mlx_core(name, defs):
     variants = {
-        "arange": ["", None, None, None, None, None, None, None, None],
-        "squeeze": ["", None, "all"],
-        "slice": ["", None, None, None],
-        "slice_update": ["", None, None],
-        "split": ["equal_parts", "", None, None],
+        "arange": ["x", None, None, None, None, None, None, "", None],
+        "eye": ["x", None, None, None, ""],
+        "tri": ["x", ""],
+        "flatten": ["x", ""],
+        "squeeze": ["axes", "axis", ""],
+        "expand_dims": ["axes", ""],
+        "slice": ["", None, "dynamic", None],
+        "slice_update": ["", None, "dynamic"],
+        "split": ["x", "sections_x", "", "sections"],
         "concatenate": ["", "all"],
         "stack": ["", "all"],
         "repeat": ["", "all"],
