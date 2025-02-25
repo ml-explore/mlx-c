@@ -86,7 +86,19 @@ extern "C" mlx_array mlx_array_new_int(int val) {
     return mlx_array_();
   }
 }
+extern "C" int mlx_array_set_float32(mlx_array* arr, float val) {
+  try {
+    mlx_array_set_(*arr, mlx::core::array(val));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
+  return mlx_array_set_float32(arr, val);
+}
+extern "C" int mlx_array_set_float64(mlx_array* arr, double val) {
   try {
     mlx_array_set_(*arr, mlx::core::array(val));
   } catch (std::exception& e) {
@@ -96,13 +108,7 @@ extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
   return 0;
 }
 extern "C" int mlx_array_set_double(mlx_array* arr, double val) {
-  try {
-    mlx_array_set_(*arr, mlx::core::array(val));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
+  return mlx_array_set_float64(arr, val);
 }
 extern "C" mlx_array mlx_array_new_float32(float val) {
   try {
@@ -113,12 +119,7 @@ extern "C" mlx_array mlx_array_new_float32(float val) {
   }
 }
 extern "C" mlx_array mlx_array_new_float(float val) {
-  try {
-    return mlx_array_new_(mlx::core::array(val));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return mlx_array_();
-  }
+  return mlx_array_new_float32(val);
 }
 extern "C" mlx_array mlx_array_new_float64(double val) {
   try {
@@ -129,12 +130,7 @@ extern "C" mlx_array mlx_array_new_float64(double val) {
   }
 }
 extern "C" mlx_array mlx_array_new_double(double val) {
-  try {
-    return mlx_array_new_(mlx::core::array(val));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return mlx_array_();
-  }
+  return mlx_array_new_float64(val);
 }
 extern "C" int
 mlx_array_set_complex(mlx_array* arr, float real_val, float imag_val) {
