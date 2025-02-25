@@ -77,13 +77,14 @@ int mlx_any_all(
     const mlx_array a,
     bool keepdims,
     const mlx_stream s);
-int mlx_arange(
+int mlx_arange_x(
     mlx_array* res,
     double start,
     double stop,
     double step,
     mlx_dtype dtype,
     const mlx_stream s);
+int mlx_arange(mlx_array* res, double stop, const mlx_stream s);
 int mlx_arccos(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_arccosh(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_arcsin(mlx_array* res, const mlx_array a, const mlx_stream s);
@@ -378,26 +379,33 @@ int mlx_equal(
 int mlx_erf(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_erfinv(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_exp(mlx_array* res, const mlx_array a, const mlx_stream s);
-int mlx_expand_dims(
+int mlx_expand_dims_axes(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
+int mlx_expand_dims(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    const mlx_stream s);
 int mlx_expm1(mlx_array* res, const mlx_array a, const mlx_stream s);
-int mlx_eye(
+int mlx_eye_x(
     mlx_array* res,
     int n,
     int m,
     int k,
     mlx_dtype dtype,
     const mlx_stream s);
-int mlx_flatten(
+int mlx_eye(mlx_array* res, int n, const mlx_stream s);
+int mlx_flatten_x(
     mlx_array* res,
     const mlx_array a,
     int start_axis,
     int end_axis,
     const mlx_stream s);
+int mlx_flatten(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_floor(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_floor_divide(
     mlx_array* res,
@@ -808,6 +816,15 @@ int mlx_slice(
     const int* strides,
     size_t strides_num,
     const mlx_stream s);
+int mlx_slice_dynamic(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array start,
+    const int* axes,
+    size_t axes_num,
+    const int* slice_size,
+    size_t slice_size_num,
+    const mlx_stream s);
 int mlx_slice_update(
     mlx_array* res,
     const mlx_array src,
@@ -818,6 +835,14 @@ int mlx_slice_update(
     size_t stop_num,
     const int* strides,
     size_t strides_num,
+    const mlx_stream s);
+int mlx_slice_update_dynamic(
+    mlx_array* res,
+    const mlx_array src,
+    const mlx_array update,
+    const mlx_array start,
+    const int* axes,
+    size_t axes_num,
     const mlx_stream s);
 int mlx_softmax(
     mlx_array* res,
@@ -848,13 +873,18 @@ int mlx_split(
     const mlx_stream s);
 int mlx_sqrt(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_square(mlx_array* res, const mlx_array a, const mlx_stream s);
-int mlx_squeeze(
+int mlx_squeeze_axes(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_squeeze_all(mlx_array* res, const mlx_array a, const mlx_stream s);
+int mlx_squeeze_axis(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    const mlx_stream s);
+int mlx_squeeze(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_stack(
     mlx_array* res,
     const mlx_vector_array arrays,
@@ -964,13 +994,14 @@ int mlx_transpose(
     size_t axes_num,
     const mlx_stream s);
 int mlx_transpose_all(mlx_array* res, const mlx_array a, const mlx_stream s);
-int mlx_tri(
+int mlx_tri_x(
     mlx_array* res,
     int n,
     int m,
     int k,
     mlx_dtype type,
     const mlx_stream s);
+int mlx_tri(mlx_array* res, int n, mlx_dtype type, const mlx_stream s);
 int mlx_tril(mlx_array* res, const mlx_array x, int k, const mlx_stream s);
 int mlx_triu(mlx_array* res, const mlx_array x, int k, const mlx_stream s);
 int mlx_unflatten(
