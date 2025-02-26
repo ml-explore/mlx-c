@@ -86,7 +86,7 @@ extern "C" mlx_array mlx_array_new_int(int val) {
     return mlx_array_();
   }
 }
-extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
+extern "C" int mlx_array_set_float32(mlx_array* arr, float val) {
   try {
     mlx_array_set_(*arr, mlx::core::array(val));
   } catch (std::exception& e) {
@@ -95,13 +95,42 @@ extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
   }
   return 0;
 }
-extern "C" mlx_array mlx_array_new_float(float val) {
+extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
+  return mlx_array_set_float32(arr, val);
+}
+extern "C" int mlx_array_set_float64(mlx_array* arr, double val) {
+  try {
+    mlx_array_set_(*arr, mlx::core::array(val));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_array_set_double(mlx_array* arr, double val) {
+  return mlx_array_set_float64(arr, val);
+}
+extern "C" mlx_array mlx_array_new_float32(float val) {
   try {
     return mlx_array_new_(mlx::core::array(val));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_array_();
   }
+}
+extern "C" mlx_array mlx_array_new_float(float val) {
+  return mlx_array_new_float32(val);
+}
+extern "C" mlx_array mlx_array_new_float64(double val) {
+  try {
+    return mlx_array_new_(mlx::core::array(val));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_array_();
+  }
+}
+extern "C" mlx_array mlx_array_new_double(double val) {
+  return mlx_array_new_float64(val);
 }
 extern "C" int
 mlx_array_set_complex(mlx_array* arr, float real_val, float imag_val) {
@@ -179,6 +208,10 @@ extern "C" int mlx_array_set_data(
       case mlx::core::float32:
         mlx_array_set_(
             *arr, mlx::core::array((float*)data, cpp_shape, cpp_dtype));
+        break;
+      case mlx::core::float64:
+        mlx_array_set_(
+            *arr, mlx::core::array((double*)data, cpp_shape, cpp_dtype));
         break;
       case mlx::core::bfloat16:
         mlx_array_set_(
@@ -384,6 +417,15 @@ extern "C" int mlx_array_item_float32(float* res, const mlx_array arr) {
   }
   return 0;
 }
+extern "C" int mlx_array_item_float64(double* res, const mlx_array arr) {
+  try {
+    *res = mlx_array_get_(arr).item<double>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_array_item_complex64(
     float _Complex* res,
     const mlx_array arr) {
@@ -495,6 +537,14 @@ extern "C" const int64_t* mlx_array_data_int64(const mlx_array arr) {
 extern "C" const float* mlx_array_data_float32(const mlx_array arr) {
   try {
     return mlx_array_get_(arr).data<float>();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return nullptr;
+  }
+}
+extern "C" const double* mlx_array_data_float64(const mlx_array arr) {
+  try {
+    return mlx_array_get_(arr).data<double>();
   } catch (std::exception& e) {
     mlx_error(e.what());
     return nullptr;
