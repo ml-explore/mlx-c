@@ -4,58 +4,53 @@
 /*                                                    */
 
 #include "mlx/c/transforms_impl.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
+#include "mlx/transforms_impl.h"
 
-#include "mlx/c/mlx.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
-#include "mlx/c/private/io.h"
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
-
-extern "C" mlx_closure mlx_detail_compile(
-    mlx_closure fun,
-    uintptr_t fun_id,
-    bool shapeless,
-    const uint64_t* constants,
-    size_t num_constants) {
-  RETURN_MLX_C_CLOSURE(mlx::core::detail::compile(
-      MLX_CPP_CLOSURE(fun),
-      fun_id,
-      shapeless,
-      MLX_CPP_UINT64VEC(constants, num_constants)));
-}
-extern "C" void mlx_detail_compile_clear_cache() {
-  RETURN_MLX_C_VOID(mlx::core::detail::compile_clear_cache());
-}
-extern "C" void mlx_detail_compile_erase(uintptr_t fun_id) {
-  RETURN_MLX_C_VOID(mlx::core::detail::compile_erase(fun_id));
-}
-extern "C" mlx_vector_array mlx_detail_vmap_replace(
+extern "C" int mlx_detail_vmap_replace(
+    mlx_vector_array* res,
     const mlx_vector_array inputs,
     const mlx_vector_array s_inputs,
     const mlx_vector_array s_outputs,
     const int* in_axes,
-    size_t num_in_axes,
+    size_t in_axes_num,
     const int* out_axes,
-    size_t num_out_axes) {
-  RETURN_MLX_C_VECTOR_ARRAY(mlx::core::detail::vmap_replace(
-      MLX_CPP_ARRVEC(inputs),
-      MLX_CPP_ARRVEC(s_inputs),
-      MLX_CPP_ARRVEC(s_outputs),
-      MLX_CPP_INTVEC(in_axes, num_in_axes),
-      MLX_CPP_INTVEC(out_axes, num_out_axes)));
+    size_t out_axes_num) {
+  try {
+    mlx_vector_array_set_(
+        *res,
+        mlx::core::detail::vmap_replace(
+            mlx_vector_array_get_(inputs),
+            mlx_vector_array_get_(s_inputs),
+            mlx_vector_array_get_(s_outputs),
+            std::vector<int>(in_axes, in_axes + in_axes_num),
+            std::vector<int>(out_axes, out_axes + out_axes_num)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" mlx_vector_vector_array mlx_detail_vmap_trace(
-    mlx_closure fun,
+extern "C" int mlx_detail_vmap_trace(
+    mlx_vector_array* res_0,
+    mlx_vector_array* res_1,
+    const mlx_closure fun,
     const mlx_vector_array inputs,
     const int* in_axes,
-    size_t num_in_axes) {
-  RETURN_MLX_C_VECTORARRAYPAIR(mlx::core::detail::vmap_trace(
-      MLX_CPP_CLOSURE(fun),
-      MLX_CPP_ARRVEC(inputs),
-      MLX_CPP_INTVEC(in_axes, num_in_axes)));
+    size_t in_axes_num) {
+  try {
+    {
+      auto [tpl_0, tpl_1] = mlx::core::detail::vmap_trace(
+          mlx_closure_get_(fun),
+          mlx_vector_array_get_(inputs),
+          std::vector<int>(in_axes, in_axes + in_axes_num));
+      mlx_vector_array_set_(*res_0, tpl_0);
+      mlx_vector_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

@@ -3,7 +3,11 @@
 #ifndef MLX_ARRAY_H
 #define MLX_ARRAY_H
 
+#include "mlx/c/string.h"
+
+#include <float.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #include "half.h"
@@ -12,9 +16,6 @@
 extern "C" {
 #endif
 
-#define __STDC_WANT_IEC_60559_TYPES_EXT__
-#include <float.h>
-
 /**
  * \defgroup mlx_array Array
  * MLX N-dimensional array object.
@@ -22,14 +23,18 @@ extern "C" {
 /**@{*/
 
 /**
- * An N-dimensional array object.
+ * A N-dimensional array object.
  */
-typedef struct mlx_array_* mlx_array;
+typedef struct mlx_array_ {
+  void* ctx;
+} mlx_array;
+
+static mlx_array mlx_array_empty;
 
 /**
  * Array element type.
  */
-typedef enum mlx_array_dtype_ {
+typedef enum mlx_dtype_ {
   MLX_BOOL,
   MLX_UINT8,
   MLX_UINT16,
@@ -41,26 +46,61 @@ typedef enum mlx_array_dtype_ {
   MLX_INT64,
   MLX_FLOAT16,
   MLX_FLOAT32,
+  MLX_FLOAT64,
   MLX_BFLOAT16,
   MLX_COMPLEX64,
-} mlx_array_dtype;
+} mlx_dtype;
+
+/**
+ * Size of given mlx_dtype datatype in bytes.
+ */
+size_t mlx_dtype_size(mlx_dtype dtype);
+
+/**
+ * Get array description.
+ */
+int mlx_array_tostring(mlx_string* str, const mlx_array arr);
+
+/**
+ * New empty array.
+ */
+mlx_array mlx_array_new();
+
+/**
+ * Free an array.
+ */
+int mlx_array_free(mlx_array arr);
 
 /**
  * New array from a bool scalar.
  */
-mlx_array mlx_array_from_bool(bool val);
+mlx_array mlx_array_new_bool(bool val);
 /**
  * New array from a int scalar.
  */
-mlx_array mlx_array_from_int(int val);
+mlx_array mlx_array_new_int(int val);
+/**
+ * New array from a float32 scalar.
+ */
+mlx_array mlx_array_new_float32(float val);
 /**
  * New array from a float scalar.
+ * Same as float32.
  */
-mlx_array mlx_array_from_float(float val);
+mlx_array mlx_array_new_float(float val);
+/**
+ * New array from a float64 scalar.
+ */
+mlx_array mlx_array_new_float64(double val);
+/**
+ * New array from a double scalar.
+ * Same as float64.
+ */
+mlx_array mlx_array_new_double(double val);
 /**
  * New array from a complex scalar.
  */
-mlx_array mlx_array_from_complex(float real_val, float imag_val);
+mlx_array mlx_array_new_complex(float real_val, float imag_val);
 /**
  * New array from existing buffer.
  * @param data A buffer which will be copied.
@@ -68,176 +108,228 @@ mlx_array mlx_array_from_complex(float real_val, float imag_val);
  * @param dim Number of dimensions (size of `shape`).
  * @param dtype Type of array elements.
  */
-mlx_array mlx_array_from_data(
+mlx_array mlx_array_new_data(
     const void* data,
     const int* shape,
     int dim,
-    mlx_array_dtype dtype);
+    mlx_dtype dtype);
+/**
+ * Set array to provided src array.
+ */
+int mlx_array_set(mlx_array* arr, const mlx_array src);
+/**
+ * Set array to a bool scalar.
+ */
+int mlx_array_set_bool(mlx_array* arr, bool val);
+/**
+ * Set array to a int scalar.
+ */
+int mlx_array_set_int(mlx_array* arr, int val);
+/**
+ * Set array to a float32 scalar.
+ */
+int mlx_array_set_float32(mlx_array* arr, float val);
+/**
+ * Set array to a float scalar.
+ */
+int mlx_array_set_float(mlx_array* arr, float val);
+/**
+ * Set array to a float64 scalar.
+ */
+int mlx_array_set_float64(mlx_array* arr, double val);
+/**
+ * Set array to a double scalar.
+ */
+int mlx_array_set_double(mlx_array* arr, double val);
+/**
+ * Set array to a complex scalar.
+ */
+int mlx_array_set_complex(mlx_array* arr, float real_val, float imag_val);
+/**
+ * Set array to specified data and shape.
+ * @param arr Destination array.
+ * @param data A buffer which will be copied.
+ * @param shape Shape of the array.
+ * @param dim Number of dimensions (size of `shape`).
+ * @param dtype Type of array elements.
+ */
+int mlx_array_set_data(
+    mlx_array* arr,
+    const void* data,
+    const int* shape,
+    int dim,
+    mlx_dtype dtype);
 
 /**
  * The size of the array's datatype in bytes.
  */
-size_t mlx_array_itemsize(mlx_array arr);
+size_t mlx_array_itemsize(const mlx_array arr);
 /**
  * Number of elements in the array.
  */
-size_t mlx_array_size(mlx_array arr);
-/**
- * The strides of the array.
- */
-size_t* mlx_array_strides(mlx_array arr);
+size_t mlx_array_size(const mlx_array arr);
 /**
  * The number of bytes in the array.
  */
-size_t mlx_array_nbytes(mlx_array arr);
+size_t mlx_array_nbytes(const mlx_array arr);
 /**
  * The array's dimension.
  */
-size_t mlx_array_ndim(mlx_array arr);
+size_t mlx_array_ndim(const mlx_array arr);
 /**
  * The shape of the array.
  * Returns: a pointer to the sizes of each dimension.
  */
-int* mlx_array_shape(mlx_array arr);
+const int* mlx_array_shape(const mlx_array arr);
 /**
  * The strides of the array.
  * Returns: a pointer to the sizes of each dimension.
  */
-size_t* mlx_array_strides(mlx_array arr);
+const size_t* mlx_array_strides(const mlx_array arr);
 /**
  * The shape of the array in a particular dimension.
  */
-int mlx_array_dim(mlx_array arr, int dim);
+int mlx_array_dim(const mlx_array arr, int dim);
 /**
  * The array element type.
  */
-mlx_array_dtype mlx_array_get_dtype(mlx_array arr);
+mlx_dtype mlx_array_dtype(const mlx_array arr);
+
 /**
  * Evaluate the array.
  */
-void mlx_array_eval(mlx_array arr);
+int mlx_array_eval(mlx_array arr);
 
 /**
  * Access the value of a scalar array.
  */
-bool mlx_array_item_bool(mlx_array arr);
+int mlx_array_item_bool(bool* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint8_t mlx_array_item_uint8(mlx_array arr);
+int mlx_array_item_uint8(uint8_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint16_t mlx_array_item_uint16(mlx_array arr);
+int mlx_array_item_uint16(uint16_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint32_t mlx_array_item_uint32(mlx_array arr);
+int mlx_array_item_uint32(uint32_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-uint64_t mlx_array_item_uint64(mlx_array arr);
+int mlx_array_item_uint64(uint64_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int8_t mlx_array_item_int8(mlx_array arr);
+int mlx_array_item_int8(int8_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int16_t mlx_array_item_int16(mlx_array arr);
+int mlx_array_item_int16(int16_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int32_t mlx_array_item_int32(mlx_array arr);
+int mlx_array_item_int32(int32_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int64_t mlx_array_item_int64(mlx_array arr);
+int mlx_array_item_int64(int64_t* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-float mlx_array_item_float32(mlx_array arr);
+int mlx_array_item_float32(float* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-float _Complex mlx_array_item_complex64(mlx_array arr);
+int mlx_array_item_float64(double* res, const mlx_array arr);
+/**
+ * Access the value of a scalar array.
+ */
+int mlx_array_item_complex64(float _Complex* res, const mlx_array arr);
 
 #ifdef HAS_FLOAT16
 /**
  * Access the value of a scalar array.
  */
-float16_t mlx_array_item_float16(mlx_array arr);
+int mlx_array_item_float16(float16_t* res, const mlx_array arr);
 #endif
 
 #ifdef HAS_BFLOAT16
 /**
  * Access the value of a scalar array.
  */
-bfloat16_t mlx_array_item_bfloat16(mlx_array arr);
+int mlx_array_item_bfloat16(bfloat16_t* res, const mlx_array arr);
 #endif
 
 /**
  * Returns a pointer to the array data, cast to `bool*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const bool* mlx_array_data_bool(mlx_array arr);
+const bool* mlx_array_data_bool(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `uint8_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const uint8_t* mlx_array_data_uint8(mlx_array arr);
+const uint8_t* mlx_array_data_uint8(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `uint16_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const uint16_t* mlx_array_data_uint16(mlx_array arr);
+const uint16_t* mlx_array_data_uint16(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `uint32_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const uint32_t* mlx_array_data_uint32(mlx_array arr);
+const uint32_t* mlx_array_data_uint32(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `uint64_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const uint64_t* mlx_array_data_uint64(mlx_array arr);
+const uint64_t* mlx_array_data_uint64(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `int8_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const int8_t* mlx_array_data_int8(mlx_array arr);
+const int8_t* mlx_array_data_int8(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `int16_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const int16_t* mlx_array_data_int16(mlx_array arr);
+const int16_t* mlx_array_data_int16(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `int32_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const int32_t* mlx_array_data_int32(mlx_array arr);
+const int32_t* mlx_array_data_int32(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `int64_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const int64_t* mlx_array_data_int64(mlx_array arr);
+const int64_t* mlx_array_data_int64(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `float32*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const float* mlx_array_data_float32(mlx_array arr);
+const float* mlx_array_data_float32(const mlx_array arr);
+/**
+ * Returns a pointer to the array data, cast to `float64*`.
+ * Array must be evaluated, otherwise returns NULL.
+ */
+const double* mlx_array_data_float64(const mlx_array arr);
 /**
  * Returns a pointer to the array data, cast to `_Complex*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const float _Complex* mlx_array_data_complex64(mlx_array arr);
+const float _Complex* mlx_array_data_complex64(const mlx_array arr);
 
 #ifdef HAS_FLOAT16
 /**
  * Returns a pointer to the array data, cast to `float16_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const float16_t* mlx_array_data_float16(mlx_array arr);
+const float16_t* mlx_array_data_float16(const mlx_array arr);
 #endif
 
 #ifdef HAS_BFLOAT16
@@ -245,95 +337,38 @@ const float16_t* mlx_array_data_float16(mlx_array arr);
  * Returns a pointer to the array data, cast to `bfloat16_t*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const bfloat16_t* mlx_array_data_bfloat16(mlx_array arr);
+const bfloat16_t* mlx_array_data_bfloat16(const mlx_array arr);
 #endif
-/**@}*/
 
 /**
- * \defgroup mlx_vector_array A vector of arrays
- * MLX vector of array object.
+ * Check if the array is available.
+ * Internal function: use at your own risk.
  */
-/**@{*/
+int _mlx_array_is_available(bool* res, const mlx_array arr);
 
 /**
- * A vector of arrays.
+ * Wait on the array to be available. After this `_mlx_array_is_available`
+ * returns `true`. Internal function: use at your own risk.
  */
-typedef struct mlx_vector_array_* mlx_vector_array;
+int _mlx_array_wait(const mlx_array arr);
 
 /**
- * Returns a new empty vector of arrays
+ * Whether the array is contiguous in memory.
+ * Internal function: use at your own risk.
  */
-mlx_vector_array mlx_vector_array_new();
-/**
- * Returns a new vector of arrays, from specified arrays.
- * The reference count of the given arrays will be increased.
- */
-mlx_vector_array mlx_vector_array_from_arrays(mlx_array* arrs, size_t num_arrs);
-/**
- * Returns a new vector of array, containing a single specified array.
- * The reference count of the given array will be increased.
- */
-mlx_vector_array mlx_vector_array_from_array(const mlx_array arr);
-/**
- * Add an array to the vector of arrays.
- * The reference count of the given array will be increased.
- */
-void mlx_vector_array_add(mlx_vector_array vec, const mlx_array arr);
-/**
- * Add several arrays to the vector of arrays.
- * The reference count of the given arrays will be increased.
- */
-void mlx_vector_array_add_arrays(
-    mlx_vector_array vec,
-    const mlx_array* arrs,
-    size_t num_arrs);
-/**
- * Get the array at `index` in the vector of arrays.
- */
-mlx_array mlx_vector_array_get(mlx_vector_array vec, size_t index);
-/**
- * Size of the vector of arrays.
- */
-size_t mlx_vector_array_size(mlx_vector_array vec);
-/**@}*/
+int _mlx_array_is_contiguous(bool* res, const mlx_array arr);
 
 /**
- * \defgroup mlx_vector_vector_array Vector of array vectors
- * MLX vector of vector array object.
+ * Whether the array's rows are contiguous in memory.
+ * Internal function: use at your own risk.
  */
-/**@{*/
+int _mlx_array_is_row_contiguous(bool* res, const mlx_array arr);
 
 /**
- * A vector of array vectors.
+ * Whether the array's columns are contiguous in memory.
+ * Internal function: use at your own risk.
  */
-typedef struct mlx_vector_vector_array_* mlx_vector_vector_array;
-
-/**
- * New empty vector of array vectors.
- */
-mlx_vector_vector_array mlx_vector_vector_array_new();
-/**
- * Add an array vector to the vector of array vectors.
- * Reference count of the array vector will be increased.
- */
-void mlx_vector_vector_array_add(
-    mlx_vector_vector_array vec2,
-    const mlx_vector_array vec);
-/**
- * Get the array vector at specified `index` in the vector of array vectors.
- */
-mlx_vector_array mlx_vector_vector_array_get(
-    mlx_vector_vector_array vec2,
-    size_t index);
-/**
- * Get the array at specified (`index`, `arr_index`) in the vector of array
- * vectors.
- */
-mlx_array mlx_vector_vector_array_get2d(
-    mlx_vector_vector_array vec2,
-    size_t index,
-    size_t arr_index);
-size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec2);
+int _mlx_array_is_col_contiguous(bool* res, const mlx_array arr);
 
 /**@}*/
 

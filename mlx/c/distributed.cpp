@@ -3,28 +3,112 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#include "mlx/c/ops.h"
+#include "mlx/c/distributed.h"
+#include "mlx/c/error.h"
+#include "mlx/c/private/mlx.h"
+#include "mlx/distributed/ops.h"
 
-#include "mlx/c/mlx.h"
-#include "mlx/c/private/array.h"
-#include "mlx/c/private/closure.h"
-#include "mlx/c/private/distributed_group.h"
-#include "mlx/c/private/future.h"
-#include "mlx/c/private/io.h"
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/stream.h"
-#include "mlx/c/private/string.h"
-#include "mlx/c/private/utils.h"
-
-extern "C" mlx_array mlx_distributed_all_gather(
-    mlx_array x,
-    mlx_distributed_group group) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_gather(
-      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt)));
+extern "C" int mlx_distributed_all_gather(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream S) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::all_gather(
+            mlx_array_get_(x),
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(S)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }
-extern "C" mlx_array mlx_distributed_all_sum(
-    mlx_array x,
-    mlx_distributed_group group) {
-  RETURN_MLX_C_ARRAY(mlx::core::distributed::all_sum(
-      x->ctx, (group ? std::make_optional(group->ctx) : std::nullopt)));
+extern "C" int mlx_distributed_all_sum(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::all_sum(
+            mlx_array_get_(x),
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_distributed_recv(
+    mlx_array* res,
+    const int* shape,
+    size_t shape_num,
+    mlx_dtype dtype,
+    int src,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::recv(
+            std::vector<int>(shape, shape + shape_num),
+            mlx_dtype_to_cpp(dtype),
+            src,
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_distributed_recv_like(
+    mlx_array* res,
+    const mlx_array x,
+    int src,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::recv_like(
+            mlx_array_get_(x),
+            src,
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_distributed_send(
+    mlx_array* res,
+    const mlx_array x,
+    int dst,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::send(
+            mlx_array_get_(x),
+            dst,
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
 }

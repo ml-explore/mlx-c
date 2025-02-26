@@ -8,10 +8,12 @@ set(CMAKE_CXX_STANDARD 17)
 
 # ----------------------------- Configuration -----------------------------
 if(NOT MLX_C_VERSION)
-  set(MLX_C_VERSION 0.0.9)
+  set(MLX_C_VERSION 0.1.2)
 endif()
 
+option(BUILD_SHARED_LIBS "Build mlx C as a shared library" OFF)
 option(MLX_C_BUILD_EXAMPLES "Build examples for mlx C" ON)
+option(MLX_C_USE_SYSTEM_MLX "Use system MLX" OFF)
 
 # ----------------------------- mlx -----------------------------
 
@@ -24,13 +26,18 @@ endif()
 # mlx
 set(MLX_BUILD_TESTS OFF)
 set(MLX_BUILD_EXAMPLES OFF)
-set(MLX_BUILD_BENCHMARKS "Build benchmarks for mlx" OFF)
+set(MLX_BUILD_BENCHMARKS OFF)
 set(MLX_BUILD_PYTHON_BINDINGS OFF)
-FetchContent_Declare(
-  mlx
-  GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-  GIT_TAG v0.15.2)
-FetchContent_MakeAvailable(mlx)
+
+if(MLX_C_USE_SYSTEM_MLX)
+  find_package(MLX REQUIRED)
+else()
+  FetchContent_Declare(
+    mlx
+    GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
+    GIT_TAG v0.23.1)
+  FetchContent_MakeAvailable(mlx)
+endif()
 
 # ----------------------------- lib -----------------------------
 
@@ -44,21 +51,20 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/future.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ioutils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
+    # ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/random.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/stream.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp)
 
-add_library(mlxc STATIC ${mlxc-src})
+add_library(mlxc ${mlxc-src})
 
 target_link_libraries(mlxc PRIVATE mlx)
 target_include_directories(mlxc

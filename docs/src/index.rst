@@ -3,10 +3,9 @@ MLX C
 
 MLX C is a C API for `MLX <https://github.com/ml-explore/mlx>`_.
 
-MLX is an array framework for machine learning research on Apple
-silicon. MLX C expands MLX to the C language, making research and
-experimentation easier on Apple silicon. MLX is intended for research and
-not for production deployment of models in apps.
+MLX is an array framework for machine learning on Apple silicon. MLX C expands
+MLX to the C language, making research and experimentation easier on Apple
+silicon.
 
 MLX C can be used standalone or as a bridge to bind other languages
 to MLX. For example, the `MLX Swift
@@ -29,18 +28,15 @@ bindings to MLX.
    :caption: Object Reference
    :maxdepth: 1
 
-   object
    array
-   vecarray
-   vecvecarray
-   stream
    device
+   stream
    string
+   vector
    map
+   optional
    closure
-   future
    distributed_group
-   ioutils
 
 .. toctree::
    :caption: API Reference
@@ -56,3 +52,4 @@ bindings to MLX.
    compile
    fast
    metal
+   error

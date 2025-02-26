@@ -10,9 +10,9 @@ import mlx.core as mx
 # -- Project information -----------------------------------------------------
 
 project = "MLX C"
-copyright = "2023-2024, MLX Contributors"
+copyright = "2023-2025, MLX Contributors"
 author = "MLX Contributors"
-version = "0.0.9"
+version = "0.1.2"
 release = version
 
 # -- General configuration ---------------------------------------------------

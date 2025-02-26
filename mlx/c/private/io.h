@@ -1,31 +1,91 @@
-/* Copyright © 2023-2024 Apple Inc. */
-
 #ifndef MLX_IO_PRIVATE_H
 #define MLX_IO_PRIVATE_H
 
-#include "mlx/c/private/map.h"
-#include "mlx/c/private/object.h"
+#include <iostream>
 #include "mlx/mlx.h"
 
-struct mlx_safetensors_ : mlx_object_ {
-  mlx_safetensors_() : mlx_object_() {
-    data = new mlx_map_string_to_array_();
-    metadata = new mlx_map_string_to_string_();
+class CFILEReader : public mlx::core::io::Reader {
+ private:
+  FILE* f;
+
+ public:
+  CFILEReader(FILE* f) : f(f) {};
+  virtual bool is_open() const override {
+    return f != nullptr;
   };
-  mlx_safetensors_(std::pair<
-                   std::unordered_map<std::string, mlx::core::array>,
-                   std::unordered_map<std::string, std::string>>&& ctx)
-      : mlx_object_() {
-    data = new mlx_map_string_to_array_(std::move(std::get<0>(ctx)));
-    metadata = new mlx_map_string_to_string_(std::move(std::get<1>(ctx)));
+  virtual bool good() const override {
+    return ferror(f) == 0;
   };
-  virtual mlx_string_* tostring() override;
-  struct mlx_map_string_to_array_* data;
-  struct mlx_map_string_to_string_* metadata;
-  virtual ~mlx_safetensors_() {
-    mlx_free(data);
-    mlx_free(metadata);
+  virtual size_t tell() override {
+    return ftell(f);
   }
+  virtual void seek(
+      int64_t off,
+      std::ios_base::seekdir way = std::ios_base::beg) override {
+    switch (way) {
+      case std::ios_base::beg:
+        fseek(f, off, SEEK_SET);
+        break;
+      case std::ios_base::cur:
+        fseek(f, off, SEEK_CUR);
+        break;
+      case std::ios_base::end:
+        fseek(f, off, SEEK_END);
+        break;
+      default:
+        throw std::runtime_error("FILE: invalid seek way");
+    }
+  }
+  virtual void read(char* data, size_t n) override {
+    fread(data, 1, n, f);
+  };
+  virtual void read(char* data, size_t n, size_t offset) override {
+    fseek(f, offset, SEEK_SET);
+    fread(data, 1, n, f);
+  };
+  virtual std::string label() const override {
+    return "FILE (read mode)";
+  };
+};
+
+class CFILEWriter : public mlx::core::io::Writer {
+ private:
+  FILE* f;
+
+ public:
+  CFILEWriter(FILE* f) : f(f) {};
+  virtual bool is_open() const override {
+    return f != nullptr;
+  };
+  virtual bool good() const override {
+    return ferror(f) == 0;
+  };
+  virtual size_t tell() override {
+    return ftell(f);
+  }
+  virtual void seek(
+      int64_t off,
+      std::ios_base::seekdir way = std::ios_base::beg) override {
+    switch (way) {
+      case std::ios_base::beg:
+        fseek(f, off, SEEK_SET);
+        break;
+      case std::ios_base::cur:
+        fseek(f, off, SEEK_CUR);
+        break;
+      case std::ios_base::end:
+        fseek(f, off, SEEK_END);
+        break;
+      default:
+        throw std::runtime_error("FILE: invalid seek way");
+    }
+  }
+  virtual void write(const char* data, size_t n) override {
+    fwrite(data, 1, n, f);
+  };
+  virtual std::string label() const override {
+    return "FILE (write mode)";
+  };
 };
 
 #endif
