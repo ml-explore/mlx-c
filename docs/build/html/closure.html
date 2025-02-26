@@ -8,45 +8,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Closures &#8212; MLX C 0.0.9 documentation</title>
+    <title>Closures &#8212; MLX C 0.1.2 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/documentation_options.js?v=0deb7d70"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'closure';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Futures" href="future.html" />
-    <link rel="prev" title="Map" href="map.html" />
+    <link rel="next" title="Distributed Group" href="distributed_group.html" />
+    <link rel="prev" title="Optionals" href="optional.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.2" />
   </head>
   
   
@@ -54,31 +58,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -86,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -94,10 +82,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -106,7 +99,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -121,6 +115,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -133,22 +129,18 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.1.2 documentation - Home"/>
+    <img src="_static/mlx_logo_dark.png" class="logo__image only-dark pst-js-only" alt="MLX C 0.1.2 documentation - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
@@ -160,21 +152,19 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
-<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional.html">Optionals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Closures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -188,6 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error management</a></li>
 </ul>
 
     </div>
@@ -203,7 +194,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -212,14 +203,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -310,27 +301,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -353,11 +336,45 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_unary()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_with_payload()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_closure_apply11mlx_closureK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_apply()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_closure_free11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv420mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_setP11mlx_closureK11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_unary()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_closure_value_and_grad_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_closure_value_and_grad_free26mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv435mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv443mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_free18mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv435mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_custom_jvp_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_jvp_free22mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv439mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_vmap_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_custom_vmap_free23mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv440mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_closure_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_value_and_grad_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_closure_custom_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_jvp_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_closure_custom_vmap_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -373,46 +390,217 @@ document.write(`
 <h1>Closures<a class="headerlink" href="#closures" title="Link to this heading">#</a></h1>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv411mlx_closure">
-<span id="_CPPv311mlx_closure"></span><span id="_CPPv211mlx_closure"></span><span id="mlx_closure"></span><span class="target" id="group__mlx__closure_1gab304bffccbf5d2ef4a09bdca4778cb5f"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_closure_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure</span></span></span><a class="headerlink" href="#_CPPv411mlx_closure" title="Link to this definition">#</a><br /></dt>
-<dd><p>A closure encapsulating a function taking a vector of arrays, and returning a vector of arrays. </p>
-</dd></dl>
+<span id="_CPPv311mlx_closure"></span><span id="_CPPv211mlx_closure"></span><span id="mlx_closure"></span><span class="target" id="group__mlx__closure_1ga438ecd53ac1643bebd810d697716a077"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv412mlx_closure_" title="mlx_closure_"><span class="n"><span class="pre">mlx_closure_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure</span></span></span><a class="headerlink" href="#_CPPv411mlx_closure" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv426mlx_closure_value_and_grad">
-<span id="_CPPv326mlx_closure_value_and_grad"></span><span id="_CPPv226mlx_closure_value_and_grad"></span><span id="mlx_closure_value_and_grad"></span><span class="target" id="group__mlx__closure_1ga0f47fc38cb9ec4b0da7902ae18261bf0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_closure_value_and_grad_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></span><a class="headerlink" href="#_CPPv426mlx_closure_value_and_grad" title="Link to this definition">#</a><br /></dt>
-<dd><p>A closure which takes a vector of arrays, and returns a vector of vector of arrays of size 2. </p>
-</dd></dl>
+<span id="_CPPv326mlx_closure_value_and_grad"></span><span id="_CPPv226mlx_closure_value_and_grad"></span><span id="mlx_closure_value_and_grad"></span><span class="target" id="group__mlx__closure_1gad8c0d5c6cac0a8bdfd16151697eddb4b"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv427mlx_closure_value_and_grad_" title="mlx_closure_value_and_grad_"><span class="n"><span class="pre">mlx_closure_value_and_grad_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></span><a class="headerlink" href="#_CPPv426mlx_closure_value_and_grad" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv418mlx_closure_custom">
+<span id="_CPPv318mlx_closure_custom"></span><span id="_CPPv218mlx_closure_custom"></span><span id="mlx_closure_custom"></span><span class="target" id="group__mlx__closure_1ga2c36417d777208a83e29fb5e0a9381a3"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv419mlx_closure_custom_" title="mlx_closure_custom_"><span class="n"><span class="pre">mlx_closure_custom_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom</span></span></span><a class="headerlink" href="#_CPPv418mlx_closure_custom" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_closure_custom_jvp">
+<span id="_CPPv322mlx_closure_custom_jvp"></span><span id="_CPPv222mlx_closure_custom_jvp"></span><span id="mlx_closure_custom_jvp"></span><span class="target" id="group__mlx__closure_1ga7aa765822c29825630370d56717bedbf"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423mlx_closure_custom_jvp_" title="mlx_closure_custom_jvp_"><span class="n"><span class="pre">mlx_closure_custom_jvp_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></span><a class="headerlink" href="#_CPPv422mlx_closure_custom_jvp" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv423mlx_closure_custom_vmap">
+<span id="_CPPv323mlx_closure_custom_vmap"></span><span id="_CPPv223mlx_closure_custom_vmap"></span><span id="mlx_closure_custom_vmap"></span><span class="target" id="group__mlx__closure_1ga1e2ad95bed1d1f71ea2a4a5b9bc24c93"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424mlx_closure_custom_vmap_" title="mlx_closure_custom_vmap_"><span class="n"><span class="pre">mlx_closure_custom_vmap_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></span><a class="headerlink" href="#_CPPv423mlx_closure_custom_vmap" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv415mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE">
-<span id="_CPPv315mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE"></span><span id="_CPPv215mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE"></span><span class="target" id="group__mlx__closure_1ga7d7413d3cbcc07cef3c052b2dd8189d3"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n"><span class="pre">arrs</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns a closure encapsulating the specified function. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv415mlx_closure_newv">
+<span id="_CPPv315mlx_closure_newv"></span><span id="_CPPv215mlx_closure_newv"></span><span id="mlx_closure_new"></span><span class="target" id="group__mlx__closure_1ga380dbbfbde9b99cc8a14851779dfe336"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415mlx_closure_newv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv421mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE">
-<span id="_CPPv321mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE"></span><span id="_CPPv221mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE"></span><span class="target" id="group__mlx__closure_1ga45952f16faf15ae11aaf798fd5bc28c7"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new_unary</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns a closure encapsulating the specified function. </p>
-<p>This is a convenience function, mapping <code class="docutils literal notranslate"><span class="pre">mlx_array</span></code> to <code class="docutils literal notranslate"><span class="pre">mlx_vector_array</span></code> under the hood. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv416mlx_closure_free11mlx_closure">
+<span id="_CPPv316mlx_closure_free11mlx_closure"></span><span id="_CPPv216mlx_closure_free11mlx_closure"></span><span id="mlx_closure_free__mlx_closure"></span><span class="target" id="group__mlx__closure_1ga8509ba1f45ad4f76e88dacba7320a60f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mlx_closure_free11mlx_closure" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv428mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE">
-<span id="_CPPv328mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span id="_CPPv228mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1ga51d007c217461faca06972a15d6e3649"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new_with_payload</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns a closure encapsulating the specified function, with the given payload. </p>
-<p>If <code class="docutils literal notranslate"><span class="pre">dtor</span></code> is not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, it will called when the closure is destroyed to free the payload. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv420mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE">
+<span id="_CPPv320mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE"></span><span id="_CPPv220mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE"></span><span class="target" id="group__mlx__closure_1ga8b7c5712ebafb62d262d5b5a8f6f9157"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new_func</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv417mlx_closure_apply11mlx_closureK16mlx_vector_array">
-<span id="_CPPv317mlx_closure_apply11mlx_closureK16mlx_vector_array"></span><span id="_CPPv217mlx_closure_apply11mlx_closureK16mlx_vector_array"></span><span id="mlx_closure_apply__mlx_closure.mlx_vector_arrayC"></span><span class="target" id="group__mlx__closure_1ga691b549af6db1861694fd9d9e9879940"></span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_closure_apply11mlx_closureK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
-<dd><p>Applies the closure over the given vector of arrays argument. </p>
-</dd></dl>
+<dt class="sig sig-object cpp" id="_CPPv428mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE">
+<span id="_CPPv328mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span id="_CPPv228mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1ga973328c41ab6be535830d0bf554b0e3c"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new_func_payload</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array">
-<span id="_CPPv332mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array"></span><span id="_CPPv232mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array"></span><span id="mlx_closure_value_and_grad_apply__mlx_closure_value_and_grad.mlx_vector_arrayC"></span><span class="target" id="group__mlx__closure_1gab5d7efa2d147102094b4a1eeeef0ed79"></span><a class="reference internal" href="vecvecarray.html#_CPPv423mlx_vector_vector_array" title="mlx_vector_vector_array"><span class="n"><span class="pre">mlx_vector_vector_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vecarray.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">inputs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
-<dd><p>Applies the closure over the given vector of arrays argument. </p>
+<dt class="sig sig-object cpp" id="_CPPv415mlx_closure_setP11mlx_closureK11mlx_closure">
+<span id="_CPPv315mlx_closure_setP11mlx_closureK11mlx_closure"></span><span id="_CPPv215mlx_closure_setP11mlx_closureK11mlx_closure"></span><span id="mlx_closure_set__mlx_closureP.mlx_closureC"></span><span class="target" id="group__mlx__closure_1ga8df03069be71dceee2993d010410a804"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415mlx_closure_setP11mlx_closureK11mlx_closure" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array">
+<span id="_CPPv317mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array"></span><span id="_CPPv217mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array"></span><span id="mlx_closure_apply__mlx_vector_arrayP.mlx_closure.mlx_vector_arrayC"></span><span class="target" id="group__mlx__closure_1gab0d6a9d6b30029743a2ad23acb7bb2f7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE">
+<span id="_CPPv321mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE"></span><span id="_CPPv221mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE"></span><span class="target" id="group__mlx__closure_1ga25d095c92fa80f2c3dffc5ddeaf99681"></span><a class="reference internal" href="#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_new_unary</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430mlx_closure_value_and_grad_newv">
+<span id="_CPPv330mlx_closure_value_and_grad_newv"></span><span id="_CPPv230mlx_closure_value_and_grad_newv"></span><span id="mlx_closure_value_and_grad_new"></span><span class="target" id="group__mlx__closure_1ga28ae151369414606b94b0ab9dbbe1129"></span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430mlx_closure_value_and_grad_newv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431mlx_closure_value_and_grad_free26mlx_closure_value_and_grad">
+<span id="_CPPv331mlx_closure_value_and_grad_free26mlx_closure_value_and_grad"></span><span id="_CPPv231mlx_closure_value_and_grad_free26mlx_closure_value_and_grad"></span><span id="mlx_closure_value_and_grad_free__mlx_closure_value_and_grad"></span><span class="target" id="group__mlx__closure_1ga2144f39da3a8dc12572f0dcc849853bf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431mlx_closure_value_and_grad_free26mlx_closure_value_and_grad" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv435mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE">
+<span id="_CPPv335mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE"></span><span id="_CPPv235mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE"></span><span class="target" id="group__mlx__closure_1ga78fdcb6a60256751d19c4b7d01081fbd"></span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_new_func</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv443mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE">
+<span id="_CPPv343mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span id="_CPPv243mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1ga51a2f977d294cf4d517c9d6cc3e0e0ce"></span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_new_func_payload</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv443mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad">
+<span id="_CPPv330mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad"></span><span id="_CPPv230mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad"></span><span id="mlx_closure_value_and_grad_set__mlx_closure_value_and_gradP.mlx_closure_value_and_gradC"></span><span class="target" id="group__mlx__closure_1ga1cd7e76f748596ce5bd9dc0139af902d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array">
+<span id="_CPPv332mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array"></span><span id="_CPPv232mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array"></span><span id="mlx_closure_value_and_grad_apply__mlx_vector_arrayP.mlx_vector_arrayP.mlx_closure_value_and_grad.mlx_vector_arrayC"></span><span class="target" id="group__mlx__closure_1gaa4cd55c01997ba25f4e2127bac8be9a0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res_0</span></span>, <a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res_1</span></span>, <a class="reference internal" href="#_CPPv426mlx_closure_value_and_grad" title="mlx_closure_value_and_grad"><span class="n"><span class="pre">mlx_closure_value_and_grad</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_closure_custom_newv">
+<span id="_CPPv322mlx_closure_custom_newv"></span><span id="_CPPv222mlx_closure_custom_newv"></span><span id="mlx_closure_custom_new"></span><span class="target" id="group__mlx__closure_1ga1f02c8f86f13bfac595a1608b2722955"></span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422mlx_closure_custom_newv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423mlx_closure_custom_free18mlx_closure_custom">
+<span id="_CPPv323mlx_closure_custom_free18mlx_closure_custom"></span><span id="_CPPv223mlx_closure_custom_free18mlx_closure_custom"></span><span id="mlx_closure_custom_free__mlx_closure_custom"></span><span class="target" id="group__mlx__closure_1ga965c046e8125e5caaefb18f0004bf72a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423mlx_closure_custom_free18mlx_closure_custom" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE">
+<span id="_CPPv327mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE"></span><span id="_CPPv227mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE"></span><span class="target" id="group__mlx__closure_1gaa0524eabbbcfe81d2a34719d9174cca9"></span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_new_func</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv435mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE">
+<span id="_CPPv335mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span id="_CPPv235mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1gaa2d099da0fd667c9c6322d84a0f0507f"></span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_new_func_payload</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom">
+<span id="_CPPv322mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom"></span><span id="_CPPv222mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom"></span><span id="mlx_closure_custom_set__mlx_closure_customP.mlx_closure_customC"></span><span class="target" id="group__mlx__closure_1ga2b82f438733ff372a0f41ab022d71f58"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array">
+<span id="_CPPv324mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array"></span><span id="_CPPv224mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array"></span><span id="mlx_closure_custom_apply__mlx_vector_arrayP.mlx_closure_custom.mlx_vector_arrayC.mlx_vector_arrayC.mlx_vector_arrayC"></span><span class="target" id="group__mlx__closure_1gab968894307b70a6ac2fbbf75614c5688"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <a class="reference internal" href="#_CPPv418mlx_closure_custom" title="mlx_closure_custom"><span class="n"><span class="pre">mlx_closure_custom</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426mlx_closure_custom_jvp_newv">
+<span id="_CPPv326mlx_closure_custom_jvp_newv"></span><span id="_CPPv226mlx_closure_custom_jvp_newv"></span><span id="mlx_closure_custom_jvp_new"></span><span class="target" id="group__mlx__closure_1gadc11140bc6055ddbfd351e6f6469bfbb"></span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_closure_custom_jvp_newv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_closure_custom_jvp_free22mlx_closure_custom_jvp">
+<span id="_CPPv327mlx_closure_custom_jvp_free22mlx_closure_custom_jvp"></span><span id="_CPPv227mlx_closure_custom_jvp_free22mlx_closure_custom_jvp"></span><span id="mlx_closure_custom_jvp_free__mlx_closure_custom_jvp"></span><span class="target" id="group__mlx__closure_1ga5b6f248a06142faceab450990f9cb9a5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_closure_custom_jvp_free22mlx_closure_custom_jvp" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE">
+<span id="_CPPv331mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE"></span><span id="_CPPv231mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE"></span><span class="target" id="group__mlx__closure_1gadb052705b2df46d4d5f0fadc76d1d2c8"></span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_new_func</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">_num</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv439mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE">
+<span id="_CPPv339mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"></span><span id="_CPPv239mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1ga8982f6b5f8a8a764fb52873d55555668"></span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_new_func_payload</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">_num</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv439mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp">
+<span id="_CPPv326mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp"></span><span id="_CPPv226mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp"></span><span id="mlx_closure_custom_jvp_set__mlx_closure_custom_jvpP.mlx_closure_custom_jvpC"></span><span class="target" id="group__mlx__closure_1ga9a80a564e448eba57845e08ad25ed48d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t">
+<span id="_CPPv328mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t"></span><span id="_CPPv228mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t"></span><span id="mlx_closure_custom_jvp_apply__mlx_vector_arrayP.mlx_closure_custom_jvp.mlx_vector_arrayC.mlx_vector_arrayC.iCP.s"></span><span class="target" id="group__mlx__closure_1ga1bec08a45224cbfd6cab02a97b2e00c9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <a class="reference internal" href="#_CPPv422mlx_closure_custom_jvp" title="mlx_closure_custom_jvp"><span class="n"><span class="pre">mlx_closure_custom_jvp</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">input_2</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">input_2_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_closure_custom_vmap_newv">
+<span id="_CPPv327mlx_closure_custom_vmap_newv"></span><span id="_CPPv227mlx_closure_custom_vmap_newv"></span><span id="mlx_closure_custom_vmap_new"></span><span class="target" id="group__mlx__closure_1ga8546316bcda4bc59e22cdfa194263d3b"></span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_new</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_closure_custom_vmap_newv" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428mlx_closure_custom_vmap_free23mlx_closure_custom_vmap">
+<span id="_CPPv328mlx_closure_custom_vmap_free23mlx_closure_custom_vmap"></span><span id="_CPPv228mlx_closure_custom_vmap_free23mlx_closure_custom_vmap"></span><span id="mlx_closure_custom_vmap_free__mlx_closure_custom_vmap"></span><span class="target" id="group__mlx__closure_1ga8915b12d49674dd2befb37258516da97"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_closure_custom_vmap_free23mlx_closure_custom_vmap" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE">
+<span id="_CPPv332mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE"></span><span id="_CPPv232mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE"></span><span class="target" id="group__mlx__closure_1ga43cc9088628941d030b67245fcf853b1"></span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_new_func</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv414mlx_vector_int" title="mlx_vector_int"><span class="n"><span class="pre">mlx_vector_int</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">_num</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv440mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE">
+<span id="_CPPv340mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"></span><span id="_CPPv240mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"></span><span class="target" id="group__mlx__closure_1gab795ddd7079268641f7874953f3082ae"></span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_new_func_payload</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fun</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv414mlx_vector_int" title="mlx_vector_int"><span class="n"><span class="pre">mlx_vector_int</span></span></a><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">_num</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">payload</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dtor</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv440mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap">
+<span id="_CPPv327mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap"></span><span id="_CPPv227mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap"></span><span id="mlx_closure_custom_vmap_set__mlx_closure_custom_vmapP.mlx_closure_custom_vmapC"></span><span class="target" id="group__mlx__closure_1gaa89efc40a876e2728aedff57e50832c8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t">
+<span id="_CPPv329mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t"></span><span id="_CPPv229mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t"></span><span id="mlx_closure_custom_vmap_apply__mlx_vector_arrayP.mlx_vector_intP.mlx_closure_custom_vmap.mlx_vector_arrayC.iCP.s"></span><span class="target" id="group__mlx__closure_1gac218f29d96fa10c4d52a39686e3d1f5c"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res_0</span></span>, <a class="reference internal" href="vector.html#_CPPv414mlx_vector_int" title="mlx_vector_int"><span class="n"><span class="pre">mlx_vector_int</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res_1</span></span>, <a class="reference internal" href="#_CPPv423mlx_closure_custom_vmap" title="mlx_closure_custom_vmap"><span class="n"><span class="pre">mlx_closure_custom_vmap</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cls</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">input_0</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">input_1</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">input_1_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv412mlx_closure_">
+<span id="_CPPv312mlx_closure_"></span><span id="_CPPv212mlx_closure_"></span><span id="mlx_closure_"></span><span class="target" id="structmlx__closure__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_</span></span></span><a class="headerlink" href="#_CPPv412mlx_closure_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;closure.h&gt;</em></div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_closure_value_and_grad_">
+<span id="_CPPv327mlx_closure_value_and_grad_"></span><span id="_CPPv227mlx_closure_value_and_grad_"></span><span id="mlx_closure_value_and_grad_"></span><span class="target" id="structmlx__closure__value__and__grad__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_value_and_grad_</span></span></span><a class="headerlink" href="#_CPPv427mlx_closure_value_and_grad_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;closure.h&gt;</em></div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv419mlx_closure_custom_">
+<span id="_CPPv319mlx_closure_custom_"></span><span id="_CPPv219mlx_closure_custom_"></span><span id="mlx_closure_custom_"></span><span class="target" id="structmlx__closure__custom__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_</span></span></span><a class="headerlink" href="#_CPPv419mlx_closure_custom_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;closure.h&gt;</em></div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423mlx_closure_custom_jvp_">
+<span id="_CPPv323mlx_closure_custom_jvp_"></span><span id="_CPPv223mlx_closure_custom_jvp_"></span><span id="mlx_closure_custom_jvp_"></span><span class="target" id="structmlx__closure__custom__jvp__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_jvp_</span></span></span><a class="headerlink" href="#_CPPv423mlx_closure_custom_jvp_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;closure.h&gt;</em></div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424mlx_closure_custom_vmap_">
+<span id="_CPPv324mlx_closure_custom_vmap_"></span><span id="_CPPv224mlx_closure_custom_vmap_"></span><span id="mlx_closure_custom_vmap_"></span><span class="target" id="structmlx__closure__custom__vmap__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_closure_custom_vmap_</span></span></span><a class="headerlink" href="#_CPPv424mlx_closure_custom_vmap_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;closure.h&gt;</em></div>
 </dd></dl>
 
 </section>
@@ -425,24 +613,24 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="map.html"
+       href="optional.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Map</p>
+        <p class="prev-next-title">Optionals</p>
       </div>
     </a>
     <a class="right-next"
-       href="future.html"
+       href="distributed_group.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Futures</p>
+        <p class="prev-next-title">Distributed Group</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -453,7 +641,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -464,11 +653,45 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_newPF16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_closure_new_unaryPF9mlx_arrayK9mlx_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_unary()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_new_with_payloadPF16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_with_payload()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_closure_apply11mlx_closureK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_apply()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_value_and_grad_apply26mlx_closure_value_and_gradK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_closure_free11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv420mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv415mlx_closure_setP11mlx_closureK11mlx_closure"><code class="docutils literal notranslate"><span class="pre">mlx_closure_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_closure_applyP16mlx_vector_array11mlx_closureK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_closure_new_unaryPFiP9mlx_arrayK9mlx_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_new_unary()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_closure_value_and_grad_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_closure_value_and_grad_free26mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv435mlx_closure_value_and_grad_new_funcPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv443mlx_closure_value_and_grad_new_func_payloadPFiP16mlx_vector_arrayP16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_closure_value_and_grad_setP26mlx_closure_value_and_gradK26mlx_closure_value_and_grad"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_value_and_grad_applyP16mlx_vector_arrayP16mlx_vector_array26mlx_closure_value_and_gradK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_free18mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv435mlx_closure_custom_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_closure_custom_setP18mlx_closure_customK18mlx_closure_custom"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_closure_custom_applyP16mlx_vector_array18mlx_closure_customK16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_custom_jvp_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_jvp_free22mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_closure_custom_jvp_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv439mlx_closure_custom_jvp_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_closure_custom_jvp_setP22mlx_closure_custom_jvpK22mlx_closure_custom_jvp"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_custom_jvp_applyP16mlx_vector_array22mlx_closure_custom_jvpK16mlx_vector_arrayK16mlx_vector_arrayPKi6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_vmap_newv"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_closure_custom_vmap_free23mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_closure_custom_vmap_new_funcPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv440mlx_closure_custom_vmap_new_func_payloadPFiP16mlx_vector_arrayP14mlx_vector_intK16mlx_vector_arrayPKi6size_tPvEPvPFvPvE"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_new_func_payload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_custom_vmap_setP23mlx_closure_custom_vmapK23mlx_closure_custom_vmap"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_closure_custom_vmap_applyP16mlx_vector_arrayP14mlx_vector_int23mlx_closure_custom_vmapK16mlx_vector_arrayPKi6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_closure_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_closure_value_and_grad_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_value_and_grad_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_closure_custom_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv423mlx_closure_custom_jvp_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_jvp_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_closure_custom_vmap_"><code class="docutils literal notranslate"><span class="pre">mlx_closure_custom_vmap_</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -493,7 +716,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023-2024, MLX Contributors.
+      © Copyright 2023-2025, MLX Contributors.
       <br/>
     
   </p>
@@ -517,8 +740,8 @@ By MLX Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

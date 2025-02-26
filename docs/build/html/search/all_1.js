@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['a_20vector_20of_20arrays_0',['A vector of arrays',['../group__mlx__vector__array.html',1,'']]],
-  ['algebra_20operations_1',['Linear algebra operations',['../group__linalg.html',1,'']]],
+  ['algebra_20operations_0',['Linear algebra operations',['../group__linalg.html',1,'']]],
+  ['architecture_1',['architecture',['../structmlx__metal__device__info__t__.html#ad12139c01f21fccd292627886e82ed0b',1,'mlx_metal_device_info_t_']]],
   ['array_2',['Array',['../group__mlx__array.html',1,'']]],
-  ['array_20map_3',['String-to-array map',['../group__mlx__map__string__to__array.html',1,'']]],
-  ['array_20operations_4',['Core array operations',['../group__ops.html',1,'']]],
-  ['array_20vectors_5',['Vector of array vectors',['../group__mlx__vector__vector__array.html',1,'']]],
-  ['array_2eh_6',['array.h',['../array_8h.html',1,'']]],
-  ['arrays_7',['A vector of arrays',['../group__mlx__vector__array.html',1,'']]]
+  ['array_20operations_3',['Core array operations',['../group__ops.html',1,'']]],
+  ['array_2eh_4',['array.h',['../array_8h.html',1,'']]]
 ];

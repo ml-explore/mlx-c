@@ -1,5 +1,5 @@
 Distributed Operations
 ======================
 
-.. doxygengroup:: distributed_ops
+.. doxygengroup:: distributed
    :content-only:

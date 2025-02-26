@@ -8,38 +8,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Compilation &#8212; MLX C 0.0.9 documentation</title>
+    <title>Compilation &#8212; MLX C 0.1.2 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/documentation_options.js?v=0deb7d70"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'compile';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,6 +50,7 @@
     <link rel="prev" title="Distributed Operations" href="distributed_ops.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.2" />
   </head>
   
   
@@ -54,31 +58,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -86,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -94,10 +82,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -106,7 +99,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -121,6 +115,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -133,22 +129,18 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.1.2 documentation - Home"/>
+    <img src="_static/mlx_logo_dark.png" class="logo__image only-dark pst-js-only" alt="MLX C 0.1.2 documentation - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
@@ -160,21 +152,19 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
-<li class="toctree-l1"><a class="reference internal" href="map.html">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional.html">Optionals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current nav bd-sidenav">
@@ -188,6 +178,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error management</a></li>
 </ul>
 
     </div>
@@ -203,7 +194,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -212,14 +203,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -310,27 +301,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -351,9 +334,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_compile_mode_"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_DISABLED</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_NO_SIMPLIFY</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_NO_FUSE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_ENABLED</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_compile_mode"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compileP11mlx_closureK11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_detail_compile_clear_cachev"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile_clear_cache()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_detail_compile_erase9uintptr_t"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile_erase()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv420mlx_set_compile_mode16mlx_compile_mode"><code class="docutils literal notranslate"><span class="pre">mlx_set_compile_mode()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -367,19 +362,70 @@ document.write(`
                   
   <section id="compilation">
 <h1>Compilation<a class="headerlink" href="#compilation" title="Link to this heading">#</a></h1>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv417mlx_compile_mode_">
+<span id="_CPPv317mlx_compile_mode_"></span><span id="_CPPv217mlx_compile_mode_"></span><span class="target" id="group__compile_1ga768115673afec9fdd8bfbd8f38c4f470"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile_mode_</span></span></span><a class="headerlink" href="#_CPPv417mlx_compile_mode_" title="Link to this definition">#</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE">
+<span id="_CPPv3N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE"></span><span id="_CPPv2N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE"></span><span class="target" id="group__compile_1gga768115673afec9fdd8bfbd8f38c4f470a819f5a1d6d37263d962dd752b6db845e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_COMPILE_MODE_DISABLED</span></span></span><a class="headerlink" href="#_CPPv4N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE">
+<span id="_CPPv3N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE"></span><span id="_CPPv2N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE"></span><span class="target" id="group__compile_1gga768115673afec9fdd8bfbd8f38c4f470ae4a888929d3893e8476b10d65e6376e1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_COMPILE_MODE_NO_SIMPLIFY</span></span></span><a class="headerlink" href="#_CPPv4N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE">
+<span id="_CPPv3N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE"></span><span id="_CPPv2N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE"></span><span class="target" id="group__compile_1gga768115673afec9fdd8bfbd8f38c4f470affb7a7c6a0beeca4429d7f871c90ef42"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_COMPILE_MODE_NO_FUSE</span></span></span><a class="headerlink" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE">
+<span id="_CPPv3N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE"></span><span id="_CPPv2N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE"></span><span class="target" id="group__compile_1gga768115673afec9fdd8bfbd8f38c4f470ae643d71face3aefd145610c9b2ee3d3e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MLX_COMPILE_MODE_ENABLED</span></span></span><a class="headerlink" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv416mlx_compile_mode">
+<span id="_CPPv316mlx_compile_mode"></span><span id="_CPPv216mlx_compile_mode"></span><span id="mlx_compile_mode"></span><span class="target" id="group__compile_1ga2e6eec9edb61f33d49d0d527aa6d1325"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv417mlx_compile_mode_" title="mlx_compile_mode_"><span class="n"><span class="pre">mlx_compile_mode_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile_mode</span></span></span><a class="headerlink" href="#_CPPv416mlx_compile_mode" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv411mlx_compile11mlx_closureb">
-<span id="_CPPv311mlx_compile11mlx_closureb"></span><span id="_CPPv211mlx_compile11mlx_closureb"></span><span id="mlx_compile__mlx_closure.b"></span><span class="target" id="group__compile_1ga66eddc203ea77675c510f98a090c3586"></span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compile11mlx_closureb" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv411mlx_compileP11mlx_closureK11mlx_closureb">
+<span id="_CPPv311mlx_compileP11mlx_closureK11mlx_closureb"></span><span id="_CPPv211mlx_compileP11mlx_closureK11mlx_closureb"></span><span id="mlx_compile__mlx_closureP.mlx_closureC.b"></span><span class="target" id="group__compile_1gae367b2c7055e67752c8beb4a4d89232e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411mlx_compileP11mlx_closureK11mlx_closureb" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t">
+<span id="_CPPv318mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t"></span><span id="_CPPv218mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t"></span><span id="mlx_detail_compile__mlx_closureP.mlx_closureC.uintptr_t.b.uint64_tCP.s"></span><span class="target" id="group__compile_1gaa2226b5b7ca997b7b0fe582a2676ab5b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_detail_compile</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="n"><span class="pre">uintptr_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun_id</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">constants</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">constants_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430mlx_detail_compile_clear_cachev">
+<span id="_CPPv330mlx_detail_compile_clear_cachev"></span><span id="_CPPv230mlx_detail_compile_clear_cachev"></span><span id="mlx_detail_compile_clear_cache"></span><span class="target" id="group__compile_1ga596af1ddfd568f4cfb1e2ed73d127ae4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_detail_compile_clear_cache</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430mlx_detail_compile_clear_cachev" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424mlx_detail_compile_erase9uintptr_t">
+<span id="_CPPv324mlx_detail_compile_erase9uintptr_t"></span><span id="_CPPv224mlx_detail_compile_erase9uintptr_t"></span><span id="mlx_detail_compile_erase__uintptr_t"></span><span class="target" id="group__compile_1ga5a38dd7698b0f029faf04e95ec1eb666"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_detail_compile_erase</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uintptr_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fun_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424mlx_detail_compile_erase9uintptr_t" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv419mlx_disable_compilev">
-<span id="_CPPv319mlx_disable_compilev"></span><span id="_CPPv219mlx_disable_compilev"></span><span id="mlx_disable_compile"></span><span class="target" id="group__compile_1gad3c419b900c9c0bc59c917ad5a621363"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_disable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_disable_compilev" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv319mlx_disable_compilev"></span><span id="_CPPv219mlx_disable_compilev"></span><span id="mlx_disable_compile"></span><span class="target" id="group__compile_1gaa10e83a6794fa4b1662cf6cd864f400d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_disable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_disable_compilev" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418mlx_enable_compilev">
-<span id="_CPPv318mlx_enable_compilev"></span><span id="_CPPv218mlx_enable_compilev"></span><span id="mlx_enable_compile"></span><span class="target" id="group__compile_1ga6ef0e5e1902671c2a3f5cf4bc0b2e910"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_enable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_enable_compilev" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv318mlx_enable_compilev"></span><span id="_CPPv218mlx_enable_compilev"></span><span id="mlx_enable_compile"></span><span class="target" id="group__compile_1gaf4f5fa6f1b21d385a57779ba7ba3c682"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_enable_compile</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418mlx_enable_compilev" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420mlx_set_compile_mode16mlx_compile_mode">
+<span id="_CPPv320mlx_set_compile_mode16mlx_compile_mode"></span><span id="_CPPv220mlx_set_compile_mode16mlx_compile_mode"></span><span id="mlx_set_compile_mode__mlx_compile_mode"></span><span class="target" id="group__compile_1gab6554ea4ee82c56a37839a4e515000f0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_set_compile_mode</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv416mlx_compile_mode" title="mlx_compile_mode"><span class="n"><span class="pre">mlx_compile_mode</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mode</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420mlx_set_compile_mode16mlx_compile_mode" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 </section>
@@ -392,7 +438,7 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
@@ -420,7 +466,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -429,9 +476,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compile11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_compile_mode_"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_25MLX_COMPILE_MODE_DISABLEDE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_DISABLED</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_NO_SIMPLIFY</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_NO_FUSEE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_NO_FUSE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv4N17mlx_compile_mode_24MLX_COMPILE_MODE_ENABLEDE"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode_::MLX_COMPILE_MODE_ENABLED</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_compile_mode"><code class="docutils literal notranslate"><span class="pre">mlx_compile_mode</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_compileP11mlx_closureK11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_detail_compile_clear_cachev"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile_clear_cache()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_detail_compile_erase9uintptr_t"><code class="docutils literal notranslate"><span class="pre">mlx_detail_compile_erase()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_disable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_disable_compile()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv418mlx_enable_compilev"><code class="docutils literal notranslate"><span class="pre">mlx_enable_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv420mlx_set_compile_mode16mlx_compile_mode"><code class="docutils literal notranslate"><span class="pre">mlx_set_compile_mode()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -456,7 +515,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023-2024, MLX Contributors.
+      © Copyright 2023-2025, MLX Contributors.
       <br/>
     
   </p>
@@ -480,8 +539,8 @@ By MLX Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

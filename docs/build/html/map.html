@@ -8,45 +8,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Map &#8212; MLX C 0.0.9 documentation</title>
+    <title>Maps &#8212; MLX C 0.1.2 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="_static/documentation_options.js?v=39f6cbd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/documentation_options.js?v=0deb7d70"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'map';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Closures" href="closure.html" />
-    <link rel="prev" title="String" href="string.html" />
+    <link rel="next" title="Optionals" href="optional.html" />
+    <link rel="prev" title="Vectors" href="vector.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.2" />
   </head>
   
   
@@ -54,31 +58,16 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -86,7 +75,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -94,10 +82,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -106,7 +99,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -121,6 +115,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -133,22 +129,18 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.0.9 documentation - Home"/>
-    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.0.9 documentation - Home"/>`);</script>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.1.2 documentation - Home"/>
+    <img src="_static/mlx_logo_dark.png" class="logo__image only-dark pst-js-only" alt="MLX C 0.1.2 documentation - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
@@ -160,21 +152,19 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="object.html">Object</a></li>
 <li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecarray.html">Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vecvecarray.html">Vector of Vector of Arrays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
 <li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vectors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional.html">Optionals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="future.html">Futures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ioutils.html">IO Utils</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
@@ -188,6 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error management</a></li>
 </ul>
 
     </div>
@@ -203,7 +194,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -212,14 +203,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -310,27 +301,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -341,7 +324,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Map</h1>
+    <h1>Maps</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -356,21 +339,25 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv433mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_newv"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_insert()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_array_iterate23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterate()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_next()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_end()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_key()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_value()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_array_free23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_insert()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_get()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_new23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_next()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_newv"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_insert()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_map_string_to_string_iterate24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterate()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_next()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_end()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_key()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv439mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_value()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_map_string_to_string_free24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_insert()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_get()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_new24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_next()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_map_string_to_array_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv433mlx_map_string_to_array_iterator_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_map_string_to_string_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_map_string_to_string_iterator_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -382,132 +369,158 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="map">
-<h1>Map<a class="headerlink" href="#map" title="Link to this heading">#</a></h1>
+  <section id="maps">
+<h1>Maps<a class="headerlink" href="#maps" title="Link to this heading">#</a></h1>
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv423mlx_map_string_to_array">
-<span id="_CPPv323mlx_map_string_to_array"></span><span id="_CPPv223mlx_map_string_to_array"></span><span id="mlx_map_string_to_array"></span><span class="target" id="group__mlx__map__string__to__array_1gabceea5d2c9c9df1243461a879c23d51d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_map_string_to_array_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></span><a class="headerlink" href="#_CPPv423mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv323mlx_map_string_to_array"></span><span id="_CPPv223mlx_map_string_to_array"></span><span id="mlx_map_string_to_array"></span><span class="target" id="group__mlx__map_1ga8f144e64742aa260de8cef05e31e59b6"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424mlx_map_string_to_array_" title="mlx_map_string_to_array_"><span class="n"><span class="pre">mlx_map_string_to_array_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></span><a class="headerlink" href="#_CPPv423mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
 <dd><p>A string-to-array map. </p>
 </dd></dl>
 
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv432mlx_map_string_to_array_iterator">
-<span id="_CPPv332mlx_map_string_to_array_iterator"></span><span id="_CPPv232mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1gaf6ad0a78a17e41d6d774e7f2a2edd150"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_map_string_to_array_iterator_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></span><a class="headerlink" href="#_CPPv432mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv332mlx_map_string_to_array_iterator"></span><span id="_CPPv232mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map_1ga2a2421642b0125cf6b2f0c295d141e4e"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv433mlx_map_string_to_array_iterator_" title="mlx_map_string_to_array_iterator_"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></span><a class="headerlink" href="#_CPPv432mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
 <dd><p>An iterator over a string-to-array map. </p>
 </dd></dl>
 
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv424mlx_map_string_to_string">
-<span id="_CPPv324mlx_map_string_to_string"></span><span id="_CPPv224mlx_map_string_to_string"></span><span id="mlx_map_string_to_string"></span><span class="target" id="group__mlx__map__string__to__array_1gad89741daee8353db929d8c62323680a2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_map_string_to_string_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></span><a class="headerlink" href="#_CPPv424mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv324mlx_map_string_to_string"></span><span id="_CPPv224mlx_map_string_to_string"></span><span id="mlx_map_string_to_string"></span><span class="target" id="group__mlx__map_1ga61391825059b43b3f05fa01f0cedfbe9"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv425mlx_map_string_to_string_" title="mlx_map_string_to_string_"><span class="n"><span class="pre">mlx_map_string_to_string_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></span><a class="headerlink" href="#_CPPv424mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
 <dd><p>A string-to-string map. </p>
 </dd></dl>
 
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv433mlx_map_string_to_string_iterator">
-<span id="_CPPv333mlx_map_string_to_string_iterator"></span><span id="_CPPv233mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1gabd52ff2712846b06f8aa6d4d85ee9c43"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">mlx_map_string_to_string_iterator_</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></span><a class="headerlink" href="#_CPPv433mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv333mlx_map_string_to_string_iterator"></span><span id="_CPPv233mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map_1gab30b3a537c6d9eafd2714cc4680796c7"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv434mlx_map_string_to_string_iterator_" title="mlx_map_string_to_string_iterator_"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></span><a class="headerlink" href="#_CPPv433mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
 <dd><p>An iterator over a string-to-string map. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv427mlx_map_string_to_array_newv">
-<span id="_CPPv327mlx_map_string_to_array_newv"></span><span id="_CPPv227mlx_map_string_to_array_newv"></span><span id="mlx_map_string_to_array_new__void"></span><span class="target" id="group__mlx__map__string__to__array_1ga7f6dfc4bd0f1a9451f0151bfd1c1970b"></span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_new</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_map_string_to_array_newv" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv327mlx_map_string_to_array_newv"></span><span id="_CPPv227mlx_map_string_to_array_newv"></span><span id="mlx_map_string_to_array_new__void"></span><span class="target" id="group__mlx__map_1ga7f6dfc4bd0f1a9451f0151bfd1c1970b"></span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_new</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_map_string_to_array_newv" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns a new empty string-to-array map. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array">
-<span id="_CPPv330mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array"></span><span id="_CPPv230mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array"></span><span id="mlx_map_string_to_array_insert__mlx_map_string_to_array.mlx_stringC.mlx_arrayC"></span><span class="target" id="group__mlx__map__string__to__array_1ga50364fbc1b2e4815a94de992e8a76b36"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv427mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array">
+<span id="_CPPv327mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array"></span><span id="_CPPv227mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array"></span><span id="mlx_map_string_to_array_set__mlx_map_string_to_arrayP.mlx_map_string_to_arrayC"></span><span class="target" id="group__mlx__map_1gae7b06862204d0569c3457e33eed2566f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<dd><p>Set map to provided src map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428mlx_map_string_to_array_free23mlx_map_string_to_array">
+<span id="_CPPv328mlx_map_string_to_array_free23mlx_map_string_to_array"></span><span id="_CPPv228mlx_map_string_to_array_free23mlx_map_string_to_array"></span><span id="mlx_map_string_to_array_free__mlx_map_string_to_array"></span><span class="target" id="group__mlx__map_1gac0213c1c48f8063544b0903599d72987"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_array_free23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<dd><p>Free a string-to-array map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array">
+<span id="_CPPv330mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array"></span><span id="_CPPv230mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array"></span><span id="mlx_map_string_to_array_insert__mlx_map_string_to_array.cCP.mlx_arrayC"></span><span class="target" id="group__mlx__map_1ga1749091b6211ebb40186c6e41e41e8ac"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array" title="Link to this definition">#</a><br /></dt>
 <dd><p>Insert a new <code class="docutils literal notranslate"><span class="pre">value</span></code> at the specified <code class="docutils literal notranslate"><span class="pre">key</span></code> in the map. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the value was actually inserted. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv427mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string">
-<span id="_CPPv327mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string"></span><span id="_CPPv227mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string"></span><span id="mlx_map_string_to_array_get__mlx_map_string_to_array.mlx_stringC"></span><span class="target" id="group__mlx__map__string__to__array_1ga90d3afaa3b6c91587b894e560274be37"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv427mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc">
+<span id="_CPPv327mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc"></span><span id="_CPPv227mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc"></span><span id="mlx_map_string_to_array_get__mlx_arrayP.mlx_map_string_to_arrayC.cCP"></span><span class="target" id="group__mlx__map_1ga0199e41a32f199d9f03f94d116caf1a1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns the value indexed at the specified <code class="docutils literal notranslate"><span class="pre">key</span></code> in the map. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if no value was found for <code class="docutils literal notranslate"><span class="pre">key</span></code>. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv431mlx_map_string_to_array_iterate23mlx_map_string_to_array">
-<span id="_CPPv331mlx_map_string_to_array_iterate23mlx_map_string_to_array"></span><span id="_CPPv231mlx_map_string_to_array_iterate23mlx_map_string_to_array"></span><span id="mlx_map_string_to_array_iterate__mlx_map_string_to_array"></span><span class="target" id="group__mlx__map__string__to__array_1ga2f1498a39c03e6d0ba33ff70a1053d31"></span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterate</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431mlx_map_string_to_array_iterate23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv436mlx_map_string_to_array_iterator_new23mlx_map_string_to_array">
+<span id="_CPPv336mlx_map_string_to_array_iterator_new23mlx_map_string_to_array"></span><span id="_CPPv236mlx_map_string_to_array_iterator_new23mlx_map_string_to_array"></span><span id="mlx_map_string_to_array_iterator_new__mlx_map_string_to_array"></span><span class="target" id="group__mlx__map_1gaa4867c6957588953602eb51b2f82d182"></span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_new</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436mlx_map_string_to_array_iterator_new23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns a new iterator over the given map. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator">
-<span id="_CPPv337mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator"></span><span id="_CPPv237mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_next__mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga75a4a571a5528f1143a5989b600a71ce"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_next</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator">
+<span id="_CPPv337mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator"></span><span id="_CPPv237mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_free__mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map_1ga7c967823b1d804c7ace1ceaba4730629"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
+<dd><p>Free iterator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator">
+<span id="_CPPv337mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator"></span><span id="_CPPv237mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_next__cCPP.mlx_arrayP.mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map_1ga64e3c10f47a8b4e90a1ee033bef86a59"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_next</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
 <dd><p>Increment iterator. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if iterator could actually be incremented. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv436mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator">
-<span id="_CPPv336mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator"></span><span id="_CPPv236mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_end__mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga30ba4ebba3d383e8479ea9d2d7f0356a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_end</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iif iterator is at the end of the map. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv436mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator">
-<span id="_CPPv336mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator"></span><span id="_CPPv236mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_key__mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga03d6d2bb281ab14b61b5200d97cc65e2"></span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_key</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns the key associated to the current iterator position in the map. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator">
-<span id="_CPPv338mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator"></span><span id="_CPPv238mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator"></span><span id="mlx_map_string_to_array_iterator_value__mlx_map_string_to_array_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga9e76cb4efd7e7cdf79653e8d705e0408"></span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv432mlx_map_string_to_array_iterator" title="mlx_map_string_to_array_iterator"><span class="n"><span class="pre">mlx_map_string_to_array_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns the value associated to the current iterator position in the map. </p>
 </dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428mlx_map_string_to_string_newv">
-<span id="_CPPv328mlx_map_string_to_string_newv"></span><span id="_CPPv228mlx_map_string_to_string_newv"></span><span id="mlx_map_string_to_string_new__void"></span><span class="target" id="group__mlx__map__string__to__array_1ga80bf5a4eeb990fd76533a0ab72e11b9d"></span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_new</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_string_newv" title="Link to this definition">#</a><br /></dt>
+<span id="_CPPv328mlx_map_string_to_string_newv"></span><span id="_CPPv228mlx_map_string_to_string_newv"></span><span id="mlx_map_string_to_string_new__void"></span><span class="target" id="group__mlx__map_1ga80bf5a4eeb990fd76533a0ab72e11b9d"></span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_new</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_string_newv" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns a new empty string-to-string map. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string">
-<span id="_CPPv331mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string"></span><span id="_CPPv231mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string"></span><span id="mlx_map_string_to_string_insert__mlx_map_string_to_string.mlx_stringC.mlx_stringC"></span><span class="target" id="group__mlx__map__string__to__array_1ga3c0c1623f2ee4ad88f172b4a50dc3aea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv428mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string">
+<span id="_CPPv328mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string"></span><span id="_CPPv228mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string"></span><span id="mlx_map_string_to_string_set__mlx_map_string_to_stringP.mlx_map_string_to_stringC"></span><span class="target" id="group__mlx__map_1gac0031c0fabc99468dd72224492e0bd14"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_set</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">src</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
+<dd><p>Set map to provided src map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429mlx_map_string_to_string_free24mlx_map_string_to_string">
+<span id="_CPPv329mlx_map_string_to_string_free24mlx_map_string_to_string"></span><span id="_CPPv229mlx_map_string_to_string_free24mlx_map_string_to_string"></span><span id="mlx_map_string_to_string_free__mlx_map_string_to_string"></span><span class="target" id="group__mlx__map_1gad7a537225a43bbda685f64e9765315dc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429mlx_map_string_to_string_free24mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
+<dd><p>Free a string-to-string map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc">
+<span id="_CPPv331mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc"></span><span id="_CPPv231mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc"></span><span id="mlx_map_string_to_string_insert__mlx_map_string_to_string.cCP.cCP"></span><span class="target" id="group__mlx__map_1ga0a0479a09343051d0c43f7420bfa78fa"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_insert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc" title="Link to this definition">#</a><br /></dt>
 <dd><p>Insert a new <code class="docutils literal notranslate"><span class="pre">value</span></code> at the specified <code class="docutils literal notranslate"><span class="pre">key</span></code> in the map. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the value was actually inserted. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv428mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string">
-<span id="_CPPv328mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string"></span><span id="_CPPv228mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string"></span><span id="mlx_map_string_to_string_get__mlx_map_string_to_string.mlx_stringC"></span><span class="target" id="group__mlx__map__string__to__array_1gab47d1649c7bdbc3d5a5844a01ee25e59"></span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_get</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv428mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc">
+<span id="_CPPv328mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc"></span><span id="_CPPv228mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc"></span><span id="mlx_map_string_to_string_get__cCPP.mlx_map_string_to_stringC.cCP"></span><span class="target" id="group__mlx__map_1ga99c9f5ef54967cfb8a675b5a74db40be"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns the value indexed at the specified <code class="docutils literal notranslate"><span class="pre">key</span></code> in the map. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if no value was found for <code class="docutils literal notranslate"><span class="pre">key</span></code>. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv432mlx_map_string_to_string_iterate24mlx_map_string_to_string">
-<span id="_CPPv332mlx_map_string_to_string_iterate24mlx_map_string_to_string"></span><span id="_CPPv232mlx_map_string_to_string_iterate24mlx_map_string_to_string"></span><span id="mlx_map_string_to_string_iterate__mlx_map_string_to_string"></span><span class="target" id="group__mlx__map__string__to__array_1ga0ae16c0c44916bb5788d0ccf37a56454"></span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterate</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432mlx_map_string_to_string_iterate24mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_string_iterator_new24mlx_map_string_to_string">
+<span id="_CPPv337mlx_map_string_to_string_iterator_new24mlx_map_string_to_string"></span><span id="_CPPv237mlx_map_string_to_string_iterator_new24mlx_map_string_to_string"></span><span id="mlx_map_string_to_string_iterator_new__mlx_map_string_to_string"></span><span class="target" id="group__mlx__map_1ga0b2d94e1c4893c3a434c3152ef0a2bda"></span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_new</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424mlx_map_string_to_string" title="mlx_map_string_to_string"><span class="n"><span class="pre">mlx_map_string_to_string</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">map</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_string_iterator_new24mlx_map_string_to_string" title="Link to this definition">#</a><br /></dt>
 <dd><p>Returns a new iterator over the given map. </p>
 </dd></dl>
 
 <dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv438mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator">
-<span id="_CPPv338mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator"></span><span id="_CPPv238mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_next__mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga6ef2a8324a75838c85f75395b734dda8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_next</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
+<dt class="sig sig-object cpp" id="_CPPv438mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator">
+<span id="_CPPv338mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator"></span><span id="_CPPv238mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_free__mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map_1ga461cecc6e04043b249119c9dd852fa0f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
+<dd><p>Free iterator. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv438mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator">
+<span id="_CPPv338mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator"></span><span id="_CPPv238mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_next__cCPP.cCPP.mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map_1gaefe4ee18c9b73d0af32ad82ee7281146"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_next</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
 <dd><p>Increment iterator. </p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if iterator could actually be incremented. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator">
-<span id="_CPPv337mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator"></span><span id="_CPPv237mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_end__mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga957548f137e28c983687760d5ffa7098"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_end</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> iif iterator is at the end of the map. </p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424mlx_map_string_to_array_">
+<span id="_CPPv324mlx_map_string_to_array_"></span><span id="_CPPv224mlx_map_string_to_array_"></span><span id="mlx_map_string_to_array_"></span><span class="target" id="structmlx__map__string__to__array__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_</span></span></span><a class="headerlink" href="#_CPPv424mlx_map_string_to_array_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;map.h&gt;</em></div>
+<p>A string-to-array map. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv437mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator">
-<span id="_CPPv337mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator"></span><span id="_CPPv237mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_key__mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1ga85c27c5e7ced082e2d978c82889c11c6"></span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_key</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns the key associated to the current iterator position in the map. </p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv433mlx_map_string_to_array_iterator_">
+<span id="_CPPv333mlx_map_string_to_array_iterator_"></span><span id="_CPPv233mlx_map_string_to_array_iterator_"></span><span id="mlx_map_string_to_array_iterator_"></span><span class="target" id="structmlx__map__string__to__array__iterator__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_array_iterator_</span></span></span><a class="headerlink" href="#_CPPv433mlx_map_string_to_array_iterator_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;map.h&gt;</em></div>
+<p>An iterator over a string-to-array map. </p>
 </dd></dl>
 
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv439mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator">
-<span id="_CPPv339mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator"></span><span id="_CPPv239mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator"></span><span id="mlx_map_string_to_string_iterator_value__mlx_map_string_to_string_iterator"></span><span class="target" id="group__mlx__map__string__to__array_1gaac61bc240ac3ba06a85ca2e1ad79624d"></span><a class="reference internal" href="string.html#_CPPv410mlx_string" title="mlx_string"><span class="n"><span class="pre">mlx_string</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_value</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv433mlx_map_string_to_string_iterator" title="mlx_map_string_to_string_iterator"><span class="n"><span class="pre">mlx_map_string_to_string_iterator</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">it</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv439mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator" title="Link to this definition">#</a><br /></dt>
-<dd><p>Returns the value associated to the current iterator position in the map. </p>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv425mlx_map_string_to_string_">
+<span id="_CPPv325mlx_map_string_to_string_"></span><span id="_CPPv225mlx_map_string_to_string_"></span><span id="mlx_map_string_to_string_"></span><span class="target" id="structmlx__map__string__to__string__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_</span></span></span><a class="headerlink" href="#_CPPv425mlx_map_string_to_string_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;map.h&gt;</em></div>
+<p>A string-to-string map. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv434mlx_map_string_to_string_iterator_">
+<span id="_CPPv334mlx_map_string_to_string_iterator_"></span><span id="_CPPv234mlx_map_string_to_string_iterator_"></span><span id="mlx_map_string_to_string_iterator_"></span><span class="target" id="structmlx__map__string__to__string__iterator__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_map_string_to_string_iterator_</span></span></span><a class="headerlink" href="#_CPPv434mlx_map_string_to_string_iterator_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;map.h&gt;</em></div>
+<p>An iterator over a string-to-string map. </p>
 </dd></dl>
 
 </section>
@@ -520,24 +533,24 @@ document.write(`
               
               
               
-                <footer class="prev-next-footer">
+                <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="string.html"
+       href="vector.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">String</p>
+        <p class="prev-next-title">Vectors</p>
       </div>
     </a>
     <a class="right-next"
-       href="closure.html"
+       href="optional.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Closures</p>
+        <p class="prev-next-title">Optionals</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -548,7 +561,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -562,21 +576,25 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv433mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_newv"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayK10mlx_stringK9mlx_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_insert()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_get23mlx_map_string_to_arrayK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_array_iterate23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterate()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_next32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_next()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_end32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_end()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_key32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_key()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_array_iterator_value32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_value()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_setP23mlx_map_string_to_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_array_free23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv430mlx_map_string_to_array_insert23mlx_map_string_to_arrayPKcK9mlx_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_insert()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_map_string_to_array_getP9mlx_arrayK23mlx_map_string_to_arrayPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_get()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv436mlx_map_string_to_array_iterator_new23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_free32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_array_iterator_nextPPKcP9mlx_array32mlx_map_string_to_array_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_next()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_newv"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_new()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringK10mlx_stringK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_insert()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_get24mlx_map_string_to_stringK10mlx_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_get()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv432mlx_map_string_to_string_iterate24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterate()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_next33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_next()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_end33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_end()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_key33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_key()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv439mlx_map_string_to_string_iterator_value33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_value()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_set()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv429mlx_map_string_to_string_free24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv431mlx_map_string_to_string_insert24mlx_map_string_to_stringPKcPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_insert()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv428mlx_map_string_to_string_getPPKcK24mlx_map_string_to_stringPKc"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_get()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv437mlx_map_string_to_string_iterator_new24mlx_map_string_to_string"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_free33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv438mlx_map_string_to_string_iterator_nextPPKcPPKc33mlx_map_string_to_string_iterator"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_next()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv424mlx_map_string_to_array_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv433mlx_map_string_to_array_iterator_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_array_iterator_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_map_string_to_string_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_map_string_to_string_iterator_"><code class="docutils literal notranslate"><span class="pre">mlx_map_string_to_string_iterator_</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -601,7 +619,7 @@ By MLX Contributors
 
   <p class="copyright">
     
-      © Copyright 2023-2024, MLX Contributors.
+      © Copyright 2023-2025, MLX Contributors.
       <br/>
     
   </p>
@@ -625,8 +643,8 @@ By MLX Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
