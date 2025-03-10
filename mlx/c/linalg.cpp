@@ -216,8 +216,7 @@ extern "C" int mlx_linalg_lu_factor_x(
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_norm_p(mlx_array* res, const mlx_array a, double ord) {
+extern "C" int mlx_linalg_norm(mlx_array* res, const mlx_array a, double ord) {
   try {
     mlx_array_set_(*res, mlx::core::linalg::norm(mlx_array_get_(a), ord));
   } catch (std::exception& e) {
@@ -226,32 +225,8 @@ mlx_linalg_norm_p(mlx_array* res, const mlx_array a, double ord) {
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_p_x(
-    mlx_array* res,
-    const mlx_array a,
-    double ord,
-    const int* axis /* may be null */,
-    size_t axis_num,
-    bool keepdims,
-    const mlx_stream s) {
-  try {
-    mlx_array_set_(
-        *res,
-        mlx::core::linalg::norm(
-            mlx_array_get_(a),
-            ord,
-            (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
-                  : std::nullopt),
-            keepdims,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 extern "C" int
-mlx_linalg_norm_ord(mlx_array* res, const mlx_array a, const char* ord) {
+mlx_linalg_norm_matrix(mlx_array* res, const mlx_array a, const char* ord) {
   try {
     mlx_array_set_(
         *res, mlx::core::linalg::norm(mlx_array_get_(a), std::string(ord)));
@@ -261,7 +236,7 @@ mlx_linalg_norm_ord(mlx_array* res, const mlx_array a, const char* ord) {
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_ord_x(
+extern "C" int mlx_linalg_norm_matrix_x(
     mlx_array* res,
     const mlx_array a,
     const char* ord,
@@ -285,9 +260,31 @@ extern "C" int mlx_linalg_norm_ord_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm(mlx_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_norm_l2(mlx_array* res, const mlx_array a) {
   try {
     mlx_array_set_(*res, mlx::core::linalg::norm(mlx_array_get_(a)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_linalg_norm_l2_x(
+    mlx_array* res,
+    const mlx_array a,
+    const int* axis /* may be null */,
+    size_t axis_num,
+    bool keepdims,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::linalg::norm(
+            mlx_array_get_(a),
+            (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
+                  : std::nullopt),
+            keepdims,
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

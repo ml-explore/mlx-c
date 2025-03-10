@@ -117,13 +117,6 @@ int mlx_random_multivariate_normal_x(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_normal(
-    mlx_array* res,
-    const int* shape,
-    size_t shape_num,
-    mlx_dtype dtype,
-    float loc,
-    float scale);
 int mlx_random_normal_x(
     mlx_array* res,
     const int* shape,
@@ -133,6 +126,7 @@ int mlx_random_normal_x(
     float scale,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_normal(mlx_array* res, const int* shape, size_t shape_num);
 int mlx_random_permutation(mlx_array* res, const mlx_array x);
 int mlx_random_permutation_arange(mlx_array* res, int x);
 int mlx_random_permutation_arange_x(
@@ -178,12 +172,6 @@ int mlx_random_truncated_normal_x(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_uniform(
-    mlx_array* res,
-    const mlx_array low,
-    const mlx_array high,
-    const int* shape,
-    size_t shape_num);
 int mlx_random_uniform_x(
     mlx_array* res,
     const mlx_array low,
@@ -193,6 +181,7 @@ int mlx_random_uniform_x(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_uniform(mlx_array* res, const int* shape, size_t shape_num);
 /**@}*/
 
 #ifdef __cplusplus
