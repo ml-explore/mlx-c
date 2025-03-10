@@ -38,7 +38,7 @@ int inc_fun_bogus(
   mlx_array value = payload->value;
   mlx_array has_nan = mlx_array_new();
   mlx_isnan(&has_nan, value);
-  mlx_any_all(&has_nan, has_nan, false);
+  mlx_any(&has_nan, has_nan, false);
   mlx_array_item_bool(&has_nan_flag, has_nan);
   mlx_array_free(has_nan);
 
