@@ -119,6 +119,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             )
         else:
             func_name = c_namespace(f["namespace"]) + "_" + f["name"]
+
         if hasattr(hooks, func_name):
             getattr(hooks, func_name)(f, implementation)
             continue
@@ -148,8 +149,13 @@ def generate(funcs, enums, header, headername, implementation, docstring):
 
         pt = f["params_t"]
         pn = f["params_name"]
+        pd = f["params_default"]
+        use_defaults = "use_defaults" in f and f["use_defaults"]
         encountered_unsupported_type = False
         for i in range(len(pt)):
+            if use_defaults and pd[i]:
+                continue
+
             pti = pt[i]
             pni = pn[i]
             if pni is None:
