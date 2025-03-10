@@ -31,17 +31,48 @@ def _make_variant_suffixes(name, defs, variants):
             raise RuntimeError("function overloads and namings do not match")
         newdefs = []
         for i, d in enumerate(defs):
-            if variants[i] is not None:
-                if variants[i] != "":
-                    d["variant"] = variants[i]
+            v = variants[i]
+            if v is not None:
+                # do we need to specify variant name?
+                if v != "":
+                    d["variant"] = v
+                # use defaults only if not the full eXtended version
+                if v != "x":
+                    d["use_defaults"] = True
                 newdefs.append(d)
 
+                # add an eXtended version if there are defaults
+                if (
+                    v != ""
+                    and v != "x"
+                    and not v.endswith("_x")
+                    and any(d["params_default"])
+                ):
+                    d = d.copy()
+                    d["variant"] = v + "_x"
+                    d["use_defaults"] = False
+                    newdefs.append(d)
         return newdefs
     else:
         if len(defs) > 1:
             for i, d in enumerate(defs):
-                print("OVL", i, _pretty_string_def(d), " -> ", "" if i == 0 else "None", file=sys.stderr)
-        return [defs[0]]  # with largest number of arguments
+                print(
+                    "OVL",
+                    i,
+                    _pretty_string_def(d),
+                    " -> ",
+                    "" if i == 0 else "None",
+                    file=sys.stderr,
+                )
+        d = defs[0]
+        d["use_defaults"] = True
+        if any(defs[0]["params_default"]):
+            dx = d.copy()
+            dx["variant"] = "x"
+            dx["use_defaults"] = None
+            return [d, dx]
+        else:
+            return [d]
 
 
 def mlx_core(name, defs):
