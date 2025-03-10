@@ -33,10 +33,10 @@ int main() {
   print_array("hello world!", arr);
 
   mlx_array two = mlx_array_new_int(2);
-  mlx_divide(&arr, arr, two, stream);
+  mlx_divide(&arr, arr, two);
   print_array("divive by 2!", arr);
 
-  mlx_arange(&arr, 0, 3, 0.5, MLX_FLOAT32, stream);
+  mlx_arange_x(&arr, 0, 3, 0.5, MLX_FLOAT32, stream);
   print_array("arange", arr);
 
   mlx_array_free(arr);

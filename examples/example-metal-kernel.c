@@ -46,8 +46,7 @@ int main() {
   mlx_array output = mlx_array_new();
 
   int dims[2] = {4, 16};
-  mlx_random_normal(
-      &input, dims, 2, MLX_FLOAT32, 0, 1, mlx_array_empty, stream);
+  mlx_random_normal(&input, dims, 2, MLX_FLOAT32, 0, 1);
 
   exp_elemwise(&output, input, stream);
 
