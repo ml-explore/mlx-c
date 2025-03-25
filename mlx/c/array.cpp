@@ -100,7 +100,7 @@ extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
 }
 extern "C" int mlx_array_set_float64(mlx_array* arr, double val) {
   try {
-    mlx_array_set_(*arr, mlx::core::array(val));
+    mlx_array_set_(*arr, mlx::core::array(val, mlx::core::float64));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -123,7 +123,7 @@ extern "C" mlx_array mlx_array_new_float(float val) {
 }
 extern "C" mlx_array mlx_array_new_float64(double val) {
   try {
-    return mlx_array_new_(mlx::core::array(val));
+    return mlx_array_new_(mlx::core::array(val, mlx::core::float64));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_array_();
