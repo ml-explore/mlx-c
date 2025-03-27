@@ -19,14 +19,14 @@ int main() {
 
   mlx_array three = mlx_array_new_float64(3);
   print_array("a float64 scalar array", three);
-  mlx_multiply_x(&arr, arr, three, stream);
+  mlx_multiply(&arr, arr, three, stream);
   print_array("multiply previous array by 3!", arr);
 
   mlx_array two = mlx_array_new_int(2);
-  mlx_divide_x(&arr, arr, two, stream);
+  mlx_divide(&arr, arr, two, stream);
   print_array("divive by 2 (integer)", arr);
 
-  mlx_arange_x(&arr, 0, 3, 0.5, MLX_FLOAT64, stream);
+  mlx_arange(&arr, 0, 3, 0.5, MLX_FLOAT64, stream);
   print_array("arange", arr);
 
   mlx_array_free(arr);
