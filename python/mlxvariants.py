@@ -36,21 +36,20 @@ def _make_variant_suffixes(name, defs, variants):
                 # do we need to specify variant name?
                 if v != "":
                     d["variant"] = v
-                # use defaults only if not the full eXtended version
-                if v != "x":
+                # use defaults only if it is the short version
+                if v == "s":
                     d["use_defaults"] = True
                 newdefs.append(d)
 
-                # add an eXtended version if there are defaults
+                # add a short version if there are defaults
                 if (
-                    v != ""
-                    and v != "x"
-                    and not v.endswith("_x")
+                    v != "s"
+                    and not v.endswith("_s")
                     and any(d["params_default"])
                 ):
                     d = d.copy()
-                    d["variant"] = v + "_x"
-                    d["use_defaults"] = False
+                    d["variant"] = "s" if v == "" else v + "_s"
+                    d["use_defaults"] = True
                     newdefs.append(d)
         return newdefs
     else:
@@ -65,11 +64,10 @@ def _make_variant_suffixes(name, defs, variants):
                     file=sys.stderr,
                 )
         d = defs[0]
-        d["use_defaults"] = True
         if any(defs[0]["params_default"]):
             dx = d.copy()
-            dx["variant"] = "x"
-            dx["use_defaults"] = None
+            dx["variant"] = "s"
+            dx["use_defaults"] = True
             return [d, dx]
         else:
             return [d]
@@ -77,15 +75,15 @@ def _make_variant_suffixes(name, defs, variants):
 
 def mlx_core(name, defs):
     variants = {
-        "arange": ["x", None, None, None, None, None, None, "", None],
-        "eye": ["x", None, None, None, ""],
-        "tri": ["x", ""],
-        "flatten": ["x", ""],
+        "arange": ["", None, None, None, None, None, None, "s", None],
+        "eye": ["", None, None, None, "s"],
+        "tri": ["", "s"],
+        "flatten": ["", "s"],
         "squeeze": ["axes", "axis", ""],
         "expand_dims": ["axes", ""],
         "slice": ["", None, "dynamic", None],
         "slice_update": ["", None, "dynamic"],
-        "split": ["x", "sections_x", "", "sections"],
+        "split": ["", "sections_x", "s", "sections"],
         "concatenate": ["axis", ""],
         "stack": ["axis", ""],
         "repeat": ["axis", ""],
@@ -116,9 +114,9 @@ def mlx_core(name, defs):
         "logsumexp": ["axes", "axis", "", None],
         "softmax": ["axes", "axis", ""],
         "tensordot": ["", "axis"],
-        "array_equal": ["x", ""],
-        "round": ["x", ""],
-        "trace": ["x", None, ""],
+        "array_equal": ["", "s"],
+        "round": ["", "s"],
+        "trace": ["", None, "s"],
     }
     return _make_variant_suffixes(name, defs, variants)
 
@@ -133,8 +131,8 @@ def mlx_core_random(name, defs):
         "categorical": ["shape", "num_samples", ""],
         "permutation": ["", "arange"],
         "split": ["num", ""],
-        "uniform": ["x", None, None, ""],
-        "normal": ["x", None, None, ""],
+        "uniform": ["", None, None, "s"],
+        "normal": ["", None, None, "s"],
     }
     return _make_variant_suffixes(name, defs, variants)
 

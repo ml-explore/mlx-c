@@ -12,8 +12,10 @@ void print_array(const char* msg, mlx_array arr) {
 }
 
 int inc_fun(mlx_array* res_, mlx_array in) {
+  mlx_stream stream = mlx_default_gpu_stream_new();
   mlx_array value = mlx_array_new_float(1.0);
-  mlx_add(res_, in, value);
+  mlx_add(res_, in, value, stream);
+  mlx_stream_free(stream);
   mlx_array_free(value);
   return 0;
 }
@@ -28,6 +30,7 @@ int inc_fun_bogus(
     mlx_vector_array in,
     void* payload_) {
   struct bogus_payload* payload = payload_;
+  mlx_stream stream = mlx_default_gpu_stream_new();
   if (mlx_vector_array_size(in) != 1) {
     fprintf(stderr, "inc_func_value: expected 1 argument");
     exit(EXIT_FAILURE);
@@ -37,21 +40,23 @@ int inc_fun_bogus(
   bool has_nan_flag;
   mlx_array value = payload->value;
   mlx_array has_nan = mlx_array_new();
-  mlx_isnan(&has_nan, value);
-  mlx_any(&has_nan, has_nan, false);
+  mlx_isnan(&has_nan, value, stream);
+  mlx_any_all(&has_nan, has_nan, false, stream);
   mlx_array_item_bool(&has_nan_flag, has_nan);
   mlx_array_free(has_nan);
 
   if (has_nan_flag) {
+    mlx_stream_free(stream);
     snprintf(payload->error, 256, "nan detected");
     return 1;
   }
 
   mlx_array res = mlx_array_new();
   mlx_vector_array_get(&res, in, 0);
-  mlx_add(&res, res, value);
+  mlx_add(&res, res, value, stream);
   mlx_vector_array_set_value(vres_, res);
   mlx_array_free(res);
+  mlx_stream_free(stream);
   return 0;
 }
 
