@@ -29,33 +29,27 @@ int mlx_random_bernoulli(
     mlx_array* res,
     const mlx_array p,
     const int* shape,
-    size_t shape_num);
-int mlx_random_bernoulli_x(
-    mlx_array* res,
-    const mlx_array p,
-    const int* shape,
     size_t shape_num,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_bits(
+int mlx_random_bernoulli_s(
     mlx_array* res,
+    const mlx_array p,
     const int* shape,
-    size_t shape_num,
-    int width);
-int mlx_random_bits_x(
+    size_t shape_num);
+int mlx_random_bits(
     mlx_array* res,
     const int* shape,
     size_t shape_num,
     int width,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_categorical_shape(
+int mlx_random_bits_s(
     mlx_array* res,
-    const mlx_array logits,
-    int axis,
     const int* shape,
-    size_t shape_num);
-int mlx_random_categorical_shape_x(
+    size_t shape_num,
+    int width);
+int mlx_random_categorical_shape(
     mlx_array* res,
     const mlx_array logits,
     int axis,
@@ -63,27 +57,39 @@ int mlx_random_categorical_shape_x(
     size_t shape_num,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_categorical_num_samples(
+int mlx_random_categorical_shape_s(
     mlx_array* res,
-    const mlx_array logits_,
+    const mlx_array logits,
     int axis,
-    int num_samples);
-int mlx_random_categorical_num_samples_x(
+    const int* shape,
+    size_t shape_num);
+int mlx_random_categorical_num_samples(
     mlx_array* res,
     const mlx_array logits_,
     int axis,
     int num_samples,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_categorical(mlx_array* res, const mlx_array logits);
-int mlx_random_gumbel(mlx_array* res, const int* shape, size_t shape_num);
-int mlx_random_gumbel_x(
+int mlx_random_categorical_num_samples_s(
+    mlx_array* res,
+    const mlx_array logits_,
+    int axis,
+    int num_samples);
+int mlx_random_categorical(
+    mlx_array* res,
+    const mlx_array logits,
+    int axis,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_categorical_s(mlx_array* res, const mlx_array logits);
+int mlx_random_gumbel(
     mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_gumbel_s(mlx_array* res, const int* shape, size_t shape_num);
 int mlx_random_key(mlx_array* res, uint64_t seed);
 int mlx_random_laplace(
     mlx_array* res,
@@ -91,33 +97,33 @@ int mlx_random_laplace(
     size_t shape_num,
     mlx_dtype dtype,
     float loc,
-    float scale);
-int mlx_random_laplace_x(
+    float scale,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_laplace_s(
     mlx_array* res,
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     float loc,
-    float scale,
-    const mlx_array key /* may be null */,
-    const mlx_stream s);
+    float scale);
 int mlx_random_multivariate_normal(
     mlx_array* res,
     const mlx_array mean,
     const mlx_array cov,
     const int* shape,
     size_t shape_num,
-    mlx_dtype dtype);
-int mlx_random_multivariate_normal_x(
+    mlx_dtype dtype,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_multivariate_normal_s(
     mlx_array* res,
     const mlx_array mean,
     const mlx_array cov,
     const int* shape,
     size_t shape_num,
-    mlx_dtype dtype,
-    const mlx_array key /* may be null */,
-    const mlx_stream s);
-int mlx_random_normal_x(
+    mlx_dtype dtype);
+int mlx_random_normal(
     mlx_array* res,
     const int* shape,
     size_t shape_num,
@@ -126,53 +132,70 @@ int mlx_random_normal_x(
     float scale,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_normal(mlx_array* res, const int* shape, size_t shape_num);
-int mlx_random_permutation(mlx_array* res, const mlx_array x);
-int mlx_random_permutation_arange(mlx_array* res, int x);
-int mlx_random_permutation_arange_x(
+int mlx_random_normal_s(
+    mlx_array* res,
+    const int* shape,
+    size_t shape_num,
+    mlx_dtype dtype,
+    float loc,
+    float scale);
+int mlx_random_permutation(
+    mlx_array* res,
+    const mlx_array x,
+    int axis,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_permutation_s(mlx_array* res, const mlx_array x);
+int mlx_random_permutation_arange(
     mlx_array* res,
     int x,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_permutation_arange_s(mlx_array* res, int x);
 int mlx_random_randint(
     mlx_array* res,
     const mlx_array low,
     const mlx_array high,
     const int* shape,
-    size_t shape_num);
-int mlx_random_randint_x(
-    mlx_array* res,
-    const mlx_array low,
-    const mlx_array high,
-    const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
+int mlx_random_randint_s(
+    mlx_array* res,
+    const mlx_array low,
+    const mlx_array high,
+    const int* shape,
+    size_t shape_num);
 int mlx_random_seed(uint64_t seed);
-int mlx_random_split_num(mlx_array* res, const mlx_array key, int num);
-int mlx_random_split_num_x(
+int mlx_random_split_num(
     mlx_array* res,
     const mlx_array key,
     int num,
     const mlx_stream s);
-int mlx_random_split(mlx_array* res_0, mlx_array* res_1, const mlx_array key);
+int mlx_random_split_num_s(mlx_array* res, const mlx_array key, int num);
+int mlx_random_split(
+    mlx_array* res_0,
+    mlx_array* res_1,
+    const mlx_array key,
+    const mlx_stream s);
+int mlx_random_split_s(mlx_array* res_0, mlx_array* res_1, const mlx_array key);
 int mlx_random_truncated_normal(
     mlx_array* res,
     const mlx_array lower,
     const mlx_array upper,
     const int* shape,
-    size_t shape_num);
-int mlx_random_truncated_normal_x(
-    mlx_array* res,
-    const mlx_array lower,
-    const mlx_array upper,
-    const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_uniform_x(
+int mlx_random_truncated_normal_s(
+    mlx_array* res,
+    const mlx_array lower,
+    const mlx_array upper,
+    const int* shape,
+    size_t shape_num);
+int mlx_random_uniform(
     mlx_array* res,
     const mlx_array low,
     const mlx_array high,
@@ -181,7 +204,12 @@ int mlx_random_uniform_x(
     mlx_dtype dtype,
     const mlx_array key /* may be null */,
     const mlx_stream s);
-int mlx_random_uniform(mlx_array* res, const int* shape, size_t shape_num);
+int mlx_random_uniform_s(
+    mlx_array* res,
+    const mlx_array low,
+    const mlx_array high,
+    const int* shape,
+    size_t shape_num);
 /**@}*/
 
 #ifdef __cplusplus

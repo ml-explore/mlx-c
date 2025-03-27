@@ -8,16 +8,7 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/linalg.h"
 
-extern "C" int mlx_linalg_cholesky(mlx_array* res, const mlx_array a) {
-  try {
-    mlx_array_set_(*res, mlx::core::linalg::cholesky(mlx_array_get_(a)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_linalg_cholesky_x(
+extern "C" int mlx_linalg_cholesky(
     mlx_array* res,
     const mlx_array a,
     bool upper,
@@ -33,16 +24,16 @@ extern "C" int mlx_linalg_cholesky_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_cholesky_inv(mlx_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_cholesky_s(mlx_array* res, const mlx_array a) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::cholesky_inv(mlx_array_get_(a)));
+    mlx_array_set_(*res, mlx::core::linalg::cholesky(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_cholesky_inv_x(
+extern "C" int mlx_linalg_cholesky_inv(
     mlx_array* res,
     const mlx_array a,
     bool upper,
@@ -58,18 +49,16 @@ extern "C" int mlx_linalg_cholesky_inv_x(
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_cross(mlx_array* res, const mlx_array a, const mlx_array b) {
+extern "C" int mlx_linalg_cholesky_inv_s(mlx_array* res, const mlx_array a) {
   try {
-    mlx_array_set_(
-        *res, mlx::core::linalg::cross(mlx_array_get_(a), mlx_array_get_(b)));
+    mlx_array_set_(*res, mlx::core::linalg::cholesky_inv(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_cross_x(
+extern "C" int mlx_linalg_cross(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
@@ -87,20 +76,17 @@ extern "C" int mlx_linalg_cross_x(
   return 0;
 }
 extern "C" int
-mlx_linalg_eigh(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
+mlx_linalg_cross_s(mlx_array* res, const mlx_array a, const mlx_array b) {
   try {
-    {
-      auto [tpl_0, tpl_1] = mlx::core::linalg::eigh(mlx_array_get_(a));
-      mlx_array_set_(*res_0, tpl_0);
-      mlx_array_set_(*res_1, tpl_1);
-    };
+    mlx_array_set_(
+        *res, mlx::core::linalg::cross(mlx_array_get_(a), mlx_array_get_(b)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_eigh_x(
+extern "C" int mlx_linalg_eigh(
     mlx_array* res_0,
     mlx_array* res_1,
     const mlx_array a,
@@ -119,16 +105,21 @@ extern "C" int mlx_linalg_eigh_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_eigvalsh(mlx_array* res, const mlx_array a) {
+extern "C" int
+mlx_linalg_eigh_s(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::eigvalsh(mlx_array_get_(a)));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::linalg::eigh(mlx_array_get_(a));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_eigvalsh_x(
+extern "C" int mlx_linalg_eigvalsh(
     mlx_array* res,
     const mlx_array a,
     const char* UPLO,
@@ -144,9 +135,9 @@ extern "C" int mlx_linalg_eigvalsh_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_inv(mlx_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_eigvalsh_s(mlx_array* res, const mlx_array a) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::inv(mlx_array_get_(a)));
+    mlx_array_set_(*res, mlx::core::linalg::eigvalsh(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -154,7 +145,7 @@ extern "C" int mlx_linalg_inv(mlx_array* res, const mlx_array a) {
   return 0;
 }
 extern "C" int
-mlx_linalg_inv_x(mlx_array* res, const mlx_array a, const mlx_stream s) {
+mlx_linalg_inv(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::linalg::inv(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -164,9 +155,9 @@ mlx_linalg_inv_x(mlx_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
-extern "C" int mlx_linalg_lu(mlx_vector_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_inv_s(mlx_array* res, const mlx_array a) {
   try {
-    mlx_vector_array_set_(*res, mlx::core::linalg::lu(mlx_array_get_(a)));
+    mlx_array_set_(*res, mlx::core::linalg::inv(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -174,7 +165,7 @@ extern "C" int mlx_linalg_lu(mlx_vector_array* res, const mlx_array a) {
   return 0;
 }
 extern "C" int
-mlx_linalg_lu_x(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
+mlx_linalg_lu(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_vector_array_set_(
         *res, mlx::core::linalg::lu(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -184,21 +175,16 @@ mlx_linalg_lu_x(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_lu_factor(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
+extern "C" int mlx_linalg_lu_s(mlx_vector_array* res, const mlx_array a) {
   try {
-    {
-      auto [tpl_0, tpl_1] = mlx::core::linalg::lu_factor(mlx_array_get_(a));
-      mlx_array_set_(*res_0, tpl_0);
-      mlx_array_set_(*res_1, tpl_1);
-    };
+    mlx_vector_array_set_(*res, mlx::core::linalg::lu(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_lu_factor_x(
+extern "C" int mlx_linalg_lu_factor(
     mlx_array* res_0,
     mlx_array* res_1,
     const mlx_array a,
@@ -216,7 +202,46 @@ extern "C" int mlx_linalg_lu_factor_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm(mlx_array* res, const mlx_array a, double ord) {
+extern "C" int
+mlx_linalg_lu_factor_s(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
+  try {
+    {
+      auto [tpl_0, tpl_1] = mlx::core::linalg::lu_factor(mlx_array_get_(a));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_linalg_norm(
+    mlx_array* res,
+    const mlx_array a,
+    double ord,
+    const int* axis /* may be null */,
+    size_t axis_num,
+    bool keepdims,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::linalg::norm(
+            mlx_array_get_(a),
+            ord,
+            (axis ? std::make_optional(std::vector<int>(axis, axis + axis_num))
+                  : std::nullopt),
+            keepdims,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int
+mlx_linalg_norm_s(mlx_array* res, const mlx_array a, double ord) {
   try {
     mlx_array_set_(*res, mlx::core::linalg::norm(mlx_array_get_(a), ord));
   } catch (std::exception& e) {
@@ -225,18 +250,7 @@ extern "C" int mlx_linalg_norm(mlx_array* res, const mlx_array a, double ord) {
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_norm_matrix(mlx_array* res, const mlx_array a, const char* ord) {
-  try {
-    mlx_array_set_(
-        *res, mlx::core::linalg::norm(mlx_array_get_(a), std::string(ord)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_linalg_norm_matrix_x(
+extern "C" int mlx_linalg_norm_matrix(
     mlx_array* res,
     const mlx_array a,
     const char* ord,
@@ -260,16 +274,18 @@ extern "C" int mlx_linalg_norm_matrix_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_l2(mlx_array* res, const mlx_array a) {
+extern "C" int
+mlx_linalg_norm_matrix_s(mlx_array* res, const mlx_array a, const char* ord) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::norm(mlx_array_get_(a)));
+    mlx_array_set_(
+        *res, mlx::core::linalg::norm(mlx_array_get_(a), std::string(ord)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_l2_x(
+extern "C" int mlx_linalg_norm_l2(
     mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
@@ -291,9 +307,9 @@ extern "C" int mlx_linalg_norm_l2_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_pinv(mlx_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_norm_l2_s(mlx_array* res, const mlx_array a) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::pinv(mlx_array_get_(a)));
+    mlx_array_set_(*res, mlx::core::linalg::norm(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -301,7 +317,7 @@ extern "C" int mlx_linalg_pinv(mlx_array* res, const mlx_array a) {
   return 0;
 }
 extern "C" int
-mlx_linalg_pinv_x(mlx_array* res, const mlx_array a, const mlx_stream s) {
+mlx_linalg_pinv(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::linalg::pinv(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -311,21 +327,16 @@ mlx_linalg_pinv_x(mlx_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_qr(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
+extern "C" int mlx_linalg_pinv_s(mlx_array* res, const mlx_array a) {
   try {
-    {
-      auto [tpl_0, tpl_1] = mlx::core::linalg::qr(mlx_array_get_(a));
-      mlx_array_set_(*res_0, tpl_0);
-      mlx_array_set_(*res_1, tpl_1);
-    };
+    mlx_array_set_(*res, mlx::core::linalg::pinv(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_qr_x(
+extern "C" int mlx_linalg_qr(
     mlx_array* res_0,
     mlx_array* res_1,
     const mlx_array a,
@@ -344,17 +355,20 @@ extern "C" int mlx_linalg_qr_x(
   return 0;
 }
 extern "C" int
-mlx_linalg_solve(mlx_array* res, const mlx_array a, const mlx_array b) {
+mlx_linalg_qr_s(mlx_array* res_0, mlx_array* res_1, const mlx_array a) {
   try {
-    mlx_array_set_(
-        *res, mlx::core::linalg::solve(mlx_array_get_(a), mlx_array_get_(b)));
+    {
+      auto [tpl_0, tpl_1] = mlx::core::linalg::qr(mlx_array_get_(a));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_solve_x(
+extern "C" int mlx_linalg_solve(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
@@ -370,22 +384,18 @@ extern "C" int mlx_linalg_solve_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_solve_triangular(
-    mlx_array* res,
-    const mlx_array a,
-    const mlx_array b) {
+extern "C" int
+mlx_linalg_solve_s(mlx_array* res, const mlx_array a, const mlx_array b) {
   try {
     mlx_array_set_(
-        *res,
-        mlx::core::linalg::solve_triangular(
-            mlx_array_get_(a), mlx_array_get_(b)));
+        *res, mlx::core::linalg::solve(mlx_array_get_(a), mlx_array_get_(b)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_solve_triangular_x(
+extern "C" int mlx_linalg_solve_triangular(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
@@ -402,9 +412,15 @@ extern "C" int mlx_linalg_solve_triangular_x(
   }
   return 0;
 }
-extern "C" int mlx_linalg_svd(mlx_vector_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_solve_triangular_s(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b) {
   try {
-    mlx_vector_array_set_(*res, mlx::core::linalg::svd(mlx_array_get_(a)));
+    mlx_array_set_(
+        *res,
+        mlx::core::linalg::solve_triangular(
+            mlx_array_get_(a), mlx_array_get_(b)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -412,7 +428,7 @@ extern "C" int mlx_linalg_svd(mlx_vector_array* res, const mlx_array a) {
   return 0;
 }
 extern "C" int
-mlx_linalg_svd_x(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
+mlx_linalg_svd(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
   try {
     mlx_vector_array_set_(
         *res, mlx::core::linalg::svd(mlx_array_get_(a), mlx_stream_get_(s)));
@@ -422,16 +438,16 @@ mlx_linalg_svd_x(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
-extern "C" int mlx_linalg_tri_inv(mlx_array* res, const mlx_array a) {
+extern "C" int mlx_linalg_svd_s(mlx_vector_array* res, const mlx_array a) {
   try {
-    mlx_array_set_(*res, mlx::core::linalg::tri_inv(mlx_array_get_(a)));
+    mlx_vector_array_set_(*res, mlx::core::linalg::svd(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
-extern "C" int mlx_linalg_tri_inv_x(
+extern "C" int mlx_linalg_tri_inv(
     mlx_array* res,
     const mlx_array a,
     bool upper,
@@ -441,6 +457,15 @@ extern "C" int mlx_linalg_tri_inv_x(
         *res,
         mlx::core::linalg::tri_inv(
             mlx_array_get_(a), upper, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_linalg_tri_inv_s(mlx_array* res, const mlx_array a) {
+  try {
+    mlx_array_set_(*res, mlx::core::linalg::tri_inv(mlx_array_get_(a)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

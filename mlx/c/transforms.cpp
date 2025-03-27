@@ -26,16 +26,7 @@ extern "C" int mlx_checkpoint(mlx_closure* res, const mlx_closure fun) {
   }
   return 0;
 }
-extern "C" int mlx_custom_function(mlx_closure* res, const mlx_closure fun) {
-  try {
-    mlx_closure_set_(*res, mlx::core::custom_function(mlx_closure_get_(fun)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_custom_function_x(
+extern "C" int mlx_custom_function(
     mlx_closure* res,
     const mlx_closure fun,
     const mlx_closure_custom fun_vjp /* may be null */,
@@ -54,6 +45,15 @@ extern "C" int mlx_custom_function_x(
             (fun_vmap.ctx
                  ? std::make_optional(mlx_closure_custom_vmap_get_(fun_vmap))
                  : std::nullopt)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_custom_function_s(mlx_closure* res, const mlx_closure fun) {
+  try {
+    mlx_closure_set_(*res, mlx::core::custom_function(mlx_closure_get_(fun)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

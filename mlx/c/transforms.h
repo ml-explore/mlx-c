@@ -27,13 +27,13 @@ extern "C" {
 /**@{*/
 int mlx_async_eval(const mlx_vector_array outputs);
 int mlx_checkpoint(mlx_closure* res, const mlx_closure fun);
-int mlx_custom_function(mlx_closure* res, const mlx_closure fun);
-int mlx_custom_function_x(
+int mlx_custom_function(
     mlx_closure* res,
     const mlx_closure fun,
     const mlx_closure_custom fun_vjp /* may be null */,
     const mlx_closure_custom_jvp fun_jvp /* may be null */,
     const mlx_closure_custom_vmap fun_vmap /* may be null */);
+int mlx_custom_function_s(mlx_closure* res, const mlx_closure fun);
 int mlx_custom_vjp(
     mlx_closure* res,
     const mlx_closure fun,
