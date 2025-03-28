@@ -59,7 +59,7 @@ int mlx_linalg_lu_factor(
     mlx_array* res_1,
     const mlx_array a,
     const mlx_stream s);
-int mlx_linalg_norm_p(
+int mlx_linalg_norm(
     mlx_array* res,
     const mlx_array a,
     double ord,
@@ -67,7 +67,7 @@ int mlx_linalg_norm_p(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s);
-int mlx_linalg_norm_ord(
+int mlx_linalg_norm_matrix(
     mlx_array* res,
     const mlx_array a,
     const char* ord,
@@ -75,7 +75,7 @@ int mlx_linalg_norm_ord(
     size_t axis_num,
     bool keepdims,
     const mlx_stream s);
-int mlx_linalg_norm(
+int mlx_linalg_norm_l2(
     mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
