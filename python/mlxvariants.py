@@ -36,21 +36,7 @@ def _make_variant_suffixes(name, defs, variants):
                 # do we need to specify variant name?
                 if v != "":
                     d["variant"] = v
-                # use defaults only if it is the short version
-                if v == "s":
-                    d["use_defaults"] = True
                 newdefs.append(d)
-
-                # add a short version if there are defaults
-                if (
-                    v != "s"
-                    and not v.endswith("_s")
-                    and any(d["params_default"])
-                ):
-                    d = d.copy()
-                    d["variant"] = "s" if v == "" else v + "_s"
-                    d["use_defaults"] = True
-                    newdefs.append(d)
         return newdefs
     else:
         if len(defs) > 1:
@@ -63,27 +49,20 @@ def _make_variant_suffixes(name, defs, variants):
                     "" if i == 0 else "None",
                     file=sys.stderr,
                 )
-        d = defs[0]
-        if any(defs[0]["params_default"]):
-            dx = d.copy()
-            dx["variant"] = "s"
-            dx["use_defaults"] = True
-            return [d, dx]
-        else:
-            return [d]
+        return [defs[0]]
 
 
 def mlx_core(name, defs):
     variants = {
-        "arange": ["", None, None, None, None, None, None, "s", None],
-        "eye": ["", None, None, None, "s"],
-        "tri": ["", "s"],
-        "flatten": ["", "s"],
+        "arange": ["", None, None, None, None, None, None, None, None],
+        "eye": ["", None, None, None, None],
+        "tri": ["", None],
+        "flatten": ["", None],
         "squeeze": ["axes", "axis", ""],
         "expand_dims": ["axes", ""],
         "slice": ["", None, "dynamic", None],
         "slice_update": ["", None, "dynamic"],
-        "split": ["", "sections_x", "s", "sections"],
+        "split": ["", "sections_x", None, "sections"],
         "concatenate": ["axis", ""],
         "stack": ["axis", ""],
         "repeat": ["axis", ""],
@@ -114,9 +93,9 @@ def mlx_core(name, defs):
         "logsumexp": ["axes", "axis", "", None],
         "softmax": ["axes", "axis", ""],
         "tensordot": ["", "axis"],
-        "array_equal": ["", "s"],
-        "round": ["", "s"],
-        "trace": ["", None, "s"],
+        "array_equal": ["", None],
+        "round": ["", None],
+        "trace": ["", None, None],
     }
     return _make_variant_suffixes(name, defs, variants)
 
@@ -131,8 +110,8 @@ def mlx_core_random(name, defs):
         "categorical": ["shape", "num_samples", ""],
         "permutation": ["", "arange"],
         "split": ["num", ""],
-        "uniform": ["", None, None, "s"],
-        "normal": ["", None, None, "s"],
+        "uniform": ["", None, None, None],
+        "normal": ["", None, None, None],
     }
     return _make_variant_suffixes(name, defs, variants)
 
