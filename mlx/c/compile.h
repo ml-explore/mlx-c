@@ -32,7 +32,6 @@ typedef enum mlx_compile_mode_ {
   MLX_COMPILE_MODE_ENABLED
 } mlx_compile_mode;
 int mlx_compile(mlx_closure* res, const mlx_closure fun, bool shapeless);
-int mlx_compile_s(mlx_closure* res, const mlx_closure fun);
 int mlx_detail_compile(
     mlx_closure* res,
     const mlx_closure fun,

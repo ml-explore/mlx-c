@@ -33,7 +33,6 @@ int mlx_custom_function(
     const mlx_closure_custom fun_vjp /* may be null */,
     const mlx_closure_custom_jvp fun_jvp /* may be null */,
     const mlx_closure_custom_vmap fun_vmap /* may be null */);
-int mlx_custom_function_s(mlx_closure* res, const mlx_closure fun);
 int mlx_custom_vjp(
     mlx_closure* res,
     const mlx_closure fun,

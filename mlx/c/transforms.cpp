@@ -51,15 +51,6 @@ extern "C" int mlx_custom_function(
   }
   return 0;
 }
-extern "C" int mlx_custom_function_s(mlx_closure* res, const mlx_closure fun) {
-  try {
-    mlx_closure_set_(*res, mlx::core::custom_function(mlx_closure_get_(fun)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 extern "C" int mlx_custom_vjp(
     mlx_closure* res,
     const mlx_closure fun,

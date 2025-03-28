@@ -19,15 +19,6 @@ mlx_compile(mlx_closure* res, const mlx_closure fun, bool shapeless) {
   }
   return 0;
 }
-extern "C" int mlx_compile_s(mlx_closure* res, const mlx_closure fun) {
-  try {
-    mlx_closure_set_(*res, mlx::core::compile(mlx_closure_get_(fun)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 extern "C" int mlx_detail_compile(
     mlx_closure* res,
     const mlx_closure fun,
