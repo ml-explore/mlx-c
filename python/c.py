@@ -121,8 +121,8 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             func_name = c_namespace(f["namespace"]) + "_" + f["name"]
 
         if hasattr(hooks, func_name):
-            getattr(hooks, func_name)(f, implementation)
-            continue
+            if not getattr(hooks, func_name)(f, implementation):
+                continue
 
         signature = []
         return_t = f["return_t"]
