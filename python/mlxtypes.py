@@ -383,16 +383,16 @@ types.append(
 types.append(
     {
         "cpp": "std::shared_ptr<io::Reader>",
-        "c_to_cpp": lambda s: "std::make_shared<CFILEReader>(" + s + ")",
-        "c_arg": lambda s, untyped=False: s if untyped else "FILE* " + s,
+        "c_to_cpp": lambda s: "mlx_io_reader_get_(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "mlx_io_reader " + s,
     }
 )
 
 types.append(
     {
         "cpp": "std::shared_ptr<io::Writer>",
-        "c_to_cpp": lambda s: "std::make_shared<CFILEWriter>(" + s + ")",
-        "c_arg": lambda s, untyped=False: s if untyped else "FILE* " + s,
+        "c_to_cpp": lambda s: "mlx_io_writer_get_(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "mlx_io_writer " + s,
     }
 )
 
