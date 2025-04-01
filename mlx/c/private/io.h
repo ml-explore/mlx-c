@@ -153,6 +153,28 @@ inline void mlx_io_reader_free_(mlx_io_reader io) {
   }
 }
 
+struct cwriter_holder {
+  std::shared_ptr<CWriter> ptr;
+};
+
+inline mlx_io_writer mlx_io_writer_new_(void* uctx, mlx_io_vtable vtable) {
+  return mlx_io_writer(
+      {new cwriter_holder({std::make_shared<CWriter>(uctx, vtable)})});
+}
+
+inline std::shared_ptr<CWriter> mlx_io_writer_get_(mlx_io_writer d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_io_writer");
+  }
+  return static_cast<cwriter_holder*>(d.ctx)->ptr;
+}
+
+inline void mlx_io_writer_free_(mlx_io_writer io) {
+  if (io.ctx) {
+    delete static_cast<cwriter_holder*>(io.ctx);
+  }
+}
+
 class CFILEReader : public mlx::core::io::Reader {
  private:
   FILE* f;
@@ -196,13 +218,6 @@ class CFILEReader : public mlx::core::io::Reader {
     return "FILE (read mode)";
   };
 };
-
-inline std::shared_ptr<CWriter> mlx_io_writer_get_(mlx_io_writer d) {
-  if (!d.ctx) {
-    throw std::runtime_error("expected a non-empty mlx_io_writer");
-  }
-  return *static_cast<std::shared_ptr<CWriter>*>(d.ctx);
-}
 
 class CFILEWriter : public mlx::core::io::Writer {
  private:

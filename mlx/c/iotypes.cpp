@@ -44,3 +44,42 @@ extern "C" int mlx_io_reader_tostring(mlx_string* str_, mlx_io_reader io) {
     return 1;
   }
 }
+
+extern "C" mlx_io_writer mlx_io_writer_new(void* desc, mlx_io_vtable vtable) {
+  try {
+    return mlx_io_writer_new_(desc, vtable);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_io_writer({nullptr});
+  }
+}
+
+extern "C" int mlx_io_writer_free(mlx_io_writer io) {
+  try {
+    mlx_io_writer_free_(io);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_io_writer_descriptor(void** desc_, mlx_io_writer io) {
+  try {
+    *desc_ = mlx_io_writer_get_(io)->desc;
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_io_writer_tostring(mlx_string* str_, mlx_io_writer io) {
+  try {
+    mlx_string_set_(*str_, mlx_io_writer_get_(io)->label());
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
