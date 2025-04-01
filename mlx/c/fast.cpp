@@ -223,6 +223,19 @@ extern "C" int mlx_fast_metal_kernel_add_template_arg_bool(
   return 0;
 }
 
+extern "C" int mlx_fast_metal_kernel_clear_args(
+    mlx_fast_metal_kernel cls) {
+  try {
+    mlx_fast_metal_kernel_get_(cls).template.clear();
+    mlx_fast_metal_kernel_get_(cls).output_shapes.clear();
+    mlx_fast_metal_kernel_get_(cls).output_dtypes.clear();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* name,
     const char* source,
