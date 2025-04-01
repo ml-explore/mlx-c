@@ -76,7 +76,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
-    #include "mlx/c/iotypes.h"
+    #include "mlx/c/io_types.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
     #include "mlx/c/string.h"
