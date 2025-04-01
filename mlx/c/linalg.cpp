@@ -132,7 +132,7 @@ extern "C" int mlx_linalg_lu_factor(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_p(
+extern "C" int mlx_linalg_norm(
     mlx_array* res,
     const mlx_array a,
     double ord,
@@ -156,7 +156,7 @@ extern "C" int mlx_linalg_norm_p(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_ord(
+extern "C" int mlx_linalg_norm_matrix(
     mlx_array* res,
     const mlx_array a,
     const char* ord,
@@ -180,7 +180,7 @@ extern "C" int mlx_linalg_norm_ord(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm(
+extern "C" int mlx_linalg_norm_l2(
     mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
