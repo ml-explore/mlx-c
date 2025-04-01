@@ -2498,7 +2498,7 @@ extern "C" int mlx_right_shift(
   }
   return 0;
 }
-extern "C" int mlx_roll_axes(
+extern "C" int mlx_roll_axis(
     mlx_array* res,
     const mlx_array a,
     const int* shift,
@@ -2519,7 +2519,7 @@ extern "C" int mlx_roll_axes(
   }
   return 0;
 }
-extern "C" int mlx_roll_axis(
+extern "C" int mlx_roll_axes(
     mlx_array* res,
     const mlx_array a,
     const int* shift,
@@ -2950,7 +2950,7 @@ extern "C" int mlx_split(
   }
   return 0;
 }
-extern "C" int mlx_split_sections_x(
+extern "C" int mlx_split_sections(
     mlx_vector_array* res,
     const mlx_array a,
     const int* indices,
@@ -2964,25 +2964,6 @@ extern "C" int mlx_split_sections_x(
             mlx_array_get_(a),
             std::vector<int>(indices, indices + indices_num),
             axis,
-            mlx_stream_get_(s)));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_split_sections(
-    mlx_vector_array* res,
-    const mlx_array a,
-    const int* indices,
-    size_t indices_num,
-    const mlx_stream s) {
-  try {
-    mlx_vector_array_set_(
-        *res,
-        mlx::core::split(
-            mlx_array_get_(a),
-            std::vector<int>(indices, indices + indices_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());

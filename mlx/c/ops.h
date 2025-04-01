@@ -777,14 +777,14 @@ int mlx_right_shift(
     const mlx_array a,
     const mlx_array b,
     const mlx_stream s);
-int mlx_roll_axes(
+int mlx_roll_axis(
     mlx_array* res,
     const mlx_array a,
     const int* shift,
     size_t shift_num,
     int axis,
     const mlx_stream s);
-int mlx_roll_axis(
+int mlx_roll_axes(
     mlx_array* res,
     const mlx_array a,
     const int* shift,
@@ -923,18 +923,12 @@ int mlx_split(
     int num_splits,
     int axis,
     const mlx_stream s);
-int mlx_split_sections_x(
-    mlx_vector_array* res,
-    const mlx_array a,
-    const int* indices,
-    size_t indices_num,
-    int axis,
-    const mlx_stream s);
 int mlx_split_sections(
     mlx_vector_array* res,
     const mlx_array a,
     const int* indices,
     size_t indices_num,
+    int axis,
     const mlx_stream s);
 int mlx_sqrt(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_square(mlx_array* res, const mlx_array a, const mlx_stream s);
