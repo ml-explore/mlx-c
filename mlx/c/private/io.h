@@ -4,6 +4,48 @@
 #include <iostream>
 #include "mlx/mlx.h"
 
+struct mlx_io_vtable_file : public mlx_io_vtable {
+ private:
+  static bool is_open_impl(void* desc) {
+    return desc != nullptr;
+  };
+  static bool good_impl(void* desc) {
+    return ferror(static_cast<FILE*>(desc)) == 0;
+  }
+  static size_t tell_impl(void* desc) {
+    return ftell(static_cast<FILE*>(desc));
+  }
+  static void seek_impl(void* desc, int64_t off, int whence) {
+    fseek(static_cast<FILE*>(desc), off, whence);
+  }
+  static void read_impl(void* desc, char* data, size_t n) {
+    fread(data, 1, n, static_cast<FILE*>(desc));
+  }
+  static void
+  read_at_offset_impl(void* desc, char* data, size_t n, size_t off) {
+    seek_impl(desc, off, SEEK_SET);
+    fread(data, 1, n, static_cast<FILE*>(desc));
+  }
+  static void write_impl(void* desc, const char* data, size_t n) {
+    fwrite(data, 1, n, static_cast<FILE*>(desc));
+  }
+  static const char* label_impl(void* desc) {
+    return "FILE";
+  };
+
+ public:
+  mlx_io_vtable_file()
+      : mlx_io_vtable(
+            {&mlx_io_vtable_file::is_open_impl,
+             &mlx_io_vtable_file::good_impl,
+             &mlx_io_vtable_file::tell_impl,
+             &mlx_io_vtable_file::seek_impl,
+             &mlx_io_vtable_file::read_impl,
+             &mlx_io_vtable_file::read_at_offset_impl,
+             &mlx_io_vtable_file::write_impl,
+             &mlx_io_vtable_file::label_impl}) {};
+};
+
 class CReader : public mlx::core::io::Reader {
  public:
   void* desc;
@@ -13,6 +55,7 @@ class CReader : public mlx::core::io::Reader {
   virtual bool is_open() const override {
     return vtable.is_open(desc);
   };
+  CReader(FILE* desc) : desc(desc), vtable(mlx_io_vtable_file()) {};
   virtual bool good() const override {
     return vtable.good(desc);
   };
@@ -53,6 +96,7 @@ class CWriter : public mlx::core::io::Writer {
   mlx_io_vtable vtable;
 
   CWriter(void* desc, mlx_io_vtable vtable) : desc(desc), vtable(vtable) {};
+  CWriter(FILE* desc) : desc(desc), vtable(mlx_io_vtable_file()) {};
   virtual bool is_open() const override {
     return vtable.is_open(desc);
   };
