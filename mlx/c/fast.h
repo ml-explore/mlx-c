@@ -120,7 +120,7 @@ int mlx_fast_metal_kernel_apply(
 int mlx_fast_rms_norm(
     mlx_array* res,
     const mlx_array x,
-    const mlx_array weight,
+    const mlx_array weight /* may be null */,
     float eps,
     const mlx_stream s);
 int mlx_fast_rope(
@@ -139,8 +139,8 @@ int mlx_fast_scaled_dot_product_attention(
     const mlx_array keys,
     const mlx_array values,
     float scale,
-    const mlx_array mask /* may be null */,
-    mlx_optional_int memory_efficient_threshold,
+    const char* mask_mode,
+    const mlx_vector_array mask_arrs,
     const mlx_stream s);
 /**@}*/
 
