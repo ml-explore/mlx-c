@@ -4,6 +4,8 @@
 #include <iostream>
 #include "mlx/mlx.h"
 
+namespace {
+
 class CReader : public mlx::core::io::Reader {
  public:
   void* desc;
@@ -136,5 +138,7 @@ inline void mlx_io_writer_free_(mlx_io_writer io) {
     delete static_cast<cwriter_holder*>(io.ctx);
   }
 }
+
+} // namespace
 
 #endif
