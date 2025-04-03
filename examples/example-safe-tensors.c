@@ -109,7 +109,7 @@ static mlx_io_vtable mlx_io_vtable_mlx_mem_stream = {
     &mem_free};
 
 int main() {
-  mlx_stream stream = mlx_default_gpu_stream_new();
+  mlx_stream stream = mlx_default_cpu_stream_new();
   mlx_map_string_to_array data = mlx_map_string_to_array_new();
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
 
