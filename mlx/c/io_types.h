@@ -40,6 +40,7 @@ typedef struct mlx_io_vtable_ {
   void (*read_at_offset)(void*, char* data, size_t n, size_t off);
   void (*write)(void*, const char* data, size_t n);
   const char* (*label)(void*);
+  void (*free)(void*);
 } mlx_io_vtable;
 
 /**
@@ -60,6 +61,10 @@ int mlx_io_reader_tostring(mlx_string* str_, mlx_io_reader io);
 
 /**
  * Free IO reader.
+ *
+ * Note that MLX arrays are lazily evaluated, so the underlying object may
+ * be not freed right away. The ``free()`` callback from ``mlx_io_vtable``
+ * will be called when the underlying object is actually freed.
  */
 int mlx_io_reader_free(mlx_io_reader io);
 
@@ -81,6 +86,10 @@ int mlx_io_writer_tostring(mlx_string* str_, mlx_io_writer io);
 
 /**
  * Free IO writer.
+ *
+ * Note that MLX arrays are lazily evaluated, so the underlying object may
+ * be not freed right away. The ``free()`` callback from ``mlx_io_vtable``
+ * will be called when the underlying object is actually freed.
  */
 int mlx_io_writer_free(mlx_io_writer io);
 

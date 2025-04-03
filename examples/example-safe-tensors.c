@@ -16,6 +16,7 @@ typedef struct mlx_mem_stream_ {
   size_t pos;
   size_t size;
   bool err;
+  bool free_data;
 } mlx_mem_stream;
 bool mem_is_open(void* desc) {
   printf("ISOPEN\n");
@@ -89,6 +90,13 @@ const char* mem_label(void* desc) {
   printf("LABEL\n");
   return "<custom memory stream>";
 }
+void mem_free(void* desc) {
+  mlx_mem_stream* m_desc = desc;
+  if (m_desc->free_data) {
+    printf("FREE DATA\n");
+    free(m_desc->data);
+  }
+}
 static mlx_io_vtable mlx_io_vtable_mlx_mem_stream = {
     &mem_is_open,
     &mem_good,
@@ -97,7 +105,8 @@ static mlx_io_vtable mlx_io_vtable_mlx_mem_stream = {
     &mem_read,
     &mem_read_at_offset,
     &mem_write,
-    &mem_label};
+    &mem_label,
+    &mem_free};
 
 int main() {
   FILE* f = fopen("arrays.safetensors", "rb");
@@ -124,7 +133,8 @@ int main() {
       malloc(2048), // 2048 bytes
       0L, // position
       2048L, // size
-      false // err
+      false, // err
+      false // do not free data (we will reuse it at read time)
   };
   mlx_io_writer writer =
       mlx_io_writer_new(&mem_stream, mlx_io_vtable_mlx_mem_stream);
@@ -135,6 +145,7 @@ int main() {
       "position in memory stream: %ld err flag: %d\n",
       mem_stream.pos,
       mem_stream.err);
+  printf("data in memory stream: ");
   for (int i = 0; i < mem_stream.pos; i++) {
     printf("%c", mem_stream.data[i]);
   }
@@ -147,6 +158,7 @@ int main() {
   mlx_map_string_to_array_iterator_free(it);
 
   printf("attempting to read from memory\n");
+  mem_stream.free_data = true;
   mlx_io_reader reader =
       mlx_io_reader_new(&mem_stream, mlx_io_vtable_mlx_mem_stream);
   data = mlx_map_string_to_array_new();
@@ -154,6 +166,7 @@ int main() {
   mlx_load_safetensors_reader(&data, &metadata, reader, stream);
   mlx_io_reader_free(reader);
 
+  printf("now the arrays (lazily evaluated):\n");
   it = mlx_map_string_to_array_iterator_new(data);
   while (!mlx_map_string_to_array_iterator_next(&key, &value, it)) {
     print_array(key, value);
@@ -165,6 +178,5 @@ int main() {
   mlx_map_string_to_array_iterator_free(it);
   mlx_stream_free(stream);
   fclose(f);
-
   return 0;
 }

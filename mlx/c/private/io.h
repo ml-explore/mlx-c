@@ -32,6 +32,7 @@ struct mlx_io_vtable_file : public mlx_io_vtable {
   static const char* label_impl(void* desc) {
     return "FILE";
   };
+  static void free_impl(void* desc) {}
 
  public:
   mlx_io_vtable_file()
@@ -43,7 +44,8 @@ struct mlx_io_vtable_file : public mlx_io_vtable {
              &mlx_io_vtable_file::read_impl,
              &mlx_io_vtable_file::read_at_offset_impl,
              &mlx_io_vtable_file::write_impl,
-             &mlx_io_vtable_file::label_impl}) {};
+             &mlx_io_vtable_file::label_impl,
+             &mlx_io_vtable_file::free_impl}) {};
 };
 
 class CReader : public mlx::core::io::Reader {
@@ -88,6 +90,9 @@ class CReader : public mlx::core::io::Reader {
   virtual std::string label() const override {
     return vtable.label(desc);
   };
+  virtual ~CReader() {
+    vtable.free(desc);
+  }
 };
 
 class CWriter : public mlx::core::io::Writer {
@@ -129,6 +134,9 @@ class CWriter : public mlx::core::io::Writer {
   virtual std::string label() const override {
     return vtable.label(desc);
   };
+  virtual ~CWriter() {
+    vtable.free(desc);
+  }
 };
 
 struct creader_holder {
