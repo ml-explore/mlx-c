@@ -109,17 +109,12 @@ static mlx_io_vtable mlx_io_vtable_mlx_mem_stream = {
     &mem_free};
 
 int main() {
-  FILE* f = fopen("arrays.safetensors", "rb");
-  if (!f) {
-    printf("could not load <arrays.safetensors>\n");
-    return -1;
-  }
-
   mlx_stream stream = mlx_default_gpu_stream_new();
   mlx_map_string_to_array data = mlx_map_string_to_array_new();
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
-  mlx_load_safetensors_file(&data, &metadata, f, stream);
 
+  printf("load data from disk:\n");
+  mlx_load_safetensors(&data, &metadata, "arrays.safetensors", stream);
   mlx_map_string_to_array_iterator it =
       mlx_map_string_to_array_iterator_new(data);
   const char* key;
@@ -177,6 +172,5 @@ int main() {
   mlx_map_string_to_string_free(metadata);
   mlx_map_string_to_array_iterator_free(it);
   mlx_stream_free(stream);
-  fclose(f);
   return 0;
 }
