@@ -76,6 +76,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
+    #include "mlx/c/io_types.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
     #include "mlx/c/string.h"
@@ -121,8 +122,8 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             func_name = c_namespace(f["namespace"]) + "_" + f["name"]
 
         if hasattr(hooks, func_name):
-            getattr(hooks, func_name)(f, implementation)
-            continue
+            if not getattr(hooks, func_name)(f, implementation):
+                continue
 
         signature = []
         return_t = f["return_t"]
