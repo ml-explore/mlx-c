@@ -364,6 +364,8 @@ int mlx_fast_metal_kernel_add_template_arg_bool(
     mlx_fast_metal_kernel cls,
     const char* name,
     bool value);
+int mlx_fast_metal_kernel_clear_args(
+    mlx_fast_metal_kernel cls);
 
 int mlx_fast_metal_kernel_apply(
     mlx_vector_array* outputs,
