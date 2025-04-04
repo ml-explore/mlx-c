@@ -264,11 +264,16 @@ extern "C" int mlx_linalg_solve_triangular(
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_svd(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
+extern "C" int mlx_linalg_svd(
+    mlx_vector_array* res,
+    const mlx_array a,
+    bool compute_uv,
+    const mlx_stream s) {
   try {
     mlx_vector_array_set_(
-        *res, mlx::core::linalg::svd(mlx_array_get_(a), mlx_stream_get_(s)));
+        *res,
+        mlx::core::linalg::svd(
+            mlx_array_get_(a), compute_uv, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

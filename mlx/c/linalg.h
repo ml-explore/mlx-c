@@ -103,6 +103,7 @@ int mlx_linalg_solve_triangular(
 int mlx_linalg_svd(
     mlx_vector_array* res,
     const mlx_array a,
+    bool compute_uv,
     const mlx_stream s);
 int mlx_linalg_tri_inv(
     mlx_array* res,
