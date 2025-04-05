@@ -6,6 +6,7 @@
 #ifndef MLX_DISTRIBUTED_H
 #define MLX_DISTRIBUTED_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
