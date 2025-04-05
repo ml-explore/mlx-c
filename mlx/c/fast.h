@@ -6,6 +6,7 @@
 #ifndef MLX_FAST_H
 #define MLX_FAST_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
