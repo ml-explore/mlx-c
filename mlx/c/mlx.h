@@ -17,6 +17,7 @@
 #include "mlx/c/io_types.h"
 #include "mlx/c/linalg.h"
 #include "mlx/c/map.h"
+#include "mlx/c/memory.h"
 #include "mlx/c/metal.h"
 #include "mlx/c/ops.h"
 #include "mlx/c/optional.h"

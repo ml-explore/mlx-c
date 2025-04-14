@@ -346,7 +346,7 @@ extern "C" int mlx_fast_metal_kernel_apply(
 extern "C" int mlx_fast_rms_norm(
     mlx_array* res,
     const mlx_array x,
-    const mlx_array weight,
+    const mlx_array weight /* may be null */,
     float eps,
     const mlx_stream s) {
   try {
@@ -354,7 +354,8 @@ extern "C" int mlx_fast_rms_norm(
         *res,
         mlx::core::fast::rms_norm(
             mlx_array_get_(x),
-            mlx_array_get_(weight),
+            (weight.ctx ? std::make_optional(mlx_array_get_(weight))
+                        : std::nullopt),
             eps,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -399,8 +400,8 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
     const mlx_array keys,
     const mlx_array values,
     float scale,
-    const mlx_array mask /* may be null */,
-    mlx_optional_int memory_efficient_threshold,
+    const char* mask_mode,
+    const mlx_vector_array mask_arrs,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -410,11 +411,8 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
             mlx_array_get_(keys),
             mlx_array_get_(values),
             scale,
-            (mask.ctx ? std::make_optional(mlx_array_get_(mask))
-                      : std::nullopt),
-            (memory_efficient_threshold.has_value
-                 ? std::make_optional<int>(memory_efficient_threshold.value)
-                 : std::nullopt),
+            std::string(mask_mode),
+            mlx_vector_array_get_(mask_arrs),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
