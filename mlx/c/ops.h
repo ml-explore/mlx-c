@@ -6,6 +6,7 @@
 #ifndef MLX_OPS_H
 #define MLX_OPS_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
