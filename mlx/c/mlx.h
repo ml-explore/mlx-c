@@ -27,5 +27,6 @@
 #include "mlx/c/transforms.h"
 #include "mlx/c/transforms_impl.h"
 #include "mlx/c/vector.h"
+#include "mlx/c/version.h"
 
 #endif
