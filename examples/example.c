@@ -24,6 +24,10 @@ void gpu_info() {
   printf("==================================================\n");
 }
 int main() {
+  mlx_string version = mlx_string_new();
+  mlx_version(&version);
+  printf("MLX version: %s\n", mlx_string_data(version));
+
   gpu_info();
 
   mlx_stream stream = mlx_default_gpu_stream_new();
@@ -42,5 +46,6 @@ int main() {
   mlx_array_free(arr);
   mlx_array_free(two);
   mlx_stream_free(stream);
+  mlx_string_free(version);
   return 0;
 }
