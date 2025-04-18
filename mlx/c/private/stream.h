@@ -29,7 +29,6 @@ inline mlx_stream& mlx_stream_set_(mlx_stream& d, const mlx::core::Stream& s) {
   }
   return d;
 }
-
 inline mlx_stream& mlx_stream_set_(mlx_stream& d, mlx::core::Stream&& s) {
   if (d.ctx) {
     *static_cast<mlx::core::Stream*>(d.ctx) = std::move(s);

@@ -29,7 +29,6 @@ inline mlx_string& mlx_string_set_(mlx_string& d, const std::string& s) {
   }
   return d;
 }
-
 inline mlx_string& mlx_string_set_(mlx_string& d, std::string&& s) {
   if (d.ctx) {
     *static_cast<std::string*>(d.ctx) = std::move(s);

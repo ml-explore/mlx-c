@@ -33,7 +33,6 @@ inline mlx_vector_array& mlx_vector_array_set_(
   }
   return d;
 }
-
 inline mlx_vector_array& mlx_vector_array_set_(
     mlx_vector_array& d,
     std::vector<mlx::core::array>&& s) {
@@ -85,7 +84,6 @@ inline mlx_vector_vector_array& mlx_vector_vector_array_set_(
   }
   return d;
 }
-
 inline mlx_vector_vector_array& mlx_vector_vector_array_set_(
     mlx_vector_vector_array& d,
     std::vector<std::vector<mlx::core::array>>&& s) {
@@ -134,7 +132,6 @@ inline mlx_vector_int& mlx_vector_int_set_(
   }
   return d;
 }
-
 inline mlx_vector_int& mlx_vector_int_set_(
     mlx_vector_int& d,
     std::vector<int>&& s) {
@@ -182,7 +179,6 @@ inline mlx_vector_string& mlx_vector_string_set_(
   }
   return d;
 }
-
 inline mlx_vector_string& mlx_vector_string_set_(
     mlx_vector_string& d,
     std::vector<std::string>&& s) {
