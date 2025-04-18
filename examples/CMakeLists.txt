@@ -17,3 +17,6 @@ target_link_libraries(example-metal-kernel PUBLIC mlxc)
 
 add_executable(example-closure ${CMAKE_CURRENT_LIST_DIR}/example-closure.c)
 target_link_libraries(example-closure PUBLIC mlxc)
+
+add_executable(example-export ${CMAKE_CURRENT_LIST_DIR}/example-export.c)
+target_link_libraries(example-export PUBLIC mlxc)

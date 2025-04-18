@@ -3,8 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_METAL_H
-#define MLX_METAL_H
+#ifndef MLX_EXPORT_H
+#define MLX_EXPORT_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -25,21 +25,20 @@ extern "C" {
 #endif
 
 /**
- * \defgroup metal Metal specific operations
+ * \defgroup export Function serialization
  */
 /**@{*/
-
-typedef struct mlx_metal_device_info_t_ {
-  char architecture[256];
-  size_t max_buffer_length;
-  size_t max_recommended_working_set_size;
-  size_t memory_size;
-} mlx_metal_device_info_t;
-mlx_metal_device_info_t mlx_metal_device_info();
-
-int mlx_metal_is_available(bool* res);
-int mlx_metal_start_capture(const char* path);
-int mlx_metal_stop_capture();
+int mlx_export_function(
+    const char* file,
+    const mlx_closure fun,
+    const mlx_vector_array args,
+    bool shapeless);
+int mlx_exporter(
+    mlx_function_exporter* res,
+    const char* file,
+    const mlx_closure fun,
+    bool shapeless);
+int mlx_import_function(mlx_imported_function* res, const char* file);
 /**@}*/
 
 #ifdef __cplusplus
