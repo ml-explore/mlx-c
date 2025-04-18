@@ -7,6 +7,7 @@ for t in [
     ["mlx_vector_int", "@std::vector<int>", "@std::vector<int>"],
     ["mlx_vector_string", "std::vector<std::string>", "std::vector<std::string>"],
     ["mlx_vector_array", "std::vector<mlx::core::array>", "std::vector<array>"],
+    ["mlx_vector_array", "Args"],
     [
         "mlx_stream",
         "mlx::core::Stream",
@@ -36,6 +37,10 @@ for t in [
         "std::function<std::vector<array>(std::vector<array>)>",
     ],
     [
+        "mlx_closure",
+        "std::function<std::vector<array>(Args)>",
+    ],
+    [
         "mlx_closure_value_and_grad",
         "std::function<std::pair<std::vector<array>, std::vector<array>>(const std::vector<array>&)>",
         "ValueAndGradFn",
@@ -60,6 +65,8 @@ for t in [
         "std::function<std::vector<array>(const std::vector<array>&, const std::vector<std::vector<int>>&, const std::vector<mlx::core::Dtype>&, std::tuple<int, int, int>, std::tuple<int, int, int>, std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>, std::optional<float>, bool, mlx::core::StreamOrDevice)>",
         "MetalKernelFunction",
     ],
+    ["mlx_function_exporter", "FunctionExporter"],
+    ["mlx_imported_function", "ImportedFunction"],
 ]:
     if len(t) == 2:
         ctype, cpptype = t
