@@ -6,6 +6,7 @@
 #include "mlx/c/private/device.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/enums.h"
+#include "mlx/c/private/export.h"
 #include "mlx/c/private/io.h"
 #include "mlx/c/private/map.h"
 #include "mlx/c/private/stream.h"
