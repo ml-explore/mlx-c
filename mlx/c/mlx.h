@@ -10,6 +10,7 @@
 #include "mlx/c/distributed.h"
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/error.h"
+#include "mlx/c/export_impl.h"
 #include "mlx/c/fast.h"
 #include "mlx/c/fft.h"
 #include "mlx/c/half.h"
