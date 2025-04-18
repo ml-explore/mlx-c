@@ -1,8 +1,3 @@
-/* Copyright © 2023-2024 Apple Inc.                   */
-/*                                                    */
-/* This file is auto-generated. Do not edit manually. */
-/*                                                    */
-
 #include "mlx/c/export_impl.h"
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
