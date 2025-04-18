@@ -29,12 +29,11 @@ inline mlx_string& mlx_string_set_(mlx_string& d, const std::string& s) {
   }
   return d;
 }
-
 inline mlx_string& mlx_string_set_(mlx_string& d, std::string&& s) {
   if (d.ctx) {
     *static_cast<std::string*>(d.ctx) = s;
   } else {
-    d.ctx = new std::string(s);
+    d.ctx = new std::string(std::move(s));
   }
   return d;
 }
