@@ -32,6 +32,16 @@ int mlx_distributed_all_gather(
     const mlx_array x,
     const mlx_distributed_group group /* may be null */,
     const mlx_stream S);
+int mlx_distributed_all_max(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s);
+int mlx_distributed_all_min(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s);
 int mlx_distributed_all_sum(
     mlx_array* res,
     const mlx_array x,

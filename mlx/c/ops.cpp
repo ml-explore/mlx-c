@@ -1349,6 +1349,7 @@ extern "C" int mlx_gather_mm(
     const mlx_array b,
     const mlx_array lhs_indices /* may be null */,
     const mlx_array rhs_indices /* may be null */,
+    bool sorted_indices,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -1360,6 +1361,7 @@ extern "C" int mlx_gather_mm(
                              : std::nullopt),
             (rhs_indices.ctx ? std::make_optional(mlx_array_get_(rhs_indices))
                              : std::nullopt),
+            sorted_indices,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -1378,6 +1380,7 @@ extern "C" int mlx_gather_qmm(
     bool transpose,
     int group_size,
     int bits,
+    bool sorted_indices,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -1394,6 +1397,7 @@ extern "C" int mlx_gather_qmm(
             transpose,
             group_size,
             bits,
+            sorted_indices,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -1702,6 +1706,24 @@ extern "C" int mlx_logaddexp(
         *res,
         mlx::core::logaddexp(
             mlx_array_get_(a), mlx_array_get_(b), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_logcumsumexp(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool reverse,
+    bool inclusive,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::logcumsumexp(
+            mlx_array_get_(a), axis, reverse, inclusive, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
