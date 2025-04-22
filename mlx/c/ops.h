@@ -439,6 +439,7 @@ int mlx_gather_mm(
     const mlx_array b,
     const mlx_array lhs_indices /* may be null */,
     const mlx_array rhs_indices /* may be null */,
+    bool sorted_indices,
     const mlx_stream s);
 int mlx_gather_qmm(
     mlx_array* res,
@@ -451,6 +452,7 @@ int mlx_gather_qmm(
     bool transpose,
     int group_size,
     int bits,
+    bool sorted_indices,
     const mlx_stream s);
 int mlx_greater(
     mlx_array* res,
@@ -522,6 +524,13 @@ int mlx_logaddexp(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
+    const mlx_stream s);
+int mlx_logcumsumexp(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool reverse,
+    bool inclusive,
     const mlx_stream s);
 int mlx_logical_and(
     mlx_array* res,
