@@ -31,6 +31,9 @@ int mlx_function_exporter_free(mlx_function_exporter xfunc);
 int mlx_function_exporter_call(
     const mlx_function_exporter xfunc,
     const mlx_vector_array args);
+int mlx_function_exporter_call_kwargs(
+    const mlx_function_exporter xfunc,
+    const mlx_map_string_to_array kwargs);
 
 typedef struct mlx_imported_function_ {
   void* ctx;
@@ -42,6 +45,10 @@ int mlx_imported_function_call(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
     mlx_vector_array args);
+int mlx_imported_function_call_kwargs(
+    mlx_vector_array* res,
+    const mlx_imported_function xfunc,
+    mlx_map_string_to_array kwargs);
 /**@}*/
 
 #ifdef __cplusplus
