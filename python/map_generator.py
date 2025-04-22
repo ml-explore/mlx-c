@@ -120,8 +120,8 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
     CTYPE1 key,
     CTYPE2 value) {
   try {
-    auto res = mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert(
-        std::make_pair(CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value)));
+    mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert_or_assign(
+        CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
