@@ -71,6 +71,70 @@ inline void mlx_closure_free_(mlx_closure d) {
   }
 }
 
+inline mlx_closure_kwargs mlx_closure_kwargs_new_() {
+  return mlx_closure_kwargs({nullptr});
+}
+
+inline mlx_closure_kwargs mlx_closure_kwargs_new_(
+    const std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>& s) {
+  return mlx_closure_kwargs({new std::function<std::vector<mlx::core::array>(
+      const std::unordered_map<std::string, mlx::core::array>&)>(s)});
+}
+
+inline mlx_closure_kwargs mlx_closure_kwargs_new_(
+    std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>&& s) {
+  return mlx_closure_kwargs({new std::function<std::vector<mlx::core::array>(
+      const std::unordered_map<std::string, mlx::core::array>&)>(
+      std::move(s))});
+}
+
+inline mlx_closure_kwargs& mlx_closure_kwargs_set_(
+    mlx_closure_kwargs& d,
+    const std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>& s) {
+  if (d.ctx) {
+    *static_cast<std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>(s);
+  }
+  return d;
+}
+inline mlx_closure_kwargs& mlx_closure_kwargs_set_(
+    mlx_closure_kwargs& d,
+    std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>&& s) {
+  if (d.ctx) {
+    *static_cast<std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>(
+        std::move(s));
+  }
+  return d;
+}
+
+inline std::function<std::vector<mlx::core::array>(
+    const std::unordered_map<std::string, mlx::core::array>&)>&
+mlx_closure_kwargs_get_(mlx_closure_kwargs d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_closure_kwargs");
+  }
+  return *static_cast<std::function<std::vector<mlx::core::array>(
+      const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx);
+}
+
+inline void mlx_closure_kwargs_free_(mlx_closure_kwargs d) {
+  if (d.ctx) {
+    delete static_cast<std::function<std::vector<mlx::core::array>(
+        const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx);
+  }
+}
+
 inline mlx_closure_value_and_grad mlx_closure_value_and_grad_new_() {
   return mlx_closure_value_and_grad({nullptr});
 }
