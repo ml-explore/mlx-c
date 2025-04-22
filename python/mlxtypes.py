@@ -17,6 +17,7 @@ for t in [
         "std::unordered_map<std::string, mlx::core::array>",
         "std::unordered_map<std::string, array>",
     ],
+    ["mlx_map_string_to_array", "Kwargs"],
     [
         "mlx_map_string_to_string",
         "std::unordered_map<std::string, std::string>",
@@ -39,6 +40,10 @@ for t in [
     [
         "mlx_closure",
         "std::function<std::vector<array>(Args)>",
+    ],
+    [
+        "mlx_closure_kwargs",
+        "std::function<std::vector<array>(Kwargs)>",
     ],
     [
         "mlx_closure_value_and_grad",

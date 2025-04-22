@@ -25,6 +25,23 @@ extern "C" int mlx_export_function(
   }
   return 0;
 }
+extern "C" int mlx_export_function_kwargs(
+    const char* file,
+    const mlx_closure_kwargs fun,
+    const mlx_map_string_to_array kwargs,
+    bool shapeless) {
+  try {
+    mlx::core::export_function(
+        std::string(file),
+        mlx_closure_kwargs_get_(fun),
+        mlx_map_string_to_array_get_(kwargs),
+        shapeless);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_exporter(
     mlx_function_exporter* res,
     const char* file,

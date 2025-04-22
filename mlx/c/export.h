@@ -33,6 +33,11 @@ int mlx_export_function(
     const mlx_closure fun,
     const mlx_vector_array args,
     bool shapeless);
+int mlx_export_function_kwargs(
+    const char* file,
+    const mlx_closure_kwargs fun,
+    const mlx_map_string_to_array kwargs,
+    bool shapeless);
 int mlx_exporter(
     mlx_function_exporter* res,
     const char* file,
