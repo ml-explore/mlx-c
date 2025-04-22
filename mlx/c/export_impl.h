@@ -28,10 +28,10 @@ typedef struct mlx_function_exporter_ {
 
 mlx_function_exporter mlx_function_exporter_new();
 int mlx_function_exporter_free(mlx_function_exporter xfunc);
-int mlx_function_exporter_call(
+int mlx_function_exporter_apply(
     const mlx_function_exporter xfunc,
     const mlx_vector_array args);
-int mlx_function_exporter_call_kwargs(
+int mlx_function_exporter_apply_kwargs(
     const mlx_function_exporter xfunc,
     const mlx_map_string_to_array kwargs);
 
@@ -41,11 +41,11 @@ typedef struct mlx_imported_function_ {
 
 mlx_imported_function mlx_imported_function_new();
 int mlx_imported_function_free(mlx_imported_function xfunc);
-int mlx_imported_function_call(
+int mlx_imported_function_apply(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
     mlx_vector_array args);
-int mlx_imported_function_call_kwargs(
+int mlx_imported_function_apply_kwargs(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
     mlx_map_string_to_array kwargs);

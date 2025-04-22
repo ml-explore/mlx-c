@@ -36,7 +36,7 @@ int main() {
 
   printf("evaluating inc() over x\n");
   mlx_vector_array res = mlx_vector_array_new();
-  mlx_imported_function_call(&res, xfunc, args);
+  mlx_imported_function_apply(&res, xfunc, args);
 
   mlx_array y = mlx_array_new();
   mlx_vector_array_get(&y, res, 0);

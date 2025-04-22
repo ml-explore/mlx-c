@@ -15,7 +15,7 @@ extern "C" int mlx_function_exporter_free(mlx_function_exporter xfunc) {
   return 0;
 }
 
-extern "C" int mlx_function_exporter_call(
+extern "C" int mlx_function_exporter_apply(
     const mlx_function_exporter xfunc,
     const mlx_vector_array args) {
   try {
@@ -27,7 +27,7 @@ extern "C" int mlx_function_exporter_call(
   return 0;
 }
 
-extern "C" int mlx_function_exporter_call_kwargs(
+extern "C" int mlx_function_exporter_apply_kwargs(
     const mlx_function_exporter xfunc,
     const mlx_map_string_to_array kwargs) {
   try {
@@ -52,7 +52,7 @@ extern "C" int mlx_imported_function_free(mlx_imported_function xfunc) {
   return 0;
 }
 
-extern "C" int mlx_imported_function_call(
+extern "C" int mlx_imported_function_apply(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
     mlx_vector_array args) {
@@ -66,7 +66,7 @@ extern "C" int mlx_imported_function_call(
   return 0;
 }
 
-extern "C" int mlx_imported_function_call_kwargs(
+extern "C" int mlx_imported_function_apply_kwargs(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
     mlx_map_string_to_array kwargs) {
