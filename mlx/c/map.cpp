@@ -43,8 +43,8 @@ extern "C" int mlx_map_string_to_array_insert(
     const char* key,
     const mlx_array value) {
   try {
-    auto res = mlx_map_string_to_array_get_(map).insert(
-        std::make_pair(std::string(key), mlx_array_get_(value)));
+    mlx_map_string_to_array_get_(map).insert_or_assign(
+        std::string(key), mlx_array_get_(value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -152,8 +152,8 @@ extern "C" int mlx_map_string_to_string_insert(
     const char* key,
     const char* value) {
   try {
-    auto res = mlx_map_string_to_string_get_(map).insert(
-        std::make_pair(std::string(key), std::string(value)));
+    mlx_map_string_to_string_get_(map).insert_or_assign(
+        std::string(key), std::string(value));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
