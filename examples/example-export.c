@@ -50,12 +50,11 @@ int main() {
   mlx_closure_free(cls);
 
   printf("loading inc() function from inc_func.bin file\n");
-  mlx_imported_function xfunc = mlx_imported_function_new();
-  mlx_import_function(&xfunc, "inc_func.bin");
+  mlx_imported_function xfunc_inc = mlx_imported_function_new("inc_func.bin");
 
   printf("evaluating inc() over x\n");
   mlx_vector_array res = mlx_vector_array_new();
-  mlx_imported_function_apply(&res, xfunc, args);
+  mlx_imported_function_apply(&res, xfunc_inc, args);
 
   mlx_array y = mlx_array_new();
   mlx_vector_array_get(&y, res, 0);
@@ -65,7 +64,7 @@ int main() {
   printf("evaluating inc() over x with kwargs\n");
   mlx_map_string_to_array kwargs = mlx_map_string_to_array_new();
   mlx_map_string_to_array_insert(kwargs, "x", x);
-  mlx_imported_function_apply_kwargs(&res, xfunc, kwargs);
+  mlx_imported_function_apply_kwargs(&res, xfunc_inc, kwargs);
   mlx_vector_array_get(&y, res, 0);
   print_array("+1: ", y);
   mlx_array_set(&x, y);
@@ -77,12 +76,12 @@ int main() {
   mlx_closure_kwargs_free(cls_kwargs);
 
   printf("loading mul() function from mul_func.bin file\n");
-  mlx_import_function(&xfunc, "mul_func.bin");
+  mlx_imported_function xfunc_mul = mlx_imported_function_new("mul_func.bin");
   printf("evaluating mul() over x and x with kwargs\n");
   print_array("x: ", x);
   mlx_map_string_to_array_insert(kwargs, "x", x);
   mlx_map_string_to_array_insert(kwargs, "y", x);
-  mlx_imported_function_apply_kwargs(&res, xfunc, kwargs);
+  mlx_imported_function_apply_kwargs(&res, xfunc_mul, kwargs);
   mlx_vector_array_get(&y, res, 0);
   print_array("3*3: ", y);
   mlx_array_set(&x, y);
@@ -92,7 +91,8 @@ int main() {
   mlx_map_string_to_array_free(kwargs);
   mlx_vector_array_free(args);
   mlx_array_free(x);
-  mlx_imported_function_free(xfunc);
+  mlx_imported_function_free(xfunc_inc);
+  mlx_imported_function_free(xfunc_mul);
 
   return 0;
 }
