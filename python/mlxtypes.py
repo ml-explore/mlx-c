@@ -7,7 +7,6 @@ for t in [
     ["mlx_vector_int", "@std::vector<int>", "@std::vector<int>"],
     ["mlx_vector_string", "std::vector<std::string>", "std::vector<std::string>"],
     ["mlx_vector_array", "std::vector<mlx::core::array>", "std::vector<array>"],
-    ["mlx_vector_array", "Args"],
     [
         "mlx_stream",
         "mlx::core::Stream",
@@ -17,7 +16,6 @@ for t in [
         "std::unordered_map<std::string, mlx::core::array>",
         "std::unordered_map<std::string, array>",
     ],
-    ["mlx_map_string_to_array", "Kwargs"],
     [
         "mlx_map_string_to_string",
         "std::unordered_map<std::string, std::string>",
@@ -36,14 +34,6 @@ for t in [
     [
         "mlx_closure",
         "std::function<std::vector<array>(std::vector<array>)>",
-    ],
-    [
-        "mlx_closure",
-        "std::function<std::vector<array>(Args)>",
-    ],
-    [
-        "mlx_closure_kwargs",
-        "std::function<std::vector<array>(Kwargs)>",
     ],
     [
         "mlx_closure_value_and_grad",
