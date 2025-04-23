@@ -46,10 +46,16 @@ typedef struct mlx_closure_kwargs_ {
 } mlx_closure_kwargs;
 mlx_closure_kwargs mlx_closure_kwargs_new();
 int mlx_closure_kwargs_free(mlx_closure_kwargs cls);
-mlx_closure_kwargs mlx_closure_kwargs_new_func(
-    int (*fun)(mlx_vector_array*, const mlx_map_string_to_array));
+mlx_closure_kwargs mlx_closure_kwargs_new_func(int (*fun)(
+    mlx_vector_array*,
+    const mlx_vector_array,
+    const mlx_map_string_to_array));
 mlx_closure_kwargs mlx_closure_kwargs_new_func_payload(
-    int (*fun)(mlx_vector_array*, const mlx_map_string_to_array, void*),
+    int (*fun)(
+        mlx_vector_array*,
+        const mlx_vector_array,
+        const mlx_map_string_to_array,
+        void*),
     void* payload,
     void (*dtor)(void*));
 int mlx_closure_kwargs_set(
@@ -58,7 +64,8 @@ int mlx_closure_kwargs_set(
 int mlx_closure_kwargs_apply(
     mlx_vector_array* res,
     mlx_closure_kwargs cls,
-    const mlx_map_string_to_array input);
+    const mlx_vector_array input_0,
+    const mlx_map_string_to_array input_1);
 
 typedef struct mlx_closure_value_and_grad_ {
   void* ctx;

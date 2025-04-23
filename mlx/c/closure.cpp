@@ -164,17 +164,24 @@ extern "C" int mlx_closure_kwargs_free(mlx_closure_kwargs cls) {
   }
 }
 
-extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func(
-    int (*fun)(mlx_vector_array*, const mlx_map_string_to_array)) {
+extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func(int (*fun)(
+    mlx_vector_array*,
+    const mlx_vector_array,
+    const mlx_map_string_to_array)) {
   try {
     auto cpp_closure =
-        [fun](const std::unordered_map<std::string, mlx::core::array>&
-                  cpp_input) {
-          auto input = mlx_map_string_to_array_new_();
-          mlx_map_string_to_array_set_(input, cpp_input);
+        [fun](
+            const std::vector<mlx::core::array>& cpp_input_0,
+            const std::unordered_map<std::string, mlx::core::array>&
+                cpp_input_1) {
+          auto input_0 = mlx_vector_array_new_();
+          mlx_vector_array_set_(input_0, cpp_input_0);
+          auto input_1 = mlx_map_string_to_array_new_();
+          mlx_map_string_to_array_set_(input_1, cpp_input_1);
           auto res = mlx_vector_array_new_();
-          auto status = fun(&res, input);
-          mlx_map_string_to_array_free(input);
+          auto status = fun(&res, input_0, input_1);
+          mlx_vector_array_free(input_0);
+          mlx_map_string_to_array_free(input_1);
           if (status) {
             mlx_vector_array_free(res);
             throw std::runtime_error(
@@ -192,7 +199,11 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func(
 }
 
 extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func_payload(
-    int (*fun)(mlx_vector_array*, const mlx_map_string_to_array, void*),
+    int (*fun)(
+        mlx_vector_array*,
+        const mlx_vector_array,
+        const mlx_map_string_to_array,
+        void*),
     void* payload,
     void (*dtor)(void*)) {
   try {
@@ -204,13 +215,17 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func_payload(
     }
     auto cpp_closure =
         [fun, cpp_payload, dtor](
+            const std::vector<mlx::core::array>& cpp_input_0,
             const std::unordered_map<std::string, mlx::core::array>&
-                cpp_input) {
-          auto input = mlx_map_string_to_array_new_();
-          mlx_map_string_to_array_set_(input, cpp_input);
+                cpp_input_1) {
+          auto input_0 = mlx_vector_array_new_();
+          mlx_vector_array_set_(input_0, cpp_input_0);
+          auto input_1 = mlx_map_string_to_array_new_();
+          mlx_map_string_to_array_set_(input_1, cpp_input_1);
           auto res = mlx_vector_array_new_();
-          auto status = fun(&res, input, cpp_payload.get());
-          mlx_map_string_to_array_free(input);
+          auto status = fun(&res, input_0, input_1, cpp_payload.get());
+          mlx_vector_array_free(input_0);
+          mlx_map_string_to_array_free(input_1);
           if (status) {
             mlx_vector_array_free(res);
             throw std::runtime_error(
@@ -230,11 +245,14 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func_payload(
 extern "C" int mlx_closure_kwargs_apply(
     mlx_vector_array* res,
     mlx_closure_kwargs cls,
-    const mlx_map_string_to_array input) {
+    const mlx_vector_array input_0,
+    const mlx_map_string_to_array input_1) {
   try {
     mlx_vector_array_set_(
         *res,
-        mlx_closure_kwargs_get_(cls)(mlx_map_string_to_array_get_(input)));
+        mlx_closure_kwargs_get_(cls)(
+            mlx_vector_array_get_(input_0),
+            mlx_map_string_to_array_get_(input_1)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

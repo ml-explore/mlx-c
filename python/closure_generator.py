@@ -344,7 +344,10 @@ print(
         code,
         "mlx_closure_kwargs",
         "std::vector<mlx::core::array>",
-        ["std::unordered_map<std::string, mlx::core::array>"],
+        [
+            "std::vector<mlx::core::array>",
+            "std::unordered_map<std::string, mlx::core::array>",
+        ],
     )
 )
 print(

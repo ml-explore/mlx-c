@@ -32,6 +32,7 @@ int mlx_export_function(
 int mlx_export_function_kwargs(
     const char* file,
     const mlx_closure_kwargs fun,
+    const mlx_vector_array args,
     const mlx_map_string_to_array kwargs,
     bool shapeless);
 
@@ -48,6 +49,7 @@ int mlx_function_exporter_apply(
     const mlx_vector_array args);
 int mlx_function_exporter_apply_kwargs(
     const mlx_function_exporter xfunc,
+    const mlx_vector_array args,
     const mlx_map_string_to_array kwargs);
 
 typedef struct mlx_imported_function_ {
@@ -58,11 +60,12 @@ int mlx_imported_function_free(mlx_imported_function xfunc);
 int mlx_imported_function_apply(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
-    mlx_vector_array args);
+    const mlx_vector_array args);
 int mlx_imported_function_apply_kwargs(
     mlx_vector_array* res,
     const mlx_imported_function xfunc,
-    mlx_map_string_to_array kwargs);
+    const mlx_vector_array args,
+    const mlx_map_string_to_array kwargs);
 /**@}*/
 
 #ifdef __cplusplus
