@@ -1,7 +1,4 @@
-/* Copyright © 2023-2024 Apple Inc.                   */
-/*                                                    */
-/* This file is auto-generated. Do not edit manually. */
-/*                                                    */
+/* Copyright © 2023-2025 Apple Inc.                   */
 
 #ifndef MLX_EXPORT_H
 #define MLX_EXPORT_H
@@ -13,7 +10,6 @@
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
-#include "mlx/c/export_impl.h"
 #include "mlx/c/io_types.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
@@ -38,12 +34,35 @@ int mlx_export_function_kwargs(
     const mlx_closure_kwargs fun,
     const mlx_map_string_to_array kwargs,
     bool shapeless);
-int mlx_exporter(
-    mlx_function_exporter* res,
+
+typedef struct mlx_function_exporter_ {
+  void* ctx;
+} mlx_function_exporter;
+mlx_function_exporter mlx_function_exporter_new(
     const char* file,
     const mlx_closure fun,
     bool shapeless);
-int mlx_import_function(mlx_imported_function* res, const char* file);
+int mlx_function_exporter_free(mlx_function_exporter xfunc);
+int mlx_function_exporter_apply(
+    const mlx_function_exporter xfunc,
+    const mlx_vector_array args);
+int mlx_function_exporter_apply_kwargs(
+    const mlx_function_exporter xfunc,
+    const mlx_map_string_to_array kwargs);
+
+typedef struct mlx_imported_function_ {
+  void* ctx;
+} mlx_imported_function;
+mlx_imported_function mlx_imported_function_new(const char* file);
+int mlx_imported_function_free(mlx_imported_function xfunc);
+int mlx_imported_function_apply(
+    mlx_vector_array* res,
+    const mlx_imported_function xfunc,
+    mlx_vector_array args);
+int mlx_imported_function_apply_kwargs(
+    mlx_vector_array* res,
+    const mlx_imported_function xfunc,
+    mlx_map_string_to_array kwargs);
 /**@}*/
 
 #ifdef __cplusplus
