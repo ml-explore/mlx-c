@@ -23,6 +23,7 @@ inline CTYPE& CTYPE_set_(CTYPE& d, const CPPTYPE& s) {
   }
   return d;
 }
+
 inline CTYPE& CTYPE_set_(CTYPE& d, CPPTYPE&& s) {
   if (d.ctx) {
     *static_cast<CPPTYPE*>(d.ctx) = std::move(s);
