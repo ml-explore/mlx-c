@@ -47,10 +47,10 @@ inline mlx_closure& mlx_closure_set_(
         const std::vector<mlx::core::array>&)>&& s) {
   if (d.ctx) {
     *static_cast<std::function<std::vector<mlx::core::array>(
-        const std::vector<mlx::core::array>&)>*>(d.ctx) = s;
+        const std::vector<mlx::core::array>&)>*>(d.ctx) = std::move(s);
   } else {
     d.ctx = new std::function<std::vector<mlx::core::array>(
-        const std::vector<mlx::core::array>&)>(s);
+        const std::vector<mlx::core::array>&)>(std::move(s));
   }
   return d;
 }
@@ -119,11 +119,11 @@ inline mlx_closure_value_and_grad& mlx_closure_value_and_grad_set_(
   if (d.ctx) {
     *static_cast<std::function<
         std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>(
-            const std::vector<mlx::core::array>&)>*>(d.ctx) = s;
+            const std::vector<mlx::core::array>&)>*>(d.ctx) = std::move(s);
   } else {
     d.ctx = new std::function<
         std::pair<std::vector<mlx::core::array>, std::vector<mlx::core::array>>(
-            const std::vector<mlx::core::array>&)>(s);
+            const std::vector<mlx::core::array>&)>(std::move(s));
   }
   return d;
 }
@@ -204,12 +204,12 @@ inline mlx_closure_custom& mlx_closure_custom_set_(
     *static_cast<std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
         const std::vector<mlx::core::array>&,
-        const std::vector<mlx::core::array>&)>*>(d.ctx) = s;
+        const std::vector<mlx::core::array>&)>*>(d.ctx) = std::move(s);
   } else {
     d.ctx = new std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
         const std::vector<mlx::core::array>&,
-        const std::vector<mlx::core::array>&)>(s);
+        const std::vector<mlx::core::array>&)>(std::move(s));
   }
   return d;
 }
@@ -295,12 +295,12 @@ inline mlx_closure_custom_jvp& mlx_closure_custom_jvp_set_(
     *static_cast<std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
         const std::vector<mlx::core::array>&,
-        const std::vector<int>&)>*>(d.ctx) = s;
+        const std::vector<int>&)>*>(d.ctx) = std::move(s);
   } else {
     d.ctx = new std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
         const std::vector<mlx::core::array>&,
-        const std::vector<int>&)>(s);
+        const std::vector<int>&)>(std::move(s));
   }
   return d;
 }
@@ -380,11 +380,12 @@ inline mlx_closure_custom_vmap& mlx_closure_custom_vmap_set_(
     *static_cast<std::function<
         std::pair<std::vector<mlx::core::array>, std::vector<int>>(
             const std::vector<mlx::core::array>&, const std::vector<int>&)>*>(
-        d.ctx) = s;
+        d.ctx) = std::move(s);
   } else {
     d.ctx = new std::function<
         std::pair<std::vector<mlx::core::array>, std::vector<int>>(
-            const std::vector<mlx::core::array>&, const std::vector<int>&)>(s);
+            const std::vector<mlx::core::array>&, const std::vector<int>&)>(
+        std::move(s));
   }
   return d;
 }

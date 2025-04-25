@@ -32,9 +32,9 @@ inline mlx_stream& mlx_stream_set_(mlx_stream& d, const mlx::core::Stream& s) {
 
 inline mlx_stream& mlx_stream_set_(mlx_stream& d, mlx::core::Stream&& s) {
   if (d.ctx) {
-    *static_cast<mlx::core::Stream*>(d.ctx) = s;
+    *static_cast<mlx::core::Stream*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new mlx::core::Stream(s);
+    d.ctx = new mlx::core::Stream(std::move(s));
   }
   return d;
 }

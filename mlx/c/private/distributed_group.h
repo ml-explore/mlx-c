@@ -39,9 +39,9 @@ inline mlx_distributed_group& mlx_distributed_group_set_(
     mlx_distributed_group& d,
     mlx::core::distributed::Group&& s) {
   if (d.ctx) {
-    *static_cast<mlx::core::distributed::Group*>(d.ctx) = s;
+    *static_cast<mlx::core::distributed::Group*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new mlx::core::distributed::Group(s);
+    d.ctx = new mlx::core::distributed::Group(std::move(s));
   }
   return d;
 }

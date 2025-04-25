@@ -38,9 +38,9 @@ inline mlx_vector_array& mlx_vector_array_set_(
     mlx_vector_array& d,
     std::vector<mlx::core::array>&& s) {
   if (d.ctx) {
-    *static_cast<std::vector<mlx::core::array>*>(d.ctx) = s;
+    *static_cast<std::vector<mlx::core::array>*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new std::vector<mlx::core::array>(s);
+    d.ctx = new std::vector<mlx::core::array>(std::move(s));
   }
   return d;
 }
@@ -90,9 +90,10 @@ inline mlx_vector_vector_array& mlx_vector_vector_array_set_(
     mlx_vector_vector_array& d,
     std::vector<std::vector<mlx::core::array>>&& s) {
   if (d.ctx) {
-    *static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx) = s;
+    *static_cast<std::vector<std::vector<mlx::core::array>>*>(d.ctx) =
+        std::move(s);
   } else {
-    d.ctx = new std::vector<std::vector<mlx::core::array>>(s);
+    d.ctx = new std::vector<std::vector<mlx::core::array>>(std::move(s));
   }
   return d;
 }
@@ -138,9 +139,9 @@ inline mlx_vector_int& mlx_vector_int_set_(
     mlx_vector_int& d,
     std::vector<int>&& s) {
   if (d.ctx) {
-    *static_cast<std::vector<int>*>(d.ctx) = s;
+    *static_cast<std::vector<int>*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new std::vector<int>(s);
+    d.ctx = new std::vector<int>(std::move(s));
   }
   return d;
 }
@@ -186,9 +187,9 @@ inline mlx_vector_string& mlx_vector_string_set_(
     mlx_vector_string& d,
     std::vector<std::string>&& s) {
   if (d.ctx) {
-    *static_cast<std::vector<std::string>*>(d.ctx) = s;
+    *static_cast<std::vector<std::string>*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new std::vector<std::string>(s);
+    d.ctx = new std::vector<std::string>(std::move(s));
   }
   return d;
 }
