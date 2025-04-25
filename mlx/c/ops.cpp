@@ -836,6 +836,7 @@ extern "C" int mlx_conv_transpose1d(
     int stride,
     int padding,
     int dilation,
+    int output_padding,
     int groups,
     const mlx_stream s) {
   try {
@@ -847,6 +848,7 @@ extern "C" int mlx_conv_transpose1d(
             stride,
             padding,
             dilation,
+            output_padding,
             groups,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -865,6 +867,8 @@ extern "C" int mlx_conv_transpose2d(
     int padding_1,
     int dilation_0,
     int dilation_1,
+    int output_padding_0,
+    int output_padding_1,
     int groups,
     const mlx_stream s) {
   try {
@@ -876,6 +880,7 @@ extern "C" int mlx_conv_transpose2d(
             std::make_pair(stride_0, stride_1),
             std::make_pair(padding_0, padding_1),
             std::make_pair(dilation_0, dilation_1),
+            std::make_pair(output_padding_0, output_padding_1),
             groups,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -897,6 +902,9 @@ extern "C" int mlx_conv_transpose3d(
     int dilation_0,
     int dilation_1,
     int dilation_2,
+    int output_padding_0,
+    int output_padding_1,
+    int output_padding_2,
     int groups,
     const mlx_stream s) {
   try {
@@ -908,6 +916,8 @@ extern "C" int mlx_conv_transpose3d(
             std::make_tuple(stride_0, stride_1, stride_2),
             std::make_tuple(padding_0, padding_1, padding_2),
             std::make_tuple(dilation_0, dilation_1, dilation_2),
+            std::make_tuple(
+                output_padding_0, output_padding_1, output_padding_2),
             groups,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
