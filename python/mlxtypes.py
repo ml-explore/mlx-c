@@ -60,8 +60,6 @@ for t in [
         "std::function<std::vector<array>(const std::vector<array>&, const std::vector<std::vector<int>>&, const std::vector<mlx::core::Dtype>&, std::tuple<int, int, int>, std::tuple<int, int, int>, std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>, std::optional<float>, bool, mlx::core::StreamOrDevice)>",
         "MetalKernelFunction",
     ],
-    ["mlx_function_exporter", "FunctionExporter"],
-    ["mlx_imported_function", "ImportedFunction"],
 ]:
     if len(t) == 2:
         ctype, cpptype = t
