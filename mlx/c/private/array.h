@@ -29,6 +29,7 @@ inline mlx_array& mlx_array_set_(mlx_array& d, const mlx::core::array& s) {
   }
   return d;
 }
+
 inline mlx_array& mlx_array_set_(mlx_array& d, mlx::core::array&& s) {
   if (d.ctx) {
     *static_cast<mlx::core::array*>(d.ctx) = std::move(s);

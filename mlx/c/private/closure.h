@@ -40,6 +40,7 @@ inline mlx_closure& mlx_closure_set_(
   }
   return d;
 }
+
 inline mlx_closure& mlx_closure_set_(
     mlx_closure& d,
     std::function<std::vector<mlx::core::array>(
@@ -110,6 +111,7 @@ inline mlx_closure_kwargs& mlx_closure_kwargs_set_(
   }
   return d;
 }
+
 inline mlx_closure_kwargs& mlx_closure_kwargs_set_(
     mlx_closure_kwargs& d,
     std::function<std::vector<mlx::core::array>(
@@ -118,7 +120,8 @@ inline mlx_closure_kwargs& mlx_closure_kwargs_set_(
   if (d.ctx) {
     *static_cast<std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
-        const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx) = s;
+        const std::unordered_map<std::string, mlx::core::array>&)>*>(d.ctx) =
+        std::move(s);
   } else {
     d.ctx = new std::function<std::vector<mlx::core::array>(
         const std::vector<mlx::core::array>&,
@@ -186,6 +189,7 @@ inline mlx_closure_value_and_grad& mlx_closure_value_and_grad_set_(
   }
   return d;
 }
+
 inline mlx_closure_value_and_grad& mlx_closure_value_and_grad_set_(
     mlx_closure_value_and_grad& d,
     std::function<
@@ -268,6 +272,7 @@ inline mlx_closure_custom& mlx_closure_custom_set_(
   }
   return d;
 }
+
 inline mlx_closure_custom& mlx_closure_custom_set_(
     mlx_closure_custom& d,
     std::function<std::vector<mlx::core::array>(
@@ -358,6 +363,7 @@ inline mlx_closure_custom_jvp& mlx_closure_custom_jvp_set_(
   }
   return d;
 }
+
 inline mlx_closure_custom_jvp& mlx_closure_custom_jvp_set_(
     mlx_closure_custom_jvp& d,
     std::function<std::vector<mlx::core::array>(
@@ -443,6 +449,7 @@ inline mlx_closure_custom_vmap& mlx_closure_custom_vmap_set_(
   }
   return d;
 }
+
 inline mlx_closure_custom_vmap& mlx_closure_custom_vmap_set_(
     mlx_closure_custom_vmap& d,
     std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(
