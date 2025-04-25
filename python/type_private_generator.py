@@ -24,9 +24,9 @@ inline CTYPE& CTYPE_set_(CTYPE& d, const CPPTYPE& s) {
 
 inline CTYPE& CTYPE_set_(CTYPE& d, CPPTYPE&& s) {
   if (d.ctx) {
-    *static_cast<CPPTYPE*>(d.ctx) = s;
+    *static_cast<CPPTYPE*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new CPPTYPE(s);
+    d.ctx = new CPPTYPE(std::move(s));
   }
   return d;
 }
