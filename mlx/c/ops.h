@@ -282,6 +282,7 @@ int mlx_conv_transpose1d(
     int stride,
     int padding,
     int dilation,
+    int output_padding,
     int groups,
     const mlx_stream s);
 int mlx_conv_transpose2d(
@@ -294,6 +295,8 @@ int mlx_conv_transpose2d(
     int padding_1,
     int dilation_0,
     int dilation_1,
+    int output_padding_0,
+    int output_padding_1,
     int groups,
     const mlx_stream s);
 int mlx_conv_transpose3d(
@@ -309,6 +312,9 @@ int mlx_conv_transpose3d(
     int dilation_0,
     int dilation_1,
     int dilation_2,
+    int output_padding_0,
+    int output_padding_1,
+    int output_padding_2,
     int groups,
     const mlx_stream s);
 int mlx_copy(mlx_array* res, const mlx_array a, const mlx_stream s);
