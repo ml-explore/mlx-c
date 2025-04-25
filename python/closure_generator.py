@@ -222,6 +222,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/map.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/vector.h"
@@ -338,6 +339,17 @@ else:
 mlx_closure mlx_closure_new_unary(int (*fun)(mlx_array*, const mlx_array));
     """
     )
+print(
+    generate(
+        code,
+        "mlx_closure_kwargs",
+        "std::vector<mlx::core::array>",
+        [
+            "std::vector<mlx::core::array>",
+            "std::unordered_map<std::string, mlx::core::array>",
+        ],
+    )
+)
 print(
     generate(
         code,

@@ -96,6 +96,7 @@ def mlx_core(name, defs):
         "array_equal": ["", None],
         "round": ["", None],
         "trace": ["", None, None],
+        "export_function": [None, "", "kwargs"],
     }
     return _make_variant_suffixes(name, defs, variants)
 
