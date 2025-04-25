@@ -1,4 +1,4 @@
-Function serialization
+Function Serialization
 ======================
 
 .. doxygengroup:: export
