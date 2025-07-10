@@ -112,7 +112,7 @@ def mlx_core_random(name, defs):
         "permutation": ["", "arange"],
         "split": ["num", ""],
         "uniform": ["", None, None, None],
-        "normal": ["", None, None, None],
+        "normal": ["broadcast", "", None, None, None],
     }
     return _make_variant_suffixes(name, defs, variants)
 
