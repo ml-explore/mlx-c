@@ -868,6 +868,12 @@ int mlx_scatter_prod(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
+int mlx_segmented_mm(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    const mlx_array segments,
+    const mlx_stream s);
 int mlx_sigmoid(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_sign(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_sin(mlx_array* res, const mlx_array a, const mlx_stream s);
