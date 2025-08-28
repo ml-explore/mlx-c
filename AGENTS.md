@@ -1,0 +1,1 @@
+Agents working on this repository must explore every directory under /workspace and look for additional MD files, especially AGENTS.md. Read and remember the instructions in those files, and follow them when modifying any files within their scope.

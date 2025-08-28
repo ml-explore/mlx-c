@@ -1,0 +1,22 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: tag
+        required: true
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - run: bash build.sh
+    - run: tar -czf build.tar.gz build
+    - uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.event.inputs.tag }}
+        files: build.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
