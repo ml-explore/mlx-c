@@ -32,7 +32,12 @@ mlx_metal_device_info_t mlx_metal_device_info();
         )
 
 
-def mlx_fast_metal_kernel(f, implementation):
+def __implement_mlx_fast_custom_kernel(implementation):
+    if not __implement_mlx_fast_custom_kernel.has_run:
+        __implement_mlx_fast_custom_kernel.has_run = True
+    else:
+        return
+
     if implementation:
         print(
             """
@@ -87,25 +92,6 @@ struct mlx_fast_custom_kernel_cpp_ {
       : mkf(mkf) {};
 };
 
-inline mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal_(
-    const std::string& name,
-    const std::vector<std::string>& input_names,
-    const std::vector<std::string>& output_names,
-    const std::string& source,
-    const std::string& header,
-    bool ensure_row_contiguous,
-    bool atomic_outputs) {
-  return mlx_fast_custom_kernel(
-      {new mlx_fast_custom_kernel_cpp_(mlx::core::fast::metal_kernel(
-          name,
-          input_names,
-          output_names,
-          source,
-          header,
-          ensure_row_contiguous,
-          atomic_outputs))});
-}
-
 inline mlx::core::fast::CustomKernelFunction& mlx_fast_custom_kernel_get_(
     mlx_fast_custom_kernel d) {
   if (!d.ctx) {
@@ -118,29 +104,6 @@ inline void mlx_fast_custom_kernel_free_(mlx_fast_custom_kernel d) {
   if (d.ctx) {
     delete static_cast<mlx_fast_custom_kernel_cpp_*>(d.ctx);
   }
-}
-
-extern "C" mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
-    const char* name,
-    const mlx_vector_string input_names,
-    const mlx_vector_string output_names,
-    const char* source,
-    const char* header,
-    bool ensure_row_contiguous,
-    bool atomic_outputs) {
-  try {
-    return mlx_fast_custom_kernel_new_metal_(
-        name,
-        mlx_vector_string_get_(input_names),
-        mlx_vector_string_get_(output_names),
-        source,
-        header,
-        ensure_row_contiguous,
-        atomic_outputs);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-  }
-  return {nullptr};
 }
 
 extern "C" void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls) {
@@ -328,6 +291,134 @@ typedef struct mlx_fast_custom_kernel_ {
   void* ctx;
 } mlx_fast_custom_kernel;
 
+void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls);
+int mlx_fast_custom_kernel_apply(
+    mlx_vector_array* outputs,
+    mlx_fast_custom_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_fast_custom_kernel_config config,
+    const mlx_stream stream);
+        """
+        )
+
+
+__implement_mlx_fast_custom_kernel.has_run = False
+
+
+def mlx_fast_cuda_kernel(f, implementation):
+    __implement_mlx_fast_custom_kernel(implementation)
+    if implementation:
+        print(
+            """
+inline mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda_(
+    const std::string& name,
+    const std::vector<std::string>& input_names,
+    const std::vector<std::string>& output_names,
+    const std::string& source,
+    const std::string& header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs) {
+  return mlx_fast_custom_kernel(
+      {new mlx_fast_custom_kernel_cpp_(mlx::core::fast::cuda_kernel(
+          name,
+          input_names,
+          output_names,
+          source,
+          header,
+          ensure_row_contiguous,
+          atomic_outputs))});
+}
+
+extern "C" mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda(
+    const char* name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    const char* source,
+    const char* header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs) {
+  try {
+    return mlx_fast_custom_kernel_new_cuda_(
+        name,
+        mlx_vector_string_get_(input_names),
+        mlx_vector_string_get_(output_names),
+        source,
+        header,
+        ensure_row_contiguous,
+        atomic_outputs);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+  }
+  return {nullptr};
+}
+        """
+        )
+    else:
+        print(
+            """
+mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda(
+    const char* name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    const char* source,
+    const char* header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs);
+        """
+        )
+
+
+def mlx_fast_metal_kernel(f, implementation):
+    __implement_mlx_fast_custom_kernel(implementation)
+    if implementation:
+        print(
+            """
+inline mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal_(
+    const std::string& name,
+    const std::vector<std::string>& input_names,
+    const std::vector<std::string>& output_names,
+    const std::string& source,
+    const std::string& header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs) {
+  return mlx_fast_custom_kernel(
+      {new mlx_fast_custom_kernel_cpp_(mlx::core::fast::metal_kernel(
+          name,
+          input_names,
+          output_names,
+          source,
+          header,
+          ensure_row_contiguous,
+          atomic_outputs))});
+}
+
+extern "C" mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
+    const char* name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    const char* source,
+    const char* header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs) {
+  try {
+    return mlx_fast_custom_kernel_new_metal_(
+        name,
+        mlx_vector_string_get_(input_names),
+        mlx_vector_string_get_(output_names),
+        source,
+        header,
+        ensure_row_contiguous,
+        atomic_outputs);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+  }
+  return {nullptr};
+}
+        """
+        )
+    else:
+        print(
+            """
 mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
     const char* name,
     const mlx_vector_string input_names,
@@ -336,12 +427,5 @@ mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
     const char* header,
     bool ensure_row_contiguous,
     bool atomic_outputs);
-void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls);
-int mlx_fast_custom_kernel_apply(
-    mlx_vector_array* outputs,
-    mlx_fast_custom_kernel cls,
-    const mlx_vector_array inputs,
-    const mlx_fast_custom_kernel_config config,
-    const mlx_stream stream);
         """
         )

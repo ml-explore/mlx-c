@@ -27,13 +27,6 @@ extern "C" {
  * \defgroup fast Fast custom operations
  */
 /**@{*/
-int mlx_fast_layer_norm(
-    mlx_array* res,
-    const mlx_array x,
-    const mlx_array weight /* may be null */,
-    const mlx_array bias /* may be null */,
-    float eps,
-    const mlx_stream s);
 
 typedef struct mlx_fast_custom_kernel_config_ {
   void* ctx;
@@ -79,6 +72,31 @@ typedef struct mlx_fast_custom_kernel_ {
   void* ctx;
 } mlx_fast_custom_kernel;
 
+void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls);
+int mlx_fast_custom_kernel_apply(
+    mlx_vector_array* outputs,
+    mlx_fast_custom_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_fast_custom_kernel_config config,
+    const mlx_stream stream);
+
+mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda(
+    const char* name,
+    const mlx_vector_string input_names,
+    const mlx_vector_string output_names,
+    const char* source,
+    const char* header,
+    bool ensure_row_contiguous,
+    bool atomic_outputs);
+
+int mlx_fast_layer_norm(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_array weight /* may be null */,
+    const mlx_array bias /* may be null */,
+    float eps,
+    const mlx_stream s);
+
 mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
     const char* name,
     const mlx_vector_string input_names,
@@ -87,13 +105,6 @@ mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
     const char* header,
     bool ensure_row_contiguous,
     bool atomic_outputs);
-void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls);
-int mlx_fast_custom_kernel_apply(
-    mlx_vector_array* outputs,
-    mlx_fast_custom_kernel cls,
-    const mlx_vector_array inputs,
-    const mlx_fast_custom_kernel_config config,
-    const mlx_stream stream);
 
 int mlx_fast_rms_norm(
     mlx_array* res,
