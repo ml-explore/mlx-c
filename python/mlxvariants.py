@@ -19,8 +19,6 @@ def _make_variant_suffixes(name, defs, variants):
         print("OVL", file=sys.stderr)
     if name in variants:
         variants = variants[name]
-        for i, d in enumerate(defs):
-            print("OVL", i, _pretty_string_def(d), " -> ", variants[i], file=sys.stderr)
         if len(variants) != len(defs):
             print("function overloads length:", len(defs), file=sys.stderr)
             for i, d in enumerate(defs):
@@ -29,6 +27,8 @@ def _make_variant_suffixes(name, defs, variants):
             for i, v in enumerate(variants):
                 print(i, v, file=sys.stderr)
             raise RuntimeError("function overloads and namings do not match")
+        for i, d in enumerate(defs):
+            print("OVL", i, _pretty_string_def(d), " -> ", variants[i], file=sys.stderr)
         newdefs = []
         for i, d in enumerate(defs):
             v = variants[i]
@@ -112,7 +112,7 @@ def mlx_core_random(name, defs):
         "permutation": ["", "arange"],
         "split": ["num", ""],
         "uniform": ["", None, None, None],
-        "normal": ["", None, None, None],
+        "normal": ["broadcast", "", None, None, None],
     }
     return _make_variant_suffixes(name, defs, variants)
 

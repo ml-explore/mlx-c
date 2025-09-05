@@ -2752,6 +2752,26 @@ extern "C" int mlx_scatter_prod(
   }
   return 0;
 }
+extern "C" int mlx_segmented_mm(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    const mlx_array segments,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::segmented_mm(
+            mlx_array_get_(a),
+            mlx_array_get_(b),
+            mlx_array_get_(segments),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int
 mlx_sigmoid(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
