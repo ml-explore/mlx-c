@@ -55,11 +55,6 @@ for t in [
         "std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(std::vector<mlx::core::array>,std::vector<int>)>",
         "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>",
     ],
-    [
-        "mlx_closure_metal_kernel",
-        "std::function<std::vector<array>(const std::vector<array>&, const std::vector<std::vector<int>>&, const std::vector<mlx::core::Dtype>&, std::tuple<int, int, int>, std::tuple<int, int, int>, std::vector<std::pair<std::string, mlx::core::fast::TemplateArg>>, std::optional<float>, bool, mlx::core::StreamOrDevice)>",
-        "MetalKernelFunction",
-    ],
 ]:
     if len(t) == 2:
         ctype, cpptype = t
@@ -151,8 +146,57 @@ def register_raw_vector_type(cpptype, alt=None):
     )
 
 
-register_raw_vector_type("int", alt="Shape")
-register_raw_vector_type("int64_t", alt="Strides")
+def register_small_vector_type(cpptype, alt=None):
+    types.append(
+        {
+            # "c": "mlx_vector_" + cpptype, # DEBUG: ONLY FOR RETURN?
+            "alt": alt,  # "alt": "std::vector<" + cpptype + ">", # DEBUG: ONLY FOR RETURN?
+            "cpp": "mlx::core::SmallVector<" + cpptype + ">",
+            "free": lambda s: "",
+            "c_to_cpp": lambda s, cpptype=cpptype: "mlx::core::SmallVector<"
+            + cpptype
+            + ">("
+            + s
+            + ", "
+            + s
+            + " + "
+            + s
+            + "_num"
+            + ")",
+            "c_assign_from_cpp": lambda d, s, returned=True: d
+            + " = "
+            + s
+            + ".data(); "
+            + d
+            + "_num = "
+            + s
+            + ".size()",
+            "c_arg": lambda s, untyped=False, cpptype=cpptype: (
+                (s + ", " + s + "_num")
+                if untyped
+                else ("const " + cpptype + "* " + s + ", size_t " + s + "_num").strip()
+            ),
+            "c_new": lambda s, cpptype=cpptype: "const "
+            + cpptype
+            + "* "
+            + s
+            + "= nullptr;  size_t "
+            + s
+            + "_num = 0",
+            # "c_return_arg": lambda s, untyped=False, ctype=ctype: (
+            #     ("" if untyped else ctype + " ") + s
+            # ).strip(),
+            # "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
+            "cpp_arg": lambda s, cpptype=cpptype: (
+                "const mlx::core::vectoSmallVector<" + cpptype + ">& " + s
+            ).strip(),
+        }
+    )
+
+
+register_small_vector_type("int", alt="Shape")
+register_small_vector_type("int64_t", alt="Strides")
+register_raw_vector_type("int")
 register_raw_vector_type("size_t")
 register_raw_vector_type("uint64_t")
 

@@ -96,7 +96,7 @@ extern "C" int mlx_distributed_recv(
     mlx_array_set_(
         *res,
         mlx::core::distributed::recv(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::SmallVector<int>(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             src,
             (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
