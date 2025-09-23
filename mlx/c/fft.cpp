@@ -37,7 +37,7 @@ extern "C" int mlx_fft_fft2(
         *res,
         mlx::core::fft::fft2(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -59,7 +59,7 @@ extern "C" int mlx_fft_fftn(
         *res,
         mlx::core::fft::fftn(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -116,7 +116,7 @@ extern "C" int mlx_fft_ifft2(
         *res,
         mlx::core::fft::ifft2(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -138,7 +138,7 @@ extern "C" int mlx_fft_ifftn(
         *res,
         mlx::core::fft::ifftn(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -195,7 +195,7 @@ extern "C" int mlx_fft_irfft2(
         *res,
         mlx::core::fft::irfft2(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -217,7 +217,7 @@ extern "C" int mlx_fft_irfftn(
         *res,
         mlx::core::fft::irfftn(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -255,7 +255,7 @@ extern "C" int mlx_fft_rfft2(
         *res,
         mlx::core::fft::rfft2(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -277,7 +277,7 @@ extern "C" int mlx_fft_rfftn(
         *res,
         mlx::core::fft::rfftn(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(n, n + n_num),
+            mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {

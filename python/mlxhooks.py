@@ -42,7 +42,7 @@ def __implement_mlx_fast_custom_kernel(implementation):
         print(
             """
 struct mlx_fast_custom_kernel_config_cpp_ {
-  std::vector<mlx::core::SmallVector<int>> output_shapes;
+  std::vector<mlx::core::Shape> output_shapes;
   std::vector<mlx::core::Dtype> output_dtypes;
   std::tuple<int, int, int> grid;
   std::tuple<int, int, int> thread_group;
@@ -117,7 +117,7 @@ extern "C" int mlx_fast_custom_kernel_config_add_output_arg(
     mlx_dtype dtype) {
   try {
     mlx_fast_custom_kernel_config_get_(cls).output_shapes.push_back(
-        mlx::core::SmallVector<int>(shape, shape + size));
+        mlx::core::Shape(shape, shape + size));
     mlx_fast_custom_kernel_config_get_(cls).output_dtypes.push_back(
         mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {

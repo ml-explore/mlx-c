@@ -146,16 +146,15 @@ def register_raw_vector_type(cpptype, alt=None):
     )
 
 
-def register_small_vector_type(cpptype, alt=None):
+def register_small_vector_type(etype, cpptype, alt=None):
     types.append(
         {
             # "c": "mlx_vector_" + cpptype, # DEBUG: ONLY FOR RETURN?
-            "alt": alt,  # "alt": "std::vector<" + cpptype + ">", # DEBUG: ONLY FOR RETURN?
-            "cpp": "mlx::core::SmallVector<" + cpptype + ">",
+            "alt": alt,
+            "cpp": cpptype,
             "free": lambda s: "",
-            "c_to_cpp": lambda s, cpptype=cpptype: "mlx::core::SmallVector<"
-            + cpptype
-            + ">("
+            "c_to_cpp": lambda s, cpptype=cpptype: cpptype
+            + "("
             + s
             + ", "
             + s
@@ -171,13 +170,13 @@ def register_small_vector_type(cpptype, alt=None):
             + "_num = "
             + s
             + ".size()",
-            "c_arg": lambda s, untyped=False, cpptype=cpptype: (
+            "c_arg": lambda s, untyped=False, etype=etype: (
                 (s + ", " + s + "_num")
                 if untyped
-                else ("const " + cpptype + "* " + s + ", size_t " + s + "_num").strip()
+                else ("const " + etype + "* " + s + ", size_t " + s + "_num").strip()
             ),
-            "c_new": lambda s, cpptype=cpptype: "const "
-            + cpptype
+            "c_new": lambda s, etype=etype: "const "
+            + etype
             + "* "
             + s
             + "= nullptr;  size_t "
@@ -188,14 +187,14 @@ def register_small_vector_type(cpptype, alt=None):
             # ).strip(),
             # "c_new": lambda s, ctype=ctype: "auto " + s + " = new " + ctype + "_()",
             "cpp_arg": lambda s, cpptype=cpptype: (
-                "const mlx::core::vectoSmallVector<" + cpptype + ">& " + s
+                "const " + cpptype + "& " + s
             ).strip(),
         }
     )
 
 
-register_small_vector_type("int", alt="Shape")
-register_small_vector_type("int64_t", alt="Strides")
+register_small_vector_type("int", "mlx::core::Shape", "Shape")
+register_small_vector_type("int64_t", "mlx::core::Strides", "Strides")
 register_raw_vector_type("int")
 register_raw_vector_type("size_t")
 register_raw_vector_type("uint64_t")

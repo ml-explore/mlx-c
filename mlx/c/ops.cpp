@@ -432,8 +432,8 @@ extern "C" int mlx_as_strided(
         *res,
         mlx::core::as_strided(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
-            mlx::core::SmallVector<int64_t>(strides, strides + strides_num),
+            mlx::core::Shape(shape, shape + shape_num),
+            mlx::core::Strides(strides, strides + strides_num),
             offset,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -605,7 +605,7 @@ extern "C" int mlx_broadcast_to(
         *res,
         mlx::core::broadcast_to(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -1322,7 +1322,7 @@ extern "C" int mlx_full(
     mlx_array_set_(
         *res,
         mlx::core::full(
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_array_get_(vals),
             mlx_dtype_to_cpp(dtype),
             mlx_stream_get_(s)));
@@ -1348,8 +1348,7 @@ extern "C" int mlx_gather(
             mlx_array_get_(a),
             mlx_vector_array_get_(indices),
             std::vector<int>(axes, axes + axes_num),
-            mlx::core::SmallVector<int>(
-                slice_sizes, slice_sizes + slice_sizes_num),
+            mlx::core::Shape(slice_sizes, slice_sizes + slice_sizes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2172,7 +2171,7 @@ extern "C" int mlx_ones(
     mlx_array_set_(
         *res,
         mlx::core::ones(
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -2226,10 +2225,8 @@ extern "C" int mlx_pad(
         mlx::core::pad(
             mlx_array_get_(a),
             std::vector<int>(axes, axes + axes_num),
-            mlx::core::SmallVector<int>(
-                low_pad_size, low_pad_size + low_pad_size_num),
-            mlx::core::SmallVector<int>(
-                high_pad_size, high_pad_size + high_pad_size_num),
+            mlx::core::Shape(low_pad_size, low_pad_size + low_pad_size_num),
+            mlx::core::Shape(high_pad_size, high_pad_size + high_pad_size_num),
             mlx_array_get_(pad_value),
             std::string(mode),
             mlx_stream_get_(s)));
@@ -2518,7 +2515,7 @@ extern "C" int mlx_reshape(
         *res,
         mlx::core::reshape(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2554,7 +2551,7 @@ extern "C" int mlx_roll_axis(
         *res,
         mlx::core::roll(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shift, shift + shift_num),
+            mlx::core::Shape(shift, shift + shift_num),
             axis,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -2576,7 +2573,7 @@ extern "C" int mlx_roll_axes(
         *res,
         mlx::core::roll(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shift, shift + shift_num),
+            mlx::core::Shape(shift, shift + shift_num),
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -2596,7 +2593,7 @@ extern "C" int mlx_roll(
         *res,
         mlx::core::roll(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(shift, shift + shift_num),
+            mlx::core::Shape(shift, shift + shift_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2839,9 +2836,9 @@ extern "C" int mlx_slice(
         *res,
         mlx::core::slice(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(start, start + start_num),
-            mlx::core::SmallVector<int>(stop, stop + stop_num),
-            mlx::core::SmallVector<int>(strides, strides + strides_num),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2865,8 +2862,7 @@ extern "C" int mlx_slice_dynamic(
             mlx_array_get_(a),
             mlx_array_get_(start),
             std::vector<int>(axes, axes + axes_num),
-            mlx::core::SmallVector<int>(
-                slice_size, slice_size + slice_size_num),
+            mlx::core::Shape(slice_size, slice_size + slice_size_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2891,9 +2887,9 @@ extern "C" int mlx_slice_update(
         mlx::core::slice_update(
             mlx_array_get_(src),
             mlx_array_get_(update),
-            mlx::core::SmallVector<int>(start, start + start_num),
-            mlx::core::SmallVector<int>(stop, stop + stop_num),
-            mlx::core::SmallVector<int>(strides, strides + strides_num),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -3027,7 +3023,7 @@ extern "C" int mlx_split_sections(
         *res,
         mlx::core::split(
             mlx_array_get_(a),
-            mlx::core::SmallVector<int>(indices, indices + indices_num),
+            mlx::core::Shape(indices, indices + indices_num),
             axis,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -3545,7 +3541,7 @@ extern "C" int mlx_unflatten(
         mlx::core::unflatten(
             mlx_array_get_(a),
             axis,
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -3656,7 +3652,7 @@ extern "C" int mlx_zeros(
     mlx_array_set_(
         *res,
         mlx::core::zeros(
-            mlx::core::SmallVector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {

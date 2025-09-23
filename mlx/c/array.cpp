@@ -159,7 +159,7 @@ extern "C" int mlx_array_set_data(
     int dim,
     mlx_dtype dtype) {
   try {
-    mlx::core::SmallVector<int> cpp_shape(shape, shape + dim);
+    mlx::core::Shape cpp_shape(shape, shape + dim);
     mlx::core::Dtype cpp_dtype = mlx_dtype_to_cpp(dtype);
     switch (cpp_dtype) {
       case mlx::core::bool_:
