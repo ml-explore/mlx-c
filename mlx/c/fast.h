@@ -182,6 +182,7 @@ int mlx_fast_scaled_dot_product_attention(
     float scale,
     const char* mask_mode,
     const mlx_vector_array mask_arrs,
+    const mlx_array sinks /* may be null */,
     const mlx_stream s);
 /**@}*/
 
