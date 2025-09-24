@@ -28,59 +28,51 @@ extern "C" {
  */
 /**@{*/
 
-typedef struct mlx_fast_custom_kernel_config_ {
+typedef struct mlx_fast_cuda_kernel_config_ {
   void* ctx;
-} mlx_fast_custom_kernel_config;
-mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new();
-void mlx_fast_custom_kernel_config_free(mlx_fast_custom_kernel_config cls);
+} mlx_fast_cuda_kernel_config;
+mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new();
+void mlx_fast_cuda_kernel_config_free(mlx_fast_cuda_kernel_config cls);
 
-int mlx_fast_custom_kernel_config_add_output_arg(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_add_output_arg(
+    mlx_fast_cuda_kernel_config cls,
     const int* shape,
     size_t size,
     mlx_dtype dtype);
-int mlx_fast_custom_kernel_config_set_grid(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_set_grid(
+    mlx_fast_cuda_kernel_config cls,
     int grid1,
     int grid2,
     int grid3);
-int mlx_fast_custom_kernel_config_set_thread_group(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_set_thread_group(
+    mlx_fast_cuda_kernel_config cls,
     int thread1,
     int thread2,
     int thread3);
-int mlx_fast_custom_kernel_config_set_init_value(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_set_init_value(
+    mlx_fast_cuda_kernel_config cls,
     float value);
-int mlx_fast_custom_kernel_config_set_verbose(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_set_verbose(
+    mlx_fast_cuda_kernel_config cls,
     bool verbose);
-int mlx_fast_custom_kernel_config_add_template_arg_dtype(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_add_template_arg_dtype(
+    mlx_fast_cuda_kernel_config cls,
     const char* name,
     mlx_dtype dtype);
-int mlx_fast_custom_kernel_config_add_template_arg_int(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_add_template_arg_int(
+    mlx_fast_cuda_kernel_config cls,
     const char* name,
     int value);
-int mlx_fast_custom_kernel_config_add_template_arg_bool(
-    mlx_fast_custom_kernel_config cls,
+int mlx_fast_cuda_kernel_config_add_template_arg_bool(
+    mlx_fast_cuda_kernel_config cls,
     const char* name,
     bool value);
 
-typedef struct mlx_fast_custom_kernel_ {
+typedef struct mlx_fast_cuda_kernel_ {
   void* ctx;
-} mlx_fast_custom_kernel;
+} mlx_fast_cuda_kernel;
 
-void mlx_fast_custom_kernel_free(mlx_fast_custom_kernel cls);
-int mlx_fast_custom_kernel_apply(
-    mlx_vector_array* outputs,
-    mlx_fast_custom_kernel cls,
-    const mlx_vector_array inputs,
-    const mlx_fast_custom_kernel_config config,
-    const mlx_stream stream);
-
-mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda(
+mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
     const char* name,
     const mlx_vector_string input_names,
     const mlx_vector_string output_names,
@@ -88,6 +80,14 @@ mlx_fast_custom_kernel mlx_fast_custom_kernel_new_cuda(
     const char* header,
     bool ensure_row_contiguous,
     bool atomic_outputs);
+
+void mlx_fast_cuda_kernel_free(mlx_fast_cuda_kernel cls);
+int mlx_fast_cuda_kernel_apply(
+    mlx_vector_array* outputs,
+    mlx_fast_cuda_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_fast_cuda_kernel_config config,
+    const mlx_stream stream);
 
 int mlx_fast_layer_norm(
     mlx_array* res,
@@ -97,7 +97,51 @@ int mlx_fast_layer_norm(
     float eps,
     const mlx_stream s);
 
-mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
+typedef struct mlx_fast_metal_kernel_config_ {
+  void* ctx;
+} mlx_fast_metal_kernel_config;
+mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new();
+void mlx_fast_metal_kernel_config_free(mlx_fast_metal_kernel_config cls);
+
+int mlx_fast_metal_kernel_config_add_output_arg(
+    mlx_fast_metal_kernel_config cls,
+    const int* shape,
+    size_t size,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_config_set_grid(
+    mlx_fast_metal_kernel_config cls,
+    int grid1,
+    int grid2,
+    int grid3);
+int mlx_fast_metal_kernel_config_set_thread_group(
+    mlx_fast_metal_kernel_config cls,
+    int thread1,
+    int thread2,
+    int thread3);
+int mlx_fast_metal_kernel_config_set_init_value(
+    mlx_fast_metal_kernel_config cls,
+    float value);
+int mlx_fast_metal_kernel_config_set_verbose(
+    mlx_fast_metal_kernel_config cls,
+    bool verbose);
+int mlx_fast_metal_kernel_config_add_template_arg_dtype(
+    mlx_fast_metal_kernel_config cls,
+    const char* name,
+    mlx_dtype dtype);
+int mlx_fast_metal_kernel_config_add_template_arg_int(
+    mlx_fast_metal_kernel_config cls,
+    const char* name,
+    int value);
+int mlx_fast_metal_kernel_config_add_template_arg_bool(
+    mlx_fast_metal_kernel_config cls,
+    const char* name,
+    bool value);
+
+typedef struct mlx_fast_metal_kernel_ {
+  void* ctx;
+} mlx_fast_metal_kernel;
+
+mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     const char* name,
     const mlx_vector_string input_names,
     const mlx_vector_string output_names,
@@ -105,6 +149,14 @@ mlx_fast_custom_kernel mlx_fast_custom_kernel_new_metal(
     const char* header,
     bool ensure_row_contiguous,
     bool atomic_outputs);
+
+void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls);
+int mlx_fast_metal_kernel_apply(
+    mlx_vector_array* outputs,
+    mlx_fast_metal_kernel cls,
+    const mlx_vector_array inputs,
+    const mlx_fast_metal_kernel_config config,
+    const mlx_stream stream);
 
 int mlx_fast_rms_norm(
     mlx_array* res,
