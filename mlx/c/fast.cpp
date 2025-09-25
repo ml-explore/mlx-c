@@ -52,30 +52,6 @@ extern "C" void mlx_fast_cuda_kernel_config_free(
   mlx_fast_cuda_kernel_config_free_(cls);
 }
 
-struct mlx_fast_cuda_kernel_cpp_ {
-  mlx::core::fast::CustomKernelFunction mkf;
-  mlx_fast_cuda_kernel_cpp_(mlx::core::fast::CustomKernelFunction mkf)
-      : mkf(mkf) {};
-};
-
-inline mlx::core::fast::CustomKernelFunction& mlx_fast_cuda_kernel_get_(
-    mlx_fast_cuda_kernel d) {
-  if (!d.ctx) {
-    throw std::runtime_error("expected a non-empty mlx_fast_cuda_kernel");
-  }
-  return static_cast<mlx_fast_cuda_kernel_cpp_*>(d.ctx)->mkf;
-}
-
-inline void mlx_fast_cuda_kernel_free_(mlx_fast_cuda_kernel d) {
-  if (d.ctx) {
-    delete static_cast<mlx_fast_cuda_kernel_cpp_*>(d.ctx);
-  }
-}
-
-extern "C" void mlx_fast_cuda_kernel_free(mlx_fast_cuda_kernel cls) {
-  mlx_fast_cuda_kernel_free_(cls);
-}
-
 extern "C" int mlx_fast_cuda_kernel_config_add_output_arg(
     mlx_fast_cuda_kernel_config cls,
     const int* shape,
@@ -182,6 +158,12 @@ extern "C" int mlx_fast_cuda_kernel_config_add_template_arg_bool(
   return 0;
 }
 
+struct mlx_fast_cuda_kernel_cpp_ {
+  mlx::core::fast::CustomKernelFunction mkf;
+  mlx_fast_cuda_kernel_cpp_(mlx::core::fast::CustomKernelFunction mkf)
+      : mkf(mkf) {};
+};
+
 inline mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new_(
     const std::string& name,
     const std::vector<std::string>& input_names,
@@ -208,7 +190,7 @@ extern "C" mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
     const char* source,
     const char* header,
     bool ensure_row_contiguous,
-    bool atomic_outputs) {
+    int shared_memory) {
   try {
     return mlx_fast_cuda_kernel_new_(
         name,
@@ -217,11 +199,29 @@ extern "C" mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
         source,
         header,
         ensure_row_contiguous,
-        atomic_outputs);
+        shared_memory);
   } catch (std::exception& e) {
     mlx_error(e.what());
   }
   return {nullptr};
+}
+
+inline mlx::core::fast::CustomKernelFunction& mlx_fast_cuda_kernel_get_(
+    mlx_fast_cuda_kernel d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_fast_cuda_kernel");
+  }
+  return static_cast<mlx_fast_cuda_kernel_cpp_*>(d.ctx)->mkf;
+}
+
+inline void mlx_fast_cuda_kernel_free_(mlx_fast_cuda_kernel d) {
+  if (d.ctx) {
+    delete static_cast<mlx_fast_cuda_kernel_cpp_*>(d.ctx);
+  }
+}
+
+extern "C" void mlx_fast_cuda_kernel_free(mlx_fast_cuda_kernel cls) {
+  mlx_fast_cuda_kernel_free_(cls);
 }
 
 extern "C" int mlx_fast_cuda_kernel_apply(
@@ -319,30 +319,6 @@ extern "C" mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new() {
 extern "C" void mlx_fast_metal_kernel_config_free(
     mlx_fast_metal_kernel_config cls) {
   mlx_fast_metal_kernel_config_free_(cls);
-}
-
-struct mlx_fast_metal_kernel_cpp_ {
-  mlx::core::fast::CustomKernelFunction mkf;
-  mlx_fast_metal_kernel_cpp_(mlx::core::fast::CustomKernelFunction mkf)
-      : mkf(mkf) {};
-};
-
-inline mlx::core::fast::CustomKernelFunction& mlx_fast_metal_kernel_get_(
-    mlx_fast_metal_kernel d) {
-  if (!d.ctx) {
-    throw std::runtime_error("expected a non-empty mlx_fast_metal_kernel");
-  }
-  return static_cast<mlx_fast_metal_kernel_cpp_*>(d.ctx)->mkf;
-}
-
-inline void mlx_fast_metal_kernel_free_(mlx_fast_metal_kernel d) {
-  if (d.ctx) {
-    delete static_cast<mlx_fast_metal_kernel_cpp_*>(d.ctx);
-  }
-}
-
-extern "C" void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls) {
-  mlx_fast_metal_kernel_free_(cls);
 }
 
 extern "C" int mlx_fast_metal_kernel_config_add_output_arg(
@@ -451,6 +427,12 @@ extern "C" int mlx_fast_metal_kernel_config_add_template_arg_bool(
   return 0;
 }
 
+struct mlx_fast_metal_kernel_cpp_ {
+  mlx::core::fast::CustomKernelFunction mkf;
+  mlx_fast_metal_kernel_cpp_(mlx::core::fast::CustomKernelFunction mkf)
+      : mkf(mkf) {};
+};
+
 inline mlx_fast_metal_kernel mlx_fast_metal_kernel_new_(
     const std::string& name,
     const std::vector<std::string>& input_names,
@@ -491,6 +473,24 @@ extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     mlx_error(e.what());
   }
   return {nullptr};
+}
+
+inline mlx::core::fast::CustomKernelFunction& mlx_fast_metal_kernel_get_(
+    mlx_fast_metal_kernel d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_fast_metal_kernel");
+  }
+  return static_cast<mlx_fast_metal_kernel_cpp_*>(d.ctx)->mkf;
+}
+
+inline void mlx_fast_metal_kernel_free_(mlx_fast_metal_kernel d) {
+  if (d.ctx) {
+    delete static_cast<mlx_fast_metal_kernel_cpp_*>(d.ctx);
+  }
+}
+
+extern "C" void mlx_fast_metal_kernel_free(mlx_fast_metal_kernel cls) {
+  mlx_fast_metal_kernel_free_(cls);
 }
 
 extern "C" int mlx_fast_metal_kernel_apply(
