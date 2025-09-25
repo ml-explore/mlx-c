@@ -320,7 +320,7 @@ inline mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new_(
     const std::string& source,
     const std::string& header,
     bool ensure_row_contiguous,
-    bool atomic_outputs) {
+    int shared_memory) {
   return mlx_fast_cuda_kernel(
       {new mlx_fast_cuda_kernel_cpp_(mlx::core::fast::cuda_kernel(
           name,
@@ -329,7 +329,7 @@ inline mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new_(
           source,
           header,
           ensure_row_contiguous,
-          atomic_outputs))});
+          shared_memory))});
 }
 
 extern "C" mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
