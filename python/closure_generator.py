@@ -26,7 +26,7 @@ decl_code = """
 typedef struct NAME_ {
   void* ctx;
 } NAME;
-NAME NAME_new();
+NAME NAME_new(void);
 int NAME_free(NAME cls);
 NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED));
 NAME NAME_new_func_payload(
@@ -118,7 +118,7 @@ def generate(code, name, rcpptype, cpptypes):
 
 
 impl_code = """
-extern "C" NAME NAME_new() {
+extern "C" NAME NAME_new(void) {
   try {
     return NAME_new_();
   } catch (std::exception& e) {
