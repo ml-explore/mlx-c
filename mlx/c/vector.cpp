@@ -7,7 +7,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" mlx_vector_array mlx_vector_array_new() {
+extern "C" mlx_vector_array mlx_vector_array_new(void) {
   try {
     return mlx_vector_array_new_({});
   } catch (std::exception& e) {
@@ -139,7 +139,7 @@ extern "C" size_t mlx_vector_array_size(mlx_vector_array vec) {
   }
 }
 
-extern "C" mlx_vector_vector_array mlx_vector_vector_array_new() {
+extern "C" mlx_vector_vector_array mlx_vector_vector_array_new(void) {
   try {
     return mlx_vector_vector_array_new_({});
   } catch (std::exception& e) {
@@ -278,7 +278,7 @@ extern "C" size_t mlx_vector_vector_array_size(mlx_vector_vector_array vec) {
   }
 }
 
-extern "C" mlx_vector_int mlx_vector_int_new() {
+extern "C" mlx_vector_int mlx_vector_int_new(void) {
   try {
     return mlx_vector_int_new_({});
   } catch (std::exception& e) {
@@ -399,7 +399,7 @@ extern "C" size_t mlx_vector_int_size(mlx_vector_int vec) {
   }
 }
 
-extern "C" mlx_vector_string mlx_vector_string_new() {
+extern "C" mlx_vector_string mlx_vector_string_new(void) {
   try {
     return mlx_vector_string_new_({});
   } catch (std::exception& e) {
