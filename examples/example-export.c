@@ -42,7 +42,7 @@ int mul_fun(
   return 0;
 }
 
-int main() {
+int main(void) {
   mlx_array x = mlx_array_new_float(1.0);
   print_array("x: ", x);
 

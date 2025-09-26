@@ -108,7 +108,7 @@ static mlx_io_vtable mlx_io_vtable_mlx_mem_stream = {
     &mem_label,
     &mem_free};
 
-int main() {
+int main(void) {
   mlx_stream stream = mlx_default_cpu_stream_new();
   mlx_map_string_to_array data = mlx_map_string_to_array_new();
   mlx_map_string_to_string metadata = mlx_map_string_to_string_new();
@@ -141,7 +141,7 @@ int main() {
       mem_stream.pos,
       mem_stream.err);
   printf("data in memory stream: ");
-  for (int i = 0; i < mem_stream.pos; i++) {
+  for (size_t i = 0; i < mem_stream.pos; i++) {
     printf("%c", mem_stream.data[i]);
   }
   printf("\n");

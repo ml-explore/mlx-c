@@ -10,7 +10,7 @@ void print_array(const char* msg, mlx_array arr) {
   mlx_string_free(str);
 }
 
-int main() {
+int main(void) {
   mlx_stream stream = mlx_default_cpu_stream_new();
   double data[] = {1, 2, 3, 4, 5, 6};
   int shape[] = {2, 3};
