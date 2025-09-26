@@ -4,7 +4,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" mlx_string mlx_string_new() {
+extern "C" mlx_string mlx_string_new(void) {
   return mlx_string_new_();
 }
 

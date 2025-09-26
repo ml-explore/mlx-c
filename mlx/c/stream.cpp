@@ -20,7 +20,7 @@ int mlx_stream_tostring(mlx_string* str_, mlx_stream stream) {
   }
 }
 
-extern "C" mlx_stream mlx_stream_new() {
+extern "C" mlx_stream mlx_stream_new(void) {
   return mlx_stream_new_();
 }
 
@@ -98,7 +98,7 @@ extern "C" int mlx_set_default_stream(mlx_stream stream) {
   }
   return 0;
 }
-extern "C" mlx_stream mlx_default_cpu_stream_new() {
+extern "C" mlx_stream mlx_default_cpu_stream_new(void) {
   try {
     return mlx_stream_new_(
         mlx::core::default_stream(mlx::core::Device::DeviceType::cpu));
@@ -107,7 +107,7 @@ extern "C" mlx_stream mlx_default_cpu_stream_new() {
     return mlx_stream_new_();
   }
 }
-extern "C" mlx_stream mlx_default_gpu_stream_new() {
+extern "C" mlx_stream mlx_default_gpu_stream_new(void) {
   try {
     return mlx_stream_new_(
         mlx::core::default_stream(mlx::core::Device::DeviceType::gpu));

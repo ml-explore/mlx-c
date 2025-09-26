@@ -34,7 +34,7 @@ extern "C" int mlx_array_free(mlx_array arr) {
   return 0;
 }
 
-extern "C" mlx_array mlx_array_new() {
+extern "C" mlx_array mlx_array_new(void) {
   try {
     return mlx_array_();
   } catch (std::exception& e) {

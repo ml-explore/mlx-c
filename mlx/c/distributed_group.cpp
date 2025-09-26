@@ -35,7 +35,7 @@ mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
   }
 }
 
-extern "C" bool mlx_distributed_is_available() {
+extern "C" bool mlx_distributed_is_available(void) {
   try {
     return mlx::core::distributed::is_available();
   } catch (std::exception& e) {

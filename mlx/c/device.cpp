@@ -19,7 +19,7 @@ extern "C" int mlx_device_tostring(mlx_string* str_, mlx_device dev) {
   }
 }
 
-extern "C" mlx_device mlx_device_new() {
+extern "C" mlx_device mlx_device_new(void) {
   return mlx_device_new_();
 }
 
