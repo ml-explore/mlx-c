@@ -31,7 +31,7 @@ extern "C" {
 typedef struct mlx_fast_cuda_kernel_config_ {
   void* ctx;
 } mlx_fast_cuda_kernel_config;
-mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new();
+mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new(void);
 void mlx_fast_cuda_kernel_config_free(mlx_fast_cuda_kernel_config cls);
 
 int mlx_fast_cuda_kernel_config_add_output_arg(
@@ -101,7 +101,7 @@ int mlx_fast_layer_norm(
 typedef struct mlx_fast_metal_kernel_config_ {
   void* ctx;
 } mlx_fast_metal_kernel_config;
-mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new();
+mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new(void);
 void mlx_fast_metal_kernel_config_free(mlx_fast_metal_kernel_config cls);
 
 int mlx_fast_metal_kernel_config_add_output_arg(

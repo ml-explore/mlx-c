@@ -34,7 +34,7 @@ typedef struct mlx_metal_device_info_t_ {
   size_t max_recommended_working_set_size;
   size_t memory_size;
 } mlx_metal_device_info_t;
-mlx_metal_device_info_t mlx_metal_device_info();
+mlx_metal_device_info_t mlx_metal_device_info(void);
 
 int mlx_metal_is_available(bool* res);
 int mlx_metal_start_capture(const char* path);
