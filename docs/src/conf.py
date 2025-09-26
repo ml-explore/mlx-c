@@ -12,7 +12,7 @@ import mlx.core as mx
 project = "MLX C"
 copyright = "2023-2025, MLX Contributors"
 author = "MLX Contributors"
-version = "0.2.0"
+version = "0.3.0"
 release = version
 
 # -- General configuration ---------------------------------------------------
