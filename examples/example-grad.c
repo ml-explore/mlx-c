@@ -41,7 +41,7 @@ void closure_dtor(void* ptr_) {
   mlx_array_free(*arr);
 }
 
-int main() {
+int main(void) {
   mlx_array x = mlx_array_new_float(1.0);
   mlx_array y = mlx_array_new_float(1.0);
   mlx_closure cls = mlx_closure_new_unary(inc_fun);

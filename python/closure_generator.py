@@ -26,7 +26,7 @@ decl_code = """
 typedef struct NAME_ {
   void* ctx;
 } NAME;
-NAME NAME_new();
+NAME NAME_new(void);
 int NAME_free(NAME cls);
 NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED));
 NAME NAME_new_func_payload(
@@ -118,7 +118,7 @@ def generate(code, name, rcpptype, cpptypes):
 
 
 impl_code = """
-extern "C" NAME NAME_new() {
+extern "C" NAME NAME_new(void) {
   try {
     return NAME_new_();
   } catch (std::exception& e) {
@@ -180,7 +180,7 @@ extern "C" NAME NAME_new_func_payload(
     } else {
       cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
     }
-    auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
+    auto cpp_closure = [fun, cpp_payload](CPPARGS_TYPE_NAME) {
       CPPARGS_TO_CARGS
       RCARGS_NEW
       auto status = fun(RCARGS_UNTYPED, CARGS_UNTYPED, cpp_payload.get());

@@ -8,7 +8,7 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/memory.h"
 
-extern "C" int mlx_clear_cache() {
+extern "C" int mlx_clear_cache(void) {
   try {
     mlx::core::clear_cache();
   } catch (std::exception& e) {
@@ -53,7 +53,7 @@ extern "C" int mlx_get_peak_memory(size_t* res) {
   }
   return 0;
 }
-extern "C" int mlx_reset_peak_memory() {
+extern "C" int mlx_reset_peak_memory(void) {
   try {
     mlx::core::reset_peak_memory();
   } catch (std::exception& e) {

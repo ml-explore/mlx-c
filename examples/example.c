@@ -10,7 +10,7 @@ void print_array(const char* msg, mlx_array arr) {
   mlx_string_free(str);
 }
 
-void gpu_info() {
+void gpu_info(void) {
   printf("==================================================\n");
   printf("GPU info:\n");
   mlx_metal_device_info_t info = mlx_metal_device_info();
@@ -23,7 +23,7 @@ void gpu_info() {
 
   printf("==================================================\n");
 }
-int main() {
+int main(void) {
   mlx_string version = mlx_string_new();
   mlx_version(&version);
   printf("MLX version: %s\n", mlx_string_data(version));

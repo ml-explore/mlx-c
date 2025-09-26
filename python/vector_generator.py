@@ -28,7 +28,7 @@ decl_code = """
 typedef struct mlx_vector_SCTYPE_ {
   void* ctx;
 } mlx_vector_SCTYPE;
-mlx_vector_SCTYPE mlx_vector_SCTYPE_new();
+mlx_vector_SCTYPE mlx_vector_SCTYPE_new(void);
 int mlx_vector_SCTYPE_set(mlx_vector_SCTYPE* vec, const mlx_vector_SCTYPE src);
 int mlx_vector_SCTYPE_free(mlx_vector_SCTYPE vec);
 mlx_vector_SCTYPE mlx_vector_SCTYPE_new_data(CTYPE* data, size_t size);
@@ -51,7 +51,7 @@ int mlx_vector_SCTYPE_get(
 """
 
 impl_code = """
-extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new() {
+extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new(void) {
   try {
     return mlx_vector_SCTYPE_new_({});
   } catch (std::exception& e) {

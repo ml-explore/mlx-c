@@ -38,7 +38,7 @@ inline void mlx_fast_cuda_kernel_config_free_(mlx_fast_cuda_kernel_config d) {
   }
 }
 
-extern "C" mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new() {
+extern "C" mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new(void) {
   try {
     return mlx_fast_cuda_kernel_config_new_();
   } catch (std::exception& e) {
@@ -307,7 +307,7 @@ inline void mlx_fast_metal_kernel_config_free_(mlx_fast_metal_kernel_config d) {
   }
 }
 
-extern "C" mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new() {
+extern "C" mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new(void) {
   try {
     return mlx_fast_metal_kernel_config_new_();
   } catch (std::exception& e) {

@@ -2,7 +2,7 @@ def mlx_metal_device_info(f, implementation):
     if implementation:
         print(
             """
-mlx_metal_device_info_t mlx_metal_device_info() {
+extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
   auto info = mlx::core::metal::device_info();
 
   mlx_metal_device_info_t c_info;
@@ -27,7 +27,7 @@ typedef struct mlx_metal_device_info_t_ {
   size_t max_recommended_working_set_size;
   size_t memory_size;
 } mlx_metal_device_info_t;
-mlx_metal_device_info_t mlx_metal_device_info();
+mlx_metal_device_info_t mlx_metal_device_info(void);
         """
         )
 
@@ -66,7 +66,7 @@ inline void mlx_fast_custom_kernel_config_free_(mlx_fast_custom_kernel_config d)
   }
 }
 
-extern "C" mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new() {
+extern "C" mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new(void) {
   try {
     return mlx_fast_custom_kernel_config_new_();
   } catch (std::exception& e) {
@@ -245,7 +245,7 @@ extern "C" int mlx_fast_custom_kernel_apply(
 typedef struct mlx_fast_custom_kernel_config_ {
   void* ctx;
 } mlx_fast_custom_kernel_config;
-mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new();
+mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new(void);
 void mlx_fast_custom_kernel_config_free(mlx_fast_custom_kernel_config cls);
 
 int mlx_fast_custom_kernel_config_add_output_arg(

@@ -8,7 +8,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-mlx_metal_device_info_t mlx_metal_device_info() {
+extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
   auto info = mlx::core::metal::device_info();
 
   mlx_metal_device_info_t c_info;
@@ -41,7 +41,7 @@ extern "C" int mlx_metal_start_capture(const char* path) {
   }
   return 0;
 }
-extern "C" int mlx_metal_stop_capture() {
+extern "C" int mlx_metal_stop_capture(void) {
   try {
     mlx::core::metal::stop_capture();
   } catch (std::exception& e) {
