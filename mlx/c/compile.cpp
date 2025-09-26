@@ -40,7 +40,7 @@ extern "C" int mlx_detail_compile(
   }
   return 0;
 }
-extern "C" int mlx_detail_compile_clear_cache() {
+extern "C" int mlx_detail_compile_clear_cache(void) {
   try {
     mlx::core::detail::compile_clear_cache();
   } catch (std::exception& e) {
@@ -58,7 +58,7 @@ extern "C" int mlx_detail_compile_erase(uintptr_t fun_id) {
   }
   return 0;
 }
-extern "C" int mlx_disable_compile() {
+extern "C" int mlx_disable_compile(void) {
   try {
     mlx::core::disable_compile();
   } catch (std::exception& e) {
@@ -67,7 +67,7 @@ extern "C" int mlx_disable_compile() {
   }
   return 0;
 }
-extern "C" int mlx_enable_compile() {
+extern "C" int mlx_enable_compile(void) {
   try {
     mlx::core::enable_compile();
   } catch (std::exception& e) {

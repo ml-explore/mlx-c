@@ -181,7 +181,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             continue
 
         # print(f)
-        c_call = ", ".join(c_call)
+        c_call = ", ".join(c_call) if len(c_call) > 0 else "void"
         cpp_call = ", ".join(cpp_call)
         signature.append(c_call)
         signature.append(")")

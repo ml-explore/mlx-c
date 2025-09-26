@@ -41,7 +41,7 @@ extern "C" int mlx_metal_start_capture(const char* path) {
   }
   return 0;
 }
-extern "C" int mlx_metal_stop_capture() {
+extern "C" int mlx_metal_stop_capture(void) {
   try {
     mlx::core::metal::stop_capture();
   } catch (std::exception& e) {

@@ -38,7 +38,7 @@ mlx_metal_device_info_t mlx_metal_device_info();
 
 int mlx_metal_is_available(bool* res);
 int mlx_metal_start_capture(const char* path);
-int mlx_metal_stop_capture();
+int mlx_metal_stop_capture(void);
 /**@}*/
 
 #ifdef __cplusplus
