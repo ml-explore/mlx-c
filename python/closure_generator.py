@@ -180,7 +180,7 @@ extern "C" NAME NAME_new_func_payload(
     } else {
       cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
     }
-    auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
+    auto cpp_closure = [fun, cpp_payload](CPPARGS_TYPE_NAME) {
       CPPARGS_TO_CARGS
       RCARGS_NEW
       auto status = fun(RCARGS_UNTYPED, CARGS_UNTYPED, cpp_payload.get());
