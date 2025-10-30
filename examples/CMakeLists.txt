@@ -11,6 +11,9 @@ add_executable(example-safe-tensors
                ${CMAKE_CURRENT_LIST_DIR}/example-safe-tensors.c)
 target_link_libraries(example-safe-tensors PUBLIC mlxc)
 
+add_executable(example-gguf ${CMAKE_CURRENT_LIST_DIR}/example-gguf.c)
+target_link_libraries(example-gguf PUBLIC mlxc)
+
 add_executable(example-metal-kernel
                ${CMAKE_CURRENT_LIST_DIR}/example-metal-kernel.c)
 target_link_libraries(example-metal-kernel PUBLIC mlxc)

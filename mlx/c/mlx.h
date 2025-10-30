@@ -15,6 +15,7 @@
 #include "mlx/c/fft.h"
 #include "mlx/c/half.h"
 #include "mlx/c/io.h"
+#include "mlx/c/io_gguf.h"
 #include "mlx/c/io_types.h"
 #include "mlx/c/linalg.h"
 #include "mlx/c/map.h"
