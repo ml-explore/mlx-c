@@ -1054,6 +1054,39 @@ extern "C" int mlx_depends(
   }
   return 0;
 }
+extern "C" int mlx_dequantize(
+    mlx_array* res,
+    const mlx_array w,
+    const mlx_array scales,
+    const mlx_array biases /* may be null */,
+    mlx_optional_int group_size,
+    mlx_optional_int bits,
+    const char* mode,
+    mlx_optional_dtype dtype,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::dequantize(
+            mlx_array_get_(w),
+            mlx_array_get_(scales),
+            (biases.ctx ? std::make_optional(mlx_array_get_(biases))
+                        : std::nullopt),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            (dtype.has_value ? std::make_optional<mlx::core::Dtype>(
+                                   mlx_dtype_to_cpp(dtype.value))
+                             : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int
 mlx_diag(mlx_array* res, const mlx_array a, int k, const mlx_stream s) {
   try {

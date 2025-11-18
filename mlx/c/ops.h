@@ -353,6 +353,16 @@ int mlx_depends(
     mlx_vector_array* res,
     const mlx_vector_array inputs,
     const mlx_vector_array dependencies);
+int mlx_dequantize(
+    mlx_array* res,
+    const mlx_array w,
+    const mlx_array scales,
+    const mlx_array biases /* may be null */,
+    mlx_optional_int group_size,
+    mlx_optional_int bits,
+    const char* mode,
+    mlx_optional_dtype dtype,
+    const mlx_stream s);
 int mlx_diag(mlx_array* res, const mlx_array a, int k, const mlx_stream s);
 int mlx_diagonal(
     mlx_array* res,
