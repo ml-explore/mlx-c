@@ -35,7 +35,7 @@ else()
   FetchContent_Declare(
     mlx
     GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-    GIT_TAG v0.29.4)
+    GIT_TAG m5_update)
   FetchContent_MakeAvailable(mlx)
 endif()
 
