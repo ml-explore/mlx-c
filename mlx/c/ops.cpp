@@ -1886,6 +1886,26 @@ extern "C" int mlx_logsumexp(
   }
   return 0;
 }
+extern "C" int mlx_masked_scatter(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array mask,
+    const mlx_array src,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::masked_scatter(
+            mlx_array_get_(a),
+            mlx_array_get_(mask),
+            mlx_array_get_(src),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_matmul(
     mlx_array* res,
     const mlx_array a,

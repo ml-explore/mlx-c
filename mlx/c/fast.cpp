@@ -578,7 +578,7 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
     const mlx_array values,
     float scale,
     const char* mask_mode,
-    const mlx_vector_array mask_arrs,
+    const mlx_array mask_arr /* may be null */,
     const mlx_array sinks /* may be null */,
     const mlx_stream s) {
   try {
@@ -590,7 +590,8 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
             mlx_array_get_(values),
             scale,
             std::string(mask_mode),
-            mlx_vector_array_get_(mask_arrs),
+            (mask_arr.ctx ? std::make_optional(mlx_array_get_(mask_arr))
+                          : std::nullopt),
             (sinks.ctx ? std::make_optional(mlx_array_get_(sinks))
                        : std::nullopt),
             mlx_stream_get_(s)));
