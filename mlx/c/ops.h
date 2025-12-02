@@ -452,7 +452,7 @@ int mlx_gather(
     const int* slice_sizes,
     size_t slice_sizes_num,
     const mlx_stream s);
-int mlx_gather_array(
+int mlx_gather_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -864,7 +864,7 @@ int mlx_scatter(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_scatter_array(
+int mlx_scatter_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -879,7 +879,7 @@ int mlx_scatter_add(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_scatter_add_array(
+int mlx_scatter_add_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -901,7 +901,7 @@ int mlx_scatter_max(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_scatter_max_array(
+int mlx_scatter_max_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -916,7 +916,7 @@ int mlx_scatter_min(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_scatter_min_array(
+int mlx_scatter_min_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -931,7 +931,7 @@ int mlx_scatter_prod(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_scatter_prod_array(
+int mlx_scatter_prod_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,

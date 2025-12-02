@@ -1398,7 +1398,7 @@ extern "C" int mlx_gather(
   }
   return 0;
 }
-extern "C" int mlx_gather_array(
+extern "C" int mlx_gather_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -2759,7 +2759,7 @@ extern "C" int mlx_scatter(
   }
   return 0;
 }
-extern "C" int mlx_scatter_array(
+extern "C" int mlx_scatter_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -2804,7 +2804,7 @@ extern "C" int mlx_scatter_add(
   }
   return 0;
 }
-extern "C" int mlx_scatter_add_array(
+extern "C" int mlx_scatter_add_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -2871,7 +2871,7 @@ extern "C" int mlx_scatter_max(
   }
   return 0;
 }
-extern "C" int mlx_scatter_max_array(
+extern "C" int mlx_scatter_max_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -2916,7 +2916,7 @@ extern "C" int mlx_scatter_min(
   }
   return 0;
 }
-extern "C" int mlx_scatter_min_array(
+extern "C" int mlx_scatter_min_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,
@@ -2961,7 +2961,7 @@ extern "C" int mlx_scatter_prod(
   }
   return 0;
 }
-extern "C" int mlx_scatter_prod_array(
+extern "C" int mlx_scatter_prod_single(
     mlx_array* res,
     const mlx_array a,
     const mlx_array indices,

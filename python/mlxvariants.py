@@ -83,12 +83,12 @@ def mlx_core(name, defs):
         "pad": ["", None, None, "symmetric"],
         "save": ["writer", ""],
         "save_safetensors": ["writer", ""],
-        "gather": ["", "array"],
-        "scatter": ["", "array"],
-        "scatter_add": ["", "array"],
-        "scatter_min": ["", "array"],
-        "scatter_prod": ["", "array"],
-        "scatter_max": ["", "array"],
+        "gather": ["", "single"],
+        "scatter": ["", "single"],
+        "scatter_add": ["", "single"],
+        "scatter_min": ["", "single"],
+        "scatter_prod": ["", "single"],
+        "scatter_max": ["", "single"],
         "argpartition": ["axis", ""],
         "partition": ["axis", ""],
         "argsort": ["axis", ""],
@@ -125,7 +125,7 @@ def mlx_core_random(name, defs):
 
 def mlx_core_fast(name, defs):
     variants = {
-        "rope": ["", "offset_array"],
+        "rope": ["", "dynamic"],
     }
     return _make_variant_suffixes(name, defs, variants)
 

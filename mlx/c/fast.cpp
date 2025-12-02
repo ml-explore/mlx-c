@@ -571,7 +571,7 @@ extern "C" int mlx_fast_rope(
   }
   return 0;
 }
-extern "C" int mlx_fast_rope_offset_array(
+extern "C" int mlx_fast_rope_dynamic(
     mlx_array* res,
     const mlx_array x,
     int dims,
