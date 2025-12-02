@@ -172,8 +172,8 @@ inline mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new_(
     const std::string& header,
     bool ensure_row_contiguous,
     int shared_memory) {
-  return mlx_fast_cuda_kernel(
-      {new mlx_fast_cuda_kernel_cpp_(mlx::core::fast::cuda_kernel(
+  return mlx_fast_cuda_kernel({new mlx_fast_cuda_kernel_cpp_(
+      mlx::core::fast::cuda_kernel(
           name,
           input_names,
           output_names,
@@ -441,8 +441,8 @@ inline mlx_fast_metal_kernel mlx_fast_metal_kernel_new_(
     const std::string& header,
     bool ensure_row_contiguous,
     bool atomic_outputs) {
-  return mlx_fast_metal_kernel(
-      {new mlx_fast_metal_kernel_cpp_(mlx::core::fast::metal_kernel(
+  return mlx_fast_metal_kernel({new mlx_fast_metal_kernel_cpp_(
+      mlx::core::fast::metal_kernel(
           name,
           input_names,
           output_names,

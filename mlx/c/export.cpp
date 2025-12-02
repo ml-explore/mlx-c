@@ -45,8 +45,9 @@ extern "C" mlx_function_exporter mlx_function_exporter_new(
     const mlx_closure fun,
     bool shapeless) {
   try {
-    return mlx_function_exporter_new_(mlx::core::exporter(
-        std::string(file), mlx_closure_get_(fun), shapeless));
+    return mlx_function_exporter_new_(
+        mlx::core::exporter(
+            std::string(file), mlx_closure_get_(fun), shapeless));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return {nullptr};
