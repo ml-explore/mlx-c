@@ -20,7 +20,7 @@ def replace_match_parenthesis(string, keyword, fun):
     return "".join(res)
 
 
-decl_code = """
+decl_code = r"""
 /**
  * A SCTYPE1-to-SCTYPE2 map
  */
@@ -83,7 +83,7 @@ int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
     mlx_map_SCTYPE1_to_SCTYPE2_iterator it);
 """
 
-impl_code = """
+impl_code = r"""
 extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
   try {
     return mlx_map_SCTYPE1_to_SCTYPE2_new_({});
@@ -210,7 +210,7 @@ def generate(code, type1, type2):
         cpptype = "std::unordered_map<" + type1["cpp"] + ", " + type2["cpp"] + ">"
         code = tpg.generate(ctype, cpptype)
         code += tpg.generate(ctype + "_iterator", cpptype + "::iterator", ctor=False)
-        code += """
+        code += r"""
 inline CPPTYPE& CTYPE_iterator_get_map_(CTYPE_iterator d) {
   return *static_cast<CPPTYPE*>(d.map_ctx);
 }
@@ -244,7 +244,7 @@ inline CPPTYPE& CTYPE_iterator_get_map_(CTYPE_iterator d) {
     return code
 
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+decl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -266,7 +266,7 @@ extern "C" {
 /**@{*/
 """
 
-decl_end = """
+decl_end = r"""
 /**@}*/
 
 #ifdef __cplusplus
@@ -276,7 +276,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+impl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -289,7 +289,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+priv_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -301,7 +301,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 #include "mlx/mlx.h"
 """
 
-priv_end = """
+priv_end = r"""
 #endif
 """
 

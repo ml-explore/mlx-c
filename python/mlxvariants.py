@@ -83,6 +83,12 @@ def mlx_core(name, defs):
         "pad": ["", None, None, "symmetric"],
         "save": ["writer", ""],
         "save_safetensors": ["writer", ""],
+        "gather": ["", "single"],
+        "scatter": ["", "single"],
+        "scatter_add": ["", "single"],
+        "scatter_min": ["", "single"],
+        "scatter_prod": ["", "single"],
+        "scatter_max": ["", "single"],
         "argpartition": ["axis", ""],
         "partition": ["axis", ""],
         "argsort": ["axis", ""],
@@ -113,6 +119,13 @@ def mlx_core_random(name, defs):
         "split": ["num", ""],
         "uniform": ["", None, None, None],
         "normal": ["broadcast", "", None, None, None],
+    }
+    return _make_variant_suffixes(name, defs, variants)
+
+
+def mlx_core_fast(name, defs):
+    variants = {
+        "rope": ["", "dynamic"],
     }
     return _make_variant_suffixes(name, defs, variants)
 

@@ -22,7 +22,7 @@ def replace_match_parenthesis(string, keyword, fun):
     return "".join(res)
 
 
-decl_code = """
+decl_code = r"""
 typedef struct NAME_ {
   void* ctx;
 } NAME;
@@ -117,7 +117,7 @@ def generate(code, name, rcpptype, cpptypes):
     return code
 
 
-impl_code = """
+impl_code = r"""
 extern "C" NAME NAME_new(void) {
   try {
     return NAME_new_();
@@ -213,7 +213,7 @@ extern "C" int NAME_apply(RCARGS, NAME cls, CARGS) {
 
 priv_code = None
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+decl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -238,7 +238,7 @@ extern "C" {
 /**@{*/
 """
 
-decl_end = """
+decl_end = r"""
 /**@}*/
 
 #ifdef __cplusplus
@@ -248,7 +248,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+impl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -261,7 +261,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+priv_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -274,7 +274,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 
 """
 
-priv_end = """
+priv_end = r"""
 #endif
 """
 
@@ -303,7 +303,7 @@ print(
 )
 if args.implementation:
     print(
-        """
+        r"""
 extern "C" mlx_closure mlx_closure_new_unary(
     int (*fun)(mlx_array*, const mlx_array)) {
   try {
@@ -335,7 +335,7 @@ elif args.private:
     pass
 else:
     print(
-        """
+        r"""
 mlx_closure mlx_closure_new_unary(int (*fun)(mlx_array*, const mlx_array));
     """
     )

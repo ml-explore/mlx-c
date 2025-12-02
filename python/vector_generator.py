@@ -21,7 +21,7 @@ def replace_match_parenthesis(string, keyword, fun):
     return "".join(res)
 
 
-decl_code = """
+decl_code = r"""
 /**
  * A vector of SCTYPE.
  */
@@ -50,7 +50,7 @@ int mlx_vector_SCTYPE_get(
     size_t idx);
 """
 
-impl_code = """
+impl_code = r"""
 extern "C" mlx_vector_SCTYPE mlx_vector_SCTYPE_new(void) {
   try {
     return mlx_vector_SCTYPE_new_({});
@@ -208,7 +208,7 @@ def generate(
     return code
 
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+decl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -240,7 +240,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+impl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -253,7 +253,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+priv_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -265,7 +265,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 #include "mlx/mlx.h"
 """
 
-priv_end = """
+priv_end = r"""
 #endif
 """
 

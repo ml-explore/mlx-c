@@ -172,8 +172,8 @@ inline mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new_(
     const std::string& header,
     bool ensure_row_contiguous,
     int shared_memory) {
-  return mlx_fast_cuda_kernel(
-      {new mlx_fast_cuda_kernel_cpp_(mlx::core::fast::cuda_kernel(
+  return mlx_fast_cuda_kernel({new mlx_fast_cuda_kernel_cpp_(
+      mlx::core::fast::cuda_kernel(
           name,
           input_names,
           output_names,
@@ -441,8 +441,8 @@ inline mlx_fast_metal_kernel mlx_fast_metal_kernel_new_(
     const std::string& header,
     bool ensure_row_contiguous,
     bool atomic_outputs) {
-  return mlx_fast_metal_kernel(
-      {new mlx_fast_metal_kernel_cpp_(mlx::core::fast::metal_kernel(
+  return mlx_fast_metal_kernel({new mlx_fast_metal_kernel_cpp_(
+      mlx::core::fast::metal_kernel(
           name,
           input_names,
           output_names,
@@ -562,6 +562,36 @@ extern "C" int mlx_fast_rope(
                             : std::nullopt),
             scale,
             offset,
+            (freqs.ctx ? std::make_optional(mlx_array_get_(freqs))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_fast_rope_dynamic(
+    mlx_array* res,
+    const mlx_array x,
+    int dims,
+    bool traditional,
+    mlx_optional_float base,
+    float scale,
+    const mlx_array offset,
+    const mlx_array freqs /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::fast::rope(
+            mlx_array_get_(x),
+            dims,
+            traditional,
+            (base.has_value ? std::make_optional<float>(base.value)
+                            : std::nullopt),
+            scale,
+            mlx_array_get_(offset),
             (freqs.ctx ? std::make_optional(mlx_array_get_(freqs))
                        : std::nullopt),
             mlx_stream_get_(s)));
