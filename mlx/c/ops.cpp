@@ -1398,6 +1398,29 @@ extern "C" int mlx_gather(
   }
   return 0;
 }
+extern "C" int mlx_gather_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    int axis,
+    const int* slice_sizes,
+    size_t slice_sizes_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::gather(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            axis,
+            mlx::core::Shape(slice_sizes, slice_sizes + slice_sizes_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_gather_mm(
     mlx_array* res,
     const mlx_array a,
@@ -2736,6 +2759,28 @@ extern "C" int mlx_scatter(
   }
   return 0;
 }
+extern "C" int mlx_scatter_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    const mlx_array updates,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::scatter(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            mlx_array_get_(updates),
+            axis,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_scatter_add(
     mlx_array* res,
     const mlx_array a,
@@ -2752,6 +2797,28 @@ extern "C" int mlx_scatter_add(
             mlx_vector_array_get_(indices),
             mlx_array_get_(updates),
             std::vector<int>(axes, axes + axes_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_scatter_add_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    const mlx_array updates,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::scatter_add(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            mlx_array_get_(updates),
+            axis,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2804,6 +2871,28 @@ extern "C" int mlx_scatter_max(
   }
   return 0;
 }
+extern "C" int mlx_scatter_max_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    const mlx_array updates,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::scatter_max(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            mlx_array_get_(updates),
+            axis,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_scatter_min(
     mlx_array* res,
     const mlx_array a,
@@ -2827,6 +2916,28 @@ extern "C" int mlx_scatter_min(
   }
   return 0;
 }
+extern "C" int mlx_scatter_min_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    const mlx_array updates,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::scatter_min(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            mlx_array_get_(updates),
+            axis,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_scatter_prod(
     mlx_array* res,
     const mlx_array a,
@@ -2843,6 +2954,28 @@ extern "C" int mlx_scatter_prod(
             mlx_vector_array_get_(indices),
             mlx_array_get_(updates),
             std::vector<int>(axes, axes + axes_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_scatter_prod_array(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array indices,
+    const mlx_array updates,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::scatter_prod(
+            mlx_array_get_(a),
+            mlx_array_get_(indices),
+            mlx_array_get_(updates),
+            axis,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());

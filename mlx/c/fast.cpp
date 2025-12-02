@@ -571,6 +571,36 @@ extern "C" int mlx_fast_rope(
   }
   return 0;
 }
+extern "C" int mlx_fast_rope_offset_array(
+    mlx_array* res,
+    const mlx_array x,
+    int dims,
+    bool traditional,
+    mlx_optional_float base,
+    float scale,
+    const mlx_array offset,
+    const mlx_array freqs /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::fast::rope(
+            mlx_array_get_(x),
+            dims,
+            traditional,
+            (base.has_value ? std::make_optional<float>(base.value)
+                            : std::nullopt),
+            scale,
+            mlx_array_get_(offset),
+            (freqs.ctx ? std::make_optional(mlx_array_get_(freqs))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_fast_scaled_dot_product_attention(
     mlx_array* res,
     const mlx_array queries,
