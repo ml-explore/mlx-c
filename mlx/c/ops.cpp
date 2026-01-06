@@ -2479,6 +2479,35 @@ extern "C" int mlx_put_along_axis(
   }
   return 0;
 }
+extern "C" int mlx_qqmm(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_array w,
+    const mlx_array w_scales /* may be null */,
+    mlx_optional_int group_size,
+    mlx_optional_int bits,
+    const char* mode,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::qqmm(
+            mlx_array_get_(x),
+            mlx_array_get_(w),
+            (w_scales.ctx ? std::make_optional(mlx_array_get_(w_scales))
+                          : std::nullopt),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_quantize(
     mlx_vector_array* res,
     const mlx_array w,

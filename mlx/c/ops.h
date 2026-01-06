@@ -781,6 +781,15 @@ int mlx_put_along_axis(
     const mlx_array values,
     int axis,
     const mlx_stream s);
+int mlx_qqmm(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_array w,
+    const mlx_array w_scales /* may be null */,
+    mlx_optional_int group_size,
+    mlx_optional_int bits,
+    const char* mode,
+    const mlx_stream s);
 int mlx_quantize(
     mlx_vector_array* res,
     const mlx_array w,
