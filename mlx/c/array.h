@@ -114,6 +114,20 @@ mlx_array mlx_array_new_data(
     int dim,
     mlx_dtype dtype);
 /**
+ * New array from existing buffer.
+ * @param data A buffer which will be copied.
+ * @param shape Shape of the array.
+ * @param dim Number of dimensions (size of `shape`).
+ * @param dtype Type of array elements.
+ * @param free_data Callback for when the buffer is no longer needed.
+ */
+mlx_array mlx_array_new_data_managed(
+    void* data,
+    const int* shape,
+    int dim,
+    mlx_dtype dtype,
+    void (*free_data)(void*));
+/**
  * Set array to provided src array.
  */
 int mlx_array_set(mlx_array* arr, const mlx_array src);
