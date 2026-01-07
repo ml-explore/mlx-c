@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # ----------------------------- Configuration -----------------------------
 if(NOT MLX_C_VERSION)
-  set(MLX_C_VERSION 0.4.0)
+  set(MLX_C_VERSION 0.4.1)
 endif()
 
 option(BUILD_SHARED_LIBS "Build mlx C as a shared library" OFF)
