@@ -23,15 +23,14 @@ brew install cmake
 To build, run the following commands:
 
 ```shell
-mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 ```
 
 From the `build/` directory, you can run an [example](examples/example.c)
 that uses MLX C with `./example`.
 
-## Contributing 
+## Contributing
 
 Check out the [contribution guidelines](CONTRIBUTING.md) for more information
 on contributing to MLX C. See the

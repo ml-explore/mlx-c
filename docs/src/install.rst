@@ -11,9 +11,8 @@ To build MLX C, run the following commands:
 
 .. code-block:: shell
 
-  mkdir build && cd build/
-  cmake .. -DCMAKE_BUILD_TYPE=Release
-  make -j
+  cmake -B build -DCMAKE_BUILD_TYPE=Release
+  cmake --build build
 
 MLX C will fetch `MLX <https://github.com/ml-explore/mlx>`_ under the hood,
 compile it, and then compile the C API.
