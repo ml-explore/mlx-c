@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; MLX C 0.1.2 documentation</title>
+    <title>Index &#8212; MLX C 0.4.1 documentation</title>
   
   
   
@@ -15,39 +15,35 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <script src="_static/documentation_options.js?v=0deb7d70"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.2" />
   </head>
   
   
@@ -63,8 +59,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -72,6 +79,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -79,8 +87,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -98,8 +106,7 @@
       
         
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -128,18 +135,22 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.1.2 documentation - Home"/>
-    <img src="_static/mlx_logo_dark.png" class="logo__image only-dark pst-js-only" alt="MLX C 0.1.2 documentation - Home"/>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
@@ -177,7 +188,8 @@
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="error.html">Error management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="export.html">Function Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error Management</a></li>
 </ul>
 
     </div>
@@ -252,16 +264,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -324,7 +344,7 @@
 </li>
       <li><a href="ops.html#_CPPv49mlx_addmmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayffK10mlx_stream">mlx_addmm (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_all_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_all_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_all (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_all_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_all_axes (C++ function)</a>
 </li>
@@ -332,9 +352,11 @@
 </li>
       <li><a href="ops.html#_CPPv412mlx_allcloseP9mlx_arrayK9mlx_arrayK9mlx_arrayddbK10mlx_stream">mlx_allclose (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_anyP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_any (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_anyP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_any (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_any_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_any_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_any_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_any_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_any_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_any_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_arangeP9mlx_arrayddd9mlx_dtypeK10mlx_stream">mlx_arange (C++ function)</a>
 </li>
@@ -352,21 +374,21 @@
 </li>
       <li><a href="ops.html#_CPPv411mlx_arctanhP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_arctanh (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv410mlx_argmaxP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_argmax (C++ function)</a>
+      <li><a href="ops.html#_CPPv410mlx_argmaxP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_argmax (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv414mlx_argmax_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_argmax_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv415mlx_argmax_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_argmax_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv410mlx_argminP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_argmin (C++ function)</a>
+      <li><a href="ops.html#_CPPv410mlx_argminP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_argmin (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv414mlx_argmin_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_argmin_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv415mlx_argmin_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_argmin_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv416mlx_argpartitionP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_argpartition (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_argpartitionP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_argpartition (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_argpartition_allP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_argpartition_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv421mlx_argpartition_axisP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_argpartition_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_argsortP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_argsort (C++ function)</a>
+      <li><a href="ops.html#_CPPv411mlx_argsortP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_argsort (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv415mlx_argsort_allP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_argsort_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_argsort_axisP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_argsort_axis (C++ function)</a>
 </li>
       <li><a href="array.html#_CPPv49mlx_array">mlx_array (C++ type)</a>
 </li>
@@ -570,6 +592,22 @@
 </li>
       <li><a href="closure.html#_CPPv416mlx_closure_free11mlx_closure">mlx_closure_free (C++ function)</a>
 </li>
+      <li><a href="closure.html#_CPPv418mlx_closure_kwargs">mlx_closure_kwargs (C++ type)</a>
+</li>
+      <li><a href="closure.html#_CPPv419mlx_closure_kwargs_">mlx_closure_kwargs_ (C++ struct)</a>
+</li>
+      <li><a href="closure.html#_CPPv424mlx_closure_kwargs_applyP16mlx_vector_array18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_array">mlx_closure_kwargs_apply (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv423mlx_closure_kwargs_free18mlx_closure_kwargs">mlx_closure_kwargs_free (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv422mlx_closure_kwargs_newv">mlx_closure_kwargs_new (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv427mlx_closure_kwargs_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayK23mlx_map_string_to_arrayE">mlx_closure_kwargs_new_func (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv435mlx_closure_kwargs_new_func_payloadPFiP16mlx_vector_arrayK16mlx_vector_arrayK23mlx_map_string_to_arrayPvEPvPFvPvE">mlx_closure_kwargs_new_func_payload (C++ function)</a>
+</li>
+      <li><a href="closure.html#_CPPv422mlx_closure_kwargs_setP18mlx_closure_kwargsK18mlx_closure_kwargs">mlx_closure_kwargs_set (C++ function)</a>
+</li>
       <li><a href="closure.html#_CPPv415mlx_closure_newv">mlx_closure_new (C++ function)</a>
 </li>
       <li><a href="closure.html#_CPPv420mlx_closure_new_funcPFiP16mlx_vector_arrayK16mlx_vector_arrayE">mlx_closure_new_func (C++ function)</a>
@@ -610,9 +648,9 @@
 </li>
       <li><a href="compile.html#_CPPv4N17mlx_compile_mode_28MLX_COMPILE_MODE_NO_SIMPLIFYE">mlx_compile_mode_::MLX_COMPILE_MODE_NO_SIMPLIFY (C++ enumerator)</a>
 </li>
-      <li><a href="ops.html#_CPPv415mlx_concatenateP9mlx_arrayK16mlx_vector_arrayiK10mlx_stream">mlx_concatenate (C++ function)</a>
+      <li><a href="ops.html#_CPPv415mlx_concatenateP9mlx_arrayK16mlx_vector_arrayK10mlx_stream">mlx_concatenate (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv419mlx_concatenate_allP9mlx_arrayK16mlx_vector_arrayK10mlx_stream">mlx_concatenate_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv420mlx_concatenate_axisP9mlx_arrayK16mlx_vector_arrayiK10mlx_stream">mlx_concatenate_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv413mlx_conjugateP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_conjugate (C++ function)</a>
 </li>
@@ -626,11 +664,11 @@
 </li>
       <li><a href="ops.html#_CPPv416mlx_conv_generalP9mlx_arrayK9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tPKi6size_tPKi6size_tPKi6size_tibK10mlx_stream">mlx_conv_general (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_conv_transpose1dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiK10mlx_stream">mlx_conv_transpose1d (C++ function)</a>
+      <li><a href="ops.html#_CPPv420mlx_conv_transpose1dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiiK10mlx_stream">mlx_conv_transpose1d (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_conv_transpose2dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiiiiK10mlx_stream">mlx_conv_transpose2d (C++ function)</a>
+      <li><a href="ops.html#_CPPv420mlx_conv_transpose2dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiiiiiiK10mlx_stream">mlx_conv_transpose2d (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_conv_transpose3dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiiiiiiiK10mlx_stream">mlx_conv_transpose3d (C++ function)</a>
+      <li><a href="ops.html#_CPPv420mlx_conv_transpose3dP9mlx_arrayK9mlx_arrayK9mlx_arrayiiiiiiiiiiiiiK10mlx_stream">mlx_conv_transpose3d (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_copyP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_copy (C++ function)</a>
 </li>
@@ -658,7 +696,7 @@
 </li>
       <li><a href="ops.html#_CPPv411mlx_dependsP16mlx_vector_arrayK16mlx_vector_arrayK16mlx_vector_array">mlx_depends (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv414mlx_dequantizeP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_dequantize (C++ function)</a>
+      <li><a href="ops.html#_CPPv414mlx_dequantizeP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_array16mlx_optional_int16mlx_optional_intPKc18mlx_optional_dtypeK10mlx_stream">mlx_dequantize (C++ function)</a>
 </li>
       <li><a href="compile.html#_CPPv418mlx_detail_compileP11mlx_closureK11mlx_closure9uintptr_tbPK8uint64_t6size_t">mlx_detail_compile (C++ function)</a>
 </li>
@@ -702,6 +740,10 @@
 </li>
       <li><a href="distributed_ops.html#_CPPv426mlx_distributed_all_gatherP9mlx_arrayK9mlx_arrayK21mlx_distributed_groupK10mlx_stream">mlx_distributed_all_gather (C++ function)</a>
 </li>
+      <li><a href="distributed_ops.html#_CPPv423mlx_distributed_all_maxP9mlx_arrayK9mlx_arrayK21mlx_distributed_groupK10mlx_stream">mlx_distributed_all_max (C++ function)</a>
+</li>
+      <li><a href="distributed_ops.html#_CPPv423mlx_distributed_all_minP9mlx_arrayK9mlx_arrayK21mlx_distributed_groupK10mlx_stream">mlx_distributed_all_min (C++ function)</a>
+</li>
       <li><a href="distributed_ops.html#_CPPv423mlx_distributed_all_sumP9mlx_arrayK9mlx_arrayK21mlx_distributed_groupK10mlx_stream">mlx_distributed_all_sum (C++ function)</a>
 </li>
       <li><a href="distributed_group.html#_CPPv421mlx_distributed_group">mlx_distributed_group (C++ type)</a>
@@ -723,6 +765,8 @@
       <li><a href="distributed_ops.html#_CPPv425mlx_distributed_recv_likeP9mlx_arrayK9mlx_arrayiK21mlx_distributed_groupK10mlx_stream">mlx_distributed_recv_like (C++ function)</a>
 </li>
       <li><a href="distributed_ops.html#_CPPv420mlx_distributed_sendP9mlx_arrayK9mlx_arrayiK21mlx_distributed_groupK10mlx_stream">mlx_distributed_send (C++ function)</a>
+</li>
+      <li><a href="distributed_ops.html#_CPPv427mlx_distributed_sum_scatterP9mlx_arrayK9mlx_arrayK21mlx_distributed_groupK10mlx_stream">mlx_distributed_sum_scatter (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_divideP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_divide (C++ function)</a>
 </li>
@@ -780,15 +824,51 @@
 </li>
       <li><a href="ops.html#_CPPv47mlx_expP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_exp (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv415mlx_expand_dimsP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_expand_dims (C++ function)</a>
+      <li><a href="ops.html#_CPPv415mlx_expand_dimsP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_expand_dims (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv420mlx_expand_dims_axesP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_expand_dims_axes (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_expm1P9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_expm1 (C++ function)</a>
 </li>
+      <li><a href="export.html#_CPPv419mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb">mlx_export_function (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv426mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb">mlx_export_function_kwargs (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv47mlx_eyeP9mlx_arrayiii9mlx_dtypeK10mlx_stream">mlx_eye (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv426mlx_fast_affine_dequantizeP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_fast_affine_dequantize (C++ function)</a>
+      <li><a href="fast.html#_CPPv420mlx_fast_cuda_kernel">mlx_fast_cuda_kernel (C++ type)</a>
 </li>
-      <li><a href="fast.html#_CPPv424mlx_fast_affine_quantizeP9mlx_arrayP9mlx_arrayP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_fast_affine_quantize (C++ function)</a>
+      <li><a href="fast.html#_CPPv421mlx_fast_cuda_kernel_">mlx_fast_cuda_kernel_ (C++ struct)</a>
+</li>
+      <li><a href="fast.html#_CPPv426mlx_fast_cuda_kernel_applyP16mlx_vector_array20mlx_fast_cuda_kernelK16mlx_vector_arrayK27mlx_fast_cuda_kernel_configK10mlx_stream">mlx_fast_cuda_kernel_apply (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv427mlx_fast_cuda_kernel_config">mlx_fast_cuda_kernel_config (C++ type)</a>
+</li>
+      <li><a href="fast.html#_CPPv428mlx_fast_cuda_kernel_config_">mlx_fast_cuda_kernel_config_ (C++ struct)</a>
+</li>
+      <li><a href="fast.html#_CPPv442mlx_fast_cuda_kernel_config_add_output_arg27mlx_fast_cuda_kernel_configPKi6size_t9mlx_dtype">mlx_fast_cuda_kernel_config_add_output_arg (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv449mlx_fast_cuda_kernel_config_add_template_arg_bool27mlx_fast_cuda_kernel_configPKcb">mlx_fast_cuda_kernel_config_add_template_arg_bool (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv450mlx_fast_cuda_kernel_config_add_template_arg_dtype27mlx_fast_cuda_kernel_configPKc9mlx_dtype">mlx_fast_cuda_kernel_config_add_template_arg_dtype (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv448mlx_fast_cuda_kernel_config_add_template_arg_int27mlx_fast_cuda_kernel_configPKci">mlx_fast_cuda_kernel_config_add_template_arg_int (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv432mlx_fast_cuda_kernel_config_free27mlx_fast_cuda_kernel_config">mlx_fast_cuda_kernel_config_free (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv431mlx_fast_cuda_kernel_config_newv">mlx_fast_cuda_kernel_config_new (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv436mlx_fast_cuda_kernel_config_set_grid27mlx_fast_cuda_kernel_configiii">mlx_fast_cuda_kernel_config_set_grid (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv442mlx_fast_cuda_kernel_config_set_init_value27mlx_fast_cuda_kernel_configf">mlx_fast_cuda_kernel_config_set_init_value (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv444mlx_fast_cuda_kernel_config_set_thread_group27mlx_fast_cuda_kernel_configiii">mlx_fast_cuda_kernel_config_set_thread_group (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv439mlx_fast_cuda_kernel_config_set_verbose27mlx_fast_cuda_kernel_configb">mlx_fast_cuda_kernel_config_set_verbose (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv425mlx_fast_cuda_kernel_free20mlx_fast_cuda_kernel">mlx_fast_cuda_kernel_free (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv424mlx_fast_cuda_kernel_newPKcK17mlx_vector_stringK17mlx_vector_stringPKcPKcbi">mlx_fast_cuda_kernel_new (C++ function)</a>
 </li>
       <li><a href="fast.html#_CPPv419mlx_fast_layer_normP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayfK10mlx_stream">mlx_fast_layer_norm (C++ function)</a>
 </li>
@@ -796,45 +876,43 @@
 </li>
       <li><a href="fast.html#_CPPv422mlx_fast_metal_kernel_">mlx_fast_metal_kernel_ (C++ struct)</a>
 </li>
-      <li><a href="fast.html#_CPPv436mlx_fast_metal_kernel_add_input_name21mlx_fast_metal_kernelPKc">mlx_fast_metal_kernel_add_input_name (C++ function)</a>
+      <li><a href="fast.html#_CPPv427mlx_fast_metal_kernel_applyP16mlx_vector_array21mlx_fast_metal_kernelK16mlx_vector_arrayK28mlx_fast_metal_kernel_configK10mlx_stream">mlx_fast_metal_kernel_apply (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv436mlx_fast_metal_kernel_add_output_arg21mlx_fast_metal_kernelPKi6size_t9mlx_dtype">mlx_fast_metal_kernel_add_output_arg (C++ function)</a>
+      <li><a href="fast.html#_CPPv428mlx_fast_metal_kernel_config">mlx_fast_metal_kernel_config (C++ type)</a>
 </li>
-      <li><a href="fast.html#_CPPv437mlx_fast_metal_kernel_add_output_name21mlx_fast_metal_kernelPKc">mlx_fast_metal_kernel_add_output_name (C++ function)</a>
+      <li><a href="fast.html#_CPPv429mlx_fast_metal_kernel_config_">mlx_fast_metal_kernel_config_ (C++ struct)</a>
 </li>
-      <li><a href="fast.html#_CPPv443mlx_fast_metal_kernel_add_template_arg_bool21mlx_fast_metal_kernelPKcb">mlx_fast_metal_kernel_add_template_arg_bool (C++ function)</a>
+      <li><a href="fast.html#_CPPv443mlx_fast_metal_kernel_config_add_output_arg28mlx_fast_metal_kernel_configPKi6size_t9mlx_dtype">mlx_fast_metal_kernel_config_add_output_arg (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv444mlx_fast_metal_kernel_add_template_arg_dtype21mlx_fast_metal_kernelPKc9mlx_dtype">mlx_fast_metal_kernel_add_template_arg_dtype (C++ function)</a>
+      <li><a href="fast.html#_CPPv450mlx_fast_metal_kernel_config_add_template_arg_bool28mlx_fast_metal_kernel_configPKcb">mlx_fast_metal_kernel_config_add_template_arg_bool (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv442mlx_fast_metal_kernel_add_template_arg_int21mlx_fast_metal_kernelPKci">mlx_fast_metal_kernel_add_template_arg_int (C++ function)</a>
+      <li><a href="fast.html#_CPPv451mlx_fast_metal_kernel_config_add_template_arg_dtype28mlx_fast_metal_kernel_configPKc9mlx_dtype">mlx_fast_metal_kernel_config_add_template_arg_dtype (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv427mlx_fast_metal_kernel_applyP16mlx_vector_array21mlx_fast_metal_kernelK16mlx_vector_arrayK10mlx_stream">mlx_fast_metal_kernel_apply (C++ function)</a>
+      <li><a href="fast.html#_CPPv449mlx_fast_metal_kernel_config_add_template_arg_int28mlx_fast_metal_kernel_configPKci">mlx_fast_metal_kernel_config_add_template_arg_int (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv433mlx_fast_metal_kernel_config_free28mlx_fast_metal_kernel_config">mlx_fast_metal_kernel_config_free (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv432mlx_fast_metal_kernel_config_newv">mlx_fast_metal_kernel_config_new (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv437mlx_fast_metal_kernel_config_set_grid28mlx_fast_metal_kernel_configiii">mlx_fast_metal_kernel_config_set_grid (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv443mlx_fast_metal_kernel_config_set_init_value28mlx_fast_metal_kernel_configf">mlx_fast_metal_kernel_config_set_init_value (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv445mlx_fast_metal_kernel_config_set_thread_group28mlx_fast_metal_kernel_configiii">mlx_fast_metal_kernel_config_set_thread_group (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv440mlx_fast_metal_kernel_config_set_verbose28mlx_fast_metal_kernel_configb">mlx_fast_metal_kernel_config_set_verbose (C++ function)</a>
 </li>
       <li><a href="fast.html#_CPPv426mlx_fast_metal_kernel_free21mlx_fast_metal_kernel">mlx_fast_metal_kernel_free (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv425mlx_fast_metal_kernel_newPKcPKcPKc">mlx_fast_metal_kernel_new (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv440mlx_fast_metal_kernel_set_atomic_outputs21mlx_fast_metal_kernelb">mlx_fast_metal_kernel_set_atomic_outputs (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv441mlx_fast_metal_kernel_set_contiguous_rows21mlx_fast_metal_kernelb">mlx_fast_metal_kernel_set_contiguous_rows (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv430mlx_fast_metal_kernel_set_grid21mlx_fast_metal_kerneliii">mlx_fast_metal_kernel_set_grid (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv436mlx_fast_metal_kernel_set_init_value21mlx_fast_metal_kernelf">mlx_fast_metal_kernel_set_init_value (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv437mlx_fast_metal_kernel_set_input_names21mlx_fast_metal_kerneliz">mlx_fast_metal_kernel_set_input_names (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv438mlx_fast_metal_kernel_set_output_names21mlx_fast_metal_kerneliz">mlx_fast_metal_kernel_set_output_names (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv438mlx_fast_metal_kernel_set_thread_group21mlx_fast_metal_kerneliii">mlx_fast_metal_kernel_set_thread_group (C++ function)</a>
-</li>
-      <li><a href="fast.html#_CPPv433mlx_fast_metal_kernel_set_verbose21mlx_fast_metal_kernelb">mlx_fast_metal_kernel_set_verbose (C++ function)</a>
+      <li><a href="fast.html#_CPPv425mlx_fast_metal_kernel_newPKcK17mlx_vector_stringK17mlx_vector_stringPKcPKcbb">mlx_fast_metal_kernel_new (C++ function)</a>
 </li>
       <li><a href="fast.html#_CPPv417mlx_fast_rms_normP9mlx_arrayK9mlx_arrayK9mlx_arrayfK10mlx_stream">mlx_fast_rms_norm (C++ function)</a>
 </li>
       <li><a href="fast.html#_CPPv413mlx_fast_ropeP9mlx_arrayK9mlx_arrayib18mlx_optional_floatfiK9mlx_arrayK10mlx_stream">mlx_fast_rope (C++ function)</a>
 </li>
-      <li><a href="fast.html#_CPPv437mlx_fast_scaled_dot_product_attentionP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayfK9mlx_array16mlx_optional_intK10mlx_stream">mlx_fast_scaled_dot_product_attention (C++ function)</a>
+      <li><a href="fast.html#_CPPv421mlx_fast_rope_dynamicP9mlx_arrayK9mlx_arrayib18mlx_optional_floatfK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_fast_rope_dynamic (C++ function)</a>
+</li>
+      <li><a href="fast.html#_CPPv437mlx_fast_scaled_dot_product_attentionP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayfPKcK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_fast_scaled_dot_product_attention (C++ function)</a>
 </li>
       <li><a href="fft.html#_CPPv411mlx_fft_fftP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_fft_fft (C++ function)</a>
 </li>
@@ -842,11 +920,15 @@
 </li>
       <li><a href="fft.html#_CPPv412mlx_fft_fftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_fft_fftn (C++ function)</a>
 </li>
+      <li><a href="fft.html#_CPPv416mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_fft_fftshift (C++ function)</a>
+</li>
       <li><a href="fft.html#_CPPv412mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_fft_ifft (C++ function)</a>
 </li>
       <li><a href="fft.html#_CPPv413mlx_fft_ifft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_fft_ifft2 (C++ function)</a>
 </li>
       <li><a href="fft.html#_CPPv413mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_fft_ifftn (C++ function)</a>
+</li>
+      <li><a href="fft.html#_CPPv417mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_fft_ifftshift (C++ function)</a>
 </li>
       <li><a href="fft.html#_CPPv413mlx_fft_irfftP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_fft_irfft (C++ function)</a>
 </li>
@@ -866,13 +948,33 @@
 </li>
       <li><a href="ops.html#_CPPv416mlx_floor_divideP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_floor_divide (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv412mlx_from_fp8P9mlx_arrayK9mlx_array9mlx_dtypeK10mlx_stream">mlx_from_fp8 (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv48mlx_fullP9mlx_arrayPKi6size_tK9mlx_array9mlx_dtypeK10mlx_stream">mlx_full (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_full_likeP9mlx_arrayK9mlx_arrayK9mlx_array9mlx_dtypeK10mlx_stream">mlx_full_like (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv421mlx_function_exporter">mlx_function_exporter (C++ type)</a>
+</li>
+      <li><a href="export.html#_CPPv422mlx_function_exporter_">mlx_function_exporter_ (C++ struct)</a>
+</li>
+      <li><a href="export.html#_CPPv427mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array">mlx_function_exporter_apply (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv434mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array">mlx_function_exporter_apply_kwargs (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv426mlx_function_exporter_free21mlx_function_exporter">mlx_function_exporter_free (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv425mlx_function_exporter_newPKcK11mlx_closureb">mlx_function_exporter_new (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_gatherP9mlx_arrayK9mlx_arrayK16mlx_vector_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_gather (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_gather_mmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_gather_mm (C++ function)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="ops.html#_CPPv413mlx_gather_mmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_gather_mm (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv414mlx_gather_qmmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arraybiiK10mlx_stream">mlx_gather_qmm (C++ function)</a>
+      <li><a href="ops.html#_CPPv414mlx_gather_qmmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayb16mlx_optional_int16mlx_optional_intPKcbK10mlx_stream">mlx_gather_qmm (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv417mlx_gather_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayiPKi6size_tK10mlx_stream">mlx_gather_single (C++ function)</a>
 </li>
       <li><a href="device.html#_CPPv422mlx_get_default_deviceP10mlx_device">mlx_get_default_device (C++ function)</a>
 </li>
@@ -880,8 +982,6 @@
 </li>
       <li><a href="ops.html#_CPPv411mlx_greaterP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_greater (C++ function)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ops.html#_CPPv417mlx_greater_equalP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_greater_equal (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv422mlx_hadamard_transformP9mlx_arrayK9mlx_array18mlx_optional_floatK10mlx_stream">mlx_hadamard_transform (C++ function)</a>
@@ -889,6 +989,18 @@
       <li><a href="ops.html#_CPPv412mlx_identityP9mlx_arrayi9mlx_dtypeK10mlx_stream">mlx_identity (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_imagP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_imag (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv421mlx_imported_function">mlx_imported_function (C++ type)</a>
+</li>
+      <li><a href="export.html#_CPPv422mlx_imported_function_">mlx_imported_function_ (C++ struct)</a>
+</li>
+      <li><a href="export.html#_CPPv427mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array">mlx_imported_function_apply (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv434mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array">mlx_imported_function_apply_kwargs (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv426mlx_imported_function_free21mlx_imported_function">mlx_imported_function_free (C++ function)</a>
+</li>
+      <li><a href="export.html#_CPPv425mlx_imported_function_newPKc">mlx_imported_function_new (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_innerP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_inner (C++ function)</a>
 </li>
@@ -920,7 +1032,11 @@
 </li>
       <li><a href="linalg.html#_CPPv416mlx_linalg_crossP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_linalg_cross (C++ function)</a>
 </li>
+      <li><a href="linalg.html#_CPPv414mlx_linalg_eigP9mlx_arrayP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_linalg_eig (C++ function)</a>
+</li>
       <li><a href="linalg.html#_CPPv415mlx_linalg_eighP9mlx_arrayP9mlx_arrayK9mlx_arrayPKcK10mlx_stream">mlx_linalg_eigh (C++ function)</a>
+</li>
+      <li><a href="linalg.html#_CPPv418mlx_linalg_eigvalsP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_linalg_eigvals (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv419mlx_linalg_eigvalshP9mlx_arrayK9mlx_arrayPKcK10mlx_stream">mlx_linalg_eigvalsh (C++ function)</a>
 </li>
@@ -930,11 +1046,11 @@
 </li>
       <li><a href="linalg.html#_CPPv420mlx_linalg_lu_factorP9mlx_arrayP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_linalg_lu_factor (C++ function)</a>
 </li>
-      <li><a href="linalg.html#_CPPv415mlx_linalg_normP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_linalg_norm (C++ function)</a>
+      <li><a href="linalg.html#_CPPv415mlx_linalg_normP9mlx_arrayK9mlx_arraydPKi6size_tbK10mlx_stream">mlx_linalg_norm (C++ function)</a>
 </li>
-      <li><a href="linalg.html#_CPPv419mlx_linalg_norm_ordP9mlx_arrayK9mlx_arrayPKcPKi6size_tbK10mlx_stream">mlx_linalg_norm_ord (C++ function)</a>
+      <li><a href="linalg.html#_CPPv418mlx_linalg_norm_l2P9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_linalg_norm_l2 (C++ function)</a>
 </li>
-      <li><a href="linalg.html#_CPPv417mlx_linalg_norm_pP9mlx_arrayK9mlx_arraydPKi6size_tbK10mlx_stream">mlx_linalg_norm_p (C++ function)</a>
+      <li><a href="linalg.html#_CPPv422mlx_linalg_norm_matrixP9mlx_arrayK9mlx_arrayPKcPKi6size_tbK10mlx_stream">mlx_linalg_norm_matrix (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv415mlx_linalg_pinvP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_linalg_pinv (C++ function)</a>
 </li>
@@ -944,7 +1060,7 @@
 </li>
       <li><a href="linalg.html#_CPPv427mlx_linalg_solve_triangularP9mlx_arrayK9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_linalg_solve_triangular (C++ function)</a>
 </li>
-      <li><a href="linalg.html#_CPPv414mlx_linalg_svdP16mlx_vector_arrayK9mlx_arrayK10mlx_stream">mlx_linalg_svd (C++ function)</a>
+      <li><a href="linalg.html#_CPPv414mlx_linalg_svdP16mlx_vector_arrayK9mlx_arraybK10mlx_stream">mlx_linalg_svd (C++ function)</a>
 </li>
       <li><a href="linalg.html#_CPPv418mlx_linalg_tri_invP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_linalg_tri_inv (C++ function)</a>
 </li>
@@ -952,11 +1068,11 @@
 </li>
       <li><a href="io.html#_CPPv48mlx_loadP9mlx_arrayPKcK10mlx_stream">mlx_load (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv413mlx_load_fileP9mlx_arrayP4FILEK10mlx_stream">mlx_load_file (C++ function)</a>
+      <li><a href="io.html#_CPPv415mlx_load_readerP9mlx_array13mlx_io_readerK10mlx_stream">mlx_load_reader (C++ function)</a>
 </li>
       <li><a href="io.html#_CPPv420mlx_load_safetensorsP23mlx_map_string_to_arrayP24mlx_map_string_to_stringPKcK10mlx_stream">mlx_load_safetensors (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv425mlx_load_safetensors_fileP23mlx_map_string_to_arrayP24mlx_map_string_to_stringP4FILEK10mlx_stream">mlx_load_safetensors_file (C++ function)</a>
+      <li><a href="io.html#_CPPv427mlx_load_safetensors_readerP23mlx_map_string_to_arrayP24mlx_map_string_to_string13mlx_io_readerK10mlx_stream">mlx_load_safetensors_reader (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_logP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_log (C++ function)</a>
 </li>
@@ -968,15 +1084,19 @@
 </li>
       <li><a href="ops.html#_CPPv413mlx_logaddexpP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_logaddexp (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv416mlx_logcumsumexpP9mlx_arrayK9mlx_arrayibbK10mlx_stream">mlx_logcumsumexp (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv415mlx_logical_andP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_logical_and (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv415mlx_logical_notP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_logical_not (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv414mlx_logical_orP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_logical_or (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_logsumexpP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_logsumexp (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_logsumexpP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_logsumexp (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv417mlx_logsumexp_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_logsumexp_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv418mlx_logsumexp_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_logsumexp_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv418mlx_logsumexp_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_logsumexp_axis (C++ function)</a>
 </li>
       <li><a href="map.html#_CPPv423mlx_map_string_to_array">mlx_map_string_to_array (C++ type)</a>
 </li>
@@ -1026,21 +1146,27 @@
 </li>
       <li><a href="map.html#_CPPv428mlx_map_string_to_string_setP24mlx_map_string_to_stringK24mlx_map_string_to_string">mlx_map_string_to_string_set (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv418mlx_masked_scatterP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_masked_scatter (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv410mlx_matmulP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_matmul (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_maxP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_max (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_maxP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_max (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_max_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_max_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_max_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_max_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_max_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_max_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_maximumP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_maximum (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_meanP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_mean (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_meanP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_mean (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_mean_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_mean_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_mean_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_mean_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_mean_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_mean_axis (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv410mlx_medianP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_median (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_meshgridP16mlx_vector_arrayK16mlx_vector_arraybPKcK10mlx_stream">mlx_meshgrid (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv421mlx_metal_clear_cachev">mlx_metal_clear_cache (C++ function)</a>
 </li>
       <li><a href="metal.html#_CPPv421mlx_metal_device_infov">mlx_metal_device_info (C++ function)</a>
 </li>
@@ -1048,29 +1174,17 @@
 </li>
       <li><a href="metal.html#_CPPv424mlx_metal_device_info_t_">mlx_metal_device_info_t_ (C++ struct)</a>
 </li>
-      <li><a href="metal.html#_CPPv427mlx_metal_get_active_memoryP6size_t">mlx_metal_get_active_memory (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv426mlx_metal_get_cache_memoryP6size_t">mlx_metal_get_cache_memory (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv425mlx_metal_get_peak_memoryP6size_t">mlx_metal_get_peak_memory (C++ function)</a>
-</li>
       <li><a href="metal.html#_CPPv422mlx_metal_is_availablePb">mlx_metal_is_available (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv427mlx_metal_reset_peak_memoryv">mlx_metal_reset_peak_memory (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv425mlx_metal_set_cache_limitP6size_t6size_t">mlx_metal_set_cache_limit (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv426mlx_metal_set_memory_limitP6size_t6size_tb">mlx_metal_set_memory_limit (C++ function)</a>
-</li>
-      <li><a href="metal.html#_CPPv425mlx_metal_set_wired_limitP6size_t6size_t">mlx_metal_set_wired_limit (C++ function)</a>
 </li>
       <li><a href="metal.html#_CPPv423mlx_metal_start_capturePKc">mlx_metal_start_capture (C++ function)</a>
 </li>
       <li><a href="metal.html#_CPPv422mlx_metal_stop_capturev">mlx_metal_stop_capture (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_minP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_min (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_minP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_min (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_min_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_min_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_min_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_min_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_min_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_min_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_minimumP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_minimum (C++ function)</a>
 </li>
@@ -1090,6 +1204,10 @@
 </li>
       <li><a href="ops.html#_CPPv413mlx_ones_likeP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_ones_like (C++ function)</a>
 </li>
+      <li><a href="optional.html#_CPPv418mlx_optional_dtype">mlx_optional_dtype (C++ type)</a>
+</li>
+      <li><a href="optional.html#_CPPv419mlx_optional_dtype_">mlx_optional_dtype_ (C++ struct)</a>
+</li>
       <li><a href="optional.html#_CPPv418mlx_optional_float">mlx_optional_float (C++ type)</a>
 </li>
       <li><a href="optional.html#_CPPv419mlx_optional_float_">mlx_optional_float_ (C++ struct)</a>
@@ -1102,21 +1220,27 @@
 </li>
       <li><a href="ops.html#_CPPv47mlx_padP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tPKi6size_tK9mlx_arrayPKcK10mlx_stream">mlx_pad (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_partitionP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_partition (C++ function)</a>
+      <li><a href="ops.html#_CPPv417mlx_pad_symmetricP9mlx_arrayK9mlx_arrayiK9mlx_arrayPKcK10mlx_stream">mlx_pad_symmetric (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv417mlx_partition_allP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_partition_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_partitionP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_partition (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv418mlx_partition_axisP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_partition_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_powerP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_power (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_prodP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_prod (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_prodP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_prod (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_prod_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_prod_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_prod_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_prod_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_prod_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_prod_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv418mlx_put_along_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_put_along_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_quantizeP9mlx_arrayP9mlx_arrayP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_quantize (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_qqmmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_array16mlx_optional_int16mlx_optional_intPKcK10mlx_stream">mlx_qqmm (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv420mlx_quantized_matmulP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arraybiiK10mlx_stream">mlx_quantized_matmul (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_quantizeP16mlx_vector_arrayK9mlx_array16mlx_optional_int16mlx_optional_intPKcK10mlx_stream">mlx_quantize (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv420mlx_quantized_matmulP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayb16mlx_optional_int16mlx_optional_intPKcK10mlx_stream">mlx_quantized_matmul (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_radiansP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_radians (C++ function)</a>
 </li>
@@ -1140,6 +1264,8 @@
 </li>
       <li><a href="random.html#_CPPv417mlx_random_normalP9mlx_arrayPKi6size_t9mlx_dtypeffK9mlx_arrayK10mlx_stream">mlx_random_normal (C++ function)</a>
 </li>
+      <li><a href="random.html#_CPPv427mlx_random_normal_broadcastP9mlx_arrayPKi6size_t9mlx_dtypeK9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_random_normal_broadcast (C++ function)</a>
+</li>
       <li><a href="random.html#_CPPv422mlx_random_permutationP9mlx_arrayK9mlx_arrayiK9mlx_arrayK10mlx_stream">mlx_random_permutation (C++ function)</a>
 </li>
       <li><a href="random.html#_CPPv429mlx_random_permutation_arangeP9mlx_arrayiK9mlx_arrayK10mlx_stream">mlx_random_permutation_arange (C++ function)</a>
@@ -1162,17 +1288,19 @@
 </li>
       <li><a href="ops.html#_CPPv413mlx_remainderP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_remainder (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv410mlx_repeatP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_repeat (C++ function)</a>
+      <li><a href="ops.html#_CPPv410mlx_repeatP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_repeat (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv414mlx_repeat_allP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_repeat_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv415mlx_repeat_axisP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_repeat_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_reshapeP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_reshape (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv415mlx_right_shiftP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_right_shift (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_rollP9mlx_arrayK9mlx_arrayiPKi6size_tK10mlx_stream">mlx_roll (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_rollP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_roll (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_roll_allP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_roll_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_roll_axesP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_roll_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_roll_axisP9mlx_arrayK9mlx_arrayPKi6size_tiK10mlx_stream">mlx_roll_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_roundP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_round (C++ function)</a>
 </li>
@@ -1180,11 +1308,11 @@
 </li>
       <li><a href="io.html#_CPPv48mlx_savePKcK9mlx_array">mlx_save (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv413mlx_save_fileP4FILEK9mlx_array">mlx_save_file (C++ function)</a>
-</li>
       <li><a href="io.html#_CPPv420mlx_save_safetensorsPKcK23mlx_map_string_to_arrayK24mlx_map_string_to_string">mlx_save_safetensors (C++ function)</a>
 </li>
-      <li><a href="io.html#_CPPv425mlx_save_safetensors_fileP4FILEK23mlx_map_string_to_arrayK24mlx_map_string_to_string">mlx_save_safetensors_file (C++ function)</a>
+      <li><a href="io.html#_CPPv427mlx_save_safetensors_writer13mlx_io_writerK23mlx_map_string_to_arrayK24mlx_map_string_to_string">mlx_save_safetensors_writer (C++ function)</a>
+</li>
+      <li><a href="io.html#_CPPv415mlx_save_writer13mlx_io_writerK9mlx_array">mlx_save_writer (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv411mlx_scatterP9mlx_arrayK9mlx_arrayK16mlx_vector_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_scatter (C++ function)</a>
 </li>
@@ -1192,11 +1320,23 @@
 </li>
       <li><a href="ops.html#_CPPv420mlx_scatter_add_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_add_axis (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv422mlx_scatter_add_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_add_single (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv415mlx_scatter_maxP9mlx_arrayK9mlx_arrayK16mlx_vector_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_scatter_max (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv422mlx_scatter_max_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_max_single (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv415mlx_scatter_minP9mlx_arrayK9mlx_arrayK16mlx_vector_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_scatter_min (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv422mlx_scatter_min_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_min_single (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv416mlx_scatter_prodP9mlx_arrayK9mlx_arrayK16mlx_vector_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_scatter_prod (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv423mlx_scatter_prod_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_prod_single (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv418mlx_scatter_singleP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_scatter_single (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv416mlx_segmented_mmP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_segmented_mm (C++ function)</a>
 </li>
       <li><a href="compile.html#_CPPv420mlx_set_compile_mode16mlx_compile_mode">mlx_set_compile_mode (C++ function)</a>
 </li>
@@ -1216,35 +1356,45 @@
 </li>
       <li><a href="ops.html#_CPPv49mlx_sliceP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tPKi6size_tK10mlx_stream">mlx_slice (C++ function)</a>
 </li>
+      <li><a href="ops.html#_CPPv417mlx_slice_dynamicP9mlx_arrayK9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_slice_dynamic (C++ function)</a>
+</li>
       <li><a href="ops.html#_CPPv416mlx_slice_updateP9mlx_arrayK9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tPKi6size_tK10mlx_stream">mlx_slice_update (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_softmaxP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_softmax (C++ function)</a>
+      <li><a href="ops.html#_CPPv424mlx_slice_update_dynamicP9mlx_arrayK9mlx_arrayK9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_slice_update_dynamic (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv415mlx_softmax_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_softmax_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv411mlx_softmaxP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_softmax (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_sortP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_sort (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_softmax_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_softmax_axes (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_sort_allP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_sort_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_softmax_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_softmax_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv49mlx_splitP16mlx_vector_arrayK9mlx_arrayPKi6size_tiK10mlx_stream">mlx_split (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_sortP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_sort (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv421mlx_split_equal_partsP16mlx_vector_arrayK9mlx_arrayiiK10mlx_stream">mlx_split_equal_parts (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_sort_axisP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_sort_axis (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv49mlx_splitP16mlx_vector_arrayK9mlx_arrayiiK10mlx_stream">mlx_split (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv418mlx_split_sectionsP16mlx_vector_arrayK9mlx_arrayPKi6size_tiK10mlx_stream">mlx_split_sections (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_sqrtP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_sqrt (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv410mlx_squareP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_square (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_squeezeP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_squeeze (C++ function)</a>
+      <li><a href="ops.html#_CPPv411mlx_squeezeP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_squeeze (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv415mlx_squeeze_allP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_squeeze_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_squeeze_axesP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_squeeze_axes (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv49mlx_stackP9mlx_arrayK16mlx_vector_arrayiK10mlx_stream">mlx_stack (C++ function)</a>
+      <li><a href="ops.html#_CPPv416mlx_squeeze_axisP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_squeeze_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_stack_allP9mlx_arrayK16mlx_vector_arrayK10mlx_stream">mlx_stack_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv49mlx_stackP9mlx_arrayK16mlx_vector_arrayK10mlx_stream">mlx_stack (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_stdP9mlx_arrayK9mlx_arrayPKi6size_tbiK10mlx_stream">mlx_std (C++ function)</a>
+      <li><a href="ops.html#_CPPv414mlx_stack_axisP9mlx_arrayK16mlx_vector_arrayiK10mlx_stream">mlx_stack_axis (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_std_allP9mlx_arrayK9mlx_arraybiK10mlx_stream">mlx_std_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_stdP9mlx_arrayK9mlx_arraybiK10mlx_stream">mlx_std (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_std_axesP9mlx_arrayK9mlx_arrayPKi6size_tbiK10mlx_stream">mlx_std_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_std_axisP9mlx_arrayK9mlx_arrayibiK10mlx_stream">mlx_std_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv417mlx_stop_gradientP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_stop_gradient (C++ function)</a>
 </li>
@@ -1284,19 +1434,21 @@
 </li>
       <li><a href="ops.html#_CPPv412mlx_subtractP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_subtract (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_sumP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_sum (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_sumP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_sum (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_sum_allP9mlx_arrayK9mlx_arraybK10mlx_stream">mlx_sum_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_sum_axesP9mlx_arrayK9mlx_arrayPKi6size_tbK10mlx_stream">mlx_sum_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_sum_axisP9mlx_arrayK9mlx_arrayibK10mlx_stream">mlx_sum_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv412mlx_swapaxesP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_swapaxes (C++ function)</a>
 </li>
       <li><a href="stream.html#_CPPv415mlx_synchronize10mlx_stream">mlx_synchronize (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_takeP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_take (C++ function)</a>
-</li>
-      <li><a href="ops.html#_CPPv412mlx_take_allP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_take_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_takeP9mlx_arrayK9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_take (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv419mlx_take_along_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_take_along_axis (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_take_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_take_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_tanP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_tan (C++ function)</a>
 </li>
@@ -1304,19 +1456,21 @@
 </li>
       <li><a href="ops.html#_CPPv413mlx_tensordotP9mlx_arrayK9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">mlx_tensordot (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv424mlx_tensordot_along_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_tensordot_along_axis (C++ function)</a>
+      <li><a href="ops.html#_CPPv418mlx_tensordot_axisP9mlx_arrayK9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_tensordot_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv48mlx_tileP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_tile (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv48mlx_topkP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_topk (C++ function)</a>
+      <li><a href="ops.html#_CPPv410mlx_to_fp8P9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_to_fp8 (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv412mlx_topk_allP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_topk_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv48mlx_topkP9mlx_arrayK9mlx_arrayiK10mlx_stream">mlx_topk (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv413mlx_topk_axisP9mlx_arrayK9mlx_arrayiiK10mlx_stream">mlx_topk_axis (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv49mlx_traceP9mlx_arrayK9mlx_arrayiii9mlx_dtypeK10mlx_stream">mlx_trace (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv413mlx_transposeP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_transpose (C++ function)</a>
+      <li><a href="ops.html#_CPPv413mlx_transposeP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_transpose (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv417mlx_transpose_allP9mlx_arrayK9mlx_arrayK10mlx_stream">mlx_transpose_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv418mlx_transpose_axesP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">mlx_transpose_axes (C++ function)</a>
 </li>
       <li><a href="ops.html#_CPPv47mlx_triP9mlx_arrayiii9mlx_dtypeK10mlx_stream">mlx_tri (C++ function)</a>
 </li>
@@ -1328,9 +1482,11 @@
 </li>
       <li><a href="transforms.html#_CPPv418mlx_value_and_gradP26mlx_closure_value_and_gradK11mlx_closurePKi6size_t">mlx_value_and_grad (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv47mlx_varP9mlx_arrayK9mlx_arrayPKi6size_tbiK10mlx_stream">mlx_var (C++ function)</a>
+      <li><a href="ops.html#_CPPv47mlx_varP9mlx_arrayK9mlx_arraybiK10mlx_stream">mlx_var (C++ function)</a>
 </li>
-      <li><a href="ops.html#_CPPv411mlx_var_allP9mlx_arrayK9mlx_arraybiK10mlx_stream">mlx_var_all (C++ function)</a>
+      <li><a href="ops.html#_CPPv412mlx_var_axesP9mlx_arrayK9mlx_arrayPKi6size_tbiK10mlx_stream">mlx_var_axes (C++ function)</a>
+</li>
+      <li><a href="ops.html#_CPPv412mlx_var_axisP9mlx_arrayK9mlx_arrayibiK10mlx_stream">mlx_var_axis (C++ function)</a>
 </li>
       <li><a href="vector.html#_CPPv416mlx_vector_array">mlx_vector_array (C++ type)</a>
 </li>
@@ -1511,8 +1667,8 @@ By MLX Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

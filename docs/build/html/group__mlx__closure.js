@@ -1,0 +1,64 @@
+var group__mlx__closure =
+[
+    [ "mlx_closure_", "structmlx__closure__.html", [
+      [ "ctx", "structmlx__closure__.html#a7e591eee67f930d0f0c1622868d1c0d2", null ]
+    ] ],
+    [ "mlx_closure_kwargs_", "structmlx__closure__kwargs__.html", [
+      [ "ctx", "structmlx__closure__kwargs__.html#a2a47f40ffd4a43fadbe35e9434f78fbe", null ]
+    ] ],
+    [ "mlx_closure_value_and_grad_", "structmlx__closure__value__and__grad__.html", [
+      [ "ctx", "structmlx__closure__value__and__grad__.html#a00fc570f68fc4ed342ec2cb8c68d26fc", null ]
+    ] ],
+    [ "mlx_closure_custom_", "structmlx__closure__custom__.html", [
+      [ "ctx", "structmlx__closure__custom__.html#ad788485d2748e3cdad0eecc4b7ae7e03", null ]
+    ] ],
+    [ "mlx_closure_custom_jvp_", "structmlx__closure__custom__jvp__.html", [
+      [ "ctx", "structmlx__closure__custom__jvp__.html#aa05ac55468059a03721678adaf1f4fc7", null ]
+    ] ],
+    [ "mlx_closure_custom_vmap_", "structmlx__closure__custom__vmap__.html", [
+      [ "ctx", "structmlx__closure__custom__vmap__.html#a71ee406d6f3ba9d54265c2317d373554", null ]
+    ] ],
+    [ "mlx_closure", "group__mlx__closure.html#ga438ecd53ac1643bebd810d697716a077", null ],
+    [ "mlx_closure_custom", "group__mlx__closure.html#ga2c36417d777208a83e29fb5e0a9381a3", null ],
+    [ "mlx_closure_custom_jvp", "group__mlx__closure.html#ga7aa765822c29825630370d56717bedbf", null ],
+    [ "mlx_closure_custom_vmap", "group__mlx__closure.html#ga1e2ad95bed1d1f71ea2a4a5b9bc24c93", null ],
+    [ "mlx_closure_kwargs", "group__mlx__closure.html#ga7fc7ffb5428a8d4ec07e40159b3f8e1a", null ],
+    [ "mlx_closure_value_and_grad", "group__mlx__closure.html#gad8c0d5c6cac0a8bdfd16151697eddb4b", null ],
+    [ "mlx_closure_apply", "group__mlx__closure.html#gab0d6a9d6b30029743a2ad23acb7bb2f7", null ],
+    [ "mlx_closure_custom_apply", "group__mlx__closure.html#gab968894307b70a6ac2fbbf75614c5688", null ],
+    [ "mlx_closure_custom_free", "group__mlx__closure.html#ga965c046e8125e5caaefb18f0004bf72a", null ],
+    [ "mlx_closure_custom_jvp_apply", "group__mlx__closure.html#ga1bec08a45224cbfd6cab02a97b2e00c9", null ],
+    [ "mlx_closure_custom_jvp_free", "group__mlx__closure.html#ga5b6f248a06142faceab450990f9cb9a5", null ],
+    [ "mlx_closure_custom_jvp_new", "group__mlx__closure.html#ga61ec2a90f14a20a20c92214ba4f70ad3", null ],
+    [ "mlx_closure_custom_jvp_new_func", "group__mlx__closure.html#gadb052705b2df46d4d5f0fadc76d1d2c8", null ],
+    [ "mlx_closure_custom_jvp_new_func_payload", "group__mlx__closure.html#ga8982f6b5f8a8a764fb52873d55555668", null ],
+    [ "mlx_closure_custom_jvp_set", "group__mlx__closure.html#ga9a80a564e448eba57845e08ad25ed48d", null ],
+    [ "mlx_closure_custom_new", "group__mlx__closure.html#gade62d28b2259fff603531932148c4802", null ],
+    [ "mlx_closure_custom_new_func", "group__mlx__closure.html#gaa0524eabbbcfe81d2a34719d9174cca9", null ],
+    [ "mlx_closure_custom_new_func_payload", "group__mlx__closure.html#gaa2d099da0fd667c9c6322d84a0f0507f", null ],
+    [ "mlx_closure_custom_set", "group__mlx__closure.html#ga2b82f438733ff372a0f41ab022d71f58", null ],
+    [ "mlx_closure_custom_vmap_apply", "group__mlx__closure.html#gac218f29d96fa10c4d52a39686e3d1f5c", null ],
+    [ "mlx_closure_custom_vmap_free", "group__mlx__closure.html#ga8915b12d49674dd2befb37258516da97", null ],
+    [ "mlx_closure_custom_vmap_new", "group__mlx__closure.html#ga3a4adda2fbe99d32fcd61a383e9f2179", null ],
+    [ "mlx_closure_custom_vmap_new_func", "group__mlx__closure.html#ga43cc9088628941d030b67245fcf853b1", null ],
+    [ "mlx_closure_custom_vmap_new_func_payload", "group__mlx__closure.html#gab795ddd7079268641f7874953f3082ae", null ],
+    [ "mlx_closure_custom_vmap_set", "group__mlx__closure.html#gaa89efc40a876e2728aedff57e50832c8", null ],
+    [ "mlx_closure_free", "group__mlx__closure.html#ga8509ba1f45ad4f76e88dacba7320a60f", null ],
+    [ "mlx_closure_kwargs_apply", "group__mlx__closure.html#gafad0fb507edec356ea7526b32ea4d94e", null ],
+    [ "mlx_closure_kwargs_free", "group__mlx__closure.html#gace2a691c88a7752ee5c38cd62e24e4ff", null ],
+    [ "mlx_closure_kwargs_new", "group__mlx__closure.html#gaab3b6c8eaf8abd135947efde60e59a08", null ],
+    [ "mlx_closure_kwargs_new_func", "group__mlx__closure.html#ga55a9136005d8812ecb5676c5e65feccf", null ],
+    [ "mlx_closure_kwargs_new_func_payload", "group__mlx__closure.html#ga8f4e52ed81a9a8215da5c73acf3468d8", null ],
+    [ "mlx_closure_kwargs_set", "group__mlx__closure.html#ga65874a369b61c88e48b676ce436b8a88", null ],
+    [ "mlx_closure_new", "group__mlx__closure.html#ga6030cc700628b3d84525818f450e0759", null ],
+    [ "mlx_closure_new_func", "group__mlx__closure.html#ga8b7c5712ebafb62d262d5b5a8f6f9157", null ],
+    [ "mlx_closure_new_func_payload", "group__mlx__closure.html#ga973328c41ab6be535830d0bf554b0e3c", null ],
+    [ "mlx_closure_new_unary", "group__mlx__closure.html#ga25d095c92fa80f2c3dffc5ddeaf99681", null ],
+    [ "mlx_closure_set", "group__mlx__closure.html#ga8df03069be71dceee2993d010410a804", null ],
+    [ "mlx_closure_value_and_grad_apply", "group__mlx__closure.html#gaa4cd55c01997ba25f4e2127bac8be9a0", null ],
+    [ "mlx_closure_value_and_grad_free", "group__mlx__closure.html#ga2144f39da3a8dc12572f0dcc849853bf", null ],
+    [ "mlx_closure_value_and_grad_new", "group__mlx__closure.html#ga2ec78727300f021b4ee2497c93bdefb8", null ],
+    [ "mlx_closure_value_and_grad_new_func", "group__mlx__closure.html#ga78fdcb6a60256751d19c4b7d01081fbd", null ],
+    [ "mlx_closure_value_and_grad_new_func_payload", "group__mlx__closure.html#ga51a2f977d294cf4d517c9d6cc3e0e0ce", null ],
+    [ "mlx_closure_value_and_grad_set", "group__mlx__closure.html#ga1cd7e76f748596ce5bd9dc0139af902d", null ]
+];

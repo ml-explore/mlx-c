@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['transform_20operations_0',['Transform operations',['../group__transforms.html',1,'']]],
-  ['transforms_2eh_1',['transforms.h',['../transforms_8h.html',1,'']]],
-  ['transforms_5fimpl_2eh_2',['transforms_impl.h',['../transforms__impl_8h.html',1,'']]]
+  ['seek_0',['seek',['../structmlx__io__vtable__.html#a542e0b9dd132802418bfb3e0475cb61d',1,'mlx_io_vtable_']]],
+  ['serialization_1',['Function serialization',['../group__export.html',1,'']]],
+  ['specific_20operations_2',['Metal specific operations',['../group__metal.html',1,'']]],
+  ['stream_3',['Stream',['../group__mlx__stream.html',1,'']]],
+  ['stream_2eh_4',['stream.h',['../stream_8h.html',1,'']]],
+  ['string_5',['String',['../group__mlx__string.html',1,'']]],
+  ['string_2eh_6',['string.h',['../string_8h.html',1,'']]]
 ];

@@ -1,0 +1,573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Function Serialization &#8212; MLX C 0.4.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'export';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Error Management" href="error.html" />
+    <link rel="prev" title="Metal backend API" href="metal.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.4.1 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Building and Installing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Object Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="array.html">Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="device.html">Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stream.html">Stream</a></li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map.html">Maps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optional.html">Optionals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="closure.html">Closures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_group.html">Distributed Group</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ops.html">Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft.html">FFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="random.html">Random</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed_ops.html">Distributed Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Function Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error Management</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/ml-explore/mlx-c" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/export.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Function Serialization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_function_exporter"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_imported_function"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb"><code class="docutils literal notranslate"><span class="pre">mlx_export_function()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb"><code class="docutils literal notranslate"><span class="pre">mlx_export_function_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_function_exporter_newPKcK11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_function_exporter_free21mlx_function_exporter"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_apply_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_imported_function_newPKc"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_imported_function_free21mlx_imported_function"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_apply_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_function_exporter_"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_imported_function_"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="function-serialization">
+<h1>Function Serialization<a class="headerlink" href="#function-serialization" title="Link to this heading">#</a></h1>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421mlx_function_exporter">
+<span id="_CPPv321mlx_function_exporter"></span><span id="_CPPv221mlx_function_exporter"></span><span id="mlx_function_exporter"></span><span class="target" id="group__export_1ga621c6fb1ad2a6accad845ffc3c97379d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422mlx_function_exporter_" title="mlx_function_exporter_"><span class="n"><span class="pre">mlx_function_exporter_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter</span></span></span><a class="headerlink" href="#_CPPv421mlx_function_exporter" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421mlx_imported_function">
+<span id="_CPPv321mlx_imported_function"></span><span id="_CPPv221mlx_imported_function"></span><span id="mlx_imported_function"></span><span class="target" id="group__export_1ga9c72e3eab320c118ae565d93c94dc5d0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422mlx_imported_function_" title="mlx_imported_function_"><span class="n"><span class="pre">mlx_imported_function_</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function</span></span></span><a class="headerlink" href="#_CPPv421mlx_imported_function" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb">
+<span id="_CPPv319mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb"></span><span id="_CPPv219mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb"></span><span id="mlx_export_function__cCP.mlx_closureC.mlx_vector_arrayC.b"></span><span class="target" id="group__export_1gac0bfba48088ef4c0e505b374b2c5fdc2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_export_function</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">file</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb">
+<span id="_CPPv326mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb"></span><span id="_CPPv226mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb"></span><span id="mlx_export_function_kwargs__cCP.mlx_closure_kwargsC.mlx_vector_arrayC.mlx_map_string_to_arrayC.b"></span><span class="target" id="group__export_1gab699a1c82c78d456a6f7f8db2cb0f967"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_export_function_kwargs</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">file</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="closure.html#_CPPv418mlx_closure_kwargs" title="mlx_closure_kwargs"><span class="n"><span class="pre">mlx_closure_kwargs</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="map.html#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kwargs</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425mlx_function_exporter_newPKcK11mlx_closureb">
+<span id="_CPPv325mlx_function_exporter_newPKcK11mlx_closureb"></span><span id="_CPPv225mlx_function_exporter_newPKcK11mlx_closureb"></span><span id="mlx_function_exporter_new__cCP.mlx_closureC.b"></span><span class="target" id="group__export_1gac97f7ec90f3d04d753bec304df539986"></span><a class="reference internal" href="#_CPPv421mlx_function_exporter" title="mlx_function_exporter"><span class="n"><span class="pre">mlx_function_exporter</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter_new</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">file</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="closure.html#_CPPv411mlx_closure" title="mlx_closure"><span class="n"><span class="pre">mlx_closure</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">fun</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shapeless</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425mlx_function_exporter_newPKcK11mlx_closureb" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426mlx_function_exporter_free21mlx_function_exporter">
+<span id="_CPPv326mlx_function_exporter_free21mlx_function_exporter"></span><span id="_CPPv226mlx_function_exporter_free21mlx_function_exporter"></span><span id="mlx_function_exporter_free__mlx_function_exporter"></span><span class="target" id="group__export_1ga545c043685e5c5665563c0f18b435acb"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421mlx_function_exporter" title="mlx_function_exporter"><span class="n"><span class="pre">mlx_function_exporter</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_function_exporter_free21mlx_function_exporter" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array">
+<span id="_CPPv327mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array"></span><span id="_CPPv227mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array"></span><span id="mlx_function_exporter_apply__mlx_function_exporterC.mlx_vector_arrayC"></span><span class="target" id="group__export_1gabba6f80c362b4596bbe0609fd859280f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter_apply</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421mlx_function_exporter" title="mlx_function_exporter"><span class="n"><span class="pre">mlx_function_exporter</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array">
+<span id="_CPPv334mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array"></span><span id="_CPPv234mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array"></span><span id="mlx_function_exporter_apply_kwargs__mlx_function_exporterC.mlx_vector_arrayC.mlx_map_string_to_arrayC"></span><span class="target" id="group__export_1ga20e7cf12a15e51f5cc02427bf54e5ac4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter_apply_kwargs</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421mlx_function_exporter" title="mlx_function_exporter"><span class="n"><span class="pre">mlx_function_exporter</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="map.html#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kwargs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425mlx_imported_function_newPKc">
+<span id="_CPPv325mlx_imported_function_newPKc"></span><span id="_CPPv225mlx_imported_function_newPKc"></span><span id="mlx_imported_function_new__cCP"></span><span class="target" id="group__export_1ga9aad67d70f9d29d0090d10b99502b046"></span><a class="reference internal" href="#_CPPv421mlx_imported_function" title="mlx_imported_function"><span class="n"><span class="pre">mlx_imported_function</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function_new</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425mlx_imported_function_newPKc" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426mlx_imported_function_free21mlx_imported_function">
+<span id="_CPPv326mlx_imported_function_free21mlx_imported_function"></span><span id="_CPPv226mlx_imported_function_free21mlx_imported_function"></span><span id="mlx_imported_function_free__mlx_imported_function"></span><span class="target" id="group__export_1ga2b4e5c235351c9d3b988c018d0ac07e4"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function_free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421mlx_imported_function" title="mlx_imported_function"><span class="n"><span class="pre">mlx_imported_function</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426mlx_imported_function_free21mlx_imported_function" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array">
+<span id="_CPPv327mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array"></span><span id="_CPPv227mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array"></span><span id="mlx_imported_function_apply__mlx_vector_arrayP.mlx_imported_functionC.mlx_vector_arrayC"></span><span class="target" id="group__export_1gafe02b841228c44ea8fed40d8f8ac4495"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function_apply</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421mlx_imported_function" title="mlx_imported_function"><span class="n"><span class="pre">mlx_imported_function</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array">
+<span id="_CPPv334mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array"></span><span id="_CPPv234mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array"></span><span id="mlx_imported_function_apply_kwargs__mlx_vector_arrayP.mlx_imported_functionC.mlx_vector_arrayC.mlx_map_string_to_arrayC"></span><span class="target" id="group__export_1gacc09df6aa0f9cabd1bd51fa437fff4e6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function_apply_kwargs</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421mlx_imported_function" title="mlx_imported_function"><span class="n"><span class="pre">mlx_imported_function</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">xfunc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="vector.html#_CPPv416mlx_vector_array" title="mlx_vector_array"><span class="n"><span class="pre">mlx_vector_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="map.html#_CPPv423mlx_map_string_to_array" title="mlx_map_string_to_array"><span class="n"><span class="pre">mlx_map_string_to_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">kwargs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_function_exporter_">
+<span id="_CPPv322mlx_function_exporter_"></span><span id="_CPPv222mlx_function_exporter_"></span><span id="mlx_function_exporter_"></span><span class="target" id="structmlx__function__exporter__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_function_exporter_</span></span></span><a class="headerlink" href="#_CPPv422mlx_function_exporter_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;export.h&gt;</em></div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422mlx_imported_function_">
+<span id="_CPPv322mlx_imported_function_"></span><span id="_CPPv222mlx_imported_function_"></span><span id="mlx_imported_function_"></span><span class="target" id="structmlx__imported__function__"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_imported_function_</span></span></span><a class="headerlink" href="#_CPPv422mlx_imported_function_" title="Link to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;export.h&gt;</em></div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="metal.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Metal backend API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="error.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Error Management</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_function_exporter"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv421mlx_imported_function"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv419mlx_export_functionPKcK11mlx_closureK16mlx_vector_arrayb"><code class="docutils literal notranslate"><span class="pre">mlx_export_function()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_export_function_kwargsPKcK18mlx_closure_kwargsK16mlx_vector_arrayK23mlx_map_string_to_arrayb"><code class="docutils literal notranslate"><span class="pre">mlx_export_function_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_function_exporter_newPKcK11mlx_closureb"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_function_exporter_free21mlx_function_exporter"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_function_exporter_applyK21mlx_function_exporterK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_function_exporter_apply_kwargsK21mlx_function_exporterK16mlx_vector_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_apply_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv425mlx_imported_function_newPKc"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_new()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv426mlx_imported_function_free21mlx_imported_function"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_free()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv427mlx_imported_function_applyP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_array"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_apply()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv434mlx_imported_function_apply_kwargsP16mlx_vector_arrayK21mlx_imported_functionK16mlx_vector_arrayK23mlx_map_string_to_array"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_apply_kwargs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_function_exporter_"><code class="docutils literal notranslate"><span class="pre">mlx_function_exporter_</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv422mlx_imported_function_"><code class="docutils literal notranslate"><span class="pre">mlx_imported_function_</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By MLX Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023-2025, MLX Contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

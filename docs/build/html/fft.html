@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>FFT &#8212; MLX C 0.1.2 documentation</title>
+    <title>FFT &#8212; MLX C 0.4.1 documentation</title>
   
   
   
@@ -16,32 +16,29 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
   
-  <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <script src="_static/documentation_options.js?v=0deb7d70"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=a3cf13c8"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'fft';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -50,7 +47,6 @@
     <link rel="prev" title="Operations" href="ops.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="0.1.2" />
   </head>
   
   
@@ -66,8 +62,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -75,6 +82,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -82,8 +90,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -99,8 +107,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -129,18 +136,22 @@
       
     
     
-    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.1.2 documentation - Home"/>
-    <img src="_static/mlx_logo_dark.png" class="logo__image only-dark pst-js-only" alt="MLX C 0.1.2 documentation - Home"/>
+    <img src="_static/mlx_logo.png" class="logo__image only-light" alt="MLX C 0.4.1 documentation - Home"/>
+    <script>document.write(`<img src="_static/mlx_logo_dark.png" class="logo__image only-dark" alt="MLX C 0.4.1 documentation - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation</span></p>
@@ -178,7 +189,8 @@
 <li class="toctree-l1"><a class="reference internal" href="compile.html">Compilation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fast.html">Fast Custom Ops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="metal.html">Metal backend API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="error.html">Error management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="export.html">Function Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error Management</a></li>
 </ul>
 
     </div>
@@ -301,16 +313,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -337,9 +357,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_fft_fftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_fft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_fftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fftn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fftshift()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_ifft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifftn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifftshift()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_irfftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_fft_irfft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_fft_irfftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfftn()</span></code></a></li>
@@ -375,6 +397,11 @@
 <dd></dd></dl>
 
 <dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">
+<span id="_CPPv316mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"></span><span id="_CPPv216mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"></span><span id="mlx_fft_fftshift__mlx_arrayP.mlx_arrayC.iCP.s.mlx_streamC"></span><span class="target" id="group__fft_1gad90978536ec3c73e332dc225ae2b8afd"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fft_fftshift</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">axes</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">axes_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv412mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream">
 <span id="_CPPv312mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"></span><span id="_CPPv212mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"></span><span id="mlx_fft_ifft__mlx_arrayP.mlx_arrayC.i.i.mlx_streamC"></span><span class="target" id="group__fft_1ga02dde429c643616a2c23e74f1b9e55f0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fft_ifft</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">axis</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
@@ -387,6 +414,11 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv413mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream">
 <span id="_CPPv313mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"></span><span id="_CPPv213mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"></span><span id="mlx_fft_ifftn__mlx_arrayP.mlx_arrayC.iCP.s.iCP.s.mlx_streamC"></span><span class="target" id="group__fft_1gac917c9eff8f269edcca72a5d66c561c1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fft_ifftn</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">n</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">axes</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">axes_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream" title="Link to this definition">#</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream">
+<span id="_CPPv317mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"></span><span id="_CPPv217mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"></span><span id="mlx_fft_ifftshift__mlx_arrayP.mlx_arrayC.iCP.s.mlx_streamC"></span><span class="target" id="group__fft_1ga106a28d15d5acb46dbcace66fbfa2c0d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mlx_fft_ifftshift</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">res</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="array.html#_CPPv49mlx_array" title="mlx_array"><span class="n"><span class="pre">mlx_array</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">a</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">axes</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">axes_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="stream.html#_CPPv410mlx_stream" title="mlx_stream"><span class="n"><span class="pre">mlx_stream</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream" title="Link to this definition">#</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -457,8 +489,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -470,9 +501,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv411mlx_fft_fftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_fft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_fftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fftn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv416mlx_fft_fftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_fftshift()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv412mlx_fft_ifftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_ifft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_ifftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifftn()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv417mlx_fft_ifftshiftP9mlx_arrayK9mlx_arrayPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_ifftshift()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv413mlx_fft_irfftP9mlx_arrayK9mlx_arrayiiK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfft()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_fft_irfft2P9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfft2()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#_CPPv414mlx_fft_irfftnP9mlx_arrayK9mlx_arrayPKi6size_tPKi6size_tK10mlx_stream"><code class="docutils literal notranslate"><span class="pre">mlx_fft_irfftn()</span></code></a></li>
@@ -527,8 +560,8 @@ By MLX Contributors
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

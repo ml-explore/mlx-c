@@ -1,0 +1,27 @@
+var topics =
+[
+    [ "Array", "group__mlx__array.html", "group__mlx__array" ],
+    [ "Closures", "group__mlx__closure.html", "group__mlx__closure" ],
+    [ "Compilation operations", "group__compile.html", "group__compile" ],
+    [ "Device", "group__mlx__device.html", "group__mlx__device" ],
+    [ "Distributed collectives", "group__distributed.html", "group__distributed" ],
+    [ "MLX distributed", "group__mlx__distributed__group.html", "group__mlx__distributed__group" ],
+    [ "Error management", "group__mlx__error.html", "group__mlx__error" ],
+    [ "Function serialization", "group__export.html", "group__export" ],
+    [ "Fast custom operations", "group__fast.html", "group__fast" ],
+    [ "FFT operations", "group__fft.html", "group__fft" ],
+    [ "IO operations", "group__io.html", "group__io" ],
+    [ "IO Types", "group__mlx__io__types.html", "group__mlx__io__types" ],
+    [ "Linear algebra operations", "group__linalg.html", "group__linalg" ],
+    [ "Maps", "group__mlx__map.html", "group__mlx__map" ],
+    [ "Memory operations", "group__memory.html", "group__memory" ],
+    [ "Metal specific operations", "group__metal.html", "group__metal" ],
+    [ "Core array operations", "group__ops.html", "group__ops" ],
+    [ "Optionals", "group__mlx__optional.html", "group__mlx__optional" ],
+    [ "Random number operations", "group__random.html", "group__random" ],
+    [ "Stream", "group__mlx__stream.html", "group__mlx__stream" ],
+    [ "String", "group__mlx__string.html", "group__mlx__string" ],
+    [ "Transform operations", "group__transforms.html", "group__transforms" ],
+    [ "Implementation detail operations", "group__transforms__impl.html", "group__transforms__impl" ],
+    [ "Vectors", "group__mlx__vector.html", "group__mlx__vector" ]
+];

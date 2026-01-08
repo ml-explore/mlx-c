@@ -1,4 +1,4 @@
-Error management
+Error Management
 ================
 
 .. doxygengroup:: mlx_error

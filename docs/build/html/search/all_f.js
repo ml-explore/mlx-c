@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['value_0',['value',['../structmlx__optional__int__.html#a2c7414bdffb9be1960571ca70db36b43',1,'mlx_optional_int_::value'],['../structmlx__optional__float__.html#a8c5965b4b19657b62fb6276a18da999c',1,'mlx_optional_float_::value']]],
-  ['vector_2eh_1',['vector.h',['../vector_8h.html',1,'']]],
-  ['vectors_2',['Vectors',['../group__mlx__vector.html',1,'']]]
+  ['tell_0',['tell',['../structmlx__io__vtable__.html#a54f2a46667ede03f8d9060f33180457f',1,'mlx_io_vtable_']]],
+  ['transform_20operations_1',['Transform operations',['../group__transforms.html',1,'']]],
+  ['transforms_2eh_2',['transforms.h',['../transforms_8h.html',1,'']]],
+  ['transforms_5fimpl_2eh_3',['transforms_impl.h',['../transforms__impl_8h.html',1,'']]],
+  ['types_4',['IO Types',['../group__mlx__io__types.html',1,'']]]
 ];
