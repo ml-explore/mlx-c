@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # ----------------------------- Configuration -----------------------------
 if(NOT MLX_C_VERSION)
-  set(MLX_C_VERSION 0.1.2)
+  set(MLX_C_VERSION 0.4.1)
 endif()
 
 option(BUILD_SHARED_LIBS "Build mlx C as a shared library" OFF)
@@ -35,7 +35,7 @@ else()
   FetchContent_Declare(
     mlx
     GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-    GIT_TAG v0.23.1)
+    GIT_TAG v0.30.1)
   FetchContent_MakeAvailable(mlx)
 endif()
 
@@ -49,11 +49,14 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/error.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/export.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fast.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/fft.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/io_types.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/linalg.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/map.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/memory.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/metal.cpp
     # ${CMAKE_CURRENT_LIST_DIR}/mlx/c/object.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/ops.cpp
@@ -62,7 +65,8 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/string.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/transforms_impl.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/vector.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/version.cpp)
 
 add_library(mlxc ${mlxc-src})
 

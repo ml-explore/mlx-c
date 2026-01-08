@@ -64,6 +64,15 @@ def getname(t):
     raise RuntimeError("unsupported type: " + str(t))
 
 
+def get_default_value(d):
+    if d is None:
+        return d
+    res = []
+    for tok in d.tokens:
+        res.append(tok.value)
+    return "".join(res)
+
+
 funcs = {}
 enums = {}
 for header in args.header.split(";"):
@@ -86,18 +95,21 @@ for header in args.header.split(";"):
                 continue
             params_t = []
             params_name = []
+            params_default = []
             return_t = getname(f.return_type)
             if return_t == "Stream":  # unsupported
                 continue
             for p in f.parameters:
                 params_t.append(getname(p.type))
                 params_name.append(p.name)
+                params_default.append(get_default_value(p.default))
             func = {
                 "name": name,
                 "params_t": params_t,
                 "params_name": params_name,
                 "return_t": return_t,
                 "namespace": namespace,
+                "params_default": params_default,
             }
             ns_name = namespace + "::" + name
             if ns_name in funcs:

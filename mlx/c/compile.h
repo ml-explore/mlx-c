@@ -6,12 +6,14 @@
 #ifndef MLX_COMPILE_H
 #define MLX_COMPILE_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
+#include "mlx/c/io_types.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
@@ -39,10 +41,10 @@ int mlx_detail_compile(
     bool shapeless,
     const uint64_t* constants,
     size_t constants_num);
-int mlx_detail_compile_clear_cache();
+int mlx_detail_compile_clear_cache(void);
 int mlx_detail_compile_erase(uintptr_t fun_id);
-int mlx_disable_compile();
-int mlx_enable_compile();
+int mlx_disable_compile(void);
+int mlx_enable_compile(void);
 int mlx_set_compile_mode(mlx_compile_mode mode);
 /**@}*/
 

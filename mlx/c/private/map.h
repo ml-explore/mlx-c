@@ -40,9 +40,10 @@ inline mlx_map_string_to_array& mlx_map_string_to_array_set_(
     mlx_map_string_to_array& d,
     std::unordered_map<std::string, mlx::core::array>&& s) {
   if (d.ctx) {
-    *static_cast<std::unordered_map<std::string, mlx::core::array>*>(d.ctx) = s;
+    *static_cast<std::unordered_map<std::string, mlx::core::array>*>(d.ctx) =
+        std::move(s);
   } else {
-    d.ctx = new std::unordered_map<std::string, mlx::core::array>(s);
+    d.ctx = new std::unordered_map<std::string, mlx::core::array>(std::move(s));
   }
   return d;
 }
@@ -80,9 +81,10 @@ inline mlx_map_string_to_array_iterator& mlx_map_string_to_array_iterator_set_(
     std::unordered_map<std::string, mlx::core::array>::iterator&& s) {
   if (d.ctx) {
     *static_cast<std::unordered_map<std::string, mlx::core::array>::iterator*>(
-        d.ctx) = s;
+        d.ctx) = std::move(s);
   } else {
-    d.ctx = new std::unordered_map<std::string, mlx::core::array>::iterator(s);
+    d.ctx = new std::unordered_map<std::string, mlx::core::array>::iterator(
+        std::move(s));
   }
   return d;
 }
@@ -142,9 +144,10 @@ inline mlx_map_string_to_string& mlx_map_string_to_string_set_(
     mlx_map_string_to_string& d,
     std::unordered_map<std::string, std::string>&& s) {
   if (d.ctx) {
-    *static_cast<std::unordered_map<std::string, std::string>*>(d.ctx) = s;
+    *static_cast<std::unordered_map<std::string, std::string>*>(d.ctx) =
+        std::move(s);
   } else {
-    d.ctx = new std::unordered_map<std::string, std::string>(s);
+    d.ctx = new std::unordered_map<std::string, std::string>(std::move(s));
   }
   return d;
 }
@@ -182,9 +185,10 @@ mlx_map_string_to_string_iterator_set_(
     std::unordered_map<std::string, std::string>::iterator&& s) {
   if (d.ctx) {
     *static_cast<std::unordered_map<std::string, std::string>::iterator*>(
-        d.ctx) = s;
+        d.ctx) = std::move(s);
   } else {
-    d.ctx = new std::unordered_map<std::string, std::string>::iterator(s);
+    d.ctx = new std::unordered_map<std::string, std::string>::iterator(
+        std::move(s));
   }
   return d;
 }

@@ -3,6 +3,7 @@
 #include "mlx/c/error.h"
 
 #include <memory>
+#include <vector>
 
 #include <cstdarg>
 #include <cstdio>
@@ -43,10 +44,10 @@ _mlx_error(const char* file, const int line, const char* fmt, ...) {
   va_end(args_copy);
   int size_loc = snprintf(nullptr, 0, " at %s:%d", file, line);
 
-  char msg[size + size_loc + 1]; // \0 at the end
-  size = vsnprintf(msg, size + 1, fmt, args);
-  snprintf(msg + size, size_loc + 1, " at %s:%d", file, line);
+  std::vector<char> msg(size + size_loc + 1); // \0 at the end
+  size = vsnprintf(msg.data(), size + 1, fmt, args);
+  snprintf(msg.data() + size, size_loc + 1, " at %s:%d", file, line);
   va_end(args);
 
-  mlx_error_handler_(msg, mlx_error_handler_data_.get());
+  mlx_error_handler_(msg.data(), mlx_error_handler_data_.get());
 }

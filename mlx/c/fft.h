@@ -6,12 +6,14 @@
 #ifndef MLX_FFT_H
 #define MLX_FFT_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
+#include "mlx/c/io_types.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
@@ -47,6 +49,12 @@ int mlx_fft_fftn(
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
+int mlx_fft_fftshift(
+    mlx_array* res,
+    const mlx_array a,
+    const int* axes,
+    size_t axes_num,
+    const mlx_stream s);
 int mlx_fft_ifft(
     mlx_array* res,
     const mlx_array a,
@@ -66,6 +74,12 @@ int mlx_fft_ifftn(
     const mlx_array a,
     const int* n,
     size_t n_num,
+    const int* axes,
+    size_t axes_num,
+    const mlx_stream s);
+int mlx_fft_ifftshift(
+    mlx_array* res,
+    const mlx_array a,
     const int* axes,
     size_t axes_num,
     const mlx_stream s);

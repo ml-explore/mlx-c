@@ -20,7 +20,7 @@ extern "C" int mlx_random_bernoulli(
         *res,
         mlx::core::random::bernoulli(
             mlx_array_get_(p),
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -40,7 +40,7 @@ extern "C" int mlx_random_bits(
     mlx_array_set_(
         *res,
         mlx::core::random::bits(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             width,
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
@@ -64,7 +64,7 @@ extern "C" int mlx_random_categorical_shape(
         mlx::core::random::categorical(
             mlx_array_get_(logits),
             axis,
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -126,7 +126,7 @@ extern "C" int mlx_random_gumbel(
     mlx_array_set_(
         *res,
         mlx::core::random::gumbel(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
@@ -158,7 +158,7 @@ extern "C" int mlx_random_laplace(
     mlx_array_set_(
         *res,
         mlx::core::random::laplace(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             loc,
             scale,
@@ -185,8 +185,34 @@ extern "C" int mlx_random_multivariate_normal(
         mlx::core::random::multivariate_normal(
             mlx_array_get_(mean),
             mlx_array_get_(cov),
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
+            (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_random_normal_broadcast(
+    mlx_array* res,
+    const int* shape,
+    size_t shape_num,
+    mlx_dtype dtype,
+    const mlx_array loc /* may be null */,
+    const mlx_array scale /* may be null */,
+    const mlx_array key /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::random::normal(
+            mlx::core::Shape(shape, shape + shape_num),
+            mlx_dtype_to_cpp(dtype),
+            (loc.ctx ? std::make_optional(mlx_array_get_(loc)) : std::nullopt),
+            (scale.ctx ? std::make_optional(mlx_array_get_(scale))
+                       : std::nullopt),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -208,7 +234,7 @@ extern "C" int mlx_random_normal(
     mlx_array_set_(
         *res,
         mlx::core::random::normal(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             loc,
             scale,
@@ -273,7 +299,7 @@ extern "C" int mlx_random_randint(
         mlx::core::random::randint(
             mlx_array_get_(low),
             mlx_array_get_(high),
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
@@ -340,7 +366,7 @@ extern "C" int mlx_random_truncated_normal(
         mlx::core::random::truncated_normal(
             mlx_array_get_(lower),
             mlx_array_get_(upper),
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
@@ -365,7 +391,7 @@ extern "C" int mlx_random_uniform(
         mlx::core::random::uniform(
             mlx_array_get_(low),
             mlx_array_get_(high),
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));

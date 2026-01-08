@@ -8,17 +8,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" int mlx_metal_clear_cache() {
-  try {
-    mlx::core::metal::clear_cache();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-
-mlx_metal_device_info_t mlx_metal_device_info() {
+extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
   auto info = mlx::core::metal::device_info();
 
   mlx_metal_device_info_t c_info;
@@ -33,73 +23,9 @@ mlx_metal_device_info_t mlx_metal_device_info() {
   return c_info;
 }
 
-extern "C" int mlx_metal_get_active_memory(size_t* res) {
-  try {
-    *res = mlx::core::metal::get_active_memory();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_metal_get_cache_memory(size_t* res) {
-  try {
-    *res = mlx::core::metal::get_cache_memory();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_metal_get_peak_memory(size_t* res) {
-  try {
-    *res = mlx::core::metal::get_peak_memory();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
 extern "C" int mlx_metal_is_available(bool* res) {
   try {
     *res = mlx::core::metal::is_available();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_metal_reset_peak_memory() {
-  try {
-    mlx::core::metal::reset_peak_memory();
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_metal_set_cache_limit(size_t* res, size_t limit) {
-  try {
-    *res = mlx::core::metal::set_cache_limit(limit);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int
-mlx_metal_set_memory_limit(size_t* res, size_t limit, bool relaxed) {
-  try {
-    *res = mlx::core::metal::set_memory_limit(limit, relaxed);
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return 1;
-  }
-  return 0;
-}
-extern "C" int mlx_metal_set_wired_limit(size_t* res, size_t limit) {
-  try {
-    *res = mlx::core::metal::set_wired_limit(limit);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -115,7 +41,7 @@ extern "C" int mlx_metal_start_capture(const char* path) {
   }
   return 0;
 }
-extern "C" int mlx_metal_stop_capture() {
+extern "C" int mlx_metal_stop_capture(void) {
   try {
     mlx::core::metal::stop_capture();
   } catch (std::exception& e) {

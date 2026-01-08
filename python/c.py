@@ -70,12 +70,14 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         print("#define MLX_" + headername.upper() + "_H")
         print(
             """
+    #include <stdbool.h>
     #include <stdint.h>
     #include <stdio.h>
 
     #include "mlx/c/array.h"
     #include "mlx/c/closure.h"
     #include "mlx/c/distributed_group.h"
+    #include "mlx/c/io_types.h"
     #include "mlx/c/map.h"
     #include "mlx/c/stream.h"
     #include "mlx/c/string.h"
@@ -119,9 +121,10 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             )
         else:
             func_name = c_namespace(f["namespace"]) + "_" + f["name"]
+
         if hasattr(hooks, func_name):
-            getattr(hooks, func_name)(f, implementation)
-            continue
+            if not getattr(hooks, func_name)(f, implementation):
+                continue
 
         signature = []
         return_t = f["return_t"]
@@ -148,8 +151,13 @@ def generate(funcs, enums, header, headername, implementation, docstring):
 
         pt = f["params_t"]
         pn = f["params_name"]
+        pd = f["params_default"]
+        use_defaults = "use_defaults" in f and f["use_defaults"]
         encountered_unsupported_type = False
         for i in range(len(pt)):
+            if use_defaults and pd[i]:
+                continue
+
             pti = pt[i]
             pni = pn[i]
             if pni is None:
@@ -173,7 +181,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             continue
 
         # print(f)
-        c_call = ", ".join(c_call)
+        c_call = ", ".join(c_call) if len(c_call) > 0 else "void"
         cpp_call = ", ".join(cpp_call)
         signature.append(c_call)
         signature.append(")")

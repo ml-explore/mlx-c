@@ -27,6 +27,44 @@ extern "C" int mlx_distributed_all_gather(
   }
   return 0;
 }
+extern "C" int mlx_distributed_all_max(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::all_max(
+            mlx_array_get_(x),
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_distributed_all_min(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::all_min(
+            mlx_array_get_(x),
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_distributed_all_sum(
     mlx_array* res,
     const mlx_array x,
@@ -58,7 +96,7 @@ extern "C" int mlx_distributed_recv(
     mlx_array_set_(
         *res,
         mlx::core::distributed::recv(
-            std::vector<int>(shape, shape + shape_num),
+            mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             src,
             (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
@@ -103,6 +141,25 @@ extern "C" int mlx_distributed_send(
         mlx::core::distributed::send(
             mlx_array_get_(x),
             dst,
+            (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
+                       : std::nullopt),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_distributed_sum_scatter(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_distributed_group group /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::distributed::sum_scatter(
+            mlx_array_get_(x),
             (group.ctx ? std::make_optional(mlx_distributed_group_get_(group))
                        : std::nullopt),
             mlx_stream_get_(s)));

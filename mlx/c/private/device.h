@@ -32,9 +32,9 @@ inline mlx_device& mlx_device_set_(mlx_device& d, const mlx::core::Device& s) {
 
 inline mlx_device& mlx_device_set_(mlx_device& d, mlx::core::Device&& s) {
   if (d.ctx) {
-    *static_cast<mlx::core::Device*>(d.ctx) = s;
+    *static_cast<mlx::core::Device*>(d.ctx) = std::move(s);
   } else {
-    d.ctx = new mlx::core::Device(s);
+    d.ctx = new mlx::core::Device(std::move(s));
   }
   return d;
 }

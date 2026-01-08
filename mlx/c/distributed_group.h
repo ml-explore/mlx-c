@@ -3,6 +3,8 @@
 #ifndef MLX_DISTRIBUTED_GROUP_H
 #define MLX_DISTRIBUTED_GROUP_H
 
+#include <stdbool.h>
+
 #include "mlx/c/stream.h"
 
 #ifdef __cplusplus
@@ -40,7 +42,7 @@ mlx_distributed_group_split(mlx_distributed_group group, int color, int key);
 /**
  * Check if distributed is available.
  */
-bool mlx_distributed_is_available();
+bool mlx_distributed_is_available(void);
 
 /**
  * Initialize distributed.

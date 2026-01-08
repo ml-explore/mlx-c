@@ -57,6 +57,24 @@ extern "C" int mlx_linalg_cross(
   }
   return 0;
 }
+extern "C" int mlx_linalg_eig(
+    mlx_array* res_0,
+    mlx_array* res_1,
+    const mlx_array a,
+    const mlx_stream s) {
+  try {
+    {
+      auto [tpl_0, tpl_1] =
+          mlx::core::linalg::eig(mlx_array_get_(a), mlx_stream_get_(s));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_linalg_eigh(
     mlx_array* res_0,
     mlx_array* res_1,
@@ -70,6 +88,18 @@ extern "C" int mlx_linalg_eigh(
       mlx_array_set_(*res_0, tpl_0);
       mlx_array_set_(*res_1, tpl_1);
     };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int
+mlx_linalg_eigvals(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::linalg::eigvals(mlx_array_get_(a), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -132,7 +162,7 @@ extern "C" int mlx_linalg_lu_factor(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_p(
+extern "C" int mlx_linalg_norm(
     mlx_array* res,
     const mlx_array a,
     double ord,
@@ -156,7 +186,7 @@ extern "C" int mlx_linalg_norm_p(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm_ord(
+extern "C" int mlx_linalg_norm_matrix(
     mlx_array* res,
     const mlx_array a,
     const char* ord,
@@ -180,7 +210,7 @@ extern "C" int mlx_linalg_norm_ord(
   }
   return 0;
 }
-extern "C" int mlx_linalg_norm(
+extern "C" int mlx_linalg_norm_l2(
     mlx_array* res,
     const mlx_array a,
     const int* axis /* may be null */,
@@ -264,11 +294,16 @@ extern "C" int mlx_linalg_solve_triangular(
   }
   return 0;
 }
-extern "C" int
-mlx_linalg_svd(mlx_vector_array* res, const mlx_array a, const mlx_stream s) {
+extern "C" int mlx_linalg_svd(
+    mlx_vector_array* res,
+    const mlx_array a,
+    bool compute_uv,
+    const mlx_stream s) {
   try {
     mlx_vector_array_set_(
-        *res, mlx::core::linalg::svd(mlx_array_get_(a), mlx_stream_get_(s)));
+        *res,
+        mlx::core::linalg::svd(
+            mlx_array_get_(a), compute_uv, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

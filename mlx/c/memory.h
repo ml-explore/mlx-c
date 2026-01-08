@@ -3,8 +3,8 @@
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
 
-#ifndef MLX_METAL_H
-#define MLX_METAL_H
+#ifndef MLX_MEMORY_H
+#define MLX_MEMORY_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -24,21 +24,18 @@ extern "C" {
 #endif
 
 /**
- * \defgroup metal Metal specific operations
+ * \defgroup memory Memory operations
  */
 /**@{*/
-
-typedef struct mlx_metal_device_info_t_ {
-  char architecture[256];
-  size_t max_buffer_length;
-  size_t max_recommended_working_set_size;
-  size_t memory_size;
-} mlx_metal_device_info_t;
-mlx_metal_device_info_t mlx_metal_device_info(void);
-
-int mlx_metal_is_available(bool* res);
-int mlx_metal_start_capture(const char* path);
-int mlx_metal_stop_capture(void);
+int mlx_clear_cache(void);
+int mlx_get_active_memory(size_t* res);
+int mlx_get_cache_memory(size_t* res);
+int mlx_get_memory_limit(size_t* res);
+int mlx_get_peak_memory(size_t* res);
+int mlx_reset_peak_memory(void);
+int mlx_set_cache_limit(size_t* res, size_t limit);
+int mlx_set_memory_limit(size_t* res, size_t limit);
+int mlx_set_wired_limit(size_t* res, size_t limit);
 /**@}*/
 
 #ifdef __cplusplus

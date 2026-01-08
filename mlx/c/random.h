@@ -6,12 +6,14 @@
 #ifndef MLX_RANDOM_H
 #define MLX_RANDOM_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
 #include "mlx/c/array.h"
 #include "mlx/c/closure.h"
 #include "mlx/c/distributed_group.h"
+#include "mlx/c/io_types.h"
 #include "mlx/c/map.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/string.h"
@@ -84,6 +86,15 @@ int mlx_random_multivariate_normal(
     const int* shape,
     size_t shape_num,
     mlx_dtype dtype,
+    const mlx_array key /* may be null */,
+    const mlx_stream s);
+int mlx_random_normal_broadcast(
+    mlx_array* res,
+    const int* shape,
+    size_t shape_num,
+    mlx_dtype dtype,
+    const mlx_array loc /* may be null */,
+    const mlx_array scale /* may be null */,
     const mlx_array key /* may be null */,
     const mlx_stream s);
 int mlx_random_normal(

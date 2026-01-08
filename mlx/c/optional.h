@@ -3,6 +3,8 @@
 #ifndef MLX_OPTIONAL_H
 #define MLX_OPTIONAL_H
 
+#include <stdbool.h>
+
 #include "mlx/c/array.h"
 #include "mlx/c/string.h"
 
@@ -31,6 +33,14 @@ typedef struct mlx_optional_float_ {
   float value;
   bool has_value;
 } mlx_optional_float;
+
+/**
+ * A dtype optional.
+ */
+typedef struct mlx_optional_dtype_ {
+  mlx_dtype value;
+  bool has_value;
+} mlx_optional_dtype;
 
 /**@}*/
 

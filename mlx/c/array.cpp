@@ -34,7 +34,7 @@ extern "C" int mlx_array_free(mlx_array arr) {
   return 0;
 }
 
-extern "C" mlx_array mlx_array_new() {
+extern "C" mlx_array mlx_array_new(void) {
   try {
     return mlx_array_();
   } catch (std::exception& e) {
@@ -100,7 +100,7 @@ extern "C" int mlx_array_set_float(mlx_array* arr, float val) {
 }
 extern "C" int mlx_array_set_float64(mlx_array* arr, double val) {
   try {
-    mlx_array_set_(*arr, mlx::core::array(val));
+    mlx_array_set_(*arr, mlx::core::array(val, mlx::core::float64));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -123,7 +123,7 @@ extern "C" mlx_array mlx_array_new_float(float val) {
 }
 extern "C" mlx_array mlx_array_new_float64(double val) {
   try {
-    return mlx_array_new_(mlx::core::array(val));
+    return mlx_array_new_(mlx::core::array(val, mlx::core::float64));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_array_();
@@ -159,8 +159,7 @@ extern "C" int mlx_array_set_data(
     int dim,
     mlx_dtype dtype) {
   try {
-    std::vector<int> cpp_shape;
-    cpp_shape.assign(shape, shape + dim);
+    mlx::core::Shape cpp_shape(shape, shape + dim);
     mlx::core::Dtype cpp_dtype = mlx_dtype_to_cpp(dtype);
     switch (cpp_dtype) {
       case mlx::core::bool_:

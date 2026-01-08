@@ -22,11 +22,11 @@ def replace_match_parenthesis(string, keyword, fun):
     return "".join(res)
 
 
-decl_code = """
+decl_code = r"""
 typedef struct NAME_ {
   void* ctx;
 } NAME;
-NAME NAME_new();
+NAME NAME_new(void);
 int NAME_free(NAME cls);
 NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED));
 NAME NAME_new_func_payload(
@@ -117,8 +117,8 @@ def generate(code, name, rcpptype, cpptypes):
     return code
 
 
-impl_code = """
-extern "C" NAME NAME_new() {
+impl_code = r"""
+extern "C" NAME NAME_new(void) {
   try {
     return NAME_new_();
   } catch (std::exception& e) {
@@ -180,7 +180,7 @@ extern "C" NAME NAME_new_func_payload(
     } else {
       cpp_payload = std::shared_ptr<void>(payload, [](void*) {});
     }
-    auto cpp_closure = [fun, cpp_payload, dtor](CPPARGS_TYPE_NAME) {
+    auto cpp_closure = [fun, cpp_payload](CPPARGS_TYPE_NAME) {
       CPPARGS_TO_CARGS
       RCARGS_NEW
       auto status = fun(RCARGS_UNTYPED, CARGS_UNTYPED, cpp_payload.get());
@@ -213,7 +213,7 @@ extern "C" int NAME_apply(RCARGS, NAME cls, CARGS) {
 
 priv_code = None
 
-decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+decl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -222,6 +222,7 @@ decl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 #define MLX_CLOSURE_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/map.h"
 #include "mlx/c/optional.h"
 #include "mlx/c/stream.h"
 #include "mlx/c/vector.h"
@@ -237,7 +238,7 @@ extern "C" {
 /**@{*/
 """
 
-decl_end = """
+decl_end = r"""
 /**@}*/
 
 #ifdef __cplusplus
@@ -247,7 +248,7 @@ decl_end = """
 #endif
 """
 
-impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+impl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -260,7 +261,7 @@ impl_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 impl_end = """
 """
 
-priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
+priv_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 /*                                                    */
 /* This file is auto-generated. Do not edit manually. */
 /*                                                    */
@@ -273,7 +274,7 @@ priv_begin = """/* Copyright © 2023-2024 Apple Inc.                   */
 
 """
 
-priv_end = """
+priv_end = r"""
 #endif
 """
 
@@ -302,7 +303,7 @@ print(
 )
 if args.implementation:
     print(
-        """
+        r"""
 extern "C" mlx_closure mlx_closure_new_unary(
     int (*fun)(mlx_array*, const mlx_array)) {
   try {
@@ -334,10 +335,21 @@ elif args.private:
     pass
 else:
     print(
-        """
+        r"""
 mlx_closure mlx_closure_new_unary(int (*fun)(mlx_array*, const mlx_array));
     """
     )
+print(
+    generate(
+        code,
+        "mlx_closure_kwargs",
+        "std::vector<mlx::core::array>",
+        [
+            "std::vector<mlx::core::array>",
+            "std::unordered_map<std::string, mlx::core::array>",
+        ],
+    )
+)
 print(
     generate(
         code,
