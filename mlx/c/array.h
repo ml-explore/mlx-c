@@ -10,6 +10,19 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+// Complex number support
+// MSVC doesn't support C99 _Complex, so we define a compatible struct
+// that has the same memory layout as std::complex<float>
+#ifdef _MSC_VER
+typedef struct {
+    float real;
+    float imag;
+} mlx_complex64_t;
+#else
+#include <complex.h>
+typedef float _Complex mlx_complex64_t;
+#endif
+
 #include "half.h"
 
 #ifdef __cplusplus
@@ -261,7 +274,7 @@ int mlx_array_item_float64(double* res, const mlx_array arr);
 /**
  * Access the value of a scalar array.
  */
-int mlx_array_item_complex64(float _Complex* res, const mlx_array arr);
+int mlx_array_item_complex64(mlx_complex64_t* res, const mlx_array arr);
 
 #ifdef HAS_FLOAT16
 /**
@@ -336,7 +349,7 @@ const double* mlx_array_data_float64(const mlx_array arr);
  * Returns a pointer to the array data, cast to `_Complex*`.
  * Array must be evaluated, otherwise returns NULL.
  */
-const float _Complex* mlx_array_data_complex64(const mlx_array arr);
+const mlx_complex64_t* mlx_array_data_complex64(const mlx_array arr);
 
 #ifdef HAS_FLOAT16
 /**
