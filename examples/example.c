@@ -12,14 +12,51 @@ void print_array(const char* msg, mlx_array arr) {
 
 void gpu_info(void) {
   printf("==================================================\n");
-  printf("GPU info:\n");
-  mlx_metal_device_info_t info = mlx_metal_device_info();
-  printf("architecture: %s\n", info.architecture);
-  printf("max_buffer_length: %ld\n", info.max_buffer_length);
-  printf(
-      "max_recommended_working_set_size: %ld\n",
-      info.max_recommended_working_set_size);
-  printf("memory_size: %ld\n", info.memory_size);
+  printf("GPU info (using new mlx_device_info API):\n");
+
+  // Get device count
+  int gpu_count = 0;
+  mlx_device_count(&gpu_count, MLX_GPU);
+  printf("GPU device count: %d\n", gpu_count);
+
+  // Get default device
+  mlx_device dev = mlx_device_new();
+  mlx_get_default_device(&dev);
+
+  // Get device info using new API
+  mlx_device_info info = mlx_device_info_new();
+  if (mlx_device_info_get(&info, dev) == 0) {
+    // Get all available keys
+    mlx_vector_string keys = mlx_vector_string_new();
+    mlx_device_info_get_keys(&keys, info);
+    size_t num_keys = mlx_vector_string_size(keys);
+
+    printf("Device info (%zu keys):\n", num_keys);
+    for (size_t i = 0; i < num_keys; i++) {
+      char* key = NULL;
+      mlx_vector_string_get(&key, keys, i);
+      if (!key)
+        continue;
+
+      bool is_string = false;
+      mlx_device_info_is_string(&is_string, info, key);
+
+      if (is_string) {
+        const char* value = NULL;
+        mlx_device_info_get_string(&value, info, key);
+        printf("  %s: %s\n", key, value ? value : "(null)");
+      } else {
+        size_t value = 0;
+        mlx_device_info_get_size(&value, info, key);
+        printf("  %s: %zu\n", key, value);
+      }
+    }
+
+    mlx_vector_string_free(keys);
+  }
+
+  mlx_device_info_free(info);
+  mlx_device_free(dev);
 
   printf("==================================================\n");
 }
@@ -30,7 +67,8 @@ int main(void) {
 
   gpu_info();
 
-  mlx_stream stream = mlx_default_gpu_stream_new();
+  // Use default CPU stream (works with any backend)
+  mlx_stream stream = mlx_default_cpu_stream_new();
   float data[] = {1, 2, 3, 4, 5, 6};
   int shape[] = {2, 3};
   mlx_array arr = mlx_array_new_data(data, shape, 2, MLX_FLOAT32);
