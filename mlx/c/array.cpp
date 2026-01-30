@@ -250,6 +250,25 @@ extern "C" mlx_array mlx_array_new_data(
     return mlx_array_();
   }
 }
+extern "C" mlx_array mlx_array_new_data_managed(
+    void* data,
+    const int* shape,
+    int dim,
+    mlx_dtype dtype,
+    void (*free_data)(void*)) {
+  try {
+    mlx::core::Shape cpp_shape(shape, shape + dim);
+    mlx::core::Dtype cpp_dtype = mlx_dtype_to_cpp(dtype);
+    std::function<void(void*)> cpp_deleter = [free_data](void* ptr) {
+      free_data(ptr);
+    };
+    return mlx_array_new_(
+        mlx::core::array(data, cpp_shape, cpp_dtype, cpp_deleter));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_array_();
+  }
+}
 
 extern "C" size_t mlx_array_itemsize(const mlx_array arr) {
   try {

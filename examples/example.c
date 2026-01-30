@@ -60,6 +60,7 @@ void gpu_info(void) {
 
   printf("==================================================\n");
 }
+
 int main(void) {
   mlx_string version = mlx_string_new();
   mlx_version(&version);
@@ -76,14 +77,24 @@ int main(void) {
 
   mlx_array two = mlx_array_new_int(2);
   mlx_divide(&arr, arr, two, stream);
-  print_array("divive by 2!", arr);
+  print_array("divide by 2!", arr);
 
   mlx_arange(&arr, 0, 3, 0.5, MLX_FLOAT32, stream);
   print_array("arange", arr);
 
+  float* data_managed = malloc(6 * sizeof(float));
+  for (int i = 0; i < 6; i++) {
+    data_managed[i] = (float)i;
+  }
+  mlx_array arr_managed =
+      mlx_array_new_data_managed(data_managed, shape, 2, MLX_FLOAT32, free);
+  print_array("from user buffer", arr_managed);
+
   mlx_array_free(arr);
   mlx_array_free(two);
+  mlx_array_free(arr_managed);
   mlx_stream_free(stream);
   mlx_string_free(version);
+
   return 0;
 }
