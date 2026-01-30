@@ -12,7 +12,7 @@ void print_array(const char* msg, mlx_array arr) {
 
 void gpu_info(void) {
   printf("==================================================\n");
-  printf("GPU info (using new mlx_device_info API):\n");
+  printf("GPU info (using mlx_device_info API):\n");
 
   // Get device count
   int gpu_count = 0;
