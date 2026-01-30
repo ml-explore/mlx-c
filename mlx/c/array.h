@@ -11,13 +11,10 @@
 #include <stdlib.h>
 
 // Complex number support
-// MSVC doesn't support C99 _Complex, so we define a compatible struct
-// that has the same memory layout as std::complex<float>
 #ifdef _MSC_VER
-typedef struct {
-    float real;
-    float imag;
-} mlx_complex64_t;
+#define _CRT_USE_C_COMPLEX_H
+#include <complex.h>
+typedef _Fcomplex mlx_complex64_t;
 #else
 #include <complex.h>
 typedef float _Complex mlx_complex64_t;

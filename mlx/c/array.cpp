@@ -448,9 +448,7 @@ extern "C" int mlx_array_item_complex64(
     mlx_complex64_t* res,
     const mlx_array arr) {
   try {
-    auto val = mlx_array_get_(arr).item<std::complex<float>>();
-    res->real = val.real();
-    res->imag = val.imag();
+    *res = mlx_array_get_(arr).item<mlx_complex64_t>();
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -570,10 +568,12 @@ extern "C" const double* mlx_array_data_float64(const mlx_array arr) {
     return nullptr;
   }
 }
-extern "C" const mlx_complex64_t* mlx_array_data_complex64(const mlx_array arr) {
+extern "C" const mlx_complex64_t* mlx_array_data_complex64(
+    const mlx_array arr) {
   try {
     // std::complex<float> and mlx_complex64_t have the same memory layout
-    return reinterpret_cast<const mlx_complex64_t*>(mlx_array_get_(arr).data<std::complex<float>>());
+    return reinterpret_cast<const mlx_complex64_t*>(
+        mlx_array_get_(arr).data<std::complex<float>>());
   } catch (std::exception& e) {
     mlx_error(e.what());
     return nullptr;
