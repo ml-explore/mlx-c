@@ -52,4 +52,54 @@ inline void mlx_device_free_(mlx_device d) {
   }
 }
 
+using mlx_device_info_cpp =
+    std::unordered_map<std::string, std::variant<std::string, size_t>>;
+
+inline mlx_device_info mlx_device_info_new_() {
+  return mlx_device_info({nullptr});
+}
+
+inline mlx_device_info mlx_device_info_new_(const mlx_device_info_cpp& s) {
+  return mlx_device_info({new mlx_device_info_cpp(s)});
+}
+
+inline mlx_device_info mlx_device_info_new_(mlx_device_info_cpp&& s) {
+  return mlx_device_info({new mlx_device_info_cpp(std::move(s))});
+}
+
+inline mlx_device_info& mlx_device_info_set_(
+    mlx_device_info& d,
+    const mlx_device_info_cpp& s) {
+  if (d.ctx) {
+    *static_cast<mlx_device_info_cpp*>(d.ctx) = s;
+  } else {
+    d.ctx = new mlx_device_info_cpp(s);
+  }
+  return d;
+}
+
+inline mlx_device_info& mlx_device_info_set_(
+    mlx_device_info& d,
+    mlx_device_info_cpp&& s) {
+  if (d.ctx) {
+    *static_cast<mlx_device_info_cpp*>(d.ctx) = std::move(s);
+  } else {
+    d.ctx = new mlx_device_info_cpp(std::move(s));
+  }
+  return d;
+}
+
+inline mlx_device_info_cpp& mlx_device_info_get_(mlx_device_info d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_device_info");
+  }
+  return *static_cast<mlx_device_info_cpp*>(d.ctx);
+}
+
+inline void mlx_device_info_free_(mlx_device_info d) {
+  if (d.ctx) {
+    delete static_cast<mlx_device_info_cpp*>(d.ctx);
+  }
+}
+
 #endif

@@ -4,6 +4,7 @@ import cxxheaderparser
 from cxxheaderparser.simple import parse_string
 import argparse
 import os
+import re
 
 parser = argparse.ArgumentParser("MLX C bindings generator", add_help=False)
 parser.add_argument("--header", type=str)
@@ -75,8 +76,21 @@ def get_default_value(d):
 
 funcs = {}
 enums = {}
+
+
+def preprocess_header(content):
+    """Simple preprocessor that strips MLX_API macro without resolving includes."""
+    # Remove MLX_API macro (appears as MLX_API or MLX_API followed by space)
+    content = re.sub(r"\bMLX_API\s*", "", content)
+    return content
+
+
 for header in args.header.split(";"):
-    Z = cxxheaderparser.simple.parse_file(header)
+    # Read file and preprocess to strip MLX_API
+    with open(header, "r") as f:
+        content = f.read()
+    content = preprocess_header(content)
+    Z = parse_string(content)
 
     def process_namespace(l, namespace, funcs, enums):
         namespace = namespace.lstrip("::")

@@ -60,8 +60,15 @@ def generate(funcs, enums, header, headername, implementation, docstring):
     if implementation:
         print('#include "mlx/c/' + headername + '.h"')
         for include in header.split(";"):
-            s, e = re.search("(mlx/.*$)", include).span()
-            print('#include "' + include[s:e] + '"')
+            # Extract path from the last mlx/ onwards
+            # This handles paths like ../mlx/mlx/backend/... -> mlx/backend/...
+            parts = include.split("/")
+            mlx_idx = None
+            for i, part in enumerate(parts):
+                if part == "mlx":
+                    mlx_idx = i
+            if mlx_idx is not None:
+                print('#include "' + "/".join(parts[mlx_idx:]) + '"')
         print('#include "mlx/c/error.h"')
         print('#include "mlx/c/private/mlx.h"')
         print()
@@ -70,30 +77,31 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         print("#define MLX_" + headername.upper() + "_H")
         print(
             """
-    #include <stdbool.h>
-    #include <stdint.h>
-    #include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
 
-    #include "mlx/c/array.h"
-    #include "mlx/c/closure.h"
-    #include "mlx/c/distributed_group.h"
-    #include "mlx/c/io_types.h"
-    #include "mlx/c/map.h"
-    #include "mlx/c/stream.h"
-    #include "mlx/c/string.h"
-    #include "mlx/c/vector.h"
+#include "mlx/c/array.h"
+#include "mlx/c/closure.h"
+#include "mlx/c/distributed_group.h"
+#include "mlx/c/io_types.h"
+#include "mlx/c/map.h"
+#include "mlx/c/stream.h"
+#include "mlx/c/string.h"
+#include "mlx/c/vector.h"
 
-    #ifdef __cplusplus
-    extern "C" {
-    #endif
-    """
+#ifdef __cplusplus
+extern "C" {
+#endif
+"""
         )
         if docstring:
-            docstring = docstring.replace("\n", "\n* ")
+            docstring = docstring.replace("\n", "\n * ")
             print("/**")
-            print("* \defgroup " + headername + " " + docstring)
-            print("*/")
+            print(r" * \defgroup " + headername + " " + docstring)
+            print(" */")
             print("/**@{*/")
+            print()  # blank line after /**@{*/
 
     for _, enum in enums.items():
         c_typename = "mlx_" + to_snake_letters(enum["name"])
@@ -123,7 +131,9 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             func_name = c_namespace(f["namespace"]) + "_" + f["name"]
 
         if hasattr(hooks, func_name):
-            if not getattr(hooks, func_name)(f, implementation):
+            hook_result = getattr(hooks, func_name)(f, implementation)
+            if not hook_result:
+                print()  # blank line after hook output
                 continue
 
         signature = []
@@ -138,8 +148,7 @@ def generate(funcs, enums, header, headername, implementation, docstring):
             continue
 
         signature.append("int")
-        signature.append(func_name)
-        signature.append("(")
+        signature.append(func_name + "(")
 
         c_call = []
         cpp_call = []
@@ -185,37 +194,40 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         cpp_call = ", ".join(cpp_call)
         signature.append(c_call)
         signature.append(")")
+        # Join signature parts, then clean up spaces around parens
         signature = " ".join(signature)
+        signature = signature.replace("( ", "(").replace(" )", ")")
 
-        c_code = [signature, ";"]
-        cpp_code = ['extern "C"', signature, "{"]
-        cpp_code.append("try {")
-        cpp_call = [f["namespace"] + "::" + f["name"], "(", cpp_call, ")"]
-        cpp_call = "".join(cpp_call)
-        cpp_code.append(return_t["c_assign_from_cpp"]("res", cpp_call))
-        cpp_code.append(";")
-        cpp_code.append("} catch (std::exception & e) {")
-        cpp_code.append("mlx_error(e.what());")
-        cpp_code.append("return 1;")
-        cpp_code.append("}")
-        cpp_code.append("return 0;")
-        cpp_code.append("}")
+        c_code = signature + ";"
         if implementation:
-            print(" ".join(cpp_code))
+            cpp_call = f["namespace"] + "::" + f["name"] + "(" + cpp_call + ")"
+            cpp_code = [
+                'extern "C" ' + signature + " {",
+                "  try {",
+                "    " + return_t["c_assign_from_cpp"]("res", cpp_call) + ";",
+                "  } catch (std::exception& e) {",
+                "    mlx_error(e.what());",
+                "    return 1;",
+                "  }",
+                "  return 0;",
+                "}",
+            ]
+            print("\n".join(cpp_code))
         else:
-            print(" ".join(c_code))
+            print(c_code)
 
     if implementation:
         pass
     else:
         if docstring:
+            print()  # blank line before /**@}*/
             print("/**@}*/")
         print(
-            """
-    #ifdef __cplusplus
-    }
-    #endif
+            """\
 
-    #endif
-    """
-        )
+#ifdef __cplusplus
+}
+#endif
+
+#endif"""
+        )  # no trailing newline
