@@ -220,6 +220,7 @@ extern "C" {
         pass
     else:
         if docstring:
+            print()  # blank line before /**@}*/
             print("/**@}*/")
         print("""\
 
