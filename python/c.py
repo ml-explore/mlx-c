@@ -62,13 +62,13 @@ def generate(funcs, enums, header, headername, implementation, docstring):
         for include in header.split(";"):
             # Extract path from the last mlx/ onwards
             # This handles paths like ../mlx/mlx/backend/... -> mlx/backend/...
-            parts = include.split('/')
+            parts = include.split("/")
             mlx_idx = None
             for i, part in enumerate(parts):
-                if part == 'mlx':
+                if part == "mlx":
                     mlx_idx = i
             if mlx_idx is not None:
-                print('#include "' + '/'.join(parts[mlx_idx:]) + '"')
+                print('#include "' + "/".join(parts[mlx_idx:]) + '"')
         print('#include "mlx/c/error.h"')
         print('#include "mlx/c/private/mlx.h"')
         print()
@@ -222,10 +222,12 @@ extern "C" {
         if docstring:
             print()  # blank line before /**@}*/
             print("/**@}*/")
-        print("""\
+        print(
+            """\
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif""")  # no trailing newline
+#endif"""
+        )  # no trailing newline

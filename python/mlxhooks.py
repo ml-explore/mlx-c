@@ -1,6 +1,7 @@
 def mlx_metal_device_info(f, implementation):
     if implementation:
-        print("""\
+        print(
+            """\
 extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
   auto info = mlx::core::metal::device_info();
 
@@ -14,9 +15,11 @@ extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
       std::get<size_t>(info["max_recommended_working_set_size"]);
   c_info.memory_size = std::get<size_t>(info["memory_size"]);
   return c_info;
-}""")
+}"""
+        )
     else:
-        print("""\
+        print(
+            """\
 /**
  * @deprecated Use mlx_device_info instead.
  * This struct is kept for backwards compatibility.
@@ -37,7 +40,8 @@ __attribute__((deprecated("Use mlx_device_info_get() instead")))
 #elif defined(_MSC_VER)
 __declspec(deprecated("Use mlx_device_info_get() instead"))
 #endif
-mlx_metal_device_info_t mlx_metal_device_info(void);""")
+mlx_metal_device_info_t mlx_metal_device_info(void);"""
+        )
 
 
 def __implement_mlx_fast_custom_kernel(backend, backend_specific_code, implementation):
