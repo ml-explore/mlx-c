@@ -62,7 +62,12 @@ inline void CTYPE_free_(CTYPE d) {
 """
 
 
-def generate(ctype, cpptype, ctor=True, no_copy=False, code=code, ctor_code=ctor_code):
+def generate(
+    ctype, cpptype, ctor=True, no_copy=False, code=code, ctor_code=ctor_code, using=None
+):
+    if using:
+        print(" ".join(["using", using, " = ", cpptype, ";"]))
+
     if ctor:
         code = ctor_code + code
     if no_copy:
@@ -73,7 +78,7 @@ def generate(ctype, cpptype, ctor=True, no_copy=False, code=code, ctor_code=ctor
         code = code.replace("SET_CODE", set_copy_code)
 
     code = code.replace("CTYPE", ctype)
-    code = code.replace("CPPTYPE", cpptype)
+    code = code.replace("CPPTYPE", using if using else cpptype)
     return code
 
 
@@ -85,6 +90,7 @@ if __name__ == "__main__":
     parser.add_argument("--cpptype", type=str)
     parser.add_argument("--no-copy", default=False, action="store_true")
     parser.add_argument("--include", default="", type=str)
+    parser.add_argument("--using", default="", type=str)
     args = parser.parse_args()
 
     if args.include:
@@ -103,6 +109,14 @@ if __name__ == "__main__":
     print('#include "mlx/mlx.h"')
     ctypes = args.ctype.split(";")
     cpptypes = args.cpptype.split(";")
+    usings = args.using.split(";")
     for i in range(len(ctypes)):
-        print(generate(ctypes[i], cpptypes[i], no_copy=args.no_copy))
+        print(
+            generate(
+                ctypes[i],
+                cpptypes[i],
+                no_copy=args.no_copy,
+                using=usings[i] if args.using else None,
+            )
+        )
     print("#endif")
