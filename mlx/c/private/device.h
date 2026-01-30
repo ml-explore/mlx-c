@@ -52,8 +52,6 @@ inline void mlx_device_free_(mlx_device d) {
   }
 }
 
-// Device info type - wraps the C++ unordered_map<string, variant<string,
-// size_t>>
 using mlx_device_info_cpp =
     std::unordered_map<std::string, std::variant<std::string, size_t>>;
 
