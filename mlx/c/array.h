@@ -119,14 +119,31 @@ mlx_array mlx_array_new_data(
  * @param shape Shape of the array.
  * @param dim Number of dimensions (size of `shape`).
  * @param dtype Type of array elements.
- * @param free_data Callback for when the buffer is no longer needed.
+ * @param dtor Callback for when the buffer is no longer needed.
  */
 mlx_array mlx_array_new_data_managed(
     void* data,
     const int* shape,
     int dim,
     mlx_dtype dtype,
-    void (*free_data)(void*));
+    void (*dtor)(void*));
+/**
+ * New array from existing buffer.
+ * @param data A buffer which will be copied.
+ * @param shape Shape of the array.
+ * @param dim Number of dimensions (size of `shape`).
+ * @param dtype Type of array elements.
+ * @param payload Payload pointer passed to the `dtor` callback instead of
+ * `data`.
+ * @param dtor Callback for when the buffer is no longer needed.
+ */
+mlx_array mlx_array_new_data_managed_payload(
+    void* data,
+    const int* shape,
+    int dim,
+    mlx_dtype dtype,
+    void* payload,
+    void (*dtor)(void*));
 /**
  * Set array to provided src array.
  */
