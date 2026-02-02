@@ -5,8 +5,6 @@
 import os
 import subprocess
 
-import mlx.core as mx
-
 # -- Project information -----------------------------------------------------
 
 project = "MLX C"
