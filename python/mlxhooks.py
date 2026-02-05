@@ -3,7 +3,7 @@ def mlx_metal_device_info(f, implementation):
         print(
             """\
 extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
-  auto info = mlx::core::metal::device_info();
+  auto info = mlx::core::gpu::device_info(0);
 
   mlx_metal_device_info_t c_info;
   std::strncpy(

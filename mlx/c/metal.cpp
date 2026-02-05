@@ -4,12 +4,13 @@
 /*                                                    */
 
 #include "mlx/c/metal.h"
+#include "mlx/backend/gpu/device_info.h"
 #include "mlx/backend/metal/metal.h"
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
 extern "C" mlx_metal_device_info_t mlx_metal_device_info(void) {
-  auto info = mlx::core::metal::device_info();
+  auto info = mlx::core::gpu::device_info(0);
 
   mlx_metal_device_info_t c_info;
   std::strncpy(
