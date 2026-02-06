@@ -17,6 +17,8 @@ def c_namespace(namespace):
     c_prefix = namespace.split("::")
     if c_prefix[0] == "mlx" and c_prefix[1] == "core":
         c_prefix.pop(1)  # we pop core
+        if len(c_prefix) == 2 and c_prefix[1] == "cu":
+            c_prefix[1] = "cuda"
     return "_".join(c_prefix)
 
 

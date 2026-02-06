@@ -35,7 +35,7 @@ else()
   FetchContent_Declare(
     mlx
     GIT_REPOSITORY "https://github.com/ml-explore/mlx.git"
-    GIT_TAG v0.30.4)
+    GIT_TAG v0.30.6)
   FetchContent_MakeAvailable(mlx)
 endif()
 
@@ -45,6 +45,7 @@ set(mlxc-src
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/array.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/closure.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/compile.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/mlx/c/cuda.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/device.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed.cpp
     ${CMAKE_CURRENT_LIST_DIR}/mlx/c/distributed_group.cpp
