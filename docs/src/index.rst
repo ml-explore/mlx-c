@@ -1,5 +1,6 @@
 MLX C
 =====
+Version |version|.
 
 MLX C is a C API for `MLX <https://github.com/ml-explore/mlx>`_.
 

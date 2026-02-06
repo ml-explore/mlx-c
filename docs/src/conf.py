@@ -8,9 +8,9 @@ import subprocess
 # -- Project information -----------------------------------------------------
 
 project = "MLX C"
-copyright = "2023-2025, MLX Contributors"
+copyright = "2023-2026, MLX Contributors"
 author = "MLX Contributors"
-version = "0.4.1"
+version = "0.5.0"
 release = version
 
 # -- General configuration ---------------------------------------------------
