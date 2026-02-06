@@ -97,6 +97,16 @@ extern "C" int mlx_device_free(mlx_device dev) {
   return 0;
 }
 
+extern "C" int mlx_device_is_available(bool* avail, mlx_device dev) {
+  try {
+    *avail = mlx::core::is_available(mlx_device_get_(dev));
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
 extern "C" int mlx_device_count(int* count, mlx_device_type type) {
   try {
     auto cpp_type = mlx_device_type_to_cpp(type);
