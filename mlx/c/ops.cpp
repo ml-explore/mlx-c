@@ -7,6 +7,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 #include "mlx/einsum.h"
+#include "mlx/version.h"
 
 extern "C" int mlx_abs(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
@@ -1065,6 +1066,7 @@ extern "C" int mlx_dequantize(
     mlx_optional_dtype dtype,
     const mlx_stream s) {
   try {
+#if defined(MLX_VERSION_NUMERIC) && MLX_VERSION_NUMERIC >= 31000
     mlx_array_set_(
         *res,
         mlx::core::dequantize(
@@ -1082,6 +1084,24 @@ extern "C" int mlx_dequantize(
                                    mlx_dtype_to_cpp(dtype.value))
                              : std::nullopt),
             mlx_stream_get_(s)));
+#else
+    mlx_array_set_(
+        *res,
+        mlx::core::dequantize(
+            mlx_array_get_(w),
+            mlx_array_get_(scales),
+            (biases.ctx ? std::make_optional(mlx_array_get_(biases))
+                        : std::nullopt),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            (dtype.has_value ? std::make_optional<mlx::core::Dtype>(
+                                   mlx_dtype_to_cpp(dtype.value))
+                             : std::nullopt),
+            mlx_stream_get_(s)));
+#endif
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2490,6 +2510,7 @@ extern "C" int mlx_qqmm(
     const char* mode,
     const mlx_stream s) {
   try {
+#if defined(MLX_VERSION_NUMERIC) && MLX_VERSION_NUMERIC >= 31000
     mlx_array_set_(
         *res,
         mlx::core::qqmm(
@@ -2505,6 +2526,21 @@ extern "C" int mlx_qqmm(
             std::nullopt,
             std::nullopt,
             mlx_stream_get_(s)));
+#else
+    mlx_array_set_(
+        *res,
+        mlx::core::qqmm(
+            mlx_array_get_(x),
+            mlx_array_get_(w),
+            (w_scales.ctx ? std::make_optional(mlx_array_get_(w_scales))
+                          : std::nullopt),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            mlx_stream_get_(s)));
+#endif
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2519,6 +2555,7 @@ extern "C" int mlx_quantize(
     const char* mode,
     const mlx_stream s) {
   try {
+#if defined(MLX_VERSION_NUMERIC) && MLX_VERSION_NUMERIC >= 31000
     mlx_vector_array_set_(
         *res,
         mlx::core::quantize(
@@ -2530,6 +2567,18 @@ extern "C" int mlx_quantize(
             std::string(mode),
             std::nullopt,
             mlx_stream_get_(s)));
+#else
+    mlx_vector_array_set_(
+        *res,
+        mlx::core::quantize(
+            mlx_array_get_(w),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            mlx_stream_get_(s)));
+#endif
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
