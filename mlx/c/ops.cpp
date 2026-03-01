@@ -1077,6 +1077,7 @@ extern "C" int mlx_dequantize(
             (bits.has_value ? std::make_optional<int>(bits.value)
                             : std::nullopt),
             std::string(mode),
+            std::nullopt,
             (dtype.has_value ? std::make_optional<mlx::core::Dtype>(
                                    mlx_dtype_to_cpp(dtype.value))
                              : std::nullopt),
@@ -2501,6 +2502,8 @@ extern "C" int mlx_qqmm(
             (bits.has_value ? std::make_optional<int>(bits.value)
                             : std::nullopt),
             std::string(mode),
+            std::nullopt,
+            std::nullopt,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -2525,6 +2528,7 @@ extern "C" int mlx_quantize(
             (bits.has_value ? std::make_optional<int>(bits.value)
                             : std::nullopt),
             std::string(mode),
+            std::nullopt,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
