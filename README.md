@@ -24,7 +24,7 @@ To build, run the following commands:
 
 ```shell
 cmake -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build
+cmake --build build -j
 ```
 
 From the `build/` directory, you can run an [example](examples/example.c)
