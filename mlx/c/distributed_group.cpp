@@ -38,8 +38,7 @@ mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
 extern "C" bool mlx_distributed_is_available(const char* bk) {
   try {
     if (bk) {
-      std::string bk_cpp(bk);
-      return mlx::core::distributed::is_available(bk_cpp);
+      return mlx::core::distributed::is_available(bk);
     } else {
       return mlx::core::distributed::is_available();
     }
@@ -54,7 +53,6 @@ extern "C" mlx_distributed_group mlx_distributed_init(
     const char* bk) {
   try {
     if (bk) {
-      std::string bk_cpp(bk);
       return mlx_distributed_group_new_(
           mlx::core::distributed::init(strict, bk));
     } else {
