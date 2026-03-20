@@ -10,7 +10,7 @@ import subprocess
 project = "MLX C"
 copyright = "2023-2026, MLX Contributors"
 author = "MLX Contributors"
-version = "0.5.0"
+version = "0.6.0"
 release = version
 
 # -- General configuration ---------------------------------------------------
