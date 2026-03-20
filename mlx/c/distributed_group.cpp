@@ -35,18 +35,29 @@ mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
   }
 }
 
-extern "C" bool mlx_distributed_is_available(void) {
+extern "C" bool mlx_distributed_is_available(const char* bk) {
   try {
-    return mlx::core::distributed::is_available();
+    if (bk) {
+      return mlx::core::distributed::is_available(bk);
+    } else {
+      return mlx::core::distributed::is_available();
+    }
   } catch (std::exception& e) {
     mlx_error(e.what());
     return false;
   }
 }
 
-extern "C" mlx_distributed_group mlx_distributed_init(bool strict) {
+extern "C" mlx_distributed_group mlx_distributed_init(
+    bool strict,
+    const char* bk) {
   try {
-    return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
+    if (bk) {
+      return mlx_distributed_group_new_(
+          mlx::core::distributed::init(strict, bk));
+    } else {
+      return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
+    }
   } catch (std::exception& e) {
     mlx_error(e.what());
     return mlx_distributed_group_new_();
