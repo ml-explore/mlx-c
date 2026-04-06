@@ -6,6 +6,22 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
+extern "C" mlx_distributed_group mlx_distributed_init(
+    bool strict,
+    const char* bk) {
+  try {
+    if (bk) {
+      return mlx_distributed_group_new_(
+          mlx::core::distributed::init(strict, bk));
+    } else {
+      return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_distributed_group_new_();
+  }
+}
+
 extern "C" int mlx_distributed_group_rank(mlx_distributed_group group) {
   try {
     return mlx_distributed_group_get_(group).rank();
@@ -35,6 +51,16 @@ mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
   }
 }
 
+extern "C" int mlx_distributed_group_free(mlx_distributed_group group) {
+  try {
+    mlx_distributed_group_free_(group);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" bool mlx_distributed_is_available(const char* bk) {
   try {
     if (bk) {
@@ -45,21 +71,5 @@ extern "C" bool mlx_distributed_is_available(const char* bk) {
   } catch (std::exception& e) {
     mlx_error(e.what());
     return false;
-  }
-}
-
-extern "C" mlx_distributed_group mlx_distributed_init(
-    bool strict,
-    const char* bk) {
-  try {
-    if (bk) {
-      return mlx_distributed_group_new_(
-          mlx::core::distributed::init(strict, bk));
-    } else {
-      return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
-    }
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return mlx_distributed_group_new_();
   }
 }
