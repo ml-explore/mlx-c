@@ -437,3 +437,68 @@ extern "C" int mlx_save_gguf(const char* file, mlx_io_gguf gguf) {
   }
 }"""
         )
+
+def mlx_export_to_dot(f, implementation):
+    if not implementation:
+        print(
+            """\
+typedef struct mlx_node_namer_ {
+  void* ctx;
+} mlx_node_namer;
+
+mlx_node_namer mlx_node_namer_new();
+int mlx_node_namer_free(mlx_node_namer namer);
+int mlx_node_namer_set_name(
+    mlx_node_namer namer,
+    const mlx_array arr,
+    const char* name);
+int mlx_node_namer_get_name(
+    const char** name,
+    mlx_node_namer namer,
+    const mlx_array arr);
+""")
+    else:
+        print("""\
+extern "C" mlx_node_namer mlx_node_namer_new() {
+  try {
+    return mlx_node_namer_new_(mlx::core::NodeNamer());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+  }
+  return {nullptr};
+}
+extern "C" int mlx_node_namer_free(mlx_node_namer namer) {
+  try {
+    mlx_node_namer_free_(namer);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+extern "C" int mlx_node_namer_set_name(
+    mlx_node_namer namer,
+    const mlx_array arr,
+    const char* name) {
+  try {
+    mlx_node_namer_get_(namer).set_name(mlx_array_get_(arr), name);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+extern "C" int mlx_node_namer_get_name(
+    const char** name,
+    mlx_node_namer namer,
+    const mlx_array arr) {
+  try {
+    *name = mlx_node_namer_get_(namer).get_name(mlx_array_get_(arr)).c_str();
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}""")
+        pass
+    return True

@@ -90,6 +90,7 @@ if __name__ == "__main__":
     parser.add_argument("--cpptype", type=str)
     parser.add_argument("--no-copy", default=False, action="store_true")
     parser.add_argument("--include", default="", type=str)
+    parser.add_argument("--mlx-include", default="mlx/mlx.h", type=str)
     parser.add_argument("--using", default="", type=str)
     args = parser.parse_args()
 
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     print("#define MLX_" + short_ctype.upper() + "_PRIVATE_H")
     print()
     print('#include "mlx/c/' + short_ctype + '.h"')
-    print('#include "mlx/mlx.h"')
+    print('#include "' + args.mlx_include + '"')
     ctypes = args.ctype.split(";")
     cpptypes = args.cpptype.split(";")
     usings = args.using.split(";")
