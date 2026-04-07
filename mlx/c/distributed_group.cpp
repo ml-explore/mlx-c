@@ -6,19 +6,38 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" mlx_distributed_group mlx_distributed_init(
-    bool strict,
-    const char* bk) {
+extern "C" mlx_distributed_group mlx_distributed_group_new(void) {
   try {
-    if (bk) {
-      return mlx_distributed_group_new_(
-          mlx::core::distributed::init(strict, bk));
-    } else {
-      return mlx_distributed_group_new_(mlx::core::distributed::init(strict));
-    }
+    return mlx_distributed_group_new_();
   } catch (std::exception& e) {
     mlx_error(e.what());
-    return mlx_distributed_group_new_();
+    return {nullptr};
+  }
+}
+
+extern "C" int mlx_distributed_group_free(mlx_distributed_group group) {
+  try {
+    mlx_distributed_group_free_(group);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int
+mlx_distributed_init(mlx_distributed_group* res, bool strict, const char* bk) {
+  try {
+    if (bk) {
+      mlx_distributed_group_set_(
+          *res, mlx::core::distributed::init(strict, bk));
+    } else {
+      mlx_distributed_group_set_(*res, mlx::core::distributed::init(strict));
+    }
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
   }
 }
 
@@ -40,25 +59,19 @@ extern "C" int mlx_distributed_group_size(mlx_distributed_group group) {
   }
 }
 
-extern "C" mlx_distributed_group
-mlx_distributed_group_split(mlx_distributed_group group, int color, int key) {
+extern "C" int mlx_distributed_group_split(
+    mlx_distributed_group* res,
+    mlx_distributed_group group,
+    int color,
+    int key) {
   try {
-    return mlx_distributed_group_new_(
-        mlx_distributed_group_get_(group).split(color, key));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
-    return mlx_distributed_group_new_();
-  }
-}
-
-extern "C" int mlx_distributed_group_free(mlx_distributed_group group) {
-  try {
-    mlx_distributed_group_free_(group);
+    mlx_distributed_group_set_(
+        *res, mlx_distributed_group_get_(group).split(color, key));
+    return 0;
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
-  return 0;
 }
 
 extern "C" bool mlx_distributed_is_available(const char* bk) {
