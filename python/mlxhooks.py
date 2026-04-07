@@ -392,3 +392,48 @@ mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
     bool atomic_outputs);
         """
     __implement_mlx_fast_custom_kernel("metal", custom_code, implementation)
+
+
+def mlx_load_gguf(f, implementation):
+    if not implementation:
+        print(
+            """
+int mlx_load_gguf(mlx_io_gguf* gguf, const char* file, const mlx_stream s);
+        """
+        )
+    else:
+        print(
+            """\
+extern "C" int mlx_load_gguf(mlx_io_gguf* gguf, const char* file, const mlx_stream s) {
+  try {
+    auto cpp_gguf = mlx::core::load_gguf(file, mlx_stream_get_(s));
+    mlx_io_gguf_set_(*gguf, std::move(cpp_gguf));
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}"""
+        )
+
+
+def mlx_save_gguf(f, implementation):
+    if not implementation:
+        print(
+            """\
+int mlx_save_gguf(const char* file, mlx_io_gguf gguf);"""
+        )
+    else:
+        print(
+            """\
+extern "C" int mlx_save_gguf(const char* file, mlx_io_gguf gguf) {
+  try {
+    auto cpp_gguf = mlx_io_gguf_get_(gguf);
+        mlx::core::save_gguf(file, cpp_gguf.first, cpp_gguf.second);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}"""
+        )

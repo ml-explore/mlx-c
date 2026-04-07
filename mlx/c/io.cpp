@@ -30,6 +30,18 @@ extern "C" int mlx_load(mlx_array* res, const char* file, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int
+mlx_load_gguf(mlx_io_gguf* gguf, const char* file, const mlx_stream s) {
+  try {
+    auto cpp_gguf = mlx::core::load_gguf(file, mlx_stream_get_(s));
+    mlx_io_gguf_set_(*gguf, std::move(cpp_gguf));
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
 extern "C" int mlx_load_safetensors_reader(
     mlx_map_string_to_array* res_0,
     mlx_map_string_to_string* res_1,
@@ -84,6 +96,17 @@ extern "C" int mlx_save(const char* file, const mlx_array a) {
   }
   return 0;
 }
+extern "C" int mlx_save_gguf(const char* file, mlx_io_gguf gguf) {
+  try {
+    auto cpp_gguf = mlx_io_gguf_get_(gguf);
+    mlx::core::save_gguf(file, cpp_gguf.first, cpp_gguf.second);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
 extern "C" int mlx_save_safetensors_writer(
     mlx_io_writer in_stream,
     const mlx_map_string_to_array param,
