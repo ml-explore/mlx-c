@@ -438,6 +438,7 @@ extern "C" int mlx_save_gguf(const char* file, mlx_io_gguf gguf) {
 }"""
         )
 
+
 def mlx_export_to_dot(f, implementation):
     if not implementation:
         print(
@@ -456,9 +457,11 @@ int mlx_node_namer_get_name(
     const char** name,
     mlx_node_namer namer,
     const mlx_array arr);
-""")
+"""
+        )
     else:
-        print("""\
+        print(
+            """\
 extern "C" mlx_node_namer mlx_node_namer_new() {
   try {
     return mlx_node_namer_new_(mlx::core::NodeNamer());
@@ -499,6 +502,7 @@ extern "C" int mlx_node_namer_get_name(
     mlx_error(e.what());
     return 1;
   }
-}""")
+}"""
+        )
         pass
     return True
