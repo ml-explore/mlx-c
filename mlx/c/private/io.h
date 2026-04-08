@@ -2,6 +2,8 @@
 #define MLX_IO_PRIVATE_H
 
 #include <iostream>
+#include <streambuf>
+
 #include "mlx/mlx.h"
 
 namespace {
@@ -138,6 +140,43 @@ inline void mlx_io_writer_free_(mlx_io_writer io) {
     delete static_cast<cwriter_holder*>(io.ctx);
   }
 }
+
+class CFileStreamBuf : public std::streambuf {
+ public:
+  explicit CFileStreamBuf(FILE* file) : file_(file) {}
+
+ protected:
+  int_type overflow(int_type c) override {
+    if (c != traits_type::eof()) {
+      if (std::fputc(c, file_) == EOF) {
+        return traits_type::eof();
+      }
+    }
+    return c;
+  }
+  std::streamsize xsputn(const char* s, std::streamsize n) override {
+    return std::fwrite(s, 1, n, file_);
+  }
+  int sync() override {
+    return std::fflush(file_) == 0 ? 0 : -1;
+  }
+
+ private:
+  FILE* file_;
+};
+
+class CFileOutputStream : public std::ostream {
+ public:
+  explicit CFileOutputStream(FILE* file) : std::ostream(&buf_), buf_(file) {}
+
+  template <typename T>
+  static T& as_lvalue(T&& t) {
+    return t;
+  }
+
+ private:
+  CFileStreamBuf buf_;
+};
 
 } // namespace
 

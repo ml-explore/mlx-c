@@ -32,6 +32,11 @@ for t in [
         "Group",
     ],
     [
+        "mlx_node_namer",
+        "mlx::core::NodeNamer",
+        "NodeNamer",
+    ],
+    [
         "mlx_closure",
         "std::function<std::vector<array>(std::vector<array>)>",
     ],
@@ -437,6 +442,16 @@ types.append(
         "cpp": "std::shared_ptr<io::Writer>",
         "c_to_cpp": lambda s: "mlx_io_writer_get_(" + s + ")",
         "c_arg": lambda s, untyped=False: s if untyped else "mlx_io_writer " + s,
+    }
+)
+
+types.append(
+    {
+        "cpp": "std::ostream",
+        "c_to_cpp": lambda s: "CFileOutputStream::as_lvalue(CFileOutputStream("
+        + s
+        + "))",
+        "c_arg": lambda s, untyped=False: s if untyped else "FILE* " + s,
     }
 )
 

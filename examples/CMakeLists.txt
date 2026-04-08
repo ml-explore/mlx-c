@@ -23,3 +23,6 @@ target_link_libraries(example-export PUBLIC mlxc)
 
 add_executable(example-gguf ${CMAKE_CURRENT_LIST_DIR}/example-gguf.c)
 target_link_libraries(example-gguf PUBLIC mlxc)
+
+add_executable(example-graph ${CMAKE_CURRENT_LIST_DIR}/example-graph.c)
+target_link_libraries(example-graph PUBLIC mlxc)
