@@ -418,6 +418,22 @@ types.append(
 
 types.append(
     {
+        "cpp": "mlx::core::fft::FFTNorm",
+        "alt": "FFTNorm",
+        "c": "mlx_fft_norm",
+        "c_to_cpp": lambda s: "mlx_fft_norm_to_cpp(" + s + ")",
+        "c_arg": lambda s, untyped=False: s if untyped else "mlx_fft_norm " + s,
+        "c_return_arg": lambda s, untyped=False: (
+            s if untyped else "mlx_fft_norm* " + s
+        ),
+        "c_new": lambda s: "mlx_fft_norm " + s,
+        "free": lambda s: "",
+        "c_assign_from_cpp": lambda d, s: d + " = " + "mlx_fft_norm_to_c(" + s + ")",
+    }
+)
+
+types.append(
+    {
         "cpp": "std::string",
         "alt": "std::string",
         "c_to_cpp": lambda s: "std::string(" + s + ")",

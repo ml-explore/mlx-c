@@ -3221,6 +3221,114 @@ extern "C" int mlx_slice_update_dynamic(
   }
   return 0;
 }
+extern "C" int mlx_slice_update_add(
+    mlx_array* res,
+    const mlx_array src,
+    const mlx_array update,
+    const int* start,
+    size_t start_num,
+    const int* stop,
+    size_t stop_num,
+    const int* strides,
+    size_t strides_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::slice_update_add(
+            mlx_array_get_(src),
+            mlx_array_get_(update),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_slice_update_max(
+    mlx_array* res,
+    const mlx_array src,
+    const mlx_array update,
+    const int* start,
+    size_t start_num,
+    const int* stop,
+    size_t stop_num,
+    const int* strides,
+    size_t strides_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::slice_update_max(
+            mlx_array_get_(src),
+            mlx_array_get_(update),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_slice_update_min(
+    mlx_array* res,
+    const mlx_array src,
+    const mlx_array update,
+    const int* start,
+    size_t start_num,
+    const int* stop,
+    size_t stop_num,
+    const int* strides,
+    size_t strides_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::slice_update_min(
+            mlx_array_get_(src),
+            mlx_array_get_(update),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_slice_update_prod(
+    mlx_array* res,
+    const mlx_array src,
+    const mlx_array update,
+    const int* start,
+    size_t start_num,
+    const int* stop,
+    size_t stop_num,
+    const int* strides,
+    size_t strides_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::slice_update_prod(
+            mlx_array_get_(src),
+            mlx_array_get_(update),
+            mlx::core::Shape(start, start + start_num),
+            mlx::core::Shape(stop, stop + stop_num),
+            mlx::core::Shape(strides, strides + strides_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_softmax_axes(
     mlx_array* res,
     const mlx_array a,

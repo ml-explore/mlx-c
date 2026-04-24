@@ -5,6 +5,7 @@
 
 #include "mlx/c/array.h"
 #include "mlx/c/compile.h"
+#include "mlx/c/fft.h"
 #include "mlx/mlx.h"
 
 namespace {
@@ -72,6 +73,18 @@ inline mlx::core::Device::DeviceType mlx_device_type_to_cpp(
   static mlx::core::Device::DeviceType map[] = {
       mlx::core::Device::DeviceType::cpu, mlx::core::Device::DeviceType::gpu};
   return map[(int)type];
+}
+inline mlx_fft_norm mlx_fft_norm_to_c(mlx::core::fft::FFTNorm norm) {
+  static mlx_fft_norm map[] = {
+      MLX_FFT_NORM_BACKWARD, MLX_FFT_NORM_ORTHO, MLX_FFT_NORM_FORWARD};
+  return map[(int)norm];
+}
+inline mlx::core::fft::FFTNorm mlx_fft_norm_to_cpp(mlx_fft_norm norm) {
+  static mlx::core::fft::FFTNorm map[] = {
+      mlx::core::fft::FFTNorm::Backward,
+      mlx::core::fft::FFTNorm::Ortho,
+      mlx::core::fft::FFTNorm::Forward};
+  return map[(int)norm];
 }
 } // namespace
 
