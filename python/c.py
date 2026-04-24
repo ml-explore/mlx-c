@@ -9,7 +9,9 @@ import mlxvariants as variants
 
 
 def to_snake_letters(name):
-    name = re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+    name = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", name)
+    name = re.sub(r"([a-z\d])([A-Z])", r"\1_\2", name)
+    name = name.lower()
     return name
 
 
@@ -123,6 +125,7 @@ extern "C" {
             decl.append(c_typename)
             decl.append(";")
             print(" ".join(decl))
+            print()
 
     for f in sorted_funcs:
         if "variant" in f:
