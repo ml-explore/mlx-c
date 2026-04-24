@@ -13,7 +13,7 @@ extern "C" int mlx_fft_fft(
     const mlx_array a,
     int n,
     int axis,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -22,7 +22,7 @@ extern "C" int mlx_fft_fft(
             mlx_array_get_(a),
             n,
             axis,
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -37,7 +37,7 @@ extern "C" int mlx_fft_fft2(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -46,7 +46,7 @@ extern "C" int mlx_fft_fft2(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -71,7 +71,7 @@ extern "C" int mlx_fft_fftn(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -80,7 +80,7 @@ extern "C" int mlx_fft_fftn(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -112,7 +112,7 @@ extern "C" int mlx_fft_ifft(
     const mlx_array a,
     int n,
     int axis,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -121,7 +121,7 @@ extern "C" int mlx_fft_ifft(
             mlx_array_get_(a),
             n,
             axis,
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -136,7 +136,7 @@ extern "C" int mlx_fft_ifft2(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -145,7 +145,7 @@ extern "C" int mlx_fft_ifft2(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -160,7 +160,7 @@ extern "C" int mlx_fft_ifftn(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -169,7 +169,7 @@ extern "C" int mlx_fft_ifftn(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -201,7 +201,7 @@ extern "C" int mlx_fft_irfft(
     const mlx_array a,
     int n,
     int axis,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -210,7 +210,7 @@ extern "C" int mlx_fft_irfft(
             mlx_array_get_(a),
             n,
             axis,
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -225,7 +225,7 @@ extern "C" int mlx_fft_irfft2(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -234,7 +234,7 @@ extern "C" int mlx_fft_irfft2(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -249,7 +249,7 @@ extern "C" int mlx_fft_irfftn(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -258,7 +258,7 @@ extern "C" int mlx_fft_irfftn(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -271,7 +271,7 @@ extern "C" int mlx_fft_rfft(
     const mlx_array a,
     int n,
     int axis,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -280,7 +280,7 @@ extern "C" int mlx_fft_rfft(
             mlx_array_get_(a),
             n,
             axis,
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -295,7 +295,7 @@ extern "C" int mlx_fft_rfft2(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -304,7 +304,7 @@ extern "C" int mlx_fft_rfft2(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -329,7 +329,7 @@ extern "C" int mlx_fft_rfftn(
     size_t n_num,
     const int* axes,
     size_t axes_num,
-    mlx_f_f_t_norm norm,
+    mlx_fft_norm norm,
     const mlx_stream s) {
   try {
     mlx_array_set_(
@@ -338,7 +338,7 @@ extern "C" int mlx_fft_rfftn(
             mlx_array_get_(a),
             mlx::core::Shape(n, n + n_num),
             std::vector<int>(axes, axes + axes_num),
-            static_cast<mlx::core::fft::FFTNorm>(norm),
+            mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
