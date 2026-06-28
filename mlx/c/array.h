@@ -82,6 +82,16 @@ mlx_array mlx_array_new(void);
 int mlx_array_free(mlx_array arr);
 
 /**
+ * Detach an array from the MLX computation graph.
+ *
+ * Clears sibling links so the array can be freed without leaving dangling
+ * references in shared ArrayDesc nodes. Call before mlx_array_free when
+ * releasing model weights or other arrays that may still be linked in the
+ * graph.
+ */
+int mlx_array_detach(mlx_array arr);
+
+/**
  * New array from a bool scalar.
  */
 mlx_array mlx_array_new_bool(bool val);

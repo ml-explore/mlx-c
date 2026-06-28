@@ -34,6 +34,18 @@ extern "C" int mlx_array_free(mlx_array arr) {
   return 0;
 }
 
+extern "C" int mlx_array_detach(mlx_array arr) {
+  try {
+    if (arr.ctx) {
+      static_cast<mlx::core::array*>(arr.ctx)->detach();
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
 extern "C" mlx_array mlx_array_new(void) {
   try {
     return mlx_array_();
