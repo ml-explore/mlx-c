@@ -7,6 +7,30 @@ import mlxtypes as mt
 import mlxhooks as hooks
 import mlxvariants as variants
 
+# Classifying catch ladder shared by every generated binding. Ordered most- to
+# least-specific so the first matching handler wins. The trailing catch (...)
+# closes the ABI hole: a non-std throw would otherwise unwind across extern "C".
+# _mlx_error_with_code records classified thread-local state *and* invokes the
+# legacy handler, so handler-based callers keep working unchanged. e.what() is
+# passed through "%s" so messages containing '%' are not misread as formats.
+CATCH_LADDER = [
+    '  } catch (const std::invalid_argument& e) {',
+    '    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());',
+    "    return 1;",
+    "  } catch (const std::out_of_range& e) {",
+    '    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());',
+    "    return 1;",
+    "  } catch (const std::bad_alloc& e) {",
+    '    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());',
+    "    return 1;",
+    "  } catch (const std::exception& e) {",
+    '    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());',
+    "    return 1;",
+    "  } catch (...) {",
+    '    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");',
+    "    return 1;",
+]
+
 
 def to_snake_letters(name):
     name = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", name)
@@ -210,9 +234,7 @@ extern "C" {
                 'extern "C" ' + signature + " {",
                 "  try {",
                 "    " + return_t["c_assign_from_cpp"]("res", cpp_call) + ";",
-                "  } catch (std::exception& e) {",
-                "    mlx_error(e.what());",
-                "    return 1;",
+                *CATCH_LADDER,
                 "  }",
                 "  return 0;",
                 "}",
