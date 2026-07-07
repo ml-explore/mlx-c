@@ -19,8 +19,20 @@ extern "C" int mlx_io_reader_free(mlx_io_reader io) {
   try {
     mlx_io_reader_free_(io);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -29,8 +41,20 @@ extern "C" int mlx_io_reader_descriptor(void** desc_, mlx_io_reader io) {
   try {
     *desc_ = mlx_io_reader_get_(io)->desc;
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -39,8 +63,20 @@ extern "C" int mlx_io_reader_tostring(mlx_string* str_, mlx_io_reader io) {
   try {
     mlx_string_set_(*str_, mlx_io_reader_get_(io)->label());
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -58,8 +94,20 @@ extern "C" int mlx_io_writer_free(mlx_io_writer io) {
   try {
     mlx_io_writer_free_(io);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -68,8 +116,20 @@ extern "C" int mlx_io_writer_descriptor(void** desc_, mlx_io_writer io) {
   try {
     *desc_ = mlx_io_writer_get_(io)->desc;
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -78,8 +138,20 @@ extern "C" int mlx_io_writer_tostring(mlx_string* str_, mlx_io_writer io) {
   try {
     mlx_string_set_(*str_, mlx_io_writer_get_(io)->label());
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -97,8 +169,20 @@ extern "C" int mlx_io_gguf_free(mlx_io_gguf io) {
   try {
     mlx_io_gguf_free_(io);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -113,8 +197,20 @@ extern "C" int mlx_io_gguf_get_keys(mlx_vector_string* keys, mlx_io_gguf io) {
     }
     mlx_vector_string_set_(*keys, cpp_keys);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -130,8 +226,20 @@ mlx_io_gguf_get_array(mlx_array* arr, mlx_io_gguf io, const char* key) {
       return 2; // not found
     }
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -197,8 +305,20 @@ mlx_io_gguf_set_array(mlx_io_gguf io, const char* key, const mlx_array arr) {
     auto& cpp_map = mlx_io_gguf_get_(io).first;
     cpp_map.insert(std::make_pair(std::string(key), mlx_array_get_(arr)));
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -211,8 +331,20 @@ extern "C" int mlx_io_gguf_set_metadata_array(
     auto& cpp_map = mlx_io_gguf_get_(io).second;
     cpp_map.insert(std::make_pair(std::string(key), mlx_array_get_(marr)));
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -225,8 +357,20 @@ extern "C" int mlx_io_gguf_set_metadata_string(
     auto& cpp_map = mlx_io_gguf_get_(io).second;
     cpp_map.insert(std::make_pair(std::string(key), std::string(mstr)));
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -240,8 +384,20 @@ extern "C" int mlx_io_gguf_set_metadata_vector_string(
     cpp_map.insert(
         std::make_pair(std::string(key), mlx_vector_string_get_(mvstr)));
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }

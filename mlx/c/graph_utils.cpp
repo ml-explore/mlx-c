@@ -20,8 +20,20 @@ extern "C" int mlx_node_namer_free(mlx_node_namer namer) {
   try {
     mlx_node_namer_free_(namer);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -32,8 +44,20 @@ extern "C" int mlx_node_namer_set_name(
   try {
     mlx_node_namer_get_(namer).set_name(mlx_array_get_(arr), name);
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -44,8 +68,20 @@ extern "C" int mlx_node_namer_get_name(
   try {
     *name = mlx_node_namer_get_(namer).get_name(mlx_array_get_(arr)).c_str();
     return 0;
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
 }
@@ -58,8 +94,20 @@ extern "C" int mlx_export_to_dot(
         CFileOutputStream::as_lvalue(CFileOutputStream(os)),
         mlx_node_namer_get_(namer),
         mlx_vector_array_get_(outputs));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
   return 0;
@@ -73,8 +121,20 @@ extern "C" int mlx_print_graph(
         CFileOutputStream::as_lvalue(CFileOutputStream(os)),
         mlx_node_namer_get_(namer),
         mlx_vector_array_get_(outputs));
-  } catch (std::exception& e) {
-    mlx_error(e.what());
+  } catch (const std::invalid_argument& e) {
+    mlx_error_with_code(MLX_ERROR_INVALID_ARGUMENT, "%s", e.what());
+    return 1;
+  } catch (const std::out_of_range& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_RANGE, "%s", e.what());
+    return 1;
+  } catch (const std::bad_alloc& e) {
+    mlx_error_with_code(MLX_ERROR_OUT_OF_MEMORY, "%s", e.what());
+    return 1;
+  } catch (const std::exception& e) {
+    mlx_error_with_code(MLX_ERROR_RUNTIME, "%s", e.what());
+    return 1;
+  } catch (...) {
+    mlx_error_with_code(MLX_ERROR_UNKNOWN, "unknown (non-std) exception");
     return 1;
   }
   return 0;
