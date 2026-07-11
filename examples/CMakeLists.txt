@@ -32,3 +32,6 @@ add_executable(example-thread-stream
 target_link_libraries(example-thread-stream PUBLIC mlxc)
 find_package(Threads REQUIRED)
 target_link_libraries(example-thread-stream PUBLIC Threads::Threads)
+
+add_executable(example-ops ${CMAKE_CURRENT_LIST_DIR}/example-ops.c)
+target_link_libraries(example-ops PUBLIC mlxc)
