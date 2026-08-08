@@ -26,3 +26,9 @@ target_link_libraries(example-gguf PUBLIC mlxc)
 
 add_executable(example-graph ${CMAKE_CURRENT_LIST_DIR}/example-graph.c)
 target_link_libraries(example-graph PUBLIC mlxc)
+
+add_executable(example-thread-stream
+               ${CMAKE_CURRENT_LIST_DIR}/example-thread-stream.c)
+target_link_libraries(example-thread-stream PUBLIC mlxc)
+find_package(Threads REQUIRED)
+target_link_libraries(example-thread-stream PUBLIC Threads::Threads)

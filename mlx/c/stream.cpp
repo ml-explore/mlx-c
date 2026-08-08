@@ -32,6 +32,15 @@ extern "C" mlx_stream mlx_stream_new_device(mlx_device dev) {
     return mlx_stream_new_();
   }
 }
+extern "C" mlx_stream mlx_stream_new_thread_unsafe(mlx_device dev) {
+  try {
+    return mlx_stream_new_(
+        mlx::core::new_thread_unsafe_stream(mlx_device_get_(dev)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_stream_new_();
+  }
+}
 extern "C" int mlx_stream_set(mlx_stream* stream, const mlx_stream src) {
   try {
     mlx_stream_set_(*stream, mlx_stream_get_(src));
