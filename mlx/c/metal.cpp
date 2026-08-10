@@ -8,9 +8,9 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
-extern "C" int mlx_metal_get_metallib_path(char** res) {
+extern "C" int mlx_metal_get_metallib_path(const char** res) {
   try {
-    res = mlx::core::metal::get_metallib_path().c_str();
+    *res = mlx::core::metal::get_metallib_path().c_str();
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
