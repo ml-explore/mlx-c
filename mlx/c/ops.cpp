@@ -973,6 +973,23 @@ extern "C" int mlx_cosh(mlx_array* res, const mlx_array a, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int mlx_count_nonzero(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool keepdims,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::count_nonzero(
+            mlx_array_get_(a), axis, keepdims, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_cummax(
     mlx_array* res,
     const mlx_array a,
@@ -1015,12 +1032,20 @@ extern "C" int mlx_cumprod(
     int axis,
     bool reverse,
     bool inclusive,
+    mlx_optional_dtype dtype,
     const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
         mlx::core::cumprod(
-            mlx_array_get_(a), axis, reverse, inclusive, mlx_stream_get_(s)));
+            mlx_array_get_(a),
+            axis,
+            reverse,
+            inclusive,
+            (dtype.has_value ? std::make_optional<mlx::core::Dtype>(
+                                   mlx_dtype_to_cpp(dtype.value))
+                             : std::nullopt),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1033,12 +1058,20 @@ extern "C" int mlx_cumsum(
     int axis,
     bool reverse,
     bool inclusive,
+    mlx_optional_dtype dtype,
     const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
         mlx::core::cumsum(
-            mlx_array_get_(a), axis, reverse, inclusive, mlx_stream_get_(s)));
+            mlx_array_get_(a),
+            axis,
+            reverse,
+            inclusive,
+            (dtype.has_value ? std::make_optional<mlx::core::Dtype>(
+                                   mlx_dtype_to_cpp(dtype.value))
+                             : std::nullopt),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1131,6 +1164,21 @@ extern "C" int mlx_diagonal(
         *res,
         mlx::core::diagonal(
             mlx_array_get_(a), offset, axis1, axis2, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_diff(
+    mlx_array* res,
+    const mlx_array a,
+    int n,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::diff(mlx_array_get_(a), n, axis, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1305,6 +1353,25 @@ extern "C" int mlx_flatten(
         *res,
         mlx::core::flatten(
             mlx_array_get_(a), start_axis, end_axis, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_flip(
+    mlx_array* res,
+    const mlx_array a,
+    const int* axes,
+    size_t axes_num,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::flip(
+            mlx_array_get_(a),
+            std::vector<int>(axes, axes + axes_num),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -1895,6 +1962,22 @@ extern "C" int mlx_logical_or(
   }
   return 0;
 }
+extern "C" int mlx_logical_xor(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::logical_xor(
+            mlx_array_get_(a), mlx_array_get_(b), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_logsumexp_axes(
     mlx_array* res,
     const mlx_array a,
@@ -2426,6 +2509,17 @@ mlx_partition(mlx_array* res, const mlx_array a, int kth, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::partition(mlx_array_get_(a), kth, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int
+mlx_positive(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::positive(mlx_array_get_(a), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -3948,6 +4042,17 @@ mlx_triu(mlx_array* res, const mlx_array x, int k, const mlx_stream s) {
   }
   return 0;
 }
+extern "C" int
+mlx_trunc(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::trunc(mlx_array_get_(a), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_unflatten(
     mlx_array* res,
     const mlx_array a,
@@ -3963,6 +4068,20 @@ extern "C" int mlx_unflatten(
             axis,
             mlx::core::Shape(shape, shape + shape_num),
             mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_unstack(
+    mlx_vector_array* res,
+    const mlx_array a,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_vector_array_set_(
+        *res, mlx::core::unstack(mlx_array_get_(a), axis, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -4020,6 +4139,23 @@ extern "C" int mlx_var(
     mlx_array_set_(
         *res,
         mlx::core::var(mlx_array_get_(a), keepdims, ddof, mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_vecdot(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    int axis,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::vecdot(
+            mlx_array_get_(a), mlx_array_get_(b), axis, mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

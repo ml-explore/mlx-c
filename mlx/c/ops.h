@@ -323,6 +323,12 @@ int mlx_conv_transpose3d(
 int mlx_copy(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_cos(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_cosh(mlx_array* res, const mlx_array a, const mlx_stream s);
+int mlx_count_nonzero(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool keepdims,
+    const mlx_stream s);
 int mlx_cummax(
     mlx_array* res,
     const mlx_array a,
@@ -343,6 +349,7 @@ int mlx_cumprod(
     int axis,
     bool reverse,
     bool inclusive,
+    mlx_optional_dtype dtype,
     const mlx_stream s);
 int mlx_cumsum(
     mlx_array* res,
@@ -350,6 +357,7 @@ int mlx_cumsum(
     int axis,
     bool reverse,
     bool inclusive,
+    mlx_optional_dtype dtype,
     const mlx_stream s);
 int mlx_degrees(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_depends(
@@ -374,6 +382,12 @@ int mlx_diagonal(
     int offset,
     int axis1,
     int axis2,
+    const mlx_stream s);
+int mlx_diff(
+    mlx_array* res,
+    const mlx_array a,
+    int n,
+    int axis,
     const mlx_stream s);
 int mlx_divide(
     mlx_array* res,
@@ -422,6 +436,12 @@ int mlx_flatten(
     const mlx_array a,
     int start_axis,
     int end_axis,
+    const mlx_stream s);
+int mlx_flip(
+    mlx_array* res,
+    const mlx_array a,
+    const int* axes,
+    size_t axes_num,
     const mlx_stream s);
 int mlx_floor(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_floor_divide(
@@ -573,6 +593,11 @@ int mlx_logical_and(
     const mlx_stream s);
 int mlx_logical_not(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_logical_or(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    const mlx_stream s);
+int mlx_logical_xor(
     mlx_array* res,
     const mlx_array a,
     const mlx_array b,
@@ -757,6 +782,7 @@ int mlx_partition(
     const mlx_array a,
     int kth,
     const mlx_stream s);
+int mlx_positive(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_power(
     mlx_array* res,
     const mlx_array a,
@@ -1231,12 +1257,18 @@ int mlx_tri(
     const mlx_stream s);
 int mlx_tril(mlx_array* res, const mlx_array x, int k, const mlx_stream s);
 int mlx_triu(mlx_array* res, const mlx_array x, int k, const mlx_stream s);
+int mlx_trunc(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_unflatten(
     mlx_array* res,
     const mlx_array a,
     int axis,
     const int* shape,
     size_t shape_num,
+    const mlx_stream s);
+int mlx_unstack(
+    mlx_vector_array* res,
+    const mlx_array a,
+    int axis,
     const mlx_stream s);
 int mlx_var_axes(
     mlx_array* res,
@@ -1258,6 +1290,12 @@ int mlx_var(
     const mlx_array a,
     bool keepdims,
     int ddof,
+    const mlx_stream s);
+int mlx_vecdot(
+    mlx_array* res,
+    const mlx_array a,
+    const mlx_array b,
+    int axis,
     const mlx_stream s);
 int mlx_view(
     mlx_array* res,
