@@ -55,6 +55,7 @@ def _make_variant_suffixes(name, defs, variants):
 def mlx_core(name, defs):
     variants = {
         "arange": ["", None, None, None, None, None, None, None, None],
+        "astype": ["copy", ""],
         "eye": ["", None, None, None, None],
         "tri": ["", None],
         "flatten": ["", None],
