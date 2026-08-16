@@ -17,6 +17,24 @@ extern "C" int mlx_metal_is_available(bool* res) {
   }
   return 0;
 }
+extern "C" int mlx_metal_set_batch_invariant_limit(int limit) {
+  try {
+    mlx::core::metal::set_batch_invariant_limit(limit);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_metal_get_batch_invariant_limit(int* res) {
+  try {
+    *res = mlx::core::metal::get_batch_invariant_limit();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_metal_start_capture(const char* path) {
   try {
     mlx::core::metal::start_capture(std::string(path));
