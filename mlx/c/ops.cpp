@@ -776,6 +776,37 @@ extern "C" int mlx_conv2d(
   }
   return 0;
 }
+extern "C" int mlx_conv2d_bias_silu(
+    mlx_array* res,
+    const mlx_array input,
+    const mlx_array weight,
+    const mlx_array bias,
+    int stride_0,
+    int stride_1,
+    int padding_0,
+    int padding_1,
+    int dilation_0,
+    int dilation_1,
+    int groups,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::conv2d_bias_silu(
+            mlx_array_get_(input),
+            mlx_array_get_(weight),
+            mlx_array_get_(bias),
+            std::make_pair(stride_0, stride_1),
+            std::make_pair(padding_0, padding_1),
+            std::make_pair(dilation_0, dilation_1),
+            groups,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_conv3d(
     mlx_array* res,
     const mlx_array input,

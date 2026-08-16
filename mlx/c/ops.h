@@ -246,6 +246,19 @@ int mlx_conv2d(
     int dilation_1,
     int groups,
     const mlx_stream s);
+int mlx_conv2d_bias_silu(
+    mlx_array* res,
+    const mlx_array input,
+    const mlx_array weight,
+    const mlx_array bias,
+    int stride_0,
+    int stride_1,
+    int padding_0,
+    int padding_1,
+    int dilation_0,
+    int dilation_1,
+    int groups,
+    const mlx_stream s);
 int mlx_conv3d(
     mlx_array* res,
     const mlx_array input,
