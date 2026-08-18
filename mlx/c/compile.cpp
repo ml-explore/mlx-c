@@ -42,22 +42,25 @@ extern "C" int mlx_detail_compile(
 }
 extern "C" int mlx_detail_compile_clear_cache(void) {
   try {
-    mlx::core::detail::compile_clear_cache();
+    mlx::core::detail::compile_clear_cache(mlx::core::detail::compile_cache());
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
+
 extern "C" int mlx_detail_compile_erase(uintptr_t fun_id) {
   try {
-    mlx::core::detail::compile_erase(fun_id);
+    mlx::core::detail::compile_erase(
+        mlx::core::detail::compile_cache(), fun_id);
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
   }
   return 0;
 }
+
 extern "C" int mlx_disable_compile(void) {
   try {
     mlx::core::disable_compile();

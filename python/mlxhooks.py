@@ -506,3 +506,39 @@ extern "C" int mlx_node_namer_get_name(
         )
         pass
     return True
+
+
+def mlx_detail_compile_clear_cache(f, implementation):
+    if not implementation:
+        print("int mlx_detail_compile_clear_cache(void);")
+    else:
+        print(
+            """\
+extern "C" int mlx_detail_compile_clear_cache(void) {
+  try {
+    mlx::core::detail::compile_clear_cache(mlx::core::detail::compile_cache());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}"""
+        )
+
+
+def mlx_detail_compile_erase(f, implementation):
+    if not implementation:
+        print("int mlx_detail_compile_erase(uintptr_t fun_id);")
+    else:
+        print(
+            """\
+extern "C" int mlx_detail_compile_erase(uintptr_t fun_id) {
+  try {
+    mlx::core::detail::compile_erase(mlx::core::detail::compile_cache(), fun_id);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}"""
+        )
