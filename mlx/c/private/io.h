@@ -2,6 +2,7 @@
 #define MLX_IO_PRIVATE_H
 
 #include <iostream>
+#include <sstream>
 #include <streambuf>
 
 #include "mlx/mlx.h"
@@ -41,16 +42,30 @@ class CReader : public mlx::core::io::Reader {
     }
   }
   virtual void read(char* data, size_t n) override {
-    return vtable.read(desc, data, n);
+    vtable.read(desc, data, n);
+    check_read_(n);
   };
   virtual void read(char* data, size_t n, size_t offset) override {
-    return vtable.read_at_offset(desc, data, n, offset);
+    vtable.read_at_offset(desc, data, n, offset);
+    check_read_(n);
   };
   virtual std::string label() const override {
     return vtable.label(desc);
   };
   virtual ~CReader() {
     vtable.free(desc);
+  }
+
+ private:
+  // The read functions of the vtable have no return value, so a failed read is
+  // only reported through good(). Turn it into an exception, as done by the
+  // readers implemented in mlx, so the error can propagate to the caller.
+  void check_read_(size_t n) {
+    if (!vtable.good(desc)) {
+      std::ostringstream msg;
+      msg << "[read] Unable to read " << n << " bytes from " << label() << ".";
+      throw std::runtime_error(msg.str());
+    }
   }
 };
 
@@ -87,7 +102,13 @@ class CWriter : public mlx::core::io::Writer {
     }
   }
   virtual void write(const char* data, size_t n) override {
-    return vtable.write(desc, data, n);
+    vtable.write(desc, data, n);
+    // Same as CReader::read(): a failed write is only reported through good().
+    if (!vtable.good(desc)) {
+      std::ostringstream msg;
+      msg << "[write] Unable to write " << n << " bytes to " << label() << ".";
+      throw std::runtime_error(msg.str());
+    }
   };
   virtual std::string label() const override {
     return vtable.label(desc);
