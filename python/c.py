@@ -203,6 +203,13 @@ extern "C" {
         signature = " ".join(signature)
         signature = signature.replace("( ", "(").replace(" )", ")")
 
+        if not implementation and "doc" in f:
+            print()
+            print("/**")
+            for ln in f["doc"]:
+                ln = ln.rstrip()
+                print((" * " + ln).rstrip())
+            print(" */")
         c_code = signature + ";"
         if implementation:
             cpp_call = f["namespace"] + "::" + f["name"] + "(" + cpp_call + ")"
