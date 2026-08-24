@@ -14,6 +14,61 @@ import re
 
 _COMMENT_RE = re.compile(r"/\*\*(.*?)\*/", re.DOTALL)
 
+# Tokens that only appear in C++ code. A @code block containing any of these
+# cannot be used verbatim in a C header's documentation.
+_CPP_TOKENS = re.compile(
+    r"\bauto\s|std::|->|::|array\{|vector\{|\bnew\b|\.c_str\(\)")
+
+
+def sanitize(body_lines, indent=""):
+    """Light, conservative cleaning of a doc-comment body.
+
+    Rules (each visible in the output, nothing silently rewritten):
+      1. Drop @code/@endcode blocks that contain C++-only tokens, replacing
+         the whole block with a single note line. Blocks without such tokens
+         are kept verbatim.
+      2. Collapse runs of blank lines to one.
+    Returns (lines, applied_rules).
+    """
+    out = []
+    rules = []
+    i = 0
+    while i < len(body_lines):
+        ln = body_lines[i]
+        if ln.strip() == "@code":
+            j = i
+            while j < len(body_lines) and body_lines[j].strip() != "@endcode":
+                j += 1
+            block = body_lines[i + 1 : j]
+            if any(_CPP_TOKENS.search(b) for b in block):
+                # drop a dangling lead-in like "For example:" or "is
+                # equivalent to:" directly above (skipping blank lines)
+                while out and out[-1].strip() == "":
+                    out.pop()
+                if out and out[-1].rstrip().endswith(":"):
+                    out.pop()
+                    while out and out[-1].strip() == "":
+                        out.pop()
+                note = "Code example omitted: written in C++."
+                if not (out and out[-1] == note):
+                    if out and out[-1].strip() != "":
+                        out.append("")
+                    out.append(note)
+                rules.append("dropped C++ @code block")
+            else:
+                out.extend(body_lines[i : j + 1])
+            i = j + 1
+            continue
+        out.append(ln)
+        i += 1
+    # collapse blank runs
+    cleaned = []
+    for ln in out:
+        if ln.strip() == "" and cleaned and cleaned[-1].strip() == "":
+            continue
+        cleaned.append(ln)
+    return cleaned, rules
+
 
 def _split_top_level(text, sep=","):
     """Split text on sep occurring outside any (), [], <> nesting."""
@@ -116,8 +171,10 @@ class HeaderDocs:
             name, arity = _decl_info(decl)
             if not name or arity is None:
                 continue
+            body, rules = sanitize(body)
             self.docs.setdefault(name, []).append(
-                {"arity": arity, "body": body, "used": False}
+                {"arity": arity, "body": body, "used": False,
+                 "rules": rules}
             )
 
     def take(self, cpp_qualified_name, namespace, name, arity):
