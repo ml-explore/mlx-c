@@ -1,5 +1,6 @@
 # Copyright © 2023-2024 Apple Inc.
 
+import os
 import re
 import sys
 
@@ -99,6 +100,17 @@ extern "C" {
 #endif
 """
         )
+        # Preserve an existing group banner when no docstring is passed, so
+        # regenerating a header reproduces its committed form instead of
+        # silently dropping the group.
+        if not docstring:
+            prev = os.path.join("mlx", "c", headername + ".h")
+            if os.path.exists(prev):
+                for ln in open(prev):
+                    m = re.search(r"\\defgroup\s+\S+\s+(.*)", ln)
+                    if m:
+                        docstring = m.group(1).replace("*/", "").strip()
+                        break
         if docstring:
             docstring = docstring.replace("\n", "\n * ")
             print("/**")
