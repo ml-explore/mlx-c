@@ -1576,6 +1576,51 @@ extern "C" int mlx_gather_qmm(
   }
   return 0;
 }
+extern "C" int mlx_gather_qqmm(
+    mlx_array* res,
+    const mlx_array x,
+    const mlx_array w,
+    const mlx_array scales_w /* may be null */,
+    const mlx_array lhs_indices /* may be null */,
+    const mlx_array rhs_indices /* may be null */,
+    mlx_optional_int group_size,
+    mlx_optional_int bits,
+    const char* mode,
+    const mlx_array global_scale_x /* may be null */,
+    const mlx_array global_scale_w /* may be null */,
+    bool sorted_indices,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::gather_qqmm(
+            mlx_array_get_(x),
+            mlx_array_get_(w),
+            (scales_w.ctx ? std::make_optional(mlx_array_get_(scales_w))
+                          : std::nullopt),
+            (lhs_indices.ctx ? std::make_optional(mlx_array_get_(lhs_indices))
+                             : std::nullopt),
+            (rhs_indices.ctx ? std::make_optional(mlx_array_get_(rhs_indices))
+                             : std::nullopt),
+            (group_size.has_value ? std::make_optional<int>(group_size.value)
+                                  : std::nullopt),
+            (bits.has_value ? std::make_optional<int>(bits.value)
+                            : std::nullopt),
+            std::string(mode),
+            (global_scale_x.ctx
+                 ? std::make_optional(mlx_array_get_(global_scale_x))
+                 : std::nullopt),
+            (global_scale_w.ctx
+                 ? std::make_optional(mlx_array_get_(global_scale_w))
+                 : std::nullopt),
+            sorted_indices,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_greater(
     mlx_array* res,
     const mlx_array a,
@@ -1831,13 +1876,19 @@ extern "C" int mlx_linspace(
     double start,
     double stop,
     int num,
+    bool endpoint,
     mlx_dtype dtype,
     const mlx_stream s) {
   try {
     mlx_array_set_(
         *res,
         mlx::core::linspace(
-            start, stop, num, mlx_dtype_to_cpp(dtype), mlx_stream_get_(s)));
+            start,
+            stop,
+            num,
+            endpoint,
+            mlx_dtype_to_cpp(dtype),
+            mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -2404,6 +2455,22 @@ extern "C" int mlx_ones(
             mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_ones_like_dtype(
+    mlx_array* res,
+    const mlx_array a,
+    mlx_dtype dtype,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::ones_like(
+            mlx_array_get_(a), mlx_dtype_to_cpp(dtype), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -3149,6 +3216,26 @@ extern "C" int mlx_scatter_prod_single(
             mlx_array_get_(indices),
             mlx_array_get_(updates),
             axis,
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_searchsorted(
+    mlx_array* res,
+    const mlx_array sorted_sequence,
+    const mlx_array values,
+    const char* side,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::searchsorted(
+            mlx_array_get_(sorted_sequence),
+            mlx_array_get_(values),
+            std::string(side),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
@@ -4211,6 +4298,22 @@ extern "C" int mlx_zeros(
             mlx::core::Shape(shape, shape + shape_num),
             mlx_dtype_to_cpp(dtype),
             mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_zeros_like_dtype(
+    mlx_array* res,
+    const mlx_array a,
+    mlx_dtype dtype,
+    const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::zeros_like(
+            mlx_array_get_(a), mlx_dtype_to_cpp(dtype), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
