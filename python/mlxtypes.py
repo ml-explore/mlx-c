@@ -60,6 +60,11 @@ for t in [
         "std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(std::vector<mlx::core::array>,std::vector<int>)>",
         "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>",
     ],
+    [
+        "mlx_compile_cache",
+        "std::weak_ptr<mlx::core::detail::CompileCache>",
+        "CompileCacheWeakPtr",
+    ],
 ]:
     if len(t) == 2:
         ctype, cpptype = t

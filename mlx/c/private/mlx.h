@@ -3,6 +3,7 @@
 
 #include "mlx/c/private/array.h"
 #include "mlx/c/private/closure.h"
+#include "mlx/c/private/compile.h"
 #include "mlx/c/private/device.h"
 #include "mlx/c/private/distributed_group.h"
 #include "mlx/c/private/enums.h"

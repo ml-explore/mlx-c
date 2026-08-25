@@ -506,3 +506,15 @@ extern "C" int mlx_node_namer_get_name(
         )
         pass
     return True
+
+
+def mlx_compile(f, implementation):
+    if not implementation:
+        print(
+            """\
+typedef struct mlx_compile_cache_ {
+  void* ctx;
+} mlx_compile_cache;
+            """
+        )
+    return True
