@@ -167,6 +167,13 @@ class HeaderDocs:
                 body.pop(0)
             while body and body[-1] == "":
                 body.pop()
+            # Skip structural Doxygen commands (file-level \defgroup groups):
+            # they document the module, not the next declaration, and must not
+            # be attached to a function or re-emitted mid-header (c.py already
+            # emits the file-level group from --docstring/committed form).
+            joined = "\n".join(body)
+            if re.search(r"\\defgroup|\\addtogroup|\\ingroup|@\{|@\}", joined):
+                continue
             decl = _decl_after(m, content)
             name, arity = _decl_info(decl)
             if not name or arity is None:
