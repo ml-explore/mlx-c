@@ -105,6 +105,17 @@ def mlx_core(name, defs):
         "export_function": [None, "", "kwargs"],
         "zeros_like": ["dtype", ""],
         "ones_like": ["dtype", ""],
+        "count_nonzero": ["axis", "axes", ""],
+        "flip": ["axis", "axes", ""],
+        "unstack": ["axis", ""],
+        "median": ["axes", "axis", "", None],
+        "logcumsumexp": ["axis", ""],
+        "cumsum": ["axis", "", None, None],
+        "cumprod": ["axis", "", None, None],
+        "cummax": ["axis", ""],
+        "cummin": ["axis", ""],
+        "trace": ["axes", None, ""],
+        "linspace": ["endpoint", ""],
     }
     return _make_variant_suffixes(name, defs, variants)
 

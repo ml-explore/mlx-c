@@ -323,13 +323,38 @@ int mlx_conv_transpose3d(
 int mlx_copy(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_cos(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_cosh(mlx_array* res, const mlx_array a, const mlx_stream s);
-int mlx_count_nonzero(
+int mlx_count_nonzero_axis(
     mlx_array* res,
     const mlx_array a,
     int axis,
     bool keepdims,
     const mlx_stream s);
+int mlx_count_nonzero_axes(
+    mlx_array* res,
+    const mlx_array a,
+    const int* axes,
+    size_t axes_num,
+    bool keepdims,
+    const mlx_stream s);
+int mlx_count_nonzero(
+    mlx_array* res,
+    const mlx_array a,
+    bool keepdims,
+    const mlx_stream s);
+int mlx_cummax_axis(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool reverse,
+    bool inclusive,
+    const mlx_stream s);
 int mlx_cummax(
+    mlx_array* res,
+    const mlx_array a,
+    bool reverse,
+    bool inclusive,
+    const mlx_stream s);
+int mlx_cummin_axis(
     mlx_array* res,
     const mlx_array a,
     int axis,
@@ -339,11 +364,25 @@ int mlx_cummax(
 int mlx_cummin(
     mlx_array* res,
     const mlx_array a,
-    int axis,
     bool reverse,
     bool inclusive,
     const mlx_stream s);
+int mlx_cumprod_axis(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool reverse,
+    bool inclusive,
+    mlx_optional_dtype dtype,
+    const mlx_stream s);
 int mlx_cumprod(
+    mlx_array* res,
+    const mlx_array a,
+    bool reverse,
+    bool inclusive,
+    mlx_optional_dtype dtype,
+    const mlx_stream s);
+int mlx_cumsum_axis(
     mlx_array* res,
     const mlx_array a,
     int axis,
@@ -354,7 +393,6 @@ int mlx_cumprod(
 int mlx_cumsum(
     mlx_array* res,
     const mlx_array a,
-    int axis,
     bool reverse,
     bool inclusive,
     mlx_optional_dtype dtype,
@@ -437,12 +475,18 @@ int mlx_flatten(
     int start_axis,
     int end_axis,
     const mlx_stream s);
-int mlx_flip(
+int mlx_flip_axis(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
+int mlx_flip_axes(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    const mlx_stream s);
+int mlx_flip(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_floor(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_floor_divide(
     mlx_array* res,
@@ -577,12 +621,19 @@ int mlx_less_equal(
     const mlx_array a,
     const mlx_array b,
     const mlx_stream s);
-int mlx_linspace(
+int mlx_linspace_endpoint(
     mlx_array* res,
     double start,
     double stop,
     int num,
     bool endpoint,
+    mlx_dtype dtype,
+    const mlx_stream s);
+int mlx_linspace(
+    mlx_array* res,
+    double start,
+    double stop,
+    int num,
     mlx_dtype dtype,
     const mlx_stream s);
 int mlx_log(mlx_array* res, const mlx_array a, const mlx_stream s);
@@ -594,10 +645,16 @@ int mlx_logaddexp(
     const mlx_array a,
     const mlx_array b,
     const mlx_stream s);
-int mlx_logcumsumexp(
+int mlx_logcumsumexp_axis(
     mlx_array* res,
     const mlx_array a,
     int axis,
+    bool reverse,
+    bool inclusive,
+    const mlx_stream s);
+int mlx_logcumsumexp(
+    mlx_array* res,
+    const mlx_array a,
     bool reverse,
     bool inclusive,
     const mlx_stream s);
@@ -687,11 +744,22 @@ int mlx_mean(
     const mlx_array a,
     bool keepdims,
     const mlx_stream s);
-int mlx_median(
+int mlx_median_axes(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
     size_t axes_num,
+    bool keepdims,
+    const mlx_stream s);
+int mlx_median_axis(
+    mlx_array* res,
+    const mlx_array a,
+    int axis,
+    bool keepdims,
+    const mlx_stream s);
+int mlx_median(
+    mlx_array* res,
+    const mlx_array a,
     bool keepdims,
     const mlx_stream s);
 int mlx_meshgrid(
@@ -1259,7 +1327,7 @@ int mlx_topk_axis(
     int axis,
     const mlx_stream s);
 int mlx_topk(mlx_array* res, const mlx_array a, int k, const mlx_stream s);
-int mlx_trace(
+int mlx_trace_axes(
     mlx_array* res,
     const mlx_array a,
     int offset,
@@ -1267,6 +1335,7 @@ int mlx_trace(
     int axis2,
     mlx_dtype dtype,
     const mlx_stream s);
+int mlx_trace(mlx_array* res, const mlx_array a, const mlx_stream s);
 int mlx_transpose_axes(
     mlx_array* res,
     const mlx_array a,
@@ -1291,11 +1360,12 @@ int mlx_unflatten(
     const int* shape,
     size_t shape_num,
     const mlx_stream s);
-int mlx_unstack(
+int mlx_unstack_axis(
     mlx_vector_array* res,
     const mlx_array a,
     int axis,
     const mlx_stream s);
+int mlx_unstack(mlx_vector_array* res, const mlx_array a, const mlx_stream s);
 int mlx_var_axes(
     mlx_array* res,
     const mlx_array a,
