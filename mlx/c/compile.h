@@ -38,6 +38,8 @@ typedef enum mlx_compile_mode_ {
 typedef struct mlx_compile_cache_ {
   void* ctx;
 } mlx_compile_cache;
+mlx_compile_cache mlx_compile_cache_new();
+int mlx_compile_cache_free(mlx_compile_cache cache);
 
 int mlx_compile(mlx_closure* res, const mlx_closure fun, bool shapeless);
 int mlx_detail_compile(

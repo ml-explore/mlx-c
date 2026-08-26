@@ -8,6 +8,24 @@
 #include "mlx/c/private/mlx.h"
 #include "mlx/compile_impl.h"
 
+extern "C" mlx_compile_cache mlx_compile_cache_new() {
+  try {
+    return mlx_compile_cache_new_();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+  }
+  return {nullptr};
+}
+extern "C" int mlx_compile_cache_free(mlx_compile_cache cache) {
+  try {
+    mlx_compile_cache_free_(cache);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+
 extern "C" int
 mlx_compile(mlx_closure* res, const mlx_closure fun, bool shapeless) {
   try {

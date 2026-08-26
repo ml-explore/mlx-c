@@ -515,6 +515,31 @@ def mlx_compile(f, implementation):
 typedef struct mlx_compile_cache_ {
   void* ctx;
 } mlx_compile_cache;
+mlx_compile_cache mlx_compile_cache_new();
+int mlx_compile_cache_free(mlx_compile_cache cache);
             """
         )
+    else:
+        print(
+            """\
+extern "C" mlx_compile_cache mlx_compile_cache_new() {
+  try {
+    return mlx_compile_cache_new_();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+  }
+  return {nullptr};
+}
+extern "C" int mlx_compile_cache_free(mlx_compile_cache cache) {
+  try {
+    mlx_compile_cache_free_(cache);
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+}
+            """
+        )
+
     return True
