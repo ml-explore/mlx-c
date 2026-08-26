@@ -443,10 +443,10 @@ types.append(
         "alt": "std::string",
         "c_to_cpp": lambda s: "std::string(" + s + ")",
         "c_arg": lambda s, untyped=False: s if untyped else "const char* " + s,
-        "c_return_arg": lambda s, untyped=False: s if untyped else "const char** " + s,
+        "c_return_arg": lambda s, untyped=False: s if untyped else "mlx_string* " + s,
         # "c_new": lambda s: "char* " + s,
         # "free": lambda s: "",
-        "c_assign_from_cpp": lambda d, s: "*" + d + " = " + s + ".c_str()",
+        "c_assign_from_cpp": lambda d, s: "mlx_string_set_(*" + d + ", " + s + ")",
     }
 )
 
