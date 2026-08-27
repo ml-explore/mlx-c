@@ -106,7 +106,7 @@ def mlx_core(name, defs):
         "zeros_like": ["dtype", ""],
         "ones_like": ["dtype", ""],
         "count_nonzero": ["axis", "axes", ""],
-        "flip": ["axis", "axes", ""],
+        "flip": ["axes", "axis", ""],
         "unstack": ["axis", ""],
         "median": ["axes", "axis", "", None],
         "logcumsumexp": ["axis", ""],

@@ -1478,7 +1478,7 @@ extern "C" int mlx_flatten(
   }
   return 0;
 }
-extern "C" int mlx_flip_axis(
+extern "C" int mlx_flip_axes(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
@@ -1498,7 +1498,7 @@ extern "C" int mlx_flip_axis(
   return 0;
 }
 extern "C" int
-mlx_flip_axes(mlx_array* res, const mlx_array a, int axis, const mlx_stream s) {
+mlx_flip_axis(mlx_array* res, const mlx_array a, int axis, const mlx_stream s) {
   try {
     mlx_array_set_(
         *res, mlx::core::flip(mlx_array_get_(a), axis, mlx_stream_get_(s)));

@@ -475,13 +475,13 @@ int mlx_flatten(
     int start_axis,
     int end_axis,
     const mlx_stream s);
-int mlx_flip_axis(
+int mlx_flip_axes(
     mlx_array* res,
     const mlx_array a,
     const int* axes,
     size_t axes_num,
     const mlx_stream s);
-int mlx_flip_axes(
+int mlx_flip_axis(
     mlx_array* res,
     const mlx_array a,
     int axis,
