@@ -58,11 +58,6 @@ void gpu_info(void) {
   mlx_device_info_free(info);
   mlx_device_free(dev);
 
-  const char* metallib_path = NULL;
-  if (mlx_metal_get_metallib_path(&metallib_path) == 0)
-    printf(
-        "Metal library path: %s\n", metallib_path ? metallib_path : "(null)");
-
   printf("==================================================\n");
 }
 

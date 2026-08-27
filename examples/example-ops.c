@@ -25,14 +25,13 @@ int main(void) {
   mlx_trunc(&res, arr, stream);
   print_array("trunc", res);
 
-  mlx_count_nonzero(&res, arr, 1, false, stream);
+  mlx_count_nonzero_axis(&res, arr, 1, false, stream);
   print_array("count_nonzero (axis=1)", res);
 
   mlx_diff(&res, arr, 1, 1, stream);
   print_array("diff (n=1, axis=1)", res);
 
-  int axes[] = {1};
-  mlx_flip(&res, arr, axes, 1, stream);
+  mlx_flip_axis(&res, arr, 1, stream);
   print_array("flip (axis=1)", res);
 
   float rhs_data[] = {6, 5, 4, 3, 2, 1};
@@ -46,7 +45,7 @@ int main(void) {
   print_array("logical_xor", res);
 
   mlx_vector_array parts = mlx_vector_array_new();
-  mlx_unstack(&parts, arr, 0, stream);
+  mlx_unstack_axis(&parts, arr, 0, stream);
   printf("unstack (axis=0): %zu arrays\n", mlx_vector_array_size(parts));
 
   float square_data[] = {4, 3, 6, 3};
