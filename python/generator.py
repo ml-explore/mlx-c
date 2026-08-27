@@ -82,6 +82,8 @@ def preprocess_header(content):
     """Simple preprocessor that strips MLX_API macro without resolving includes."""
     # Remove MLX_API macro (appears as MLX_API or MLX_API followed by space)
     content = re.sub(r"\bMLX_API\s*", "", content)
+    # Remove thread_local (unsupported by the cxxheaderparser)
+    content = re.sub(r"\bthread_local\s+", "", content)
     return content
 
 

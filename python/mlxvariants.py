@@ -103,6 +103,19 @@ def mlx_core(name, defs):
         "round": ["", None],
         "trace": ["", None, None],
         "export_function": [None, "", "kwargs"],
+        "zeros_like": ["dtype", ""],
+        "ones_like": ["dtype", ""],
+        "count_nonzero": ["axis", "axes", ""],
+        "flip": ["axes", "axis", ""],
+        "unstack": ["axis", ""],
+        "median": ["axes", "axis", "", None],
+        "logcumsumexp": ["axis", ""],
+        "cumsum": ["axis", "", None, None],
+        "cumprod": ["axis", "", None, None],
+        "cummax": ["axis", ""],
+        "cummin": ["axis", ""],
+        "trace": ["axes", None, ""],
+        "linspace": ["endpoint", ""],
     }
     return _make_variant_suffixes(name, defs, variants)
 
@@ -133,6 +146,7 @@ def mlx_core_fast(name, defs):
 def mlx_core_detail(name, defs):
     if name not in [
         "compile",
+        "compile_cache",
         "compile_clear_cache",
         "compile_erase",
         "vmap_replace",

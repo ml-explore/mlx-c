@@ -8,9 +8,27 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 
+extern "C" int mlx_metal_get_metallib_path(mlx_string* res) {
+  try {
+    mlx_string_set_(*res, mlx::core::metal::get_metallib_path());
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_metal_is_available(bool* res) {
   try {
     *res = mlx::core::metal::is_available();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_metal_set_metallib_path(const char* path) {
+  try {
+    mlx::core::metal::set_metallib_path(std::string(path));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;

@@ -60,6 +60,11 @@ for t in [
         "std::function<std::pair<std::vector<mlx::core::array>, std::vector<int>>(std::vector<mlx::core::array>,std::vector<int>)>",
         "std::function<std::pair<std::vector<array>, std::vector<int>>(std::vector<array>,std::vector<int>)>",
     ],
+    [
+        "mlx_compile_cache",
+        "std::weak_ptr<mlx::core::detail::CompileCache>",
+        "CompileCacheWeakPtr",
+    ],
 ]:
     if len(t) == 2:
         ctype, cpptype = t
@@ -438,10 +443,10 @@ types.append(
         "alt": "std::string",
         "c_to_cpp": lambda s: "std::string(" + s + ")",
         "c_arg": lambda s, untyped=False: s if untyped else "const char* " + s,
-        "c_return_arg": lambda s, untyped=False: s if untyped else "char** " + s,
+        "c_return_arg": lambda s, untyped=False: s if untyped else "mlx_string* " + s,
         # "c_new": lambda s: "char* " + s,
         # "free": lambda s: "",
-        "c_assign_from_cpp": lambda d, s: d + " = " + s + ".c_str()",
+        "c_assign_from_cpp": lambda d, s: "mlx_string_set_(*" + d + ", " + s + ")",
     }
 )
 

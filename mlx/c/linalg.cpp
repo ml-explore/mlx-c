@@ -57,6 +57,17 @@ extern "C" int mlx_linalg_cross(
   }
   return 0;
 }
+extern "C" int
+mlx_linalg_det(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res, mlx::core::linalg::det(mlx_array_get_(a), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_linalg_eig(
     mlx_array* res_0,
     mlx_array* res_1,
@@ -252,6 +263,24 @@ extern "C" int mlx_linalg_qr(
     {
       auto [tpl_0, tpl_1] =
           mlx::core::linalg::qr(mlx_array_get_(a), mlx_stream_get_(s));
+      mlx_array_set_(*res_0, tpl_0);
+      mlx_array_set_(*res_1, tpl_1);
+    };
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_linalg_slogdet(
+    mlx_array* res_0,
+    mlx_array* res_1,
+    const mlx_array a,
+    const mlx_stream s) {
+  try {
+    {
+      auto [tpl_0, tpl_1] =
+          mlx::core::linalg::slogdet(mlx_array_get_(a), mlx_stream_get_(s));
       mlx_array_set_(*res_0, tpl_0);
       mlx_array_set_(*res_1, tpl_1);
     };
