@@ -32,7 +32,7 @@ size_t mem_tell(void* desc) {
   mlx_mem_stream* m_desc = desc;
   return m_desc->pos;
 }
-void mem_seek(void* desc, int64_t off, int whence) {
+int mem_seek(void* desc, int64_t off, int whence) {
   printf("SEEK\n");
   mlx_mem_stream* m_desc = desc;
   size_t new_pos;
@@ -48,43 +48,48 @@ void mem_seek(void* desc, int64_t off, int whence) {
       break;
     default:
       m_desc->err = true;
-      return;
+      return -1;
   }
   if (new_pos > m_desc->size) {
     m_desc->err = true;
+    return -1;
   } else {
     m_desc->pos = new_pos;
+    return 0;
   }
 }
-void mem_read(void* desc, char* data, size_t n) {
+size_t mem_read(void* desc, char* data, size_t n) {
   printf("READ %ld\n", n);
   mlx_mem_stream* m_desc = desc;
   if (n + m_desc->pos > m_desc->size) {
     m_desc->err = true;
-    return;
+    return 0;
   }
   memcpy(data, m_desc->data + m_desc->pos, n);
   m_desc->pos += n;
+  return n;
 }
-void mem_read_at_offset(void* desc, char* data, size_t n, size_t off) {
+size_t mem_read_at_offset(void* desc, char* data, size_t n, size_t off) {
   printf("READ@OFFSET %ld @ %ld\n", n, off);
   mlx_mem_stream* m_desc = desc;
   if (off + n > m_desc->size) {
     m_desc->err = true;
-    return;
+    return 0;
   }
   memcpy(data, m_desc->data + off, n);
   m_desc->pos = off;
+  return n;
 }
-void mem_write(void* desc, const char* data, size_t n) {
+size_t mem_write(void* desc, const char* data, size_t n) {
   printf("WRITE %ld\n", n);
   mlx_mem_stream* m_desc = desc;
   if (n + m_desc->pos > m_desc->size) {
     m_desc->err = true;
-    return;
+    return 0;
   }
   memcpy(m_desc->data + m_desc->pos, data, n);
   m_desc->pos += n;
+  return n;
 }
 const char* mem_label(void* desc) {
   printf("LABEL\n");
