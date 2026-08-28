@@ -26,29 +26,45 @@ class CReader : public mlx::core::io::Reader {
   virtual void seek(
       int64_t off,
       std::ios_base::seekdir way = std::ios_base::beg) override {
+    int status = 0;
     switch (way) {
       case std::ios_base::beg:
-        return vtable.seek(desc, off, SEEK_SET);
+        status = vtable.seek(desc, off, SEEK_SET);
         break;
       case std::ios_base::cur:
-        return vtable.seek(desc, off, SEEK_CUR);
+        status = vtable.seek(desc, off, SEEK_CUR);
         break;
       case std::ios_base::end:
-        return vtable.seek(desc, off, SEEK_END);
+        status = vtable.seek(desc, off, SEEK_END);
         break;
       default:
-        throw std::runtime_error("mlx_io_reader: invalid seek way");
+        reader_error("invalid seek way");
+    }
+    if (status < 0) {
+      reader_error("unable to seek");
     }
   }
   virtual void read(char* data, size_t n) override {
-    return vtable.read(desc, data, n);
+    auto read_n = vtable.read(desc, data, n);
+    if (read_n != n) {
+      reader_error(
+          std::format("unable to read {} bytes (read {} instead)", n, read_n));
+    }
   };
   virtual void read(char* data, size_t n, size_t offset) override {
-    return vtable.read_at_offset(desc, data, n, offset);
+    auto read_n = vtable.read_at_offset(desc, data, n, offset);
+    if (read_n != n) {
+      reader_error(
+          std::format("unable to read {} bytes (read {} instead)", n, read_n));
+    }
   };
   virtual std::string label() const override {
     return vtable.label(desc);
   };
+  void reader_error(const std::string& msg) {
+    throw std::runtime_error(
+        std::format("[mlx_io_reader] {} in {}", msg, label()));
+  }
   virtual ~CReader() {
     vtable.free(desc);
   }
@@ -72,26 +88,39 @@ class CWriter : public mlx::core::io::Writer {
   virtual void seek(
       int64_t off,
       std::ios_base::seekdir way = std::ios_base::beg) override {
+    int status = 0;
     switch (way) {
       case std::ios_base::beg:
-        return vtable.seek(desc, off, SEEK_SET);
+        status = vtable.seek(desc, off, SEEK_SET);
         break;
       case std::ios_base::cur:
-        return vtable.seek(desc, off, SEEK_CUR);
+        status = vtable.seek(desc, off, SEEK_CUR);
         break;
       case std::ios_base::end:
-        return vtable.seek(desc, off, SEEK_END);
+        status = vtable.seek(desc, off, SEEK_END);
         break;
       default:
-        throw std::runtime_error("mlx_io_writer: invalid seek way");
+        writer_error("invalid seek way");
+    }
+    if (status < 0) {
+      writer_error("unable to seek");
     }
   }
   virtual void write(const char* data, size_t n) override {
-    return vtable.write(desc, data, n);
+    auto wrote_n = vtable.write(desc, data, n);
+    if (wrote_n != n) {
+      writer_error(
+          std::format(
+              "unable to write {} bytes (wrote {} instead)", n, wrote_n));
+    }
   };
   virtual std::string label() const override {
     return vtable.label(desc);
   };
+  void writer_error(const std::string& msg) {
+    throw std::runtime_error(
+        std::format("[mlx_io_writer] {} in {}", msg, label()));
+  }
   virtual ~CWriter() {
     vtable.free(desc);
   }
