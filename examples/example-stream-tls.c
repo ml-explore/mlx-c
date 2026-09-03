@@ -11,7 +11,7 @@ int main(void) {
 
   mlx_stream_thread_local tls = mlx_stream_thread_local_new(dev);
   if (!tls.ctx)
-    mlx_error("mlx_stream_new_thread_local returned empty");
+    mlx_error("mlx_stream_thread_local_new returned empty");
   printf("thread-local stream created\n");
 
   mlx_stream cur = mlx_stream_new();
