@@ -35,3 +35,7 @@ target_link_libraries(example-thread-stream PUBLIC Threads::Threads)
 
 add_executable(example-ops ${CMAKE_CURRENT_LIST_DIR}/example-ops.c)
 target_link_libraries(example-ops PUBLIC mlxc)
+
+add_executable(example-stream-tls
+              ${CMAKE_CURRENT_LIST_DIR}/example-stream-tls.c)
+target_link_libraries(example-stream-tls PUBLIC mlxc)

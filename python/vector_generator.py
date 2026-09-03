@@ -217,6 +217,7 @@ decl_begin = r"""/* Copyright © 2023-2024 Apple Inc.                   */
 #define MLX_VECTOR_H
 
 #include "mlx/c/array.h"
+#include "mlx/c/stream.h"
 #include "mlx/c/string.h"
 
 #ifdef __cplusplus
@@ -333,6 +334,17 @@ print(
         "char**",
         lambda s: s,
         lambda d, s: "*" + d + " = " + s + ".data()",
+    )
+)
+print(
+    generate(
+        code,
+        "mlx::core::Stream",
+        "const mlx_stream",
+        "stream",
+        "mlx_stream*",
+        lambda s: "mlx_stream_get_(" + s + ")",
+        lambda d, s: "mlx_stream_set_(*" + d + ", " + s + ")",
     )
 )
 print(end)
