@@ -529,3 +529,137 @@ extern "C" size_t mlx_vector_string_size(mlx_vector_string vec) {
     return 0;
   }
 }
+
+extern "C" mlx_vector_stream mlx_vector_stream_new(void) {
+  try {
+    return mlx_vector_stream_new_({});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_stream_new_();
+  }
+}
+
+extern "C" int mlx_vector_stream_set(
+    mlx_vector_stream* vec,
+    const mlx_vector_stream src) {
+  try {
+    mlx_vector_stream_set_(*vec, mlx_vector_stream_get_(src));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_stream_free(mlx_vector_stream vec) {
+  try {
+    mlx_vector_stream_free_(vec);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" mlx_vector_stream mlx_vector_stream_new_data(
+    const mlx_stream* data,
+    size_t size) {
+  try {
+    auto vec = mlx_vector_stream_new();
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_stream_get_(vec).push_back(mlx_stream_get_(data[i]));
+    }
+    return vec;
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_stream_new_();
+  }
+}
+
+extern "C" mlx_vector_stream mlx_vector_stream_new_value(const mlx_stream val) {
+  try {
+    return mlx_vector_stream_new_({mlx_stream_get_(val)});
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return mlx_vector_stream_new_();
+  }
+}
+
+extern "C" int mlx_vector_stream_set_data(
+    mlx_vector_stream* vec_,
+    const mlx_stream* data,
+    size_t size) {
+  try {
+    std::vector<mlx::core::Stream> cpp_arrs;
+    for (size_t i = 0; i < size; i++) {
+      cpp_arrs.push_back(mlx_stream_get_(data[i]));
+    }
+    mlx_vector_stream_set_(*vec_, cpp_arrs);
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_stream_set_value(
+    mlx_vector_stream* vec_,
+    const mlx_stream val) {
+  try {
+    mlx_vector_stream_set_(
+        *vec_, std::vector<mlx::core::Stream>({mlx_stream_get_(val)}));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_stream_append_data(
+    mlx_vector_stream vec,
+    const mlx_stream* data,
+    size_t size) {
+  try {
+    for (size_t i = 0; i < size; i++) {
+      mlx_vector_stream_get_(vec).push_back(mlx_stream_get_(data[i]));
+    }
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_stream_append_value(
+    mlx_vector_stream vec,
+    const mlx_stream value) {
+  try {
+    mlx_vector_stream_get_(vec).push_back(mlx_stream_get_(value));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" int mlx_vector_stream_get(
+    mlx_stream* res,
+    const mlx_vector_stream vec,
+    size_t index) {
+  try {
+    mlx_stream_set_(*res, mlx_vector_stream_get_(vec).at(index));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+
+extern "C" size_t mlx_vector_stream_size(mlx_vector_stream vec) {
+  try {
+    return mlx_vector_stream_get_(vec).size();
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 0;
+  }
+}

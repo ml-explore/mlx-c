@@ -207,4 +207,54 @@ inline void mlx_vector_string_free_(mlx_vector_string d) {
   }
 }
 
+inline mlx_vector_stream mlx_vector_stream_new_() {
+  return mlx_vector_stream({nullptr});
+}
+
+inline mlx_vector_stream mlx_vector_stream_new_(
+    const std::vector<mlx::core::Stream>& s) {
+  return mlx_vector_stream({new std::vector<mlx::core::Stream>(s)});
+}
+
+inline mlx_vector_stream mlx_vector_stream_new_(
+    std::vector<mlx::core::Stream>&& s) {
+  return mlx_vector_stream({new std::vector<mlx::core::Stream>(std::move(s))});
+}
+
+inline mlx_vector_stream& mlx_vector_stream_set_(
+    mlx_vector_stream& d,
+    const std::vector<mlx::core::Stream>& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<mlx::core::Stream>*>(d.ctx) = s;
+  } else {
+    d.ctx = new std::vector<mlx::core::Stream>(s);
+  }
+  return d;
+}
+
+inline mlx_vector_stream& mlx_vector_stream_set_(
+    mlx_vector_stream& d,
+    std::vector<mlx::core::Stream>&& s) {
+  if (d.ctx) {
+    *static_cast<std::vector<mlx::core::Stream>*>(d.ctx) = std::move(s);
+  } else {
+    d.ctx = new std::vector<mlx::core::Stream>(std::move(s));
+  }
+  return d;
+}
+
+inline std::vector<mlx::core::Stream>& mlx_vector_stream_get_(
+    mlx_vector_stream d) {
+  if (!d.ctx) {
+    throw std::runtime_error("expected a non-empty mlx_vector_stream");
+  }
+  return *static_cast<std::vector<mlx::core::Stream>*>(d.ctx);
+}
+
+inline void mlx_vector_stream_free_(mlx_vector_stream d) {
+  if (d.ctx) {
+    delete static_cast<std::vector<mlx::core::Stream>*>(d.ctx);
+  }
+}
+
 #endif
