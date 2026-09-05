@@ -2413,13 +2413,24 @@ extern "C" int mlx_median_axes(
     bool keepdims,
     const mlx_stream s) {
   try {
-    mlx_array_set_(
-        *res,
-        mlx::core::median(
-            mlx_array_get_(a),
-            std::vector<int>(axes, axes + axes_num),
-            keepdims,
-            mlx_stream_get_(s)));
+    if (axes_num == 0) {
+      // axes_num == 0 means "no axis": reduce over every dimension. The axes
+      // overload of mlx::core::median does not accept an empty axes list (it
+      // reaches flatten(start_axis == ndim), which asserts), so route this case
+      // to the full-reduce overload, like the dedicated mlx_median entry point.
+      mlx_array_set_(
+          *res,
+          mlx::core::median(
+              mlx_array_get_(a), keepdims, mlx_stream_get_(s)));
+    } else {
+      mlx_array_set_(
+          *res,
+          mlx::core::median(
+              mlx_array_get_(a),
+              std::vector<int>(axes, axes + axes_num),
+              keepdims,
+              mlx_stream_get_(s)));
+    }
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
