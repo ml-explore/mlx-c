@@ -26,6 +26,17 @@ extern "C" int mlx_get_active_memory(size_t* res) {
   }
   return 0;
 }
+extern "C" int mlx_get_array_buffer_size(
+    size_t* res,
+    const mlx_vector_array arrays) {
+  try {
+    *res = mlx::core::get_array_buffer_size(mlx_vector_array_get_(arrays));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
 extern "C" int mlx_get_cache_memory(size_t* res) {
   try {
     *res = mlx::core::get_cache_memory();
