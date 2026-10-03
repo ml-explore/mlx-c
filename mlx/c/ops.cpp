@@ -7,6 +7,7 @@
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
 #include "mlx/einsum.h"
+#include "mlx/version.h"
 
 extern "C" int mlx_abs(mlx_array* res, const mlx_array a, const mlx_stream s) {
   try {
@@ -1708,6 +1709,9 @@ extern "C" int mlx_gather_qmm(
             (bits.has_value ? std::make_optional<int>(bits.value)
                             : std::nullopt),
             std::string(mode),
+#if MLX_VERSION_NUMERIC >= 32003
+            std::nullopt,
+#endif
             sorted_indices,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {

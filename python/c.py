@@ -75,6 +75,8 @@ def generate(funcs, enums, header, headername, implementation, docstring):
                 print('#include "' + "/".join(parts[mlx_idx:]) + '"')
         print('#include "mlx/c/error.h"')
         print('#include "mlx/c/private/mlx.h"')
+        if headername == "ops":
+            print('#include "mlx/version.h"')
         print()
     else:
         print("#ifndef MLX_" + headername.upper() + "_H")
@@ -188,7 +190,19 @@ extern "C" {
                 break
 
             c_call.append(pti["c_arg"](pni))
-            cpp_call.append(pti["c_to_cpp"](pni))
+            cpp_arg = pti["c_to_cpp"](pni)
+            # Preserve the C signature generated from MLX 0.32.2 when using 0.32.3.
+            if (
+                implementation
+                and func_name == "mlx_gather_qmm"
+                and pni == "sorted_indices"
+                and "global_scale" not in pn
+            ):
+                cpp_arg = (
+                    "\n#if MLX_VERSION_NUMERIC >= 32003\nstd::nullopt,\n#endif\n"
+                    + cpp_arg
+                )
+            cpp_call.append(cpp_arg)
 
         if encountered_unsupported_type:
             print("skipping", f, file=sys.stderr)
