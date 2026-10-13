@@ -1,10 +1,14 @@
 /* Copyright © 2023-2024 Apple Inc. */
 
 #include <cstring>
+#include <memory>
+#include <stdexcept>
+#include <utility>
 
 #include "mlx/c/distributed_group.h"
 #include "mlx/c/error.h"
 #include "mlx/c/private/mlx.h"
+#include "mlx/distributed/distributed.h"
 
 extern "C" mlx_distributed_group mlx_distributed_group_new(void) {
   try {
@@ -84,5 +88,97 @@ extern "C" bool mlx_distributed_is_available(const char* bk) {
   } catch (std::exception& e) {
     mlx_error(e.what());
     return false;
+  }
+}
+
+extern "C" int mlx_distributed_clear_backends(void) {
+  try {
+    mlx::core::distributed::clear_backends();
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error("%s", e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_distributed_group_get_rank(
+    int* res,
+    mlx_distributed_group group) {
+  try {
+    if (!res) {
+      throw std::invalid_argument("rank output must not be null");
+    }
+    *res = mlx_distributed_group_get_(group).rank();
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error("%s", e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_distributed_group_get_size(
+    int* res,
+    mlx_distributed_group group) {
+  try {
+    if (!res) {
+      throw std::invalid_argument("size output must not be null");
+    }
+    *res = mlx_distributed_group_get_(group).size();
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error("%s", e.what());
+    return 1;
+  }
+}
+
+extern "C" int mlx_distributed_init_with_all_gather(
+    mlx_distributed_group* res,
+    bool strict,
+    const char* bk,
+    int (*all_gather)(
+        int rank,
+        int size,
+        const char* src,
+        char* dst,
+        size_t n_bytes,
+        void* payload),
+    void* payload,
+    void (*dtor)(void*)) {
+  try {
+    // Take ownership before validation so failures release the payload.
+    std::shared_ptr<void> owner(payload, [dtor](void* p) {
+      if (dtor) {
+        dtor(p);
+      }
+    });
+
+    if (!res) {
+      throw std::invalid_argument("group output must not be null");
+    }
+    if (!bk || std::strcmp(bk, "jaccl") != 0) {
+      throw std::invalid_argument("all-gather initialization requires 'jaccl'");
+    }
+    if (!all_gather) {
+      throw std::invalid_argument("all-gather callback must not be null");
+    }
+
+    mlx::core::distributed::AllGatherFactory factory =
+        [all_gather, owner](
+            int rank, int size) -> mlx::core::distributed::AllGatherFn {
+      return [all_gather, owner, rank, size](
+                 const char* src, char* dst, size_t n_bytes) {
+        if (all_gather(rank, size, src, dst, n_bytes, owner.get()) != 0) {
+          throw std::runtime_error("all-gather callback returned an error");
+        }
+      };
+    };
+
+    mlx_distributed_group_set_(
+        *res, mlx::core::distributed::init(strict, bk, std::move(factory)));
+
+    return 0;
+  } catch (std::exception& e) {
+    mlx_error("%s", e.what());
+    return 1;
   }
 }
