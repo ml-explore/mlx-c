@@ -6,6 +6,8 @@ import argparse
 import os
 import re
 
+from docextract import HeaderDocs
+
 parser = argparse.ArgumentParser("MLX C bindings generator", add_help=False)
 parser.add_argument("--header", type=str)
 parser.add_argument("--implementation", default=False, action="store_true")
@@ -93,8 +95,14 @@ for header in args.header.split(";"):
         content = f.read()
     content = preprocess_header(content)
     Z = parse_string(content)
+    header_docs = None
+    try:
+        with open(header, "r") as f:
+            header_docs = HeaderDocs(f.read())
+    except OSError:
+        header_docs = None
 
-    def process_namespace(l, namespace, funcs, enums):
+    def process_namespace(l, namespace, funcs, enums, header_docs=None):
         namespace = namespace.lstrip("::")
         for e in l.enums:
             name = getname(e.typename)
@@ -127,6 +135,12 @@ for header in args.header.split(";"):
                 "namespace": namespace,
                 "params_default": params_default,
             }
+            if header_docs is not None:
+                doc = header_docs.take(
+                    namespace + "::" + name, namespace, name, len(params_t)
+                )
+                if doc is not None:
+                    func["doc"] = doc
             ns_name = namespace + "::" + name
             if ns_name in funcs:
                 funcs[ns_name].append(func)
@@ -139,9 +153,10 @@ for header in args.header.split(";"):
                 namespace + "::" + subnamespace,
                 funcs,
                 enums,
+                header_docs,
             )
 
-    process_namespace(Z.namespace, "", funcs, enums)
+    process_namespace(Z.namespace, "", funcs, enums, header_docs)
 
 if args.language == "C":
     from c import generate
