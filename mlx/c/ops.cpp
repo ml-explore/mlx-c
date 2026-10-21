@@ -1687,6 +1687,7 @@ extern "C" int mlx_gather_qmm(
     mlx_optional_int group_size,
     mlx_optional_int bits,
     const char* mode,
+    const mlx_array global_scale /* may be null */,
     bool sorted_indices,
     const mlx_stream s) {
   try {
@@ -1708,6 +1709,8 @@ extern "C" int mlx_gather_qmm(
             (bits.has_value ? std::make_optional<int>(bits.value)
                             : std::nullopt),
             std::string(mode),
+            (global_scale.ctx ? std::make_optional(mlx_array_get_(global_scale))
+                              : std::nullopt),
             sorted_indices,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
@@ -2287,6 +2290,18 @@ extern "C" int mlx_matmul(
         *res,
         mlx::core::matmul(
             mlx_array_get_(a), mlx_array_get_(b), mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int
+mlx_matrix_transpose(mlx_array* res, const mlx_array a, const mlx_stream s) {
+  try {
+    mlx_array_set_(
+        *res,
+        mlx::core::matrix_transpose(mlx_array_get_(a), mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
     return 1;
@@ -4372,6 +4387,33 @@ extern "C" int mlx_unflatten(
             mlx_array_get_(a),
             axis,
             mlx::core::Shape(shape, shape + shape_num),
+            mlx_stream_get_(s)));
+  } catch (std::exception& e) {
+    mlx_error(e.what());
+    return 1;
+  }
+  return 0;
+}
+extern "C" int mlx_unique(
+    mlx_vector_array* res,
+    const mlx_array a,
+    int size,
+    bool return_index,
+    bool return_inverse,
+    bool return_counts,
+    const mlx_array fill_value /* may be null */,
+    const mlx_stream s) {
+  try {
+    mlx_vector_array_set_(
+        *res,
+        mlx::core::unique(
+            mlx_array_get_(a),
+            size,
+            return_index,
+            return_inverse,
+            return_counts,
+            (fill_value.ctx ? std::make_optional(mlx_array_get_(fill_value))
+                            : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
     mlx_error(e.what());
