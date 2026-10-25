@@ -12,7 +12,7 @@ extern "C" mlx_string mlx_string_new_data(const char* str) {
   try {
     return mlx_string_new_(str);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_string_new_();
   }
 }
@@ -21,7 +21,7 @@ extern "C" int mlx_string_set(mlx_string* str, const mlx_string src) {
   try {
     mlx_string_set_(*str, mlx_string_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -31,7 +31,7 @@ extern "C" const char* mlx_string_data(mlx_string str) {
   try {
     return mlx_string_get_(str).c_str();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return nullptr;
   }
 }
@@ -40,7 +40,7 @@ extern "C" int mlx_string_free(mlx_string str) {
   try {
     mlx_string_free_(str);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

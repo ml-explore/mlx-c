@@ -8,7 +8,7 @@ extern "C" int mlx_version(mlx_string* str_) {
     mlx_string_set_(*str_, mlx::core::version());
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }

@@ -12,7 +12,7 @@ extern "C" int mlx_metal_get_metallib_path(mlx_string* res) {
   try {
     mlx_string_set_(*res, mlx::core::metal::get_metallib_path());
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -21,7 +21,7 @@ extern "C" int mlx_metal_is_available(bool* res) {
   try {
     *res = mlx::core::metal::is_available();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -30,7 +30,7 @@ extern "C" int mlx_metal_set_metallib_path(const char* path) {
   try {
     mlx::core::metal::set_metallib_path(std::string(path));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -39,7 +39,7 @@ extern "C" int mlx_metal_start_capture(const char* path) {
   try {
     mlx::core::metal::start_capture(std::string(path));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -48,7 +48,7 @@ extern "C" int mlx_metal_stop_capture(void) {
   try {
     mlx::core::metal::stop_capture();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

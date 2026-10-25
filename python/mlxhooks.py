@@ -36,7 +36,7 @@ extern "C" mlx_fast_custom_kernel_config mlx_fast_custom_kernel_config_new(void)
   try {
     return mlx_fast_custom_kernel_config_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -57,7 +57,7 @@ extern "C" int mlx_fast_custom_kernel_config_add_output_arg(
     mlx_fast_custom_kernel_config_get_(cls).output_dtypes.push_back(
         mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -71,7 +71,7 @@ extern "C" int mlx_fast_custom_kernel_config_set_grid(
     mlx_fast_custom_kernel_config_get_(cls).grid =
         std::make_tuple(grid1, grid2, grid3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -85,7 +85,7 @@ extern "C" int mlx_fast_custom_kernel_config_set_thread_group(
     mlx_fast_custom_kernel_config_get_(cls).thread_group =
         std::make_tuple(thread1, thread2, thread3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -96,7 +96,7 @@ extern "C" int mlx_fast_custom_kernel_config_set_init_value(
   try {
     mlx_fast_custom_kernel_config_get_(cls).init_value = value;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -107,7 +107,7 @@ extern "C" int mlx_fast_custom_kernel_config_set_verbose(
   try {
     mlx_fast_custom_kernel_config_get_(cls).verbose = verbose;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -120,7 +120,7 @@ extern "C" int mlx_fast_custom_kernel_config_add_template_arg_dtype(
     mlx_fast_custom_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -133,7 +133,7 @@ extern "C" int mlx_fast_custom_kernel_config_add_template_arg_int(
     mlx_fast_custom_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -146,7 +146,7 @@ extern "C" int mlx_fast_custom_kernel_config_add_template_arg_bool(
     mlx_fast_custom_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -200,7 +200,7 @@ extern "C" int mlx_fast_custom_kernel_apply(
             config_ctx.verbose,
             mlx_stream_get_(stream)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -316,7 +316,7 @@ extern "C" mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
         ensure_row_contiguous,
         shared_memory);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -375,7 +375,7 @@ extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
         ensure_row_contiguous,
         atomic_outputs);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -410,7 +410,7 @@ extern "C" int mlx_load_gguf(mlx_io_gguf* gguf, const char* file, const mlx_stre
     mlx_io_gguf_set_(*gguf, std::move(cpp_gguf));
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }"""
@@ -432,7 +432,7 @@ extern "C" int mlx_save_gguf(const char* file, mlx_io_gguf gguf) {
         mlx::core::save_gguf(file, cpp_gguf.first, cpp_gguf.second);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }"""
@@ -466,7 +466,7 @@ extern "C" mlx_node_namer mlx_node_namer_new() {
   try {
     return mlx_node_namer_new_(mlx::core::NodeNamer());
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -475,7 +475,7 @@ extern "C" int mlx_node_namer_free(mlx_node_namer namer) {
     mlx_node_namer_free_(namer);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -487,7 +487,7 @@ extern "C" int mlx_node_namer_set_name(
     mlx_node_namer_get_(namer).set_name(mlx_array_get_(arr), name);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -499,7 +499,7 @@ extern "C" int mlx_node_namer_get_name(
     *name = mlx_node_namer_get_(namer).get_name(mlx_array_get_(arr)).c_str();
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }"""
@@ -526,7 +526,7 @@ extern "C" mlx_compile_cache mlx_compile_cache_new() {
   try {
     return mlx_compile_cache_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -535,7 +535,7 @@ extern "C" int mlx_compile_cache_free(mlx_compile_cache cache) {
     mlx_compile_cache_free_(cache);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }

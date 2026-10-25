@@ -12,7 +12,7 @@ extern "C" int mlx_async_eval(const mlx_vector_array outputs) {
   try {
     mlx::core::async_eval(mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -21,7 +21,7 @@ extern "C" int mlx_checkpoint(mlx_closure* res, const mlx_closure fun) {
   try {
     mlx_closure_set_(*res, mlx::core::checkpoint(mlx_closure_get_(fun)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -46,7 +46,7 @@ extern "C" int mlx_custom_function(
                  ? std::make_optional(mlx_closure_custom_vmap_get_(fun_vmap))
                  : std::nullopt)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -61,7 +61,7 @@ extern "C" int mlx_custom_vjp(
         mlx::core::custom_vjp(
             mlx_closure_get_(fun), mlx_closure_custom_get_(fun_vjp)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -70,7 +70,7 @@ extern "C" int mlx_eval(const mlx_vector_array outputs) {
   try {
     mlx::core::eval(mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -91,7 +91,7 @@ extern "C" int mlx_jvp(
       mlx_vector_array_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -108,7 +108,7 @@ extern "C" int mlx_value_and_grad(
             mlx_closure_get_(fun),
             std::vector<int>(argnums, argnums + argnums_num)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -129,7 +129,7 @@ extern "C" int mlx_vjp(
       mlx_vector_array_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

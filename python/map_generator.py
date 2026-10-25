@@ -88,7 +88,7 @@ extern "C" mlx_map_SCTYPE1_to_SCTYPE2 mlx_map_SCTYPE1_to_SCTYPE2_new(void) {
   try {
     return mlx_map_SCTYPE1_to_SCTYPE2_new_({});
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_SCTYPE1_to_SCTYPE2_new_();
   }
 }
@@ -99,7 +99,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_set(
   try {
     mlx_map_SCTYPE1_to_SCTYPE2_set_(*map, mlx_map_SCTYPE1_to_SCTYPE2_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -109,7 +109,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_free(mlx_map_SCTYPE1_to_SCTYPE2 map) {
   try {
     mlx_map_SCTYPE1_to_SCTYPE2_free_(map);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -123,7 +123,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_insert(
     mlx_map_SCTYPE1_to_SCTYPE2_get_(map).insert_or_assign(
         CTYPE1_TO_CPP(key), CTYPE2_TO_CPP(value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -142,7 +142,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_get(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -156,7 +156,7 @@ mlx_map_SCTYPE1_to_SCTYPE2_iterator_new(mlx_map_SCTYPE1_to_SCTYPE2 map) {
         new std::unordered_map<CPPTYPE1, CPPTYPE2>::iterator(cpp_map.begin()),
         &cpp_map};
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_SCTYPE1_to_SCTYPE2_iterator{0};
   }
 }
@@ -178,7 +178,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_next(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -188,7 +188,7 @@ extern "C" int mlx_map_SCTYPE1_to_SCTYPE2_iterator_free(
   try {
     mlx_map_SCTYPE1_to_SCTYPE2_iterator_free_(it);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

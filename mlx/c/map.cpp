@@ -11,7 +11,7 @@ extern "C" mlx_map_string_to_array mlx_map_string_to_array_new(void) {
   try {
     return mlx_map_string_to_array_new_({});
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_string_to_array_new_();
   }
 }
@@ -22,7 +22,7 @@ extern "C" int mlx_map_string_to_array_set(
   try {
     mlx_map_string_to_array_set_(*map, mlx_map_string_to_array_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -32,7 +32,7 @@ extern "C" int mlx_map_string_to_array_free(mlx_map_string_to_array map) {
   try {
     mlx_map_string_to_array_free_(map);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -46,7 +46,7 @@ extern "C" int mlx_map_string_to_array_insert(
     mlx_map_string_to_array_get_(map).insert_or_assign(
         std::string(key), mlx_array_get_(value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -65,7 +65,7 @@ extern "C" int mlx_map_string_to_array_get(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -80,7 +80,7 @@ mlx_map_string_to_array_iterator_new(mlx_map_string_to_array map) {
             cpp_map.begin()),
         &cpp_map};
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_string_to_array_iterator{0};
   }
 }
@@ -100,7 +100,7 @@ extern "C" int mlx_map_string_to_array_iterator_next(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -110,7 +110,7 @@ extern "C" int mlx_map_string_to_array_iterator_free(
   try {
     mlx_map_string_to_array_iterator_free_(it);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -120,7 +120,7 @@ extern "C" mlx_map_string_to_string mlx_map_string_to_string_new(void) {
   try {
     return mlx_map_string_to_string_new_({});
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_string_to_string_new_();
   }
 }
@@ -131,7 +131,7 @@ extern "C" int mlx_map_string_to_string_set(
   try {
     mlx_map_string_to_string_set_(*map, mlx_map_string_to_string_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -141,7 +141,7 @@ extern "C" int mlx_map_string_to_string_free(mlx_map_string_to_string map) {
   try {
     mlx_map_string_to_string_free_(map);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -155,7 +155,7 @@ extern "C" int mlx_map_string_to_string_insert(
     mlx_map_string_to_string_get_(map).insert_or_assign(
         std::string(key), std::string(value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -174,7 +174,7 @@ extern "C" int mlx_map_string_to_string_get(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -189,7 +189,7 @@ mlx_map_string_to_string_iterator_new(mlx_map_string_to_string map) {
             cpp_map.begin()),
         &cpp_map};
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_map_string_to_string_iterator{0};
   }
 }
@@ -209,7 +209,7 @@ extern "C" int mlx_map_string_to_string_iterator_next(
       return 0;
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -219,7 +219,7 @@ extern "C" int mlx_map_string_to_string_iterator_free(
   try {
     mlx_map_string_to_string_iterator_free_(it);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

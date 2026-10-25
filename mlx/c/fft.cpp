@@ -25,7 +25,7 @@ extern "C" int mlx_fft_fft(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -49,7 +49,7 @@ extern "C" int mlx_fft_fft2(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -59,7 +59,7 @@ mlx_fft_fftfreq(mlx_array* res, int n, double d, const mlx_stream s) {
   try {
     mlx_array_set_(*res, mlx::core::fft::fftfreq(n, d, mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -83,7 +83,7 @@ extern "C" int mlx_fft_fftn(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -102,7 +102,7 @@ extern "C" int mlx_fft_fftshift(
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -124,7 +124,7 @@ extern "C" int mlx_fft_ifft(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -148,7 +148,7 @@ extern "C" int mlx_fft_ifft2(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -172,7 +172,7 @@ extern "C" int mlx_fft_ifftn(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -191,7 +191,7 @@ extern "C" int mlx_fft_ifftshift(
             std::vector<int>(axes, axes + axes_num),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -213,7 +213,7 @@ extern "C" int mlx_fft_irfft(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -237,7 +237,7 @@ extern "C" int mlx_fft_irfft2(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -261,7 +261,7 @@ extern "C" int mlx_fft_irfftn(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -283,7 +283,7 @@ extern "C" int mlx_fft_rfft(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -307,7 +307,7 @@ extern "C" int mlx_fft_rfft2(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -317,7 +317,7 @@ mlx_fft_rfftfreq(mlx_array* res, int n, double d, const mlx_stream s) {
   try {
     mlx_array_set_(*res, mlx::core::fft::rfftfreq(n, d, mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -341,7 +341,7 @@ extern "C" int mlx_fft_rfftn(
             mlx_fft_norm_to_cpp(norm),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

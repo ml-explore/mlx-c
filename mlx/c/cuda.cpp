@@ -12,7 +12,7 @@ extern "C" int mlx_cuda_is_available(bool* res) {
   try {
     *res = mlx::core::cu::is_available();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

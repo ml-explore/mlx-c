@@ -14,7 +14,7 @@ extern "C" int mlx_device_tostring(mlx_string* str_, mlx_device dev) {
     mlx_string_set_(*str_, str);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -28,7 +28,7 @@ extern "C" mlx_device mlx_device_new_type(mlx_device_type type, int index) {
     auto cpp_type = mlx_device_type_to_cpp(type);
     return mlx_device_new_(mlx::core::Device(cpp_type, index));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_device_new_();
   }
 }
@@ -37,7 +37,7 @@ extern "C" int mlx_device_set(mlx_device* dev, const mlx_device src) {
   try {
     mlx_device_set_(*dev, mlx_device_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -47,7 +47,7 @@ extern "C" int mlx_device_get_index(int* index, mlx_device dev) {
   try {
     *index = mlx_device_get_(dev).index;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -57,7 +57,7 @@ extern "C" int mlx_device_get_type(mlx_device_type* type, mlx_device dev) {
   try {
     *type = mlx_device_type_to_c(mlx_device_get_(dev).type);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -72,7 +72,7 @@ extern "C" int mlx_get_default_device(mlx_device* dev) {
     mlx_device_set_(*dev, mlx::core::default_device());
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -81,7 +81,7 @@ extern "C" int mlx_set_default_device(mlx_device dev) {
   try {
     mlx::core::set_default_device(mlx_device_get_(dev));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -91,7 +91,7 @@ extern "C" int mlx_device_free(mlx_device dev) {
   try {
     mlx_device_free_(dev);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -102,7 +102,7 @@ extern "C" int mlx_device_is_available(bool* avail, mlx_device dev) {
     *avail = mlx::core::is_available(mlx_device_get_(dev));
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -113,7 +113,7 @@ extern "C" int mlx_device_count(int* count, mlx_device_type type) {
     *count = mlx::core::device_count(cpp_type);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -128,7 +128,7 @@ extern "C" int mlx_device_info_get(mlx_device_info* info, mlx_device dev) {
     mlx_device_info_set_(*info, cpp_info);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -138,7 +138,7 @@ extern "C" int mlx_device_info_free(mlx_device_info info) {
     mlx_device_info_free_(info);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -150,7 +150,7 @@ mlx_device_info_has_key(bool* exists, mlx_device_info info, const char* key) {
     *exists = cpp_info.find(key) != cpp_info.end();
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -168,7 +168,7 @@ extern "C" int mlx_device_info_is_string(
     *is_string = std::holds_alternative<std::string>(it->second);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -189,7 +189,7 @@ extern "C" int mlx_device_info_get_string(
     *value = std::get<std::string>(it->second).c_str();
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -208,7 +208,7 @@ mlx_device_info_get_size(size_t* value, mlx_device_info info, const char* key) {
     *value = std::get<size_t>(it->second);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -226,7 +226,7 @@ extern "C" int mlx_device_info_get_keys(
     mlx_vector_string_set_(*keys, std::move(key_vec));
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }

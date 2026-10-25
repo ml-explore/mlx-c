@@ -22,7 +22,7 @@ extern "C" int mlx_distributed_all_gather(
                        : std::nullopt),
             mlx_stream_get_(S)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -41,7 +41,7 @@ extern "C" int mlx_distributed_all_max(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -60,7 +60,7 @@ extern "C" int mlx_distributed_all_min(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -79,7 +79,7 @@ extern "C" int mlx_distributed_all_sum(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -103,7 +103,7 @@ extern "C" int mlx_distributed_recv(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -124,7 +124,7 @@ extern "C" int mlx_distributed_recv_like(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -145,7 +145,7 @@ extern "C" int mlx_distributed_send(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -164,7 +164,7 @@ extern "C" int mlx_distributed_sum_scatter(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

@@ -21,7 +21,7 @@ extern "C" int mlx_fast_cross_entropy(
             mlx_array_get_(targets),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -61,7 +61,7 @@ extern "C" mlx_fast_cuda_kernel_config mlx_fast_cuda_kernel_config_new(void) {
   try {
     return mlx_fast_cuda_kernel_config_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -82,7 +82,7 @@ extern "C" int mlx_fast_cuda_kernel_config_add_output_arg(
     mlx_fast_cuda_kernel_config_get_(cls).output_dtypes.push_back(
         mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -96,7 +96,7 @@ extern "C" int mlx_fast_cuda_kernel_config_set_grid(
     mlx_fast_cuda_kernel_config_get_(cls).grid =
         std::make_tuple(grid1, grid2, grid3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -110,7 +110,7 @@ extern "C" int mlx_fast_cuda_kernel_config_set_thread_group(
     mlx_fast_cuda_kernel_config_get_(cls).thread_group =
         std::make_tuple(thread1, thread2, thread3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -121,7 +121,7 @@ extern "C" int mlx_fast_cuda_kernel_config_set_init_value(
   try {
     mlx_fast_cuda_kernel_config_get_(cls).init_value = value;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -132,7 +132,7 @@ extern "C" int mlx_fast_cuda_kernel_config_set_verbose(
   try {
     mlx_fast_cuda_kernel_config_get_(cls).verbose = verbose;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -145,7 +145,7 @@ extern "C" int mlx_fast_cuda_kernel_config_add_template_arg_dtype(
     mlx_fast_cuda_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -158,7 +158,7 @@ extern "C" int mlx_fast_cuda_kernel_config_add_template_arg_int(
     mlx_fast_cuda_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -171,7 +171,7 @@ extern "C" int mlx_fast_cuda_kernel_config_add_template_arg_bool(
     mlx_fast_cuda_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -220,7 +220,7 @@ extern "C" mlx_fast_cuda_kernel mlx_fast_cuda_kernel_new(
         ensure_row_contiguous,
         shared_memory);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -264,7 +264,7 @@ extern "C" int mlx_fast_cuda_kernel_apply(
             config_ctx.verbose,
             mlx_stream_get_(stream)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -296,7 +296,7 @@ extern "C" int mlx_fast_gated_delta_update(
                       : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -320,7 +320,7 @@ extern "C" int mlx_fast_layer_norm(
             eps,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -361,7 +361,7 @@ extern "C" mlx_fast_metal_kernel_config mlx_fast_metal_kernel_config_new(void) {
   try {
     return mlx_fast_metal_kernel_config_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -382,7 +382,7 @@ extern "C" int mlx_fast_metal_kernel_config_add_output_arg(
     mlx_fast_metal_kernel_config_get_(cls).output_dtypes.push_back(
         mlx_dtype_to_cpp(dtype));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -396,7 +396,7 @@ extern "C" int mlx_fast_metal_kernel_config_set_grid(
     mlx_fast_metal_kernel_config_get_(cls).grid =
         std::make_tuple(grid1, grid2, grid3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -410,7 +410,7 @@ extern "C" int mlx_fast_metal_kernel_config_set_thread_group(
     mlx_fast_metal_kernel_config_get_(cls).thread_group =
         std::make_tuple(thread1, thread2, thread3);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -421,7 +421,7 @@ extern "C" int mlx_fast_metal_kernel_config_set_init_value(
   try {
     mlx_fast_metal_kernel_config_get_(cls).init_value = value;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -432,7 +432,7 @@ extern "C" int mlx_fast_metal_kernel_config_set_verbose(
   try {
     mlx_fast_metal_kernel_config_get_(cls).verbose = verbose;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -445,7 +445,7 @@ extern "C" int mlx_fast_metal_kernel_config_add_template_arg_dtype(
     mlx_fast_metal_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), mlx_dtype_to_cpp(dtype)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -458,7 +458,7 @@ extern "C" int mlx_fast_metal_kernel_config_add_template_arg_int(
     mlx_fast_metal_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -471,7 +471,7 @@ extern "C" int mlx_fast_metal_kernel_config_add_template_arg_bool(
     mlx_fast_metal_kernel_config_get_(cls).template_args.push_back(
         std::make_pair(std::string(name), value));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -520,7 +520,7 @@ extern "C" mlx_fast_metal_kernel mlx_fast_metal_kernel_new(
         ensure_row_contiguous,
         atomic_outputs);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -564,7 +564,7 @@ extern "C" int mlx_fast_metal_kernel_apply(
             config_ctx.verbose,
             mlx_stream_get_(stream)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -586,7 +586,7 @@ extern "C" int mlx_fast_rms_norm(
             eps,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -616,7 +616,7 @@ extern "C" int mlx_fast_rope(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -646,7 +646,7 @@ extern "C" int mlx_fast_rope_dynamic(
                        : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -678,7 +678,7 @@ extern "C" int mlx_fast_scaled_dot_product_attention(
             force_fused,
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

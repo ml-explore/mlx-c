@@ -11,7 +11,7 @@ extern "C" mlx_closure mlx_closure_new(void) {
   try {
     return mlx_closure_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_new_();
   }
 }
@@ -20,7 +20,7 @@ extern "C" int mlx_closure_set(mlx_closure* cls, const mlx_closure src) {
   try {
     mlx_closure_set_(*cls, mlx_closure_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -31,7 +31,7 @@ extern "C" int mlx_closure_free(mlx_closure cls) {
     mlx_closure_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -55,7 +55,7 @@ extern "C" mlx_closure mlx_closure_new_func(
     };
     return mlx_closure_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_new_();
   }
 }
@@ -88,7 +88,7 @@ extern "C" mlx_closure mlx_closure_new_func_payload(
         };
     return mlx_closure_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_new_();
   }
 }
@@ -101,7 +101,7 @@ extern "C" int mlx_closure_apply(
     mlx_vector_array_set_(
         *res, mlx_closure_get_(cls)(mlx_vector_array_get_(input)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -128,7 +128,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
     };
     return mlx_closure_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_new_();
   }
 }
@@ -137,7 +137,7 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new(void) {
   try {
     return mlx_closure_kwargs_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_kwargs_new_();
   }
 }
@@ -148,7 +148,7 @@ extern "C" int mlx_closure_kwargs_set(
   try {
     mlx_closure_kwargs_set_(*cls, mlx_closure_kwargs_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -159,7 +159,7 @@ extern "C" int mlx_closure_kwargs_free(mlx_closure_kwargs cls) {
     mlx_closure_kwargs_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -194,7 +194,7 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func(
         };
     return mlx_closure_kwargs_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_kwargs_new_();
   }
 }
@@ -238,7 +238,7 @@ extern "C" mlx_closure_kwargs mlx_closure_kwargs_new_func_payload(
         };
     return mlx_closure_kwargs_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_kwargs_new_();
   }
 }
@@ -255,7 +255,7 @@ extern "C" int mlx_closure_kwargs_apply(
             mlx_vector_array_get_(input_0),
             mlx_map_string_to_array_get_(input_1)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -265,7 +265,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new(void) {
   try {
     return mlx_closure_value_and_grad_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_value_and_grad_new_();
   }
 }
@@ -276,7 +276,7 @@ extern "C" int mlx_closure_value_and_grad_set(
   try {
     mlx_closure_value_and_grad_set_(*cls, mlx_closure_value_and_grad_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -287,7 +287,7 @@ extern "C" int mlx_closure_value_and_grad_free(mlx_closure_value_and_grad cls) {
     mlx_closure_value_and_grad_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -319,7 +319,7 @@ extern "C" mlx_closure_value_and_grad mlx_closure_value_and_grad_new_func(
     };
     return mlx_closure_value_and_grad_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_value_and_grad_new_();
   }
 }
@@ -365,7 +365,7 @@ mlx_closure_value_and_grad_new_func_payload(
         };
     return mlx_closure_value_and_grad_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_value_and_grad_new_();
   }
 }
@@ -383,7 +383,7 @@ extern "C" int mlx_closure_value_and_grad_apply(
       mlx_vector_array_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -393,7 +393,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new(void) {
   try {
     return mlx_closure_custom_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_new_();
   }
 }
@@ -404,7 +404,7 @@ extern "C" int mlx_closure_custom_set(
   try {
     mlx_closure_custom_set_(*cls, mlx_closure_custom_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -415,7 +415,7 @@ extern "C" int mlx_closure_custom_free(mlx_closure_custom cls) {
     mlx_closure_custom_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -453,7 +453,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func(
     };
     return mlx_closure_custom_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_new_();
   }
 }
@@ -500,7 +500,7 @@ extern "C" mlx_closure_custom mlx_closure_custom_new_func_payload(
     };
     return mlx_closure_custom_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_new_();
   }
 }
@@ -519,7 +519,7 @@ extern "C" int mlx_closure_custom_apply(
             mlx_vector_array_get_(input_1),
             mlx_vector_array_get_(input_2)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -529,7 +529,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new(void) {
   try {
     return mlx_closure_custom_jvp_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_jvp_new_();
   }
 }
@@ -540,7 +540,7 @@ extern "C" int mlx_closure_custom_jvp_set(
   try {
     mlx_closure_custom_jvp_set_(*cls, mlx_closure_custom_jvp_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -551,7 +551,7 @@ extern "C" int mlx_closure_custom_jvp_free(mlx_closure_custom_jvp cls) {
     mlx_closure_custom_jvp_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -592,7 +592,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func(
     };
     return mlx_closure_custom_jvp_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_jvp_new_();
   }
 }
@@ -643,7 +643,7 @@ extern "C" mlx_closure_custom_jvp mlx_closure_custom_jvp_new_func_payload(
     };
     return mlx_closure_custom_jvp_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_jvp_new_();
   }
 }
@@ -663,7 +663,7 @@ extern "C" int mlx_closure_custom_jvp_apply(
             mlx_vector_array_get_(input_1),
             std::vector<int>(input_2, input_2 + input_2_num)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -673,7 +673,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new(void) {
   try {
     return mlx_closure_custom_vmap_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_vmap_new_();
   }
 }
@@ -684,7 +684,7 @@ extern "C" int mlx_closure_custom_vmap_set(
   try {
     mlx_closure_custom_vmap_set_(*cls, mlx_closure_custom_vmap_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -695,7 +695,7 @@ extern "C" int mlx_closure_custom_vmap_free(mlx_closure_custom_vmap cls) {
     mlx_closure_custom_vmap_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -739,7 +739,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func(
     };
     return mlx_closure_custom_vmap_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_vmap_new_();
   }
 }
@@ -793,7 +793,7 @@ extern "C" mlx_closure_custom_vmap mlx_closure_custom_vmap_new_func_payload(
     };
     return mlx_closure_custom_vmap_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_custom_vmap_new_();
   }
 }
@@ -814,7 +814,7 @@ extern "C" int mlx_closure_custom_vmap_apply(
       mlx_vector_int_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

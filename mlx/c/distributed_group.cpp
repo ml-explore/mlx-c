@@ -10,7 +10,7 @@ extern "C" mlx_distributed_group mlx_distributed_group_new(void) {
   try {
     return mlx_distributed_group_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return {nullptr};
   }
 }
@@ -19,7 +19,7 @@ extern "C" int mlx_distributed_group_free(mlx_distributed_group group) {
   try {
     mlx_distributed_group_free_(group);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -36,7 +36,7 @@ mlx_distributed_init(mlx_distributed_group* res, bool strict, const char* bk) {
     }
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -45,7 +45,7 @@ extern "C" int mlx_distributed_group_rank(mlx_distributed_group group) {
   try {
     return mlx_distributed_group_get_(group).rank();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 0;
   }
 }
@@ -54,7 +54,7 @@ extern "C" int mlx_distributed_group_size(mlx_distributed_group group) {
   try {
     return mlx_distributed_group_get_(group).size();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 0;
   }
 }
@@ -69,7 +69,7 @@ extern "C" int mlx_distributed_group_split(
         *res, mlx_distributed_group_get_(group).split(color, key));
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -82,7 +82,7 @@ extern "C" bool mlx_distributed_is_available(const char* bk) {
       return mlx::core::distributed::is_available();
     }
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return false;
   }
 }
