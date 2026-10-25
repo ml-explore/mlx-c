@@ -122,7 +122,7 @@ extern "C" NAME NAME_new(void) {
   try {
     return NAME_new_();
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return NAME_new_();
   }
 }
@@ -131,7 +131,7 @@ extern "C" int NAME_set(NAME *cls, const NAME src) {
   try {
     NAME_set_(*cls, NAME_get_(src));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -142,7 +142,7 @@ extern "C" int NAME_free(NAME cls) {
     NAME_free_(cls);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -164,7 +164,7 @@ extern "C" NAME NAME_new_func(int (*fun)(RCARGS_UNNAMED, CARGS_UNNAMED)) {
     };
     return NAME_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return NAME_new_();
   }
 }
@@ -195,7 +195,7 @@ extern "C" NAME NAME_new_func_payload(
     };
     return NAME_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return NAME_new_();
   }
 }
@@ -204,7 +204,7 @@ extern "C" int NAME_apply(RCARGS, NAME cls, CARGS) {
   try {
     ASSIGN_CLS_TO_RCARGS
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -325,7 +325,7 @@ extern "C" mlx_closure mlx_closure_new_unary(
     };
     return mlx_closure_new_(cpp_closure);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return mlx_closure_new_();
   }
 }

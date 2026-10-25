@@ -15,7 +15,7 @@ extern "C" int mlx_export_function(
         mlx_vector_array_get_(args),
         shapeless);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -34,7 +34,7 @@ extern "C" int mlx_export_function_kwargs(
         mlx_map_string_to_array_get_(kwargs),
         shapeless);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -49,7 +49,7 @@ extern "C" mlx_function_exporter mlx_function_exporter_new(
         mlx::core::exporter(
             std::string(file), mlx_closure_get_(fun), shapeless));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return {nullptr};
   }
 }
@@ -57,7 +57,7 @@ extern "C" int mlx_function_exporter_free(mlx_function_exporter xfunc) {
   try {
     mlx_function_exporter_free_(xfunc);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -69,7 +69,7 @@ extern "C" int mlx_function_exporter_apply(
   try {
     mlx_function_exporter_get_(xfunc)(mlx_vector_array_get_(args));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -83,7 +83,7 @@ extern "C" int mlx_function_exporter_apply_kwargs(
     mlx_function_exporter_get_(xfunc)(
         mlx_vector_array_get_(args), mlx_map_string_to_array_get_(kwargs));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -93,7 +93,7 @@ extern "C" mlx_imported_function mlx_imported_function_new(const char* file) {
     return mlx_imported_function_new_(
         mlx::core::import_function(std::string(file)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return {nullptr};
   }
 }
@@ -101,7 +101,7 @@ extern "C" int mlx_imported_function_free(mlx_imported_function xfunc) {
   try {
     mlx_imported_function_free_(xfunc);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -114,7 +114,7 @@ extern "C" int mlx_imported_function_apply(
     mlx_vector_array_set_(
         *res, mlx_imported_function_get_(xfunc)(mlx_vector_array_get_(args)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -130,7 +130,7 @@ extern "C" int mlx_imported_function_apply_kwargs(
         mlx_imported_function_get_(xfunc)(
             mlx_vector_array_get_(args), mlx_map_string_to_array_get_(kwargs)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

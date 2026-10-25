@@ -27,7 +27,7 @@ extern "C" int mlx_detail_vmap_replace(
             std::vector<int>(in_axes, in_axes + in_axes_num),
             std::vector<int>(out_axes, out_axes + out_axes_num)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -49,7 +49,7 @@ extern "C" int mlx_detail_vmap_trace(
       mlx_vector_array_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

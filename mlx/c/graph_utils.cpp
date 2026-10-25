@@ -12,7 +12,7 @@ extern "C" mlx_node_namer mlx_node_namer_new() {
   try {
     return mlx_node_namer_new_(mlx::core::NodeNamer());
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
   }
   return {nullptr};
 }
@@ -21,7 +21,7 @@ extern "C" int mlx_node_namer_free(mlx_node_namer namer) {
     mlx_node_namer_free_(namer);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -33,7 +33,7 @@ extern "C" int mlx_node_namer_set_name(
     mlx_node_namer_get_(namer).set_name(mlx_array_get_(arr), name);
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -45,7 +45,7 @@ extern "C" int mlx_node_namer_get_name(
     *name = mlx_node_namer_get_(namer).get_name(mlx_array_get_(arr)).c_str();
     return 0;
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
 }
@@ -59,7 +59,7 @@ extern "C" int mlx_export_to_dot(
         mlx_node_namer_get_(namer),
         mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -74,7 +74,7 @@ extern "C" int mlx_print_graph(
         mlx_node_namer_get_(namer),
         mlx_vector_array_get_(outputs));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;

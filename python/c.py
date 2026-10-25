@@ -211,7 +211,7 @@ extern "C" {
                 "  try {",
                 "    " + return_t["c_assign_from_cpp"]("res", cpp_call) + ";",
                 "  } catch (std::exception& e) {",
-                "    mlx_error(e.what());",
+                '    mlx_error("%s", e.what());',
                 "    return 1;",
                 "  }",
                 "  return 0;",

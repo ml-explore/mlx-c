@@ -24,7 +24,7 @@ extern "C" int mlx_random_bernoulli(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -45,7 +45,7 @@ extern "C" int mlx_random_bits(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -68,7 +68,7 @@ extern "C" int mlx_random_categorical_shape(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -90,7 +90,7 @@ extern "C" int mlx_random_categorical_num_samples(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -110,7 +110,7 @@ extern "C" int mlx_random_categorical(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -131,7 +131,7 @@ extern "C" int mlx_random_gumbel(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -140,7 +140,7 @@ extern "C" int mlx_random_key(mlx_array* res, uint64_t seed) {
   try {
     mlx_array_set_(*res, mlx::core::random::key(seed));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -165,7 +165,7 @@ extern "C" int mlx_random_laplace(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -190,7 +190,7 @@ extern "C" int mlx_random_multivariate_normal(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -216,7 +216,7 @@ extern "C" int mlx_random_normal_broadcast(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -241,7 +241,7 @@ extern "C" int mlx_random_normal(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -261,7 +261,7 @@ extern "C" int mlx_random_permutation(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -279,7 +279,7 @@ extern "C" int mlx_random_permutation_arange(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -304,7 +304,7 @@ extern "C" int mlx_random_randint(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -313,7 +313,7 @@ extern "C" int mlx_random_seed(uint64_t seed) {
   try {
     mlx::core::random::seed(seed);
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -328,7 +328,7 @@ extern "C" int mlx_random_split_num(
         *res,
         mlx::core::random::split(mlx_array_get_(key), num, mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -346,7 +346,7 @@ extern "C" int mlx_random_split(
       mlx_array_set_(*res_1, tpl_1);
     };
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -371,7 +371,7 @@ extern "C" int mlx_random_truncated_normal(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
@@ -396,7 +396,7 @@ extern "C" int mlx_random_uniform(
             (key.ctx ? std::make_optional(mlx_array_get_(key)) : std::nullopt),
             mlx_stream_get_(s)));
   } catch (std::exception& e) {
-    mlx_error(e.what());
+    mlx_error("%s", e.what());
     return 1;
   }
   return 0;
