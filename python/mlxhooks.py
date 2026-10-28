@@ -447,7 +447,7 @@ typedef struct mlx_node_namer_ {
   void* ctx;
 } mlx_node_namer;
 
-mlx_node_namer mlx_node_namer_new();
+mlx_node_namer mlx_node_namer_new(void);
 int mlx_node_namer_free(mlx_node_namer namer);
 int mlx_node_namer_set_name(
     mlx_node_namer namer,
@@ -515,7 +515,7 @@ def mlx_compile(f, implementation):
 typedef struct mlx_compile_cache_ {
   void* ctx;
 } mlx_compile_cache;
-mlx_compile_cache mlx_compile_cache_new();
+mlx_compile_cache mlx_compile_cache_new(void);
 int mlx_compile_cache_free(mlx_compile_cache cache);
             """
         )
